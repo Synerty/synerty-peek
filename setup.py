@@ -2,7 +2,7 @@ import os
 import shutil
 from distutils.core import setup
 
-package_name = "peek"
+package_name = "synerty-peek"
 package_version = '0.0.0'
 
 egg_info = "%s.egg-info" % package_name
