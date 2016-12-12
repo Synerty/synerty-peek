@@ -2,10 +2,30 @@
 
 set -o nounset
 set -o errexit
+set -x
 
-echo
+#function convertBambooDate() {
+## EG s="2010-01-01T01:00:00.000+01:00"
+## TO 100101.0100
+#python <<EOF
+#from dateutil.parser import parse
+#print parse("${BAMBOO_DATE}").strftime('%y%m%d.%H%M')
+#EOF
+#}
+#echo "start version is $VER"
+#
+#BUILD="${BUILD}"
+#VER="${VER}"
+#DATE="`convertBambooDate`"
+#
+#if [ "${VER}" == '${bamboo.jira.version}' ]; then
+#    VER="b${DATE}"
+#fi
+#
+#echo "New version is $VER"
+#echo "New build is $BUILD"
 
-PACKAGES="peek
+PACKAGES="
 papp_base
 peek_platform
 peek_agent
@@ -64,28 +84,49 @@ echo
 [ -n "$EXIT" ] && exit 1
 
 # -------------------------------------
-# -------------------------------------
-exit 0
-
-
-echo "Setting version to $VER"
-
-# Update the setup.py
-sed -i "s;^package_version.*=.*;package_version = '${VER}';"  setup.py
-
-# Upload to test pypi
-python setup.py sdist upload -r pypitest
-
-# Reset the commit, we don't want versions in the commit
-git commit -a -m "Updated to version ${VER}"
-
-git tag ${VER}
-git push
-git push --tags
-
-
-
-echo "If you're happy with this you can now run :"
+echo "CHECKING for for successful build"
+for pkg in $PACKAGES; do
+    if ! (cd ../$pkg && python setup.py sdist); then
+        echo "${bold}${pkg}${normal} : failed to build." >&2
+        exit 1
+    fi
+done
 echo
-echo "python setup.py sdist upload -r pypi"
+
+
+
+# -------------------------------------
+echo "Building synerty-peek"
+./pipbuild.sh ${VER}
+
+# -------------------------------------
+echo "Building packages"
+for pkg in $PACKAGES; do
+    if ! (cd ../$pkg && ./pipbuild.sh ${VER} ); then
+        echo "${bold}${pkg}${normal} : failed to run pipbuild." >&2
+        exit 1
+    fi
+done
+echo
+
+RELEASE="dist/peek-release-${VER}"
+RELEASE_TAR="peek-release-${VER}.tar.gz"
+
+[ -d $RELEASE ] && rm -rf $RELEASE
+[ -f dist/$RELEASE_TAR ] && rm dist/$RELEASE_TAR
+
+mkdir -p $RELEASE
+TAR_ARGS=""
+for pkg in $PACKAGES; do
+    cp ../${pkg}/dist/${pkg}-${VER}.tar.gz $RELEASE
+done
+
+(cd $RELEASE &&  tar cvzf ../$RELEASE_TAR *)
+[ -d $RELEASE ] && rm -rf $RELEASE
+
+echo
+echo "Peek Release compressed to dist/${RELEASE_TAR}"
+echo
+echo "If you're happy with this you can now run :"
+echo "./pypi_upload.sh"
 echo
