@@ -4,7 +4,7 @@ set -o nounset
 set -o errexit
 # set -x
 
-PACKAGES="
+PACKAGES="synerty-peek
 papp_base
 peek_platform
 peek_agent
@@ -97,9 +97,9 @@ done
 echo
 
 
-# -------------------------------------
-echo "Building synerty-peek"
-./pipbuild.sh ${VER}
+## -------------------------------------
+#echo "Building synerty-peek"
+#./pipbuild.sh ${VER}
 
 # -------------------------------------
 echo "Building packages"

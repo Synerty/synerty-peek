@@ -29,14 +29,19 @@ echo "Setting version to $VER"
 sed -i "s;^package_version.*=.*;package_version = '${VER}';"  setup.py
 
 # Upload to test pypi
-python setup.py sdist upload -r pypitest
+if [[ $string == *"dev"* ]]; then
+    python setup.py sdist
+    git reset --hard
 
-# Reset the commit, we don't want versions in the commit
-git commit -a -m "Updated to version ${VER}"
+else
+    python setup.py sdist upload -r pypitest
+    # Reset the commit, we don't want versions in the commit
+    git commit -a -m "Updated to version ${VER}"
 
-git tag ${VER}
-git push
-git push --tags
+    git tag ${VER}
+    git push
+    git push --tags
+fi
 
 
 
