@@ -2,28 +2,7 @@
 
 set -o nounset
 set -o errexit
-set -x
-
-#function convertBambooDate() {
-## EG s="2010-01-01T01:00:00.000+01:00"
-## TO 100101.0100
-#python <<EOF
-#from dateutil.parser import parse
-#print parse("${BAMBOO_DATE}").strftime('%y%m%d.%H%M')
-#EOF
-#}
-#echo "start version is $VER"
-#
-#BUILD="${BUILD}"
-#VER="${VER}"
-#DATE="`convertBambooDate`"
-#
-#if [ "${VER}" == '${bamboo.jira.version}' ]; then
-#    VER="b${DATE}"
-#fi
-#
-#echo "New version is $VER"
-#echo "New build is $BUILD"
+# set -x
 
 PACKAGES="
 papp_base
@@ -39,13 +18,37 @@ bold=$(tput bold)
 normal=$(tput sgr0)
 
 # -------------------------------------
+VER="${VER:-$1}" # If VER is not defined, try arg 1
+[ "${VER}" == '${bamboo.jira.version}' ] && unset VER # = "0.0.0dev${BUILD}"
+VER="${VER:?You must pass a version of the format 0.0.0 as the only argument}"
+
+
+# -------------------------------------
 if ! [ -f "setup.py" ]; then
     echo "setver.sh must be run in the directory where setup.py is" >&2
     exit 1
 fi
 
-# -------------------------------------
-VER="${1:?You must pass a version of the format 0.0.0 as the only argument}"
+function convertBambooDate() {
+# EG s="2010-01-01T01:00:00.000+01:00"
+# TO 100101.0100
+python <<EOF
+from dateutil.parser import parse
+print parse("${BAMBOO_DATE}").strftime('%y%m%d.%H%M')
+EOF
+}
+#echo "start version is $VER"
+
+#BUILD="${BUILD:-0}" # Default to build 0
+#VER="${VER}"
+if [ "${BAMBOO_DATE:-}" ]; then
+    DATE="`convertBambooDate`"
+else
+    DATE="`date +%y%m%d.%H%M`"
+fi
+
+#echo "New version is $VER"
+#echo "New build is $BUILD"
 
 # -------------------------------------
 echo "CHECKING for package existance"
@@ -94,7 +97,6 @@ done
 echo
 
 
-
 # -------------------------------------
 echo "Building synerty-peek"
 ./pipbuild.sh ${VER}
@@ -120,6 +122,8 @@ TAR_ARGS=""
 for pkg in $PACKAGES; do
     cp ../${pkg}/dist/${pkg}-${VER}.tar.gz $RELEASE
 done
+
+echo "${DATE}" > $RELEASE/version
 
 (cd $RELEASE &&  tar cvzf ../$RELEASE_TAR *)
 [ -d $RELEASE ] && rm -rf $RELEASE
