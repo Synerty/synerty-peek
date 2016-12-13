@@ -3,7 +3,7 @@ import shutil
 from distutils.core import setup
 
 package_name = "synerty-peek"
-package_version = '0.0.4'
+package_version = '0.0.5'
 
 egg_info = "%s.egg-info" % package_name
 if os.path.isdir(egg_info):
