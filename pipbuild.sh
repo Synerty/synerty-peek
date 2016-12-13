@@ -29,7 +29,7 @@ echo "Setting version to $VER"
 sed -i "s;^package_version.*=.*;package_version = '${VER}';"  setup.py
 
 # Upload to test pypi
-if [[ $string == *"dev"* ]]; then
+if [[ ${VER} == *"dev"* ]]; then
     python setup.py sdist
     git reset --hard
 
