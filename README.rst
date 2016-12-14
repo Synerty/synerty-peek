@@ -51,10 +51,10 @@ http://superuser.com/questions/104845/permission-to-make-symbolic-links-in-windo
 DEVELOPING
 ----------
 
-For platform development (NOTE: Most development will be for the papp, not platform, so these instructions are not high priority)
+For platform development (NOTE: Most development will be for the plugin, not platform, so these instructions are not high priority)
 #.      Checkout the following, all in the same folder
     #.  peek
-    #.  papp_base
+    #.  plugin_base
     #.  peek_agent
     #.  peek_client
     #.  peek_client_fe
@@ -70,8 +70,23 @@ For platform development (NOTE: Most development will be for the papp, not platf
         #. Disable Python -> "PEP8 Naming Convention Violation" (use search bar)
         #. Change Python -> "Type Checker" from warning to error (use search bar)
     #. Project -> Project Dependencies
-        #.  peek_platform depends on -> papp_base
+        #.  peek_platform depends on -> plugin_base
         #.  peek_server depends on -> peek_platform, peek_server_fe
         #.  peek_client depends on -> peek_platform, peek_client_fe
         #.  peek_agent depends on -> peek_platform
         #.  peek_worker depends on -> peek_platform
+
+Building
+````````
+
+The peek package has build scripts that generate a platform build.
+It has two modes
+#. Prod build, it tags, commits and test uploads to testpypi
+#. Dev build, it doesn't tag, commit or test upload, but still generates a build.
+
+    # For a dev build
+    ./pipbuild_platform.sh 0.0.1dev1
+
+    # For a prod build
+    ./pipbuild_platform.sh 0.0.8
+    ./pypi_upload.sh
