@@ -125,6 +125,9 @@ done
 
 echo "${DATE}" > $RELEASE/version
 
+## Add the latest PIP to the bundle
+#(cd $RELEASE && pip download pip)
+
 (cd $RELEASE &&  tar cvzf ../$RELEASE_TAR *)
 [ -d $RELEASE ] && rm -rf $RELEASE
 
