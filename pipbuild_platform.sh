@@ -5,7 +5,7 @@ set -o errexit
 # set -x
 
 PACKAGES="synerty-peek
-papp_base
+peek_plugin_base
 peek_platform
 peek_agent
 peek_client

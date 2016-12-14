@@ -6,7 +6,7 @@ set -o errexit
 echo
 
 PACKAGES="synerty-peek
-plugin_base
+peek_plugin_base
 peek_platform
 peek_agent
 peek_client
