@@ -123,7 +123,7 @@ for pkg in $PACKAGES; do
     cp ../${pkg}/dist/${pkg}-${VER}.tar.gz $RELEASE
 done
 
-echo "${DATE}" > $RELEASE/version
+echo "${DATE}_${VER}" > $RELEASE/stamp
 
 ## Add the latest PIP to the bundle
 #(cd $RELEASE && pip download pip)
