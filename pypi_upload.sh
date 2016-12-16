@@ -5,15 +5,16 @@ set -o errexit
 
 echo
 
-PACKAGES="synerty-peek
-peek_plugin_base
-peek_platform
-peek_agent
-peek_client
-peek_client_fe
-peek_server
-peek_server_fe
-peek_worker"
+PACKAGES="
+peek-plugin-base
+peek-platform
+peek-agent
+peek-worker
+peek-client
+peek-client-fe
+peek-server
+peek-server-fe
+synerty-peek"
 
 bold=$(tput bold)
 normal=$(tput sgr0)

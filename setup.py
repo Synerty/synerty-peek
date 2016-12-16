@@ -12,10 +12,10 @@ if os.path.isdir(egg_info):
     shutil.rmtree(egg_info)
 
 requirements = [
-    "peek_server",
-    "peek_worker",
-    "peek_agent",
-    "peek_client"
+    "peek-server",
+    "peek-worker",
+    "peek-agent",
+    "peek-client"
 ]
 
 setup(

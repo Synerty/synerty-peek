@@ -5,14 +5,14 @@ set -o errexit
 # set -x
 
 PACKAGES="
-peek_plugin_base
-peek_platform
-peek_agent
-peek_worker
-peek_client_fe
-peek_client
-peek_server_fe
-peek_server
+peek-plugin-base
+peek-platform
+peek-agent
+peek-worker
+peek-client
+peek-client-fe
+peek-server
+peek-server-fe
 synerty-peek"
 
 bold=$(tput bold)
@@ -27,10 +27,6 @@ if ! [ -f "setup.py" ]; then
 fi
 
 # -------------------------------------
-echo "Ensuring PIP is upgraded"
-pip install --upgrade pip
-
-# -------------------------------------
 echo "CHECKING for package existance"
 EXIT=""
 for pkg in $PACKAGES; do
@@ -41,8 +37,5 @@ for pkg in $PACKAGES; do
         fi
     fi
 
-    if ! (cd ../$pkg && python setup.py develop ); then
-        echo "Development setup of $bold${pkg}$normal failed" >&2
-        exit 1
-    fi
+
 done
