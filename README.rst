@@ -42,6 +42,7 @@ SymLinks
 ````````
 
 :TODO BRENTON: Include instructions on how to enable windows symlinks
+
 See peek_platform.WindowsPatch for my cross platform symlink code.
 http://superuser.com/questions/104845/permission-to-make-symbolic-links-in-windows-7
 
@@ -50,10 +51,14 @@ http://superuser.com/questions/104845/permission-to-make-symbolic-links-in-windo
 
 DEVELOPING
 ----------
+For platform development (NOTE: Most development will be for the plugin, not platform,
+so these instructions are not high priority)
 
-For platform development (NOTE: Most development will be for the plugin, not platform, so these instructions are not high priority)
+FROM SHELL
+``````````
+
 #.      Checkout the following, all in the same folder
-    #.  peek
+    #.  peek -> rename dir to synerty-peek
     #.  plugin_base
     #.  peek_agent
     #.  peek_client
@@ -62,6 +67,16 @@ For platform development (NOTE: Most development will be for the plugin, not pla
     #.  peek_server
     #.  peek_server_fe
     #.   peek_worker
+#.  These steps link the projects under site-packages and installs their dependencies.
+    #.  Run the following command:
+
+    cd synerty-peek
+    ./uninstall_and_develop.sh
+
+
+SETTING UP PYCHARM
+``````````````````
+
 #.  Open pycharm,
     #.  open the peek project, open in new window
     #.  Open each of the other projects mentioned above, add to current window
@@ -77,6 +92,8 @@ For platform development (NOTE: Most development will be for the plugin, not pla
         #.  peek_client depends on -> peek_platform, peek_client_fe
         #.  peek_agent depends on -> peek_platform
         #.  peek_worker depends on -> peek_platform
+
+You can now start developing
 
 Building
 ````````
