@@ -66,9 +66,11 @@ For platform development (NOTE: Most development will be for the plugin, not pla
     #.  open the peek project, open in new window
     #.  Open each of the other projects mentioned above, add to current window
 #. File -> Settings (Ctrl+Alt+S with eclipse keymap)
-    #. Editor -> Inspection
-        #. Disable Python -> "PEP8 Naming Convention Violation" (use search bar)
-        #. Change Python -> "Type Checker" from warning to error (use search bar)
+    #. Editor -> Inspection (use the search bar for finding the inspections)
+        #. Disable Python -> "PEP8 Naming Convention Violation"
+        #. Change Python -> "Type Checker" from warning to error
+        #. Change Python -> "Incorrect Docstring" from warning to error
+        #. Change Python -> "Missing type hinting ..." from warning to error
     #. Project -> Project Dependencies
         #.  peek_platform depends on -> plugin_base
         #.  peek_server depends on -> peek_platform, peek_server_fe
