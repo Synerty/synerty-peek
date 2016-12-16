@@ -2,8 +2,10 @@ import os
 import shutil
 from distutils.core import setup
 
+from setuptools import find_packages
+
 package_name = "synerty-peek"
-package_version = '1.1.1dev34343'
+package_version = '0.0.0'
 
 egg_info = "%s.egg-info" % package_name
 if os.path.isdir(egg_info):
@@ -18,7 +20,7 @@ requirements = [
 
 setup(
     name=package_name,
-    packages=[],
+    packages=find_packages(exclude=["*.tests", "*.tests.*", "tests.*", "tests"]),
     install_requires=requirements,
     version=package_version,
     description='Peek Platform - Meta Package to install all services',

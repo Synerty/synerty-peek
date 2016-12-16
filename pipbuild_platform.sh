@@ -126,9 +126,12 @@ done
 echo "${DATE}_${VER}" > $RELEASE/stamp
 
 ## Add the latest PIP to the bundle
-#(cd $RELEASE && pip download pip)
+(cd $RELEASE && pip download pip setuptools)
 
+# Create the tar file
 (cd $RELEASE &&  tar cvzf ../$RELEASE_TAR *)
+
+# Cleanup the build dir.
 [ -d $RELEASE ] && rm -rf $RELEASE
 
 echo
