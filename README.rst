@@ -57,7 +57,7 @@ so these instructions are not high priority)
 FROM SHELL
 ``````````
 
-#.      Checkout the following, all in the same folder
+#.  Checkout the following, all in the same folder
 
     #.  peek -> rename dir to synerty-peek
     #.  plugin_base
@@ -67,11 +67,13 @@ FROM SHELL
     #.  peek_platform
     #.  peek_server
     #.  peek_server_fe
-    #.   peek_worker
+    #.  peek_worker
 
 #.  These steps link the projects under site-packages and installs their dependencies.
 
     #.  Run the following command:
+
+::
 
     cd synerty-peek
     ./uninstall_and_develop.sh
@@ -82,17 +84,17 @@ SETTING UP PYCHARM
 
 #.  Open pycharm,
 
-    #.  open the peek project, open in new window
+    #.  Open the peek project, open in new window
     #.  Open each of the other projects mentioned above, add to current window
 
-#. File -> Settings (Ctrl+Alt+S with eclipse keymap)
+#.  File -> Settings (Ctrl+Alt+S with eclipse keymap)
 
     #. Editor -> Inspection (use the search bar for finding the inspections)
 
-        #. Disable Python -> "PEP8 Naming Convention Violation"
-        #. Change Python -> "Type Checker" from warning to error
-        #. Change Python -> "Incorrect Docstring" from warning to error
-        #. Change Python -> "Missing type hinting ..." from warning to error
+        #.  Disable Python -> "PEP8 Naming Convention Violation"
+        #.  Change Python -> "Type Checker" from warning to error
+        #.  Change Python -> "Incorrect Docstring" from warning to error
+        #.  Change Python -> "Missing type hinting ..." from warning to error
 
     #. Project -> Project Dependencies
 
