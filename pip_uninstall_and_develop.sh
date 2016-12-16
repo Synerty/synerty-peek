@@ -9,10 +9,10 @@ peek-plugin-base
 peek-platform
 peek-agent
 peek-worker
-peek-client
 peek-client-fe
-peek-server
+peek-client
 peek-server-fe
+peek-server
 synerty-peek"
 
 bold=$(tput bold)
