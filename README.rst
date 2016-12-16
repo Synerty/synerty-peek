@@ -71,9 +71,7 @@ FROM SHELL
 
 #.  These steps link the projects under site-packages and installs their dependencies.
 
-    #.  Run the following command:
-
-::
+    #.  Run the following command ::
 
     cd synerty-peek
     ./uninstall_and_develop.sh
@@ -113,6 +111,8 @@ The peek package has build scripts that generate a platform build.
 It has two modes
 #. Prod build, it tags, commits and test uploads to testpypi
 #. Dev build, it doesn't tag, commit or test upload, but still generates a build.
+
+::
 
     # For a dev build
     ./pipbuild_platform.sh 0.0.1dev1
