@@ -71,7 +71,9 @@ FROM SHELL
 
 #.  These steps link the projects under site-packages and installs their dependencies.
 
-    #.  Run the following command ::
+    #.  Run the following command
+
+::
 
     cd synerty-peek
     ./uninstall_and_develop.sh
