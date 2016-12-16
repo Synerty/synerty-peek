@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-PACKAGE="synerty-peek"
+PACKAGE="peek"
 
 set -o nounset
 set -o errexit

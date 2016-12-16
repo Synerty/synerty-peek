@@ -10,7 +10,9 @@ Welcome to synerty-peek's documentation!
    :maxdepth: 2
    :caption: Contents:
 
-
+   README
+   modules
+   LICENSE
 
 Indices and tables
 ==================
