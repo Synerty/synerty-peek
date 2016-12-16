@@ -31,6 +31,7 @@ echo "CHECKING for package existance"
 EXIT=""
 for pkg in $PACKAGES; do
     if pip freeze | grep -q "${pkg}==" ; then
+        echo "Uninstalling $bold${pkg}$normal"
         if ! pip uninstall -q -y $pkg; then
             echo "PIP uninstall of $bold${pkg}$normal failed"
             exit 1
