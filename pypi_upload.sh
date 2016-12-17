@@ -1,23 +1,8 @@
 #!/usr/bin/env bash
 
-set -o nounset
-set -o errexit
+source ./pip_common.sh
 
 echo
-
-PACKAGES="
-peek-plugin-base
-peek-platform
-peek-agent
-peek-worker
-peek-client
-peek-client-fe
-peek-server
-peek-server-fe
-synerty-peek"
-
-bold=$(tput bold)
-normal=$(tput sgr0)
 
 
 # -------------------------------------

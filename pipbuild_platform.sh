@@ -1,34 +1,12 @@
 #!/usr/bin/env bash
 
-set -o nounset
-set -o errexit
-# set -x
-
-PACKAGES="
-peek-plugin-base
-peek-platform
-peek-agent
-peek-worker
-peek-client
-peek-client-fe
-peek-server
-peek-server-fe
-synerty-peek"
-
-bold=$(tput bold)
-normal=$(tput sgr0)
+source ./pip_common.sh
 
 # -------------------------------------
 VER="${VER:-$1}" # If VER is not defined, try arg 1
 [ "${VER}" == '${bamboo.jira.version}' ] && unset VER # = "0.0.0dev${BUILD}"
 VER="${VER:?You must pass a version of the format 0.0.0 as the only argument}"
 
-
-# -------------------------------------
-if ! [ -f "setup.py" ]; then
-    echo "setver.sh must be run in the directory where setup.py is" >&2
-    exit 1
-fi
 
 function convertBambooDate() {
 # EG s="2010-01-01T01:00:00.000+01:00"
