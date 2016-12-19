@@ -43,12 +43,11 @@ SymLinks
 Enabling SymLinks (Note: This setting has no effect on user accounts that belong to the Administrators group.
 Those users will always have to run mklink in an elevated environment as Administrator.)
 
-#.  Ask Cortana "Edit Group Policy"
-#.  Select "Edit Group Policy"
+#.  In the "Control Panel", Select: "Edit Group Policy"
 #.  Navigate: "Computer configuration → Windows Settings → Security Settings → Local Policies → User Rights
 Assignment → Create symbolic links"
-#.  Add the user or group that you want to allow to create symbolic links.
-#.  You will need to logout and log back in for the change to take effect.
+#.  Add the user or group that you want to allow to create symbolic links
+#.  You will need to logout and log back in for the change to take effect
 
 :TODO BRENTON: Include instructions on how to enable windows symlinks
 
