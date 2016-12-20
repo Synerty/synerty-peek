@@ -15,14 +15,14 @@ echo "Building Sphinx documentation for '${PACKAGE}'!"
 echo "==========================================="
 
 echo "Removing old documentation in build folder."
-rm -fr docs/build
+rm -fr dist/docs/*
 
 echo "Updating module rst files.  This will overwrite old rst files."
 export PYTHONPATH="`pwd`"
-sphinx-apidoc -f -e -o docs/source ${PACKAGE} '*Test.py'
+sphinx-apidoc -f -e -o docs ${PACKAGE} '*Test.py'
 
 echo "Build HTML files."
-sphinx-build -b html docs/source docs/build
+sphinx-build -b html docs dist/docs
 
 echo "Opening created documentation..."
-start docs/build/index.html
+start dist/docs/index.html
