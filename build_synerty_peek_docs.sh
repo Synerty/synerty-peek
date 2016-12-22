@@ -14,15 +14,37 @@ echo "==========================================="
 echo "Building Sphinx documentation for '${PACKAGE}'!"
 echo "==========================================="
 
-echo "Removing old documentation in build folder."
-rm -fr docs/build
+echo "Removing old documentation in build folder..."
+rm -fr dist/docs/*
 
-echo "Updating module rst files.  This will overwrite old rst files."
-export PYTHONPATH="`pwd`"
-sphinx-apidoc -f -e -o docs/source ${PACKAGE} '*Test.py'
+echo "Creating link to the packages..."
+rm -fr peek_agent peek_client peek_platform peek_server peek_worker
+ln -s ../peek-agent/peek_agent/
+ln -s ../peek-client/peek_client/
+ln -s ../peek-platform/peek_platform/
+ln -s ../peek-server/peek_server/
+ln -s ../peek-worker/peek_worker/
 
-echo "Build HTML files."
-sphinx-build -b html docs/source docs/build
+echo "Creating Python Path"
+source ./pip_common.sh
+PYTHONPATH=""
+
+for pkg in $PACKAGES; do
+    PYTHONPATH="${PYTHONPATH}:`pwd`/../${pkg}"
+done
+export PYTHONPATH
+
+sphinx-apidoc -f -l -d 6 -o docs . '*Test.py' 'setup.py'
+
+sphinx-build -b html docs dist/docs
+
+echo "Removing old module rst files..."
+rm -fr docs/peek* docs/modules.rst
+
+echo "Cleaning up links..."
+rm -fr peek_agent peek_client peek_platform peek_server peek_worker
 
 echo "Opening created documentation..."
-start docs/build/index.html
+start dist/docs/index.html
+
+echo $PYTHONPATH
