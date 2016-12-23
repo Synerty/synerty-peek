@@ -34,6 +34,11 @@ for pkg in $PACKAGES; do
 done
 export PYTHONPATH
 
+echo "Ensure Sphinx and the theme that Synerty uses is installed..."
+pip install sphinx
+pip install sphinx_rtd_theme
+
+echo "Running Sphinx-apidoc"
 sphinx-apidoc -f -l -d 6 -o docs . '*Test.py' 'setup.py'
 
 sphinx-build -b html docs dist/docs
