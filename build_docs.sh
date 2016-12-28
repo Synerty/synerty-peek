@@ -35,7 +35,7 @@ done
 export PYTHONPATH
 
 echo "Ensure Sphinx and the theme that Synerty uses is installed..."
-for pkg in sphinx sphinx_rtd_theme; do
+for pkg in Sphinx sphinx-rtd-theme; do
     if ! pip freeze | grep -q "${pkg}==" ; then
         echo "Installing ${pkg}"
         pip install ${pkg}
