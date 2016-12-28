@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 PACKAGE="peek"
 
-set -o nounset
-set -o errexit
+set -o nounset # Error on unset variables
+set -o errexit # Exit if a command fails
 
 echo "Retrieving latest version tag"
 VER=$(git describe --tags `git rev-list --tags --max-count=1`)
@@ -35,8 +35,12 @@ done
 export PYTHONPATH
 
 echo "Ensure Sphinx and the theme that Synerty uses is installed..."
-pip install sphinx
-pip install sphinx_rtd_theme
+for pkg in sphinx sphinx_rtd_theme; do
+    if ! pip freeze | grep -q "${pkg}==" ; then
+        echo "Installing ${pkg}"
+        pip install ${pkg}
+    fi
+done
 
 echo "Running Sphinx-apidoc"
 sphinx-apidoc -f -l -d 6 -o docs . '*Test.py' 'setup.py'
