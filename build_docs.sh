@@ -55,5 +55,3 @@ rm -fr peek_agent peek_client peek_platform peek_server peek_worker
 
 echo "Opening created documentation..."
 start dist/docs/index.html
-
-echo $PYTHONPATH
