@@ -77,6 +77,19 @@ FROM SHELL
     #.  peek_server_fe
     #.  peek_worker
 
+#.  Symlink the tsconfig.json and node_modules file and directory. These steps are run in
+        the directory where the projects are checked out from. These are required for
+        the frontend typescript compiler.
+
+    #.  ln -s peek-client-fe/peek_client_fe/node_modules .
+    #.  ln -s peek-client-fe/peek_client_fe/src/tsconfig.json .
+
+::
+
+    peek@peek:~/project$ ls -la
+    lrwxrwxrwx  1 peek sudo   42 Dec 27 21:00 node_modules -> peek-client-fe/peek_client_fe/node_modules
+    lrwxrwxrwx  1 peek sudo   47 Dec 27 21:00 tsconfig.json -> peek-client-fe/peek_client_fe/src/tsconfig.json
+
 #.  These steps link the projects under site-packages and installs their dependencies.
 
     #.  Run the following command
@@ -130,3 +143,5 @@ It has two modes
     # For a prod build
     ./pipbuild_platform.sh 0.0.8
     ./pypi_upload.sh
+
+
