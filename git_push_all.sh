@@ -3,7 +3,7 @@
 source ./pip_common.sh
 
 # -------------------------------------
-for pkgDir in `ls -d ../peek-*`; do
+for pkgDir in `ls -d ../peek-*` ../synerty-peek; do
     echo "Pushing ${pkgDir}"
-    (cd $pkgDir && git push)
+    (cd $pkgDir && git push --commit)
 done
