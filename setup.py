@@ -1,8 +1,7 @@
 import os
 import shutil
-from distutils.core import setup
 
-from setuptools import find_packages
+from setuptools import find_packages, setup
 
 package_name = "synerty-peek"
 package_version = '0.0.7'
