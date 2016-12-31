@@ -235,7 +235,7 @@ interface with an oracle database.
 
 #.  Make the directory where the oracle client will live ::
 
-    ORACLE_DIR="~/cpython-${PEEK_PY_VER}/oracle"
+    ORACLE_DIR="/home/peek/cpython-${PEEK_PY_VER}/oracle"
     echo "Oracle client dir will be $ORACLE_DIR"
     mkdir $ORACLE_DIR && cd $ORACLE_DIR
 
@@ -251,10 +251,27 @@ interface with an oracle database.
 
 #.  Symlink the oracle client lib ::
 
-    cd ~/python/oracle/instantclient_12_1
+    cd $ORACLE_HOME
     ln -snf libclntsh.so.12.1 libclntsh.so
     ls -l libclntsh.so
 
+#.  Now you can install the cx_Oracle python package. ::
+
+    pip install cx_Oracle
+
+#.  Now test it with some python ::
+
+    from sqlalchemy import create_engine
+    from sqlalchemy import schema
+
+    orapass = "PASS"
+    orahost = "host"
+
+    oraEngine = create_engine('oracle://enmac:%s@%s:1521/NMS' % (orapass, orahost))
+    metadata = schema.MetaData(oraEngine)
+    metadata.reflect(schema='ENMAC')
+
+    "ENMAC.host_details" in metadata.tables
 
 DEVELOPING
 ----------
