@@ -49,9 +49,6 @@ Assignment → Create symbolic links"
 #.  Add the user or group that you want to allow to create symbolic links
 #.  You will need to logout and log back in for the change to take effect
 
-:TODO BRENTON: Include instructions on how to enable windows symlinks
-
-See peek_platform.WindowsPatch for my cross platform symlink code.
 http://superuser.com/questions/104845/permission-to-make-symbolic-links-in-windows-7
 
 PYTHON ENVIRONMENT
@@ -330,6 +327,8 @@ SETTING UP PYCHARM
         #.  Change Python -> "Type Checker" from warning to error
         #.  Change Python -> "Incorrect Docstring" from warning to error
         #.  Change Python -> "Missing type hinting ..." from warning to error
+        #.  Change Python -> "Incorrect call arguments" from warning to error
+        #.  Change Python -> "Unresolved references" from warning to error
 
     #. Project -> Project Dependencies
 
