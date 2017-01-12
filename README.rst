@@ -338,6 +338,16 @@ SETTING UP PYCHARM
         #.  peek_agent depends on -> peek_platform
         #.  peek_worker depends on -> peek_platform
 
+    #.  Languages & Frameworks -> TypesScript
+
+        #.  Node interpreter -> ~/node-v7.1.0/bin/node
+        #.  Enable TypeScript Compiler -> Checked
+        #.  Set options manually -> Checked
+        #.  Command line options -> --target es5 --experimentalDecorators --lib es6,dom --sourcemap --emitDecoratorMetadata
+        #.  Generate source maps -> Checked
+
+        .. image::pycharm_setup/settings_typescript.png
+
 You can now start developing
 
 Building
