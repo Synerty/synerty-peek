@@ -23,10 +23,126 @@ This section describes the requirements and configuration for windows.
 Requirements
 ````````````
 
-GitBash
-:Download: https://github.com/git-for-windows/git/releases/download/v2.11.0.windows.1/Git-2.11.0-64-bit.exe
-:From: https://git-for-windows.github.io
+#.  Chrome
+    :Download: https://www.google.com/intl/en/chrome/browser/desktop/index.html?standalone=1#
+    :From: https://www.google.com/chrome/
 
+#.  Python 3.5
+    :Download: https://www.python.org/ftp/python/3.5.3/python-3.5.3rc1-amd64.exe
+    :From: https://www.python.org/downloads/windows/
+    Add PATH to environment variables ::
+
+        "~\AppData\Local\Programs\Python\Python35\Scripts\"
+        "~\AppData\Local\Programs\Python\Python35\"
+
+
+    Confirm PATH with ::
+
+        $ which python
+
+#.  Node.js 7+ and NPM 3+
+    :Download: https://nodejs.org/dist/v7.4.0/node-v7.4.0-x64.msi
+    :From: https://nodejs.org/en/download/current/
+    Add PATH to environment variables ::
+
+        "~\AppData\Roaming\npm"
+
+    Confirm PATH with ::
+
+        $ which NPM
+
+#.  Install the required NPM packages ::
+
+    npm -g upgrade npm
+    npm -g install angular-cli typescript tslint
+
+#. GitBash
+    :Download: https://github.com/git-for-windows/git/releases/download/v2.11.0.windows.1/Git-2.11.0-64-bit.exe
+    :From: https://git-for-windows.github.io
+    Add PATH to environment variables ::
+
+        "C:\Program Files\Git\bin"
+
+#.  FreeTDS
+    :Download: https://github.com/ramiro/freetds/releases/download/v0.95.95/freetds-v0.95.95-win-x86_64-vs2015.zip
+    :From: https://github.com/ramiro/freetds/releases
+    Unzip contents into ::
+
+        "~\AppData\Local\Programs\Python\Python35\freetds-v0.95.95"
+
+    Add PATH to environment variables ::
+
+        "~\AppData\Local\Programs\Python\Python35\freetds-v0.95.95\bin"
+
+    Confirm PATH with ::
+
+        $ which tsql
+
+    Create 'freetds.conf' in "C:\" ::
+
+    [global]
+        port = 1433
+        instance = ./peek
+        tds version = 7.0
+        dump file = /tmp/freetds.log
+    [custom_config]
+        host = localhost
+        instance = peek
+        port = 1433
+        tds version = 7.0
+        encryption = reques
+
+-
+    :Download: http://indy.fulgan.com/SSL/openssl-1.0.2j-x64_86-win64.zip
+    :From: http://indy.fulgan.com/SSL/
+    ensure these files are in the system32 folder:
+        libeay32.dll
+        ssleay32.dll
+    You will need to duplicate the above files and name them as per below:
+        libeay32MD.dll
+        ssleay32MD.dll
+
+#.  Shapely
+    :Download: http://www.lfd.uci.edu/~gohlke/pythonlibs/#shapely
+    :From: https://pypi.python.org/pypi/Shapely
+    Shapely >= 1.5.17 ::
+
+    pip install ~/Downloads/Shapely-1.5.17-cp35-cp35m-win_amd64.whl
+
+#.  Dependencies
+    Run these command in terminal ::
+
+        pip install psycopg2
+        pip install pycparser
+        pip install cffi
+        pip install cryptography
+        pip install pytest
+        pip install coverage
+        pip install pypiwin32
+
+#.  Microsoft .NET Framework 3.5 Service Pack 1
+    :Download: https://www.microsoft.com/en-ca/download/details.aspx?id=22
+
+#.  Visual C++ Build Tools 2015
+    :Download: http://go.microsoft.com/fwlink/?LinkId=691126&__hstc=268264337.40d7988155305183930d94960a802559.1481662741421.1481662741421.1484335933816.2&__hssc=268264337.1.1484335933816&__hsfp=1223438833&fixForIE=.exe
+    :From: http://landinghub.visualstudio.com/visual-cpp-build-tools
+
+#.  Microsoft® SQL Server® 2014 Express
+    :Download: https://www.microsoft.com/en-ca/download/details.aspx?id=42299
+
+    Make Changes in SQL Server Configuration Manager ::
+
+
+        SQL Server Configuration Manager --> SQL Server Network Configuration --> Protocols for SQLEXPRESS:
+            under the TCP/IP properties set 'IPALL' 'TCP PORT' to '1433'. Select 'Apply' then 'OK',
+            Enable the 'TCP/IP' Protocol
+            Restart the server service.
+
+#.  Visual Studio Code
+    :Download: https://code.visualstudio.com
+    Add PATH to environment variables ::
+
+        "C:\Program Files (x86)\Microsoft VS Code\bin"
 
 OS Commands
 ```````````
@@ -40,12 +156,14 @@ When peek generates it's config it should automatically choose the right interpr
 
 SymLinks
 ````````
-Enabling SymLinks (Note: This setting has no effect on user accounts that belong to the Administrators group.
+
+Enabling SymLinks (Note: This setting has no effect on user accounts that belong to the
+ Administrators group.
 Those users will always have to run mklink in an elevated environment as Administrator.)
 
 #.  In the "Control Panel", Select: "Edit Group Policy"
-#.  Navigate: "Computer configuration → Windows Settings → Security Settings → Local Policies → User Rights
-Assignment → Create symbolic links"
+#.  Navigate: "Computer configuration → Windows Settings → Security Settings → Local
+Policies → User Rights Assignment → Create symbolic links"
 #.  Add the user or group that you want to allow to create symbolic links
 #.  You will need to logout and log back in for the change to take effect
 
