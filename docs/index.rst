@@ -11,6 +11,8 @@ Welcome to synerty-peek's documentation!
    :caption: Contents:
 
    README
+   ProductionSetup
+   DevelopmentSetup
    modules
    LICENSE
 
