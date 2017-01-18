@@ -1,6 +1,6 @@
-=============
-Peek Platform
-=============
+============
+Synerty Peek
+============
 
 A platform for python written for Twisted.
 
@@ -21,6 +21,15 @@ The Peek platform is designed to run on Linux, however, it is compatible with wi
 Peek Production Platform (ProductionSetup.rst) describes the requirements and
 configuration for windows.
 
+OS Commands
+```````````
+
+The config file for each service in the peek platform describes the location of the BASH
+interpreter. Peek is coded to use the bash interpreter and basic posix compliant utilites
+for all OS commands.
+
+When peek generates it's config it should automatically choose the right interpreter.
+     "C:\Program Files\Git\bin\bash.exe" if isWindows else "/bin/bash"
 
 Debian Linux
 ------------

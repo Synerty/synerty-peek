@@ -13,13 +13,6 @@ Windows Support
 Requirements
 ````````````
 
-#.  Shapely
-    :Download: http://www.lfd.uci.edu/~gohlke/pythonlibs/#shapely
-    :From: https://pypi.python.org/pypi/Shapely
-    Shapely >= 1.5.17 ::
-
-    pip install ~/Downloads/Shapely-1.5.17-cp35-cp35m-win_amd64.whl
-
 #.  Dependencies
     Run these command in terminal ::
 
@@ -37,6 +30,21 @@ Requirements
 
         "C:\Program Files (x86)\Microsoft VS Code\bin"
 
+SymLinks
+````````
+
+Enabling SymLinks (Note: This setting has no effect on user accounts that belong to the
+ Administrators group.
+Those users will always have to run mklink in an elevated environment as Administrator.)
+
+#.  Launch: "gpedit.msc"
+#.  Navigate: "Computer configuration → Windows Settings → Security Settings → Local
+    Policies → User Rights Assignment → Create symbolic links"
+#.  Add the user or group that you want to allow to create symbolic links
+#.  You will need to logout and log back in for the change to take effect
+
+https://github.com/git-for-windows/git/wiki/Symbolic-Links
+
 DEVELOPING
 ----------
 
@@ -45,6 +53,22 @@ so these instructions are not high priority)
 
 FROM SHELL
 ``````````
+
+#.  Checkout the following, all in the same folder
+    :From: https://github.com/Synerty
+    ::
+
+    git clone -c core.symlinks=true <URL>
+-
+    #.  synerty-peek
+    #.  peek-plugin-base
+    #.  peek-agent
+    #.  peek-client
+    #.  peek-client-fe
+    #.  peek-platform
+    #.  peek-server
+    #.  peek-server-fe
+    #.  peek-worker
 
 #.  Symlink the tsconfig.json and node_modules file and directory. These steps are run in
         the directory where the projects are checked out from. These are required for
@@ -114,5 +138,22 @@ The peek package has build scripts that generate a development build.
 
     # NOTE: Omitting the dot before dev will cause the script to fail as setuptools
     # adds the dot in if it's not there, which means the cp commands won't match files.
+
+Building for Production
+```````````````````````
+
+NOTE: If you're building for development skip this step and continue through to
+Development Setup.
+
+The peek package has build scripts that generate a platform build.
+#. Prod build, it tags, commits and test uploads to testpypi
+
+::
+
+    # NOTE: Omitting the dot before dev will cause the script to fail as setuptools
+    # adds the dot in if it's not there, which means the cp commands won't match files.
+
+    ./pipbuild_platform.sh 0.0.8
+    ./pypi_upload.sh
 
     ./pipbuild_platform.sh 0.0.1.dev1
