@@ -10,8 +10,8 @@ Windows Support
 The Peek platform is designed to run on Linux, however, it is compatible with windows.
 This section describes the requirements and configuration for windows.
 
-Requirements
-````````````
+Software Requirements
+`````````````````````
 
 #.  Create peek user account
 
@@ -132,9 +132,6 @@ Requirements
 
         pip install ~/Downloads/Shapely-1.5.17-cp35-cp35m-win_amd64.whl
 
-synerty-peek
-------------
-
 #.  Celery::
 
         $ pip install celery
@@ -142,6 +139,9 @@ synerty-peek
 #.  Twisted::
 
         $ pip install twisted
+
+synerty-peek
+------------
 
 #.  synerty-peek::
 
@@ -152,9 +152,3 @@ synerty-peek
         $ cd `dirname $(which python)`/lib/site-packages/peek_client_fe
         $ npm install
 
-#.  Symlink the tsconfig.json and node_modules file and directory.  These steps are run
- in the directory where the projects are checked out from. These are required for the
- frontend typescript compiler.::
-
-        ln -s peek-client-fe/peek_client_fe/node_modules .
-        ln -s peek-client-fe/peek_client_fe/src/tsconfig.json .
