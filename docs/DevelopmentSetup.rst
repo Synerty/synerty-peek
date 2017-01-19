@@ -1,12 +1,15 @@
-======================
-Peek Development Setup
-======================
+=================
+Development Setup
+=================
 
-This documentation is an extension of the Peek Production Platform (ProductionSetup.rst).
+.. WARNING:: This document extends, Synerty Peek Installation (Installation.rst).
 
-Windows Support
----------------
 
+.. NOTE:: Most development will be for the plugin, not platform, so these instructions
+    are not high priority.
+
+Windows
+-------
 
 Requirements
 ````````````
@@ -23,8 +26,9 @@ Requirements
         pip install coverage
         pip install pypiwin32
 
-#.  Visual Studio Code
-    :Download: https://code.visualstudio.com
+#.  Visual Studio Code,
+
+    :Download: `<https://code.visualstudio.com>`_
 
     Add PATH to environment variables ::
 
@@ -33,9 +37,11 @@ Requirements
 SymLinks
 ````````
 
-Enabling SymLinks (Note: This setting has no effect on user accounts that belong to the
- Administrators group.  Those users will always have to run mklink in an elevated
- environment as Administrator.)
+Enabling SymLinks.
+
+.. Note:: This setting has no effect on user accounts that belong to the Administrators
+    group.  Those users will always have to run mklink in an elevated environment as
+    Administrator.
 
 #.  Launch: "gpedit.msc"
 #.  Navigate: "Computer configuration → Windows Settings → Security Settings → Local
@@ -43,24 +49,20 @@ Enabling SymLinks (Note: This setting has no effect on user accounts that belong
 #.  Add the user or group that you want to allow to create symbolic links
 #.  You will need to logout and log back in for the change to take effect
 
-https://github.com/git-for-windows/git/wiki/Symbolic-Links
-
-DEVELOPING
-----------
-
-For platform development (NOTE: Most development will be for the plugin, not platform,
-so these instructions are not high priority)
+`<https://github.com/git-for-windows/git/wiki/Symbolic-Links>`_
 
 FROM SHELL
 ``````````
 
-#.  Checkout the following, all in the same folder
-    :From: https://github.com/Synerty
+#.  Checkout the following, all in the same folder,
+
+    :From: `<https://github.com/Synerty>`_
+
     ::
 
         git clone -c core.symlinks=true <URL>
 
--
+*  Repositories
     #.  synerty-peek
     #.  peek-plugin-base
     #.  peek-agent
@@ -133,35 +135,43 @@ SETTING UP PYCHARM
 
         .. image::pycharm_setup/settings_typescript.png
 
-You can now start developing
+*You can now start developing*
+
+Debian Linux
+------------
+
+
+Building synerty-peek
+---------------------
+
+Building for Production
+```````````````````````
+
+.. NOTE:: If you're building for development skip this step and continue through to
+    Development Setup.
+
+The peek package has build scripts that generate a platform build.
+
+.. NOTE:: Prod build, it tags, commits and test uploads to testpypi.
+
+.. WARNING:: Omitting the dot before dev will cause the script to fail as setuptools
+    adds the dot in if it's not there, which means the cp commands won't match files.
+
+    ::
+
+        ./pipbuild_platform.sh 0.0.8
+        ./pypi_upload.sh
 
 Building for Development
 ````````````````````````
 
 The peek package has build scripts that generate a development build.
-#. Dev build, it doesn't tag, commit or test upload, but still generates a build.
 
-::
+.. NOTE:: Dev build, it doesn't tag, commit or test upload, but still generates a build.
 
-        # NOTE: Omitting the dot before dev will cause the script to fail as setuptools
-        # adds the dot in if it's not there, which means the cp commands won't match files.
+.. WARNING:: Omitting the dot before dev will cause the script to fail as setuptools
+    adds the dot in if it's not there, which means the cp commands won't match files.
 
-Building for Production
-```````````````````````
-
-NOTE: If you're building for development skip this step and continue through to
-Development Setup.
-
-The peek package has build scripts that generate a platform build.
-#. Prod build, it tags, commits and test uploads to testpypi
-
-::
-
-        # NOTE: Omitting the dot before dev will cause the script to fail as setuptools
-        # adds the dot in if it's not there, which means the cp commands won't match files.
-
-        ./pipbuild_platform.sh 0.0.8
-        ./pypi_upload.sh
+    ::
 
         ./pipbuild_platform.sh 0.0.1.dev1
-
