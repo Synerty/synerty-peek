@@ -20,6 +20,19 @@ Services
 *  peek_agent
 *  peek_client
 
+Browser Support
+---------------
+
+synerty-peek has only been tested on Chrome.
+
+Future Browser Support
+``````````````````````
+
+*  Safari on iOS
+*  Chrome on Android
+*  Chrome desktop
+*  IE 11 and above.
+
 Getting Started
 ---------------
 
