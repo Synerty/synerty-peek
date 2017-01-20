@@ -11,6 +11,7 @@ Welcome to synerty-peek's documentation!
    :caption: Contents:
 
    README
+   Installation
    ProductionSetup
    DevelopmentSetup
    modules
