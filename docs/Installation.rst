@@ -24,7 +24,7 @@ Software Requirements
 #.  Create peek user account
 
     *  Username: peek
-    *  Password: PASSWORD
+    *  Password: PA$$W0RD
     *  sign in to the peek account
 
 #.  Chrome,
@@ -54,7 +54,7 @@ Software Requirements
 
     *  SQL Server Configuration Manager --> SQL Server Network Configuration -->
        Protocols for PEEK:
-    *  Under the TCP/IP properties set 'IPALL' 'TCP PORT' to '1433'. Select 'Apply' then
+    *  Under the TCP/IP properties set 'IPALL' 'TCP PORT' to '5432'. Select 'Apply' then
        'OK',
     *  Enable the 'TCP/IP' Protocol
     *  Restart the server service.
@@ -89,11 +89,11 @@ Software Requirements
 
     Unzip contents into ::
 
-        "%USERPROFILE%\AppData\Local\Programs\Python\Python35\freetds-v0.95.95"
+        "%USERPROFILE%\Python\Python35\freetds-v0.95.95"
 
     Add PATH to environment variables ::
 
-        "%USERPROFILE%\AppData\Local\Programs\Python\Python35\freetds-v0.95.95\bin"
+        "%USERPROFILE%\Python\freetds-v0.95.95\bin"
 
     Create 'freetds.conf' in "C:\" ::
 
