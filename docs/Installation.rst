@@ -148,6 +148,17 @@ Software Requirements
 
         $ pip install twisted
 
+Installing Oracle Libraries (Optional)
+``````````````````````````````````````
+
+The oracle libraries are optional. Install them where the agent runs if you are going
+to interface with an oracle database.
+
+#.  cx_Oracle
+
+    :Download: `<https://pypi.python.org/packages/50/c0/de24ec02484eb9add03cfbd28bd3c23fe137551501a9ca4498f30109621e/cx_Oracle-5.2.1-12c.win-amd64-py3.5.exe#md5=b505eaceceaa3813cf6bfe701ba92c3e>`_
+    :From: `<https://pypi.python.org/pypi/cx_Oracle/5.2.1>`_
+
 
 Installing synerty-peek
 ```````````````````````
