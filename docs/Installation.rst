@@ -24,7 +24,7 @@ Software Requirements
 #.  Create peek user account
 
     *  Username: peek
-    *  Password: PASSWORD
+    *  Password: PA$$W0RD
     *  sign in to the peek account
 
 #.  Chrome,
@@ -54,7 +54,7 @@ Software Requirements
 
     *  SQL Server Configuration Manager --> SQL Server Network Configuration -->
        Protocols for PEEK:
-    *  Under the TCP/IP properties set 'IPALL' 'TCP PORT' to '1433'. Select 'Apply' then
+    *  Under the TCP/IP properties set 'IPALL' 'TCP PORT' to '5432'. Select 'Apply' then
        'OK',
     *  Enable the 'TCP/IP' Protocol
     *  Restart the server service.
@@ -89,11 +89,11 @@ Software Requirements
 
     Unzip contents into ::
 
-        "%USERPROFILE%\AppData\Local\Programs\Python\Python35\freetds-v0.95.95"
+        "%USERPROFILE%\Python\Python35\freetds-v0.95.95"
 
     Add PATH to environment variables ::
 
-        "%USERPROFILE%\AppData\Local\Programs\Python\Python35\freetds-v0.95.95\bin"
+        "%USERPROFILE%\Python\freetds-v0.95.95\bin"
 
     Create 'freetds.conf' in "C:\" ::
 
@@ -147,6 +147,17 @@ Software Requirements
 #.  Twisted::
 
         $ pip install twisted
+
+Installing Oracle Libraries (Optional)
+``````````````````````````````````````
+
+The oracle libraries are optional. Install them where the agent runs if you are going
+to interface with an oracle database.
+
+#.  cx_Oracle
+
+    :Download: `<https://pypi.python.org/packages/50/c0/de24ec02484eb9add03cfbd28bd3c23fe137551501a9ca4498f30109621e/cx_Oracle-5.2.1-12c.win-amd64-py3.5.exe#md5=b505eaceceaa3813cf6bfe701ba92c3e>`_
+    :From: `<https://pypi.python.org/pypi/cx_Oracle/5.2.1>`_
 
 
 Installing synerty-peek

@@ -8,6 +8,11 @@ Development Setup
 .. NOTE:: Most development will be for the plugin, not platform, so these instructions
     are not high priority.
 
+Hardward Recommendation
+-----------------------
+
+32gb of ram (minumum 16gb)
+
 Windows
 -------
 
