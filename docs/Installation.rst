@@ -54,7 +54,7 @@ Software Requirements
 
     *  SQL Server Configuration Manager --> SQL Server Network Configuration -->
        Protocols for PEEK:
-    *  Under the TCP/IP properties set 'IPALL' 'TCP PORT' to '5432'. Select 'Apply' then
+    *  Under the TCP/IP properties set 'IPALL' 'TCP PORT' to '1433'. Select 'Apply' then
        'OK',
     *  Enable the 'TCP/IP' Protocol
     *  Restart the server service.
@@ -78,9 +78,10 @@ Software Requirements
     :Download: `<https://www.python.org/ftp/python/3.5.3/python-3.5.3rc1-amd64.exe>`_
     :From: `<https://www.python.org/downloads/windows/>`_
 
-    Add PATH to environment variables ::
+    Add PATH(s) to environment variables ::
 
-        "%USERPROFILE%\AppData\Local\Programs\Python\Python35\"
+        "%USERPROFILE%\Python35\"
+        "%USERPROFILE%\Python35\Scripts\"
 
 #.  FreeTDS,
 
@@ -89,11 +90,11 @@ Software Requirements
 
     Unzip contents into ::
 
-        "%USERPROFILE%\Python\Python35\freetds-v0.95.95"
+        "%USERPROFILE%\freetds-v0.95.95"
 
     Add PATH to environment variables ::
 
-        "%USERPROFILE%\Python\freetds-v0.95.95\bin"
+        "%USERPROFILE%\freetds-v0.95.95\bin"
 
     Create 'freetds.conf' in "C:\" ::
 
@@ -139,14 +140,6 @@ Software Requirements
     Shapely >= 1.5.17 ::
 
         pip install ~/Downloads/Shapely-1.5.17-cp35-cp35m-win_amd64.whl
-
-#.  Celery::
-
-        $ pip install celery
-
-#.  Twisted::
-
-        $ pip install twisted
 
 Installing Oracle Libraries (Optional)
 ``````````````````````````````````````
