@@ -149,10 +149,36 @@ to interface with an oracle database.
 
 #.  cx_Oracle
 
-    :Download: `<https://pypi.python.org/packages/50/c0/de24ec02484eb9add03cfbd28bd3c23fe137551501a9ca4498f30109621e/cx_Oracle-5.2.1-12c.win-amd64-py3.5.exe#md5=b505eaceceaa3813cf6bfe701ba92c3e>`_
-    :From: `<https://pypi.python.org/pypi/cx_Oracle/5.2.1>`_
+    #.  Install Oracle Instant Client
 
-    TODO:
+        :Download: `<http://download.oracle.com/otn/nt/instantclient/121020/instantclient-basic-windows.x64-12.1.0.2.0.zip>`_
+        :From: `<http://www.oracle.com/technetwork/topics/winx64soft-089540.html>`_
+
+        Unzip contents into ::
+
+                "%USERPROFILE%\Oracle\12.1.0.2.0\instantclient_12_1_basic"
+
+        Add 'ORACLE_HOME' to the environment variables and set the path ::
+
+                "%USERPROFILE%\Oracle\12.1.0.2.0\instantclient_12_1_basic"
+
+        Add to the 'PATH' to environment variables ::
+
+                "%USERPROFILE%\Oracle\12.1.0.2.0\instantclient_12_1_basic"
+
+    #.  Install cx_Oracle
+
+        :Download: `<https://pypi.python.org/packages/50/c0/de24ec02484eb9add03cfbd28bd3c23fe137551501a9ca4498f30109621e/cx_Oracle-5.2.1-12c.win-amd64-py3.5.exe#md5=b505eaceceaa3813cf6bfe701ba92c3e>`_
+        :From: `<https://pypi.python.org/pypi/cx_Oracle/5.2.1>`_
+
+    #.  Test cx_Oracle in python ::
+
+            >>>
+            >>> import cx_Oracle
+            >>> con = cx_Oracle.connect('TODO:  insert server connection string')
+            >>> print con.version
+            12.1.0.2.0
+            >>>con.close()
 
 Installing synerty-peek
 ```````````````````````
