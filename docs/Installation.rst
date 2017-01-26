@@ -78,6 +78,8 @@ Software Requirements
     :Download: `<https://www.python.org/ftp/python/3.5.3/python-3.5.3rc1-amd64.exe>`_
     :From: `<https://www.python.org/downloads/windows/>`_
 
+    Install to PATH "%USERPROFILE%\Python35\"
+
     Add PATH(s) to environment variables ::
 
         "%USERPROFILE%\Python35\"
@@ -175,10 +177,21 @@ to interface with an oracle database.
 
             >>>
             >>> import cx_Oracle
-            >>> con = cx_Oracle.connect('TODO:  insert server connection string')
+            >>> con = cx_Oracle.connect('oracle://username:password@hostname:1521/instance')
             >>> print con.version
             12.1.0.2.0
             >>>con.close()
+
+            con = cx_Oracle.connect('oracle://enmac:bford@192.168.215.128:1521/enmac')
+
+    #.  Test cx_Oracle with Alchemy ::
+
+            >>>
+            >>> from sqlalchemy import create_engine
+
+            >>> create_engine('oracle://username:password@hostname:1521/instance')
+            >>> engine = create_engine('oracle://enmac:bford@192.168.215.128:1521/enmac')
+            >>> engine.execute("SELECT 1")
 
 Installing synerty-peek
 ```````````````````````
