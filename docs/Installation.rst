@@ -54,7 +54,7 @@ Software Requirements
 
     *  SQL Server Configuration Manager --> SQL Server Network Configuration -->
        Protocols for PEEK:
-    *  Under the TCP/IP properties set 'IPALL' 'TCP PORT' to '5432'. Select 'Apply' then
+    *  Under the TCP/IP properties set 'IPALL' 'TCP PORT' to '1433'. Select 'Apply' then
        'OK',
     *  Enable the 'TCP/IP' Protocol
     *  Restart the server service.
@@ -78,9 +78,12 @@ Software Requirements
     :Download: `<https://www.python.org/ftp/python/3.5.3/python-3.5.3rc1-amd64.exe>`_
     :From: `<https://www.python.org/downloads/windows/>`_
 
-    Add PATH to environment variables ::
+    Install to PATH "%USERPROFILE%\Python35\"
 
-        "%USERPROFILE%\AppData\Local\Programs\Python\Python35\"
+    Add PATH(s) to environment variables ::
+
+        "%USERPROFILE%\Python35\"
+        "%USERPROFILE%\Python35\Scripts\"
 
 #.  FreeTDS,
 
@@ -89,11 +92,11 @@ Software Requirements
 
     Unzip contents into ::
 
-        "%USERPROFILE%\Python\Python35\freetds-v0.95.95"
+        "%USERPROFILE%\freetds-v0.95.95"
 
     Add PATH to environment variables ::
 
-        "%USERPROFILE%\Python\freetds-v0.95.95\bin"
+        "%USERPROFILE%\freetds-v0.95.95\bin"
 
     Create 'freetds.conf' in "C:\" ::
 
@@ -140,14 +143,6 @@ Software Requirements
 
         pip install ~/Downloads/Shapely-1.5.17-cp35-cp35m-win_amd64.whl
 
-#.  Celery::
-
-        $ pip install celery
-
-#.  Twisted::
-
-        $ pip install twisted
-
 Installing Oracle Libraries (Optional)
 ``````````````````````````````````````
 
@@ -156,9 +151,47 @@ to interface with an oracle database.
 
 #.  cx_Oracle
 
-    :Download: `<https://pypi.python.org/packages/50/c0/de24ec02484eb9add03cfbd28bd3c23fe137551501a9ca4498f30109621e/cx_Oracle-5.2.1-12c.win-amd64-py3.5.exe#md5=b505eaceceaa3813cf6bfe701ba92c3e>`_
-    :From: `<https://pypi.python.org/pypi/cx_Oracle/5.2.1>`_
+    #.  Install Oracle Instant Client
 
+        :Download: `<http://download.oracle.com/otn/nt/instantclient/121020/instantclient-basic-windows.x64-12.1.0.2.0.zip>`_
+        :From: `<http://www.oracle.com/technetwork/topics/winx64soft-089540.html>`_
+
+        Unzip contents into ::
+
+                "%USERPROFILE%\Oracle\12.1.0.2.0\instantclient_12_1_basic"
+
+        Add 'ORACLE_HOME' to the environment variables and set the path ::
+
+                "%USERPROFILE%\Oracle\12.1.0.2.0\instantclient_12_1_basic"
+
+        Add to the 'PATH' to environment variables ::
+
+                "%USERPROFILE%\Oracle\12.1.0.2.0\instantclient_12_1_basic"
+
+    #.  Install cx_Oracle
+
+        :Download: `<https://pypi.python.org/packages/50/c0/de24ec02484eb9add03cfbd28bd3c23fe137551501a9ca4498f30109621e/cx_Oracle-5.2.1-12c.win-amd64-py3.5.exe#md5=b505eaceceaa3813cf6bfe701ba92c3e>`_
+        :From: `<https://pypi.python.org/pypi/cx_Oracle/5.2.1>`_
+
+    #.  Test cx_Oracle in python ::
+
+            >>>
+            >>> import cx_Oracle
+            >>> con = cx_Oracle.connect('oracle://username:password@hostname:1521/instance')
+            >>> print con.version
+            12.1.0.2.0
+            >>>con.close()
+
+            con = cx_Oracle.connect('oracle://enmac:bford@192.168.215.128:1521/enmac')
+
+    #.  Test cx_Oracle with Alchemy ::
+
+            >>>
+            >>> from sqlalchemy import create_engine
+
+            >>> create_engine('oracle://username:password@hostname:1521/instance')
+            >>> engine = create_engine('oracle://enmac:bford@192.168.215.128:1521/enmac')
+            >>> engine.execute("SELECT 1")
 
 Installing synerty-peek
 ```````````````````````
