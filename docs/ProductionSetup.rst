@@ -7,7 +7,7 @@ Production Platform
 Windows
 -------
 
-Run the command prompt as administrator then enter the bash shell.
+Run the command prompt **as administrator** then enter the bash shell.
 
 #.  synerty-peek::
 
@@ -27,7 +27,7 @@ Run the command prompt as administrator then enter the bash shell.
         $ npm install
 
 #.  Symlink the tsconfig.json and node_modules file and directory in the parent
-directory of peek-client-fe, peek-server-fe and the plugins. These steps are run in the
+directory of peek-client-fe. These steps are run in the
 directory where the projects are checked out from. These are required for the frontend
 typescript compiler. ::
 

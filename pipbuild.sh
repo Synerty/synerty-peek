@@ -33,11 +33,11 @@ sed -i "s;.*version.*=.*;__version__ = '${VER}';" ${PACKAGE}/__init__.py
 
 # Upload to test pypi
 if [[ ${VER} == *"dev"* ]]; then
-    python setup.py sdist
+    python setup.py  sdist --format=gztar
     git reset --hard
 
 else
-    python setup.py sdist upload -r pypitest
+    python setup.py sdist --format=gztar upload -r pypitest
     # Reset the commit, we don't want versions in the commit
     git commit -a -m "Updated to version ${VER}"
 
