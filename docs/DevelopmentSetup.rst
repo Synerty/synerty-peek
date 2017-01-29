@@ -116,6 +116,10 @@ typescript compiler. ::
             cd synerty-peek
             ./pip_uninstall_and_develop.sh
 
+    #.  For repositories and plugins run from their directory ::
+
+            $ python setup.py develop
+
 SETTING UP PYCHARM
 ``````````````````
 
@@ -177,7 +181,7 @@ The peek package has build scripts that generate a platform build.
 
     ::
 
-        ./pipbuild_platform.sh 0.0.8
+        ./pipbuild_platform.sh #.#.##
         ./pypi_upload.sh
 
 Building for Development

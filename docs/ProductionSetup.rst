@@ -13,6 +13,12 @@ Run the command prompt as administrator then enter the bash shell.
 
         $ pip install synerty-peek
 
+#.  peek-plugins
+
+    From saved directory::
+
+            $ pip install
+
 #.  Install front end packages ::
 
         $ cd `dirname $(which python)`/lib/site-packages/peek_client_fe
