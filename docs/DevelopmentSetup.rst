@@ -31,6 +31,25 @@ Requirements
         pip install coverage
         pip install pypiwin32
 
+#.  Install and Configure RabbitMQ
+
+    #.  Install Erlang
+        :Download: `<http://www.erlang.org/download/otp_win64_19.2.exe>`_
+        :From: `<http://www.erlang.org/downloads>`_
+
+    #.  Install rabbitmq
+        :Download: `<http://www.rabbitmq.com/releases/rabbitmq-server/v3.6.6/rabbitmq-server-3.6.6.exe>`_
+        :From: `<http://www.rabbitmq.com/download.html>`_
+
+    TODO:
+
+#.  Install and Configure Redis
+
+    :Download: `<http://www.rabbitmq.com/releases/rabbitmq-server/v3.6.6/rabbitmq-server-3.6.6.exe>`_
+    :From: `<http://www.rabbitmq.com/download.html>`_
+
+    TODO:
+
 #.  Visual Studio Code,
 
     :Download: `<https://code.visualstudio.com>`_
@@ -39,22 +58,12 @@ Requirements
 
         "C:\Program Files (x86)\Microsoft VS Code\bin"
 
-SymLinks
-````````
 
-Enabling SymLinks.
+Enable your device for development
+``````````````````````````````````
 
-.. Note:: This setting has no effect on user accounts that belong to the Administrators
-    group.  Those users will always have to run mklink in an elevated environment as
-    Administrator.
 
-#.  Launch: "gpedit.msc"
-#.  Navigate: "Computer configuration → Windows Settings → Security Settings → Local
-    Policies → User Rights Assignment → Create symbolic links"
-#.  Add the user or group that you want to allow to create symbolic links
-#.  You will need to logout and log back in for the change to take effect
-
-`<https://github.com/git-for-windows/git/wiki/Symbolic-Links>`_
+`<https://msdn.microsoft.com/en-us/windows/uwp/get-started/enable-your-device-for-development>`_
 
 FROM SHELL
 ``````````
@@ -62,10 +71,6 @@ FROM SHELL
 #.  Checkout the following, all in the same folder,
 
     :From: `<https://github.com/Synerty>`_
-
-    ::
-
-        git clone -c core.symlinks=true <URL>
 
 *  Repositories
     #.  synerty-peek
@@ -78,23 +83,31 @@ FROM SHELL
     #.  peek-server-fe
     #.  peek-worker
 
-#.  Install front end packages::
+#.  Update git config ::
 
-        $ cd `dirname $(which python)`/lib/site-packages/peek_client_fe
+        $ git config -unset core.symlink
+        $ git config -add core.symlink true
+
+#.  Install front end packages
+
+        Go to the peek-server-fe/peek_server_fe/ and peek-client-fe/peek_client_fe/ ::
+
         $ npm install
 
-#.  Symlink the tsconfig.json and node_modules file and directory. These steps are run in
-        the directory where the projects are checked out from. These are required for
-        the frontend typescript compiler.
+#.  Symlink the tsconfig.json and node_modules file and directory in the parent
+directory of peek-client-fe, peek-server-fe and the plugins. These steps are run in the
+directory where the projects are checked out from. These are required for the frontend
+typescript compiler. ::
 
-    #.  ln -s peek-client-fe/peek_client_fe/node_modules .
-    #.  ln -s peek-client-fe/peek_client_fe/src/tsconfig.json .
+        ln -s peek-client-fe/peek_client_fe/node_modules .
+        ln -s peek-client-fe/peek_client_fe/tsconfig.json .
+    #.  ::
 
-    ::
+            $ cd peek-server-fe/peek_server_fe/
+            $ ng build
 
-        peek@peek:~/project$ ls -la
-        lrwxrwxrwx  1 peek sudo   42 Dec 27 21:00 node_modules -> peek-client-fe/peek_client_fe/node_modules
-        lrwxrwxrwx  1 peek sudo   47 Dec 27 21:00 tsconfig.json -> peek-client-fe/peek_client_fe/src/tsconfig.json
+            $ cd peek-client-fe/peek_client_fe/
+            $ ng build
 
 #.  These steps link the projects under site-packages and installs their dependencies.
 
@@ -102,6 +115,10 @@ FROM SHELL
 
             cd synerty-peek
             ./pip_uninstall_and_develop.sh
+
+    #.  For repositories and plugins run from their directory ::
+
+            $ python setup.py develop
 
 SETTING UP PYCHARM
 ``````````````````
@@ -164,7 +181,7 @@ The peek package has build scripts that generate a platform build.
 
     ::
 
-        ./pipbuild_platform.sh 0.0.8
+        ./pipbuild_platform.sh #.#.##
         ./pypi_upload.sh
 
 Building for Development

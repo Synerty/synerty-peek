@@ -45,19 +45,19 @@ Software Requirements
 
     :From: `<https://www.microsoft.com/en-ca/download/details.aspx?id=42299>`_
 
-    *  Shared Feature: check 'LocalDB'
-    *  Instance Configuration: change the named instance to 'peek'
-    *  Server Configuration: enter the Account Name and Password details for the 'peek'
+    #.  Shared Feature: check 'LocalDB'
+    #.  Instance Configuration: change the named instance to 'peek'
+    #.  Server Configuration: enter the Account Name and Password details for the 'peek'
        user.
 
 #.  Make Changes in SQL Server Configuration Manager (SQLServerManager12.msc)
 
-    *  SQL Server Configuration Manager --> SQL Server Network Configuration -->
+    #.  SQL Server Configuration Manager --> SQL Server Network Configuration -->
        Protocols for PEEK:
-    *  Under the TCP/IP properties set 'IPALL' 'TCP PORT' to '1433'. Select 'Apply' then
+    #.  Under the TCP/IP properties set 'IPALL' 'TCP PORT' to '1433'. Select 'Apply' then
        'OK',
-    *  Enable the 'TCP/IP' Protocol
-    *  Restart the server service.
+    #.  Enable the 'TCP/IP' Protocol
+    #.  Restart the server service.
 
 #.  Node.js 7+ and NPM 3+,
 
@@ -70,7 +70,7 @@ Software Requirements
 
 #.  Install the required NPM packages ::
 
-        npm -g upgrade npm
+
         npm -g install angular-cli typescript tslint
 
 #.  Python 3.5,
@@ -78,9 +78,9 @@ Software Requirements
     :Download: `<https://www.python.org/ftp/python/3.5.3/python-3.5.3rc1-amd64.exe>`_
     :From: `<https://www.python.org/downloads/windows/>`_
 
-    Install to PATH "%USERPROFILE%\Python35\"
+    #.  Install to PATH "%USERPROFILE%\Python35\"
 
-    Add PATH(s) to environment variables ::
+    #.  Add PATH(s) to environment variables ::
 
         "%USERPROFILE%\Python35\"
         "%USERPROFILE%\Python35\Scripts\"
@@ -90,15 +90,15 @@ Software Requirements
     :Download: `<https://github.com/ramiro/freetds/releases/download/v0.95.95/freetds-v0.95.95-win-x86_64-vs2015.zip>`_
     :From: `<https://github.com/ramiro/freetds/releases>`_
 
-    Unzip contents into ::
+    #.  Unzip contents into ::
 
         "%USERPROFILE%\freetds-v0.95.95"
 
-    Add PATH to environment variables ::
+    #.  Add PATH to environment variables ::
 
         "%USERPROFILE%\freetds-v0.95.95\bin"
 
-    Create 'freetds.conf' in "C:\" ::
+    #.  Create 'freetds.conf' in "C:\" ::
 
         [global]
             port = 1433
@@ -106,27 +106,30 @@ Software Requirements
             tds version = 7.0
             dump file = /tmp/freetds.log
 
+    #.  Test FreeTDS is working
+
+
 #.  dll files,
 
     :Download: `<http://indy.fulgan.com/SSL/openssl-1.0.2j-x64_86-win64.zip>`_
     :From: `<http://indy.fulgan.com/SSL/>`_
 
-    *  ensure these files are in the system32 folder:
-        *  libeay32.dll
-        *  ssleay32.dll
+    ensure these files are in the system32 folder:
+    *  libeay32.dll
+    *  ssleay32.dll
 
-        *  You will need to duplicate the above files and name them as per below:
-            *  libeay32MD.dll
-            *  ssleay32MD.dll
+    *  You will need to duplicate the above files and name them as per below:
+        *  libeay32MD.dll
+        *  ssleay32MD.dll
 
 #. GitBash,
 
     :Download: `<https://github.com/git-for-windows/git/releases/download/v2.11.0.windows.1/Git-2.11.0-64-bit.exe>`_
     :From: `<https://git-for-windows.github.io>`_
 
-    Configuring Extra Options: check 'Enable Symbolic Links'
+    #.  Configuring Extra Options: check 'Enable Symbolic Links'
 
-    Add PATH to environment variables ::
+    #.  Add PATH to environment variables ::
 
         "C:\Program Files\Git\bin"
 
@@ -192,6 +195,24 @@ to interface with an oracle database.
             >>> create_engine('oracle://username:password@hostname:1521/instance')
             >>> engine = create_engine('oracle://enmac:bford@192.168.215.128:1521/enmac')
             >>> engine.execute("SELECT 1")
+
+SymLinks
+````````
+
+Enabling SymLinks.
+
+.. Note:: This setting has no effect on user accounts that belong to the Administrators
+    group.  Those users will always have to run mklink in an elevated environment as
+    Administrator.
+
+#.  Launch: "gpedit.msc"
+
+    #.  Navigate: "Computer configuration → Windows Settings → Security Settings → Local
+    Policies → User Rights Assignment → Create symbolic links"
+    #.  Add the user or group that you want to allow to create symbolic links
+    #.  You will need to logout and log back in for the change to take effect
+
+`<https://github.com/git-for-windows/git/wiki/Symbolic-Links>`_
 
 Installing synerty-peek
 ```````````````````````
