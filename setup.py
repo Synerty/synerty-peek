@@ -10,6 +10,9 @@ egg_info = "%s.egg-info" % pip_package_name
 if os.path.isdir(egg_info):
     shutil.rmtree(egg_info)
 
+if os.path.isfile('MANIFEST'):
+    os.remove('MANIFEST')
+
 requirements = [
     "peek-server",
     "peek-worker",
