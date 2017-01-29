@@ -33,7 +33,7 @@ sed -i "s;.*version.*=.*;__version__ = '${VER}';" ${PACKAGE}/__init__.py
 
 # Upload to test pypi
 if [[ ${VER} == *"dev"* ]]; then
-    python setup.py sdist
+    python setup.py  --format=gztar
     git reset --hard
 
 else
