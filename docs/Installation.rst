@@ -214,11 +214,6 @@ Enabling SymLinks.
 
 `<https://github.com/git-for-windows/git/wiki/Symbolic-Links>`_
 
-#.  Update git config
-
-    #.  'git config -unset core.symlink'
-    #.  'git config -add core.symlink true'
-
 Installing synerty-peek
 ```````````````````````
 

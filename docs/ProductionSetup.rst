@@ -25,24 +25,21 @@ directory of peek-client-fe, peek-server-fe and the plugins. These steps are run
 directory where the projects are checked out from. These are required for the frontend
 typescript compiler. ::
 
+        $ exit
+        > cd C:\Users\peek\Python35\Lib\site-packages
         > mklink /J node_modules peek-client-fe\peek_client_fe\node_modules
-        > mklink /J tsconfig.json peek-client-fe\peek_client_fe\tsconfig.json
+        > bash
+        $ ln -s ~/Python35/Lib/site-packages/peek_client_fe/tsconfig.json .
 
     #.  ::
 
-            $ cd peek-server-fe/peek_server_fe/
+            $ python ~/Python35/Lib/site-packages/peek_server/run_peek_server.py
+            $ cd ~/Python35/Lib/site-packages/peek_server_fe/
             $ ng build
 
-            $ cd peek-client-fe/peek_client_fe/
+            $ python ~/Python35/Lib/site-packages/peek_client/run_peek_client.py
+            $ cd ~/Python35/Lib/site-packages/peek_client_fe/
             $ ng build
-
-#.  Install front end packages::
-
-        $ cd `dirname $(which python)`/lib/site-packages/peek_client_fe
-        $ npm install
-
-
-
 
 Running synerty-peek
 ````````````````````

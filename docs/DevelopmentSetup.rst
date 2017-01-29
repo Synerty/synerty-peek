@@ -83,6 +83,11 @@ FROM SHELL
     #.  peek-server-fe
     #.  peek-worker
 
+#.  Update git config ::
+
+        $ git config -unset core.symlink
+        $ git config -add core.symlink true
+
 #.  Install front end packages
 
         Go to the peek-server-fe/peek_server_fe/ and peek-client-fe/peek_client_fe/ ::
