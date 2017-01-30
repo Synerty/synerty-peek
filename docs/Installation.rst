@@ -2,6 +2,9 @@
 Installation Guide
 ==================
 
+.. note:: For offline installation complete the online installation on another server
+first.
+
 Windows Support
 ---------------
 
@@ -70,8 +73,14 @@ Software Requirements
 
 #.  Install the required NPM packages ::
 
-
         npm -g install angular-cli typescript tslint
+
+.. note:: follow these instruction for the offline installation.
+::
+
+    $ cat > package.json
+    ctrl-D
+
 
 #.  Python 3.5,
 
@@ -84,6 +93,10 @@ Software Requirements
 
         "%USERPROFILE%\Python35\"
         "%USERPROFILE%\Python35\Scripts\"
+
+
+.. note:: For the offline installation goto the Offline Installation Guide from here.
+This online installation is required until the completion of the offline installation.
 
 #.  FreeTDS,
 
@@ -217,8 +230,190 @@ Enabling SymLinks.
 Installing synerty-peek
 ```````````````````````
 
+.. note:: only complete these steps if following the online installation procedure.
+
 From here you will be deploying either the **Production Platform** (ProductionSetup.rst)
 or the **Development Setup** (DevelopmentSetup.rst).
+
+
+==========================
+Offline Installation Guide
+==========================
+
+.. warning:: For offline installation complete the online installation on another server
+first.  This is because some software requires online access to install.
+
+Software Requirements
+`````````````````````
+
+#.  Create peek user account as per the online installation,
+
+#.  Chrome,
+
+    :Download: `<https://www.google.com/intl/en/chrome/browser/desktop/index.html?standalone=1#>`_
+    :From: `<https://www.google.com/chrome/>`_
+
+#.  Microsoft .NET Framework 3.5 Service Pack 1,
+
+    :Download: `<https://www.microsoft.com/en-ca/download/details.aspx?id=22>`_
+
+#.  Visual C++ Build Tools 2015,
+
+    :Download: `<http://go.microsoft.com/fwlink/?LinkId=691126&__hstc=268264337.40d7988155305183930d94960a802559.1481662741421.1481662741421.1484335933816.2&__hssc=268264337.1.1484335933816&__hsfp=1223438833&fixForIE=.exe>`_
+    :From: `<http://landinghub.visualstudio.com/visual-cpp-build-tools>`_
+
+#.  Microsoft® SQL Server® 2014 Express,
+
+    :From: `<https://www.microsoft.com/en-ca/download/details.aspx?id=42299>`_
+
+    #.  Shared Feature: check 'LocalDB'
+    #.  Instance Configuration: change the named instance to 'peek'
+    #.  Server Configuration: enter the Account Name and Password details for the 'peek'
+       user.
+
+#.  Make Changes in SQL Server Configuration Manager (SQLServerManager12.msc)
+
+    #.  SQL Server Configuration Manager --> SQL Server Network Configuration -->
+       Protocols for PEEK:
+    #.  Under the TCP/IP properties set 'IPALL' 'TCP PORT' to '1433'. Select 'Apply' then
+       'OK',
+    #.  Enable the 'TCP/IP' Protocol
+    #.  Restart the server service.
+
+#.  Node.js 7+ and NPM 3+,
+
+    :Download: `<https://nodejs.org/dist/v7.4.0/node-v7.4.0-x64.msi>`_
+    :From: `<https://nodejs.org/en/download/current/>`_
+
+    Add PATH to environment variables ::
+
+        "%USERPROFILE%\AppData\Roaming\npm"
+
+#.  Install the required NPM packages ::
+
+
+        npm -g install angular-cli typescript tslint
+
+#.  Python 3.5,
+
+    TODO: package from the online server.
+
+#.  FreeTDS,
+
+        :Download: `<https://github.com/ramiro/freetds/releases/download/v0.95.95/freetds-v0.95.95-win-x86_64-vs2015.zip>`_
+        :From: `<https://github.com/ramiro/freetds/releases>`_
+
+        #.  Unzip contents into ::
+
+            "%USERPROFILE%\freetds-v0.95.95"
+
+        #.  Add PATH to environment variables ::
+
+            "%USERPROFILE%\freetds-v0.95.95\bin"
+
+        #.  Create 'freetds.conf' in "C:\" ::
+
+            [global]
+                port = 1433
+                instance = peek
+                tds version = 7.0
+                dump file = /tmp/freetds.log
+
+        #.  Test FreeTDS is working
+
+
+#.  dll files,
+
+    :Download: `<http://indy.fulgan.com/SSL/openssl-1.0.2j-x64_86-win64.zip>`_
+    :From: `<http://indy.fulgan.com/SSL/>`_
+
+    ensure these files are in the system32 folder:
+    *  libeay32.dll
+    *  ssleay32.dll
+
+    *  You will need to duplicate the above files and name them as per below:
+        *  libeay32MD.dll
+        *  ssleay32MD.dll
+
+#. GitBash,
+
+    :Download: `<https://github.com/git-for-windows/git/releases/download/v2.11.0.windows.1/Git-2.11.0-64-bit.exe>`_
+    :From: `<https://git-for-windows.github.io>`_
+
+    #.  Configuring Extra Options: check 'Enable Symbolic Links'
+
+    #.  Add PATH to environment variables ::
+
+        "C:\Program Files\Git\bin"
+
+Installing Oracle Libraries (Optional)
+``````````````````````````````````````
+
+The oracle libraries are optional. Install them where the agent runs if you are going
+to interface with an oracle database.
+
+#.  cx_Oracle
+
+    #.  Install Oracle Instant Client
+
+        :Download: `<http://download.oracle.com/otn/nt/instantclient/121020/instantclient-basic-windows.x64-12.1.0.2.0.zip>`_
+        :From: `<http://www.oracle.com/technetwork/topics/winx64soft-089540.html>`_
+
+        Unzip contents into ::
+
+                "%USERPROFILE%\Oracle\12.1.0.2.0\instantclient_12_1_basic"
+
+        Add 'ORACLE_HOME' to the environment variables and set the path ::
+
+                "%USERPROFILE%\Oracle\12.1.0.2.0\instantclient_12_1_basic"
+
+        Add to the 'PATH' to environment variables ::
+
+                "%USERPROFILE%\Oracle\12.1.0.2.0\instantclient_12_1_basic"
+
+    #.  Install cx_Oracle
+
+        :Download: `<https://pypi.python.org/packages/50/c0/de24ec02484eb9add03cfbd28bd3c23fe137551501a9ca4498f30109621e/cx_Oracle-5.2.1-12c.win-amd64-py3.5.exe#md5=b505eaceceaa3813cf6bfe701ba92c3e>`_
+        :From: `<https://pypi.python.org/pypi/cx_Oracle/5.2.1>`_
+
+    #.  Test cx_Oracle in python ::
+
+            >>>
+            >>> import cx_Oracle
+            >>> con = cx_Oracle.connect('oracle://username:password@hostname:1521/instance')
+            >>> print con.version
+            12.1.0.2.0
+            >>>con.close()
+
+            con = cx_Oracle.connect('oracle://enmac:bford@192.168.215.128:1521/enmac')
+
+    #.  Test cx_Oracle with Alchemy ::
+
+            >>>
+            >>> from sqlalchemy import create_engine
+
+            >>> create_engine('oracle://username:password@hostname:1521/instance')
+            >>> engine = create_engine('oracle://enmac:bford@192.168.215.128:1521/enmac')
+            >>> engine.execute("SELECT 1")
+
+SymLinks
+````````
+
+Enabling SymLinks.
+
+.. Note:: This setting has no effect on user accounts that belong to the Administrators
+    group.  Those users will always have to run mklink in an elevated environment as
+    Administrator.
+
+#.  Launch: "gpedit.msc"
+
+    #.  Navigate: "Computer configuration → Windows Settings → Security Settings → Local
+    Policies → User Rights Assignment → Create symbolic links"
+    #.  Add the user or group that you want to allow to create symbolic links
+    #.  You will need to logout and log back in for the change to take effect
+
+`<https://github.com/git-for-windows/git/wiki/Symbolic-Links>`_
+
 
 Debian Linux
 ------------
