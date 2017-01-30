@@ -56,7 +56,9 @@ Software Requirements
        Protocols for PEEK:
     #.  Under the TCP/IP properties set 'IPALL' 'TCP PORT' to '1433'. Select 'Apply' then
        'OK',
+        .. image:: sqlexpress_config/set_tcp_port.png
     #.  Enable the 'TCP/IP' Protocol
+        .. image:: sqlexpress_config/enable_tcpip.png
     #.  Restart the server service.
 
 #.  Node.js 7+ and NPM 3+,
