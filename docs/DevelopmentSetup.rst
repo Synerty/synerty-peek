@@ -2,7 +2,7 @@
 Development Setup
 =================
 
-.. WARNING:: This document extends, Synerty Peek Installation (Installation.rst).
+.. WARNING:: This document extends, Installation Guide (Installation.rst).
 
 
 .. NOTE:: Most development will be for the plugin, not platform, so these instructions

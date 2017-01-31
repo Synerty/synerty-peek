@@ -2,7 +2,7 @@
 Production Platform
 ===================
 
-.. WARNING:: This document extends, Synerty Peek Installation (Installation.rst).
+.. WARNING:: This document extends, Installation Guide (Installation.rst).
 
 Windows
 -------

@@ -2,8 +2,8 @@
 Installation Guide
 ==================
 
-.. note:: For offline installation complete the online installation on another server
-first.
+.. note:: For offline installation some steps are required to be installed on another
+    online server for the files to be packaged and transfered to the offline server.
 
 Windows Support
 ---------------
@@ -37,29 +37,40 @@ Software Requirements
 
 #.  Microsoft .NET Framework 3.5 Service Pack 1,
 
-    :Download: `<https://www.microsoft.com/en-ca/download/details.aspx?id=22>`_
+    :Download: `<http://download.microsoft.com/download/2/0/e/20e90413-712f-438c-988e-fdaa79a8ac3d/dotnetfx35.exe>`_
 
 #.  Visual C++ Build Tools 2015,
 
+    *  Online Installation:
+
     :Download: `<http://go.microsoft.com/fwlink/?LinkId=691126&__hstc=268264337.40d7988155305183930d94960a802559.1481662741421.1481662741421.1484335933816.2&__hssc=268264337.1.1484335933816&__hsfp=1223438833&fixForIE=.exe>`_
     :From: `<http://landinghub.visualstudio.com/visual-cpp-build-tools>`_
+
+    *  Offline Installation:
+
+    :Download: `<https://www.microsoft.com/en-US/download/details.aspx?id=48146>`_
 
 #.  Microsoft® SQL Server® 2014 Express,
 
     :From: `<https://www.microsoft.com/en-ca/download/details.aspx?id=42299>`_
 
     #.  Shared Feature: check 'LocalDB'
+
     #.  Instance Configuration: change the named instance to 'peek'
+
     #.  Server Configuration: enter the Account Name and Password details for the 'peek'
-       user.
+        user.
 
 #.  Make Changes in SQL Server Configuration Manager (SQLServerManager12.msc)
 
     #.  SQL Server Configuration Manager --> SQL Server Network Configuration -->
-       Protocols for PEEK:
+    Protocols for PEEK:
+
     #.  Under the TCP/IP properties set 'IPALL' 'TCP PORT' to '1433'. Select 'Apply' then
-       'OK',
+    'OK',
+
     #.  Enable the 'TCP/IP' Protocol
+
     #.  Restart the server service.
 
 #.  Node.js 7+ and NPM 3+,
@@ -67,20 +78,20 @@ Software Requirements
     :Download: `<https://nodejs.org/dist/v7.4.0/node-v7.4.0-x64.msi>`_
     :From: `<https://nodejs.org/en/download/current/>`_
 
-    Add PATH to environment variables ::
+    #.  Change install path ::
 
-        "%USERPROFILE%\AppData\Roaming\npm"
+            C:\Users\peek\nodejs
 
-#.  Install the required NPM packages ::
+    #.  Add PATH to environment variables ::
 
-        npm -g install angular-cli typescript tslint
+            "%USERPROFILE%\AppData\Roaming\npm"
 
-.. note:: follow these instruction for the offline installation.
-::
+    #.  Install the required NPM packages ::
 
-    $ cat > package.json
-    ctrl-D
+            npm -g install angular-cli typescript tslint
 
+.. note:: For Offline installation, package the installed nodejs files and installed
+    modules.  Unpackage in the same directory locations on the offline server.
 
 #.  Python 3.5,
 
@@ -94,9 +105,9 @@ Software Requirements
         "%USERPROFILE%\Python35\"
         "%USERPROFILE%\Python35\Scripts\"
 
-
-.. note:: For the offline installation goto the Offline Installation Guide from here.
-This online installation is required until the completion of the offline installation.
+.. note:: For Offline installation, package the installed python files after
+    synerty-peek package has been install and configured on the online server.  Unpackage
+     in the same directory locations on the offline server.
 
 #.  FreeTDS,
 
@@ -113,11 +124,11 @@ This online installation is required until the completion of the offline install
 
     #.  Create 'freetds.conf' in "C:\" ::
 
-        [global]
-            port = 1433
-            instance = peek
-            tds version = 7.0
-            dump file = /tmp/freetds.log
+            [global]
+                port = 1433
+                instance = peek
+                tds version = 7.0
+                dump file = /tmp/freetds.log
 
     #.  Test FreeTDS is working
 
@@ -129,10 +140,13 @@ This online installation is required until the completion of the offline install
 
     ensure these files are in the system32 folder:
     *  libeay32.dll
+
     *  ssleay32.dll
 
     *  You will need to duplicate the above files and name them as per below:
+
         *  libeay32MD.dll
+
         *  ssleay32MD.dll
 
 #. GitBash,
@@ -222,7 +236,9 @@ Enabling SymLinks.
 
     #.  Navigate: "Computer configuration → Windows Settings → Security Settings → Local
     Policies → User Rights Assignment → Create symbolic links"
+
     #.  Add the user or group that you want to allow to create symbolic links
+
     #.  You will need to logout and log back in for the change to take effect
 
 `<https://github.com/git-for-windows/git/wiki/Symbolic-Links>`_
@@ -230,190 +246,55 @@ Enabling SymLinks.
 Installing synerty-peek
 ```````````````````````
 
-.. note:: only complete these steps if following the online installation procedure.
+.. note:: If offline installation is required, complete the Installing synerty-peek
+    setup then return to the Offline Installation Guide.
 
 From here you will be deploying either the **Production Platform** (ProductionSetup.rst)
 or the **Development Setup** (DevelopmentSetup.rst).
 
-
-==========================
 Offline Installation Guide
-==========================
+--------------------------
 
-.. warning:: For offline installation complete the online installation on another server
-first.  This is because some software requires online access to install.
+.. warning:: For offline installation, complete the Installation Guide on another
+    online server first.  This is because some software requires online access to install.
 
 Software Requirements
 `````````````````````
 
-#.  Create peek user account as per the online installation,
-
-#.  Chrome,
-
-    :Download: `<https://www.google.com/intl/en/chrome/browser/desktop/index.html?standalone=1#>`_
-    :From: `<https://www.google.com/chrome/>`_
-
-#.  Microsoft .NET Framework 3.5 Service Pack 1,
-
-    :Download: `<https://www.microsoft.com/en-ca/download/details.aspx?id=22>`_
-
-#.  Visual C++ Build Tools 2015,
-
-    :Download: `<http://go.microsoft.com/fwlink/?LinkId=691126&__hstc=268264337.40d7988155305183930d94960a802559.1481662741421.1481662741421.1484335933816.2&__hssc=268264337.1.1484335933816&__hsfp=1223438833&fixForIE=.exe>`_
-    :From: `<http://landinghub.visualstudio.com/visual-cpp-build-tools>`_
-
-#.  Microsoft® SQL Server® 2014 Express,
-
-    :From: `<https://www.microsoft.com/en-ca/download/details.aspx?id=42299>`_
-
-    #.  Shared Feature: check 'LocalDB'
-    #.  Instance Configuration: change the named instance to 'peek'
-    #.  Server Configuration: enter the Account Name and Password details for the 'peek'
-       user.
-
-#.  Make Changes in SQL Server Configuration Manager (SQLServerManager12.msc)
-
-    #.  SQL Server Configuration Manager --> SQL Server Network Configuration -->
-       Protocols for PEEK:
-    #.  Under the TCP/IP properties set 'IPALL' 'TCP PORT' to '1433'. Select 'Apply' then
-       'OK',
-    #.  Enable the 'TCP/IP' Protocol
-    #.  Restart the server service.
+The offline installation guide has the same steps as the Installation Guide
+excluding the steps listed below:
 
 #.  Node.js 7+ and NPM 3+,
 
-    :Download: `<https://nodejs.org/dist/v7.4.0/node-v7.4.0-x64.msi>`_
-    :From: `<https://nodejs.org/en/download/current/>`_
+    From the online server, package the nodejs files and npm files.  Unpackage these
+    files on the offline server.
 
-    Add PATH to environment variables ::
+    Nodejs and NPM files are located::
 
-        "%USERPROFILE%\AppData\Roaming\npm"
+            ~\nodejs
+            ~\AppData\Roaming\npm
 
-#.  Install the required NPM packages ::
+    #.  Add PATH(s) to environment variables ::
 
-
-        npm -g install angular-cli typescript tslint
+            "%USERPROFILE%\AppData\Roaming\npm"
 
 #.  Python 3.5,
 
-    TODO: package from the online server.
+    From the online server, package the python files.  Unpackage these files on the
+    offline server.
 
-#.  FreeTDS,
+    Python35 files are located::
 
-        :Download: `<https://github.com/ramiro/freetds/releases/download/v0.95.95/freetds-v0.95.95-win-x86_64-vs2015.zip>`_
-        :From: `<https://github.com/ramiro/freetds/releases>`_
+            ~\Python35
 
-        #.  Unzip contents into ::
+    #.  Add PATH(s) to environment variables ::
 
-            "%USERPROFILE%\freetds-v0.95.95"
+            "%USERPROFILE%\Python35\"
+            "%USERPROFILE%\Python35\Scripts\"
 
-        #.  Add PATH to environment variables ::
-
-            "%USERPROFILE%\freetds-v0.95.95\bin"
-
-        #.  Create 'freetds.conf' in "C:\" ::
-
-            [global]
-                port = 1433
-                instance = peek
-                tds version = 7.0
-                dump file = /tmp/freetds.log
-
-        #.  Test FreeTDS is working
-
-
-#.  dll files,
-
-    :Download: `<http://indy.fulgan.com/SSL/openssl-1.0.2j-x64_86-win64.zip>`_
-    :From: `<http://indy.fulgan.com/SSL/>`_
-
-    ensure these files are in the system32 folder:
-    *  libeay32.dll
-    *  ssleay32.dll
-
-    *  You will need to duplicate the above files and name them as per below:
-        *  libeay32MD.dll
-        *  ssleay32MD.dll
-
-#. GitBash,
-
-    :Download: `<https://github.com/git-for-windows/git/releases/download/v2.11.0.windows.1/Git-2.11.0-64-bit.exe>`_
-    :From: `<https://git-for-windows.github.io>`_
-
-    #.  Configuring Extra Options: check 'Enable Symbolic Links'
-
-    #.  Add PATH to environment variables ::
-
-        "C:\Program Files\Git\bin"
-
-Installing Oracle Libraries (Optional)
-``````````````````````````````````````
-
-The oracle libraries are optional. Install them where the agent runs if you are going
-to interface with an oracle database.
-
-#.  cx_Oracle
-
-    #.  Install Oracle Instant Client
-
-        :Download: `<http://download.oracle.com/otn/nt/instantclient/121020/instantclient-basic-windows.x64-12.1.0.2.0.zip>`_
-        :From: `<http://www.oracle.com/technetwork/topics/winx64soft-089540.html>`_
-
-        Unzip contents into ::
-
-                "%USERPROFILE%\Oracle\12.1.0.2.0\instantclient_12_1_basic"
-
-        Add 'ORACLE_HOME' to the environment variables and set the path ::
-
-                "%USERPROFILE%\Oracle\12.1.0.2.0\instantclient_12_1_basic"
-
-        Add to the 'PATH' to environment variables ::
-
-                "%USERPROFILE%\Oracle\12.1.0.2.0\instantclient_12_1_basic"
-
-    #.  Install cx_Oracle
-
-        :Download: `<https://pypi.python.org/packages/50/c0/de24ec02484eb9add03cfbd28bd3c23fe137551501a9ca4498f30109621e/cx_Oracle-5.2.1-12c.win-amd64-py3.5.exe#md5=b505eaceceaa3813cf6bfe701ba92c3e>`_
-        :From: `<https://pypi.python.org/pypi/cx_Oracle/5.2.1>`_
-
-    #.  Test cx_Oracle in python ::
-
-            >>>
-            >>> import cx_Oracle
-            >>> con = cx_Oracle.connect('oracle://username:password@hostname:1521/instance')
-            >>> print con.version
-            12.1.0.2.0
-            >>>con.close()
-
-            con = cx_Oracle.connect('oracle://enmac:bford@192.168.215.128:1521/enmac')
-
-    #.  Test cx_Oracle with Alchemy ::
-
-            >>>
-            >>> from sqlalchemy import create_engine
-
-            >>> create_engine('oracle://username:password@hostname:1521/instance')
-            >>> engine = create_engine('oracle://enmac:bford@192.168.215.128:1521/enmac')
-            >>> engine.execute("SELECT 1")
-
-SymLinks
-````````
-
-Enabling SymLinks.
-
-.. Note:: This setting has no effect on user accounts that belong to the Administrators
-    group.  Those users will always have to run mklink in an elevated environment as
-    Administrator.
-
-#.  Launch: "gpedit.msc"
-
-    #.  Navigate: "Computer configuration → Windows Settings → Security Settings → Local
-    Policies → User Rights Assignment → Create symbolic links"
-    #.  Add the user or group that you want to allow to create symbolic links
-    #.  You will need to logout and log back in for the change to take effect
-
-`<https://github.com/git-for-windows/git/wiki/Symbolic-Links>`_
-
+.. note:: For Offline installation, package the installed python files after
+    synerty-peek package has been install and configured.  Unpackage in the same directory
+    locations on the offline server.
 
 Debian Linux
 ------------
