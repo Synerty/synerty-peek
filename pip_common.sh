@@ -15,6 +15,15 @@ peek-server-fe
 peek-server
 synerty-peek"
 
+export PLUGINS="
+peek-plugin-action-to-client
+peek-plugin-data-dms
+peek-plugin-pof-soap
+peek-plugin-user
+peek-plugin-pof-field-switching
+peek-plugin-pof-sql"
+
+
 export bold=$(tput bold)
 export normal=$(tput sgr0)
 
