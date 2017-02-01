@@ -15,6 +15,7 @@ Welcome to synerty-peek's documentation!
    ProductionSetup
    DevelopmentSetup
    modules
+   Troubleshooting
    LICENSE
 
 Indices and tables
