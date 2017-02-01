@@ -63,7 +63,7 @@ Software Requirements
 
 #.  Make Changes in SQL Server Configuration Manager (SQLServerManager12.msc)
 
-    #.  SQL Server Configuration Manager --> SQL Server Network Configuration -->
+    SQL Server Configuration Manager --> SQL Server Network Configuration -->
     Protocols for PEEK:
 
     #.  Under the TCP/IP properties set 'IPALL' 'TCP PORT' to '1433'. Select 'Apply' then
@@ -299,6 +299,14 @@ excluding the steps listed below:
 .. note:: For Offline installation, package the installed python files after
     synerty-peek package has been install and configured.  Unpackage in the same directory
     locations on the offline server.
+
+    #.  Refreshing symbolic links::
+
+            $ cd `dirname $(which python)`/lib/site-packages/
+
+            $ rm -r peek_server_fe/src/app/peek_plugin* peek_server_fe/node_modules/peek_plugin*
+
+            $ rm -r peek_client_fe/src/app/peek_plugin* peek_client_fe/node_modules/peek_plugin*
 
 Debian Linux
 ------------
