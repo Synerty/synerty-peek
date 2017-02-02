@@ -23,13 +23,13 @@ Requirements
 
     Run these command in terminal ::
 
-        pip install psycopg2
-        pip install pycparser
-        pip install cffi
-        pip install cryptography
-        pip install pytest
-        pip install coverage
-        pip install pypiwin32
+        $ pip install psycopg2
+        $ pip install pycparser
+        $ pip install cffi
+        $ pip install cryptography
+        $ pip install pytest
+        $ pip install coverage
+        $ pip install pypiwin32
 
 #.  Install and Configure RabbitMQ
 
@@ -99,8 +99,8 @@ directory of peek-client-fe, peek-server-fe and the plugins. These steps are run
 directory where the projects are checked out from. These are required for the frontend
 typescript compiler. ::
 
-        ln -s peek-client-fe/peek_client_fe/node_modules .
-        ln -s peek-client-fe/peek_client_fe/tsconfig.json .
+        $ ln -s peek-client-fe/peek_client_fe/node_modules .
+        $ ln -s peek-client-fe/peek_client_fe/tsconfig.json .
     #.  ::
 
             $ cd peek-server-fe/peek_server_fe/
@@ -113,8 +113,8 @@ typescript compiler. ::
 
     #.  Run the following commands ::
 
-            cd synerty-peek
-            ./pip_uninstall_and_develop.sh
+            $ cd synerty-peek
+            $ ./pip_uninstall_and_develop.sh
 
     #.  For repositories and plugins run from their directory ::
 
@@ -181,8 +181,8 @@ The peek package has build scripts that generate a platform build.
 
     ::
 
-        ./pipbuild_platform.sh #.#.##
-        ./pypi_upload.sh
+        $ ./pipbuild_platform.sh #.#.##
+        $ ./pypi_upload.sh
 
 Building for Development
 ````````````````````````
@@ -196,4 +196,14 @@ The peek package has build scripts that generate a development build.
 
     ::
 
-        ./pipbuild_platform.sh 0.0.1.dev1
+        $ ./pipbuild_platform.sh 0.0.1.dev1
+
+Building peek-plugins
+---------------------
+
+
+
+    ::
+
+        $ export RELEASE_DIR=/c/peek_plugins
+        $ ./pipbuild.sh #.#.##
