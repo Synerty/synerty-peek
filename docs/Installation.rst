@@ -61,6 +61,9 @@ Software Requirements
     #.  Server Configuration: enter the Account Name and Password details for the 'peek'
         user.
 
+    #.  Start Microsoft SQL Server Management Studio --> Connect to PEEK database
+    engine --> create new database 'peek'
+
 #.  Make Changes in SQL Server Configuration Manager (SQLServerManager12.msc)
 
     SQL Server Configuration Manager --> SQL Server Network Configuration -->

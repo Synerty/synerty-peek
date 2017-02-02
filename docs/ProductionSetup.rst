@@ -17,7 +17,7 @@ Run the command prompt **as administrator** then enter the bash shell.
 
     From saved directory::
 
-            $ pip install
+            $ pip install ~/...
 
 #.  Install front end packages ::
 
@@ -40,17 +40,65 @@ typescript compiler. ::
     #.  ::
 
             $ python ~/Python35/Lib/site-packages/peek_server/run_peek_server.py
+
+            ctrl+c
+
             $ cd ~/Python35/Lib/site-packages/peek_server_fe/
             $ ng build
 
             $ python ~/Python35/Lib/site-packages/peek_client/run_peek_client.py
+
+            ctrl+c
+
             $ cd ~/Python35/Lib/site-packages/peek_client_fe/
             $ ng build
 
+            $ python ~/Python35/Lib/site-packages/peek_agent/run_peek_agent.py
+
+            ctrl+c
+
+#.  Update config.json files
+
+    #.  peek-server.home/config.json
+
+        *  update the sql connection::
+
+                "sqlalchemy": {
+                        "connectUrl": "mssql+pymssql://.\\peek:PASSWORD@localhost/peek",
+
+        *  if using plugins::
+
+                "plugin": {
+                    "enabled": [
+                        "insert plugin name",
+                        "insert plugin name"
+                    ],
+                },
+
+       #.  peek-client.home/nconfig.json
+
+        *  if using plugins::
+
+                "plugin": {
+                    "enabled": [
+                        "insert plugin name",
+                        "insert plugin name"
+                    ],
+                },
 Running synerty-peek
 ````````````````````
 
+$ python ~/Python35/Lib/site-packages/peek_server/run_peek_server.py
 
+chrome: http://127.0.0.1:8010/
+
+Update plugin settings
+
+$ python ~/Python35/Lib/site-packages/peek_client/run_peek_client.py
+
+chrome: http://127.0.0.1:8000/
+
+$ python ~/Python35/Lib/site-packages/peek_agent/run_peek_agent.py
 
 Debian Linux
 ------------
