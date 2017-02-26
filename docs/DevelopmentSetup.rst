@@ -147,6 +147,13 @@ SETTING UP PYCHARM
         #.  peek_agent depends on -> peek_platform
         #.  peek_worker depends on -> peek_platform
 
+    #.  Languages & Frameworks -> Node.js and NPM
+
+        #.  Node interpreter -> ~/node-v7.1.0/bin/node
+        #.  Remove other node interpreters
+
+        .. image::pycharm_setup/settings_nodejs_and_npm.png
+
     #.  Languages & Frameworks -> TypesScript
 
         #.  Node interpreter -> ~/node-v7.1.0/bin/node
@@ -156,6 +163,14 @@ SETTING UP PYCHARM
         #.  Generate source maps -> Checked
 
         .. image::pycharm_setup/settings_typescript.png
+
+    #.  Languages & Frameworks -> Typescript -> TSLint
+
+        #.  Select "Enable"
+        #.  Node interpreter -> ~/node-v7.1.0/bin/node
+        #.  TSLint Package -> ~/node-v7.1.0/lib/node_modules/tslint
+
+        .. image::pycharm_setup/settings_tslint.png
 
 *You can now start developing*
 
