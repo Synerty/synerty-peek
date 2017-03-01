@@ -26,8 +26,14 @@ Software Requirements
 
 #.  Create peek user account
 
-    *  Username: peek
-    *  Password: PA$$W0RD
+    *  Account Type: Administrator
+
+    *  Username: ::
+
+            peek
+    *  Password: ::
+
+            PA$$W0RD
     *  sign in to the peek account
 
 #.  Chrome,
@@ -35,9 +41,27 @@ Software Requirements
     :Download: `<https://www.google.com/intl/en/chrome/browser/desktop/index.html?standalone=1#>`_
     :From: `<https://www.google.com/chrome/>`_
 
+#.  7zip (optional),
+
+    :Download: `<http://www.7-zip.org/a/7z1604-x64.exe>`_
+    :From: `<http://www.7-zip.org/download.html>`_
+
+
+#.  Notepad ++ (optional),
+
+    :Download: `<https://notepad-plus-plus.org/repository/7.x/7.3.2/npp.7.3.2.Installer.x64.exe>`_
+    :From: `<https://notepad-plus-plus.org>`_
+
 #.  Microsoft .NET Framework 3.5 Service Pack 1,
 
+    *  Online Installation:
+
     :Download: `<http://download.microsoft.com/download/2/0/e/20e90413-712f-438c-988e-fdaa79a8ac3d/dotnetfx35.exe>`_
+    :From: `<https://www.microsoft.com/en-ca/download>`_
+
+    *  Offline Installation:
+
+    :Download: `<https://download.microsoft.com/download/2/0/E/20E90413-712F-438C-988E-FDAA79A8AC3D/dotnetfx35.exe>`_
 
 #.  Visual C++ Build Tools 2015,
 
@@ -47,19 +71,33 @@ Software Requirements
     :From: `<http://landinghub.visualstudio.com/visual-cpp-build-tools>`_
 
     *  Offline Installation:
-
+    Install using the ISO
     :Download: `<https://www.microsoft.com/en-US/download/details.aspx?id=48146>`_
+
 
 #.  Microsoft® SQL Server® 2014 Express,
 
     :From: `<https://www.microsoft.com/en-ca/download/details.aspx?id=42299>`_
 
-    #.  Shared Feature: check 'LocalDB'
+    #.  Choose directory for extracted files: ::
 
-    #.  Instance Configuration: change the named instance to 'peek'
+            C:\SQLEXPRWT_x64_ENU\
 
-    #.  Server Configuration: enter the Account Name and Password details for the 'peek'
-        user.
+    #.  Select "New SQL Server stand-alone installation"
+
+    #.  Feature Selection: check all Features
+
+        .. image:: screenshots/SQLServer-FeatureSelection.jpg
+
+    #.  Instance Configuration: change the named instance to 'peek'. This will update
+    the 'Instance ID'
+
+    #.  Server Configuration: Select browse from the 'Account Name' drop-list and check
+     names for 'peek'.  Select ok then enter the account password
+
+        .. image:: screenshots/SQLServer-ServerConfiguration.jpg
+
+    #.  Database Engine Configuration: Leave the default settings
 
     #.  Start Microsoft SQL Server Management Studio --> Connect to PEEK database
     engine --> create new database 'peek'
@@ -72,13 +110,15 @@ Software Requirements
     #.  Under the TCP/IP properties set 'IPALL' 'TCP PORT' to '1433'. Select 'Apply' then
     'OK',
 
-        .. image:: sqlexpress_config/set_tcp_port.png
+        .. image:: screenshots/set_tcp_port.png
 
     #.  Enable the 'TCP/IP' Protocol
 
-        .. image:: sqlexpress_config/enable_tcpip.png
+        .. image:: screenshots/enable_tcpip.png
 
     #.  Restart the server service.
+
+        .. image:: screenshots/SQLServer-RestartServices.jpg
 
 #.  Node.js 7+ and NPM 3+,
 
@@ -89,32 +129,43 @@ Software Requirements
 
             C:\Users\peek\nodejs
 
-    #.  Add PATH to environment variables ::
+    #.  Confirm PATH to environment variables ::
 
-            "%USERPROFILE%\AppData\Roaming\npm"
+            %USERPROFILE%\AppData\Roaming\npm
+            C:\Users\peek\nodejs\
 
-    #.  Install the required NPM packages ::
+    #.  Run the Command Prompt as Administrator and run the following commands: ::
 
             npm -g install angular-cli typescript tslint
 
-.. note:: For Offline installation, package the installed nodejs files and installed
-    modules.  Unpackage in the same directory locations on the offline server.
+        This will install the required NPM packages
+
+.. note:: For Offline installation, install the Node.js 7+ and NPM 3+ on a machine with
+ internet access.  Package the installed nodejs files and installed modules
+ 'C:\Users\peek\nodejs'.  Unpackage in the same directory location on the offline server.
 
 #.  Python 3.5,
 
     :Download: `<https://www.python.org/ftp/python/3.5.3/python-3.5.3rc1-amd64.exe>`_
     :From: `<https://www.python.org/downloads/windows/>`_
 
-    #.  Install to PATH "%USERPROFILE%\Python35\"
+    #.  Check the 'Add Python 3.5 to PATH' and select 'Customize Installation'
 
-    #.  Add PATH(s) to environment variables ::
+        .. image:: screenshots/Python-Install.jpg
 
-        "%USERPROFILE%\Python35\"
-        "%USERPROFILE%\Python35\Scripts\"
+    #.  Update the 'Customize install location' to PATH %USERPROFILE%\Python35\
 
-.. note:: For Offline installation, package the installed python files after
-    synerty-peek package has been install and configured on the online server.  Unpackage
-     in the same directory locations on the offline server.
+        .. image:: screenshots/Python-AdvancedOptions.jpg
+
+    #.  Confirm PATH(s) to environment variables ::
+
+        %USERPROFILE%\Python35\
+        %USERPROFILE%\Python35\Scripts\
+
+.. note:: For Offline installation, install Python 3.5 on a machine with internet
+access.  Package the installed python files after synerty-peek package has been deployed
+ and configured on the online server.  Package then deploy and unpackage in the same
+ directory locations on the offline server.
 
 #.  FreeTDS,
 
@@ -123,11 +174,11 @@ Software Requirements
 
     #.  Unzip contents into ::
 
-        "%USERPROFILE%\freetds-v0.95.95"
+        %USERPROFILE%\freetds-v0.95.95
 
     #.  Add PATH to environment variables ::
 
-        "%USERPROFILE%\freetds-v0.95.95\bin"
+        %USERPROFILE%\freetds-v0.95.95\bin
 
     #.  Create 'freetds.conf' in "C:\" ::
 
@@ -137,24 +188,24 @@ Software Requirements
                 tds version = 7.0
                 dump file = /tmp/freetds.log
 
-    #.  Test FreeTDS is working
 
 
-#.  dll files,
+    #.  dll files,
 
-    :Download: `<http://indy.fulgan.com/SSL/openssl-1.0.2j-x64_86-win64.zip>`_
-    :From: `<http://indy.fulgan.com/SSL/>`_
+        :Download: `<http://indy.fulgan.com/SSL/openssl-1.0.2j-x64_86-win64.zip>`_
+        :From: `<http://indy.fulgan.com/SSL/>`_
 
-    ensure these files are in the system32 folder:
-    *  libeay32.dll
+        ensure these files are in the system32 folder:
 
-    *  ssleay32.dll
+        *  libeay32.dll
 
-    *  You will need to duplicate the above files and name them as per below:
+        *  ssleay32.dll
 
-        *  libeay32MD.dll
+        *  You will need to duplicate the above files and name them as per below:
 
-        *  ssleay32MD.dll
+            *  libeay32MD.dll
+
+            *  ssleay32MD.dll
 
 #. GitBash,
 
@@ -163,11 +214,13 @@ Software Requirements
 
     #.  Configuring Extra Options: check 'Enable Symbolic Links'
 
+        .. image:: screenshots/GIT-ExtraOptions.jpg
+
     #.  Add PATH to environment variables ::
 
-        "C:\Program Files\Git\bin"
+        C:\Program Files\Git\bin
 
-#.  Upgrade pip ::
+#.  Upgrade pip, run the command prompt as Administrator and run the following command: ::
 
         python -m pip install --upgrade pip
 
@@ -176,7 +229,10 @@ Software Requirements
     :Download: `<http://www.lfd.uci.edu/~gohlke/pythonlibs/#shapely>`_
     :From: `<https://pypi.python.org/pypi/Shapely>`_
 
-    Shapely >= 1.5.17 ::
+    #.  Download Shapely >= 1.5.17 and save in the Downloads directory
+
+    #.  Run the command prompt as Administrator and start the bash shell.  Run the
+    following command: ::
 
         pip install ~/Downloads/Shapely-1.5.17-cp35-cp35m-win_amd64.whl
 
@@ -195,15 +251,15 @@ to interface with an oracle database.
 
         Unzip contents into ::
 
-                "%USERPROFILE%\Oracle\12.1.0.2.0\instantclient_12_1_basic"
+                %USERPROFILE%\Oracle\12.1.0.2.0\instantclient_12_1_basic
 
         Add 'ORACLE_HOME' to the environment variables and set the path ::
 
-                "%USERPROFILE%\Oracle\12.1.0.2.0\instantclient_12_1_basic"
+                %USERPROFILE%\Oracle\12.1.0.2.0\instantclient_12_1_basic
 
         Add to the 'PATH' to environment variables ::
 
-                "%USERPROFILE%\Oracle\12.1.0.2.0\instantclient_12_1_basic"
+                %USERPROFILE%\Oracle\12.1.0.2.0\instantclient_12_1_basic
 
     #.  Install cx_Oracle
 
