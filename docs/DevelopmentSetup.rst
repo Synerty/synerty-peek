@@ -5,7 +5,7 @@ Development Setup
 .. WARNING:: This document extends, Installation Guide (Installation.rst).
 
 
-.. NOTE:: Most development will be for the plugin, not platform, so these instructions
+.. NOTE:: Most development will be for the plugins, not platform, so these instructions
     are not high priority.
 
 Hardward Recommendation
@@ -19,7 +19,8 @@ Windows
 Requirements
 ````````````
 
-#.  Dependencies
+#.  Dependencies ( these should be fixed in the peek install and not required here.
+Brenton to confirm. )
 
     Run these command in terminal ::
 
@@ -33,13 +34,14 @@ Requirements
 
 #.  Install and Configure RabbitMQ
 
-    #.  Install Erlang
+    #.  Install Erlang OTP
         :Download: `<http://www.erlang.org/download/otp_win64_19.2.exe>`_
         :From: `<http://www.erlang.org/downloads>`_
 
     #.  Install rabbitmq
         :Download: `<http://www.rabbitmq.com/releases/rabbitmq-server/v3.6.6/rabbitmq-server-3.6.6.exe>`_
         :From: `<http://www.rabbitmq.com/download.html>`_
+
 
     TODO:
 

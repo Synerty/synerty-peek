@@ -324,7 +324,8 @@ Offline Installation Guide
 --------------------------
 
 .. warning:: For offline installation, complete the Installation Guide on another
-    online server first.  This is because some software requires online access to install.
+    online server first.  This is because some software requires internet access to
+    install.
 
 Software Requirements
 `````````````````````
