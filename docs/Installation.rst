@@ -438,7 +438,7 @@ Compiling and Installing NodeJS
 
         wget "https://nodejs.org/dist/v${PEEK_NODE_VER}/node-v${PEEK_NODE_VER}-linux-x64.tar.xz"
         tar xvJf node-v${PEEK_NODE_VER}-linux-x64.tar.xz
-        cd node-v${PEEK_NODE_VER}-linux-x64
+        cd node-v${PEEK_NODE_VER}
 
 #.  Configure the NodeJS Build ::
 
@@ -456,7 +456,7 @@ Compiling and Installing NodeJS
 #.  Install the required NPM packages ::
 
         npm -g upgrade npm
-        npm -g install angular-cli typescript tslint
+        npm -g install angular-cli typescript tslint nativescript
 
 Compiling and Installing Python
 ```````````````````````````````
