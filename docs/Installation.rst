@@ -63,7 +63,7 @@ Software Requirements
 
     :Download: `<https://download.microsoft.com/download/2/0/E/20E90413-712F-438C-988E-FDAA79A8AC3D/dotnetfx35.exe>`_
 
-.. note:: Restart if prompted to restart.
+    .. note:: Restart if prompted to restart.
 
 #.  Visual C++ Build Tools 2015,
 
@@ -133,7 +133,7 @@ Software Requirements
 
     #.  Confirm PATH to environment variables ::
 
-            %USERPROFILE%\AppData\Roaming\npm
+            C:\Users\peek\AppData\Roaming\npm
             C:\Users\peek\nodejs\
 
     #.  Run the Command Prompt as Administrator and run the following commands: ::
@@ -142,9 +142,10 @@ Software Requirements
 
         This will install the required NPM packages
 
-.. note:: For Offline installation, install the Node.js 7+ and NPM 3+ on a machine with
- internet access.  Package the installed nodejs files and installed modules
- 'C:\Users\peek\nodejs'.  Unpackage in the same directory location on the offline server.
+    .. note:: For Offline installation, install the Node.js 7+ and NPM 3+ on a machine
+    with internet access.  Package the installed nodejs files and installed modules
+    'C:\Users\peek\nodejs'.  Unpackage in the same directory location on the offline
+    server.
 
 #.  Python 3.5,
 
@@ -155,19 +156,19 @@ Software Requirements
 
         .. image:: screenshots/Python-Install.jpg
 
-    #.  Update the 'Customize install location' to PATH %USERPROFILE%\Python35\
+    #.  Update the 'Customize install location' to PATH C:\Users\peek\Python35\
 
         .. image:: screenshots/Python-AdvancedOptions.jpg
 
     #.  Confirm PATH(s) to environment variables ::
 
-        %USERPROFILE%\Python35\
-        %USERPROFILE%\Python35\Scripts\
+        C:\Users\peek\Python35\
+        C:\Users\peek\Python35\Scripts\
 
-.. note:: For Offline installation, install Python 3.5 on a machine with internet
-access.  Package the installed python files after synerty-peek package has been deployed
- and configured on the online server.  Package then deploy and unpackage in the same
- directory locations on the offline server.
+    .. note:: For Offline installation, install Python 3.5 on a machine with internet
+    access.  Package the installed python files after synerty-peek package has been
+    deployed and configured on the online server.  Package then deploy and unpackage in
+     the same directory locations on the offline server.
 
 #.  FreeTDS,
 
@@ -176,11 +177,11 @@ access.  Package the installed python files after synerty-peek package has been 
 
     #.  Unzip contents into ::
 
-        %USERPROFILE%\freetds-v0.95.95
+        C:\Users\peek\freetds-v0.95.95
 
     #.  Add PATH to environment variables ::
 
-        %USERPROFILE%\freetds-v0.95.95\bin
+        C:\Users\peek\freetds-v0.95.95\bin
 
     #.  Create 'freetds.conf' in "C:\" ::
 
@@ -220,7 +221,7 @@ access.  Package the installed python files after synerty-peek package has been 
 
     #.  Add PATH to environment variables ::
 
-        C:\Program Files\Git\bin
+            C:\Program Files\Git\bin
 
 #.  Upgrade pip, run the command prompt as Administrator and run the following command: ::
 
@@ -236,7 +237,7 @@ access.  Package the installed python files after synerty-peek package has been 
     #.  Run the command prompt as Administrator and start the bash shell.  Run the
     following command: ::
 
-        pip install ~/Downloads/Shapely-1.5.17-cp35-cp35m-win_amd64.whl
+            pip install ~/Downloads/Shapely-1.5.17-cp35-cp35m-win_amd64.whl
 
 Installing Oracle Libraries (Optional)
 ``````````````````````````````````````
@@ -244,49 +245,47 @@ Installing Oracle Libraries (Optional)
 The oracle libraries are optional. Install them where the agent runs if you are going
 to interface with an oracle database.
 
-#.  cx_Oracle
+#.  Install Oracle Instant Client
 
-    #.  Install Oracle Instant Client
+    :Download: `<http://download.oracle.com/otn/nt/instantclient/121020/instantclient-basic-windows.x64-12.1.0.2.0.zip>`_
+    :From: `<http://www.oracle.com/technetwork/topics/winx64soft-089540.html>`_
 
-        :Download: `<http://download.oracle.com/otn/nt/instantclient/121020/instantclient-basic-windows.x64-12.1.0.2.0.zip>`_
-        :From: `<http://www.oracle.com/technetwork/topics/winx64soft-089540.html>`_
+    Unzip contents into ::
 
-        Unzip contents into ::
+            C:\Users\peek\Oracle\12.1.0.2.0\
 
-                %USERPROFILE%\Oracle\12.1.0.2.0\instantclient_12_1_basic
+    Add 'ORACLE_HOME' to the environment variables and set the path ::
 
-        Add 'ORACLE_HOME' to the environment variables and set the path ::
+            C:\Users\peek\Oracle\12.1.0.2.0\instantclient_12_1
 
-                %USERPROFILE%\Oracle\12.1.0.2.0\instantclient_12_1_basic
+    Add to the 'PATH' to environment variables ::
 
-        Add to the 'PATH' to environment variables ::
+            C:\Users\peek\Oracle\12.1.0.2.0\instantclient_12_1
 
-                %USERPROFILE%\Oracle\12.1.0.2.0\instantclient_12_1_basic
+#.  Install cx_Oracle
 
-    #.  Install cx_Oracle
+    :Download: `<https://pypi.python.org/packages/50/c0/de24ec02484eb9add03cfbd28bd3c23fe137551501a9ca4498f30109621e/cx_Oracle-5.2.1-12c.win-amd64-py3.5.exe#md5=b505eaceceaa3813cf6bfe701ba92c3e>`_
+    :From: `<https://pypi.python.org/pypi/cx_Oracle/5.2.1>`_
 
-        :Download: `<https://pypi.python.org/packages/50/c0/de24ec02484eb9add03cfbd28bd3c23fe137551501a9ca4498f30109621e/cx_Oracle-5.2.1-12c.win-amd64-py3.5.exe#md5=b505eaceceaa3813cf6bfe701ba92c3e>`_
-        :From: `<https://pypi.python.org/pypi/cx_Oracle/5.2.1>`_
+#.  Test cx_Oracle in python ::
 
-    #.  Test cx_Oracle in python ::
+        >>>
+        >>> import cx_Oracle
+        >>> con = cx_Oracle.connect('oracle://username:password@hostname:1521/instance')
+        >>> print con.version
+        12.1.0.2.0
+        >>>con.close()
 
-            >>>
-            >>> import cx_Oracle
-            >>> con = cx_Oracle.connect('oracle://username:password@hostname:1521/instance')
-            >>> print con.version
-            12.1.0.2.0
-            >>>con.close()
+        con = cx_Oracle.connect('oracle://enmac:bford@192.168.215.128:1521/enmac')
 
-            con = cx_Oracle.connect('oracle://enmac:bford@192.168.215.128:1521/enmac')
+#.  Test cx_Oracle with Alchemy (after installing peek) ::
 
-    #.  Test cx_Oracle with Alchemy ::
+        >>>
+        >>> from sqlalchemy import create_engine
 
-            >>>
-            >>> from sqlalchemy import create_engine
-
-            >>> create_engine('oracle://username:password@hostname:1521/instance')
-            >>> engine = create_engine('oracle://enmac:bford@192.168.215.128:1521/enmac')
-            >>> engine.execute("SELECT 1")
+        >>> create_engine('oracle://username:password@hostname:1521/instance')
+        >>> engine = create_engine('oracle://enmac:bford@192.168.215.128:1521/enmac')
+        >>> engine.execute("SELECT 1")
 
 SymLinks
 ````````
@@ -302,7 +301,11 @@ Enabling SymLinks.
     #.  Navigate: "Computer configuration → Windows Settings → Security Settings → Local
     Policies → User Rights Assignment → Create symbolic links"
 
+        .. image:: screenshots/gpedit-CreateSymlink.jpg
+
     #.  Add the user or group that you want to allow to create symbolic links
+
+        .. image:: screenshots/gpedit-AddUser.jpg
 
     #.  You will need to logout and log back in for the change to take effect
 
@@ -326,48 +329,16 @@ Offline Installation Guide
 Software Requirements
 `````````````````````
 
-The offline installation guide has the same steps as the Installation Guide
-excluding the steps listed below:
+The offline installation guide requires the steps below to be completed after the
+Installation has been copied from the online machine to the offline machine:
 
-#.  Node.js 7+ and NPM 3+,
+#.  Refreshing symbolic links::
 
-    From the online server, package the nodejs files and npm files.  Unpackage these
-    files on the offline server.
+        $ cd `dirname $(which python)`/lib/site-packages/
 
-    Nodejs and NPM files are located::
+        $ rm -r peek_server_fe/src/app/peek_plugin* peek_server_fe/node_modules/peek_plugin*
 
-            ~\nodejs
-            ~\AppData\Roaming\npm
-
-    #.  Add PATH(s) to environment variables ::
-
-            "%USERPROFILE%\AppData\Roaming\npm"
-
-#.  Python 3.5,
-
-    From the online server, package the python files.  Unpackage these files on the
-    offline server.
-
-    Python35 files are located::
-
-            ~\Python35
-
-    #.  Add PATH(s) to environment variables ::
-
-            "%USERPROFILE%\Python35\"
-            "%USERPROFILE%\Python35\Scripts\"
-
-.. note:: For Offline installation, package the installed python files after
-    synerty-peek package has been install and configured.  Unpackage in the same directory
-    locations on the offline server.
-
-    #.  Refreshing symbolic links::
-
-            $ cd `dirname $(which python)`/lib/site-packages/
-
-            $ rm -r peek_server_fe/src/app/peek_plugin* peek_server_fe/node_modules/peek_plugin*
-
-            $ rm -r peek_client_fe/src/app/peek_plugin* peek_client_fe/node_modules/peek_plugin*
+        $ rm -r peek_client_fe/src/app/peek_plugin* peek_client_fe/node_modules/peek_plugin*
 
 Debian Linux
 ------------
