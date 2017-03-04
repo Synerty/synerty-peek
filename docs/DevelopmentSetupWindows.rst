@@ -43,7 +43,9 @@ Brenton to confirm. )
 Enable your device for development
 ``````````````````````````````````
 
-
+.. image:: windows_development_setup_screenshots/DevMode-Settings.jpg
+.. image:: windows_development_setup_screenshots/DevMode-UpdateSecurity.jpg
+.. image:: windows_development_setup_screenshots/DevMode-ForDevelopers.jpg
 `<https://msdn.microsoft.com/en-us/windows/uwp/get-started/enable-your-device-for-development>`_
 
 FROM SHELL
