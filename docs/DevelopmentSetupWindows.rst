@@ -1,25 +1,25 @@
-=================
-Development Setup
-=================
+=========================
+Windows Development Setup
+=========================
 
-.. WARNING:: This document extends, Installation Guide (Installation.rst).
+.. WARNING:: This document extends, Windows Requirements Install Guide
+(RequirementsWindows.rst).
 
 
-.. NOTE:: Most development will be for the plugin, not platform, so these instructions
+.. NOTE:: Most development will be for the plugins, not platform, so these instructions
     are not high priority.
 
-Hardward Recommendation
+
+Hardware Recommendation
 -----------------------
 
-32gb of ram (minumum 16gb)
+*  32gb of ram (minimum 16gb)
 
-Windows
--------
+Software Requirements
+`````````````````````
 
-Requirements
-````````````
-
-#.  Dependencies
+#.  Dependencies ( these should be fixed in the peek install and not required here.
+Brenton to confirm. )
 
     Run these command in terminal ::
 
@@ -30,25 +30,6 @@ Requirements
         $ pip install pytest
         $ pip install coverage
         $ pip install pypiwin32
-
-#.  Install and Configure RabbitMQ
-
-    #.  Install Erlang
-        :Download: `<http://www.erlang.org/download/otp_win64_19.2.exe>`_
-        :From: `<http://www.erlang.org/downloads>`_
-
-    #.  Install rabbitmq
-        :Download: `<http://www.rabbitmq.com/releases/rabbitmq-server/v3.6.6/rabbitmq-server-3.6.6.exe>`_
-        :From: `<http://www.rabbitmq.com/download.html>`_
-
-    TODO:
-
-#.  Install and Configure Redis
-
-    :Download: `<http://www.rabbitmq.com/releases/rabbitmq-server/v3.6.6/rabbitmq-server-3.6.6.exe>`_
-    :From: `<http://www.rabbitmq.com/download.html>`_
-
-    TODO:
 
 #.  Visual Studio Code,
 
@@ -173,52 +154,3 @@ SETTING UP PYCHARM
         .. image::pycharm_setup/settings_tslint.png
 
 *You can now start developing*
-
-Debian Linux
-------------
-
-
-Building synerty-peek
----------------------
-
-Building for Production
-```````````````````````
-
-.. NOTE:: If you're building for development skip this step and continue through to
-    Development Setup.
-
-The peek package has build scripts that generate a platform build.
-
-.. NOTE:: Prod build, it tags, commits and test uploads to testpypi.
-
-.. WARNING:: Omitting the dot before dev will cause the script to fail as setuptools
-    adds the dot in if it's not there, which means the cp commands won't match files.
-
-    ::
-
-        $ ./pipbuild_platform.sh #.#.##
-        $ ./pypi_upload.sh
-
-Building for Development
-````````````````````````
-
-The peek package has build scripts that generate a development build.
-
-.. NOTE:: Dev build, it doesn't tag, commit or test upload, but still generates a build.
-
-.. WARNING:: Omitting the dot before dev will cause the script to fail as setuptools
-    adds the dot in if it's not there, which means the cp commands won't match files.
-
-    ::
-
-        $ ./pipbuild_platform.sh 0.0.1.dev1
-
-Building peek-plugins
----------------------
-
-
-
-    ::
-
-        $ export RELEASE_DIR=/c/peek_plugins
-        $ ./pipbuild.sh #.#.##

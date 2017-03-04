@@ -1,11 +1,12 @@
-===================
-Production Platform
-===================
+=================================
+Windows Production Platform Setup
+=================================
 
-.. WARNING:: This document extends, Installation Guide (Installation.rst).
+.. WARNING:: This document extends, Windows Requirements Install Guide
+(RequirementsWindows.rst).
 
-Windows
--------
+Building synerty-peek
+---------------------
 
 Run the command prompt **as administrator** then enter the bash shell.
 
@@ -85,8 +86,9 @@ typescript compiler. ::
                         "insert plugin name"
                     ],
                 },
+
 Running synerty-peek
-````````````````````
+--------------------
 
 $ python ~/Python35/Lib/site-packages/peek_server/run_peek_server.py
 
@@ -100,5 +102,3 @@ chrome: http://127.0.0.1:8000/
 
 $ python ~/Python35/Lib/site-packages/peek_agent/run_peek_agent.py
 
-Debian Linux
-------------
