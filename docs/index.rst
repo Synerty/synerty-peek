@@ -11,11 +11,14 @@ Welcome to synerty-peek's documentation!
    :caption: Contents:
 
    README
-   Installation
-   ProductionSetup
-   DevelopmentSetup
+   RequirementsWindows
+   DevelopmentSetupWindows
+   ProductionSetupWindows
+   RequirementsDebian
+   DevelopmentSetupDebian
+   ProductionSetupDebian
    modules
-   Troubleshooting
+   TroubleshootingWindows
    LICENSE
 
 Indices and tables

@@ -1,25 +1,25 @@
-==================
-Installation Guide
-==================
+==================================
+Windows Requirements Install Guide
+==================================
 
 .. note:: For offline installation some steps are required to be installed on another
-    online server for the files to be packaged and transfered to the offline server.
-
-Windows Support
----------------
+online server for the files to be packaged and transferred to the offline server.
 
 The Peek platform is designed to run on Linux, however, it is compatible with windows.
 
 OS Commands
-```````````
+-----------
 
 The config file for each service in the peek platform describes the location of the BASH
-interpreter. Peek is coded to use the bash interpreter and basic posix compliant utilites
+interpreter. Peek is coded to use the bash interpreter and basic posix compliant utilities
 for all OS commands.
 
 When peek generates it's config it should automatically choose the right interpreter. ::
 
         "C:\Program Files\Git\bin\bash.exe" if isWindows else "/bin/bash"
+
+Online Installation
+-------------------
 
 Software Requirements
 `````````````````````
@@ -31,9 +31,11 @@ Software Requirements
     *  Username: ::
 
             peek
+
     *  Password: ::
 
             PA$$W0RD
+
     *  sign in to the peek account
 
 #.  Chrome,
@@ -89,7 +91,7 @@ Software Requirements
 
     #.  Feature Selection: check all Features
 
-        .. image:: screenshots/SQLServer-FeatureSelection.jpg
+        .. image:: windows_installation_screenshots/SQLServer-FeatureSelection.jpg
 
     #.  Instance Configuration: change the named instance to 'peek'. This will update
     the 'Instance ID'
@@ -97,7 +99,7 @@ Software Requirements
     #.  Server Configuration: Select browse from the 'Account Name' drop-list and check
      names for 'peek'.  Select ok then enter the account password
 
-        .. image:: screenshots/SQLServer-ServerConfiguration.jpg
+        .. image:: windows_installation_screenshots/SQLServer-ServerConfiguration.jpg
 
     #.  Database Engine Configuration: Leave the default settings
 
@@ -112,15 +114,15 @@ Software Requirements
     #.  Under the TCP/IP properties set 'IPALL' 'TCP PORT' to '1433'. Select 'Apply' then
     'OK',
 
-        .. image:: screenshots/set_tcp_port.png
+        .. image:: windows_installation_screenshots/set_tcp_port.png
 
     #.  Enable the 'TCP/IP' Protocol
 
-        .. image:: screenshots/enable_tcpip.png
+        .. image:: windows_installation_screenshots/enable_tcpip.png
 
     #.  Restart the server service.
 
-        .. image:: screenshots/SQLServer-RestartServices.jpg
+        .. image:: windows_installation_screenshots/SQLServer-RestartServices.jpg
 
 #.  Node.js 7+ and NPM 3+,
 
@@ -154,11 +156,11 @@ Software Requirements
 
     #.  Check the 'Add Python 3.5 to PATH' and select 'Customize Installation'
 
-        .. image:: screenshots/Python-Install.jpg
+        .. image:: windows_installation_screenshots/Python-Install.jpg
 
     #.  Update the 'Customize install location' to PATH C:\Users\peek\Python35\
 
-        .. image:: screenshots/Python-AdvancedOptions.jpg
+        .. image:: windows_installation_screenshots/Python-AdvancedOptions.jpg
 
     #.  Confirm PATH(s) to environment variables ::
 
@@ -217,7 +219,7 @@ Software Requirements
 
     #.  Configuring Extra Options: check 'Enable Symbolic Links'
 
-        .. image:: screenshots/GIT-ExtraOptions.jpg
+        .. image:: windows_installation_screenshots/GIT-ExtraOptions.jpg
 
     #.  Add PATH to environment variables ::
 
@@ -287,6 +289,26 @@ to interface with an oracle database.
         >>> engine = create_engine('oracle://enmac:bford@192.168.215.128:1521/enmac')
         >>> engine.execute("SELECT 1")
 
+#.  Install and Configure RabbitMQ
+
+    #.  Install Erlang OTP
+        :Download: `<http://www.erlang.org/download/otp_win64_19.2.exe>`_
+        :From: `<http://www.erlang.org/downloads>`_
+
+    #.  Install rabbitmq
+        :Download: `<http://www.rabbitmq.com/releases/rabbitmq-server/v3.6.6/rabbitmq-server-3.6.6.exe>`_
+        :From: `<http://www.rabbitmq.com/download.html>`_
+
+
+    #.  TODO:
+
+#.  Install and Configure Redis
+
+    :Download: `<http://www.rabbitmq.com/releases/rabbitmq-server/v3.6.6/rabbitmq-server-3.6.6.exe>`_
+    :From: `<http://www.rabbitmq.com/download.html>`_
+
+    #.  TODO:
+
 SymLinks
 ````````
 
@@ -301,11 +323,11 @@ Enabling SymLinks.
     #.  Navigate: "Computer configuration → Windows Settings → Security Settings → Local
     Policies → User Rights Assignment → Create symbolic links"
 
-        .. image:: screenshots/gpedit-CreateSymlink.jpg
+        .. image:: windows_installation_screenshots/gpedit-CreateSymlink.jpg
 
     #.  Add the user or group that you want to allow to create symbolic links
 
-        .. image:: screenshots/gpedit-AddUser.jpg
+        .. image:: windows_installation_screenshots/gpedit-AddUser.jpg
 
     #.  You will need to logout and log back in for the change to take effect
 
@@ -317,13 +339,14 @@ Installing synerty-peek
 .. note:: If offline installation is required, complete the Installing synerty-peek
     setup then return to the Offline Installation Guide.
 
-From here you will be deploying either the **Production Platform** (ProductionSetup.rst)
-or the **Development Setup** (DevelopmentSetup.rst).
+From here you will be deploying either the **Windows Production Platform Setup**
+(ProductionSetupWindows.rst) or the **Windows Development Setup**
+(DevelopmentSetupWindows.rst).
 
-Offline Installation Guide
---------------------------
+Offline Installation
+--------------------
 
-.. warning:: For offline installation, complete the Installation Guide on another
+.. warning:: For offline installation, complete the Online Installation on another
     online server first.  This is because some software requires internet access to
     install.
 
@@ -340,217 +363,4 @@ Installation has been copied from the online machine to the offline machine:
         $ rm -r peek_server_fe/src/app/peek_plugin* peek_server_fe/node_modules/peek_plugin*
 
         $ rm -r peek_client_fe/src/app/peek_plugin* peek_client_fe/node_modules/peek_plugin*
-
-Debian Linux
-------------
-
-This section desribes how to perform the setup for Debian Linux 8
-The python environment will be installed under the user Peek will run as. This should be
-**peek** with a home of **/home/peek**
-
-Installing General Prerequisites
-````````````````````````````````
-#.  Install the general OS packages ::
-
-        # Python and Node build dependencies
-        PKG="gcc"
-
-        # This isn't a dependency, but it's good to have
-        PKG="$PKG rsync"
-        PKG="$PKG git"
-
-        # For licencing and upgrades
-        PKG="$PKG sudo"
-
-        apt-get install -y $PKG
-
-Installing the PostGreSQL database
-``````````````````````````````````
-Install the relational database we use on Linux.
-
-#.  Add the latest PostGreSQL repository ::
-
-        F=/etc/apt/sources.list.d/postgresql.list
-        echo "deb http://apt.postgresql.org/pub/repos/apt/ jessie-pgdg main" > $F
-        wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
-
-        apt-get update
-
-#.  Install PostGresQL ::
-
-        # The SQL Server we use on Linux
-        apt-get install -y postgis postgresql-9.5
-
-#.  Configure the DB and User ::
-
-        PEEK_PG_PASS="PASSWORD"
-        F=/etc/postgresql/9.5/main/pg_hba.conf
-
-        if ! grep -q 'peek' $F; then
-            echo "host  peek    peek    127.0.0.1/32    trust" >> $F
-        fi
-
-        su - postgres
-        createuser -d -r -s peek
-
-        # Create the db
-        createdb -O peek peek
-
-        # Set the password
-        psql <<EOF
-        alter role peek password "${PEEK_PG_PASS}";
-        \q
-        EOF
-
-        # Cleanup traces of the password
-        [ -e ~/.psql_history ] && rm ~/.psql_history || true
-        exit #su
-
-Setting the Environment
-```````````````````````
-
-NOTE: This is done before the software is installed.
-
-#.  Edit **~/.bashrc** and insert the following after the first block comment.
-    :NOTE: Make sure these are before any lines like:
-    # If not running interactively, don't do anything ::
-
-        ##### SET THE PEEK ENVIRONMENT #####
-        export PEEK_PY_VER="3.5.2"
-        export PEEK_NODE_VER="7.1.0"
-        export LD_LIBRARY_PATH="/home/peek/cpython-${PEEK_PY_VER}/oracle/instantclient_12_1:$LD_LIBRARY_PATH"
-        export ORACLE_HOME="/home/peek/cpython-${PEEK_PY_VER}/oracle/instantclient_12_1"
-        export PATH="/home/peek/cpython-${PEEK_PY_VER}/bin:/home/peek/node-v${PEEK_NODE_VER}/bin:$PATH"
-
-Compiling and Installing NodeJS
-```````````````````````````````
-
-#.  Install the build prerequisites ::
-
-        PKGS="build-essential curl git m4 ruby texinfo libbz2-dev libcurl4-openssl-dev"
-        PKGS="$PKGS libexpat-dev libncurses-dev zlib1g-dev libgmp-dev"
-        apt-get install $PKGS
-
-#.  Download the supported node version ::
-
-        PEEK_NODE_VER="7.1.0"
-        mkdir ~/node_src &&  cd ~/node_src
-
-        wget "https://nodejs.org/dist/v${PEEK_NODE_VER}/node-v${PEEK_NODE_VER}-linux-x64.tar.xz"
-        tar xvJf node-v${PEEK_NODE_VER}-linux-x64.tar.xz
-        cd node-v${PEEK_NODE_VER}
-
-#.  Configure the NodeJS Build ::
-
-        ./configure --prefix=/home/peek/node-v${PEEK_NODE_VER}
-        make -j4 && make install
-
-#.  Test that the setup is working ::
-
-        which node
-        echo "It should be /home/peek/node-v7.1.0/bin/node"
-
-        which npm
-        echo "It should be /home/peek/node-v7.1.0/bin/npm"
-
-#.  Install the required NPM packages ::
-
-        npm -g upgrade npm
-        npm -g install angular-cli typescript tslint nativescript
-
-Compiling and Installing Python
-```````````````````````````````
-
-#.  Install the required debian packages ::
-
-        # Required for the build
-        PKG="libbz2-dev libcurl4-gnutls-dev samba-dev libsmbclient-dev libcups2-dev"
-
-        # Required for pip installs
-        PKG="$PKG libxml2"
-        PKG="$PKG libxml2-dev"
-        PKG="$PKG libxslt1.1"
-        PKG="$PKG libxslt1-dev"
-        PKG="$PKG libpq-dev"
-        PKG="$PKG libsqlite3-dev"
-
-        # For Shapely / GEOAlchemy
-        PKG="$PKG libgeos-dev libgeos-c1"
-
-        apt-get install -y $PKG
-
-#.  Download and unarchive the supported version of Python ::
-
-        cd ~
-        PEEK_PY_VER="3.5.2"
-        wget "https://www.python.org/ftp/python/${PEEK_PY_VER}/Python-${PEEK_PY_VER}.tgz"
-        tar xf Python-${PEEK_PY_VER}.tgz
-
-#.  Configure the build ::
-
-        cd Python-${VER}
-        ./configure --prefix=/home/peek/cpython-${PEEK_PY_VER}/ --enable-optimizations
-
-#.  Make and Make install the software ::
-
-        make -j4 && make install
-
-#.  Test that the setup is working ::
-
-        which python
-        echo "It should be /home/peek/cpython-3.5.2/bin/python"
-
-        which pip
-        echo "It should be /home/peek/cpython-3.5.2/bin/pip"
-
-Installing Oracle Libraries (Optional)
-``````````````````````````````````````
-
-The oracle libraries are optional. Install them where the agent runs if you are going to
-interface with an oracle database.
-
-#.  Install the OS dependencies ::
-
-        # For oracle instant client
-        apt-get install -y libaio1
-
-#.  Make the directory where the oracle client will live ::
-
-        ORACLE_DIR="/home/peek/cpython-${PEEK_PY_VER}/oracle"
-        echo "Oracle client dir will be $ORACLE_DIR"
-        mkdir $ORACLE_DIR && cd $ORACLE_DIR
-
-#.  Download the following from oracle.
-    The version used in these instructions is **12.1.0.2.0**.
-    Copy them to the directory created in the step above.
-
-    #.  Download the "Instant Client Package - Basic" from
-        http://www.oracle.com/technetwork/topics/linuxx86-64soft-092277.html
-
-    #.  Download the "Instant Client Package - SDK" from
-        http://www.oracle.com/technetwork/topics/linuxx86-64soft-092277.html
-
-#.  Symlink the oracle client lib ::
-
-        cd $ORACLE_HOME
-        ln -snf libclntsh.so.12.1 libclntsh.so
-        ls -l libclntsh.so
-
-#.  Now you can install the cx_Oracle python package. ::
-
-        pip install cx_Oracle
-
-#.  Now test it with some python ::
-
-        from sqlalchemy import create_engine
-        from sqlalchemy import schema
-
-        orapass = "PASS"
-        orahost = "host"
-
-        oraEngine = create_engine('oracle://enmac:%s@%s:1521/NMS' % (orapass, orahost))
-        metadata = schema.MetaData(oraEngine)
-        metadata.reflect(schema='ENMAC')
-
-        "ENMAC.host_details" in metadata.tables
 
