@@ -95,7 +95,7 @@ Software Requirements
 
     #.  Install the required NPM packages ::
 
-            npm -g install angular-cli typescript tslint
+            npm -g install angular-cli typescript tslint nativescript
 
 .. note:: For Offline installation, package the installed nodejs files and installed
     modules.  Unpackage in the same directory locations on the offline server.
