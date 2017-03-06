@@ -16,7 +16,7 @@ Hardware Recommendation
 *  32gb of ram (minimum 16gb)
 
 Software Requirements
-`````````````````````
+---------------------
 
 #.  Dependencies ( these should be fixed in the peek install and not required here.
 Brenton to confirm. )
@@ -43,61 +43,122 @@ Brenton to confirm. )
 Enable your device for development
 ``````````````````````````````````
 
-.. image:: windows_development_setup_screenshots/DevMode-Settings.jpg
 .. image:: windows_development_setup_screenshots/DevMode-UpdateSecurity.jpg
 .. image:: windows_development_setup_screenshots/DevMode-ForDevelopers.jpg
 `<https://msdn.microsoft.com/en-us/windows/uwp/get-started/enable-your-device-for-development>`_
 
-FROM SHELL
-``````````
+Clone Peek Repositories
+-----------------------
 
 #.  Checkout the following, all in the same folder,
 
+    .. NOTE:: core.symlink:  If false, symbolic links are checked out as small plain
+    files that contain the link text. git-update-index[1] and git-add[1] will not change
+    the recorded type to regular file. Useful on filesystems like FAT that do not support
+    symbolic links.  The default is true, except git-clone[1] or git-init[1] will probe
+    and set core .symlinks false if appropriate when the repository is created.
+
     :From: `<https://github.com/Synerty>`_
 
-*  Repositories
-    #.  synerty-peek
-    #.  peek-plugin-base
-    #.  peek-agent
-    #.  peek-client
-    #.  peek-client-fe
-    #.  peek-platform
-    #.  peek-server
-    #.  peek-server-fe
-    #.  peek-worker
+    *  Repositories
+        #.  synerty-peek
+        #.  peek-plugin-base
+        #.  peek-agent
+        #.  peek-client
+        #.  peek-client-fe
+        #.  peek-platform
+        #.  peek-server
+        #.  peek-server-fe
+        #.  peek-worker
+        ::
 
-#.  Update git config ::
+            cd ~peek/Documents/
+            mkdir peek-mobile
+            cd ~peek/Documents/peek-mobile/
+            git clone https://github.com/Synerty/{repository}.git
+            cd ~peek/Documents/peek-mobile/{repository}
+            git config --unset core.symlink
+            git config --add core.symlink true
 
-        $ git config -unset core.symlink
-        $ git config -add core.symlink true
+    *  Script to clone all repositories: ::
+
+            mkdir ~peek/Documents/peek-mobile
+            cd ~peek/Documents/peek-mobile/
+            git clone https://github.com/Synerty/synerty-peek.git
+            cd ~peek/Documents/peek-mobile/synerty-peek
+            git config --unset core.symlink
+            git config --add core.symlink true
+            cd ~peek/Documents/peek-mobile/
+            git clone https://github.com/Synerty/peek-plugin-base.git
+            cd ~peek/Documents/peek-mobile/peek-plugin-base
+            git config --unset core.symlink
+            git config --add core.symlink true
+            cd ~peek/Documents/peek-mobile/
+            git clone https://github.com/Synerty/peek-agent.git
+            cd ~peek/Documents/peek-mobile/peek-agent
+            git config --unset core.symlink
+            git config --add core.symlink true
+            cd ~peek/Documents/peek-mobile/
+            git clone https://github.com/Synerty/peek-client.git
+            cd ~peek/Documents/peek-mobile/peek-client
+            git config --unset core.symlink
+            git config --add core.symlink true
+            cd ~peek/Documents/peek-mobile/
+            git clone https://github.com/Synerty/peek-client-fe.git
+            cd ~peek/Documents/peek-mobile/peek-client-fe
+            git config --unset core.symlink
+            git config --add core.symlink true
+            cd ~peek/Documents/peek-mobile/
+            git clone https://github.com/Synerty/peek-platform.git
+            cd ~peek/Documents/peek-mobile/peek-platform
+            git config --unset core.symlink
+            git config --add core.symlink true
+            cd ~peek/Documents/peek-mobile/
+            git clone https://github.com/Synerty/peek-server.git
+            cd ~peek/Documents/peek-mobile/peek-server
+            git config --unset core.symlink
+            git config --add core.symlink true
+            cd ~peek/Documents/peek-mobile/
+            git clone https://github.com/Synerty/peek-server-fe.git
+            cd ~peek/Documents/peek-mobile/peek-server-fe
+            git config --unset core.symlink
+            git config --add core.symlink true
+            cd ~peek/Documents/peek-mobile/
+            git clone https://github.com/Synerty/peek-worker.git
+            cd ~peek/Documents/peek-mobile/peek-worker
+            git config --unset core.symlink
+            git config --add core.symlink true
+            cd ~peek/Documents/peek-mobile/
+            ls -l
+
 
 #.  Install front end packages
 
-        Go to the peek-server-fe/peek_server_fe/ and peek-client-fe/peek_client_fe/ ::
+    Go to the ~peek/Documents/peek-mobile/peek-client-fe/peek_client_fe/ ::
 
-        $ npm install
+        cd ~peek/Documents/peek-mobile/peek-client-fe/peek_client_fe/
+        npm install
+
 
 #.  Symlink the tsconfig.json and node_modules file and directory in the parent
 directory of peek-client-fe, peek-server-fe and the plugins. These steps are run in the
 directory where the projects are checked out from. These are required for the frontend
 typescript compiler. ::
 
-        $ ln -s peek-client-fe/peek_client_fe/node_modules .
-        $ ln -s peek-client-fe/peek_client_fe/tsconfig.json .
-    #.  ::
+        cd ~peek/Documents/peek-mobile/
+        ln -s peek-client-fe/peek_client_fe/node_modules .
+        ln -s peek-client-fe/peek_client_fe/tsconfig.json .
 
-            $ cd peek-server-fe/peek_server_fe/
-            $ ng build
+        cd ~peek/Documents/peek-mobile/peek-client-fe/peek_client_fe/
+        ng build
 
-            $ cd peek-client-fe/peek_client_fe/
-            $ ng build
 
 #.  These steps link the projects under site-packages and installs their dependencies.
 
     #.  Run the following commands ::
 
-            $ cd synerty-peek
-            $ ./pip_uninstall_and_develop.sh
+            cd ~peek/Documents/peek-mobile/synerty-peek
+            ./pip_uninstall_and_develop.sh
 
     #.  For repositories and plugins run from their directory ::
 
