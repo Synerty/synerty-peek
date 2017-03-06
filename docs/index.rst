@@ -7,20 +7,20 @@ Welcome to synerty-peek's documentation!
 ========================================
 
 .. toctree::
-:maxdepth: 2
-       :caption: Contents:
+   :maxdepth: 2
+   :caption: Contents:
 
-       README
-       RequirementsWindows
-       DevelopmentSetupWindows
-       ProductionSetupWindows
-       RequirementsDebian
-       DevelopmentSetupDebian
-       ProductionSetupDebian
-       pycharm_setup/pycharm_setup
-       modules
-       TroubleshootingWindows
-       LICENSE
+   README
+   RequirementsWindows
+   DevelopmentSetupWindows
+   ProductionSetupWindows
+   RequirementsDebian
+   DevelopmentSetupDebian
+   ProductionSetupDebian
+   pycharm_setup/pycharm_setup
+   modules
+   TroubleshootingWindows
+   LICENSE
 
 Indices and tables
 ==================
