@@ -1,5 +1,6 @@
-SETTING UP PYCHARM
-``````````````````
+=============
+Setup Pycharm
+=============
 
 #.  Open pycharm,
 
@@ -30,7 +31,7 @@ SETTING UP PYCHARM
         #.  Node interpreter -> ~/node-v7.1.0/bin/node
         #.  Remove other node interpreters
 
-        .. image::pycharm_setup/settings_nodejs_and_npm.png
+        .. image:: settings_nodejs_and_npm.png
 
     #.  Languages & Frameworks -> TypesScript
 
@@ -40,7 +41,7 @@ SETTING UP PYCHARM
         #.  Command line options -> --target es5 --experimentalDecorators --lib es6,dom --sourcemap --emitDecoratorMetadata
         #.  Generate source maps -> Checked
 
-        .. image::pycharm_setup/settings_typescript.png
+        .. image:: settings_typescript.png
 
     #.  Languages & Frameworks -> Typescript -> TSLint
 
@@ -48,4 +49,4 @@ SETTING UP PYCHARM
         #.  Node interpreter -> ~/node-v7.1.0/bin/node
         #.  TSLint Package -> ~/node-v7.1.0/lib/node_modules/tslint
 
-        .. image::pycharm_setup/settings_tslint.png
+        .. image:: settings_tslint.png

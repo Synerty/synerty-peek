@@ -3,9 +3,11 @@ Windows Requirements Install Guide
 ==================================
 
 .. note:: For offline installation some steps are required to be installed on another
-online server for the files to be packaged and transferred to the offline server.
+    online server for the files to be packaged and transferred to the offline server.
 
 The Peek platform is designed to run on Linux, however, it is compatible with windows.
+Please read through all of the documentation before commencing the installation
+procedure.
 
 OS Commands
 -----------
@@ -28,6 +30,8 @@ Software Requirements
 
     *  Account Type: Administrator
 
+    |
+
     *  Username: ::
 
             peek
@@ -38,10 +42,7 @@ Software Requirements
 
     *  sign in to the peek account
 
-#.  Chrome,
-
-    :Download: `<https://www.google.com/intl/en/chrome/browser/desktop/index.html?standalone=1#>`_
-    :From: `<https://www.google.com/chrome/>`_
+    |
 
 #.  7zip (optional),
 
@@ -75,9 +76,10 @@ Software Requirements
     :From: `<http://landinghub.visualstudio.com/visual-cpp-build-tools>`_
 
     *  Offline Installation:
-    Install using the ISO
-    :Download: `<https://www.microsoft.com/en-US/download/details.aspx?id=48146>`_
 
+    Install using the ISO
+
+    :Download: `<https://www.microsoft.com/en-US/download/details.aspx?id=48146>`_
 
 #.  Microsoft® SQL Server® 2014 Express,
 
@@ -88,18 +90,19 @@ Software Requirements
             C:\SQLEXPRWT_x64_ENU\
 
     #.  Select "New SQL Server stand-alone installation"
+        |
 
     #.  Feature Selection: check all Features
 
-        .. image:: windows_installation_screenshots/SQLServer-FeatureSelection.jpg
+            .. image:: windows_installation_screenshots/SQLServer-FeatureSelection.jpg
 
     #.  Instance Configuration: change the named instance to 'peek'. This will update
     the 'Instance ID'
 
     #.  Server Configuration: Select browse from the 'Account Name' drop-list and check
-     names for 'peek'.  Select ok then enter the account password
+    names for 'peek'.  Select ok then enter the account password
 
-        .. image:: windows_installation_screenshots/SQLServer-ServerConfiguration.jpg
+    .. image:: windows_installation_screenshots/SQLServer-ServerConfiguration.jpg
 
     #.  Database Engine Configuration: Leave the default settings
 
@@ -140,14 +143,46 @@ Software Requirements
 
     #.  Run the Command Prompt as Administrator and run the following commands: ::
 
-            npm -g install angular-cli typescript tslint
+            npm -g install angular-cli typescript tslint nativescript
 
         This will install the required NPM packages
 
+        #.  Do you want to run the setup script? ::
+
+                Y
+
+            .. image:: windows_installation_screenshots/Nativescript-Install.jpg
+
+        #.  Allow the script to install Chocolatey(It's mandatory for the rest of the
+        script) ::
+
+                A
+
+        #.  Do you want to install the Android emulator?: ::
+
+                N
+
+            .. image:: windows_installation_screenshots/Nativescript-InstallComplete.jpg
+
+        #.  Once the installation is complete press 'ctrl+c' to exit the PowerShel
+        shell then in the command prompt run ::
+
+                tns doctor
+
+        .. image:: windows_installation_screenshots/Nativescript-tnsDoctor.jpg
+
+    #.  Confirm Environment Variable ANDROID_HOME ::
+
+            C:\Users\peek\AppData\Local\Android\android-sdk
+
+    #.  Confirm Environment Variable JAVA_HOME ::
+
+            C:\Program Files\Java\jdk1.8.0_121
+
     .. note:: For Offline installation, install the Node.js 7+ and NPM 3+ on a machine
-    with internet access.  Package the installed nodejs files and installed modules
-    'C:\Users\peek\nodejs'.  Unpackage in the same directory location on the offline
-    server.
+        with internet access.  Package the installed nodejs files and installed modules
+        'C:\Users\peek\nodejs'.  Unpackage in the same directory location on the offline
+        server.
 
 #.  Python 3.5,
 
@@ -164,13 +199,13 @@ Software Requirements
 
     #.  Confirm PATH(s) to environment variables ::
 
-        C:\Users\peek\Python35\
-        C:\Users\peek\Python35\Scripts\
+            C:\Users\peek\Python35\
+            C:\Users\peek\Python35\Scripts\
 
     .. note:: For Offline installation, install Python 3.5 on a machine with internet
-    access.  Package the installed python files after synerty-peek package has been
-    deployed and configured on the online server.  Package then deploy and unpackage in
-     the same directory locations on the offline server.
+        access.  Package the installed python files after synerty-peek package has been
+        deployed and configured on the online server.  Package then deploy and
+        unpackage in the same directory locations on the offline server.
 
 #.  FreeTDS,
 
@@ -179,11 +214,11 @@ Software Requirements
 
     #.  Unzip contents into ::
 
-        C:\Users\peek\freetds-v0.95.95
+            C:\Users\peek\freetds-v0.95.95
 
     #.  Add PATH to environment variables ::
 
-        C:\Users\peek\freetds-v0.95.95\bin
+            C:\Users\peek\freetds-v0.95.95\bin
 
     #.  Create 'freetds.conf' in "C:\" ::
 
@@ -280,34 +315,16 @@ to interface with an oracle database.
 
         con = cx_Oracle.connect('oracle://enmac:bford@192.168.215.128:1521/enmac')
 
-#.  Test cx_Oracle with Alchemy (after installing peek) ::
+Cygwin
+``````
 
-        >>>
-        >>> from sqlalchemy import create_engine
+    :Download: `<https://cygwin.com/setup-x86_64.exe>`_
+    :From: `<https://cygwin.com/install.html>`_
 
-        >>> create_engine('oracle://username:password@hostname:1521/instance')
-        >>> engine = create_engine('oracle://enmac:bford@192.168.215.128:1521/enmac')
-        >>> engine.execute("SELECT 1")
+::
 
-#.  Install and Configure RabbitMQ
+     ln -s /cygdrive/c/Users/peek/Documents/ .
 
-    #.  Install Erlang OTP
-        :Download: `<http://www.erlang.org/download/otp_win64_19.2.exe>`_
-        :From: `<http://www.erlang.org/downloads>`_
-
-    #.  Install rabbitmq
-        :Download: `<http://www.rabbitmq.com/releases/rabbitmq-server/v3.6.6/rabbitmq-server-3.6.6.exe>`_
-        :From: `<http://www.rabbitmq.com/download.html>`_
-
-
-    #.  TODO:
-
-#.  Install and Configure Redis
-
-    :Download: `<http://www.rabbitmq.com/releases/rabbitmq-server/v3.6.6/rabbitmq-server-3.6.6.exe>`_
-    :From: `<http://www.rabbitmq.com/download.html>`_
-
-    #.  TODO:
 
 SymLinks
 ````````
@@ -323,7 +340,7 @@ Enabling SymLinks.
     #.  Navigate: "Computer configuration → Windows Settings → Security Settings → Local
     Policies → User Rights Assignment → Create symbolic links"
 
-        .. image:: windows_installation_screenshots/gpedit-CreateSymlink.jpg
+        .. image:: windows_installation_screenshots/gpedit-CreateSymlinks.jpg
 
     #.  Add the user or group that you want to allow to create symbolic links
 
