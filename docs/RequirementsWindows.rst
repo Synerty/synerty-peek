@@ -3,9 +3,11 @@ Windows Requirements Install Guide
 ==================================
 
 .. note:: For offline installation some steps are required to be installed on another
-online server for the files to be packaged and transferred to the offline server.
+    online server for the files to be packaged and transferred to the offline server.
 
 The Peek platform is designed to run on Linux, however, it is compatible with windows.
+Please read through all of the documentation before commencing the installation
+procedure.
 
 OS Commands
 -----------
@@ -28,6 +30,8 @@ Software Requirements
 
     *  Account Type: Administrator
 
+    |
+
     *  Username: ::
 
             peek
@@ -37,6 +41,8 @@ Software Requirements
             PA$$W0RD
 
     *  sign in to the peek account
+
+    |
 
 #.  7zip (optional),
 
@@ -70,9 +76,10 @@ Software Requirements
     :From: `<http://landinghub.visualstudio.com/visual-cpp-build-tools>`_
 
     *  Offline Installation:
-    Install using the ISO
-    :Download: `<https://www.microsoft.com/en-US/download/details.aspx?id=48146>`_
 
+    Install using the ISO
+
+    :Download: `<https://www.microsoft.com/en-US/download/details.aspx?id=48146>`_
 
 #.  Microsoft® SQL Server® 2014 Express,
 
@@ -83,18 +90,19 @@ Software Requirements
             C:\SQLEXPRWT_x64_ENU\
 
     #.  Select "New SQL Server stand-alone installation"
+        |
 
     #.  Feature Selection: check all Features
 
-        .. image:: windows_installation_screenshots/SQLServer-FeatureSelection.jpg
+            .. image:: windows_installation_screenshots/SQLServer-FeatureSelection.jpg
 
     #.  Instance Configuration: change the named instance to 'peek'. This will update
     the 'Instance ID'
 
     #.  Server Configuration: Select browse from the 'Account Name' drop-list and check
-     names for 'peek'.  Select ok then enter the account password
+    names for 'peek'.  Select ok then enter the account password
 
-        .. image:: windows_installation_screenshots/SQLServer-ServerConfiguration.jpg
+    .. image:: windows_installation_screenshots/SQLServer-ServerConfiguration.jpg
 
     #.  Database Engine Configuration: Leave the default settings
 
@@ -172,9 +180,9 @@ Software Requirements
             C:\Program Files\Java\jdk1.8.0_121
 
     .. note:: For Offline installation, install the Node.js 7+ and NPM 3+ on a machine
-    with internet access.  Package the installed nodejs files and installed modules
-    'C:\Users\peek\nodejs'.  Unpackage in the same directory location on the offline
-    server.
+        with internet access.  Package the installed nodejs files and installed modules
+        'C:\Users\peek\nodejs'.  Unpackage in the same directory location on the offline
+        server.
 
 #.  Python 3.5,
 
@@ -191,13 +199,13 @@ Software Requirements
 
     #.  Confirm PATH(s) to environment variables ::
 
-        C:\Users\peek\Python35\
-        C:\Users\peek\Python35\Scripts\
+            C:\Users\peek\Python35\
+            C:\Users\peek\Python35\Scripts\
 
     .. note:: For Offline installation, install Python 3.5 on a machine with internet
-    access.  Package the installed python files after synerty-peek package has been
-    deployed and configured on the online server.  Package then deploy and unpackage in
-     the same directory locations on the offline server.
+        access.  Package the installed python files after synerty-peek package has been
+        deployed and configured on the online server.  Package then deploy and
+        unpackage in the same directory locations on the offline server.
 
 #.  FreeTDS,
 
@@ -206,11 +214,11 @@ Software Requirements
 
     #.  Unzip contents into ::
 
-        C:\Users\peek\freetds-v0.95.95
+            C:\Users\peek\freetds-v0.95.95
 
     #.  Add PATH to environment variables ::
 
-        C:\Users\peek\freetds-v0.95.95\bin
+            C:\Users\peek\freetds-v0.95.95\bin
 
     #.  Create 'freetds.conf' in "C:\" ::
 
@@ -332,7 +340,7 @@ Enabling SymLinks.
     #.  Navigate: "Computer configuration → Windows Settings → Security Settings → Local
     Policies → User Rights Assignment → Create symbolic links"
 
-        .. image:: windows_installation_screenshots/gpedit-CreateSymlink.jpg
+        .. image:: windows_installation_screenshots/gpedit-CreateSymlinks.jpg
 
     #.  Add the user or group that you want to allow to create symbolic links
 

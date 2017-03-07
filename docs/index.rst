@@ -15,6 +15,7 @@ Welcome to synerty-peek's documentation!
    ProductionSetupDebian
    visio_studio_code_setup/visio_studio_code_setup
    pycharm_setup/pycharm_setup
+   plugin_development/GettingStarted
    modules
    TroubleshootingWindows
    LICENSE
