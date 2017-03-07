@@ -161,7 +161,7 @@ Software Requirements
 
                 tns doctor
 
-            .. image:: windows_installation_screenshots/Nativescript-tnsDoctor.jpg
+        .. image:: windows_installation_screenshots/Nativescript-tnsDoctor.jpg
 
     #.  Confirm Environment Variable ANDROID_HOME ::
 
@@ -307,34 +307,16 @@ to interface with an oracle database.
 
         con = cx_Oracle.connect('oracle://enmac:bford@192.168.215.128:1521/enmac')
 
-#.  Test cx_Oracle with Alchemy (after installing peek) ::
+Cygwin
+``````
 
-        >>>
-        >>> from sqlalchemy import create_engine
+    :Download: `<https://cygwin.com/setup-x86_64.exe>`_
+    :From: `<https://cygwin.com/install.html>`_
 
-        >>> create_engine('oracle://username:password@hostname:1521/instance')
-        >>> engine = create_engine('oracle://enmac:bford@192.168.215.128:1521/enmac')
-        >>> engine.execute("SELECT 1")
+::
 
-#.  Install and Configure RabbitMQ
+     ln -s /cygdrive/c/Users/peek/Documents/ .
 
-    #.  Install Erlang OTP
-        :Download: `<http://www.erlang.org/download/otp_win64_19.2.exe>`_
-        :From: `<http://www.erlang.org/downloads>`_
-
-    #.  Install rabbitmq
-        :Download: `<http://www.rabbitmq.com/releases/rabbitmq-server/v3.6.6/rabbitmq-server-3.6.6.exe>`_
-        :From: `<http://www.rabbitmq.com/download.html>`_
-
-
-    #.  TODO:
-
-#.  Install and Configure Redis
-
-    :Download: `<http://www.rabbitmq.com/releases/rabbitmq-server/v3.6.6/rabbitmq-server-3.6.6.exe>`_
-    :From: `<http://www.rabbitmq.com/download.html>`_
-
-    #.  TODO:
 
 SymLinks
 ````````

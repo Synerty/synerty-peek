@@ -17,6 +17,7 @@ Welcome to synerty-peek's documentation!
    RequirementsDebian
    DevelopmentSetupDebian
    ProductionSetupDebian
+   visio_studio_code_setup/visio_studio_code_setup
    pycharm_setup/pycharm_setup
    modules
    TroubleshootingWindows
