@@ -26,7 +26,7 @@ Online Installation
 Software Requirements
 `````````````````````
 
-#.  Create peek user account
+1.  Create peek user account
 
     *  Account Type: Administrator
 
@@ -44,18 +44,18 @@ Software Requirements
 
     |
 
-#.  7zip (optional),
+2.  7zip (optional),
 
     :Download: `<http://www.7-zip.org/a/7z1604-x64.exe>`_
     :From: `<http://www.7-zip.org/download.html>`_
 
 
-#.  Notepad ++ (optional),
+3.  Notepad ++ (optional),
 
     :Download: `<https://notepad-plus-plus.org/repository/7.x/7.3.2/npp.7.3.2.Installer.x64.exe>`_
     :From: `<https://notepad-plus-plus.org>`_
 
-#.  Microsoft .NET Framework 3.5 Service Pack 1,
+4.  Microsoft .NET Framework 3.5 Service Pack 1,
 
     *  Online Installation:
 
@@ -68,7 +68,7 @@ Software Requirements
 
     .. note:: Restart if prompted to restart.
 
-#.  Visual C++ Build Tools 2015,
+5.  Visual C++ Build Tools 2015,
 
     *  Online Installation:
 
@@ -81,101 +81,122 @@ Software Requirements
 
     :Download: `<https://www.microsoft.com/en-US/download/details.aspx?id=48146>`_
 
-#.  Microsoft® SQL Server® 2014 Express,
+6.  Microsoft® SQL Server® 2014 Express,
 
     :From: `<https://www.microsoft.com/en-ca/download/details.aspx?id=42299>`_
 
-    #.  Choose directory for extracted files: ::
+    1.  Choose directory for extracted files: ::
 
             C:\SQLEXPRWT_x64_ENU\
 
-    #.  Select "New SQL Server stand-alone installation"
-        |
+    2.  Select "New SQL Server stand-alone installation"
 
-    #.  Feature Selection: check all Features
+    |
 
-            .. image:: windows_installation_screenshots/SQLServer-FeatureSelection.jpg
+    3.  Feature Selection: check all Features
 
-    #.  Instance Configuration: change the named instance to 'peek'. This will update
-    the 'Instance ID'
+    .. image:: windows_installation_screenshots/SQLServer-FeatureSelection.jpg
 
-    #.  Server Configuration: Select browse from the 'Account Name' drop-list and check
-    names for 'peek'.  Select ok then enter the account password
+    |
+
+    4.  Instance Configuration: change the named instance to 'peek'. This will update
+        the 'Instance ID'
+
+    |
+
+    5.  Server Configuration: Select browse from the 'Account Name' drop-list and check
+        names for 'peek'.  Select ok then enter the account password
 
     .. image:: windows_installation_screenshots/SQLServer-ServerConfiguration.jpg
 
-    #.  Database Engine Configuration: Leave the default settings
+    |
 
-    #.  Start Microsoft SQL Server Management Studio --> Connect to PEEK database
-    engine --> create new database 'peek'
+    6.  Database Engine Configuration: Leave the default settings
 
-#.  Make Changes in SQL Server Configuration Manager (SQLServerManager12.msc)
+    |
+
+    7.  Start Microsoft SQL Server Management Studio --> Connect to PEEK database
+        engine --> create new database 'peek'
+
+7.  Make Changes in SQL Server Configuration Manager (SQLServerManager12.msc)
 
     SQL Server Configuration Manager --> SQL Server Network Configuration -->
     Protocols for PEEK:
 
-    #.  Under the TCP/IP properties set 'IPALL' 'TCP PORT' to '1433'. Select 'Apply' then
-    'OK',
+    1.  Under the TCP/IP properties set 'IPALL' 'TCP PORT' to '1433'. Select 'Apply' then
+        'OK',
 
-        .. image:: windows_installation_screenshots/set_tcp_port.png
+    .. image:: windows_installation_screenshots/set_tcp_port.png
 
-    #.  Enable the 'TCP/IP' Protocol
+    |
 
-        .. image:: windows_installation_screenshots/enable_tcpip.png
+    2.  Enable the 'TCP/IP' Protocol
 
-    #.  Restart the server service.
+    .. image:: windows_installation_screenshots/enable_tcpip.png
 
-        .. image:: windows_installation_screenshots/SQLServer-RestartServices.jpg
+    |
 
-#.  Node.js 7+ and NPM 3+,
+    3.  Restart the server service.
+
+    .. image:: windows_installation_screenshots/SQLServer-RestartServices.jpg
+
+    |
+
+8.  Node.js 7+ and NPM 3+,
 
     :Download: `<https://nodejs.org/dist/v7.4.0/node-v7.4.0-x64.msi>`_
     :From: `<https://nodejs.org/en/download/current/>`_
 
-    #.  Change install path ::
+    1.  Change install path ::
 
             C:\Users\peek\nodejs
 
-    #.  Confirm PATH to environment variables ::
+    2.  Confirm PATH to environment variables ::
 
             C:\Users\peek\AppData\Roaming\npm
             C:\Users\peek\nodejs\
 
-    #.  Run the Command Prompt as Administrator and run the following commands: ::
+    3.  Run the Command Prompt as Administrator and run the following commands: ::
 
             npm -g install angular-cli typescript tslint nativescript
 
         This will install the required NPM packages
 
-        #.  Do you want to run the setup script? ::
+        1.  Do you want to run the setup script? ::
 
                 Y
 
-            .. image:: windows_installation_screenshots/Nativescript-Install.jpg
+        .. image:: windows_installation_screenshots/Nativescript-Install.jpg
 
-        #.  Allow the script to install Chocolatey(It's mandatory for the rest of the
+    |
+
+        2.  Allow the script to install Chocolatey(It's mandatory for the rest of the
         script) ::
 
                 A
 
-        #.  Do you want to install the Android emulator?: ::
+        3.  Do you want to install the Android emulator?: ::
 
                 N
 
-            .. image:: windows_installation_screenshots/Nativescript-InstallComplete.jpg
+        .. image:: windows_installation_screenshots/Nativescript-InstallComplete.jpg
 
-        #.  Once the installation is complete press 'ctrl+c' to exit the PowerShel
+    |
+
+        4.  Once the installation is complete press 'ctrl+c' to exit the PowerShel
         shell then in the command prompt run ::
 
                 tns doctor
 
         .. image:: windows_installation_screenshots/Nativescript-tnsDoctor.jpg
 
-    #.  Confirm Environment Variable ANDROID_HOME ::
+    |
+
+    4.  Confirm Environment Variable ANDROID_HOME ::
 
             C:\Users\peek\AppData\Local\Android\android-sdk
 
-    #.  Confirm Environment Variable JAVA_HOME ::
+    5.  Confirm Environment Variable JAVA_HOME ::
 
             C:\Program Files\Java\jdk1.8.0_121
 
@@ -184,20 +205,24 @@ Software Requirements
         'C:\Users\peek\nodejs'.  Unpackage in the same directory location on the offline
         server.
 
-#.  Python 3.5,
+9.  Python 3.5,
 
     :Download: `<https://www.python.org/ftp/python/3.5.3/python-3.5.3rc1-amd64.exe>`_
     :From: `<https://www.python.org/downloads/windows/>`_
 
-    #.  Check the 'Add Python 3.5 to PATH' and select 'Customize Installation'
+    1.  Check the 'Add Python 3.5 to PATH' and select 'Customize Installation'
 
-        .. image:: windows_installation_screenshots/Python-Install.jpg
+    .. image:: windows_installation_screenshots/Python-Install.jpg
 
-    #.  Update the 'Customize install location' to PATH C:\Users\peek\Python35\
+    |
 
-        .. image:: windows_installation_screenshots/Python-AdvancedOptions.jpg
+    2.  Update the 'Customize install location' to PATH C:\Users\peek\Python35\
 
-    #.  Confirm PATH(s) to environment variables ::
+    .. image:: windows_installation_screenshots/Python-AdvancedOptions.jpg
+
+    |
+
+    3.  Confirm PATH(s) to environment variables ::
 
             C:\Users\peek\Python35\
             C:\Users\peek\Python35\Scripts\
@@ -207,20 +232,20 @@ Software Requirements
         deployed and configured on the online server.  Package then deploy and
         unpackage in the same directory locations on the offline server.
 
-#.  FreeTDS,
+10. FreeTDS,
 
     :Download: `<https://github.com/ramiro/freetds/releases/download/v0.95.95/freetds-v0.95.95-win-x86_64-vs2015.zip>`_
     :From: `<https://github.com/ramiro/freetds/releases>`_
 
-    #.  Unzip contents into ::
+    1.  Unzip contents into ::
 
             C:\Users\peek\freetds-v0.95.95
 
-    #.  Add PATH to environment variables ::
+    2.  Add PATH to environment variables ::
 
             C:\Users\peek\freetds-v0.95.95\bin
 
-    #.  Create 'freetds.conf' in "C:\" ::
+    3.  Create 'freetds.conf' in "C:\" ::
 
             [global]
                 port = 1433
@@ -230,7 +255,7 @@ Software Requirements
 
 
 
-    #.  dll files,
+    4.  dll files,
 
         :Download: `<http://indy.fulgan.com/SSL/openssl-1.0.2j-x64_86-win64.zip>`_
         :From: `<http://indy.fulgan.com/SSL/>`_
@@ -241,38 +266,45 @@ Software Requirements
 
         *  ssleay32.dll
 
+    |
+
         *  You will need to duplicate the above files and name them as per below:
 
             *  libeay32MD.dll
 
             *  ssleay32MD.dll
 
-#. GitBash,
+11. GitBash,
 
     :Download: `<https://github.com/git-for-windows/git/releases/download/v2.11.0.windows.1/Git-2.11.0-64-bit.exe>`_
     :From: `<https://git-for-windows.github.io>`_
 
-    #.  Configuring Extra Options: check 'Enable Symbolic Links'
+    1.  Configuring Extra Options: check 'Enable Symbolic Links'
 
-        .. image:: windows_installation_screenshots/GIT-ExtraOptions.jpg
+    .. image:: windows_installation_screenshots/GIT-ExtraOptions.jpg
 
-    #.  Add PATH to environment variables ::
+    |
+
+    2.  Add PATH to environment variables ::
 
             C:\Program Files\Git\bin
 
-#.  Upgrade pip, run the command prompt as Administrator and run the following command: ::
+12. Upgrade pip, run the command prompt as Administrator and run the following
+    command: ::
 
         python -m pip install --upgrade pip
 
-#.  Shapely,
+13. Shapely,
 
     :Download: `<http://www.lfd.uci.edu/~gohlke/pythonlibs/#shapely>`_
     :From: `<https://pypi.python.org/pypi/Shapely>`_
 
-    #.  Download Shapely >= 1.5.17 and save in the Downloads directory
+    1.  Download Shapely >= 1.5.17 and save in the Downloads directory
 
-    #.  Run the command prompt as Administrator and start the bash shell.  Run the
-    following command: ::
+    |
+
+    2.  Run the command prompt as Administrator and start the bash shell.  Run the
+        following command: ::
 
             pip install ~/Downloads/Shapely-1.5.17-cp35-cp35m-win_amd64.whl
 
@@ -282,7 +314,7 @@ Installing Oracle Libraries (Optional)
 The oracle libraries are optional. Install them where the agent runs if you are going
 to interface with an oracle database.
 
-#.  Install Oracle Instant Client
+1.  Install Oracle Instant Client
 
     :Download: `<http://download.oracle.com/otn/nt/instantclient/121020/instantclient-basic-windows.x64-12.1.0.2.0.zip>`_
     :From: `<http://www.oracle.com/technetwork/topics/winx64soft-089540.html>`_
@@ -299,12 +331,12 @@ to interface with an oracle database.
 
             C:\Users\peek\Oracle\12.1.0.2.0\instantclient_12_1
 
-#.  Install cx_Oracle
+2.  Install cx_Oracle
 
     :Download: `<https://pypi.python.org/packages/50/c0/de24ec02484eb9add03cfbd28bd3c23fe137551501a9ca4498f30109621e/cx_Oracle-5.2.1-12c.win-amd64-py3.5.exe#md5=b505eaceceaa3813cf6bfe701ba92c3e>`_
     :From: `<https://pypi.python.org/pypi/cx_Oracle/5.2.1>`_
 
-#.  Test cx_Oracle in python ::
+3.  Test cx_Oracle in python ::
 
         >>>
         >>> import cx_Oracle
@@ -335,18 +367,22 @@ Enabling SymLinks.
     group.  Those users will always have to run mklink in an elevated environment as
     Administrator.
 
-#.  Launch: "gpedit.msc"
+1.  Launch: "gpedit.msc"
 
-    #.  Navigate: "Computer configuration → Windows Settings → Security Settings → Local
-    Policies → User Rights Assignment → Create symbolic links"
+    1.  Navigate: "Computer configuration → Windows Settings → Security Settings → Local
+        Policies → User Rights Assignment → Create symbolic links"
 
-        .. image:: windows_installation_screenshots/gpedit-CreateSymlinks.jpg
+    .. image:: windows_installation_screenshots/gpedit-CreateSymlinks.jpg
 
-    #.  Add the user or group that you want to allow to create symbolic links
+    |
 
-        .. image:: windows_installation_screenshots/gpedit-AddUser.jpg
+    2.  Add the user or group that you want to allow to create symbolic links
 
-    #.  You will need to logout and log back in for the change to take effect
+    .. image:: windows_installation_screenshots/gpedit-AddUser.jpg
+
+    |
+
+    3.  You will need to logout and log back in for the change to take effect
 
 `<https://github.com/git-for-windows/git/wiki/Symbolic-Links>`_
 
@@ -373,11 +409,11 @@ Software Requirements
 The offline installation guide requires the steps below to be completed after the
 Installation has been copied from the online machine to the offline machine:
 
-#.  Refreshing symbolic links::
+1.  Refreshing symbolic links::
 
-        $ cd `dirname $(which python)`/lib/site-packages/
+        cd `dirname $(which python)`/lib/site-packages/
 
-        $ rm -r peek_server_fe/src/app/peek_plugin* peek_server_fe/node_modules/peek_plugin*
+        rm -r peek_server_fe/src/app/peek_plugin* peek_server_fe/node_modules/peek_plugin*
 
-        $ rm -r peek_client_fe/src/app/peek_plugin* peek_client_fe/node_modules/peek_plugin*
+        rm -r peek_client_fe/src/app/peek_plugin* peek_client_fe/node_modules/peek_plugin*
 
