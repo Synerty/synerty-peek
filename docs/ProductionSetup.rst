@@ -3,7 +3,7 @@ Windows Production Platform Setup
 =================================
 
 .. WARNING:: This document extends, Windows Requirements Install Guide
-(RequirementsWindows.rst).
+    (RequirementsWindows.rst).
 
 Building synerty-peek
 ---------------------

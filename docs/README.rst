@@ -36,4 +36,22 @@ Future Browser Support
 Getting Started
 ---------------
 
-Follow the **Installation Guide** (Installation.rst).
+This documentation contains instructions for configuring synerty-peek on Windows and
+Debian.  Each OS has a unique guide for installing and configuring of OS specific
+requirements.
+
+The documentation for setting up the Platform or Development will be covered by a
+similar set of instructions for both Windows and Debian.  The instructions for Windows
+at this point will be run using the *Cygwin* terminal.
+
+For Windows installation, follow the *Windows Requirements Install Guide*
+(RequirementsWindows.rst).
+
+For Debian installation, follow the *Debian Requirements Install Guide*
+(RequirementsDebian.rst).
+
+|
+
+.. image:: https://readthedocs.org/projects/synerty-peek/badge/?version=latest
+    :target: http://synerty-peek.readthedocs.io/en/latest/?badge=latest
+    :alt: Documentation Status
