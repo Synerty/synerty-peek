@@ -1,5 +1,5 @@
 =============
-Setup Pycharm
+Pycharm Setup
 =============
 
 #.  Open pycharm,

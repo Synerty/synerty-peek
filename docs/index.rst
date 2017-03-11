@@ -8,11 +8,9 @@ Welcome to synerty-peek's documentation!
 
    README
    RequirementsWindows
-   DevelopmentSetupWindows
-   ProductionSetupWindows
    RequirementsDebian
-   DevelopmentSetupDebian
-   ProductionSetupDebian
+   DevelopmentSetup
+   ProductionSetup
    visio_studio_code_setup/visio_studio_code_setup
    pycharm_setup/pycharm_setup
    plugin_development/GettingStarted
