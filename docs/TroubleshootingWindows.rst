@@ -45,9 +45,9 @@ recreated.
         self.buildFrontend()
       File "C:\Users\peek\Python35\lib\site-packages\peek_platform\plugin\PluginFron
     tendInstallerABC.py", line 105, in buildFrontend
-        self._relinkPluginDirs(feAppDir, pluginDetails)
+        self._syncPluginFiles(feAppDir, pluginDetails)
       File "C:\Users\peek\Python35\lib\site-packages\peek_platform\plugin\PluginFron
-    tendInstallerABC.py", line 257, in _relinkPluginDirs
+    tendInstallerABC.py", line 257, in _syncPluginFiles
         os.remove(path)
     PermissionError: [WinError 5] Access is denied: 'C:\\Users\\peek\\Python35\\lib\
     \site-packages\\peek_server_fe\\src\\app\\peek_plugin_action_to_client'
