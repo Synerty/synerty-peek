@@ -10,13 +10,21 @@ synerty-peek
 ------------
 
 A multiteared architecture platform for python, supporting :
+
 *   Plugins
+
 *   Reactive / observable data transport
+
 *   Multiprocessing worker services
+
 *   Angular + Typescript frontend for:
+
     *   Web
+
     *   Nativescript
+
 *   MS SQLServer + Windows
+
 *   PostGreSQL + Debian Linux
 
 This is the meta package that installs the platform.
