@@ -19,7 +19,7 @@ Optional  Software
 *  Notepad ++
 *  Installing Oracle Libraries (Instructions in the procedure)
 
-Installation of 7zip is optional.  This tool will come in handy during the process but
+Installation of 7zip is optional. This tool will come in handy during the process but
 is not required.
 
 |
@@ -189,59 +189,17 @@ Node.js 7+ and NPM 3+
 
         C:\Users\peek\nodejs
 
-2.  Confirm PATH to environment variables ::
+2.  Edit the system PATH to environment variable, and add the following ::
 
-        C:\Users\peek\AppData\Roaming\npm
+        C:\Users\peek\AppData\Roaming\npm;
         C:\Users\peek\nodejs\
 
 3.  Install the required NPM packages
 
 Run the Command Prompt as Administrator and run the following commands: ::
 
-        npm -g install angular-cli typescript tslint nativescript
+        npm -g install @angular\cli typescript tslint
 
-3.1.  Do you want to run the setup script? ::
-
-        Y
-
-.. image:: windows_installation_screenshots/Nativescript-Install.jpg
-
-|
-
-3.2.  Allow the script to install Chocolatey(It's mandatory for the rest of the
-script) ::
-
-        A
-
-3.3.  Do you want to install the Android emulator?: ::
-
-        N
-
-.. image:: windows_installation_screenshots/Nativescript-InstallComplete.jpg
-
-|
-
-3.4.  Once the installation is complete press 'ctrl+c' to exit the PowerShel
-shell then in the command prompt run ::
-
-        tns doctor
-
-.. image:: windows_installation_screenshots/Nativescript-tnsDoctor.jpg
-
-|
-
-4.  Confirm Environment Variable ANDROID_HOME ::
-
-        C:\Users\peek\AppData\Local\Android\android-sdk
-
-5.  Confirm Environment Variable JAVA_HOME ::
-
-        C:\Program Files\Java\jdk1.8.0_121
-
-.. note:: For Offline installation, install the Node.js 7+ and NPM 3+ on a machine
-    with internet access.  Package the installed nodejs files and installed modules
-    'C:\Users\peek\nodejs'.  Unpackage in the same directory location on the offline
-    server.
 
 Python 3.5
 ``````````
@@ -249,19 +207,23 @@ Python 3.5
 :Download: `<https://www.python.org/ftp/python/3.5.3/python-3.5.3rc1-amd64.exe>`_
 :From: `<https://www.python.org/downloads/windows/>`_
 
-1.  Check the 'Add Python 3.5 to PATH' and select 'Customize Installation'
+*   Check the 'Add Python 3.5 to PATH' and select 'Customize Installation'
 
 .. image:: windows_installation_screenshots/Python-Install.jpg
 
 |
 
-2.  Update the 'Customize install location' to PATH C:\Users\peek\Python35\
+*   Update the 'Customize install location' to PATH C:\Users\peek\Python35\
 
 .. image:: windows_installation_screenshots/Python-AdvancedOptions.jpg
 
 |
 
-3.  Confirm PATH(s) to environment variables ::
+*   Confirm PATH(s) to environment variables ::
+
+        echo %PATH%
+
+        ...
 
         C:\Users\peek\Python35\
         C:\Users\peek\Python35\Scripts\
@@ -271,6 +233,8 @@ Python 3.5
     deployed and configured on the online server.  Package then deploy and unpackaged in
     the same directory locations on the offline server.  The environment variables will
     need to be checked and updated in the offline server.
+
+
 
 FreeTDS
 ```````

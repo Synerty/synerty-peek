@@ -120,7 +120,7 @@ Compiling and Installing NodeJS
 #.  Install the required NPM packages ::
 
         npm -g upgrade npm
-        npm -g install angular-cli typescript tslint nativescript
+        npm -g install @angular/cli typescript tslint
 
 Compiling and Installing Python
 ```````````````````````````````

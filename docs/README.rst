@@ -1,3 +1,7 @@
+.. image:: https://readthedocs.org/projects/synerty-peek/badge/?version=latest
+    :target: http://synerty-peek.readthedocs.io/en/latest/?badge=latest
+    :alt: Documentation Status
+
 =======
 Read Me
 =======
@@ -5,7 +9,15 @@ Read Me
 synerty-peek
 ------------
 
-A platform for python written for Twisted.
+A multiteared architecture platform for python, supporting :
+*   Plugins
+*   Reactive / observable data transport
+*   Multiprocessing worker services
+*   Angular + Typescript frontend for:
+    *   Web
+    *   Nativescript
+*   MS SQLServer + Windows
+*   PostGreSQL + Debian Linux
 
 This is the meta package that installs the platform.
 
@@ -33,16 +45,11 @@ Future Browser Support
 *  Chrome desktop
 *  IE 11 and above.
 
-Getting Started
----------------
+Installing the Platform
+-----------------------
 
-This documentation contains instructions for configuring synerty-peek on Windows and
-Debian.  Each OS has a unique guide for installing and configuring of OS specific
-requirements.
-
-The documentation for setting up the Platform or Development will be covered by a
-similar set of instructions for both Windows and Debian.  The instructions for Windows
-at this point will be run using the *Cygwin* terminal.
+The Peek Plaform needs different requirements installed depending on the supported
+platform chosen.
 
 For Windows installation, follow the *Windows Requirements Install Guide*
 (RequirementsWindows.rst).
@@ -50,8 +57,13 @@ For Windows installation, follow the *Windows Requirements Install Guide*
 For Debian installation, follow the *Debian Requirements Install Guide*
 (RequirementsDebian.rst).
 
-|
+Then, follow (ProductionSetup.rst) to install the peek services.
 
-.. image:: https://readthedocs.org/projects/synerty-peek/badge/?version=latest
-    :target: http://synerty-peek.readthedocs.io/en/latest/?badge=latest
-    :alt: Documentation Status
+The Peek Platform is now ready to install the required plugins.
+
+For Plugin Development, follow the (PluginDevelopmentSetup.rst) instructions.
+
+Should you wish to develop the peek platform it's self, run through the
+ (PlatformDevelopmentSetup.rst) instructions instead of ProductionSetup
+
+
