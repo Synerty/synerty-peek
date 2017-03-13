@@ -4,7 +4,7 @@ import shutil
 from setuptools import find_packages, setup
 
 pip_package_name = "synerty-peek"
-package_version = '0.0.32'
+package_version = '0.1.0'
 
 egg_info = "%s.egg-info" % pip_package_name
 if os.path.isdir(egg_info):
