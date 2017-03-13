@@ -18,10 +18,10 @@ Open gitbash, run the following
     DIR=`pwd`
 
     [ -d peek_dist ] && rm -rf peek_dist
-    mkdir peek_dist/py
-    mkdir peek_dist/client-build-ns/tmp
-    mkdir peek_dist/client-build-web/tmp
-    mkdir peek_dist/server-build-web/tmp
+    mkdir -p peek_dist/py
+    mkdir -p peek_dist/client-build-ns/tmp
+    mkdir -p peek_dist/client-build-web/tmp
+    mkdir -p peek_dist/server-build-web/tmp
 
 
     cd $DIR/peek_dist/py
