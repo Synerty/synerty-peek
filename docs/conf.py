@@ -24,7 +24,7 @@
 __project__ = 'Synerty Peek'
 __copyright__ = '2016, Synerty'
 __author__ = 'Synerty'
-__version__ = '0.0.25'
+__version__ = '0.0.27'
 
 import sphinx_rtd_theme
 
@@ -64,7 +64,7 @@ author = __author__
 # built documents.
 #
 # The short X.Y version.
-version = __version__
+__version__ = '0.0.27'
 # The full version, including alpha/beta/rc tags.
 release = __version__
 
