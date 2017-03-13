@@ -354,20 +354,25 @@ SymLinks
 
 Enabling SymLinks.
 
-1.  Launch: "gpedit.msc" and Navigate to "Computer configuration → Windows Settings →
-    Security Settings → Local Policies → User Rights Assignment → Create symbolic links"
+*   Launch: "gpedit.msc" and Navigate to
+        Computer configuration
+        → Windows Settings
+        → Security Settings
+        → Local Policies
+        → User Rights Assignment
+        → Create symbolic links
 
 .. image:: windows_installation_screenshots/gpedit-CreateSymlinks.jpg
 
 |
 
-2.  Add the user or group that you want to allow to create symbolic links
+*   Add the user or group that you want to allow to create symbolic links
 
 .. image:: windows_installation_screenshots/gpedit-AddUser.jpg
 
 |
 
-3.  You will need to logout and log back in for the change to take effect
+*   You will need to logout and log back in for the change to take effect
 
 .. Note:: This setting has no effect on user accounts that belong to the Administrators
     group.  Those users will always have to run mklink in an elevated environment as
@@ -380,13 +385,13 @@ Enable Development
 
 Enable your device for development
 
-1.  From 'Windows Settings' select 'Update & Security'
+*   From 'Windows Settings' select 'Update & Security'
 
 .. image:: windows_installation_screenshots/DevMode-UpdateSecurity.jpg
 
 |
 
-2.  Ensure that 'Developer Mode' is checked in the 'For Development' tab
+*   Ensure that 'Developer Mode' is checked in the 'For Development' tab
 
 .. image:: windows_installation_screenshots/DevMode-ForDevelopers.jpg
 
