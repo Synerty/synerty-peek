@@ -350,10 +350,21 @@ If you're installing offline, you can :
 
         exit
 
+To check this has worked, run the folling LS command, you should see the following
+
+::
+
+        ls -ld /home/peek /home/peek/peek-site-packages
+
+        lrwxrwxrwx 1 peek None 22 Mar 13 11:24 /home/peek -> /cygdrive/c/Users/peek
+        lrwxrwxrwx 1 peek None 37 Mar 13 11:28 /home/peek/peek-site-packages -> /home/peek/Python35/Lib/site-packages
+
 SymLinks
 ````````
 
 Enabling SymLinks.
+
+`<https://github.com/git-for-windows/git/wiki/Symbolic-Links>`_
 
 *   Launch: "gpedit.msc" and Navigate to
         Computer configuration
@@ -361,13 +372,14 @@ Enabling SymLinks.
         → Security Settings
         → Local Policies
         → User Rights Assignment
-        → Create symbolic links
 
 .. image:: windows_installation_screenshots/gpedit-CreateSymlinks.jpg
 
 |
 
-*   Add the user or group that you want to allow to create symbolic links
+*   Double click on "Create symbolic links"
+
+*   Click "Add User or Group", add "peek", then "OK" out of the dialogues.
 
 .. image:: windows_installation_screenshots/gpedit-AddUser.jpg
 
@@ -379,26 +391,33 @@ Enabling SymLinks.
     group.  Those users will always have to run mklink in an elevated environment as
     Administrator.
 
-`<https://github.com/git-for-windows/git/wiki/Symbolic-Links>`_
-
 Enable Development
 ``````````````````
 
+This applies to windows 10, and may apply to other windows versions as well.
+
+`<https://msdn.microsoft.com/en-us/windows/uwp/get-started/enable-your-device-for-development>`_
+
 Enable your device for development
 
-*   From 'Windows Settings' select 'Update & Security'
+*   Click the "Start" menu and select "Settings"
+
+*   Select 'Update & Security'
 
 .. image:: windows_installation_screenshots/DevMode-UpdateSecurity.jpg
 
 |
 
-*   Ensure that 'Developer Mode' is checked in the 'For Development' tab
+*   Click on the "For developers" tab on the left.
+
+
+
+*   Select 'Developer Mode', and acknowledge the warning.
 
 .. image:: windows_installation_screenshots/DevMode-ForDevelopers.jpg
 
 |
 
-`<https://msdn.microsoft.com/en-us/windows/uwp/get-started/enable-your-device-for-development>`_
 
 Installing Oracle Libraries
 ---------------------------
