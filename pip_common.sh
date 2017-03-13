@@ -16,7 +16,7 @@ peek-server
 synerty-peek"
 
 export PLUGINS="
-peek-plugin-action-to-client
+peek-plugin-active-task
 peek-plugin-data-dms
 peek-plugin-pof-soap
 peek-plugin-user
