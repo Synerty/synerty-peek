@@ -1,44 +1,50 @@
-=================================
-Windows Production Platform Setup
-=================================
+================================
+Peek Platform - Production Setup
+================================
 
-.. WARNING:: This document extends, Windows Requirements Install Guide
-    (RequirementsWindows.rst).
+.. note:: This document extends the Windows or Debian requirements setup guide
 
-Building synerty-peek
----------------------
+Instal Platform Packages (pip)
+------------------------------
 
-Run the command prompt **as administrator** then enter the bash shell.
+Open a command prompt **as administrator**, you'll use this to install the
+peek playform packages.
 
-#.  synerty-peek::
+----
 
-        $ pip install synerty-peek
+synerty-peek
 
-#.  peek-plugins
+::
+
+        pip install synerty-peek
+
+----
+
+peek-plugins
 
     From saved directory::
 
             $ pip install ~/...
 
-#.  Install front end packages ::
+
+Instal Frontend Packages (npm)
+------------------------------
+
+Install the npm packages for the server and client
+
+::
 
         $ cd `dirname $(which python)`/lib/site-packages/peek_client_fe
         $ npm install
         $ cd `dirname $(which python)`/lib/site-packages/peek_server_fe
         $ npm install
 
-#.  Symlink the tsconfig.json and node_modules file and directory in the parent
-directory of peek-client-fe. These steps are run in the
-directory where the projects are checked out from. These are required for the frontend
-typescript compiler. ::
 
-        $ exit
-        > cd C:\Users\peek\Python35\Lib\site-packages
-        > mklink /J node_modules peek-client-fe\peek_client_fe\node_modules
-        > bash
-        $ ln -s ~/Python35/Lib/site-packages/peek_client_fe/tsconfig.json .
+----
 
-    #.  ::
+Building the frontend (TODO, This should" just work")
+
+::
 
             $ python ~/Python35/Lib/site-packages/peek_server/run_peek_server.py
 
@@ -58,34 +64,45 @@ typescript compiler. ::
 
             ctrl+c
 
-#.  Update config.json files
+Configuring Platform (config.json)
+----------------------------------
 
-    #.  peek-server.home/config.json
+Update config.json files. This tells the peek platform services how to connect to each
+other, connect to the database, which plugins to load, etc.
 
-        *  update the sql connection::
+----
 
-                "sqlalchemy": {
-                        "connectUrl": "mssql+pymssql://.\\peek:PASSWORD@localhost/peek",
+Update the sql connection
+    Edit **peek-server.home/config.json**
 
-        *  if using plugins::
+Update the sqlalchemy.connectUrl property
 
-                "plugin": {
-                    "enabled": [
-                        "insert plugin name",
-                        "insert plugin name"
-                    ],
-                },
+::
 
-       #.  peek-client.home/nconfig.json
+            "sqlalchemy": {
+                    "connectUrl": "mssql+pymssql://.\\peek:PASSWORD@localhost/peek",
 
-        *  if using plugins::
 
-                "plugin": {
-                    "enabled": [
-                        "insert plugin name",
-                        "insert plugin name"
-                    ],
-                },
+----
+
+A plugin contains peices of code that are run on each of the peek services.
+
+To enable a service to run their part of a plugin, add it to the **plugin.enabled**
+array in each services **config.json**
+
+For example:
+    Edit **peek-agent.home/config.json**
+
+Add the appropriate plugins to the array.
+::
+
+            "plugin": {
+                "enabled": [
+                    "peek_plugin_noop",
+                    "peek_plugin_etc"
+                ],
+            },
+
 
 Running synerty-peek
 --------------------

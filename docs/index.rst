@@ -17,7 +17,8 @@ Welcome to synerty-peek's documentation!
    pycharm_setup/pycharm_setup
    plugin_development/GettingStarted
    modules
-   TroubleshootingWindows
+   TroubleshootingWindow
+   PlatformReleasePackaging
    LICENSE
 
 Indices and tables
