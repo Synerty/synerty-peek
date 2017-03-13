@@ -25,6 +25,7 @@ Open gitbash, run the following
 
 
     cd $DIR/peek_dist/py
+    pip install wheel
     pip wheel --no-cache synerty-peek
     wget 'http://www.lfd.uci.edu/~gohlke/pythonlibs/tuth5y6k/Shapely-1.5.17-cp35-cp35m-win_amd64.whl'
 
