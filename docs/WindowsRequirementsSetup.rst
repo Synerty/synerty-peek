@@ -12,26 +12,6 @@ Installation Objective
 This *Installation Guide* contains specific Windows operating system requirements for the
 configuring of synerty-peek.
 
-Optional  Software
-``````````````````
-
-*  7zip
-*  Notepad ++
-*  Installing Oracle Libraries (Instructions in the procedure)
-
-Installation of 7zip is optional. This tool will come in handy during the process but
-is not required.
-
-|
-
-Installation of Notepad ++ is optional.  Notepad ++ is a handy tool for viewing
-documents and has useful features.
-
-|
-
-Installing Oracle Libraries is required if you intend on installing the peek agent.
-Instruction for installing the Oracle Libraries are in the *Online Installation Guide*.
-
 Required Software
 `````````````````
 
@@ -50,6 +30,26 @@ Below is a list of all the required software:
 *  GitBash
 *  Shapely
 *  Cygwin
+
+Optional  Software
+``````````````````
+
+*  7zip
+*  Notepad ++
+*  Installing Oracle Libraries (Instructions in the procedure)
+
+Installation of 7zip is optional. This tool will come in handy during the process but
+is not required.
+
+----
+
+Installation of Notepad ++ is optional.  Notepad ++ is a handy tool for viewing
+documents and has useful features.
+
+----
+
+Installing Oracle Libraries is required if you intend on installing the peek agent.
+Instruction for installing the Oracle Libraries are in the *Online Installation Guide*.
 
 OS Commands
 -----------
@@ -72,9 +72,9 @@ Create a peek user account with admin rights.
 
 ----
 
-Account Type: Administrator
+Account Type: ::
 
-|
+        Administrator
 
 ----
 
@@ -107,6 +107,8 @@ Microsoft .NET Framework 3.5 Service Pack 1
 :Download: `<https://download.microsoft.com/download/2/0/E/20E90413-712F-438C-988E-FDAA79A8AC3D/dotnetfx35.exe>`_
 
 .. note:: Restart if prompted to restart.
+
+|
 
 Visual C++ Build Tools 2015
 ```````````````````````````
@@ -145,13 +147,13 @@ Feature Selection: check all Features
 
 ----
 
-Instance Configuration: change the named instance to 'peek'. This will update
-    the 'Instance ID'
+Instance Configuration: change the named instance to 'peek'. This will update the
+'Instance ID'
 
 ----
 
-Server Configuration: Select browse from the 'Account Name' drop-list and check
-    names for 'peek'.  Select ok then enter the account password
+Server Configuration: Select browse from the 'Account Name' drop-list and check names
+for 'peek'.  Select ok then enter the account password
 
 .. image:: windows_installation_screenshots/SQLServer-ServerConfiguration.jpg
 
@@ -162,20 +164,23 @@ Database Engine Configuration: Leave the default settings
 ----
 
 Start Microsoft SQL Server Management Studio
-    --> Connect to PEEK database engine
-    --> create new database 'peek'
+
+    > Connect to PEEK database engine
+
+    > create new database 'peek'
 
 ----
 
-Make Changes in SQL Server Configuration Manager (SQLServerManager12.msc).
-    Open the "SQL Server Configuration Manager" from the start menu
-    --> SQL Server Network Configuration
-    --> Protocols for PEEK
+Make Changes in SQL Server Configuration Manager (SQLServerManager12.msc).  Open the
+"SQL Server Configuration Manager" from the start menu
+
+    > SQL Server Network Configuration
+
+    > Protocols for PEEK
 
 ----
 
-Under the TCP/IP properties set 'IPALL' 'TCP PORT' to '1433'. Select 'Apply' then
-    'OK',
+Under the TCP/IP properties set 'IPALL' 'TCP PORT' to '1433'. Select 'Apply' then 'OK',
 
 .. image:: windows_installation_screenshots/set_tcp_port.png
 
@@ -190,6 +195,8 @@ Enable the 'TCP/IP' Protocol
 Restart the server service.
 
 .. image:: windows_installation_screenshots/SQLServer-RestartServices.jpg
+
+|
 
 Node.js 7+ and NPM 3+
 `````````````````````
@@ -217,7 +224,6 @@ Install the required NPM packages
 Run the Command Prompt as Administrator and run the following commands: ::
 
         npm -g install @angular\cli typescript tslint
-
 
 Python 3.5
 ``````````
@@ -248,17 +254,16 @@ Confirm PATH(s) to environment variables ::
         C:\Users\peek\Python35\
         C:\Users\peek\Python35\Scripts\
 
-.. note:: For Offline installation, install Python 3.5 on a machine with internet access.
-    Copy the python directory to the destination server after the python packages and
-    synerty-peek package(s) have been deployed and configured.  The environment
-    variables will need to be checked and updated.
-
 ----
 
 Upgrade pip. Run the command prompt as Administrator and run the following command: ::
 
         python -m pip install --upgrade pip
 
+.. note:: For Offline installation, install Python 3.5 on a machine with internet access.
+    Copy the python directory to the destination server after the python packages and
+    synerty-peek package(s) have been deployed and configured.  The environment
+    variables will need to be checked and updated.
 
 FreeTDS
 ```````
@@ -350,21 +355,30 @@ Run the following command: ::
 Cygwin
 ``````
 
+**Online Installation:**
+
     :Download: `<https://cygwin.com/setup-x86_64.exe>`_
     :From: `<https://cygwin.com/install.html>`_
 
 ----
 
 Download and run the Cygwin installer.
+
 Use the default install options.
 
+**Offline Installation:**
 
-.. note:: If you're installing offline, you can :
-        *   run the installer and select "download only",
-        *   Zip up the install directory and move it to the offline server,
-        *   Then run the installer and select "install from local".
+If you're installing offline, you can:
 
-----
+    *  Run the installer and select "download only",
+
+    *  Zip up the install directory and move it to the offline server,
+
+    *  Run the installer and select "install from local",
+
+    *  Use the default install options.
+
+**Configure Cygwin:**
 
 Once cygwin is installed, Open "Cygwin64" from the desktop and run the following
 
@@ -384,7 +398,7 @@ Once cygwin is installed, Open "Cygwin64" from the desktop and run the following
 
 ----
 
-To check this has worked, run the folling LS command, you should see the following
+To check this has worked, run the following LS command, you should see the following
 
 ::
 
@@ -403,11 +417,16 @@ Enabling SymLinks.
 ----
 
 Launch: "gpedit.msc" and Navigate to
-        Computer configuration
-        → Windows Settings
-        → Security Settings
-        → Local Policies
-        → User Rights Assignment
+
+    > Computer configuration
+
+    > Windows Settings
+
+    > Security Settings
+
+    > Local Policies
+
+    > User Rights Assignment
 
 .. image:: windows_installation_screenshots/gpedit-CreateSymlinks.jpg
 
