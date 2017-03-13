@@ -364,11 +364,10 @@ Cygwin
 Download and run the Cygwin installer.
 Use the default install options.
 
-
-.. note:: If you're installing offline, you can :
-        *   run the installer and select "download only",
-        *   Zip up the install directory and move it to the offline server,
-        *   Then run the installer and select "install from local".
+.. note:: If you're installing offline, you can:
+    1.  run the installer and select "download only",
+    2.  Zip up the install directory and move it to the offline server,
+    3.  Then run the installer and select "install from local".
 
 ----
 
