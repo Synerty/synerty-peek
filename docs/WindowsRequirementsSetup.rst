@@ -113,7 +113,7 @@ Visual C++ Build Tools 2015
 
 **Online Installation:**
 
-:Download: `<http://go.microsoft.com/fwlink/?LinkId=691126&__hstc=268264337.40d7988155305183930d94960a802559.1481662741421.1481662741421.1484335933816.2&__hssc=268264337.1.1484335933816&__hsfp=1223438833&fixForIE=.exe>`_
+:Download: `<http://go.microsoft.com/fwlink/?LinkId=691126>`_
 :From: `<http://landinghub.visualstudio.com/visual-cpp-build-tools>`_
 
 **Offline Installation:**
@@ -345,10 +345,10 @@ Download Shapely >= 1.5.17 and save in the Downloads directory
 
 ----
 
-Run the command prompt as Administrator and start the bash shell.
+Open a command prompt as Administrator.
 Run the following command: ::
 
-        pip install ~/Downloads/Shapely-1.5.17-cp35-cp35m-win_amd64.whl
+        pip install \Users\peek\Downloads\Shapely-1.5.17-cp35-cp35m-win_amd64.whl
 
 Cygwin
 ``````
