@@ -431,17 +431,20 @@ Oracle Instant Client
 :Download: `<http://download.oracle.com/otn/nt/instantclient/121020/instantclient-basic-windows.x64-12.1.0.2.0.zip>`_
 :From: `<http://www.oracle.com/technetwork/topics/winx64soft-089540.html>`_
 
-Unzip contents into ::
+|   Unzip contents into ::
 
-        C:\Users\peek\Oracle\12.1.0.2.0\
+        C:\Users\peek\oracle\
 
-Add 'ORACLE_HOME' to the environment variables and set the path ::
+|   Add 'ORACLE_HOME' to the environment variables and set the path ::
 
-        C:\Users\peek\Oracle\12.1.0.2.0\instantclient_12_1
+        C:\Users\peek\oracle\instantclient_12_1
 
-Add to the 'PATH' to environment variables ::
+|   Add to the 'PATH' to environment variables ::
 
-        C:\Users\peek\Oracle\12.1.0.2.0\instantclient_12_1
+        C:\Users\peek\oracle\instantclient_12_1
+
+|   Reboot windows, or logout and login to ensure the PATH updates.
+
 
 cx_Oracle
 `````````
@@ -449,40 +452,37 @@ cx_Oracle
 :Download: `<https://pypi.python.org/packages/50/c0/de24ec02484eb9add03cfbd28bd3c23fe137551501a9ca4498f30109621e/cx_Oracle-5.2.1-12c.win-amd64-py3.5.exe#md5=b505eaceceaa3813cf6bfe701ba92c3e>`_
 :From: `<https://pypi.python.org/pypi/cx_Oracle/5.2.1>`_
 
+*   Download cx_Oracle from the link above
+
+*   Run the installer.
+        It should detect the correct python that was installed above.
+        Use all defaults suggested by the installer
+
+*
+
 Test cx_Oracle in Python
 ````````````````````````
+
+*   Open the "Python 3.5 (64-bit)" application from the windows start menu.
 
 Run the following commands in Python: ::
 
         import cx_Oracle
-        con = cx_Oracle.connect('oracle://username:password@hostname:1521/instance')
+        con = cx_Oracle.connect('username/password@hostname/instance')
         print con.version
-        12.1.0.2.0
+        # Expcect to see "12.1.0.2.0"
         con.close()
-
-        con = cx_Oracle.connect('oracle://enmac:bford@192.168.215.128:1521/enmac')
 
 Offline Installation Guide
 --------------------------
 
-For offline installation, complete the Online Installation on another online server
-first.  This is because some software requires internet access to install.
-Instructions for the software that requires internet access for installation are found
-throughout the *Online Installation Guide* process.
+For offline installation
+    #.  Complete the Online Installation on another online server first.
+        This is because some software requires internet access to install.
 
-Refresh Symlinks
-````````````````
+    #.  Instructions for the software that requires internet access for installation are
+        found tresthroughout the *Online Installation Guide* process.
 
-The offline installation guide requires the steps below to be completed after the
-Installation has been copied from the online machine to the offline machine:
-
-To refreshing symbolic links, run the following commands: ::
-
-        cd `dirname $(which python)`/lib/site-packages/
-
-        rm -r peek_server_fe/src/app/peek_plugin* peek_server_fe/node_modules/peek_plugin*
-
-        rm -r peek_client_fe/src/app/peek_plugin* peek_client_fe/node_modules/peek_plugin*
 
 Installing synerty-peek
 -----------------------
