@@ -11,9 +11,20 @@ https://sourceforge.net/projects/gnuwin32/files/wget/1.11.4-1/wget-1.11.4-1-setu
 
 ----
 
+Add wgets bin folder to the PATh
+
+::
+
+    C:\Program Files (x86)\GnuWin32\bin
+
+----
+
 Open gitbash, run the following
 
 ::
+
+    # Add wget to the path if required
+    export PATH="/c/Program\ Files\ \(x86\)/GnuWin32/bin:$PATH"
 
     DIR=`pwd`
 
