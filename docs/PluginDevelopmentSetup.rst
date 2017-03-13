@@ -1,6 +1,6 @@
-=================
-Development Setup
-=================
+========================
+Plugin Development Setup
+========================
 
 .. WARNING:: This document extends, *Windows Requirements Install Guide*
     (RequirementsWindows.rst) or the *Debian Requirements Install Guide*
