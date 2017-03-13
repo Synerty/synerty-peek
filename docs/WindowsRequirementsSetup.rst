@@ -356,20 +356,30 @@ Run the following command: ::
 Cygwin
 ``````
 
+**Online Installation:**
+
     :Download: `<https://cygwin.com/setup-x86_64.exe>`_
     :From: `<https://cygwin.com/install.html>`_
 
 ----
 
 Download and run the Cygwin installer.
+
 Use the default install options.
 
-.. note:: If you're installing offline, you can:
-    1.  run the installer and select "download only",
-    2.  Zip up the install directory and move it to the offline server,
-    3.  Then run the installer and select "install from local".
+**Offline Installation:**
 
-----
+If you're installing offline, you can:
+
+    *  Run the installer and select "download only",
+
+    *  Zip up the install directory and move it to the offline server,
+
+    *  Run the installer and select "install from local",
+
+    *  Use the default install options.
+
+**Configure Cygwin:**
 
 Once cygwin is installed, Open "Cygwin64" from the desktop and run the following
 
@@ -389,7 +399,7 @@ Once cygwin is installed, Open "Cygwin64" from the desktop and run the following
 
 ----
 
-To check this has worked, run the folling LS command, you should see the following
+To check this has worked, run the following LS command, you should see the following
 
 ::
 
