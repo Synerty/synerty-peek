@@ -431,17 +431,25 @@ Oracle Instant Client
 :Download: `<http://download.oracle.com/otn/nt/instantclient/121020/instantclient-basic-windows.x64-12.1.0.2.0.zip>`_
 :From: `<http://www.oracle.com/technetwork/topics/winx64soft-089540.html>`_
 
+------------
+
 Unzip contents into ::
 
         C:\Users\peek\oracle\
+
+------------
 
 Add 'ORACLE_HOME' to the environment variables and set the path ::
 
         C:\Users\peek\oracle\instantclient_12_1
 
+------------
+
 Add to the 'PATH' to environment variables ::
 
         C:\Users\peek\oracle\instantclient_12_1
+
+------------
 
 Reboot windows, or logout and login to ensure the PATH updates.
 
