@@ -59,19 +59,26 @@ Installing the Platform
 The Peek Plaform needs different requirements installed depending on the supported
 platform chosen.
 
+----
+
 For Windows installation, follow the *Windows Requirements Install Guide*
 (RequirementsWindows.rst).
 
 For Debian installation, follow the *Debian Requirements Install Guide*
 (RequirementsDebian.rst).
 
-Then, follow (ProductionSetup.rst) to install the peek services.
+----
+
+After following the Requirements Install Guide go to the *Peek Platform - Production
+Setup* (ProductionSetup.rst) to install the peek services.
+
+.. NOTE:: Should you wish to develop the peek platform it's self, run through the
+    *Platform Development Setup* (PlatformDevelopmentSetup.rst) instructions instead of
+    *Peek Platform - Production Setup*
+
+----
 
 The Peek Platform is now ready to install the required plugins.
 
-For Plugin Development, follow the (PluginDevelopmentSetup.rst) instructions.
-
-Should you wish to develop the peek platform it's self, run through the
- (PlatformDevelopmentSetup.rst) instructions instead of ProductionSetup
-
-
+For Plugin Development, follow the *Plugin Development Setup*
+(PluginDevelopmentSetup.rst) instructions.
