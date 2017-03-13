@@ -159,6 +159,10 @@ Compiling and Installing Python
 
         make -j4 && make install
 
+#.  Symlink the site packages for convienence ::
+
+        ln -s /home/peek/cpython-3.5.2/lib/python3.5/site-packages /home/peek/peek-site-packages
+
 #.  Test that the setup is working ::
 
         which python

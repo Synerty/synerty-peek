@@ -236,21 +236,26 @@ Python 3.5
 
 
 
+*   Upgrade pip. Run the command prompt as Administrator and run the following command: ::
+
+        python -m pip install --upgrade pip
+
+
 FreeTDS
 ```````
 
 :Download: `<https://github.com/ramiro/freetds/releases/download/v0.95.95/freetds-v0.95.95-win-x86_64-vs2015.zip>`_
 :From: `<https://github.com/ramiro/freetds/releases>`_
 
-1.  Unzip contents into ::
+*   Unzip contents into ::
 
         C:\Users\peek\freetds-v0.95.95
 
-2.  Add PATH to environment variables ::
+*   Add PATH to environment variables ::
 
         C:\Users\peek\freetds-v0.95.95\bin
 
-3.  Create 'freetds.conf' in "C:\" ::
+*   Create 'freetds.conf' in "C:\" ::
 
         [global]
             port = 1433
@@ -260,7 +265,8 @@ FreeTDS
 
 
 
-4.  dll files
+dll files
+~~~~~~~~~
 
 :Download: `<http://indy.fulgan.com/SSL/openssl-1.0.2j-x64_86-win64.zip>`_
 :From: `<http://indy.fulgan.com/SSL/>`_
@@ -285,20 +291,15 @@ GitBash
 :Download: `<https://github.com/git-for-windows/git/releases/download/v2.11.0.windows.1/Git-2.11.0-64-bit.exe>`_
 :From: `<https://git-for-windows.github.io>`_
 
-1.  Configuring Extra Options: check 'Enable Symbolic Links'
+*   Configuring Extra Options: check 'Enable Symbolic Links'
 
 .. image:: windows_installation_screenshots/GIT-ExtraOptions.jpg
 
 |
 
-2.  Add PATH to environment variables ::
+*   Add PATH to environment variables ::
 
         C:\Program Files\Git\bin
-
-3. Using bash, Upgrade pip.  Run the command prompt as Administrator enter the bash
-shell and run the following command: ::
-
-        python -m pip install --upgrade pip
 
 Shapely
 ```````
@@ -306,11 +307,11 @@ Shapely
 :Download: `<http://www.lfd.uci.edu/~gohlke/pythonlibs/#shapely>`_
 :From: `<https://pypi.python.org/pypi/Shapely>`_
 
-1.  Download Shapely >= 1.5.17 and save in the Downloads directory
+*   Download Shapely >= 1.5.17 and save in the Downloads directory
 
 |
 
-2.  Run the command prompt as Administrator and start the bash shell.  Run the
+*   Run the command prompt as Administrator and start the bash shell.  Run the
     following command: ::
 
         pip install ~/Downloads/Shapely-1.5.17-cp35-cp35m-win_amd64.whl
@@ -321,10 +322,32 @@ Cygwin
     :Download: `<https://cygwin.com/setup-x86_64.exe>`_
     :From: `<https://cygwin.com/install.html>`_
 
+*   Download and run the Cygwin installer.
+    Use the default install options.
+
+|
+
+If you're installing offline, cygwin you can run the installer and select "download only",
+Zip up the install directory and move it to the offline server,
+Then run the installer and select "install from local".
+
+|
+
+* Once cygwin is installed, Open "Cygwin64" from the desktop and run the following
+
 ::
 
-     ln -s /cygdrive/c/Users/peek/Documents/ .
+        cd /home
 
+        echo "Symlinking peek home"
+        rm -rf peek
+        ln -s /cygdrive/c/Users/peek .
+
+        echo "Symlinking site-packages
+        cd
+        ln -s /home/peek/Python35/Lib/site-packages peek-site-packages
+
+        exit
 
 SymLinks
 ````````
