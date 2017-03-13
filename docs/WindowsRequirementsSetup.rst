@@ -254,17 +254,16 @@ Confirm PATH(s) to environment variables ::
         C:\Users\peek\Python35\
         C:\Users\peek\Python35\Scripts\
 
-.. note:: For Offline installation, install Python 3.5 on a machine with internet access.
-    Copy the python directory to the destination server after the python packages and
-    synerty-peek package(s) have been deployed and configured.  The environment
-    variables will need to be checked and updated.
-
 ----
 
 Upgrade pip. Run the command prompt as Administrator and run the following command: ::
 
         python -m pip install --upgrade pip
 
+.. note:: For Offline installation, install Python 3.5 on a machine with internet access.
+    Copy the python directory to the destination server after the python packages and
+    synerty-peek package(s) have been deployed and configured.  The environment
+    variables will need to be checked and updated.
 
 FreeTDS
 ```````
