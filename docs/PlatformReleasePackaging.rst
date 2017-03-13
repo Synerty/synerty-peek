@@ -38,24 +38,67 @@ Open gitbash, run the following
     cd $DIR/peek_dist/py
     pip install wheel
     pip wheel --no-cache synerty-peek
-    wget 'http://www.lfd.uci.edu/~gohlke/pythonlibs/tuth5y6k/Shapely-1.5.17-cp35-cp35m-win_amd64.whl'
+
+----
+
+Leave the gitbash terminal open
+
+----
+
+:Download: `<http://www.lfd.uci.edu/~gohlke/pythonlibs/#shapely>`_
+:From: `<https://pypi.python.org/pypi/Shapely>`_
+
+Download Shapely >= 1.5.17 and save in the "$DIR/peek_dist/py" directory
+
+----
+
+:Download: `<https://raw.githubusercontent.com/Synerty/peek-client-fe/master/peek_client_fe/build-ns/package.json>`_
+
+Download the package.json and save in the "$DIR/peek_dist/client-build-ns/tmp" directory
+
+----
+
+Run the following
+
+::
 
     cd $DIR/peek_dist/client-build-ns/tmp
-    wget 'https://raw.githubusercontent.com/Synerty/peek-client-fe/master/peek_client_fe/build-ns/package.json'
     npm install
     cd ..
     mv tmp/node_modules .
     rm -rf tmp
+
+----
+
+:Download: `<https://raw.githubusercontent.com/Synerty/peek-client-fe/master/peek_client_fe/build-web/package.json>`_
+
+Download the package.json and save in the "$DIR/peek_dist/client-build-web/tmp" directory
+
+----
+
+Run the following
+
+::
 
     cd $DIR/peek_dist/client-build-web/tmp
-    wget 'https://raw.githubusercontent.com/Synerty/peek-client-fe/master/peek_client_fe/build-web/package.json'
     npm install
     cd ..
     mv tmp/node_modules .
     rm -rf tmp
 
+----
+
+:Download: `<https://raw.githubusercontent.com/Synerty/peek-server-fe/master/peek_server_fe/build-web/package.json>`_
+
+Download the package.json and save in the "$DIR/peek_dist/server-build-web/tmp" directory
+
+----
+
+Run the following
+
+::
+
     cd $DIR/peek_dist/server-build-web/tmp
-    wget 'https://raw.githubusercontent.com/Synerty/peek-server-fe/master/peek_server_fe/build-web/package.json'
     npm install
     cd ..
     mv tmp/node_modules .
