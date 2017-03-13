@@ -51,7 +51,7 @@ Nativescript Package
 
 Run the Command Prompt as Administrator and run the following commands: ::
 
-        npm -g install @angular\cli typescript tslint nativescript
+        npm -g install @angular/cli typescript tslint nativescript
 
 *  Do you want to run the setup script? ::
 

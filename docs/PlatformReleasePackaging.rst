@@ -29,13 +29,14 @@ Open gitbash, run the following
     DIR=`pwd`
 
     [ -d peek_dist ] && rm -rf peek_dist
-    mkdir peek_dist/py
-    mkdir peek_dist/client-build-ns/tmp
-    mkdir peek_dist/client-build-web/tmp
-    mkdir peek_dist/server-build-web/tmp
+    mkdir -p peek_dist/py
+    mkdir -p peek_dist/client-build-ns/tmp
+    mkdir -p peek_dist/client-build-web/tmp
+    mkdir -p peek_dist/server-build-web/tmp
 
 
     cd $DIR/peek_dist/py
+    pip install wheel
     pip wheel --no-cache synerty-peek
     wget 'http://www.lfd.uci.edu/~gohlke/pythonlibs/tuth5y6k/Shapely-1.5.17-cp35-cp35m-win_amd64.whl'
 
