@@ -248,13 +248,10 @@ Confirm PATH(s) to environment variables ::
         C:\Users\peek\Python35\
         C:\Users\peek\Python35\Scripts\
 
-.. note:: For Offline installation, install Python 3.5 on a machine with internet
-    access.  Package the installed python files after synerty-peek package has been
-    deployed and configured on the online server.  Package then deploy and unpackaged in
-    the same directory locations on the offline server.  The environment variables will
-    need to be checked and updated in the offline server.
-
-
+.. note:: For Offline installation, install Python 3.5 on a machine with internet access.
+    Copy the python directory to the destination server after the python packages and
+    synerty-peek package(s) have been deployed and configured.  The environment
+    variables will need to be checked and updated.
 
 ----
 
