@@ -70,19 +70,27 @@ Create Account
 
 Create a peek user account with admin rights.
 
-*  Account Type: Administrator
+----
+
+Account Type: Administrator
 
 |
 
-*  Username: ::
+----
+
+Username: ::
 
         peek
 
-*  Password: ::
+----
+
+Password: ::
 
         PA$$W0RD
 
-*  sign in to the peek account
+----
+
+sign in to the peek account
 
 |
 
@@ -119,65 +127,69 @@ Microsoft® SQL Server® 2014 Express
 
 :From: `<https://www.microsoft.com/en-ca/download/details.aspx?id=42299>`_
 
-1.  Choose directory for extracted files: ::
+----
+
+Choose directory for extracted files: ::
 
         C:\SQLEXPRWT_x64_ENU\
 
-2.  Select "New SQL Server stand-alone installation"
+----
 
-|
+Select "New SQL Server stand-alone installation"
 
-3.  Feature Selection: check all Features
+----
+
+Feature Selection: check all Features
 
 .. image:: windows_installation_screenshots/SQLServer-FeatureSelection.jpg
 
-|
+----
 
-4.  Instance Configuration: change the named instance to 'peek'. This will update
+Instance Configuration: change the named instance to 'peek'. This will update
     the 'Instance ID'
 
-|
+----
 
-5.  Server Configuration: Select browse from the 'Account Name' drop-list and check
+Server Configuration: Select browse from the 'Account Name' drop-list and check
     names for 'peek'.  Select ok then enter the account password
 
 .. image:: windows_installation_screenshots/SQLServer-ServerConfiguration.jpg
 
-|
+----
 
-6.  Database Engine Configuration: Leave the default settings
+Database Engine Configuration: Leave the default settings
 
-|
+----
 
-7.  Start Microsoft SQL Server Management Studio --> Connect to PEEK database
-    engine --> create new database 'peek'
+Start Microsoft SQL Server Management Studio
+    --> Connect to PEEK database engine
+    --> create new database 'peek'
 
-|
+----
 
-8.  Make Changes in SQL Server Configuration Manager (SQLServerManager12.msc).
-    Navigate to SQL Server Configuration Manager --> SQL Server Network Configuration -->
-    Protocols for PEEK
+Make Changes in SQL Server Configuration Manager (SQLServerManager12.msc).
+    Open the "SQL Server Configuration Manager" from the start menu
+    --> SQL Server Network Configuration
+    --> Protocols for PEEK
 
-|
+----
 
-9.  Under the TCP/IP properties set 'IPALL' 'TCP PORT' to '1433'. Select 'Apply' then
+Under the TCP/IP properties set 'IPALL' 'TCP PORT' to '1433'. Select 'Apply' then
     'OK',
 
 .. image:: windows_installation_screenshots/set_tcp_port.png
 
-|
+----
 
-10. Enable the 'TCP/IP' Protocol
+Enable the 'TCP/IP' Protocol
 
 .. image:: windows_installation_screenshots/enable_tcpip.png
 
-|
+----
 
-11. Restart the server service.
+Restart the server service.
 
 .. image:: windows_installation_screenshots/SQLServer-RestartServices.jpg
-
-|
 
 Node.js 7+ and NPM 3+
 `````````````````````
@@ -185,16 +197,22 @@ Node.js 7+ and NPM 3+
 :Download: `<https://nodejs.org/dist/v7.4.0/node-v7.4.0-x64.msi>`_
 :From: `<https://nodejs.org/en/download/current/>`_
 
-1.  Change install path ::
+----
+
+Change install path ::
 
         C:\Users\peek\nodejs
 
-2.  Edit the system PATH to environment variable, and add the following ::
+----
+
+Edit the system PATH to environment variable, and add the following ::
 
         C:\Users\peek\AppData\Roaming\npm;
         C:\Users\peek\nodejs\
 
-3.  Install the required NPM packages
+----
+
+Install the required NPM packages
 
 Run the Command Prompt as Administrator and run the following commands: ::
 
@@ -207,19 +225,21 @@ Python 3.5
 :Download: `<https://www.python.org/ftp/python/3.5.3/python-3.5.3rc1-amd64.exe>`_
 :From: `<https://www.python.org/downloads/windows/>`_
 
-*   Check the 'Add Python 3.5 to PATH' and select 'Customize Installation'
+----
+
+Check the 'Add Python 3.5 to PATH' and select 'Customize Installation'
 
 .. image:: windows_installation_screenshots/Python-Install.jpg
 
-|
+----
 
-*   Update the 'Customize install location' to PATH C:\Users\peek\Python35\
+Update the 'Customize install location' to PATH C:\Users\peek\Python35\
 
 .. image:: windows_installation_screenshots/Python-AdvancedOptions.jpg
 
-|
+----
 
-*   Confirm PATH(s) to environment variables ::
+Confirm PATH(s) to environment variables ::
 
         echo %PATH%
 
@@ -236,21 +256,34 @@ Python 3.5
 
 
 
+----
+
+Upgrade pip. Run the command prompt as Administrator and run the following command: ::
+
+        python -m pip install --upgrade pip
+
+
 FreeTDS
 ```````
 
 :Download: `<https://github.com/ramiro/freetds/releases/download/v0.95.95/freetds-v0.95.95-win-x86_64-vs2015.zip>`_
 :From: `<https://github.com/ramiro/freetds/releases>`_
 
-1.  Unzip contents into ::
+----
+
+Unzip contents into ::
 
         C:\Users\peek\freetds-v0.95.95
 
-2.  Add PATH to environment variables ::
+----
+
+Add PATH to environment variables ::
 
         C:\Users\peek\freetds-v0.95.95\bin
 
-3.  Create 'freetds.conf' in "C:\" ::
+----
+
+Create 'freetds.conf' in "C:\" ::
 
         [global]
             port = 1433
@@ -260,18 +293,21 @@ FreeTDS
 
 
 
-4.  dll files
+dll files
+~~~~~~~~~
 
 :Download: `<http://indy.fulgan.com/SSL/openssl-1.0.2j-x64_86-win64.zip>`_
 :From: `<http://indy.fulgan.com/SSL/>`_
 
-ensure these files are in the system32 folder:
+----
+
+Ensure these files are in the system32 folder:
 
 *  libeay32.dll
 
 *  ssleay32.dll
 
-|
+----
 
 You will need to duplicate the above files and name them as per below:
 
@@ -285,20 +321,17 @@ GitBash
 :Download: `<https://github.com/git-for-windows/git/releases/download/v2.11.0.windows.1/Git-2.11.0-64-bit.exe>`_
 :From: `<https://git-for-windows.github.io>`_
 
-1.  Configuring Extra Options: check 'Enable Symbolic Links'
+----
+
+Configuring Extra Options: check 'Enable Symbolic Links'
 
 .. image:: windows_installation_screenshots/GIT-ExtraOptions.jpg
 
-|
+----
 
-2.  Add PATH to environment variables ::
+Add PATH to environment variables ::
 
         C:\Program Files\Git\bin
-
-3. Using bash, Upgrade pip.  Run the command prompt as Administrator enter the bash
-shell and run the following command: ::
-
-        python -m pip install --upgrade pip
 
 Shapely
 ```````
@@ -306,12 +339,14 @@ Shapely
 :Download: `<http://www.lfd.uci.edu/~gohlke/pythonlibs/#shapely>`_
 :From: `<https://pypi.python.org/pypi/Shapely>`_
 
-1.  Download Shapely >= 1.5.17 and save in the Downloads directory
+----
 
-|
+Download Shapely >= 1.5.17 and save in the Downloads directory
 
-2.  Run the command prompt as Administrator and start the bash shell.  Run the
-    following command: ::
+----
+
+Run the command prompt as Administrator and start the bash shell.
+Run the following command: ::
 
         pip install ~/Downloads/Shapely-1.5.17-cp35-cp35m-win_amd64.whl
 
@@ -321,55 +356,113 @@ Cygwin
     :Download: `<https://cygwin.com/setup-x86_64.exe>`_
     :From: `<https://cygwin.com/install.html>`_
 
+----
+
+Download and run the Cygwin installer.
+Use the default install options.
+
+
+.. note:: If you're installing offline, you can :
+        *   run the installer and select "download only",
+        *   Zip up the install directory and move it to the offline server,
+        *   Then run the installer and select "install from local".
+
+----
+
+Once cygwin is installed, Open "Cygwin64" from the desktop and run the following
+
 ::
 
-     ln -s /cygdrive/c/Users/peek/Documents/ .
+        cd /home
 
+        echo "Symlinking peek home"
+        rm -rf peek
+        ln -s /cygdrive/c/Users/peek .
+
+        echo "Symlinking site-packages
+        cd
+        ln -s /home/peek/Python35/Lib/site-packages peek-site-packages
+
+        exit
+
+----
+
+To check this has worked, run the folling LS command, you should see the following
+
+::
+
+        ls -ld /home/peek /home/peek/peek-site-packages
+
+        lrwxrwxrwx 1 peek None 22 Mar 13 11:24 /home/peek -> /cygdrive/c/Users/peek
+        lrwxrwxrwx 1 peek None 37 Mar 13 11:28 /home/peek/peek-site-packages -> /home/peek/Python35/Lib/site-packages
 
 SymLinks
 ````````
 
 Enabling SymLinks.
 
-1.  Launch: "gpedit.msc" and Navigate to "Computer configuration → Windows Settings →
-    Security Settings → Local Policies → User Rights Assignment → Create symbolic links"
+`<https://github.com/git-for-windows/git/wiki/Symbolic-Links>`_
+
+----
+
+Launch: "gpedit.msc" and Navigate to
+        Computer configuration
+        → Windows Settings
+        → Security Settings
+        → Local Policies
+        → User Rights Assignment
 
 .. image:: windows_installation_screenshots/gpedit-CreateSymlinks.jpg
 
-|
+----
 
-2.  Add the user or group that you want to allow to create symbolic links
+Double click on "Create symbolic links"
+
+----
+
+Click "Add User or Group", add "peek", then "OK" out of the dialogues.
 
 .. image:: windows_installation_screenshots/gpedit-AddUser.jpg
 
-|
+----
 
-3.  You will need to logout and log back in for the change to take effect
+You will need to logout and log back in for the change to take effect
 
 .. Note:: This setting has no effect on user accounts that belong to the Administrators
     group.  Those users will always have to run mklink in an elevated environment as
     Administrator.
 
-`<https://github.com/git-for-windows/git/wiki/Symbolic-Links>`_
-
 Enable Development
 ``````````````````
 
+This applies to windows 10, and may apply to other windows versions as well.
+
+`<https://msdn.microsoft.com/en-us/windows/uwp/get-started/enable-your-device-for-development>`_
+
 Enable your device for development
 
-1.  From 'Windows Settings' select 'Update & Security'
+----
+
+Click the "Start" menu and select "Settings"
+
+----
+
+Select 'Update & Security'
 
 .. image:: windows_installation_screenshots/DevMode-UpdateSecurity.jpg
 
-|
+----
 
-2.  Ensure that 'Developer Mode' is checked in the 'For Development' tab
+Click on the "For developers" tab on the left.
+
+----
+
+Select 'Developer Mode', and acknowledge the warning.
 
 .. image:: windows_installation_screenshots/DevMode-ForDevelopers.jpg
 
 |
 
-`<https://msdn.microsoft.com/en-us/windows/uwp/get-started/enable-your-device-for-development>`_
 
 Installing Oracle Libraries
 ---------------------------
@@ -383,17 +476,28 @@ Oracle Instant Client
 :Download: `<http://download.oracle.com/otn/nt/instantclient/121020/instantclient-basic-windows.x64-12.1.0.2.0.zip>`_
 :From: `<http://www.oracle.com/technetwork/topics/winx64soft-089540.html>`_
 
+----
+
 Unzip contents into ::
 
-        C:\Users\peek\Oracle\12.1.0.2.0\
+        C:\Users\peek\oracle\
+
+----
 
 Add 'ORACLE_HOME' to the environment variables and set the path ::
 
-        C:\Users\peek\Oracle\12.1.0.2.0\instantclient_12_1
+        C:\Users\peek\oracle\instantclient_12_1
+
+----
 
 Add to the 'PATH' to environment variables ::
 
-        C:\Users\peek\Oracle\12.1.0.2.0\instantclient_12_1
+        C:\Users\peek\oracle\instantclient_12_1
+
+----
+
+Reboot windows, or logout and login to ensure the PATH updates.
+
 
 cx_Oracle
 `````````
@@ -401,40 +505,44 @@ cx_Oracle
 :Download: `<https://pypi.python.org/packages/50/c0/de24ec02484eb9add03cfbd28bd3c23fe137551501a9ca4498f30109621e/cx_Oracle-5.2.1-12c.win-amd64-py3.5.exe#md5=b505eaceceaa3813cf6bfe701ba92c3e>`_
 :From: `<https://pypi.python.org/pypi/cx_Oracle/5.2.1>`_
 
+----
+
+Download cx_Oracle from the link above
+
+----
+
+Run the installer.
+It should detect the correct python that was installed above.
+Use all defaults suggested by the installer
+
+
 Test cx_Oracle in Python
 ````````````````````````
+
+----
+
+Open the "Python 3.5 (64-bit)" application from the windows start menu.
+
+----
 
 Run the following commands in Python: ::
 
         import cx_Oracle
-        con = cx_Oracle.connect('oracle://username:password@hostname:1521/instance')
+        con = cx_Oracle.connect('username/password@hostname/instance')
         print con.version
-        12.1.0.2.0
+        # Expcect to see "12.1.0.2.0"
         con.close()
-
-        con = cx_Oracle.connect('oracle://enmac:bford@192.168.215.128:1521/enmac')
 
 Offline Installation Guide
 --------------------------
 
-For offline installation, complete the Online Installation on another online server
-first.  This is because some software requires internet access to install.
-Instructions for the software that requires internet access for installation are found
-throughout the *Online Installation Guide* process.
+For offline installation
+    #.  Complete the Online Installation on another online server first.
+        This is because some software requires internet access to install.
 
-Refresh Symlinks
-````````````````
+    #.  Instructions for the software that requires internet access for installation are
+        found tresthroughout the *Online Installation Guide* process.
 
-The offline installation guide requires the steps below to be completed after the
-Installation has been copied from the online machine to the offline machine:
-
-To refreshing symbolic links, run the following commands: ::
-
-        cd `dirname $(which python)`/lib/site-packages/
-
-        rm -r peek_server_fe/src/app/peek_plugin* peek_server_fe/node_modules/peek_plugin*
-
-        rm -r peek_client_fe/src/app/peek_plugin* peek_client_fe/node_modules/peek_plugin*
 
 Installing synerty-peek
 -----------------------

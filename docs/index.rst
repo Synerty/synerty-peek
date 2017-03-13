@@ -7,10 +7,12 @@ Welcome to synerty-peek's documentation!
    :caption: Contents:
 
    README
-   RequirementsWindows
-   RequirementsDebian
-   DevelopmentSetup
+   WindowsRequirementsSetup
+   WindowsNativescriptSetup
+   DebianRequirementsSetup
    ProductionSetup
+   PluginDevelopmentSetup
+   PlatformDevelopmentSetup
    visio_studio_code_setup/visio_studio_code_setup
    pycharm_setup/pycharm_setup
    plugin_development/GettingStarted

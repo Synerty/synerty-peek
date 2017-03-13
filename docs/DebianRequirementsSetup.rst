@@ -159,6 +159,10 @@ Compiling and Installing Python
 
         make -j4 && make install
 
+#.  Symlink the site packages for convienence ::
+
+        ln -s /home/peek/cpython-3.5.2/lib/python3.5/site-packages /home/peek/peek-site-packages
+
 #.  Test that the setup is working ::
 
         which python
@@ -206,15 +210,9 @@ interface with an oracle database.
 
 #.  Now test it with some python ::
 
-        from sqlalchemy import create_engine
-        from sqlalchemy import schema
-
-        orapass = "PASS"
-        orahost = "host"
-
-        oraEngine = create_engine('oracle://enmac:%s@%s:1521/NMS' % (orapass, orahost))
-        metadata = schema.MetaData(oraEngine)
-        metadata.reflect(schema='ENMAC')
-
-        "ENMAC.host_details" in metadata.tables
+        import cx_Oracle
+        con = cx_Oracle.connect('username/password@hostname/instance')
+        print con.version
+        # Expcect to see "12.1.0.2.0"
+        con.close()
 
