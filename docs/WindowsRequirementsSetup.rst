@@ -377,9 +377,9 @@ Run the installer (setup.exe)
 
 Select the following options
 
+:Install Type: Runtime
 :Oracle Base: C:\Users\peek\oracle
 :Oracle Home: C:\Users\peek\oracle\client12c
-:Install Type: Runtime
 
 ----
 
