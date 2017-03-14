@@ -4,58 +4,6 @@ Peek Platform - Production Setup
 
 .. note:: The Windows or Debian requirements must be followed before following this guide.
 
-Create Platform Release
------------------------
-
-To install the peek platform, you may use a Synerty provided release or build your own.
-
-A release is a zip file containing all the required node_modules and python packages.
-
-Windows
-```````
-
-This section contains the steps to build your own.
-
-----
-
-Open a powershell window.
-
-----
-
-Create and change to a working directory where you're happy for the release to be created.
-
-::
-
-    Set-Location C:\Users\peek
-
-----
-
-Download the platform build script.
-Run the following commands in the power shell window.
-
-::
-
-    $file = "build_win_platform_release.ps1";
-    $uri = "https://raw.githubusercontent.com/Synerty/synerty-peek/master/$file";
-    Invoke-WebRequest -Uri $uri -UseBasicParsing -OutFile $file;
-
-----
-
-Run the platform build script.
-
-::
-
-    PowerShell.exe -ExecutionPolicy Bypass -File build_win_platform_release.ps1
-
-The script will download the latest peek platform release and all its dependencies.
-
-Take note of the end of the script, it will print out where the release is.
-
-Linux
-`````
-
-**TODO**
-
 Deploy Platform Release
 -----------------------
 
@@ -66,6 +14,10 @@ for every deployment.
 
 This ensures that each install is clean, has the right dependencies and there is a
 rollback path (switch back to the old virtual environment.
+
+To build your own platform release, see the following document
+
+    :ref:`_platform_build_release`
 
 Windows
 ```````
@@ -100,35 +52,44 @@ The script will deploy to C:\Users\peek.
 
 The platform is now deployed.
 
-Next Steps:
-    >
 
 Linux
 `````
 
 **TODO**
 
-Building the frontend (TODO, This should" just work")
+
+
+Deploying Plugins
+-----------------
+
+This section deploys the plugins to the new virtual environment.
+
+For more information about plugin development and building plugin packages / releases
+see: :ref:`_plugin_development`
+
+Windows
+```````
+
+Open a power shell window
+
+----
+
+CD to the folder where the plugin packages are located
+
+----
+
+Pip install the plugins with the following command
 
 ::
 
-        $ python ~/Python35/Lib/site-packages/peek_server/run_peek_server.py
+    # Activate the virtual environment
+    $env:Path = "C:\Users\peek\synerty-peek-0.1.0\Scripts;$env:Path"
 
-        ctrl+c
+    # Install the plugin packages
+    pip install --no-deps $(ls * -name)
 
-        $ cd ~/Python35/Lib/site-packages/peek_server_fe/
-        $ ng build
 
-        $ python ~/Python35/Lib/site-packages/peek_client/run_peek_client.py
-
-        ctrl+c
-
-        $ cd ~/Python35/Lib/site-packages/peek_client_fe/
-        $ ng build
-
-        $ python ~/Python35/Lib/site-packages/peek_agent/run_peek_agent.py
-
-        ctrl+c
 
 Configuring Platform (config.json)
 ----------------------------------
@@ -168,6 +129,7 @@ Add the appropriate plugins to the array.
                     "peek_plugin_etc"
                 ],
             },
+
 
 
 Running synerty-peek
