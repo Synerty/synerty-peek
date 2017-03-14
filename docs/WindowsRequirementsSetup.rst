@@ -459,65 +459,25 @@ to interface with an oracle database.
 Oracle Instant Client
 `````````````````````
 
-:Download: `<http://download.oracle.com/otn/nt/instantclient/121020/instantclient-basic-windows.x64-12.1.0.2.0.zip>`_
-:From: `<http://www.oracle.com/technetwork/topics/winx64soft-089540.html>`_
+:Download: `<http://download.oracle.com/otn/nt/oracle12c/121020/winx64_12102_client.zip>`_
+:From: `<http://www.oracle.com/technetwork/database/enterprise-edition/downloads/database12c-win64-download-2297732.html>`_
 
 ----
 
-Unzip contents into ::
+Unzip contents into a temporary location
 
-        C:\Users\peek\oracle\
+Run the installer (setup.exe)
 
-----
+Select the following options
 
-Add 'ORACLE_HOME' to the environment variables and set the path ::
-
-        C:\Users\peek\oracle\instantclient_12_1
-
-----
-
-Add to the 'PATH' to environment variables ::
-
-        C:\Users\peek\oracle\instantclient_12_1
+:Oracle Base: C:\Users\peek\oracle
+:Oracle Home: C:\Users\peek\oracle\client12c
+:Install Type: Runtime
 
 ----
 
 Reboot windows, or logout and login to ensure the PATH updates.
 
-
-cx_Oracle
-`````````
-
-:Download: `<https://pypi.python.org/packages/50/c0/de24ec02484eb9add03cfbd28bd3c23fe137551501a9ca4498f30109621e/cx_Oracle-5.2.1-12c.win-amd64-py3.5.exe#md5=b505eaceceaa3813cf6bfe701ba92c3e>`_
-:From: `<https://pypi.python.org/pypi/cx_Oracle/5.2.1>`_
-
-----
-
-Download cx_Oracle from the link above
-
-----
-
-Run the installer.
-It should detect the correct python that was installed above.
-Use all defaults suggested by the installer
-
-
-Test cx_Oracle in Python
-````````````````````````
-
-----
-
-Open the "Python 3.5 (64-bit)" application from the windows start menu.
-
-----
-
-Run the following commands in Python: ::
-
-        import cx_Oracle
-        con = cx_Oracle.connect('username/password@hostname/instance')
-        print con.version
-        # Expcect to see "12.1.0.2.0"
-        con.close()
 
 Offline Installation Guide
 --------------------------
@@ -537,5 +497,4 @@ From here you will be deploying either the *Production Platform Setup*
 (ProductionSetup.rst) or the *Development Setup*
 (DevelopmentSetup.rst).
 
-.. note:: If offline installation is required, complete the Installing synerty-peek
-    setup then return to the Offline Installation Guide.
+
