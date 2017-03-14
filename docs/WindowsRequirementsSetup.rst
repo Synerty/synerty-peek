@@ -208,7 +208,7 @@ Install the required NPM packages
 
 Run the Command Prompt as Administrator and run the following commands: ::
 
-        npm -g install @angular\cli typescript tslint
+        npm -g install @angular/cli typescript tslint
 
 Python 3.5
 ``````````
