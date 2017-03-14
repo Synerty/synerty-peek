@@ -95,7 +95,7 @@ Run the following command ::
 
 Do you want to run the setup script?
 
-:Answer: A
+:Answer: N
 
 ----
 
