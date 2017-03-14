@@ -8,17 +8,24 @@ Welcome to synerty-peek's documentation!
 
    README
    WindowsRequirementsSetup
-   WindowsNativescriptSetup
    DebianRequirementsSetup
    ProductionSetup
-   PluginDevelopmentSetup
-   PlatformDevelopmentSetup
-   visio_studio_code_setup/visio_studio_code_setup
-   pycharm_setup/pycharm_setup
-   plugin_development/GettingStarted
+
+      WindowsNativescriptSetup
+      DebianAndroidSetup
+      DebianNativescriptSetup
+
+      PluginDevelopmentSetup
+      PluginBuildRelease
+
+      PlatformDevelopmentSetup
+      PlatformBuildRelease
+
+      visio_studio_code_setup/visio_studio_code_setup
+      pycharm_setup/pycharm_setup
+
    modules
-   TroubleshootingWindow
-   PlatformReleasePackaging
+   TroubleshootingWindows
    LICENSE
 
 Indices and tables
