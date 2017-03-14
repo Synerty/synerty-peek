@@ -68,31 +68,18 @@ Online Installation Guide
 Create Account
 ``````````````
 
-Create a peek user account with admin rights.
+Create a windows user account for peek with admin rights.
 
 ----
 
-Account Type: ::
-
-        Administrator
-
-----
-
-Username: ::
-
-        peek
-
-----
-
-Password: ::
-
-        PA$$W0RD
+:Account Type: Administrator
+:Username: peek
+:Password: PA$$W0RD
 
 ----
 
 sign in to the peek account
 
-|
 
 Microsoft .NET Framework 3.5 Service Pack 1
 ```````````````````````````````````````````
