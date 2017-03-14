@@ -10,20 +10,15 @@ Welcome to synerty-peek's documentation!
    WindowsRequirementsSetup
    DebianRequirementsSetup
    ProductionSetup
-
-      WindowsNativescriptSetup
-      DebianAndroidSetup
-      DebianNativescriptSetup
-
-      PluginDevelopmentSetup
-      PluginBuildRelease
-
-      PlatformDevelopmentSetup
-      PlatformBuildRelease
-
-      visio_studio_code_setup/visio_studio_code_setup
-      pycharm_setup/pycharm_setup
-
+   WindowsNativescriptSetup
+   DebianAndroidSetup
+   DebianNativescriptSetup
+   PluginDevelopmentSetup
+   PluginBuildRelease
+   PlatformDevelopmentSetup
+   PlatformBuildRelease
+   visio_studio_code_setup/visio_studio_code_setup
+   pycharm_setup/pycharm_setup
    modules
    TroubleshootingWindows
    LICENSE
