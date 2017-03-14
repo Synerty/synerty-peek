@@ -151,15 +151,17 @@ Database Engine Configuration: Leave the default settings
 ----
 
 Start Microsoft SQL Server Management Studio
-    --> Connect to PEEK database engine
-    --> create new database 'peek'
+    Connect to PEEK database engine
+    Create new database 'peek'
 
 ----
 
 Make Changes in SQL Server Configuration Manager (SQLServerManager12.msc).
-    Open the "SQL Server Configuration Manager" from the start menu
-    --> SQL Server Network Configuration
-    --> Protocols for PEEK
+
+Open the "SQL Server Configuration Manager" from the start menu
+    Select the folowing:
+        SQL Server Network Configuration
+        Protocols for PEEK
 
 ----
 
@@ -401,10 +403,10 @@ Enabling SymLinks.
 
 Launch: "gpedit.msc" and Navigate to
     Computer configuration
-    --> Windows Settings
-    --> Security Settings
-    --> Local Policies
-    --> User Rights Assignment
+        Windows Settings
+        Security Settings
+        Local Policies
+        User Rights Assignment
 
 .. image:: windows_installation_screenshots/gpedit-CreateSymlinks.jpg
 
