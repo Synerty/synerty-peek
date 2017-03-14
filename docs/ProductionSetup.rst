@@ -2,67 +2,133 @@
 Peek Platform - Production Setup
 ================================
 
-.. note:: This document extends the Windows or Debian requirements setup guide
+.. note:: The Windows or Debian requirements must be followed before following this guide.
 
-Instal Platform Packages (pip)
-------------------------------
+Create Platform Release
+-----------------------
 
-Open a command prompt **as administrator**, you'll use this to install the
-peek playform packages.
+To install the peek platform, you may use a Synerty provided release or build your own.
+
+A release is a zip file containing all the required node_modules and python packages.
+
+Windows
+```````
+
+This section contains the steps to build your own.
 
 ----
 
-synerty-peek
+Open a powershell window.
+
+----
+
+Create and change to a working directory where you're happy for the release to be created.
 
 ::
 
-        pip install synerty-peek
+    Set-Location C:\Users\peek
 
 ----
 
-peek-plugins
-
-    From saved directory::
-
-            $ pip install ~/...
-
-
-Instal Frontend Packages (npm)
-------------------------------
-
-Install the npm packages for the server and client
+Download the platform build script.
+Run the following commands in the power shell window.
 
 ::
 
-        $ cd `dirname $(which python)`/lib/site-packages/peek_client_fe
-        $ npm install
-        $ cd `dirname $(which python)`/lib/site-packages/peek_server_fe
-        $ npm install
-
+    $file = "build_win_platform_release.ps1";
+    $uri = "https://raw.githubusercontent.com/Synerty/synerty-peek/master/$file";
+    Invoke-WebRequest -Uri $uri -UseBasicParsing -OutFile $file;
 
 ----
+
+Run the platform build script.
+
+::
+
+    PowerShell.exe -ExecutionPolicy Bypass -File build_win_platform_release.ps1
+
+The script will download the latest peek platform release and all its dependencies.
+
+Take note of the end of the script, it will print out where the release is.
+
+Linux
+`````
+
+**TODO**
+
+Deploy Platform Release
+-----------------------
+
+This section describes how to deploy a peek platform release.
+
+Peek is deployed into python virtual environments, a new virtual environment is created
+for every deployment.
+
+This ensures that each install is clean, has the right dependencies and there is a
+rollback path (switch back to the old virtual environment.
+
+Windows
+```````
+
+Open a powershell windows.
+
+----
+
+Download the platform deploy script.
+This is the only step in this section that requires the internet.
+
+::
+
+        $file = "deploy_win_playform_release.ps1"
+        $uri = "https://raw.githubusercontent.com/Synerty/synerty-peek/master/$file";
+        Invoke-WebRequest -Uri $uri -UseBasicParsing -OutFile $file;
+
+----
+
+Run the platform deploy script.
+At the end it will print out where it has deployed the new environment to.
+Ensure you update the **$dist** variable with the path to your release.
+
+The script will deploy to C:\Users\peek.
+
+::
+
+        $dist = "C:\Users\peek\Downlaods\peek_dist_win_0.1.0.zip"
+        PowerShell.exe -ExecutionPolicy Bypass -File deploy_peek_win_release.ps1 $dist
+
+----
+
+The platform is now deployed.
+
+Next Steps:
+    >
+
+Linux
+`````
+
+**TODO**
 
 Building the frontend (TODO, This should" just work")
 
 ::
 
-            $ python ~/Python35/Lib/site-packages/peek_server/run_peek_server.py
+        $ python ~/Python35/Lib/site-packages/peek_server/run_peek_server.py
 
-            ctrl+c
+        ctrl+c
 
-            $ cd ~/Python35/Lib/site-packages/peek_server_fe/
-            $ ng build
+        $ cd ~/Python35/Lib/site-packages/peek_server_fe/
+        $ ng build
 
-            $ python ~/Python35/Lib/site-packages/peek_client/run_peek_client.py
+        $ python ~/Python35/Lib/site-packages/peek_client/run_peek_client.py
 
-            ctrl+c
+        ctrl+c
 
-            $ cd ~/Python35/Lib/site-packages/peek_client_fe/
-            $ ng build
+        $ cd ~/Python35/Lib/site-packages/peek_client_fe/
+        $ ng build
 
-            $ python ~/Python35/Lib/site-packages/peek_agent/run_peek_agent.py
+        $ python ~/Python35/Lib/site-packages/peek_agent/run_peek_agent.py
 
-            ctrl+c
+        ctrl+c
 
 Configuring Platform (config.json)
 ----------------------------------
