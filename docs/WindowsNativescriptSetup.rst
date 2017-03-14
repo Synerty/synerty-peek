@@ -47,49 +47,94 @@ Java Install
 Nativescript Package
 ````````````````````
 
-*  Install the required NPM packages
+This section installs the following:
+    *   Nativescript command line utility (tns)
+    *   Nativescript build tools
+    *   Android emulator (with no images)
+    *   Android SDK (With no SDKs)
+
+----
+
+Install the required NPM packages
 
 Run the Command Prompt as Administrator and run the following commands: ::
 
-        npm -g install @angular/cli typescript tslint nativescript
+        npm -g install nativescript
 
-*  Do you want to run the setup script? ::
+----
+
+Do you want to run the setup script? ::
 
         Y
 
-.. image:: windows_installation_screenshots/Nativescript-Install.jpg
+.. image:: nativescript/Nativescript-Install.jpg
 
-|
+----
 
-*  Allow the script to install Chocolatey(It's mandatory for the rest of the
-script) ::
+Allow the script to install Chocolatey (It's mandatory for the rest of the script)
 
-        A
+:Answer: A
 
-*  Do you want to install the Android emulator?: ::
+----
 
-        N
+Do you want to install the Android emulator?
 
-.. image:: windows_installation_screenshots/Nativescript-InstallComplete.jpg
+:Answer: Y
 
-|
+----
 
-*  Once the installation is complete press 'ctrl+c' to exit the PowerShel
-shell then in the command prompt run ::
+Do you want to install HAXM (Hardware accelerated Android emulator)?:
 
-        tns doctor
+:Answer: Y
 
-.. image:: windows_installation_screenshots/Nativescript-tnsDoctor.jpg
+----
 
-|
+.. image:: nativescript/Nativescript-InstallComplete.jpg
 
-*  Confirm Environment Variable ANDROID_HOME ::
+----
+
+When the blue power shell windows says it's finished, close it.
+
+Return focus to the original window, you should see
+
+    > If you are using bash or zsh, you can enable command-line completion.
+    > Do you want to enable it now? (Y/n)
+
+Press "n", then "Enter".
+
+----
+
+When the script has finished: log off windows.
+
+Login to windows as peek, Then open a command window and continue.
+
+---
+
+Check the installation with tns
+
+:::
+
+    tns doctor
+
+.. image:: nativescript/Nativescript-tnsDoctor.jpg
+
+.. note:: At this point you may find your self in a real life infinite loop.
+    as tns doctor may ask you to run the setup script again if the setup is broken.
+
+----
+
+Confirm Environment Variable ANDROID_HOME ::
 
         C:\Users\peek\AppData\Local\Android\android-sdk
 
-*  Confirm Environment Variable JAVA_HOME ::
+----
+
+Confirm Environment Variable JAVA_HOME ::
 
         C:\Program Files\Java\jdk1.8.0_121
+
+
+----
 
 .. note:: For Offline installation, install the Node.js 7+ and NPM 3+ on a machine
     with internet access.  Package the installed nodejs files and installed modules

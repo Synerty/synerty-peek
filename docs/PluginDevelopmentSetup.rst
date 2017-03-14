@@ -2,198 +2,94 @@
 Plugin Development Setup
 ========================
 
-.. WARNING:: This document extends, *Windows Requirements Install Guide*
-    (RequirementsWindows.rst) or the *Debian Requirements Install Guide*
-    (RequirementsDebian.rst) depending on your OS.
+** TODO **
+** TODO **
+** TODO **
+** TODO **
+This document has not been started, or finished.
+** TODO **
+** TODO **
+** TODO **
+** TODO **
 
-Most development will be for the plugins, not platform, so these instructions are not
-high priority.
+======================================
+Peek Client - NativeScript Development
+======================================
 
-Development Setup Objective
----------------------------
+Developing
+----------
 
-This guide lists the synerty-peek repositories that can be cloned and how to clone.  The
-document contains instructions for obtaining the dependencies, building the front end
-packages and Building synerty-peek for development or production.
+Herein, "tns" refers to the nativescript command line utility.
+"tsc" is the typescript compiler command line utility.
 
-There is assumed understanding of *git*, forking and committing.
+Some parts of the peek-plugins for the peek-client are installed under
+node_modules/@peek-client/peek_plugin_name.
 
-Hardware Recommendation
------------------------
+tns doesn't compile typescript (.ts) files that are installed under node_modules.
 
-*  32gb of ram (minimum 16gb)
+To solve this, Peek places a tsconfig file at node_modules/@peek-client/tsconfig.json.
+tsc must be run in this directory prior to a tns build.
 
-Software Installation and Configuration
----------------------------------------
-
-On a Windows machine the follow commands will be run in the Cygwin terminal.
-
-synerty-peek Repositories
-`````````````````````````
-
-:Synerty's Repositories: `<https://github.com/Synerty>`_
-
-*  synerty-peek
-
-*  peek-plugin-base
-
-*  peek-agent
-
-*  peek-client
-
-*  peek-client-fe
-
-*  peek-platform
-
-*  peek-server
-
-*  peek-server-fe
-
-*  peek-worker
-
-Clone Peek Repositories
-```````````````````````
-
-Checkout repositories all in the same folder
-
-Use this script to insert individual peek modules.  Update {gitAccount} and
-{repository} in the script below: ::
-
-        GIT="{gitAccount}"
-        REPO="{repository}"
-
-        cd ~peek/Documents/
-        mkdir peek-mobile
-        cd ~peek/Documents/peek-mobile/
-        git clone https://github.com/$GIT/$REPO.git
-        cd ~peek/Documents/peek-mobile/$REPO
-        git config --unset core.symlink
-        git config --add core.symlink true
-
-Use this script to clone all repositories.  Update {gitAccount} in the script below: ::
-
-        GIT="{gitAccount}"
-
-        REPOS="synerty-peek"
-        REPOS="$REPOS peek-plugin-base"
-        REPOS="$REPOS peek-agent"
-        REPOS="$REPOS peek-client"
-        REPOS="$REPOS peek-client-fe"
-        REPOS="$REPOS peek-platform"
-        REPOS="$REPOS peek-server"
-        REPOS="$REPOS peek-server-fe"
-        REPOS="$REPOS peek-worker"
-        cd ~peek/Documents/
-        mkdir ~peek/Documents/peek-mobile
-        for REPO in ${REPOS[*]}
-        do
-            echo $REPO
-            cd ~peek/Documents/peek-mobile/
-            git clone https://github.com/$GIT/$REPO.git
-            cd ~peek/Documents/peek-mobile/$REPO
-            git config --unset core.symlink
-            git config --add core.symlink true
-        done
-        cd ~peek/Documents/peek-mobile/
-        ls -l
-
-.. NOTE:: core.symlink:  If false, symbolic links are checked out as small plain files
-    that contain the link text.  The default is true, except *git-clone* or *git-init*
-    will probe and set core.symlinks false if appropriate when the repository is created.
-
-Install Front End Modules
-`````````````````````````
-
-Remove the old npm modules files and re-install for both client and server front and
-packages.  Run the following commands: ::
-
-        cd ~peek/Documents/peek-mobile/peek-client-fe/peek_client_fe/
-        [ -d node_modules ] && rm -rf node_modules
-        npm install
-        cd ~peek/Documents/peek-mobile/peek-server-fe/peek_server_fe/
-        [ -d node_modules ] && rm -rf node_modules
-        npm install
-
-Compile Front End Packages
-``````````````````````````
-
-Symlink the tsconfig.json and node_modules file and directory in the parent directory
-of peek-client-fe, peek-server-fe and the plugins. These steps are run in the directory
-where the projects are checked out from. These are required for the frontend typescript
-compiler.
-
-Run the following commands: ::
-
-        cd ~peek/Documents/peek-mobile/
-        ln -s peek-client-fe/peek_client_fe/node_modules .
-        ln -s peek-client-fe/peek_client_fe/tsconfig.json .
-
-        cd ~peek/Documents/peek-mobile/peek-client-fe/peek_client_fe/
-        ng build
-        cd ~peek/Documents/peek-mobile/peek-server-fe/peek_server_fe/
-        ng build
-
-Install synerty-peek Dependencies
-`````````````````````````````````
-
-These steps link the projects under site-packages and installs their dependencies.
-
-For synerty-peek, run the following commands: ::
-
-        cd ~peek/Documents/peek-mobile/synerty-peek
-        ./pip_uninstall_and_develop.sh
-
-For repositories and plugins, run from their directory ::
-
-            python setup.py develop
-
-.. NOTE:: For offline installation, copy across the software to the offline server as
-    per the *Requirements Install Guide* and complete the *Offline Installation Guide*
-    instructions.
-
-Test cx_Oracle With Alchemy
-```````````````````````````
-
-Installing Oracle Libraries is required if you intend on installing the peek agent.
-Instruction for installing the Oracle Libraries are in the *Online Installation Guide*.
-
-Run the following commands in Python: ::
-
-        from sqlalchemy import create_engine
-
-        create_engine('oracle://username:password@hostname:1521/instance')
-        engine = create_engine('oracle://enmac:bford@192.168.215.128:1521/enmac')
-        engine.execute("SELECT 1")
-
-*You can now start developing*
-
-Building synerty-peek
----------------------
-
-Development
-```````````
-
-The peek package has build scripts that generate a development build.
 ::
 
-        ./pipbuild_platform.sh 0.0.1.dev1
+    cd peek-client-fe/peek_client_fe/node_modules/@peek-client
+    tsc --watch --pretty
 
-.. NOTE:: Dev build, it doesn't tag, commit or test upload, but still generates a build.
 
-.. WARNING:: Omitting the dot before dev will cause the script to fail as setuptools
-    adds the dot in if it's not there, which means the cp commands won't match files.
+The next issue is that nativescript doesn't incrementally update node_modules when
+changes are made. (TODO, Test and finish this section)
 
-Production
+::
+
+    rsync -avP --delete * ../../platforms/android/src/main/re^C
+
+Rebuilding
 ``````````
 
-The peek package has build scripts that generate a platform build.
+#.  Delete the "android" directory under the "platforms" directory
+
 ::
 
-        ./pipbuild_platform.sh #.#.##
-        ./pypi_upload.sh
+    # Get the emulator name
+    android list avd | grep Name
 
-.. NOTE:: Prod build, it tags, commits and test uploads to testpypi.  If you're building
-    for development, skip this step and go back to Development.
+    # Wipe the data and start emulator
+    # emulator -avd <Name> -wipe-data
+    emulator -avd Peek_Test -wipe-data
+
+    # RM platform
+    rm -rf playform/android
+
+
+
+
+Deploying
+---------
+
+Android
+```````
+
+=================================
+Setting Up Plugin For Development
+=================================
+
+#.  Clone the plugin
+#.  Install the plugin in development mode, so peek can load it. Run ::
+
+    python setup.py develop
+
+#.  Enable the plugin to the appropriate peek-<service>.home/config.json file.
+
+Finished. You should now be able to run peek and the plugin will load.
+
+Building peek-plugins
+---------------------
+
+The peek package plugins contain build scripts that generate a platform build.
+::
+
+        export RELEASE_DIR=/c/peek_plugins
+        ./pipbuild.sh #.#.##
 
 .. WARNING:: Omitting the dot before dev will cause the script to fail as setuptools
     adds the dot in if it's not there, which means the cp commands won't match files.

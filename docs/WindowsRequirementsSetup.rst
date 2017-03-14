@@ -130,7 +130,7 @@ Select "New SQL Server stand-alone installation"
 
 Feature Selection: check all Features
 
-.. image:: windows_installation_screenshots/SQLServer-FeatureSelection.jpg
+.. image:: windows_requirements_setup/SQLServer-FeatureSelection.jpg
 
 ----
 
@@ -142,7 +142,7 @@ Instance Configuration: change the named instance to 'peek'. This will update th
 Server Configuration: Select browse from the 'Account Name' drop-list and check names
 for 'peek'.  Select ok then enter the account password
 
-.. image:: windows_installation_screenshots/SQLServer-ServerConfiguration.jpg
+.. image:: windows_requirements_setup/SQLServer-ServerConfiguration.jpg
 
 ----
 
@@ -167,19 +167,19 @@ Open the "SQL Server Configuration Manager" from the start menu
 
 Under the TCP/IP properties set 'IPALL' 'TCP PORT' to '1433'. Select 'Apply' then 'OK',
 
-.. image:: windows_installation_screenshots/set_tcp_port.png
+.. image:: windows_requirements_setup/set_tcp_port.png
 
 ----
 
 Enable the 'TCP/IP' Protocol
 
-.. image:: windows_installation_screenshots/enable_tcpip.png
+.. image:: windows_requirements_setup/enable_tcpip.png
 
 ----
 
 Restart the server service.
 
-.. image:: windows_installation_screenshots/SQLServer-RestartServices.jpg
+.. image:: windows_requirements_setup/SQLServer-RestartServices.jpg
 
 |
 
@@ -220,13 +220,13 @@ Python 3.5
 
 Check the 'Add Python 3.5 to PATH' and select 'Customize Installation'
 
-.. image:: windows_installation_screenshots/Python-Install.jpg
+.. image:: windows_requirements_setup/Python-Install.jpg
 
 ----
 
 Update the 'Customize install location' to PATH C:\Users\peek\Python35\
 
-.. image:: windows_installation_screenshots/Python-AdvancedOptions.jpg
+.. image:: windows_requirements_setup/Python-AdvancedOptions.jpg
 
 ----
 
@@ -312,7 +312,7 @@ GitBash
 
 Configuring Extra Options: check 'Enable Symbolic Links'
 
-.. image:: windows_installation_screenshots/GIT-ExtraOptions.jpg
+.. image:: windows_requirements_setup/GIT-ExtraOptions.jpg
 
 ----
 
@@ -408,7 +408,7 @@ Launch: "gpedit.msc" and Navigate to
         Local Policies
         User Rights Assignment
 
-.. image:: windows_installation_screenshots/gpedit-CreateSymlinks.jpg
+.. image:: windows_requirements_setup/gpedit-CreateSymlinks.jpg
 
 ----
 
@@ -418,7 +418,7 @@ Double click on "Create symbolic links"
 
 Click "Add User or Group", add "peek", then "OK" out of the dialogues.
 
-.. image:: windows_installation_screenshots/gpedit-AddUser.jpg
+.. image:: windows_requirements_setup/gpedit-AddUser.jpg
 
 ----
 
@@ -445,7 +445,7 @@ Click the "Start" menu and select "Settings"
 
 Select 'Update & Security'
 
-.. image:: windows_installation_screenshots/DevMode-UpdateSecurity.jpg
+.. image:: windows_requirements_setup/DevMode-UpdateSecurity.jpg
 
 ----
 
@@ -455,7 +455,7 @@ Click on the "For developers" tab on the left.
 
 Select 'Developer Mode', and acknowledge the warning.
 
-.. image:: windows_installation_screenshots/DevMode-ForDevelopers.jpg
+.. image:: windows_requirements_setup/DevMode-ForDevelopers.jpg
 
 |
 
