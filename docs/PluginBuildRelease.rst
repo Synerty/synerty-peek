@@ -9,51 +9,52 @@ Create Plugin Release
 **TODO** This is really just for Synerty internal plugins at this stage.
 
 
-A release is a zip file containing all the required node_modules and python packages.
+A release is a zip file containing all the required python packages to install
+the plugins after the platform release has installed.
 
-Building a Windows Release
---------------------------
+Building a Windows Plugin Release
+---------------------------------
 
-This section contains the steps to build your own.
-
-----
-
-Open a powershell window.
-
-----
-
-Create and change to a working directory where you're happy for the release to be created.
+Open git bash, and run the following
 
 ::
 
-    Set-Location C:\Users\peek
+    # CD to the synerty-peek project
+    cd synerty-peek
 
-----
+    # Ensure RELEASE_DIR is where you want it
+    echo $RELEASE_DIR
+    ./pipbuild_plugins.sh V.E.R
 
-Download the platform build script.
-Run the following commands in the power shell window.
+    # Now build the wheels
+    # NOTE: This WILL pull down some platform dependencies, it will also compile cx_Oracle
+    cd $RELEASE_DIR
+    pip wheel *
+
+    # Now clean out the src packages
+    rm *.tar.gz
+
+
+
+Building a Linux Plugin Release
+-------------------------------
+
+Open a bash prompt and run the following
 
 ::
 
-    $file = "build_win_platform_release.ps1";
-    $uri = "https://raw.githubusercontent.com/Synerty/synerty-peek/master/$file";
-    Invoke-WebRequest -Uri $uri -UseBasicParsing -OutFile $file;
+    # CD to the synerty-peek project
+    cd synerty-peek
 
-----
+    # Ensure RELEASE_DIR is where you want it
+    echo $RELEASE_DIR
+    ./pipbuild_plugins.sh V.E.R
 
-Run the platform build script.
+    # Now build the wheels
+    # NOTE: This WILL pull down some platform dependencies, it will also compile cx_Oracle
+    cd $RELEASE_DIR
+    pip wheel *
 
-::
-
-    PowerShell.exe -ExecutionPolicy Bypass -File build_win_platform_release.ps1
-
-The script will download the latest peek platform release and all its dependencies.
-
-Take note of the end of the script, it will print out where the release is.
-
-Building a Linux Release
-------------------------
-
-**TODO**
-
+    # Now clean out the src packages
+    rm *.tar.gz
 

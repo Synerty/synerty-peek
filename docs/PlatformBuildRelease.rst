@@ -13,7 +13,7 @@ A release is a zip file containing all the required node_modules and python pack
 Building a Windows Release
 --------------------------
 
-This section contains the steps to build your own.
+This section contains the steps to build your own platform release.
 
 ----
 
