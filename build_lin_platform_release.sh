@@ -1,43 +1,20 @@
-=================
-Offline Packaging
-=================
-
-Windows Make
-------------
-
-Install wget
-
-https://sourceforge.net/projects/gnuwin32/files/wget/1.11.4-1/wget-1.11.4-1-setup.exe/download
-
-----
-
-Add wgets bin folder to the PATh
-
-::
-
-    C:\Program Files (x86)\GnuWin32\bin
-
-----
-
-Open gitbash, run the following
-
-::
-
-    # Add wget to the path if required
-    export PATH="/c/Program\ Files\ \(x86\)/GnuWin32/bin:$PATH"
-
-    DIR=`pwd`
-
-    [ -d peek_dist ] && rm -rf peek_dist
-    mkdir -p peek_dist/py
-    mkdir -p peek_dist/client-build-ns/tmp
-    mkdir -p peek_dist/client-build-web/tmp
-    mkdir -p peek_dist/server-build-web/tmp
+#!/usr/bin/env bash
+exit
 
 
-    cd $DIR/peek_dist/py
-    pip install wheel
-    pip wheel --no-cache synerty-peek
+# Add wget to the path if required
+DIR=`pwd`
+
+[ -d peek_dist ] && rm -rf peek_dist
+mkdir -p peek_dist/py
+mkdir -p peek_dist/client-build-ns/tmp
+mkdir -p peek_dist/client-build-web/tmp
+mkdir -p peek_dist/server-build-web/tmp
+
+
+cd $DIR/peek_dist/py
+pip install wheel
+pip wheel --no-cache synerty-peek
 
 ----
 
