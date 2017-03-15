@@ -7,13 +7,11 @@ Welcome to synerty-peek's documentation!
    :caption: Contents:
 
    ../README
-   architecture/peek_architecture
+   overview/overview
    WindowsRequirementsSetup
    DebianRequirementsSetup
    ProductionSetup
    WindowsNativescriptSetup
-   DebianAndroidSetup
-   DebianNativescriptSetup
    PluginDevelopmentSetup
    PluginBuildRelease
    PlatformDevelopmentSetup
