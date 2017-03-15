@@ -163,6 +163,80 @@ Confirm database was created
 
 .. image:: windows_requirements_setup/pgAdmin4-peekDatabase.jpg
 
+|
+
+Microsoft® SQL Server® 2014 Express
+```````````````````````````````````
+
+:From: `<https://www.microsoft.com/en-ca/download/details.aspx?id=42299>`_
+
+----
+
+Choose directory for extracted files: ::
+
+        C:\SQLEXPRWT_x64_ENU\
+
+----
+
+Select "New SQL Server stand-alone installation"
+
+----
+
+Feature Selection: check all Features
+
+.. image:: windows_requirements_setup/SQLServer-FeatureSelection.jpg
+
+----
+
+Instance Configuration: change the named instance to 'peek'. This will update the
+'Instance ID'
+
+----
+
+Server Configuration: Select browse from the 'Account Name' drop-list and check names
+for 'peek'.  Select ok then enter the account password
+
+.. image:: windows_requirements_setup/SQLServer-ServerConfiguration.jpg
+
+----
+
+Database Engine Configuration: Leave the default settings
+
+----
+
+Start Microsoft SQL Server Management Studio
+    Connect to PEEK database engine
+    Create new database 'peek'
+
+----
+
+Make Changes in SQL Server Configuration Manager (SQLServerManager12.msc).
+
+Open the "SQL Server Configuration Manager" from the start menu
+    Select the folowing:
+        SQL Server Network Configuration
+        Protocols for PEEK
+
+----
+
+Under the TCP/IP properties set 'IPALL' 'TCP PORT' to '1433'. Select 'Apply' then 'OK',
+
+.. image:: windows_requirements_setup/set_tcp_port.png
+
+----
+
+Enable the 'TCP/IP' Protocol
+
+.. image:: windows_requirements_setup/enable_tcpip.png
+
+----
+
+Restart the server service.
+
+.. image:: windows_requirements_setup/SQLServer-RestartServices.jpg
+
+|
+
 Node.js 7+ and NPM 3+
 `````````````````````
 
