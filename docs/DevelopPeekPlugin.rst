@@ -65,9 +65,8 @@ Deploying
 Android
 ```````
 
-=================================
 Setting Up Plugin For Development
-=================================
+---------------------------------
 
 #.  Clone the plugin
 #.  Install the plugin in development mode, so peek can load it. Run ::
