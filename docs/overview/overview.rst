@@ -16,7 +16,9 @@ networks.
 This achieves an extra step of separation, and potentially more processing
 power.
 
-The following diagram describes the architecture of the platform.
+The following diagram describes the architecture of the platform and the services it
+it provides.
 
 .. image:: platform_architecture.png
 
+The
