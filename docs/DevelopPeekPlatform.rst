@@ -1,10 +1,9 @@
-==========================
-Platform Development Setup
-==========================
+=====================
+Develop Peek Platform
+=====================
 
-.. WARNING:: This document extends, *Windows Requirements Install Guide*
-    (RequirementsWindows.rst) or the *Debian Requirements Install Guide*
-    (RequirementsDebian.rst) depending on your OS.
+.. WARNING:: This document extends, *Setup OS Requirements Windows* or the *Setup OS
+    Requirements Debian* depending on your OS.
 
 Most development will be for the plugins, not platform, so these instructions are not
 high priority.

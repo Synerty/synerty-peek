@@ -1,6 +1,6 @@
-=================================
-Debian Requirements Install Guide
-=================================
+============================
+Setup OS Requirements Debian
+============================
 
 .. note:: For offline installation some steps are required to be installed on another
     online server for the files to be packaged and transfered to the offline server.
