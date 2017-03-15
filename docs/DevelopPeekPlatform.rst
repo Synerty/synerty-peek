@@ -25,7 +25,27 @@ Hardware Recommendation
 Software Installation and Configuration
 ---------------------------------------
 
-On a Windows machine the follow commands will be run in the Cygwin terminal.
+On a Windows machine the follow commands will be run using the bash shell.
+
+GitBash
+```````
+
+.. WARNING:: This step is required for Windows only.
+
+:Download: `<https://github.com/git-for-windows/git/releases/download/v2.11.0.windows.1/Git-2.11.0-64-bit.exe>`_
+:From: `<https://git-for-windows.github.io>`_
+
+----
+
+Configuring Extra Options: check 'Enable Symbolic Links'
+
+.. image:: windows_requirements_setup/GIT-ExtraOptions.jpg
+
+----
+
+Add PATH to environment variables ::
+
+        C:\Program Files\Git\bin
 
 synerty-peek Repositories
 `````````````````````````
