@@ -28,10 +28,12 @@ Cross Platform
 Peek is compatible with the following operating systems
 
 *   Linux (Preferred)
+
     *   Debian 8
     *   Redhat Enterprise Linux 6+
 
 *   Windows (64bit only)
+
     *   Windows 7
     *   Windows 10
     *   Windows 2008R2
@@ -89,12 +91,14 @@ These web applications are tested against the following browsers.
 Current Browser Support
 ```````````````````````
 *   Desktop
+
     *   Chrome
     *   IE 11 and above
     *   Microsoft Edge
     *   Safari on Mac
 
 *   Mobile
+
     *   Safari on iOS
     *   Mobile Chrome
 
