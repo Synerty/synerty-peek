@@ -1,6 +1,6 @@
-==================================
-Windows Requirements Install Guide
-==================================
+=============================
+Setup OS Requirements Windows
+=============================
 
 The Peek platform is designed to run on Linux, however, it is compatible with windows.
 Please read through all of the documentation before commencing the installation
@@ -108,77 +108,60 @@ Install using the ISO
 
 :Download: `<https://www.microsoft.com/en-US/download/details.aspx?id=48146>`_
 
-Microsoft® SQL Server® 2014 Express
-```````````````````````````````````
+PostgresSQL
+```````````
 
-:From: `<https://www.microsoft.com/en-ca/download/details.aspx?id=42299>`_
-
-----
-
-Choose directory for extracted files: ::
-
-        C:\SQLEXPRWT_x64_ENU\
+:Download: `<https://www.enterprisedb.com/downloads/postgres-postgresql-downloads#windows>`_
+:From: `<https://www.postgresql.org>`_
 
 ----
 
-Select "New SQL Server stand-alone installation"
+Install PostgresSQL with default settings
 
 ----
 
-Feature Selection: check all Features
-
-.. image:: windows_requirements_setup/SQLServer-FeatureSelection.jpg
+Run pgAdmin4
 
 ----
 
-Instance Configuration: change the named instance to 'peek'. This will update the
-'Instance ID'
+Open the Query Tool
+
+.. image:: windows_requirements_setup/pgAdmin4-queryTool.jpg
 
 ----
 
-Server Configuration: Select browse from the 'Account Name' drop-list and check names
-for 'peek'.  Select ok then enter the account password
+Create the peek user, run the following script: ::
 
-.. image:: windows_requirements_setup/SQLServer-ServerConfiguration.jpg
+    CREATE USER peek WITH
+        LOGIN
+        SUPERUSER
+        CREATEDB
+        CREATEROLE
+        INHERIT
+        REPLICATION
+        CONNECTION LIMIT -1
+        PASSWORD 'bford';
 
-----
-
-Database Engine Configuration: Leave the default settings
-
-----
-
-Start Microsoft SQL Server Management Studio
-    Connect to PEEK database engine
-    Create new database 'peek'
-
-----
-
-Make Changes in SQL Server Configuration Manager (SQLServerManager12.msc).
-
-Open the "SQL Server Configuration Manager" from the start menu
-    Select the folowing:
-        SQL Server Network Configuration
-        Protocols for PEEK
+.. image:: windows_requirements_setup/pgAdmin4-userQuery.jpg
 
 ----
 
-Under the TCP/IP properties set 'IPALL' 'TCP PORT' to '1433'. Select 'Apply' then 'OK',
+Create the peek database, run the following script: ::
 
-.. image:: windows_requirements_setup/set_tcp_port.png
-
-----
-
-Enable the 'TCP/IP' Protocol
-
-.. image:: windows_requirements_setup/enable_tcpip.png
+    CREATE DATABASE peek WITH
+        OWNER = peek
+        ENCODING = 'UTF8'
+        CONNECTION LIMIT = -1;
 
 ----
 
-Restart the server service.
+Confirm database was created
 
-.. image:: windows_requirements_setup/SQLServer-RestartServices.jpg
+.. image:: windows_requirements_setup/pgAdmin4-refresh.jpg
 
 |
+
+.. image:: windows_requirements_setup/pgAdmin4-peekDatabase.jpg
 
 Node.js 7+ and NPM 3+
 `````````````````````
@@ -236,7 +219,6 @@ Confirm PATH(s) to environment variables ::
         C:\Users\peek\Python35\
         C:\Users\peek\Python35\Scripts\
 
-
 FreeTDS
 ```````
 
@@ -264,7 +246,6 @@ Create 'freetds.conf' in "C:\" ::
             instance = peek
             tds version = 7.0
             dump file = /tmp/freetds.log
-
 
 
 dll files
