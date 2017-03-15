@@ -41,7 +41,7 @@ Run the platform deploy script.
 At the end it will print out where it has deployed the new environment to.
 Ensure you update the **$dist** variable with the path to your release.
 
-The script will deploy to C:\Users\peek.
+The script will deploy to C:\\Users\\peek.
 
 ::
 
