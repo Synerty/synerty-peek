@@ -11,8 +11,13 @@ Welcome to synerty-peek's documentation!
    SetupOSRequirementsWindows
    SetupOSRequirementsDebian
    DeployPeekPlatform
+   DeployPeekPlugin
+   AdministerPeekPlatform
    NativescriptSetupWindows
+   PackageNativescriptApp
+   DeployNativescriptApp
    DevelopPeekPlugin
+   PublishPeekPlugin
    PackagePeekPlugin
    DevelopPeekPlatform
    PublishPeekPlatform
