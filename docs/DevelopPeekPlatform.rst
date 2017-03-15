@@ -25,7 +25,27 @@ Hardware Recommendation
 Software Installation and Configuration
 ---------------------------------------
 
-On a Windows machine the follow commands will be run in the Cygwin terminal.
+On a Windows machine the follow commands will be run using the bash shell.
+
+GitBash
+```````
+
+.. WARNING:: This step is required for Windows only.
+
+:Download: `<https://github.com/git-for-windows/git/releases/download/v2.11.0.windows.1/Git-2.11.0-64-bit.exe>`_
+:From: `<https://git-for-windows.github.io>`_
+
+----
+
+Configuring Extra Options: check 'Enable Symbolic Links'
+
+.. image:: windows_requirements_setup/GIT-ExtraOptions.jpg
+
+----
+
+Add PATH to environment variables ::
+
+        C:\Program Files\Git\bin
 
 synerty-peek Repositories
 `````````````````````````
@@ -61,13 +81,19 @@ Use this script to insert individual peek modules.  Update {gitAccount} and
         GIT="{gitAccount}"
         REPO="{repository}"
 
-        cd ~peek/Documents/
-        mkdir peek-mobile
-        cd ~peek/Documents/peek-mobile/
-        git clone https://github.com/$GIT/$REPO.git
-        cd ~peek/Documents/peek-mobile/$REPO
-        git config --unset core.symlink
-        git config --add core.symlink true
+        if [ ! -d ~peek/Documents/peek-dev ]; then
+            mkdir ~peek/Documents/peek-dev
+            cd ~peek/Documents/peek-dev/
+            git clone https://github.com/$GIT/$REPO.git
+            cd ~peek/Documents/peek-mobile/$REPO
+            git config --unset core.symlink
+            git config --add core.symlink true
+        else
+            echo "ALERT: `pwd` directory already exists.  Please investigate then retry."
+        fi
+
+        cd ~peek/Documents/peek-dev/
+        ls -l
 
 Use this script to clone all repositories.  Update {gitAccount} in the script below: ::
 
@@ -82,18 +108,23 @@ Use this script to clone all repositories.  Update {gitAccount} in the script be
         REPOS="$REPOS peek-server"
         REPOS="$REPOS peek-server-fe"
         REPOS="$REPOS peek-worker"
-        cd ~peek/Documents/
-        mkdir ~peek/Documents/peek-mobile
+
+        if [ ! -d ~peek/Documents/peek-dev ]; then
+        mkdir ~peek/Documents/peek-dev
+        cd ~peek/Documents/peek-dev/
         for REPO in ${REPOS[*]}
         do
             echo $REPO
-            cd ~peek/Documents/peek-mobile/
             git clone https://github.com/$GIT/$REPO.git
-            cd ~peek/Documents/peek-mobile/$REPO
+            cd ~peek/Documents/peek-dev/$REPO
             git config --unset core.symlink
             git config --add core.symlink true
+            cd ~peek/Documents/peek-dev/
         done
-        cd ~peek/Documents/peek-mobile/
+        else
+            cd ~peek/Documents/peek-dev/
+            echo "ALERT: `pwd` directory already exists.  Please investigate then retry."
+        fi
         ls -l
 
 .. NOTE:: core.symlink:  If false, symbolic links are checked out as small plain files
@@ -106,10 +137,13 @@ Install Front End Modules
 Remove the old npm modules files and re-install for both client and server front and
 packages.  Run the following commands: ::
 
-        cd ~peek/Documents/peek-mobile/peek-client-fe/peek_client_fe/
+        cd ~peek/Documents/peek-dev/peek-client-fe/peek_client_fe/build-web
         [ -d node_modules ] && rm -rf node_modules
         npm install
-        cd ~peek/Documents/peek-mobile/peek-server-fe/peek_server_fe/
+        cd ~peek/Documents/peek-dev/peek-client-fe/peek_client_fe/build-ns
+        [ -d node_modules ] && rm -rf node_modules
+        npm install
+        cd ~peek/Documents/peek-dev/peek-server-fe/peek_server_fe/build-web
         [ -d node_modules ] && rm -rf node_modules
         npm install
 
@@ -123,13 +157,11 @@ compiler.
 
 Run the following commands: ::
 
-        cd ~peek/Documents/peek-mobile/
-        ln -s peek-client-fe/peek_client_fe/node_modules .
-        ln -s peek-client-fe/peek_client_fe/tsconfig.json .
-
-        cd ~peek/Documents/peek-mobile/peek-client-fe/peek_client_fe/
+        cd ~peek/Documents/peek-dev/peek-client-fe/peek_client_fe/build-web
         ng build
-        cd ~peek/Documents/peek-mobile/peek-server-fe/peek_server_fe/
+        cd ~peek/Documents/peek-dev/peek-client-fe/peek_client_fe/build-ns
+        tns build android
+        cd ~peek/Documents/peek-dev/peek-server-fe/peek_server_fe/build-web
         ng build
 
 Install synerty-peek Dependencies
@@ -139,60 +171,10 @@ These steps link the projects under site-packages and installs their dependencie
 
 For synerty-peek, run the following commands: ::
 
-        cd ~peek/Documents/peek-mobile/synerty-peek
+        cd ~peek/Documents/peek-dev/synerty-peek
         ./pip_uninstall_and_develop.sh
 
 For repositories and plugins, run from their directory ::
 
             python setup.py develop
 
-.. NOTE:: For offline installation, copy across the software to the offline server as
-    per the *Requirements Install Guide* and complete the *Offline Installation Guide*
-    instructions.
-
-Test cx_Oracle With Alchemy
-```````````````````````````
-
-Installing Oracle Libraries is required if you intend on installing the peek agent.
-Instruction for installing the Oracle Libraries are in the *Online Installation Guide*.
-
-Run the following commands in Python: ::
-
-        from sqlalchemy import create_engine
-
-        create_engine('oracle://username:password@hostname:1521/instance')
-        engine = create_engine('oracle://enmac:bford@192.168.215.128:1521/enmac')
-        engine.execute("SELECT 1")
-
-*You can now start developing*
-
-Building synerty-peek
----------------------
-
-Development
-```````````
-
-The peek package has build scripts that generate a development build.
-::
-
-        ./pipbuild_platform.sh 0.0.1.dev1
-
-.. NOTE:: Dev build, it doesn't tag, commit or test upload, but still generates a build.
-
-.. WARNING:: Omitting the dot before dev will cause the script to fail as setuptools
-    adds the dot in if it's not there, which means the cp commands won't match files.
-
-Production
-``````````
-
-The peek package has build scripts that generate a platform build.
-::
-
-        ./pipbuild_platform.sh #.#.##
-        ./pypi_upload.sh
-
-.. NOTE:: Prod build, it tags, commits and test uploads to testpypi.  If you're building
-    for development, skip this step and go back to Development.
-
-.. WARNING:: Omitting the dot before dev will cause the script to fail as setuptools
-    adds the dot in if it's not there, which means the cp commands won't match files.

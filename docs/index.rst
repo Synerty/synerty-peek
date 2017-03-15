@@ -15,6 +15,7 @@ Welcome to synerty-peek's documentation!
    DevelopPeekPlugin
    PackagePeekPlugin
    DevelopPeekPlatform
+   PublishPeekPlatform
    PackagePeekPlatform
    visio_studio_code_setup/visio_studio_code_setup
    pycharm_setup/pycharm_setup
