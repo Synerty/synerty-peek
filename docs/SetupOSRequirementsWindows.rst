@@ -23,7 +23,7 @@ Below is a list of all the required software:
 
 *  Microsoft .NET Framework 3.5 Service Pack 1
 *  Visual C++ Build Tools 2015
-*  Microsoft® SQL Server® 2014 Express
+*  PostgresSQL 9.6.2+
 *  Node.js 7+ and NPM 3+
 *  Python 3.5
 *  FreeTDS

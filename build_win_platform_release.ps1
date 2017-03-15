@@ -38,6 +38,12 @@ $nodePackages = @(
 New-Item "$baseDir\py" -ItemType directory;
 Set-Location "$baseDir\py";
 Write-Host "Downloading and creating windows wheels";
+if (Get-Module -ListAvailable -Name wheel) {
+    Write-Host "wheel module exists";
+} else {
+    Write-Host "wheel module does not exist";
+    pip install wheel;
+}
 pip wheel --no-cache synerty-peek;
 
 # Make sure we've downloaded the right version
