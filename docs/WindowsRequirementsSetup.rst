@@ -378,24 +378,12 @@ Run the installer (setup.exe)
 Select the following options
 
 :Install Type: Runtime
-:Oracle Base: C:\Users\peek\oracle
-:Oracle Home: C:\Users\peek\oracle\client12c
+:Oracle Base: C:\\Users\\peek\\oracle
+:Oracle Home: C:\\Users\\peek\\oracle\\client12c
 
 ----
 
 Reboot windows, or logout and login to ensure the PATH updates.
-
-
-Offline Installation Guide
---------------------------
-
-For offline installation
-    #.  Complete the Online Installation on another online server first.
-        This is because some software requires internet access to install.
-
-    #.  Instructions for the software that requires internet access for installation are
-        found tresthroughout the *Online Installation Guide* process.
-
 
 Installing synerty-peek
 -----------------------
