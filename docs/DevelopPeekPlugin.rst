@@ -1,6 +1,6 @@
-========================
-Plugin Development Setup
-========================
+===================
+Develop Peek Plugin
+===================
 
 ** TODO **
 ** TODO **
@@ -11,10 +11,6 @@ This document has not been started, or finished.
 ** TODO **
 ** TODO **
 ** TODO **
-
-======================================
-Peek Client - NativeScript Development
-======================================
 
 Developing
 ----------
