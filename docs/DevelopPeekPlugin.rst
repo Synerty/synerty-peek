@@ -12,10 +12,6 @@ This document has not been started, or finished.
 ** TODO **
 ** TODO **
 
-======================================
-Peek Client - NativeScript Development
-======================================
-
 Developing
 ----------
 
