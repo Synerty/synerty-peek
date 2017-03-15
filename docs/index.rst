@@ -14,6 +14,8 @@ Welcome to synerty-peek's documentation!
    DeployPeekPlugin
    AdministerPeekPlatform
    NativescriptSetupWindows
+   PackageNativescriptApp
+   DeployNativescriptApp
    DevelopPeekPlugin
    PackagePeekPlugin
    DevelopPeekPlatform
