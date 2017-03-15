@@ -51,7 +51,12 @@ Future Browser Support
 *  Safari on iOS
 *  Chrome on Android
 *  Chrome desktop
-*  IE 11 and above.
+*  IE 11 and above
+
+How to Use This Document
+------------------------
+
+.. image:: README_doc_map.png
 
 Installing the Platform
 -----------------------
