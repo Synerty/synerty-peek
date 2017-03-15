@@ -2,83 +2,112 @@
     :target: http://synerty-peek.readthedocs.io/en/latest/?badge=latest
     :alt: Documentation Status
 
-=======
-Read Me
-=======
+============
+Synerty Peek
+============
 
-synerty-peek
+What is Peek
 ------------
+
+Peek is semi distributed pluggable python platform.
+
+Peek provides a platform for Python similar to the functionality JBOSS provides for JAVA.
+(Or at least that is in the intention, it's early days)
+
+The Big Bang
+------------
+
+Peek was created and is maintained by Synerty to provide common facilities python plugins,
+Allowing developers to better sensationalise and integrate new code.
+
+Synerty uses the Peek platform to provide scalable enterprise grade applications.
+
+Cross Platform
+--------------
+
+Peek is compatible with the following operating systems
+
+*   Linux (Preferred)
+
+    *   Debian 8
+    *   Redhat Enterprise Linux 6+
+
+*   Windows (64bit only)
+
+    *   Windows 7
+    *   Windows 10
+    *   Windows 2008R2
+    *   Windows 2012R2
+
+Technologies
+------------
+
+Peek utilises the following technologies
 
 A multiteared architecture platform for python, supporting :
 
-*   Plugins
+*   Reactive / observable data transport using Synerty Vortex.
+    (Synerty's observable, routable, data serialisation and transport library)
 
-*   Reactive / observable data transport
+*   Reactive framework, using Twisted
 
-*   Multiprocessing worker services
+*   A web based user and admin site, using:
 
-*   Angular + Typescript frontend for:
+    *   Bootstrap3
+    *   Angular2+, Angular CLI
+    *   Typescript
+    *   FontAwesome
+    *   Web Sockets with HTTP Fallback
 
-    *   Web
+*   A native mobile app, using:
 
-    *   Nativescript
+    *   Nativescript2+
+    *   Angular2+
+    *   Typescript
+    *   FontAwesome
+    *   Web Sockets
 
-*   MS SQLServer + Windows
+*   Persistent Storage, using either:
 
-*   PostGreSQL + Debian Linux
+    *   PostGreSQL for NoSQL and SQL support (Preferred)
+    *   MS SQL Server (SQL Only)
 
-This is the meta package that installs the platform.
+*   Multiprocessing worker services using Celery, rabbitmq and redis
 
-.. NOTE:: If you don't want to install the whole platform, you can install just the
-    service you want.
+*   External data input / output (EG, External SQL or SOAP), for example:
 
-Services
---------
+    *   txCelery
+    *   SOAPpy
+    *   cxOracle
+    *   Any other libraries your plugins wants to install
 
-*  peek_server
-*  peek_worker
-*  peek_agent
-*  peek_client
 
 Browser Support
 ---------------
 
-synerty-peek has only been tested on Chrome.
+Peek provides two separate web apps, one for administration one for users.
+These web applications are tested against the following browsers.
 
-Future Browser Support
-``````````````````````
+Current Browser Support
+```````````````````````
+*   Desktop
 
-*  Safari on iOS
-*  Chrome on Android
-*  Chrome desktop
-*  IE 11 and above.
+    *   Chrome
+    *   IE 11 and above
+    *   Microsoft Edge
+    *   Safari on Mac
 
-Installing the Platform
------------------------
+*   Mobile
 
-The Peek Plaform needs different requirements installed depending on the supported
-platform chosen.
+    *   Safari on iOS
+    *   Mobile Chrome
 
-----
+How to Use Peek Documention
+---------------------------
 
-For Windows installation, follow the *Windows Requirements Install Guide*
-(RequirementsWindows.rst).
+The Peek platform documentation is designed like code (IE, Modular).
 
-For Debian installation, follow the *Debian Requirements Install Guide*
-(RequirementsDebian.rst).
+http://synerty-peek.readthedocs.io/
 
-----
+.. image:: README_doc_map.png
 
-After following the Requirements Install Guide go to the *Peek Platform - Production
-Setup* (ProductionSetup.rst) to install the peek services.
-
-.. NOTE:: Should you wish to develop the peek platform it's self, run through the
-    *Platform Development Setup* (PlatformDevelopmentSetup.rst) instructions instead of
-    *Peek Platform - Production Setup*
-
-----
-
-The Peek Platform is now ready to install the required plugins.
-
-For Plugin Development, follow the *Plugin Development Setup*
-(PluginDevelopmentSetup.rst) instructions.

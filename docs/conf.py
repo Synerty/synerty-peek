@@ -159,7 +159,7 @@ man_pages = [
 #  dir menu entry, description, category)
 texinfo_documents = [
     (master_doc, 'synerty-peek', 'synerty-peek Documentation',
-     author, 'synerty-peek', 'One line description of project.',
+     author, 'synerty-peek', 'Pluggable platform for Python.',
      'Miscellaneous'),
 ]
 
