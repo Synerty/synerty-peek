@@ -6,7 +6,7 @@ Welcome to synerty-peek's documentation!
    :maxdepth: 2
    :caption: Contents:
 
-   README
+   ../README
    architecture/peek_architecture
    WindowsRequirementsSetup
    DebianRequirementsSetup
