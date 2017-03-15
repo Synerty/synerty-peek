@@ -8,7 +8,7 @@ Welcome to synerty-peek's documentation!
 
    ../README
    overview/overview
-   WindowsRequirementsSetup
+   SetupOSRequirementsWindows
    DebianRequirementsSetup
    ProductionSetup
    WindowsNativescriptSetup
