@@ -17,10 +17,16 @@ Peek provides a platform for Python similar to the functionality JBOSS provides 
 The Big Bang
 ------------
 
-Peek was created and is maintained by Synerty to provide common facilities python plugins,
-Allowing developers to better sensationalise and integrate new code.
+Peek was created and is maintained by Synerty to be a distributed, pluggable
+python platform that provides many of the core services needed for enterprise applications.
 
-Synerty uses the Peek platform to provide scalable enterprise grade applications.
+We wanted to integrated smaller peices of code, that can leverage different services. For
+example, services for parallel processing or services for business integrations.
+
+The Peek Platform allows developers to better write and integrate smaller units of code.
+
+Synerty uses the Peek platform to provide scalable enterprise grade applications to the
+power utilities sector.
 
 Cross Platform
 --------------
@@ -49,7 +55,9 @@ A multiteared architecture platform for python, supporting :
 *   Reactive / observable data transport using Synerty Vortex.
     (Synerty's observable, routable, data serialisation and transport library)
 
-*   Reactive framework, using Twisted
+*   Reactive framework, using:
+
+    *   Twisted
 
 *   A web based user and admin site, using:
 
@@ -67,12 +75,18 @@ A multiteared architecture platform for python, supporting :
     *   FontAwesome
     *   Web Sockets
 
-*   Persistent Storage, using either:
+*   Persistent Storage, using:
 
-    *   PostGreSQL for NoSQL and SQL support (Preferred)
+    *   Alembic
+    *   SQLAlchemy
+    *   PostGreSQL for NoSQL and SQL support (Preferred), or
     *   MS SQL Server (SQL Only)
 
-*   Multiprocessing worker services using Celery, rabbitmq and redis
+*   Multiprocessing worker services, using:
+
+    *   Celery
+    *   rabbitmq
+    *   redis
 
 *   External data input / output (EG, External SQL or SOAP), for example:
 

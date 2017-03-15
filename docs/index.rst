@@ -7,6 +7,7 @@ Welcome to synerty-peek's documentation!
    :caption: Contents:
 
    README
+   architecture/peek_architecture
    WindowsRequirementsSetup
    DebianRequirementsSetup
    ProductionSetup
@@ -22,8 +23,6 @@ Welcome to synerty-peek's documentation!
    modules
    TroubleshootingWindows
    LICENSE
-   restructured_text/rst/directives
-   restructured_text/rst/restructuredText
 
 
 Indices and tables
