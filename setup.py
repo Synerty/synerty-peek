@@ -20,6 +20,14 @@ requirements = [
     "peek-client"
 ]
 
+doc_requirements = [
+    "Sphinx",
+    "Sphinx_rtd_theme",
+    "sphinx-autobuild"
+]
+
+requirements.extend(doc_requirements)
+
 setup(
     name=pip_package_name,
     packages=find_packages(exclude=["*.tests", "*.tests.*", "tests.*", "tests"]),

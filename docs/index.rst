@@ -22,8 +22,8 @@ Welcome to synerty-peek's documentation!
    modules
    TroubleshootingWindows
    LICENSE
-   restructured_text/directives
-   restructured_text/restructuredText
+   restructured_text/rst/directives
+   restructured_text/rst/restructuredText
 
 
 Indices and tables
