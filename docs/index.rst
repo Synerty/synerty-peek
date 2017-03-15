@@ -10,12 +10,12 @@ Welcome to synerty-peek's documentation!
    overview/overview
    SetupOSRequirementsWindows
    SetupOSRequirementsDebian
-   ProductionSetup
-   WindowsNativescriptSetup
-   PluginDevelopmentSetup
-   PluginBuildRelease
+   DeployPeekPlatform
+   NativescriptSetupWindows
+   DevelopPeekPlugin
+   PackagePeekPlugin
    DevelopPeekPlatform
-   PlatformBuildRelease
+   PackagePeekPlatform
    visio_studio_code_setup/visio_studio_code_setup
    pycharm_setup/pycharm_setup
    modules

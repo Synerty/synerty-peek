@@ -1,6 +1,6 @@
-==================================
-Windows Nativescript Install Guide
-==================================
+==========================
+Nativescript Setup Windows
+==========================
 
 This page contains a list of all system requirements needed to build and run
 NativeScript apps on Windows.

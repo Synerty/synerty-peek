@@ -1,6 +1,6 @@
-=======================
-Create Platform Release
-=======================
+=====================
+Package Peek Platform
+=====================
 
 .. note:: The Windows or Debian requirements must be followed before following this guide.
 
