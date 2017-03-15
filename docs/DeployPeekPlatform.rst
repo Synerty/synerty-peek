@@ -17,7 +17,7 @@ rollback path (switch back to the old virtual environment.
 
 To build your own platform release, see the following document
 
-    :ref:`_platform_build_release`
+    **Package Peek Platform**
 
 Windows
 ```````
