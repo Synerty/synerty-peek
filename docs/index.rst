@@ -22,6 +22,7 @@ Welcome to synerty-peek's documentation!
    modules
    TroubleshootingWindows
    LICENSE
+   ReStructuredTextDirectives
 
 Indices and tables
 ==================
