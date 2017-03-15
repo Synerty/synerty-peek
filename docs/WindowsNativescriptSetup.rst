@@ -146,7 +146,7 @@ Select a device and select next
 ----
 
 Update the "Virtual device name" to something shorter (easier to remember and type) and
- select next
+select next
 
 Your virtual device will be retrieved and deployed
 
