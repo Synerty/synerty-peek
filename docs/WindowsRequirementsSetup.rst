@@ -27,9 +27,6 @@ Below is a list of all the required software:
 *  Node.js 7+ and NPM 3+
 *  Python 3.5
 *  FreeTDS
-*  GitBash
-*  Shapely
-*  Cygwin
 
 Optional  Software
 ``````````````````
@@ -292,96 +289,6 @@ You will need to duplicate the above files and name them as per below:
 
 *  ssleay32MD.dll
 
-GitBash
-```````
-
-:Download: `<https://github.com/git-for-windows/git/releases/download/v2.11.0.windows.1/Git-2.11.0-64-bit.exe>`_
-:From: `<https://git-for-windows.github.io>`_
-
-----
-
-Configuring Extra Options: check 'Enable Symbolic Links'
-
-.. image:: windows_requirements_setup/GIT-ExtraOptions.jpg
-
-----
-
-Add PATH to environment variables ::
-
-        C:\Program Files\Git\bin
-
-Shapely
-```````
-
-:Download: `<http://www.lfd.uci.edu/~gohlke/pythonlibs/#shapely>`_
-:From: `<https://pypi.python.org/pypi/Shapely>`_
-
-----
-
-Download Shapely >= 1.5.17 and save in the Downloads directory
-
-----
-
-Open a command prompt as Administrator.
-Run the following command: ::
-
-        pip install \Users\peek\Downloads\Shapely-1.5.17-cp35-cp35m-win_amd64.whl
-
-Cygwin
-``````
-
-**Online Installation:**
-
-    :Download: `<https://cygwin.com/setup-x86_64.exe>`_
-    :From: `<https://cygwin.com/install.html>`_
-
-----
-
-Download and run the Cygwin installer.
-
-Use the default install options.
-
-**Offline Installation:**
-
-If you're installing offline, you can:
-
-    *  Run the installer and select "download only",
-
-    *  Zip up the install directory and move it to the offline server,
-
-    *  Run the installer and select "install from local",
-
-    *  Use the default install options.
-
-**Configure Cygwin:**
-
-Once cygwin is installed, Open "Cygwin64" from the desktop and run the following
-
-::
-
-        cd /home
-
-        echo "Symlinking peek home"
-        rm -rf peek
-        ln -s /cygdrive/c/Users/peek .
-
-        echo "Symlinking site-packages
-        cd
-        ln -s /home/peek/Python35/Lib/site-packages peek-site-packages
-
-        exit
-
-----
-
-To check this has worked, run the following LS command, you should see the following
-
-::
-
-        ls -ld /home/peek /home/peek/peek-site-packages
-
-        lrwxrwxrwx 1 peek None 22 Mar 13 11:24 /home/peek -> /cygdrive/c/Users/peek
-        lrwxrwxrwx 1 peek None 37 Mar 13 11:28 /home/peek/peek-site-packages -> /home/peek/Python35/Lib/site-packages
-
 SymLinks
 ````````
 
@@ -470,25 +377,13 @@ Run the installer (setup.exe)
 
 Select the following options
 
-:Oracle Base: C:\Users\peek\oracle
-:Oracle Home: C:\Users\peek\oracle\client12c
 :Install Type: Runtime
+:Oracle Base: C:\\Users\\peek\\oracle
+:Oracle Home: C:\\Users\\peek\\oracle\\client12c
 
 ----
 
 Reboot windows, or logout and login to ensure the PATH updates.
-
-
-Offline Installation Guide
---------------------------
-
-For offline installation
-    #.  Complete the Online Installation on another online server first.
-        This is because some software requires internet access to install.
-
-    #.  Instructions for the software that requires internet access for installation are
-        found tresthroughout the *Online Installation Guide* process.
-
 
 Installing synerty-peek
 -----------------------

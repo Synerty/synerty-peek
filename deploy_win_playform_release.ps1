@@ -77,7 +77,7 @@ Write-Host "Setting PEEK_ENV to $venvDir";
 Write-Host "Peek is now deployed to $venvDir";
 Write-Host " ";
 Write-Host "Activate the new envrionment from command :";
-Write-Host "    $venvDir\Scripts\activate";
+Write-Host "    set PATH=`"$venvDir\Scripts;%PATH%`"";
 Write-Host " ";
 Write-Host "Activate the new envrionment from powershell :";
 Write-Host "    `$env:Path = `"$venvDir\Scripts;`$env:Path`"";

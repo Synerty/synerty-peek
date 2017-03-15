@@ -1,5 +1,3 @@
-.. _plugin_development:
-
 ========================
 Plugin Development Setup
 ========================

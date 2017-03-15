@@ -27,16 +27,22 @@ Below is a list of all the required software:
 *  Java JDK
 *  Android SDK
 *  nativescript NPM package
+*  Android Emulator
 
 
 Optional  Software
 ``````````````````
 
 *   VirtualBox
-*   GenyMotion (Synerty uses Genymotion)
+*   GenyMotion (Synerty uses GenyMotion)
 
 Online Installation Guide
 -------------------------
+
+Install google Chrome
+`````````````````````
+
+Install google chrome
 
 Install Chocolatey
 ``````````````````
@@ -79,11 +85,6 @@ Install the required Android SDKs and the Local Maven repository for Support Lib
 
     echo yes | "%ANDROID_HOME%\tools\android" update sdk --filter tools,platform-tools,android-25,build-tools-25.0.2,extra-android-m2repository,extra-google-m2repository,extra-android-support --all --no-ui
 
-Android Emulator
-````````````````
-
-** TODO **
-
 Nativescript Package
 ````````````````````
 
@@ -120,3 +121,37 @@ Check the installation with tns ::
     tns doctor
 
 .. image:: nativescript/Nativescript-tnsDoctor.jpg
+
+Android Emulator Setup
+``````````````````````
+
+You can use any emulator.  Synerty has written instructions for GenyMotion.
+
+:Download - with Virtualbox: `<https://www.genymotion.com/download/>`_
+
+Install GenyMotion with Virtualbox, all default options
+
+----
+
+Run both GenyMotion and Virtualbox
+
+----
+
+In GenyMotion select the add button to create a virtual device
+
+----
+
+Select a device and select next
+
+----
+
+Update the "Virtual device name" to something shorter (easier to remember and type) and
+ select next
+
+Your virtual device will be retrieved and deployed
+
+----
+
+With a device selected in the "Your virtual devices" list select the "Start" button
+
+Your device emulation will start in a new window

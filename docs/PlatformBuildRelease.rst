@@ -1,5 +1,3 @@
-.. _platform_build_release:
-
 =======================
 Create Platform Release
 =======================
