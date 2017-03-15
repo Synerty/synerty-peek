@@ -17,6 +17,7 @@ Welcome to synerty-peek's documentation!
    PackageNativescriptApp
    DeployNativescriptApp
    DevelopPeekPlugin
+   PublishPeekPlugin
    PackagePeekPlugin
    DevelopPeekPlatform
    PublishPeekPlatform
