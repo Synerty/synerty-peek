@@ -25,27 +25,8 @@ Hardware Recommendation
 Software Installation and Configuration
 ---------------------------------------
 
-On a Windows machine the follow commands will be run using the bash shell.
-
-GitBash
-```````
-
-.. WARNING:: This step is required for Windows only.
-
-:Download: `<https://github.com/git-for-windows/git/releases/download/v2.11.0.windows.1/Git-2.11.0-64-bit.exe>`_
-:From: `<https://git-for-windows.github.io>`_
-
-----
-
-Configuring Extra Options: check 'Enable Symbolic Links'
-
-.. image:: GIT-ExtraOptions.jpg
-
-----
-
-Add PATH to environment variables ::
-
-        C:\Program Files\Git\bin
+On a Windows machine the follow commands will be run using the bash shell, see
+:ref:`git-bash`.
 
 synerty-peek Repositories
 `````````````````````````
@@ -147,23 +128,6 @@ packages.  Run the following commands: ::
         [ -d node_modules ] && rm -rf node_modules
         npm install
 
-Compile Front End Packages
-``````````````````````````
-
-Symlink the tsconfig.json and node_modules file and directory in the parent directory
-of peek-client-fe, peek-server-fe and the plugins. These steps are run in the directory
-where the projects are checked out from. These are required for the frontend typescript
-compiler.
-
-Run the following commands: ::
-
-        cd ~peek/Documents/peek-dev/peek-client-fe/peek_client_fe/build-web
-        ng build
-        cd ~peek/Documents/peek-dev/peek-client-fe/peek_client_fe/build-ns
-        tns build android
-        cd ~peek/Documents/peek-dev/peek-server-fe/peek_server_fe/build-web
-        ng build
-
 Install synerty-peek Dependencies
 `````````````````````````````````
 
@@ -177,4 +141,19 @@ For synerty-peek, run the following commands: ::
 For repositories and plugins, run from their directory ::
 
             python setup.py develop
+
+Compile Front End Packages
+``````````````````````````
+
+Symlink the tsconfig.json and node_modules file and directory in the parent directory
+of peek-client-fe, peek-server-fe and the plugins. These steps are run in the directory
+where the projects are checked out from. These are required for the frontend typescript
+compiler.
+
+Run the following commands: ::
+
+        cd ~peek/Documents/peek-dev/peek-client-fe/peek_client_fe/build-web
+        ng build
+        cd ~peek/Documents/peek-dev/peek-server-fe/peek_server_fe/build-web
+        ng build
 
