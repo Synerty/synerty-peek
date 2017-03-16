@@ -147,23 +147,6 @@ packages.  Run the following commands: ::
         [ -d node_modules ] && rm -rf node_modules
         npm install
 
-Compile Front End Packages
-``````````````````````````
-
-Symlink the tsconfig.json and node_modules file and directory in the parent directory
-of peek-client-fe, peek-server-fe and the plugins. These steps are run in the directory
-where the projects are checked out from. These are required for the frontend typescript
-compiler.
-
-Run the following commands: ::
-
-        cd ~peek/Documents/peek-dev/peek-client-fe/peek_client_fe/build-web
-        ng build
-        cd ~peek/Documents/peek-dev/peek-client-fe/peek_client_fe/build-ns
-        tns build android
-        cd ~peek/Documents/peek-dev/peek-server-fe/peek_server_fe/build-web
-        ng build
-
 Install synerty-peek Dependencies
 `````````````````````````````````
 
@@ -177,4 +160,19 @@ For synerty-peek, run the following commands: ::
 For repositories and plugins, run from their directory ::
 
             python setup.py develop
+
+Compile Front End Packages
+``````````````````````````
+
+Symlink the tsconfig.json and node_modules file and directory in the parent directory
+of peek-client-fe, peek-server-fe and the plugins. These steps are run in the directory
+where the projects are checked out from. These are required for the frontend typescript
+compiler.
+
+Run the following commands: ::
+
+        cd ~peek/Documents/peek-dev/peek-client-fe/peek_client_fe/build-web
+        ng build
+        cd ~peek/Documents/peek-dev/peek-server-fe/peek_server_fe/build-web
+        ng build
 
