@@ -25,7 +25,6 @@ Peek Platform Documentation
     package_platform/PackagePeekPlatform
     setup_pycharm/SetupPycharm
     setup_vs_code/SetupVSCode
-    modules
     troubleshooting_windows/TroubleshootingWindows
     troubleshooting_debian/TroubleshootingDebian
 
