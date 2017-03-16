@@ -32,7 +32,7 @@ For example, if you want to provide a means of integrating with external, less s
 systems, you can place a "Peek Agent Service" in a DMZ to interface with the less secure
 networks. The Peek Agent will talk upstream to the Peek Server.
 
-The following diagram describes the architecture of the platform and the services it
+The following diagram describes the architecture of the platform and the services
 it provides.
 
 .. image:: platform_architecture.png
@@ -69,7 +69,8 @@ The services are as follows:
     "mobile", "typescript", "The user interface for mobile devices."
     "desktop", "typescript", "The user interface for desktops"
 
-
+.. note:: Where we refer to "Angular" this means Angular version 2+. Angular1 is known
+            as "AngularJS"
 
 Server Service
 ``````````````
@@ -92,15 +93,64 @@ update their database schemas, or patch data as required.
 
 The database access is available on the Peek Worker and Peek Server services.
 
+
+Client Service
+``````````````
+
+The Client service was introduced to handle all requests from desktop, mobile and web
+apps. Reducing the load on the Peek Server.
+
+Multiple Client services can connect to one Server service, improving the maximum number
+of simultaneous users the platform can handle.
+
+The Peek Client server handles all the live data, and serves all the resources to
+ the Peek Desktop and Peek Mobile services.
+
+The live data is serialised payloads, transferred over HTTP or Websockets. This is the
+VortexJS library at work.
+
+The Client service buffers observable data from the server. The client will ask the server
+for data once, and then notify all users connected to the Client service when the data
+arrives. However, Plugins can implement their own logic for this if required.
+
+The Client serves all HTTP resources to the Desktop web apps and Mobile web apps,
+this includes HTML, CSS, Javascript, images and other assets.
+
+The following diagram gives an overview of the clients communications.
+
+.. image:: ClientService.png
+
+
 Mobile Service
 ``````````````
+
+.. image:: MobileService.png
+
+The mobile service provides two user interfaces, a native mobile app backed by
+Telerik Nativescript + Angular, and an Angular web app.
+
+VortexJS provides data serialisation and transport to the Peek Client service via
+a websockets or HTTP connection.
+
+VortexJS provides a method for sending actions to, and observing data from the
+Peek Client service. Actions and observer data can be cached in the web/native app,
+allowing it to work offline.
+
+In web developers terminology, the Mobile service is called the frontend, and
+the Client service is called the backend.
+
 
 Desktop Service
 ```````````````
 
+.. image:: DesktopService.png
 
-Client Service
-``````````````
+The Peek Desktop service is almost identical to the Mobile service, using
+Electron + Angular for Native desktop apps and Angular for the web app.
+
+The Desktop service has a different user interface, designed for desktop use.
+
+Plugins can use share code in the desktop and mobile apps if they choose.
 
 Worker Service
 ``````````````
@@ -110,6 +160,15 @@ Agent Service
 
 Admin Service
 `````````````
+
+The Peek Admin service is almost identical to the Desktop service, however it only has
+the web app.
+
+The Peek Admin service is an Angular
+
+The Desktop service has a different user interface, designed for desktop use.
+
+Plugins can use share code in the desktop and mobile apps if they choose.
 
 
 Plugins
@@ -178,33 +237,51 @@ Noop Plugin Example
 
 The NOOP plugin is a testing / example plugin.
 
-It's folder structure looks like this
+It's folder structure looks like this :
 
-*   peek-plugin-noop (Root project dir, pypi package name)
+*   **peek-plugin-noop** (Root project dir, pypi package name)
 
-    *   peek_plugin_noop (The plugin root, this is the python package)
+    *   **peek_plugin_noop** (The plugin root, this is the python package)
 
-        *   _private (All protected code lives in here)
+        *   **_private** (All protected code lives in here)
 
-            *   alembic (Database schema versioning scripts)
+            *   **admin_app**   (The admin web based user interface)
 
-            *   client  (The code that runs on the client service)
+            *   **admin_assets**   (Static assets for the admin web UI)
 
-            *   client_fe_app   (The user interface that runs on the mobile/web devices)
+            *   **agent** (The code that runs on the agent service)
 
-            *   client_fe_assets    (Images for the mobile/web UI)
+            *   **alembic** (Database schema versioning scripts)
 
-            *   server  (The code that runs on the server service)
+            *   **client**  (The code that runs on the client service)
 
-            *   server_fe_app   (The admin web based user interface)
+            *   **desktop_app**   (The user interface that runs on the desktop/web)
 
-            *   storage     (SQLAlchemy ORM classes for db access, used by server,worker)
+            *   **desktop_assets**    (Images for the desktop/web)
 
-            *   worker  (The parallel processing  Celery tasks that are run on the worker)
+            *   **mobile_app**   (The user interface that runs on the mobile/web devices)
 
-        *   server  (Exposed API, plugins on the server service use this)
+            *   **mobile_assets**    (Images for the mobile/web UI)
 
-        *   client_fe_modules   (Exposed API, plugins in the mobile/web app can use this)
+            *   **server**  (The code that runs on the server service)
+
+            *   **storage**     (SQLAlchemy ORM classes for db access, used by server,worker)
+
+            *   **worker**  (The parallel processing  Celery tasks that are run on the worker)
+
+        *   **admin_modules**   (Exposed API, plugins in the admin app can use this)
+
+        *   **agent**  (Exposed API, plugins on the agent service use this)
+
+        *   **desktop_modules**   (Exposed API, plugins in the desktop/web app can use this)
+
+        *   **client**  (Exposed API, plugins on the client service use this)
+
+        *   **mobile_modules**   (Exposed API, plugins in the mobile/web app can use this)
+
+        *   **server**  (Exposed API, plugins on the server service use this)
+
+        *   **shared_modules**   (Exposed API, for admin, mobile and desktop)
 
 
-.. note:: Did you know that python can't import packages with hypons in them?
+.. note:: Random Fact : Did you know that python can't import packages with hypons in them?
