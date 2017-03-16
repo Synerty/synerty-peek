@@ -6,7 +6,7 @@ Peek Platform Documentation
     :maxdepth: 2
     :caption: Contents:
 
-    ../README
+    guide
     overview/Overview
     setup_os_requirements_windows/SetupOSRequirementsWindows
     setup_os_requirements_debian/SetupOSRequirementsDebian
@@ -28,7 +28,6 @@ Peek Platform Documentation
     modules
     troubleshooting_windows/TroubleshootingWindows
     troubleshooting_debian/TroubleshootingDebian
-    ../LICENSE
 
 
 Indices and tables
