@@ -23,7 +23,7 @@ Below is a list of all the required software:
 
 *  Microsoft .NET Framework 3.5 Service Pack 1
 *  Visual C++ Build Tools 2015
-*  PostgresSQL 9.6.2+
+*  PostgresSQL 9.6.2+ or Microsoft® SQL Server® 2014 Express
 *  Node.js 7+ and NPM 3+
 *  Python 3.5
 *  FreeTDS
@@ -200,7 +200,9 @@ for 'peek'.  Select ok then enter the account password
 
 ----
 
-Database Engine Configuration: Leave the default settings
+Database Engine Configuration: Select "Mixed Mode" and enter a password
+
+.. image:: SQLServer-DBEngConfig.jpg
 
 ----
 
