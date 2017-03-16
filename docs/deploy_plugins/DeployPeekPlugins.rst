@@ -1,3 +1,5 @@
+.. _deploy_peek_plugins:
+
 ===================
 Deploy Peek Plugins
 ===================
@@ -10,7 +12,7 @@ Deploying Plugins
 This section deploys the plugins to the new virtual environment.
 
 For more information about plugin development and building plugin packages / releases
-see: :ref:`_plugin_development`
+see: :ref:`develop_peek_plugins`
 
 Windows
 ```````

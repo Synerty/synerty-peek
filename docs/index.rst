@@ -6,7 +6,7 @@ Peek Platform Documentation
     :maxdepth: 2
     :caption: Contents:
 
-    ../README
+    guide
     overview/Overview
     setup_os_requirements_windows/SetupOSRequirementsWindows
     setup_os_requirements_debian/SetupOSRequirementsDebian
@@ -25,10 +25,8 @@ Peek Platform Documentation
     package_platform/PackagePeekPlatform
     setup_pycharm/SetupPycharm
     setup_vs_code/SetupVSCode
-    modules
     troubleshooting_windows/TroubleshootingWindows
     troubleshooting_debian/TroubleshootingDebian
-    ../LICENSE
 
 
 Indices and tables

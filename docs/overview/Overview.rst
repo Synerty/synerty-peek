@@ -6,7 +6,7 @@ Peek Platforms primary goal is to manage, run and provide services to, hundreds 
 small units of code. We call these units of code, plugins.
 
 These plugins build upon each others functionality to provide highly maintainable,
-testable and enterpise grade environment.
+testable and enterprise grade environment.
 
 Plugins can publish APIs for other plugins to use, and one plugin can run across all
 services in the platform if it chooses.
@@ -15,7 +15,7 @@ The Peek Platform provides low level services, such as data transport,
 database access, web server, etc. It effectively just bootstraps plugins.
 
 With the Peek Platform up and running, plugins can be added and updated by dropping zip
-files onto the peek admin web page. The platform then propogates the new plugin, loads
+files onto the peek admin web page. The platform then propagates the new plugin, loads
 and runs it.
 
 Higher level functionality is added by creating plugins.
@@ -63,7 +63,7 @@ The services are as follows:
     "server", "python", "The center of the Peek Platform, ideal for central logic."
     "storage", "python", "This refers to support for persisting and retrieving database data."
     "client", "python", "The client service handles requests from 'desktop' and 'mobile'."
-    "agent", "python", "The agent is a satelite service, integrating with external systems."
+    "agent", "python", "The agent is a satellite service, integrating with external systems."
     "worker", "python", "The worker service provides parallel processing for computational intensive tasks"
     "admin", "typescript", "A web based admin interface for the peek platform"
     "mobile", "typescript", "The user interface for mobile devices."
@@ -89,9 +89,9 @@ The storage service is provided by a SQLAlchemy database library, supporting any
 from low level database API access to working with the database using a high level ORM.
 
 Database schema versioning is handled by Alembic, allowing plugins to automatically
-updage their database schemas, or patch data as required.
+update their database schemas, or patch data as required.
 
-The database access is availible on the Peek Worker and Peek Server services.
+The database access is available on the Peek Worker and Peek Server services.
 
 
 Client Service
@@ -215,7 +215,7 @@ Plugins
 -------
 
 The Peek Platform doesn't do much by it's self. It starts, makes all it's connections,
-initilises databases and then just waits.
+initialises databases and then just waits.
 
 The magic happens in the plugins, plugins provide useful functionality to Peek.
 
@@ -228,10 +228,10 @@ All of the code for one plugin exists within a single python package. This one p
 is installed on all of the services, even though only part of the plugin will run on each
 service.
 
-There are muliple entry hooks with in the plugin, one for each peek service
+There are multiple entry hooks with in the plugin, one for each peek service
 the plugin chooses to run on.
 
-Each service will start a peice of the plugin, for example : Part of the plugin may run
+Each service will start a piece of the plugin, for example : Part of the plugin may run
 on the server service, and part of the plugin may run on the agent service.
 
 Plugins, Integrating with Plugins
@@ -269,7 +269,7 @@ Enterprise Extensible
 You could create other "User Plugins" with the same exposed plugin API for different
 backends, and the "Active Task" plugin wouldn't know the difference.
 
-Stable, exposed APIs make building enterprise applications more managable.
+Stable, exposed APIs make building enterprise applications more manageable.
 
 
 Noop Plugin Example
@@ -293,7 +293,7 @@ It's folder structure looks like this :
 
             *   **alembic** (Database schema versioning scripts)
 
-            *   **client**  (The code that runs on the client servce)
+            *   **client**  (The code that runs on the client service)
 
             *   **desktop_app**   (The user interface that runs on the desktop/web)
 

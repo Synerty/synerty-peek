@@ -1,4 +1,4 @@
-.. _git-bash:
+.. _git_bash:
 
 ==============
 Setup Msys Git
