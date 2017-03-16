@@ -1,5 +1,7 @@
+.. _SetupAndroidDebian:
+
 ====================
-Debian Android Setup
+Setup Android Debian
 ====================
 
 Install the 32bit requirements

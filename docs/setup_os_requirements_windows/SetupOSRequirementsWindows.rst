@@ -126,7 +126,7 @@ Run pgAdmin4
 
 Open the Query Tool
 
-.. image:: windows_requirements_setup/pgAdmin4-queryTool.jpg
+.. image:: pgAdmin4-queryTool.jpg
 
 ----
 
@@ -142,7 +142,7 @@ Create the peek user, run the following script: ::
         CONNECTION LIMIT -1
         PASSWORD 'bford';
 
-.. image:: windows_requirements_setup/pgAdmin4-userQuery.jpg
+.. image:: pgAdmin4-userQuery.jpg
 
 ----
 
@@ -157,11 +157,11 @@ Create the peek database, run the following script: ::
 
 Confirm database was created
 
-.. image:: windows_requirements_setup/pgAdmin4-refresh.jpg
+.. image:: pgAdmin4-refresh.jpg
 
 |
 
-.. image:: windows_requirements_setup/pgAdmin4-peekDatabase.jpg
+.. image:: pgAdmin4-peekDatabase.jpg
 
 |
 
@@ -184,7 +184,7 @@ Select "New SQL Server stand-alone installation"
 
 Feature Selection: check all Features
 
-.. image:: windows_requirements_setup/SQLServer-FeatureSelection.jpg
+.. image:: SQLServer-FeatureSelection.jpg
 
 ----
 
@@ -196,7 +196,7 @@ Instance Configuration: change the named instance to 'peek'. This will update th
 Server Configuration: Select browse from the 'Account Name' drop-list and check names
 for 'peek'.  Select ok then enter the account password
 
-.. image:: windows_requirements_setup/SQLServer-ServerConfiguration.jpg
+.. image:: SQLServer-ServerConfiguration.jpg
 
 ----
 
@@ -221,19 +221,19 @@ Open the "SQL Server Configuration Manager" from the start menu
 
 Under the TCP/IP properties set 'IPALL' 'TCP PORT' to '1433'. Select 'Apply' then 'OK',
 
-.. image:: windows_requirements_setup/set_tcp_port.png
+.. image:: set_tcp_port.png
 
 ----
 
 Enable the 'TCP/IP' Protocol
 
-.. image:: windows_requirements_setup/enable_tcpip.png
+.. image:: enable_tcpip.png
 
 ----
 
 Restart the server service.
 
-.. image:: windows_requirements_setup/SQLServer-RestartServices.jpg
+.. image:: SQLServer-RestartServices.jpg
 
 |
 
@@ -274,13 +274,13 @@ Python 3.5
 
 Check the 'Add Python 3.5 to PATH' and select 'Customize Installation'
 
-.. image:: windows_requirements_setup/Python-Install.jpg
+.. image:: Python-Install.jpg
 
 ----
 
 Update the 'Customize install location' to PATH C:\Users\peek\Python35\
 
-.. image:: windows_requirements_setup/Python-AdvancedOptions.jpg
+.. image:: Python-AdvancedOptions.jpg
 
 ----
 
@@ -360,7 +360,7 @@ Launch: "gpedit.msc" and Navigate to
         Local Policies
         User Rights Assignment
 
-.. image:: windows_requirements_setup/gpedit-CreateSymlinks.jpg
+.. image:: gpedit-CreateSymlinks.jpg
 
 ----
 
@@ -370,7 +370,7 @@ Double click on "Create symbolic links"
 
 Click "Add User or Group", add "peek", then "OK" out of the dialogues.
 
-.. image:: windows_requirements_setup/gpedit-AddUser.jpg
+.. image:: gpedit-AddUser.jpg
 
 ----
 
@@ -397,7 +397,7 @@ Click the "Start" menu and select "Settings"
 
 Select 'Update & Security'
 
-.. image:: windows_requirements_setup/DevMode-UpdateSecurity.jpg
+.. image:: DevMode-UpdateSecurity.jpg
 
 ----
 
@@ -407,7 +407,7 @@ Click on the "For developers" tab on the left.
 
 Select 'Developer Mode', and acknowledge the warning.
 
-.. image:: windows_requirements_setup/DevMode-ForDevelopers.jpg
+.. image:: DevMode-ForDevelopers.jpg
 
 |
 

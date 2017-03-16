@@ -8,25 +8,27 @@ Welcome to synerty-peek's documentation!
 
    ../README
    overview/overview
-   SetupOSRequirementsWindows
-   SetupOSRequirementsDebian
-   DeployPeekPlatform
-   DeployPeekPlugin
-   AdministerPeekPlatform
-   NativescriptSetupWindows
-   PackageNativescriptApp
-   DeployNativescriptApp
-   DevelopPeekPlugin
-   PublishPeekPlugin
-   PackagePeekPlugin
-   DevelopPeekPlatform
-   PublishPeekPlatform
-   PackagePeekPlatform
-   visio_studio_code_setup/visio_studio_code_setup
-   pycharm_setup/pycharm_setup
+   setup_os_requirements_windows/SetupOSRequirementsWindows
+   setup_os_requirements_debian/SetupOSRequirementsDebian
+   deploy_platform/DeployPeekPlatform
+   deploy_plugins/DeployPeekPlugins
+   administer/AdministerPeekPlatform
+   setup_nativescript_windows/SetupNativescriptWindows
+   setup_nativescript_debian/SetupNativescriptDebian
+   package_nativescript/PackageNativescriptApp
+   deploy_nativescript/DeployNativescriptApp
+   develop_plugins/DevelopPeekPlugins
+   publish_plugins/PublishPeekPlugins
+   package_plugins/PackagePeekPlugins
+   develop_platform/DevelopPeekPlatform
+   publish_platform/PublishPeekPlatform
+   package_platform/PackagePeekPlatform
+   setup_pycharm/SetupPycharm
+   setup_vs_code/SetupVSCode
    modules
-   TroubleshootingWindows
-   LICENSE
+   troubleshooting_windows/TroubleshootingWindows
+   troubleshooting_debian/TroubleshootingDebian
+   ../LICENSE
 
 
 Indices and tables
@@ -35,3 +37,4 @@ Indices and tables
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
+

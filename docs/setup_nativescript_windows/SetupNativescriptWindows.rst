@@ -1,5 +1,5 @@
 ==========================
-Nativescript Setup Windows
+Setup Nativescript Windows
 ==========================
 
 This page contains a list of all system requirements needed to build and run
@@ -120,7 +120,7 @@ Check the installation with tns ::
 
     tns doctor
 
-.. image:: nativescript/Nativescript-tnsDoctor.jpg
+.. image:: ./Nativescript-TnsDoctor.jpg
 
 Android Emulator Setup
 ``````````````````````

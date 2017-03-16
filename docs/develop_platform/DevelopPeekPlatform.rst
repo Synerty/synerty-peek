@@ -39,7 +39,7 @@ GitBash
 
 Configuring Extra Options: check 'Enable Symbolic Links'
 
-.. image:: windows_requirements_setup/GIT-ExtraOptions.jpg
+.. image:: GIT-ExtraOptions.jpg
 
 ----
 
