@@ -104,7 +104,7 @@ Multiple Client services can connect to one Server service, improving the maximu
 of simultaneous users the platform can handle.
 
 The Peek Client server handles all the live data, and serves all the resources to
- the Peek Desktop and Peek Mobile services.
+the Peek Desktop and Peek Mobile services.
 
 The live data is serialised payloads, transferred over HTTP or Websockets. This is the
 VortexJS library at work.
@@ -139,6 +139,13 @@ allowing it to work offline.
 In web developers terminology, the Mobile service is called the frontend, and
 the Client service is called the backend.
 
+The Mobile service codes structure allows Angualar components to be reused to drive both
+nativescript and web based interfaces. For example :
+
+**my-component.ns.html**    (View for Nativescipt XML)
+**my-component.ts**    (Angular component, written in Typescript)
+**my-component.web.html**   (View for Browser HTML)
+
 
 Desktop Service
 ```````````````
@@ -150,26 +157,59 @@ Electron + Angular for Native desktop apps and Angular for the web app.
 
 The Desktop service has a different user interface, designed for desktop use.
 
-Plugins can use share code in the desktop and mobile apps if they choose.
+The Desktop service codes structure allows Angualar components to be reused to drive both
+electron and web based interfaces. For example :
+
+**my-component.tron.html**    (View for Nativescipt XML)
+**my-component.ts**    (Angular component, written in Typescript)
+**my-component.web.html**   (View for Browser HTML)
+
+Plugins can be structured to reuse code and Angular components between the Mobile
+and Desktop services if they choose.
 
 Worker Service
 ``````````````
 
+The Peek Worker service provides parallel processing support for the platform using the
+Celery project.
+
+The Worker service is ideal for computationally or IO expensive operations.
+
+The Peek Server queues tasks for the Worker service to process via a rabbitmq messaging
+queue, the tasks are performed and the results are returned to the Peek Service via redis.
+
+Tasks are run in forks, meaning there is one task per an operating system process, which
+achives better performance.
+
+Multiple Peek Worker services can connect to one Peek Server service.
+
 Agent Service
 `````````````
+The Peek Agent service provides support for integrations with external system.
+
+The Agent allows Peek to connect to other systems. There is nothing special about the
+agent implementation, it's primary purpose is to separate external system integrations
+from the Peek Server service.
+
+Peek Agent can be placed in other networks, allowing greater separation and security from
+Peek Server.
+
+Here are some example use cases :
+
+*   Quering and opdate Oracle databases.
+*   Providing and connecting to SOAP services
+*   Providing HTTP REST interfaces
+*   Interfacing with other systems via SSH.
 
 Admin Service
 `````````````
+The Peek Admin service is the Peek Administrators user interface, providing administration
+for plugins and the platform.
 
 The Peek Admin service is almost identical to the Desktop service, however it only has
 the web app.
 
-The Peek Admin service is an Angular
-
-The Desktop service has a different user interface, designed for desktop use.
-
-Plugins can use share code in the desktop and mobile apps if they choose.
-
+The Peek Admin service is an Angular web app.
 
 Plugins
 -------
