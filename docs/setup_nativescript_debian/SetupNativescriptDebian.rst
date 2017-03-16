@@ -1,6 +1,6 @@
-=================================
-Debian Nativescript Install Guide
-=================================
+=========================
+Setup Nativescript Debian
+=========================
 
 **TODO** This is still the windows guide.
 
@@ -36,8 +36,10 @@ Below is a list of all the required software:
 
 
 
-Online Installation Guide
--------------------------
+Installation Guide
+------------------
+
+.. include:: android_sdk/SetupAndroidDebian.rst
 
 
 Java Install
@@ -69,7 +71,7 @@ Do you want to run the setup script? ::
 
         Y
 
-.. image:: nativescript/Nativescript-Install.jpg
+###.. image:: Nativescript-Install.jpg
 
 ----
 
@@ -91,7 +93,7 @@ Do you want to install HAXM (Hardware accelerated Android emulator)?:
 
 ----
 
-.. image:: nativescript/Nativescript-InstallComplete.jpg
+.. image DISABLED:: Nativescript-InstallComplete.jpg
 
 ----
 
@@ -114,11 +116,11 @@ Login to windows as peek, Then open a command window and continue.
 
 Check the installation with tns
 
-:::
+::
 
     tns doctor
 
-.. image:: nativescript/Nativescript-tnsDoctor.jpg
+.. image DISABLED:: Nativescript-tnsDoctor.jpg
 
 .. note:: At this point you may find your self in a real life infinite loop.
     as tns doctor may ask you to run the setup script again if the setup is broken.

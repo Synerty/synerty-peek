@@ -1,6 +1,6 @@
-=============
-Pycharm Setup
-=============
+=================
+Setup Pycharm IDE
+=================
 
 #.  Open pycharm,
 

@@ -1,6 +1,6 @@
-===================
-Package Peek Plugin
-===================
+====================
+Package Peek Plugins
+====================
 
 .. note:: The Windows or Debian requirements must be followed before following this guide.
 

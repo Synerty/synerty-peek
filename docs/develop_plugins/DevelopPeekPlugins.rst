@@ -1,15 +1,23 @@
-===================
-Develop Peek Plugin
-===================
+====================
+Develop Peek Plugins
+====================
 
 ** TODO **
+
 ** TODO **
+
 ** TODO **
+
 ** TODO **
+
 This document has not been started, or finished.
+
 ** TODO **
+
 ** TODO **
+
 ** TODO **
+
 ** TODO **
 
 Developing

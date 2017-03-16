@@ -1,6 +1,6 @@
-=======================
-Visio Studio Code Setup
-=======================
+=============
+Setup VS Code
+=============
 
 #.  Visual Studio Code,
 

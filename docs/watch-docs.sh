@@ -2,4 +2,11 @@
 
 path=`dirname $0`
 
-bash -l -c "sphinx-autobuild -p 8020 -H 0.0.0.0 $path $path/../dist/doc_autobuild"
+cd $path
+
+ARGS="-H 0.0.0.0"
+ARGS="$ARGS -p 8020"
+ARGS="$ARGS . ../dist/doc_autobuild"
+
+# Run the command
+bash -l -c "sphinx-autobuild $ARGS"
