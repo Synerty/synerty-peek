@@ -32,7 +32,7 @@ For example, if you want to provide a means of integrating with external, less s
 systems, you can place a "Peek Agent Service" in a DMZ to interface with the less secure
 networks. The Peek Agent will talk upstream to the Peek Server.
 
-The following diagram describes the architecture of the platform and the services it
+The following diagram describes the architecture of the platform and the services
 it provides.
 
 .. image:: platform_architecture.png
@@ -69,7 +69,8 @@ The services are as follows:
     "mobile", "typescript", "The user interface for mobile devices."
     "desktop", "typescript", "The user interface for desktops"
 
-
+.. note:: Where we refer to "Angular" this means Angular version 2+. Angular1 is known
+            as "AngularJS"
 
 Server Service
 ``````````````
@@ -96,8 +97,26 @@ The database access is availible on the Peek Worker and Peek Server services.
 Client Service
 ``````````````
 
-The Peek Client server handles serving of user web app resources like html, css,
+The Client service was introduced to handle all requests from desktop, mobile and web
+apps. Reducing the load on the Peek Server.
 
+Multiple Client services can connect to one Server service, improving the maximum number
+of simultaneous users the platform can handle.
+
+The Peek Client server handles all the live data, and serves all the resources to
+ the Peek Desktop and Peek Mobile services.
+
+The live data is serialised payloads, transferred over HTTP or Websockets. This is the
+VortexJS library at work.
+
+The Client service buffers observable data from the server. The client will ask the server
+for data once, and then notify all users connected to the Client service when the data
+arrives. However, Plugins can implement their own logic for this if required.
+
+The Client serves all HTTP resources to the Desktop web apps and Mobile web apps,
+this includes HTML, CSS, Javascript, images and other assets.
+
+The following diagram gives an overview of the clients communications.
 
 .. image:: ClientService.png
 
@@ -141,6 +160,15 @@ Agent Service
 
 Admin Service
 `````````````
+
+The Peek Admin service is almost identical to the Desktop service, however it only has
+the web app.
+
+The Peek Admin service is an Angular
+
+The Desktop service has a different user interface, designed for desktop use.
+
+Plugins can use share code in the desktop and mobile apps if they choose.
 
 
 Plugins
