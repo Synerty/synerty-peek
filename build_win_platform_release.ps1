@@ -33,7 +33,24 @@ $nodePackages = @(
     }
 );
 
+# ------------------------------------------------------------------------------
+# Download node, npm, @angular/cli, typescript and tslint
+Set-Location "$baseDir";
+$nodeVer = "node-v7.7.3-win-x64";
+$nodeUrl = 'https://nodejs.org/dist/latest/$nodeVer.zip';
+$nodeFile = 'node.zip';
+Invoke-WebRequest -Uri $nodeUrl -UseBasicParsing -OutFile $nodeFile;
 
+Write-Host "Using standard windows zip handler, this will be slow";
+Add-Type -Assembly System.IO.Compression.FileSystem;
+[System.IO.Compression.ZipFile]::ExtractToDirectory("$baseDir\$nodeFile", $baseDir);
+
+Remove-Item "$baseDir\$nodeFile" -Force -Recurse;
+Move-Item "$nodeVer" "node"
+Set-Location "$baseDir\node";
+npm -g install @angular/cli typescript tslint;
+
+# ------------------------------------------------------------------------------
 # Download the peek platform and all it's dependencies
 New-Item "$baseDir\py" -ItemType directory;
 Set-Location "$baseDir\py";
@@ -58,7 +75,7 @@ $shapeUrl = 'http://www.lfd.uci.edu/~gohlke/pythonlibs/tuth5y6k/Shapely-1.5.17-c
 $shapeFile = 'Shapely-1.5.17-cp35-cp35m-win_amd64.whl';
 Invoke-WebRequest -Uri $shapeUrl -UseBasicParsing -OutFile $shapeFile;
 
-
+# ------------------------------------------------------------------------------
 # Download the node_packages
 foreach ($element in $nodePackages) {
     # Get the variables for this package
@@ -84,7 +101,7 @@ foreach ($element in $nodePackages) {
     Remove-Item "tmp" -Force -Recurse;
 }
 
-
+# ------------------------------------------------------------------------------
 # Set the location back to where we were.
 Set-Location $startDir;
 
