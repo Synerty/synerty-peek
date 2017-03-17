@@ -4,6 +4,18 @@
 Develop Peek Plugins
 ====================
 
+Synerty recommend:
+
+Bitbucket to manage and share your Git repositories
+
+:URL: `<https://bitbucket.org>`_
+
+SourceTree GUI to visually manage and interact with your Git repositories
+
+:URL: `<https://www.sourcetreeapp.com>`_
+
+|
+
 Creating Peek Plugin
 --------------------
 
@@ -13,6 +25,10 @@ Clone and Copy peek-plugin-noop
 ```````````````````````````````
 
 :Clone: `<https://github.com/Synerty/peek-plugin-noop.git>`_
+
+Go to, peek-plugin-noop repository on Bitbucket
+
+.. image:: DevPlugin-CloneSTree.jpg
 
 ----
 
@@ -61,7 +77,7 @@ Create new repository on GitHub.
 
 Your link will look something like: ::
 
-        https://github.com/synerty/example.git
+        https://{account username}@bitbucket.org/{account username}/example.git
 
 ----
 
@@ -90,9 +106,6 @@ Push your changes: ::
 
 Edit Existing Plugin
 --------------------
-
-You will need to already have a GitHub account to create a fork of the plugin(s) you plan
-to edit.
 
 Fork and Clone plugin
 `````````````````````
