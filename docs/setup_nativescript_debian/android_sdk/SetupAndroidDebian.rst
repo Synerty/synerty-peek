@@ -1,11 +1,11 @@
 .. _SetupAndroidDebian:
 
-====================
+
 Setup Android Debian
-====================
+--------------------
 
 Install the 32bit requirements
-------------------------------
+``````````````````````````````
 
 ::
 
@@ -16,7 +16,7 @@ Install the 32bit requirements
 
 
 Install Java JDK
-----------------
+````````````````
 
 ::
 
@@ -25,7 +25,7 @@ Install Java JDK
 
 
 Installing the SDK
-------------------
+``````````````````
 
 Download the SDK only from here, scroll right to the bottom, to the
 "Get just the command line tools" section, and download the linux tools.
@@ -44,7 +44,7 @@ https://developer.android.com/studio/index.html#downloads
 
 
 Create the Android Virtual Device
----------------------------------
+`````````````````````````````````
 
 ::
 
