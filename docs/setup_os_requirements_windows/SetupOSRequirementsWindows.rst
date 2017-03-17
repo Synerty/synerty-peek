@@ -215,26 +215,33 @@ Database Engine Configuration: Select "Mixed Mode" and enter a password
 
 .. image:: SQLServer-DBEngConfig.jpg
 
-----
+|
+
+Create Peek Database
+~~~~~~~~~~~~~~~~~~~~
 
 Start Microsoft SQL Server Management Studio
-    Connect to PEEK database engine
-    Create new database 'peek'
 
 ----
 
-Make Changes in SQL Server Configuration Manager (SQLServerManager12.msc).
-
-Open the "SQL Server Configuration Manager" from the start menu
-    Select the folowing:
-        SQL Server Network Configuration
-        Protocols for PEEK
+Connect to PEEK database engine
 
 ----
 
-Under the TCP/IP properties set 'IPALL' 'TCP PORT' to '1433'. Select 'Apply' then 'OK',
+Create new database 'peek'
 
-.. image:: set_tcp_port.png
+SQL Server Configuration Manager
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Open the "SQL Server Configuration Manager" (SQLServerManager12.msc) from the start menu
+
+----
+
+Expand, "SQL Server Network Configuration"
+
+----
+
+Select, "Protocols for PEEK"
 
 ----
 
