@@ -42,7 +42,6 @@ Copy into new directory structure, run the following commands in the bash shell:
 
         cp -pr peek-plugin-noop peek-plugin-example
         cd peek-plugin-example
-        mv peek_plugin_noop/ peek_plugin_example/
         rm -rf .git .idea .vscode
 
 Rename the Plugin
