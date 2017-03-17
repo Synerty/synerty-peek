@@ -37,8 +37,8 @@ $nodePackages = @(
 # Download node, npm, @angular/cli, typescript and tslint
 Set-Location "$baseDir";
 $nodeVer = "node-v7.7.3-win-x64";
-$nodeUrl = 'https://nodejs.org/dist/latest/$nodeVer.zip';
-$nodeFile = 'node.zip';
+$nodeUrl = "https://nodejs.org/dist/latest/$nodeVer.zip";
+$nodeFile = "node.zip";
 Invoke-WebRequest -Uri $nodeUrl -UseBasicParsing -OutFile $nodeFile;
 
 Write-Host "Using standard windows zip handler, this will be slow";
