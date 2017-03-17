@@ -233,21 +233,43 @@ Create new database 'peek'
 SQL Server Configuration Manager
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Open the "SQL Server Configuration Manager" (SQLServerManager12.msc) from the start menu
+Open the SQL Server Configuration Manager (SQLServerManager12.msc) from the start menu
 
 ----
 
-Expand, "SQL Server Network Configuration"
+Expand, SQL Server Network Configuration
 
 ----
 
-Select, "Protocols for PEEK"
+Select, Protocols for PEEK
 
 ----
 
-Enable the 'TCP/IP' Protocol
+Go to, TCP/IP Properties and select the IP Addresses tab
+
+----
+
+Go to, section with the IP Address set to 127.0.0.1
+
+----
+
+Set Enabled "Yes"
+
+----
+
+Set TCP Port to "1433"
+
+.. image:: set_tcp_port.jpg
+
+----
+
+Enable the TCP/IP Protocol
 
 .. image:: enable_tcpip.png
+
+----
+
+Select 'OK'
 
 ----
 
