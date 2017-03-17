@@ -32,7 +32,7 @@ requirements.extend(doc_requirements)
 setup(
     name=pip_package_name,
     packages=find_packages(exclude=["*.tests", "*.tests.*", "tests.*", "tests"]),
-    install_requires=requirements,
+    requires=requirements,
     version=package_version,
     description='Peek Platform - Meta Package to install all services',
     author='Synerty',
