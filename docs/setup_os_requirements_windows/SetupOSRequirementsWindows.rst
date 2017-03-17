@@ -6,11 +6,15 @@ The Peek platform is designed to run on Linux, however, it is compatible with wi
 Please read through all of the documentation before commencing the installation
 procedure.
 
+|
+
 Installation Objective
 ----------------------
 
 This *Installation Guide* contains specific Windows operating system requirements for the
 configuring of synerty-peek.
+
+|
 
 Required Software
 `````````````````
@@ -27,6 +31,8 @@ Below is a list of all the required software:
 *  Node.js 7+ and NPM 3+
 *  Python 3.5
 *  FreeTDS
+
+|
 
 Optional  Software
 ``````````````````
@@ -48,6 +54,8 @@ documents and has useful features.
 Installing Oracle Libraries is required if you intend on installing the peek agent.
 Instruction for installing the Oracle Libraries are in the *Online Installation Guide*.
 
+|
+
 OS Commands
 -----------
 
@@ -58,6 +66,8 @@ for all OS commands.
 When peek generates it's config it should automatically choose the right interpreter. ::
 
         "C:\Program Files\Git\bin\bash.exe" if isWindows else "/bin/bash"
+
+|
 
 Online Installation Guide
 -------------------------
@@ -77,6 +87,7 @@ Create a windows user account for peek with admin rights.
 
 sign in to the peek account
 
+|
 
 Microsoft .NET Framework 3.5 Service Pack 1
 ```````````````````````````````````````````
@@ -107,6 +118,8 @@ Visual C++ Build Tools 2015
 Install using the ISO
 
 :Download: `<https://www.microsoft.com/en-US/download/details.aspx?id=48146>`_
+
+|
 
 .. _postgressql:
 
@@ -230,6 +243,8 @@ Connect to PEEK database engine
 
 Create new database 'peek'
 
+|
+
 SQL Server Configuration Manager
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -307,6 +322,7 @@ Create 'freetds.conf' in "C:\" ::
             tds version = 7.0
             dump file = /tmp/freetds.log
 
+|
 
 dll files
 ~~~~~~~~~
@@ -329,6 +345,8 @@ You will need to duplicate the above files and name them as per below:
 *  libeay32MD.dll
 
 *  ssleay32MD.dll
+
+|
 
 Python 3.5
 ``````````
@@ -358,6 +376,8 @@ Confirm PATH(s) to environment variables ::
 
         C:\Users\peek\Python35\
         C:\Users\peek\Python35\Scripts\
+
+|
 
 SymLinks
 ````````
@@ -395,6 +415,8 @@ You will need to logout and log back in for the change to take effect
     group.  Those users will always have to run mklink in an elevated environment as
     Administrator.
 
+|
+
 Enable Development
 ``````````````````
 
@@ -426,12 +448,13 @@ Select 'Developer Mode', and acknowledge the warning.
 
 |
 
-
 Installing Oracle Libraries
 ---------------------------
 
 The oracle libraries are optional. Install them where the agent runs if you are going
 to interface with an oracle database.
+
+|
 
 Oracle Instant Client
 `````````````````````
@@ -454,6 +477,8 @@ Select the following options
 ----
 
 Reboot windows, or logout and login to ensure the PATH updates.
+
+|
 
 Installing synerty-peek
 -----------------------
