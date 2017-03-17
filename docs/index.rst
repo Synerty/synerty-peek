@@ -27,6 +27,8 @@ Peek Platform Documentation
     setup_vs_code/SetupVSCode
     troubleshooting_windows/TroubleshootingWindows
     troubleshooting_debian/TroubleshootingDebian
+    api/API
+    api_autodoc/peek_plugin_base/peek_plugin_base
 
 
 Indices and tables

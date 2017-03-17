@@ -1,4 +1,4 @@
-.. _SetupAndroidDebian:
+.. _setup_android_debian:
 
 
 Setup Android Debian

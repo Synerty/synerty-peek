@@ -163,5 +163,12 @@ texinfo_documents = [
      'Miscellaneous'),
 ]
 
+from docs.create_api import createApiDocs
+
+import peek_plugin_base
+createApiDocs(peek_plugin_base.__file__)
+
+# import peek_platform
+# createApiDocs(peek_platform.__file__)
 
 

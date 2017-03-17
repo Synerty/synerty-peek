@@ -10,6 +10,7 @@ dist/git s
 
 # Distribution / packaging
 .Python
+docs/api_autodoc/
 env/
 build/
 develop-eggs/
