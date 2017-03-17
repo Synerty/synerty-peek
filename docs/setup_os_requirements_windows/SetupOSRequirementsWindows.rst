@@ -290,33 +290,6 @@ You will need to duplicate the above files and name them as per below:
 
 *  ssleay32MD.dll
 
-Node.js 7+ and NPM 3+
-`````````````````````
-
-:Download: `<https://nodejs.org/dist/v7.4.0/node-v7.4.0-x64.msi>`_
-:From: `<https://nodejs.org/en/download/current/>`_
-
-----
-
-Change install path ::
-
-        C:\Users\peek\nodejs
-
-----
-
-Edit the system PATH to environment variable, and add the following ::
-
-        C:\Users\peek\AppData\Roaming\npm;
-        C:\Users\peek\nodejs\
-
-----
-
-Install the required NPM packages
-
-Run the Command Prompt as Administrator and run the following commands: ::
-
-        npm -g install @angular/cli typescript tslint
-
 Python 3.5
 ``````````
 
