@@ -10,7 +10,7 @@ Bitbucket to manage and share your Git repositories
 
 :URL: `<https://bitbucket.org>`_
 
-SourceTree GUI to visually manage and interact with your Git repositories
+SourceTree to visually manage and interact with your Git repositories
 
 :URL: `<https://www.sourcetreeapp.com>`_
 
