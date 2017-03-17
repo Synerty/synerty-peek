@@ -108,8 +108,14 @@ Install using the ISO
 
 :Download: `<https://www.microsoft.com/en-US/download/details.aspx?id=48146>`_
 
+.. _postgressql:
+
 PostgresSQL
 ```````````
+
+.. NOTE:: This install procedure contains instructions for both PostgresSQL and MSSQL.
+    To install Microsoft® SQL Server® 2014 Express, see:
+    :ref:`microsoft_sql_server_2014_express`
 
 :Download: `<https://www.enterprisedb.com/downloads/postgres-postgresql-downloads#windows>`_
 :From: `<https://www.postgresql.org>`_
@@ -165,8 +171,13 @@ Confirm database was created
 
 |
 
+.. _microsoft_sql_server_2014_express:
+
 Microsoft® SQL Server® 2014 Express
 ```````````````````````````````````
+
+.. NOTE:: This install procedure contains instructions for both PostgresSQL and MSSQL.
+    To install PostgresSQL, see: :ref:`postgressql`
 
 :From: `<https://www.microsoft.com/en-ca/download/details.aspx?id=42299>`_
 
