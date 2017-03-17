@@ -239,6 +239,57 @@ Restart the server service.
 
 |
 
+FreeTDS
+~~~~~~~
+
+:Download: `<https://github.com/ramiro/freetds/releases/download/v0.95.95/freetds-v0.95.95-win-x86_64-vs2015.zip>`_
+:From: `<https://github.com/ramiro/freetds/releases>`_
+
+----
+
+Unzip contents into ::
+
+        C:\Users\peek\freetds-v0.95.95
+
+----
+
+Add PATH to environment variables ::
+
+        C:\Users\peek\freetds-v0.95.95\bin
+
+----
+
+Create 'freetds.conf' in "C:\" ::
+
+        [global]
+            port = 1433
+            instance = peek
+            tds version = 7.0
+            dump file = /tmp/freetds.log
+
+
+dll files
+~~~~~~~~~
+
+:Download: `<http://indy.fulgan.com/SSL/openssl-1.0.2j-x64_86-win64.zip>`_
+:From: `<http://indy.fulgan.com/SSL/>`_
+
+----
+
+Ensure these files are in the system32 folder:
+
+*  libeay32.dll
+
+*  ssleay32.dll
+
+----
+
+You will need to duplicate the above files and name them as per below:
+
+*  libeay32MD.dll
+
+*  ssleay32MD.dll
+
 Node.js 7+ and NPM 3+
 `````````````````````
 
@@ -294,57 +345,6 @@ Confirm PATH(s) to environment variables ::
 
         C:\Users\peek\Python35\
         C:\Users\peek\Python35\Scripts\
-
-FreeTDS
-```````
-
-:Download: `<https://github.com/ramiro/freetds/releases/download/v0.95.95/freetds-v0.95.95-win-x86_64-vs2015.zip>`_
-:From: `<https://github.com/ramiro/freetds/releases>`_
-
-----
-
-Unzip contents into ::
-
-        C:\Users\peek\freetds-v0.95.95
-
-----
-
-Add PATH to environment variables ::
-
-        C:\Users\peek\freetds-v0.95.95\bin
-
-----
-
-Create 'freetds.conf' in "C:\" ::
-
-        [global]
-            port = 1433
-            instance = peek
-            tds version = 7.0
-            dump file = /tmp/freetds.log
-
-
-dll files
-~~~~~~~~~
-
-:Download: `<http://indy.fulgan.com/SSL/openssl-1.0.2j-x64_86-win64.zip>`_
-:From: `<http://indy.fulgan.com/SSL/>`_
-
-----
-
-Ensure these files are in the system32 folder:
-
-*  libeay32.dll
-
-*  ssleay32.dll
-
-----
-
-You will need to duplicate the above files and name them as per below:
-
-*  libeay32MD.dll
-
-*  ssleay32MD.dll
 
 SymLinks
 ````````
