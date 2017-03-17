@@ -108,8 +108,14 @@ Install using the ISO
 
 :Download: `<https://www.microsoft.com/en-US/download/details.aspx?id=48146>`_
 
+.. _postgressql:
+
 PostgresSQL
 ```````````
+
+.. NOTE:: This install procedure contains instructions for both PostgresSQL and MSSQL.
+    To install Microsoft® SQL Server® 2014 Express, see:
+    :ref:`microsoft_sql_server_2014_express`
 
 :Download: `<https://www.enterprisedb.com/downloads/postgres-postgresql-downloads#windows>`_
 :From: `<https://www.postgresql.org>`_
@@ -165,8 +171,13 @@ Confirm database was created
 
 |
 
+.. _microsoft_sql_server_2014_express:
+
 Microsoft® SQL Server® 2014 Express
 ```````````````````````````````````
+
+.. NOTE:: This install procedure contains instructions for both PostgresSQL and MSSQL.
+    To install PostgresSQL, see: :ref:`postgressql`
 
 :From: `<https://www.microsoft.com/en-ca/download/details.aspx?id=42299>`_
 
@@ -239,64 +250,8 @@ Restart the server service.
 
 |
 
-Node.js 7+ and NPM 3+
-`````````````````````
-
-:Download: `<https://nodejs.org/dist/v7.4.0/node-v7.4.0-x64.msi>`_
-:From: `<https://nodejs.org/en/download/current/>`_
-
-----
-
-Change install path ::
-
-        C:\Users\peek\nodejs
-
-----
-
-Edit the system PATH to environment variable, and add the following ::
-
-        C:\Users\peek\AppData\Roaming\npm;
-        C:\Users\peek\nodejs\
-
-----
-
-Install the required NPM packages
-
-Run the Command Prompt as Administrator and run the following commands: ::
-
-        npm -g install @angular/cli typescript tslint
-
-Python 3.5
-``````````
-
-:Download: `<https://www.python.org/ftp/python/3.5.3/python-3.5.3rc1-amd64.exe>`_
-:From: `<https://www.python.org/downloads/windows/>`_
-
-----
-
-Check the 'Add Python 3.5 to PATH' and select 'Customize Installation'
-
-.. image:: Python-Install.jpg
-
-----
-
-Update the 'Customize install location' to PATH C:\Users\peek\Python35\
-
-.. image:: Python-AdvancedOptions.jpg
-
-----
-
-Confirm PATH(s) to environment variables ::
-
-        echo %PATH%
-
-        ...
-
-        C:\Users\peek\Python35\
-        C:\Users\peek\Python35\Scripts\
-
 FreeTDS
-```````
+~~~~~~~
 
 :Download: `<https://github.com/ramiro/freetds/releases/download/v0.95.95/freetds-v0.95.95-win-x86_64-vs2015.zip>`_
 :From: `<https://github.com/ramiro/freetds/releases>`_
@@ -345,6 +300,35 @@ You will need to duplicate the above files and name them as per below:
 *  libeay32MD.dll
 
 *  ssleay32MD.dll
+
+Python 3.5
+``````````
+
+:Download: `<https://www.python.org/ftp/python/3.5.3/python-3.5.3rc1-amd64.exe>`_
+:From: `<https://www.python.org/downloads/windows/>`_
+
+----
+
+Check the 'Add Python 3.5 to PATH' and select 'Customize Installation'
+
+.. image:: Python-Install.jpg
+
+----
+
+Update the 'Customize install location' to PATH C:\Users\peek\Python35\
+
+.. image:: Python-AdvancedOptions.jpg
+
+----
+
+Confirm PATH(s) to environment variables ::
+
+        echo %PATH%
+
+        ...
+
+        C:\Users\peek\Python35\
+        C:\Users\peek\Python35\Scripts\
 
 SymLinks
 ````````

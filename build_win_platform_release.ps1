@@ -48,7 +48,7 @@ Add-Type -Assembly System.IO.Compression.FileSystem;
 Remove-Item "$baseDir\$nodeFile" -Force -Recurse;
 Move-Item "$nodeVer" "node"
 Set-Location "$baseDir\node";
-npm -g install @angular/cli typescript tslint;
+npm -g install --prefix "$baseDir\node" @angular/cli typescript tslint;
 
 # ------------------------------------------------------------------------------
 # Download the peek platform and all it's dependencies

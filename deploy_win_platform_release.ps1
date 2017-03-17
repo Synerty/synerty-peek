@@ -67,6 +67,7 @@ $sp="$venvDir\Lib\site-packages";
 Move-Item $releaseDir\client-build-ns\node_modules $sp\peek_client_fe\build-ns -Force
 Move-Item $releaseDir\client-build-web\node_modules $sp\peek_client_fe\build-web -Force
 Move-Item $releaseDir\server-build-web\node_modules $sp\peek_server_fe\build-web -Force
+Move-Item $releaseDir\node\* $venvDir\Scripts -Force
 
 # Update the reference to the new environment.
 # We probably won't want to do this here when we setup services.
