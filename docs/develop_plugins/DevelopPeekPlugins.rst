@@ -125,7 +125,7 @@ Developing
 Setup Plugin for Development
 ````````````````````````````
 
-Run the following command in the bash shell: ::
+In the repository directory, run the following command in the bash shell: ::
 
         python setup.py develop
 
