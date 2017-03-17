@@ -35,7 +35,7 @@ networks. The Peek Agent will talk upstream to the Peek Server.
 The following diagram describes the architecture of the platform and the services
 it provides.
 
-.. image:: platform_architecture.png
+.. image:: PlatformArchitecture.png
 
 Services
 --------
@@ -110,8 +110,8 @@ The live data is serialised payloads, transferred over HTTP or Websockets. This 
 VortexJS library at work.
 
 The Client service buffers observable data from the server. The client will ask the server
-for data once, and then notify all users connected to the Client service when the data
-arrives. However, Plugins can implement their own logic for this if required.
+for data once, and then notify multiple users connected to the Client service when the
+data arrives. However, Plugins can implement their own logic for this if required.
 
 The Client serves all HTTP resources to the Desktop web apps and Mobile web apps,
 this includes HTML, CSS, Javascript, images and other assets.
@@ -142,9 +142,9 @@ the Client service is called the backend.
 The Mobile service codes structure allows Angualar components to be reused to drive both
 nativescript and web based interfaces. For example :
 
-**my-component.ns.html**    (View for Nativescipt XML)
-**my-component.ts**    (Angular component, written in Typescript)
-**my-component.web.html**   (View for Browser HTML)
+*   **my-component.ns.html**    (View for Nativescipt XML)
+*   **my-component.ts**    (Angular component, written in Typescript)
+*   **my-component.web.html**   (View for Browser HTML)
 
 
 Desktop Service
@@ -160,9 +160,9 @@ The Desktop service has a different user interface, designed for desktop use.
 The Desktop service codes structure allows Angualar components to be reused to drive both
 electron and web based interfaces. For example :
 
-**my-component.tron.html**    (View for Nativescipt XML)
-**my-component.ts**    (Angular component, written in Typescript)
-**my-component.web.html**   (View for Browser HTML)
+*   **my-component.tron.html**    (View for Nativescipt XML)
+*   **my-component.ts**    (Angular component, written in Typescript)
+*   **my-component.web.html**   (View for Browser HTML)
 
 Plugins can be structured to reuse code and Angular components between the Mobile
 and Desktop services if they choose.
