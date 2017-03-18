@@ -1,3 +1,5 @@
+.. _overview:
+
 ========
 Overview
 ========
@@ -331,9 +333,7 @@ Typescript and Nativescript.
 The desktop, mobile and admin interfaces need the client and server python services to
 run, so this compile arrangement makes sense.
 
-
 .. image:: PluginsRunningOnMobile.png
-
 
 
 Noop Plugin Example

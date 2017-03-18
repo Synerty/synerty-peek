@@ -1,4 +1,4 @@
-.. _setup-pycharm-ide:
+.. _setup_pycharm_ide:
 
 =================
 Setup Pycharm IDE
@@ -52,3 +52,29 @@ Setup Pycharm IDE
         #.  TSLint Package -> ~/node-v7.1.0/lib/node_modules/tslint
 
         .. image:: settings_tslint.png
+
+Configure your developing software to use the virtual environment you wish to use
+
+Here is an example of the setting in PyCharm:
+
+.. image:: PycharmProjectInterpreter.jpg
+
+----
+
+Restart the services that use the plugin
+
+.. NOTE:: The plugins that aren't being developed should be installed as per
+    :ref:`deploy_peek_plugins`
+
+----
+
+This is an example of running the server service in debug mode using **PyCharm**
+
+Under the drop down "Run" then "Edit Configurations..."
+
+1.  Add new configuration, select "Python"
+2.  Update the "Name:"
+3.  Locate the script you wish to run
+4.  Check that the "Python Interpreter" is correct
+
+.. image:: PycharmDebugRunServer.jpg
