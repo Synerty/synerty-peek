@@ -221,21 +221,8 @@ The magic happens in the plugins, plugins provide useful functionality to Peek.
 
 A plugin is a single, small project focuses on providing one feature.
 
-One Plugin, Many Services
-`````````````````````````
-
-All of the code for one plugin exists within a single python package. This one package
-is installed on all of the services, even though only part of the plugin will run on each
-service.
-
-There are multiple entry hooks with in the plugin, one for each peek service
-the plugin chooses to run on.
-
-Each service will start a piece of the plugin, for example : Part of the plugin may run
-on the server service, and part of the plugin may run on the agent service.
-
-Plugins, Integrating with Plugins
-`````````````````````````````````
+Enterprise Extensible
+`````````````````````
 
 The peek platform provides support for plugins to share the APIs with other plugins.
 
@@ -263,13 +250,79 @@ Plugins can integrate with other plugins in the following services:
     "mobile", "YES"
     "desktop", "YES"
 
-Enterprise Extensible
-`````````````````````
 
 You could create other "User Plugins" with the same exposed plugin API for different
 backends, and the "Active Task" plugin wouldn't know the difference.
 
 Stable, exposed APIs make building enterprise applications more manageable.
+
+One Plugin, One Package
+```````````````````````
+
+All of the code for one plugin exists within a single python package. This one package
+is installed on all of the services, even though only part of the plugin will run on each
+service.
+
+There are multiple entry hooks with in the plugin, one for each peek service
+the plugin chooses to run on.
+
+Each service will start a piece of the plugin, for example : Part of the plugin may run
+on the server service, and part of the plugin may run on the agent service.
+
+Here are some plugin examples, indicating the services each platform has been designed to
+run on. Here are some things of interest :
+
+*   The SOAP and SQL plugins are implemented to talk specifically to system1 and system2.
+    They abstract away the details of this implementation for any other plugins that want
+    to talk to system1 or system 2.
+
+*   The User and Active Task plugins don't require the agent or worker services, so they
+    don't have implementation for them.
+
+*   All plugins have implementation for the server service, this is an ideal place for
+    plugins to integrate with each other.
+
+.. image:: PluginArchitecture.png
+
+
+This diagram illustrates how the plugins will run on the server service.
+
+Each plugins python package is fully installed in the server services environment.
+Plugins have entry points for the server service.
+The server calls this server entry hook when it loads each plugin.
+
+.. image:: PluginsRunningOnServer.png
+
+There are only two plugins that require the agent service, so the agent will only load
+these two. Again, the whole plugin is installed in the agents python environment.
+
+.. image:: PluginsRunningOnAgent.png
+
+There are three plugins that require the client service, so the client will only load
+these three. Again, the whole plugin is installed in the clients python environment.
+
+The client, agent, worker and server services can and run from the one python
+environment. This is the standard setup for single server environments.
+
+.. image:: RunningPluginsOnClient.png
+
+There are three plugins that require the mobile service. The mobile service is a python
+package that contains the build skeletins for the nativescript and web apps.
+
+The client service combines (copies) the files required from each of the plugins into the
+build environments, and then compiles the web app. (The Nativescript app is compiled
+manually by developers)
+
+The client and server services
+prepare and compile the desktop, mobile and admin services, as these are all HTML,
+Typescript and Nativescript.
+
+The desktop, mobile and admin interfaces need the client and server python services to
+run, so this compile arrangement makes sense.
+
+
+.. image:: PluginsRunningOnMobile.png
+
 
 
 Noop Plugin Example
@@ -277,6 +330,13 @@ Noop Plugin Example
 
 The NOOP plugin is a testing / example plugin.
 
+It's designed to test the basic operations of the platform and runs on every service.
+All of the code for the plugin is within one python packaged, named "peek-plugin-noop".
+
+.. image:: OverviewNoopPlugin.png
+
+The code is available here:
+`Peek Plugin Noop, on bitbucket <https://bitbucket.org/synerty/peek-plugin-noop>`_,
 It's folder structure looks like this :
 
 *   **peek-plugin-noop** (Root project dir, pypi package name)
@@ -325,3 +385,4 @@ It's folder structure looks like this :
 
 
 .. note:: Random Fact : Did you know that python can't import packages with hypons in them?
+
