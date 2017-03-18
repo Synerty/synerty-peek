@@ -230,24 +230,9 @@ Run the platform services from bash with the following commands: ::
         # Run the peek worker
         run_peek_worker
 
-Learning to Develop Plugins
----------------------------
 
-The following sections go on to guide the reader to develop different parts of the plugin
-and eventually run the plugins in development mode
-(:command:`ng serve`, :command:`tns run` etc).
+Continue Development
+--------------------
 
-Ensure you are well versed with the platform from the :ref:`Overview` as the following
-sections build upon that.
-
-Plugins and the Platform
-------------------------
-
-
-The Peek Platform services provide places for the Peek Plugins to run.
-A plugin can chose to run on any service the platform provides.
-
-Here is an architecture diagram for a plugin :
-
-.. image:: DevelopPluginOverview.png
-
+To learn more about plugin development from scratch, or the basic setup of plugins,
+see :ref:`learn_plugin_development`.
