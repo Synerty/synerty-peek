@@ -227,7 +227,7 @@ Enterprise Extensible
 The peek platform provides support for plugins to share the APIs with other plugins.
 
 This means we can build functionality into the platform, by writing plugins.
-For example, there are two publicly release plugins for Peek that add functionality :
+For example, here are two publicly release plugins for Peek that add functionality :
 
     * Active Task Plugin - Allowing plugins to notify mobile device users
     * User Plugin - Providing simple user directory and authentication.
@@ -256,6 +256,21 @@ backends, and the "Active Task" plugin wouldn't know the difference.
 
 Stable, exposed APIs make building enterprise applications more manageable.
 
+The next diagram provides an example of how plugins can integrate to each other.
+
+Here are some things of interest :
+
+*   The SOAP plugin is implemented to talk specifically to system1. It handles the burdon
+    of implementing the system 1 SOAP interface.
+
+*   The SOAP, User and Active Task plugins provide APIs on the server service that can
+    be multiple feature plugins.
+
+*   A feature plugin is just a name we've given to the plugin that provides features to
+    the user. It's no different to any other plugin other than what it does.
+
+.. image:: PluginIntegration.png
+
 One Plugin, One Package
 ```````````````````````
 
@@ -271,10 +286,6 @@ on the server service, and part of the plugin may run on the agent service.
 
 Here are some plugin examples, indicating the services each platform has been designed to
 run on. Here are some things of interest :
-
-*   The SOAP and SQL plugins are implemented to talk specifically to system1 and system2.
-    They abstract away the details of this implementation for any other plugins that want
-    to talk to system1 or system 2.
 
 *   The User and Active Task plugins don't require the agent or worker services, so they
     don't have implementation for them.
