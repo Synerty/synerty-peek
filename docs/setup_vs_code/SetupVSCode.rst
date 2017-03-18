@@ -1,3 +1,5 @@
+.. _setup-vs-code-ide:
+
 =============
 Setup VS Code
 =============

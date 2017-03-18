@@ -1,3 +1,5 @@
+.. _setup-pycharm-ide:
+
 =================
 Setup Pycharm IDE
 =================

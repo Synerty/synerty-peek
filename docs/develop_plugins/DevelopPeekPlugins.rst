@@ -4,7 +4,7 @@
 Develop Peek Plugins
 ====================
 
-Synerty recommend:
+Synerty recommends the Atlassian suite of developer tools.
 
 Bitbucket to manage and share your Git repositories
 
@@ -14,10 +14,11 @@ SourceTree to visually manage and interact with your Git repositories
 
 :URL: `<https://www.sourcetreeapp.com>`_
 
-|
+Bitbucket can be integrated with Jira (issue management)
+ and Bamboo (continuous integration).
 
-Creating Peek Plugin
---------------------
+Developing a New Peek Plugin
+----------------------------
 
 If you're creating a new plugin you can copy from "peek-plugin-noop" and rename.
 
@@ -34,20 +35,24 @@ Go to, peek-plugin-noop repository on Bitbucket
 
 Clone the repository
 
+#.  This URL will be automatically populated from Bitbucket.
+#.  **Alter this name to end with peek-plugin-example.**
+
 .. image:: DevPlugin-Clone.jpg
 
 ----
 
-Copy into new directory structure, run the following commands in the bash shell: ::
+Remove the git references into new directory structure, run the following commands in the bash shell: ::
 
-        cp -pr peek-plugin-noop peek-plugin-example
         cd peek-plugin-example
         rm -rf .git .idea .vscode
 
-Rename the Plugin
-`````````````````
+Rename to New Plugin
+````````````````````
 
-Update "rename_plugin.sh" with new names: ::
+Edit the **"rename_plugin.sh"** file in the plugin root project folder.
+
+Update the variables near the top with the new names: ::
 
         caps="EXAMPLE"
         underscore="_example"
@@ -59,7 +64,7 @@ Update "rename_plugin.sh" with new names: ::
 
 Run "rename_plugin.sh", run the following command in the bash shell: ::
 
-        ./rename_plugin.sh
+        bash ./rename_plugin.sh
 
 ----
 
@@ -74,7 +79,9 @@ Create new repository on GitHub.
 
 .. image:: DevPlugin-newRepo.jpg
 
-Your link will look something like: ::
+.. note:: Bitbucket will also provide instructions on how to do the following.
+
+Get the git url, it will look something like: ::
 
         https://{account username}@bitbucket.org/{account username}/example.git
 
@@ -103,13 +110,16 @@ Push your changes: ::
 
         git push -u origin master
 
-Edit Existing Plugin
---------------------
+Developing an Existing Peek Plugin
+----------------------------------
 
 Fork and Clone plugin
 `````````````````````
 
-Create a fork of the plugin
+Create your own fork of the plugins if you don't already have one.
+
+.. warning:: Be sure to check your fork syncing is enabled and up to date,
+    Otherwise you'll run into issues.
 
 .. image:: DevPlugin-Fork.jpg
 
@@ -118,6 +128,24 @@ Create a fork of the plugin
 Clone the fork
 
 .. image:: DevPlugin-Clone.jpg
+
+Setup an IDE
+---------
+
+An integrated development environment (IDE), is an advanced text editor with the
+following features.
+
+*   Syntax highlighting
+*   Error highlighting
+*   Integrating build tools
+*   Debugging
+*   Linting - checking code for quality.
+
+The Peek documentation has documentation for two IDEs:
+
+*   :ref:`setup-pycharm-ide`_
+*   :ref:`setup-vs-code-ide`_
+
 
 Developing
 ----------
@@ -135,9 +163,10 @@ Configure Services
 Update the config for services you're testing: ::
 
             "plugin": {
-            "enabled": [
-            "peek_plugin_example"
-            ]
+                "enabled": [
+                    "peek_plugin_example"
+                ]
+            }
 
 ----
 
