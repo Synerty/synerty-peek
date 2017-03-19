@@ -9,7 +9,7 @@ peek-plugin-base
 peek-platform
 peek-agent
 peek-worker
-peek-client-fe
+peek-mobile
 peek-client
 peek-server-fe
 peek-server

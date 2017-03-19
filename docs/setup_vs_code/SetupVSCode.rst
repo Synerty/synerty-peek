@@ -1,6 +1,8 @@
-=============
-Setup VS Code
-=============
+.. _setup_vs_code_ide:
+
+=================
+Setup VS Code IDE
+=================
 
 #.  Visual Studio Code,
 

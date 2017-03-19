@@ -27,7 +27,7 @@ Peek Platform Documentation
     setup_vs_code/SetupVSCode
     troubleshooting_windows/TroubleshootingWindows
     troubleshooting_debian/TroubleshootingDebian
-    api/API
+    learn_plugin_development/LearnPluginDevelopment
     api_autodoc/peek_plugin_base/peek_plugin_base
 
 

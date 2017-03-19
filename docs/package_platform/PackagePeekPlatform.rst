@@ -32,7 +32,7 @@ Run the following commands in the power shell window.
 
 ::
 
-    $file = "build_win_platform_release.ps1";
+    $file = "package_platform_win.ps1";
     $uri = "https://raw.githubusercontent.com/Synerty/synerty-peek/master/$file";
     Invoke-WebRequest -Uri $uri -UseBasicParsing -OutFile $file;
 
@@ -42,7 +42,7 @@ Run the platform build script.
 
 ::
 
-    PowerShell.exe -ExecutionPolicy Bypass -File build_win_platform_release.ps1
+    PowerShell.exe -ExecutionPolicy Bypass -File package_platform_win.ps1
 
 The script will download the latest peek platform release and all its dependencies.
 
@@ -60,7 +60,7 @@ Building synerty-peek
 The peek package has build scripts that generate a platform build.
 ::
 
-        ./pipbuild_platform.sh #.#.##
+        ./publish_platform.sh #.#.##
         ./pypi_upload.sh
 
 .. NOTE:: Prod build, it tags, commits and test uploads to testpypi.  If you're building
@@ -75,5 +75,5 @@ The peek package has build scripts that generate a platform build.
 Dev build example
 ::
 
-        ./pipbuild_platform.sh 0.0.1.dev1
+        ./publish_platform.sh 0.0.1.dev1
 

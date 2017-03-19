@@ -1,3 +1,5 @@
+.. _overview:
+
 ========
 Overview
 ========
@@ -221,26 +223,13 @@ The magic happens in the plugins, plugins provide useful functionality to Peek.
 
 A plugin is a single, small project focuses on providing one feature.
 
-One Plugin, Many Services
-`````````````````````````
-
-All of the code for one plugin exists within a single python package. This one package
-is installed on all of the services, even though only part of the plugin will run on each
-service.
-
-There are multiple entry hooks with in the plugin, one for each peek service
-the plugin chooses to run on.
-
-Each service will start a piece of the plugin, for example : Part of the plugin may run
-on the server service, and part of the plugin may run on the agent service.
-
-Plugins, Integrating with Plugins
-`````````````````````````````````
+Enterprise Extensible
+`````````````````````
 
 The peek platform provides support for plugins to share the APIs with other plugins.
 
 This means we can build functionality into the platform, by writing plugins.
-For example, there are two publicly release plugins for Peek that add functionality :
+For example, here are two publicly release plugins for Peek that add functionality :
 
     * Active Task Plugin - Allowing plugins to notify mobile device users
     * User Plugin - Providing simple user directory and authentication.
@@ -263,13 +252,88 @@ Plugins can integrate with other plugins in the following services:
     "mobile", "YES"
     "desktop", "YES"
 
-Enterprise Extensible
-`````````````````````
 
 You could create other "User Plugins" with the same exposed plugin API for different
 backends, and the "Active Task" plugin wouldn't know the difference.
 
 Stable, exposed APIs make building enterprise applications more manageable.
+
+The next diagram provides an example of how plugins can integrate to each other.
+
+Here are some things of interest :
+
+*   The SOAP plugin is implemented to talk specifically to system1. It handles the burdon
+    of implementing the system 1 SOAP interface.
+
+*   The SOAP, User and Active Task plugins provide APIs on the server service that can
+    be multiple feature plugins.
+
+*   A feature plugin is just a name we've given to the plugin that provides features to
+    the user. It's no different to any other plugin other than what it does.
+
+.. image:: PluginIntegration.png
+
+One Plugin, One Package
+```````````````````````
+
+All of the code for one plugin exists within a single python package. This one package
+is installed on all of the services, even though only part of the plugin will run on each
+service.
+
+There are multiple entry hooks with in the plugin, one for each peek service
+the plugin chooses to run on.
+
+Each service will start a piece of the plugin, for example : Part of the plugin may run
+on the server service, and part of the plugin may run on the agent service.
+
+Here are some plugin examples, indicating the services each platform has been designed to
+run on. Here are some things of interest :
+
+*   The User and Active Task plugins don't require the agent or worker services, so they
+    don't have implementation for them.
+
+*   All plugins have implementation for the server service, this is an ideal place for
+    plugins to integrate with each other.
+
+.. image:: PluginArchitecture.png
+
+
+This diagram illustrates how the plugins will run on the server service.
+
+Each plugins python package is fully installed in the server services environment.
+Plugins have entry points for the server service.
+The server calls this server entry hook when it loads each plugin.
+
+.. image:: PluginsRunningOnServer.png
+
+There are only two plugins that require the agent service, so the agent will only load
+these two. Again, the whole plugin is installed in the agents python environment.
+
+.. image:: PluginsRunningOnAgent.png
+
+There are three plugins that require the client service, so the client will only load
+these three. Again, the whole plugin is installed in the clients python environment.
+
+The client, agent, worker and server services can and run from the one python
+environment. This is the standard setup for single server environments.
+
+.. image:: RunningPluginsOnClient.png
+
+There are three plugins that require the mobile service. The mobile service is a python
+package that contains the build skeletins for the nativescript and web apps.
+
+The client service combines (copies) the files required from each of the plugins into the
+build environments, and then compiles the web app. (The Nativescript app is compiled
+manually by developers)
+
+The client and server services
+prepare and compile the desktop, mobile and admin services, as these are all HTML,
+Typescript and Nativescript.
+
+The desktop, mobile and admin interfaces need the client and server python services to
+run, so this compile arrangement makes sense.
+
+.. image:: PluginsRunningOnMobile.png
 
 
 Noop Plugin Example
@@ -277,6 +341,13 @@ Noop Plugin Example
 
 The NOOP plugin is a testing / example plugin.
 
+It's designed to test the basic operations of the platform and runs on every service.
+All of the code for the plugin is within one python packaged, named "peek-plugin-noop".
+
+.. image:: OverviewNoopPlugin.png
+
+The code is available here:
+`Peek Plugin Noop, on bitbucket <https://bitbucket.org/synerty/peek-plugin-noop>`_,
 It's folder structure looks like this :
 
 *   **peek-plugin-noop** (Root project dir, pypi package name)
@@ -285,9 +356,9 @@ It's folder structure looks like this :
 
         *   **_private** (All protected code lives in here)
 
-            *   **admin_app**   (The admin web based user interface)
+            *   **admin-app**   (The admin web based user interface)
 
-            *   **admin_assets**   (Static assets for the admin web UI)
+            *   **admin-assets**   (Static assets for the admin web UI)
 
             *   **agent** (The code that runs on the agent service)
 
@@ -295,13 +366,13 @@ It's folder structure looks like this :
 
             *   **client**  (The code that runs on the client service)
 
-            *   **desktop_app**   (The user interface that runs on the desktop/web)
+            *   **desktop-app**   (The user interface that runs on the desktop/web)
 
-            *   **desktop_assets**    (Images for the desktop/web)
+            *   **desktop-assets**    (Images for the desktop/web)
 
-            *   **mobile_app**   (The user interface that runs on the mobile/web devices)
+            *   **mobile-app**   (The user interface that runs on the mobile/web devices)
 
-            *   **mobile_assets**    (Images for the mobile/web UI)
+            *   **mobile-assets**    (Images for the mobile/web UI)
 
             *   **server**  (The code that runs on the server service)
 
@@ -309,19 +380,20 @@ It's folder structure looks like this :
 
             *   **worker**  (The parallel processing  Celery tasks that are run on the worker)
 
-        *   **admin_modules**   (Exposed API, plugins in the admin app can use this)
+        *   **admin-modules**   (Exposed API, plugins in the admin app can use this)
 
         *   **agent**  (Exposed API, plugins on the agent service use this)
 
-        *   **desktop_modules**   (Exposed API, plugins in the desktop/web app can use this)
+        *   **desktop-modules**   (Exposed API, plugins in the desktop/web app can use this)
 
         *   **client**  (Exposed API, plugins on the client service use this)
 
-        *   **mobile_modules**   (Exposed API, plugins in the mobile/web app can use this)
+        *   **mobile-modules**   (Exposed API, plugins in the mobile/web app can use this)
 
         *   **server**  (Exposed API, plugins on the server service use this)
 
-        *   **shared_modules**   (Exposed API, for admin, mobile and desktop)
+        *   **shared-modules**   (Exposed API, for admin, mobile and desktop)
 
 
 .. note:: Random Fact : Did you know that python can't import packages with hypons in them?
+

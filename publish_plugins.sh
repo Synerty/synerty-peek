@@ -78,8 +78,8 @@ echo
 # -------------------------------------
 echo "Building packages"
 for plugin in $PLUGINS; do
-    if ! (cd ../$plugin && ./pipbuild.sh ${VER} ); then
-        echo "${bold}${plugin}${normal} : failed to run pipbuild." >&2
+    if ! (cd ../$plugin && ./publish.sh ${VER} ); then
+        echo "${bold}${plugin}${normal} : failed to run publish." >&2
         exit 1
     fi
 done
