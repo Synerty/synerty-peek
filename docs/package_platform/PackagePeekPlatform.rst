@@ -60,7 +60,7 @@ Building synerty-peek
 The peek package has build scripts that generate a platform build.
 ::
 
-        ./pipbuild_platform.sh #.#.##
+        ./publish_platform.sh #.#.##
         ./pypi_upload.sh
 
 .. NOTE:: Prod build, it tags, commits and test uploads to testpypi.  If you're building
@@ -75,5 +75,5 @@ The peek package has build scripts that generate a platform build.
 Dev build example
 ::
 
-        ./pipbuild_platform.sh 0.0.1.dev1
+        ./publish_platform.sh 0.0.1.dev1
 

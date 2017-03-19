@@ -78,8 +78,8 @@ echo
 # -------------------------------------
 echo "Building packages"
 for pkg in $PACKAGES; do
-    if ! (cd ../$pkg && ./pipbuild.sh ${VER} ); then
-        echo "${bold}${pkg}${normal} : failed to run pipbuild." >&2
+    if ! (cd ../$pkg && ./publish.sh ${VER} ); then
+        echo "${bold}${pkg}${normal} : failed to run publish." >&2
         exit 1
     fi
 done

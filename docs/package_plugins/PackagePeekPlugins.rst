@@ -19,7 +19,7 @@ Open bash, and run the following
 
     # Ensure RELEASE_DIR is where you want it
     echo $RELEASE_DIR
-    ./pipbuild_plugins.sh V.E.R
+    ./publish_plugins.sh V.E.R
 
     # Now build the wheels
     # NOTE: This WILL pull down some platform dependencies, it will also compile cx_Oracle
