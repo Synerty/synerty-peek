@@ -6,15 +6,11 @@ The Peek platform is designed to run on Linux, however, it is compatible with wi
 Please read through all of the documentation before commencing the installation
 procedure.
 
-|
-
 Installation Objective
 ----------------------
 
 This *Installation Guide* contains specific Windows operating system requirements for the
 configuring of synerty-peek.
-
-|
 
 Required Software
 `````````````````
@@ -31,8 +27,6 @@ Below is a list of all the required software:
 *  Node.js 7+ and NPM 3+
 *  Python 3.5
 *  FreeTDS
-
-|
 
 Optional  Software
 ``````````````````
@@ -54,8 +48,6 @@ documents and has useful features.
 Installing Oracle Libraries is required if you intend on installing the peek agent.
 Instruction for installing the Oracle Libraries are in the *Online Installation Guide*.
 
-|
-
 OS Commands
 -----------
 
@@ -67,10 +59,8 @@ When peek generates it's config it should automatically choose the right interpr
 
         "C:\Program Files\Git\bin\bash.exe" if isWindows else "/bin/bash"
 
-|
-
-Online Installation Guide
--------------------------
+Installation Guide
+------------------
 
 Create Account
 ``````````````
@@ -87,8 +77,6 @@ Create a windows user account for peek with admin rights.
 
 sign in to the peek account
 
-|
-
 Microsoft .NET Framework 3.5 Service Pack 1
 ```````````````````````````````````````````
 
@@ -102,8 +90,6 @@ Microsoft .NET Framework 3.5 Service Pack 1
 :Download: `<https://download.microsoft.com/download/2/0/E/20E90413-712F-438C-988E-FDAA79A8AC3D/dotnetfx35.exe>`_
 
 .. note:: Restart if prompted to restart.
-
-|
 
 Visual C++ Build Tools 2015
 ```````````````````````````
@@ -119,14 +105,15 @@ Install using the ISO
 
 :Download: `<https://www.microsoft.com/en-US/download/details.aspx?id=48146>`_
 
-|
-
 .. _postgressql:
 
 PostgresSQL
 ```````````
 
 .. NOTE:: This install procedure contains instructions for both PostgresSQL and MSSQL.
+
+    Synerty recommends PostGreSQL for Production, Development, Windows and Linux servers.
+
     To install Microsoft® SQL Server® 2014 Express, see:
     :ref:`microsoft_sql_server_2014_express`
 
@@ -135,7 +122,17 @@ PostgresSQL
 
 ----
 
-Install PostgresSQL with default settings
+Install PostgresSQL with default settings.
+
+Make a note of the postgres user password that you supply, you'll need this.
+
+.. warning:: Generate a strong password for both peek and postgres users for
+    production use.
+
+    Synerty recommends 32 to 40 chars of  capitals, lower case and numbers, with some
+    punctuation, best to avoid these ` / \\ ' "
+
+    `<https://strongpasswordgenerator.com>`_
 
 ----
 
@@ -153,13 +150,11 @@ Create the peek user, run the following script: ::
 
     CREATE USER peek WITH
         LOGIN
-        SUPERUSER
         CREATEDB
-        CREATEROLE
         INHERIT
         REPLICATION
         CONNECTION LIMIT -1
-        PASSWORD 'bford';
+        PASSWORD 'PASSWORD';
 
 .. image:: pgAdmin4-userQuery.jpg
 
@@ -178,11 +173,7 @@ Confirm database was created
 
 .. image:: pgAdmin4-refresh.jpg
 
-|
-
 .. image:: pgAdmin4-peekDatabase.jpg
-
-|
 
 .. _microsoft_sql_server_2014_express:
 
@@ -228,8 +219,6 @@ Database Engine Configuration: Select "Mixed Mode" and enter a password
 
 .. image:: SQLServer-DBEngConfig.jpg
 
-|
-
 Create Peek Database
 ~~~~~~~~~~~~~~~~~~~~
 
@@ -242,8 +231,6 @@ Connect to PEEK database engine
 ----
 
 Create new database 'peek'
-
-|
 
 SQL Server Configuration Manager
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -292,10 +279,14 @@ Restart the server service.
 
 .. image:: SQLServer-RestartServices.jpg
 
-|
-
 FreeTDS
 ~~~~~~~
+
+FreeTDS is an open source driver for the TDS protocol, this is the protocol used to
+talk to the MSSQL SQLServer database.
+
+Peek needs this installed as it uses the pymssql python database driver, which depends on
+FreeTDS.
 
 :Download: `<https://github.com/ramiro/freetds/releases/download/v0.95.95/freetds-v0.95.95-win-x86_64-vs2015.zip>`_
 :From: `<https://github.com/ramiro/freetds/releases>`_
@@ -322,8 +313,6 @@ Create 'freetds.conf' in "C:\" ::
             tds version = 7.0
             dump file = /tmp/freetds.log
 
-|
-
 dll files
 ~~~~~~~~~
 
@@ -345,8 +334,6 @@ You will need to duplicate the above files and name them as per below:
 *  libeay32MD.dll
 
 *  ssleay32MD.dll
-
-|
 
 Python 3.5
 ``````````
@@ -376,8 +363,6 @@ Confirm PATH(s) to environment variables ::
 
         C:\Users\peek\Python35\
         C:\Users\peek\Python35\Scripts\
-
-|
 
 SymLinks
 ````````
@@ -415,8 +400,6 @@ You will need to logout and log back in for the change to take effect
     group.  Those users will always have to run mklink in an elevated environment as
     Administrator.
 
-|
-
 Enable Development
 ``````````````````
 
@@ -446,15 +429,11 @@ Select 'Developer Mode', and acknowledge the warning.
 
 .. image:: DevMode-ForDevelopers.jpg
 
-|
-
 Installing Oracle Libraries
 ---------------------------
 
 The oracle libraries are optional. Install them where the agent runs if you are going
 to interface with an oracle database.
-
-|
 
 Oracle Instant Client
 `````````````````````
@@ -478,13 +457,10 @@ Select the following options
 
 Reboot windows, or logout and login to ensure the PATH updates.
 
-|
+What Next?
+----------
 
-Installing synerty-peek
------------------------
-
-From here you will be deploying either the *Production Platform Setup*
-(ProductionSetup.rst) or the *Development Setup*
-(DevelopmentSetup.rst).
+Refer back to the :ref:`how_to_use_peek_documentation` guide to see which document to
+follow next.
 
 
