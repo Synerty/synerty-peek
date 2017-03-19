@@ -11,7 +11,7 @@ peek-agent
 peek-worker
 peek-mobile
 peek-client
-peek-server-fe
+peek-admin
 peek-server
 synerty-peek"
 
