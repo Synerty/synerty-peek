@@ -4,7 +4,7 @@
 Develop Peek Plugins
 ====================
 
-Synerty recommend:
+Synerty recommends the Atlassian suite of developer tools.
 
 Bitbucket to manage and share your Git repositories
 
@@ -14,15 +14,36 @@ SourceTree to visually manage and interact with your Git repositories
 
 :URL: `<https://www.sourcetreeapp.com>`_
 
-|
+Bitbucket can be integrated with Jira (issue management)
+ and Bamboo (continuous integration).
 
-Creating Peek Plugin
---------------------
+.. note::   The reader needs be familiar with, or will become familar with the following:
+
+            *   `GIT <https://git-scm.com>`_
+            *   `Python3.5+ <https://www.python.org>`_
+            *   `Python Twisted <http://twistedmatrix.com>`_
+            *   HTML
+            *   CSS
+            *   `Bootstrap3 <http://getbootstrap.com>`_
+            *   `TypeScript <https://www.typescriptlang.org>`_
+            *   `Angular <https://angular.io>`_ (Angular2+, not AngularJS aka Angular1)
+            *   `NativeScript <https://www.nativescript.org>`_
+
+
+.. note:: This a cross platform development guide, all commands are writen for bash.
+
+    Bash is installed by default on Linux.
+
+    Windows users should use bash from msys, which comes with git for windows,
+    :ref:`msys_git`.
+
+Clone a New Peek Plugin
+-----------------------
 
 If you're creating a new plugin you can copy from "peek-plugin-noop" and rename.
 
-Clone and Copy peek-plugin-noop
-```````````````````````````````
+Copy peek-plugin-noop
+`````````````````````
 
 :Clone: `<https://github.com/Synerty/peek-plugin-noop.git>`_
 
@@ -34,20 +55,25 @@ Go to, peek-plugin-noop repository on Bitbucket
 
 Clone the repository
 
+#.  This URL will be automatically populated from Bitbucket.
+#.  **Alter this name to end with peek-plugin-example.**
+
 .. image:: DevPlugin-Clone.jpg
 
 ----
 
-Copy into new directory structure, run the following commands in the bash shell: ::
+Remove the git references into new directory structure, run the following commands in the bash shell: ::
 
-        cp -pr peek-plugin-noop peek-plugin-example
         cd peek-plugin-example
         rm -rf .git .idea .vscode
 
-Rename the Plugin
-`````````````````
+Rename to New Plugin
+````````````````````
 
-Update "rename_plugin.sh" with new names: ::
+Edit the :file:`rename_plugin.sh` file in the plugin root project folder.
+
+
+Update the variables near the top with the new names: ::
 
         caps="EXAMPLE"
         underscore="_example"
@@ -57,9 +83,9 @@ Update "rename_plugin.sh" with new names: ::
 
 ----
 
-Run "rename_plugin.sh", run the following command in the bash shell: ::
+Run :file:`rename_plugin.sh`, run the following command in the bash shell: ::
 
-        ./rename_plugin.sh
+        bash ./rename_plugin.sh
 
 ----
 
@@ -74,7 +100,9 @@ Create new repository on GitHub.
 
 .. image:: DevPlugin-newRepo.jpg
 
-Your link will look something like: ::
+.. note:: Bitbucket will also provide instructions on how to do the following.
+
+Get the git url, it will look something like: ::
 
         https://{account username}@bitbucket.org/{account username}/example.git
 
@@ -103,13 +131,13 @@ Push your changes: ::
 
         git push -u origin master
 
-Edit Existing Plugin
---------------------
+Cloning an Existing Peek Plugin
+-------------------------------
 
-Fork and Clone plugin
-`````````````````````
+Create your own fork of the plugins if you don't already have one.
 
-Create a fork of the plugin
+.. warning:: Be sure to check your fork syncing is enabled and up to date,
+    Otherwise you'll run into issues.
 
 .. image:: DevPlugin-Fork.jpg
 
@@ -119,50 +147,92 @@ Clone the fork
 
 .. image:: DevPlugin-Clone.jpg
 
-Developing
-----------
+Setup an IDE
+------------
 
-Setup Plugin for Development
-````````````````````````````
+An integrated development environment (IDE), is an advanced text editor with the
+following features.
 
-In the repository directory, run the following command in the bash shell: ::
+*   Syntax highlighting
+*   Error highlighting
+*   Integrating build tools
+*   Debugging
+*   Linting - checking code for quality.
+
+The Peek documentation has procedures for IDE setup:
+
+*   :ref:`setup_pycharm_ide`
+*   :ref:`setup_vs_code_ide`
+
+
+Setup the Plugin
+----------------
+
+Setup Plugin for Development.
+
+Plugins need to be installed as python packages for the Peek Platform to run them.
+This is typically done with a command similar to :command:`pip install peek-plugin-noop`
+in the :ref:`deploy_peek_plugins`.
+
+Python packages can be installed in "development" mode, where your code being developed
+is only linked into the python environment.
+
+This is achived with the following command in the plugin project root directory, where
+setup.py is: ::
+
+        # Check to ensure we're using the right python
+        which python
 
         python setup.py develop
 
-Configure Services
-``````````````````
 
-Update the config for services you're testing: ::
+----
 
-            "plugin": {
+Configure Peek Services.
+
+The python peek services, **worker**, **agent**, **client** and **server** need to have
+the plugin enabled in their :file:`~/peek-{service}/config.json`.
+
+For exampple: ::
+
+        "plugin": {
             "enabled": [
-            "peek_plugin_example"
+                "peek_plugin_example"
             ]
+        }
 
 ----
 
-Configure your developing software to use the virtual environment you wish to use
+Run the Plugin.
 
-Here is an example of the setting in PyCharm:
+Now that the plugin has been setup for development and the platform has been configured
+to run it, running the platform will run the plugin.
 
-.. image:: DevPlugin-projectInterpreter.jpg
+See the Setup IDE procedures to run the platform and debug plugins under those.
 
-----
+If a platform service, (:command:`run_peek_server` for example) is run under the IDEs
+debugger, it will also debug the plugins the platform loads.
 
-Restart the services that use the plugin
+Run the platform services from bash with the following commands: ::
 
-.. NOTE:: The plugins that aren't being developed should be installed as per
-    :ref:`deploy_peek_plugins`
+        # Check to ensure we're using the right python
+        which python
 
-----
+        # Run the peek server
+        run_peek_server
 
-This is an example of running the server service in debug mode using **PyCharm**
+        # Run the peek client
+        run_peek_client
 
-Under the drop down "Run" then "Edit Configurations..."
+        # Run the peek agent
+        run_peek_agent
 
-1.  Add new configuration, select "Python"
-2.  Update the "Name:"
-3.  Locate the script you wish to run
-4.  Check that the "Python Interpreter" is correct
+        # Run the peek worker
+        run_peek_worker
 
-.. image:: DevPlugin-debugRunServer.jpg
+
+Continue Development
+--------------------
+
+To learn more about plugin development from scratch, or the basic setup of plugins,
+see :ref:`learn_plugin_development`.
