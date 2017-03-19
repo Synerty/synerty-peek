@@ -32,7 +32,7 @@ Run the following commands in the power shell window.
 
 ::
 
-    $file = "build_win_platform_release.ps1";
+    $file = "package_platform_win.ps1";
     $uri = "https://raw.githubusercontent.com/Synerty/synerty-peek/master/$file";
     Invoke-WebRequest -Uri $uri -UseBasicParsing -OutFile $file;
 
@@ -42,7 +42,7 @@ Run the platform build script.
 
 ::
 
-    PowerShell.exe -ExecutionPolicy Bypass -File build_win_platform_release.ps1
+    PowerShell.exe -ExecutionPolicy Bypass -File package_platform_win.ps1
 
 The script will download the latest peek platform release and all its dependencies.
 

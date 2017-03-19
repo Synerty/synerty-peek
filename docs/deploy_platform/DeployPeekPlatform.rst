@@ -31,7 +31,7 @@ This is the only step in this section that requires the internet.
 
 ::
 
-        $file = "deploy_win_platform_release.ps1"
+        $file = "deploy_platform_win.ps1"
         $uri = "https://raw.githubusercontent.com/Synerty/synerty-peek/master/$file";
         Invoke-WebRequest -Uri $uri -UseBasicParsing -OutFile $file;
 
@@ -46,7 +46,7 @@ The script will deploy to C:\\Users\\peek.
 ::
 
         $dist = "C:\Users\peek\Downloads\peek_dist_win_0.1.0.zip"
-        PowerShell.exe -ExecutionPolicy Bypass -File deploy_win_platform_release.ps1 $dist
+        PowerShell.exe -ExecutionPolicy Bypass -File deploy_platform_win.ps1 $dist
 
 ----
 
