@@ -248,6 +248,19 @@ Check that your plugin now looks like this: ::
 
 ----
 
+Create the :file:`peek_plugin_tutorial/_private/PluginNames.py` file with the following
+contents: ::
+
+::
+
+        tutorialFilt = {"plugin": "peek_plugin_tutorial"}
+        tutorialTuplePrefix = "peek_plugin_tutorial."
+        tutorialObservableName = "peek_plugin_tutorial"
+        tutorialActionProcessorName = "peek_plugin_tutorial"
+
+
+----
+
 Install the python plugin package in development mode, run the following:
 
 ::
@@ -277,7 +290,7 @@ Adding the Server Service
 -------------------------
 
 
-Setup Skeleton Files
+Configure the Plugin
 ````````````````````
 This section adds the basic files require for the plugin to run on the servers service.
 Create the following files and directories.
@@ -285,6 +298,12 @@ Create the following files and directories.
 .. note:: Setting up skeleton files for the client, worker and agent services,
             is identical to the server, generally replace "Server" with the appropriate
             service name.
+
+The platform loads the plugins python package, and then calls the appropriate
+**peek{Server}EntryHook()** method on it, if it exists.
+
+The object returned must implement the right interfaces, the platform then calls methods
+on this object to load, start, stop, unload, etc the plugin.
 
 ----
 
@@ -410,6 +429,308 @@ You can now run the peek server, you should see your plugin load. ::
         DEBUG peek_plugin_tutorial._private.server.ServerEntryHook:Loaded
         DEBUG peek_plugin_tutorial._private.server.ServerEntryHook:Started
         ...
+
+
+Adding the Storage Service
+--------------------------
+
+The storage service is conceptually a little different to other services in the Peek
+Platform.
+
+Peek Storage connects to a database server, provides each plugin it's own schema, and
+provides much of the boilerplate code required to make this work.
+
+Only two Peek Services are able to access the database, these are the Worker and Server
+services.
+
+The Storage schema upgrades are managed by the Server service.
+
+.. note:: The Server service must be enabled to use the Storage service.
+
+Add Skeleton Files
+``````````````````
+
+Create directory :file:`peek_plugin_tutorial/_private/storage`
+Create the empty package file :file:`peek_plugin_tutorial/_private/storage/__init__.py`
+
+Command: ::
+
+        mkdir peek_plugin_tutorial/_private/storage
+        touch peek_plugin_tutorial/_private/storage/__init__.py
+
+----
+
+Create a file :file:`peek_plugin_tutorial/_private/storage/DeclarativeBase.py`
+and populate it with the following contents:
+
+::
+
+        from sqlalchemy.ext.declarative import declarative_base
+
+        from sqlalchemy.schema import MetaData
+
+        metadata = MetaData(schema="pl_tutorial")
+        DeclarativeBase = declarative_base(metadata=metadata)
+
+
+        def loadStorageTuples():
+            """ Load Storage Tables
+
+            This method should be called from the "load()" method of the agent, server, worker
+            and client entry hook classes.
+
+            This will register the ORM classes as tuples, allowing them to be serialised and
+            deserialized by the vortex.
+
+            """
+
+
+----
+
+Create directory :file:`peek_plugin_tutorial/_private/alembic`
+Create the empty package file :file:`peek_plugin_tutorial/_private/alembic/__init__.py`
+
+Command: ::
+
+        mkdir peek_plugin_tutorial/_private/alembic
+        touch peek_plugin_tutorial/_private/alembic/__init__.py
+
+----
+
+Create a file :file:`peek_plugin_tutorial/_private/alembic/env.py` and populate it with
+the following contents:
+
+::
+
+        from peek_plugin_base.storage.AlembicEnvBase import AlembicEnvBase
+
+        from peek_plugin_tutorial._private.storage import DeclarativeBase
+
+        DeclarativeBase.loadStorageTuples()
+
+        alembicEnv = AlembicEnvBase(DeclarativeBase.DeclarativeBase.metadata)
+        alembicEnv.run()
+
+----
+
+Create a file :file:`peek_plugin_tutorial/_private/alembic/script.py.mako` and populate it with
+the following contents:
+
+::
+
+        """${message}
+
+        Peek Plugin Database Migration Script
+
+        Revision ID: ${up_revision}
+        Revises: ${down_revision | comma,n}
+        Create Date: ${create_date}
+
+        """
+
+        # revision identifiers, used by Alembic.
+        revision = ${repr(up_revision)}
+        down_revision = ${repr(down_revision)}
+        branch_labels = ${repr(branch_labels)}
+        depends_on = ${repr(depends_on)}
+
+        from alembic import op
+        import sqlalchemy as sa
+        import geoalchemy2
+        ${imports if imports else ""}
+
+        def upgrade():
+            ${upgrades if upgrades else "pass"}
+
+
+        def downgrade():
+            ${downgrades if downgrades else "pass"}
+
+
+----
+
+Edit the file :file:`peek_plugin_tutorial/plugin_package.json` :
+
+#.  Add **"storage"** to the requiresServices section so it looks like ::
+
+        "requiresServices": [
+            "storage"
+        ]
+
+#.  Add the **storage** section after **requiresServices** section: ::
+
+        "storage": {
+        }
+
+#.  Ensure your JSON is still valid (Your IDE may help here)
+
+Here is an example ::
+
+        {
+            ...
+            "requiresServices": [
+                ...
+                "storage"
+            ],
+            ...
+            "storage": {
+            }
+        }
+
+----
+
+Edit the file :file:`peek_plugin_tutorial/_private/server/ServerEntryHook.py`
+
+#.  Add the following import up the top of the file ::
+
+        from peek_plugin_tutorial._private.storage import DeclarativeBase
+        from peek_plugin_base.server.PluginServerStorageEntryHookABC import PluginServerStorageEntryHookABC
+
+#.  Add **PluginServerStorageEntryHookABC** to the list of classes **"ServerEntryHook"**
+    inherits ::
+
+        class ServerEntryHook(PluginServerEntryHookABC, PluginServerStorageEntryHookABC):
+
+#.  Call the following method from the **load(self):** method ::
+
+        def load(self) -> None:
+            DeclarativeBase.loadStorageTuples() # <-- Add this line
+            logger.debug("Loaded")
+
+#.  Implement the **dbMetadata(self):** property ::
+
+        @property
+        def dbMetadata(self):
+            return DeclarativeBase.metadata
+
+You should have a file like this: ::
+
+        # Added imports, step 1
+        from peek_plugin_noop._private.storage import DeclarativeBase
+        from peek_plugin_base.server.PluginServerStorageEntryHookABC import \
+            PluginServerStorageEntryHookABC
+
+
+        # Added inherited class, step2
+        class ServerEntryHook(PluginServerEntryHookABC, PluginServerStorageEntryHookABC):
+
+
+            def load(self) -> None:
+                # Added call to loadStorageTables, step 3
+                DeclarativeBase.loadStorageTuples()
+                logger.debug("Loaded")
+
+            # Added implementation for dbMetadata, step 4
+            @property
+            def dbMetadata(self):
+                return DeclarativeBase.metadata
+
+
+----
+
+Create a file :file:`peek_plugin_tutorial/_private/alembic.ini` and populate it with
+the following contents, make sure to update the **sqlalchemy.url** line.
+
+.. note:: The database connection string is only used when creating database upgrade
+    scripts.
+
+::
+
+        [alembic]
+        script_location = alembic
+        sqlalchemy.url = postgresql://peek:PASSWORD@localhost/peek
+
+----
+
+Finally, run the peek server, it should load with out error.
+
+The hard parts done, adding the tables is much easier.
+
+Adding a Simple Table
+`````````````````````
+
+This section adds a simple table, For lack of a better idea, lets have a table of strings
+and Integers.
+
+----
+
+Create the file :file:`peek_plugin_tutorial/_private/storage/StringIntTuple.py`
+and populate it with the following contents.
+
+Most of this is straight from the
+`SQLAlchemy Object Relational Tutorial <http://docs.sqlalchemy.org/en/latest/orm/tutorial.html#declare-a-mapping`_
+
+::
+
+        import logging
+
+        from sqlalchemy import Column
+        from sqlalchemy import Integer, String
+        from vortex.Tuple import Tuple, addTupleType
+
+        from peek_plugin_tutorial._private.PluginNames import tutorialTuplePrefix
+        from peek_plugin_tutorial._private.storage.DeclarativeBase import DeclarativeBase
+
+        logger = logging.getLogger(__name__)
+
+
+        @addTupleType
+        class StringIntTuple(Tuple, DeclarativeBase):
+            __tupleType__ = tutorialTuplePrefix + 'StringIntTuple'
+            __tablename__ = 'StringIntTuple'
+
+            id = Column(Integer, primary_key=True, autoincrement=True)
+            string1 = Column(String(50))
+            int1 = Column(Integer)
+
+
+The remainder is from VortexPY, which allows the object to be serialised,
+and reconstructed as the proper python class. VortexPY is present in these three lines ::
+
+        @addTupleType
+        class StringIntTuple(Tuple, DeclarativeBase):
+            __tupleType__ = tutorialTuplePrefix + 'StringIntTuple'
+
+
+----
+
+Edit the file :file:`peek_plugin_tutorial/_private/storage/DeclarativeBase.py`
+
+#.  Add the lines to the **loadStoragetuples():** method ::
+
+        from . import StringIntTuple
+        StringIntTuple.__unused = False
+
+----
+
+Now we need create a database upgrade script, this allows Peek to automatically upgrade
+the plugins schema. Peek uses Alembic to handle this.
+
+Read more about `Alembic here <http://alembic.zzzcomputing.com/en/latest/>`_
+
+#.  Open a :command:`bash` window
+#.  CD to the _private directory of the plugin ::
+
+    # Root dir of plugin project
+    cd peek-plugin-tutorial
+
+    # CD to where alembic.ini is
+    cd peek_plugin_tutorial/_private
+
+#.  Run the alembic upgrade command. ::
+
+    alembic revision -m "Added StringInt Table"
+
+#.  Now check that Alembic has added a new version file in the
+    :file:`peek_plugin_tutorial/_private/alembic/versions` directory.
+
+.. tip::    You can add and kind of SQL you want to this script, if you want default data,
+            then this is the place to add it.
+
+
+Adding a Settings Table
+```````````````````````
+
 
 
 Adding the Admin Service
