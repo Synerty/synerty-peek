@@ -356,9 +356,9 @@ It's folder structure looks like this :
 
         *   **_private** (All protected code lives in here)
 
-            *   **admin_app**   (The admin web based user interface)
+            *   **admin-app**   (The admin web based user interface)
 
-            *   **admin_assets**   (Static assets for the admin web UI)
+            *   **admin-assets**   (Static assets for the admin web UI)
 
             *   **agent** (The code that runs on the agent service)
 
@@ -366,13 +366,13 @@ It's folder structure looks like this :
 
             *   **client**  (The code that runs on the client service)
 
-            *   **desktop_app**   (The user interface that runs on the desktop/web)
+            *   **desktop-app**   (The user interface that runs on the desktop/web)
 
-            *   **desktop_assets**    (Images for the desktop/web)
+            *   **desktop-assets**    (Images for the desktop/web)
 
-            *   **mobile_app**   (The user interface that runs on the mobile/web devices)
+            *   **mobile-app**   (The user interface that runs on the mobile/web devices)
 
-            *   **mobile_assets**    (Images for the mobile/web UI)
+            *   **mobile-assets**    (Images for the mobile/web UI)
 
             *   **server**  (The code that runs on the server service)
 
@@ -380,19 +380,19 @@ It's folder structure looks like this :
 
             *   **worker**  (The parallel processing  Celery tasks that are run on the worker)
 
-        *   **admin_modules**   (Exposed API, plugins in the admin app can use this)
+        *   **admin-modules**   (Exposed API, plugins in the admin app can use this)
 
         *   **agent**  (Exposed API, plugins on the agent service use this)
 
-        *   **desktop_modules**   (Exposed API, plugins in the desktop/web app can use this)
+        *   **desktop-modules**   (Exposed API, plugins in the desktop/web app can use this)
 
         *   **client**  (Exposed API, plugins on the client service use this)
 
-        *   **mobile_modules**   (Exposed API, plugins in the mobile/web app can use this)
+        *   **mobile-modules**   (Exposed API, plugins in the mobile/web app can use this)
 
         *   **server**  (Exposed API, plugins on the server service use this)
 
-        *   **shared_modules**   (Exposed API, for admin, mobile and desktop)
+        *   **shared-modules**   (Exposed API, for admin, mobile and desktop)
 
 
 .. note:: Random Fact : Did you know that python can't import packages with hypons in them?
