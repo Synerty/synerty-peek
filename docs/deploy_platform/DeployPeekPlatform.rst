@@ -1,3 +1,5 @@
+.. _deploy_peek_platform:
+
 ====================
 Deploy Peek Platform
 ====================
