@@ -11,7 +11,11 @@ function modPath() {
 python <<EOPY
 import os.path as p
 import $1
-print(p.dirname($1.__file__))
+dir = p.dirname($1.__file__)
+# Convert it to bash if required
+if dir[1] == ':':
+    dir = '/' + dir[0] + dir[2:].replace('\\\\', '/')
+print(dir)
 EOPY
 }
 
