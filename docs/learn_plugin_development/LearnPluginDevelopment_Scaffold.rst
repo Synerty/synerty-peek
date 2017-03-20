@@ -72,7 +72,7 @@ Add Package :file:`peek_plugin_tutorial`
 
 Package :file:`peek_plugin_tutorial` is the root
 `python package <https://docs.python.org/3.5/tutorial/modules.html#packages>`_.
- for our plugin.
+for our plugin.
 
 This package will contain everything that is packaged up and deployed for the Peek
 Platform to run. This includes:
@@ -201,8 +201,8 @@ Modify the options near the top. We've modified the following:
 
 ----
 
-Add File file:`README.rst`
---------------------------
+Add File :file:`README.rst`
+---------------------------
 
 The file:`README.rst` file is a verbose description of this plugin, it's the file that
 version control systems, such as BitBucket or Github will display when the project is
@@ -222,6 +222,8 @@ Here is a suggestion: ::
 
         This is a Peek Plugin, from the tutorial.
 
+
+.. _package_json_explaination:
 
 Add File :file:`plugin_package.json`
 ------------------------------------

@@ -35,7 +35,7 @@ integration).
     Bash is installed by default on Linux.
 
     Windows users should use bash from msys, which comes with git for windows,
-    :ref:`msys_git`.
+    :ref:`setup_msys_git`.
 
 Clone a New Peek Plugin
 -----------------------

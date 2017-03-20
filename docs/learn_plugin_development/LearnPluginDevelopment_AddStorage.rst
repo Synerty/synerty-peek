@@ -18,7 +18,7 @@ The Storage schema upgrades are managed by the Server service.
 .. note:: The Server service must be enabled to use the Storage service.
 
 Add Package :file:`_private/storage`
-----------------------------
+------------------------------------
 
 Package :file:`_private/storage` will contain the database ORM
 classes. These define the schema for the database and are used for data maniupation and

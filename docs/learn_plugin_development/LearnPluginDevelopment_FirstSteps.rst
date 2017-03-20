@@ -19,7 +19,7 @@ and eventually run the plugins in development mode
 Ensure you are well versed with the platform from the :ref:`Overview` as the following
 sections build upon that.
 
-The following sections will be usefull if you're starting a plugin with out cloning
+The following sections will be useful if you're starting a plugin with out cloning
 peek_plugin_noop, or if you'd like to learn more about how to code different parts
 of the plugin.
 
@@ -28,9 +28,9 @@ Check Setup
 
 .. important:: Windows users must use :command:`bash`
 
-These instructions are corss platform, windows users should use bash from msys, which
+These instructions are cross platform, windows users should use bash from msys, which
 is easily installable form the windows git installer, see the instructions here,
-:ref:`msys_git`.
+:ref:`setup_msys_git`.
 
 ----
 
@@ -56,6 +56,3 @@ A plugin can chose to run on any service the platform provides.
 Here is an architecture diagram for a plugin :
 
 .. image:: LearnPluginOverview.png
-
-----
-

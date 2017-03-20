@@ -1,7 +1,7 @@
 .. _learn_plugin_development_add_agent:
 
 ========================
-Adding the agent Service
+Adding the Agent Service
 ========================
 
 This document is a stripped version of :ref:`learn_plugin_development_add_server`.

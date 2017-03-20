@@ -1,7 +1,34 @@
-.. _learn_plugin_development_add_admin:
+.. _learn_plugin_development_add_mobile:
 
-Adding the Admin Service
-------------------------
+================================
+Adding the Mobile Service (TODO)
+================================
+
+
+**TODO**
+
+**TODO**
+
+**TODO**
+
+**TODO**
+
+**TODO**
+
+**TODO**
+
+**TODO**
+
+**TODO**
+
+**TODO**
+
+**TODO**
+
+**TODO**
+
+**TODO**
+
 
 The admin service is the admin user interface.
 
@@ -156,20 +183,20 @@ Example: ::
 
 ----
 
-You can now run the peek server, you should see your plugin load. ::
+You can now run the peek client, you should see your plugin load. ::
 
-        peek@peek:~$ run_peek_server
+        peek@peek:~$ run_peek_client
         ...
         INFO peek_platform.frontend.WebBuilder:Rebuilding frontend distribution
         ...
-        INFO txhttputil.site.SiteUtil:Peek Admin is alive and listening on http://10.211.55.14:8010
+        INFO txhttputil.site.SiteUtil:Peek Admin is alive and listening on http://10.211.55.14:8000
         ....
 
 ----
 
 Now bring up a web browser and navigate to
-`http://localhost:8010 <http://localhost:8010>`_ or the IP mentioned in the output of
-:command:`run_peek_server`.
+`http://localhost:8000 <http://localhost:8000>`_ or the IP mentioned in the output of
+:command:`run_peek_client`.
 
 If you see this, then congratulations, you've just enabled your plugin to use the
 Peek Platform, Admin Service.

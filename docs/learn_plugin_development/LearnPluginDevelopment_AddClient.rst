@@ -98,6 +98,10 @@ Edit the file :file:`peek_plugin_tutorial/__init__.py`, and add the following: :
 Edit :file:`plugin_package.json`
 --------------------------------
 
+For more details about the :file:`plugin_package.json`,
+see :ref:`About plugin_package.json <package_json_explaination>`.
+
+----
 
 Edit the file :file:`peek_plugin_tutorial/plugin_package.json` :
 

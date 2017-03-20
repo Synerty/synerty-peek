@@ -26,7 +26,7 @@ Software Installation and Configuration
 ---------------------------------------
 
 On a Windows machine the follow commands will be run using the bash shell, see
-:ref:`git_bash`.
+:ref:`setup_msys_git`.
 
 synerty-peek Repositories
 `````````````````````````
