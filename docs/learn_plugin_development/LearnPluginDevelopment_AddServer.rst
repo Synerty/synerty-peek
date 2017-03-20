@@ -1,12 +1,12 @@
 .. _learn_plugin_development_add_server:
 
-
+=========================
 Adding the Server Service
--------------------------
+=========================
 
 
 Configure the Plugin
-````````````````````
+--------------------
 This section adds the basic files require for the plugin to run on the servers service.
 Create the following files and directories.
 
@@ -20,6 +20,20 @@ The platform loads the plugins python package, and then calls the appropriate
 The object returned must implement the right interfaces, the platform then calls methods
 on this object to load, start, stop, unload, etc the plugin.
 
+
+Add Package :file:`_private/server`
+-----------------------------------
+
+This step creates the :file:`_private/server`
+`python package <https://docs.python.org/3.5/tutorial/modules.html#packages>`_.
+
+This package will contain the majority of the plugins code that will run on the
+Server service. Files in this package can be imported with ::
+
+        # Example
+        # To import peek_plugin_tutorial/_private/server/File.py
+        from peek_plugin_tutorial._private.server import File
+
 ----
 
 Create directory :file:`peek_plugin_tutorial/_private/server`
@@ -32,7 +46,18 @@ Commands: ::
         mkdir peek_plugin_tutorial/_private/server
         touch peek_plugin_tutorial/_private/server/__init__.py
 
-----
+
+Add File :file:`ServerEntryHook.py`
+-----------------------------------
+
+This file/class is the entry point for the plugin on the Server service.
+When the server service starts this plugin, it will call the :command:`load()` then the
+:command:`start()` methods.
+
+Any initialisation and loading that the plugin needs to do to run should
+be placed in the
+
+--
 
 Create the file :file:`peek_plugin_tutorial/_private/server/ServerEntryHook.py`
 and populate it with the following contents.
@@ -47,17 +72,65 @@ and populate it with the following contents.
 
 
         class ServerEntryHook(PluginServerEntryHookABC):
+            def __init__(self, *args, **kwargs):
+                """" Constructor """
+                # Call the base classes constructor
+                PluginServerEntryHookABC.__init__(self, *args, **kwargs)
+
+                #: Loaded Objects, This is a list of all objects created when we start
+                self._loadedObjects = []
+
             def load(self) -> None:
+                """ Load
+
+                This will be called when the plugin is loaded, just after the db is migrated.
+                Place any custom initialiastion steps here.
+
+                """
                 logger.debug("Loaded")
 
             def start(self):
+                """ Load
+
+                This will be called when the plugin is loaded, just after the db is migrated.
+                Place any custom initialiastion steps here.
+
+                """
                 logger.debug("Started")
 
             def stop(self):
+                """ Stop
+
+                This method is called by the platform to tell the peek app to shutdown and stop
+                everything it's doing
+                """
+                # Shutdown and dereference all objects we constructed when we started
+                while self._loadedObjects:
+                    self._loadedObjects.pop().shutdown()
+
                 logger.debug("Stopped")
 
             def unload(self):
+                """Unload
+
+                This method is called after stop is called, to unload any last resources
+                before the PLUGIN is unlinked from the platform
+
+                """
                 logger.debug("Unloaded")
+
+
+Edit :file:`peek_plugin_tutorial/__init__.py`
+---------------------------------------------
+
+When the Server service loads the plugin, it first calls the
+:command:`peekServerEntryHook()` method from the :command:`peek_plugin_tutorial` package.
+
+The :command:`peekServerEntryHook()` method returns the Class that the server should
+create to initialise and start the plugin.
+
+As far as the Peek Platform is concerned, the plugin can be structured how ever it likes
+internally, as long as it defines these methods in it's root python package.
 
 ----
 
@@ -70,6 +143,14 @@ Edit the file :file:`peek_plugin_tutorial/__init__.py`, and add the following: :
         def peekServerEntryHook() -> Type[PluginServerEntryHookABC]:
             from ._private.server.ServerEntryHook import ServerEntryHook
             return ServerEntryHook
+
+
+Edit :file:`plugin_package.json`
+--------------------------------
+
+These updates to the :file:`plugin_package.json` tell the Peek Platform that we require
+the "server" service to run, and additional configuration options we have for that
+service.
 
 ----
 
@@ -107,7 +188,12 @@ Here is an example ::
 The plugin should now be ready for the server to load.
 
 Running on the Server Service
-`````````````````````````````
+-----------------------------
+
+File :file:`~/peek-server.home/config.json` is the configuration file for the Server
+service.
+
+----
 
 Edit :file:`~/peek-server.home/config.json`:
 
