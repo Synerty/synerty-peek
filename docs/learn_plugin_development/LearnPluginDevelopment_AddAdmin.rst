@@ -1,7 +1,8 @@
 .. _learn_plugin_development_add_admin:
 
+========================
 Adding the Admin Service
-------------------------
+========================
 
 The admin service is the admin user interface.
 
@@ -10,10 +11,24 @@ of using Angular, thats outside the scope of this guide.
 
 We will go into the details of getting data with VortexJS/VortexPY.
 
-Adding the Root Admin Page
-``````````````````````````
+Add Directory :file:`admin-app`
+-------------------------------
+
+The :file:`admin-app` directory will contain the plugins the Angular application.
+
+Angular "Lazy Loads" this part of the plugin, meaning it only loads it when the user
+navigates to the page, and unloads it when it's finished.
+
+This allows large, single page web applications to be made.
+
+----
 
 Create directory :file:`peek_plugin_tutorial/_private/admin-app`
+
+Add File :file:`tutorial.component.html`
+----------------------------------------
+
+The :file:`tutorial.component.html` file is the default HTML file for the admin frontend.
 
 ----
 
@@ -28,6 +43,14 @@ and populate it with the following contents.
             <p>This is the root of the admin app for the Tutorial plugin</p>
         </div>
 
+
+Add File :file:`tutorial.component.ts`
+--------------------------------------
+
+The :file:`tutorial.component.ts` is the default Angular Component for the admin page
+of the component.
+
+`See NgModule for more <https://angular.io/docs/ts/latest/guide/ngmodule.html>`_
 
 ----
 
@@ -48,6 +71,18 @@ and populate it with the following contents.
 
             }
         }
+
+
+Add File :file:`tutorial.module.ts`
+-----------------------------------
+
+The :file:`tutorial.module.ts` is the main Angular module of the plugin.
+
+This file can describe other routes, that will load other components. This is standard
+Angular.
+
+`See NgModule for more <https://angular.io/docs/ts/latest/guide/ngmodule.html>`_
+
 
 ----
 
@@ -85,7 +120,9 @@ and populate it with the following contents.
 
         }
 
-----
+
+Edit File :file:`plugin_package.json`
+-------------------------------------
 
 Finally, Edit the file :file:`peek_plugin_tutorial/plugin_package.json` to tell the
 platform that we want to use the admin service:
@@ -122,10 +159,10 @@ Here is an example ::
             }
         }
 
-----
 
 Running on the Admin Service
-````````````````````````````
+----------------------------
+
 The Peek Server service provides the web service that serves the admin angular
 application.
 
