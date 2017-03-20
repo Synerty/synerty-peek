@@ -55,9 +55,13 @@ When the server service starts this plugin, it will call the :command:`load()` t
 :command:`start()` methods.
 
 Any initialisation and loading that the plugin needs to do to run should
-be placed in the
+be placed in :command:`load()` and :command:`start()` methods.
 
---
+.. important::  Ensure what ever is constructed and initialised in the :command:`load()`
+                and :command:`start()` methods, should be deconstructed in the
+                :command:`stop()` and :command:`unload()` methods.
+
+----
 
 Create the file :file:`peek_plugin_tutorial/_private/server/ServerEntryHook.py`
 and populate it with the following contents.
