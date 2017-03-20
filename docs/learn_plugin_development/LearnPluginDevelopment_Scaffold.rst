@@ -201,6 +201,17 @@ Modify the options near the top. We've modified the following:
 
 ----
 
+Add File file:`README.rst`
+--------------------------
+
+The file:`README.rst` file is a verbose description of this plugin, it's the file that
+version control systems, such as BitBucket or Github will display when the project is
+viewed on their sites.
+
+It's ideal to include a great overvew about the plugin in this file.
+
+----
+
 Create a README, create a :file:`README.rst` file and populate it.
 
 Here is a suggestion: ::
