@@ -14,8 +14,8 @@ SourceTree to visually manage and interact with your Git repositories
 
 :URL: `<https://www.sourcetreeapp.com>`_
 
-Bitbucket can be integrated with Jira (issue management)
- and Bamboo (continuous integration).
+Bitbucket can be integrated with Jira (issue management) and Bamboo (continuous
+integration).
 
 .. note::   The reader needs be familiar with, or will become familar with the following:
 
