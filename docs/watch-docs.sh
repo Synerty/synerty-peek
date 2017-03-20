@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+set -o nounset
+set -o errexit
+
 # Make sure this script has all the environment setup
 export PATH="$(dirname `echo 'which python' | bash -l`):$PATH"
 

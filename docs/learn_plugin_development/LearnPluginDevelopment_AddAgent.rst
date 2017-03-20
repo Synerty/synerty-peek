@@ -1,41 +1,41 @@
-.. _learn_plugin_development_add_client:
+.. _learn_plugin_development_add_agent:
 
-=========================
-Adding the client Service
-=========================
+========================
+Adding the agent Service
+========================
 
 This document is a stripped version of :ref:`learn_plugin_development_add_server`.
 
 
-Add Package :file:`_private/client`
------------------------------------
+Add Package :file:`_private/agent`
+----------------------------------
 
 Commands: ::
 
-        mkdir peek_plugin_tutorial/_private/client
-        touch peek_plugin_tutorial/_private/client/__init__.py
+        mkdir peek_plugin_tutorial/_private/agent
+        touch peek_plugin_tutorial/_private/agent/__init__.py
 
 
-Add File :file:`clientEntryHook.py`
------------------------------------
+Add File :file:`agentEntryHook.py`
+----------------------------------
 
-Create the file :file:`peek_plugin_tutorial/_private/client/clientEntryHook.py`
+Create the file :file:`peek_plugin_tutorial/_private/agent/agentEntryHook.py`
 and populate it with the following contents.
 
 ::
 
         import logging
 
-        from peek_plugin_base.client.PluginclientEntryHookABC import PluginclientEntryHookABC
+        from peek_plugin_base.agent.PluginagentEntryHookABC import PluginagentEntryHookABC
 
         logger = logging.getLogger(__name__)
 
 
-        class clientEntryHook(PluginclientEntryHookABC):
+        class agentEntryHook(PluginagentEntryHookABC):
             def __init__(self, *args, **kwargs):
                 """" Constructor """
                 # Call the base classes constructor
-                PluginclientEntryHookABC.__init__(self, *args, **kwargs)
+                PluginagentEntryHookABC.__init__(self, *args, **kwargs)
 
                 #: Loaded Objects, This is a list of all objects created when we start
                 self._loadedObjects = []
@@ -86,13 +86,13 @@ Edit :file:`peek_plugin_tutorial/__init__.py`
 
 Edit the file :file:`peek_plugin_tutorial/__init__.py`, and add the following: ::
 
-        from peek_plugin_base.client.PluginclientEntryHookABC import PluginclientEntryHookABC
+        from peek_plugin_base.agent.PluginagentEntryHookABC import PluginagentEntryHookABC
         from typing import Type
 
 
-        def peekclientEntryHook() -> Type[PluginclientEntryHookABC]:
-            from ._private.client.clientEntryHook import clientEntryHook
-            return clientEntryHook
+        def peekagentEntryHook() -> Type[PluginagentEntryHookABC]:
+            from ._private.agent.agentEntryHook import agentEntryHook
+            return agentEntryHook
 
 
 Edit :file:`plugin_package.json`
@@ -101,15 +101,15 @@ Edit :file:`plugin_package.json`
 
 Edit the file :file:`peek_plugin_tutorial/plugin_package.json` :
 
-#.  Add **"client"** to the requiresServices section so it looks like ::
+#.  Add **"agent"** to the requiresServices section so it looks like ::
 
         "requiresServices": [
-            "client"
+            "agent"
         ]
 
-#.  Add the **client** section after **requiresServices** section: ::
+#.  Add the **agent** section after **requiresServices** section: ::
 
-        "client": {
+        "agent": {
         }
 
 #.  Ensure your JSON is still valid (Your IDE may help here)
@@ -121,29 +121,29 @@ Here is an example ::
                 ...
             },
             "requiresServices": [
-                "client"
+                "agent"
             ],
-            "client": {
+            "agent": {
             }
         }
 
 
-Running on the client Service
------------------------------
+Running on the agent Service
+----------------------------
 
-Edit :file:`~/peek-client.home/config.json`:
+Edit :file:`~/peek-agent.home/config.json`:
 
 #.  Ensure **logging.level** is set to **"DEBUG"**
 #.  Add **"peek_plugin_tutorial"** to the **plugin.enabled** array
 
 ----
 
-You can now run the peek client, you should see your plugin load. 
-:file:`run_peek_client` ::
+You can now run the peek agent, you should see your plugin load. 
+:file:`run_peek_agent` ::
 
-        peek@peek:~$ run_peek_client
+        peek@peek:~$ run_peek_agent
         ...
-        DEBUG peek_plugin_tutorial._private.client.clientEntryHook:Loaded
-        DEBUG peek_plugin_tutorial._private.client.clientEntryHook:Started
+        DEBUG peek_plugin_tutorial._private.agent.agentEntryHook:Loaded
+        DEBUG peek_plugin_tutorial._private.agent.agentEntryHook:Started
         ...
 

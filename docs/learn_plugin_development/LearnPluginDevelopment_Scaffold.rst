@@ -223,9 +223,6 @@ Here is a suggestion: ::
         This is a Peek Plugin, from the tutorial.
 
 
-
-
-
 Add File :file:`plugin_package.json`
 ------------------------------------
 
