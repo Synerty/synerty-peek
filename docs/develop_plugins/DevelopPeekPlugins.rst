@@ -45,7 +45,7 @@ If you're creating a new plugin you can copy from "peek-plugin-noop" and rename.
 Copy peek-plugin-noop
 `````````````````````
 
-:Clone: `<https://github.com/Synerty/peek-plugin-noop.git>`_
+:Clone: `<https://bitbucket.org/synerty/peek-plugin-noop/src>`_
 
 Go to, peek-plugin-noop repository on Bitbucket
 
