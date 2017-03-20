@@ -14,8 +14,8 @@ SourceTree to visually manage and interact with your Git repositories
 
 :URL: `<https://www.sourcetreeapp.com>`_
 
-Bitbucket can be integrated with Jira (issue management)
- and Bamboo (continuous integration).
+Bitbucket can be integrated with Jira (issue management) and Bamboo (continuous
+integration).
 
 .. note::   The reader needs be familiar with, or will become familar with the following:
 
@@ -45,7 +45,7 @@ If you're creating a new plugin you can copy from "peek-plugin-noop" and rename.
 Copy peek-plugin-noop
 `````````````````````
 
-:Clone: `<https://github.com/Synerty/peek-plugin-noop.git>`_
+:Clone: `<https://bitbucket.org/synerty/peek-plugin-noop/src>`_
 
 Go to, peek-plugin-noop repository on Bitbucket
 
