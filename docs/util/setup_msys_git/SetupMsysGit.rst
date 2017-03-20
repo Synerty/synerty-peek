@@ -1,11 +1,8 @@
-.. _msys_git:
+.. _setup_msys_git:
 
 ==============
 Setup Msys Git
 ==============
-
-GitBash
--------
 
 .. WARNING:: This step is required for Windows only.
 

@@ -3,7 +3,7 @@ Peek Platform Documentation
 ===========================
 
 .. toctree::
-    :maxdepth: 2
+    :maxdepth: 3
     :caption: Contents:
 
     guide
@@ -27,7 +27,8 @@ Peek Platform Documentation
     setup_vs_code/SetupVSCode
     troubleshooting_windows/TroubleshootingWindows
     troubleshooting_debian/TroubleshootingDebian
-    learn_plugin_development/LearnPluginDevelopment
+    learn_plugin_development/IndexLearn
+    util/IndexUtil
     api_autodoc/peek_plugin_base/peek_plugin_base
 
 

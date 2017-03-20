@@ -195,7 +195,7 @@ Configure Peek Services
 The python peek services, **worker**, **agent**, **client** and **server** need to have
 the plugin enabled in their :file:`~/peek-{service}/config.json`.
 
-For exampple: ::
+For example: ::
 
         "plugin": {
             "enabled": [
