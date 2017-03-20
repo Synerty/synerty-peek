@@ -168,7 +168,8 @@ The Peek documentation has procedures for IDE setup:
 Setup the Plugin
 ----------------
 
-Setup Plugin for Development.
+Setup Plugin for Development
+````````````````````````````
 
 Plugins need to be installed as python packages for the Peek Platform to run them.
 This is typically done with a command similar to :command:`pip install peek-plugin-noop`
@@ -188,7 +189,8 @@ setup.py is: ::
 
 ----
 
-Configure Peek Services.
+Configure Peek Services
+```````````````````````
 
 The python peek services, **worker**, **agent**, **client** and **server** need to have
 the plugin enabled in their :file:`~/peek-{service}/config.json`.
@@ -203,7 +205,8 @@ For exampple: ::
 
 ----
 
-Run the Plugin.
+Run the Plugin
+``````````````
 
 Now that the plugin has been setup for development and the platform has been configured
 to run it, running the platform will run the plugin.
