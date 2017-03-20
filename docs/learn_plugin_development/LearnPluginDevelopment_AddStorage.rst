@@ -1,7 +1,8 @@
 .. _learn_plugin_development_add_storage:
 
+==========================
 Adding the Storage Service
---------------------------
+==========================
 
 The storage service is conceptually a little different to other services in the Peek
 Platform.
@@ -16,17 +17,36 @@ The Storage schema upgrades are managed by the Server service.
 
 .. note:: The Server service must be enabled to use the Storage service.
 
-Add Skeleton Files
-``````````````````
+Add Package :file:`_private/storage`
+----------------------------
 
-Create directory :file:`peek_plugin_tutorial/_private/storage`
+Package :file:`_private/storage` will contain the database ORM
+classes. These define the schema for the database and are used for data maniupation and
+retreival.
 
-Create the empty package file :file:`peek_plugin_tutorial/_private/storage/__init__.py`
+----
 
-Command: ::
+Create the :file:`peek_plugin_tutorial._private/storage` Package. Commands: ::
 
-        mkdir peek_plugin_tutorial/_private/storage
+        mkdir -p peek_plugin_tutorial/_private/storage
         touch peek_plugin_tutorial/_private/storage/__init__.py
+
+
+Add File :file:`DeclarativeBase.py`
+-----------------------------------
+
+The :file:`DeclarativeBase.py` file  defines an SQLAlchemy declarative base class.
+All Table classes inheriting this base class belong together, you can have multiple
+declarative bases.
+
+See `SQLALchemy <http://docs.sqlalchemy.org/en/rel_1_1/orm/tutorial.html#declare-a-mapping>`_
+for more details.
+
+In this delcarative base, we define a metadata with a schema name for this plugin,
+**pl_tutorial**.
+
+Peek has a :command:`loadStorageTuples()` method that imports the tables.
+All the table classes in the plugin will be loaded in this method.
 
 ----
 
@@ -55,10 +75,17 @@ and populate it with the following contents:
             """
 
 
+Add Package :file:`alembic`
+---------------------------
+
+Alembic is the database upgrade library Peek uses. The :file:`alembic` package is where
+the alembic configuration will be kept.
+
+Read more about `Alembic here <http://alembic.zzzcomputing.com/en/latest/>`_
+
 ----
 
 Create directory :file:`peek_plugin_tutorial/_private/alembic`
-
 Create the empty package file :file:`peek_plugin_tutorial/_private/alembic/__init__.py`
 
 Command: ::
@@ -66,16 +93,30 @@ Command: ::
         mkdir peek_plugin_tutorial/_private/alembic
         touch peek_plugin_tutorial/_private/alembic/__init__.py
 
+
+Add Package :file:`versions`
+----------------------------
+
+The :file:`versions` package is where the Alembic database upgrade scripts are kept.
+
 ----
 
 Create directory :file:`peek_plugin_tutorial/_private/alembic/versions`
-
 Create the empty package file :file:`peek_plugin_tutorial/_private/alembic/versions/__init__.py`
 
 Command: ::
 
         mkdir peek_plugin_tutorial/_private/alembic/versions
         touch peek_plugin_tutorial/_private/alembic/versions/__init__.py
+
+
+Add File :file:`env.py`
+-----------------------
+
+The :file:`env.py` is loaded by Alembic to get it's configuration and environment.
+
+Notice that the :command:`loadStorageTuples()` are loaded? Alembic needs the table
+classes loaded to create the version control scripts.
 
 ----
 
@@ -92,6 +133,16 @@ the following contents:
 
         alembicEnv = AlembicEnvBase(DeclarativeBase.DeclarativeBase.metadata)
         alembicEnv.run()
+
+
+Add File :file:`script.py.mako`
+-------------------------------
+
+The :file:`script.py.mako` file is a template that is used by Alembic to create new
+database version scripts.
+
+Out of interest, Alembic uses `Mako <http://www.makotemplates.org>`_ to compile the
+template into a new script.
 
 ----
 
@@ -129,6 +180,12 @@ the following contents:
             ${downgrades if downgrades else "pass"}
 
 
+Edit File :file:`plugin_package.json`
+-------------------------------------
+
+For more details about the :file:`plugin_package.json`,
+see :ref:`About plugin_package.json <package_json_explaination>`.
+
 ----
 
 Edit the file :file:`peek_plugin_tutorial/plugin_package.json` :
@@ -160,6 +217,17 @@ Here is an example ::
             }
         }
 
+
+Edit File :file:`ServerEntryHook.py`
+------------------------------------
+
+The :file:`ServerEntryHook.py` file needs to be updated to do the following:
+
+*   Implement the :command:`PluginServerStorageEntryHookABC` abstract base class.
+    Including implementing :command:`dbMetadata` property.
+
+*   Ensure that the storage Tables are loaded on plugin load.
+
 ----
 
 Edit the file :file:`peek_plugin_tutorial/_private/server/ServerEntryHook.py`
@@ -186,7 +254,7 @@ Edit the file :file:`peek_plugin_tutorial/_private/server/ServerEntryHook.py`
         def dbMetadata(self):
             return DeclarativeBase.metadata
 
-You should have a file like this: ::
+When you're finished, You should have a file like this: ::
 
         # Added imports, step 1
         from peek_plugin_noop._private.storage import DeclarativeBase
@@ -209,6 +277,14 @@ You should have a file like this: ::
                 return DeclarativeBase.metadata
 
 
+
+
+Add File :file:`alembic.ini`
+----------------------------
+
+The :file:`alembic.ini` file is the first file Alembic laods, it tells Alembic
+how to connect to the database and where it's "alembic" directory is.
+
 ----
 
 Create a file :file:`peek_plugin_tutorial/_private/alembic.ini` and populate it with
@@ -229,19 +305,28 @@ Finally, run the peek server, it should load with out error.
 
 The hard parts done, adding the tables is much easier.
 
+.. _add_a_simple_table:
+
 Adding a Simple Table
-`````````````````````
+---------------------
 
 This section adds a simple table, For lack of a better idea, lets have a table of strings
 and Integers.
+
+Add File :file:`StringIntTuple.py`
+``````````````````````````````````
+
+The :file:`StringIntTuple.py` python file defines a database Table class.
+This database Table class desribes a table in the database.
+
+Most of this is straight from the
+`SQLAlchemy Object Relational Tutorial <http://docs.sqlalchemy.org/en/latest/orm/tutorial.html#declare-a-mapping>`_
 
 ----
 
 Create the file :file:`peek_plugin_tutorial/_private/storage/StringIntTuple.py`
 and populate it with the following contents.
 
-Most of this is straight from the
-`SQLAlchemy Object Relational Tutorial <http://docs.sqlalchemy.org/en/latest/orm/tutorial.html#declare-a-mapping>`_
 
 ::
 
@@ -271,7 +356,8 @@ and reconstructed as the proper python class. VortexPY is present in these three
             __tupleType__ = tutorialTuplePrefix + 'StringIntTuple'
 
 
-----
+Edit File :file:`DeclarativeBase.py`
+````````````````````````````````````
 
 Edit the file :file:`peek_plugin_tutorial/_private/storage/DeclarativeBase.py`
 
@@ -280,12 +366,23 @@ Edit the file :file:`peek_plugin_tutorial/_private/storage/DeclarativeBase.py`
         from . import StringIntTuple
         StringIntTuple.__unused = False
 
-----
+
+Create New Alembic Version
+``````````````````````````
 
 Now we need create a database upgrade script, this allows Peek to automatically upgrade
 the plugins schema. Peek uses Alembic to handle this.
 
 Read more about `Alembic here <http://alembic.zzzcomputing.com/en/latest/>`_
+
+Alembic will load the schema from the database, then load the schema defined by the
+SQLALchemy Table classes.
+
+Alembic then works out the differences and create an upgrade script. The upgrade script
+will modify the database to match the schema defined by the python SQLAlchemy Table
+classes.
+
+----
 
 #.  Open a :command:`bash` window
 #.  CD to the _private directory of the plugin ::
@@ -328,14 +425,16 @@ Read more about `Alembic here <http://alembic.zzzcomputing.com/en/latest/>`_
 
 
 Adding a Settings Table
-```````````````````````
+-----------------------
 
 The Noop plugin has special Settings and SettingsProperty tables that is usefully for
 storing plugin settings.
 
-This section sets this up for the Tutorial plugin.
+This section sets this up for the Tutorial plugin. It's roughly the same process used
+to :ref:`add_a_simple_table`.
 
-----
+Add File :file:`Settings.py`
+````````````````````````````
 
 Download the :file:`Settings.py` file to :file:`peek_plugin_tutorial/_private/storage`
 from `<https://bitbucket.org/synerty/peek-plugin-noop/raw/master/peek_plugin_noop/_private/storage/Setting.py>`_
@@ -357,7 +456,9 @@ Add the following lines to the :command:`loadStorageTuples():` method ::
     from . import Setting
     Setting.__unused = False
 
-----
+
+Create New Alembic Version
+``````````````````````````
 
 Open a :command:`bash` window, run the alembic upgrade ::
 
@@ -367,11 +468,14 @@ Open a :command:`bash` window, run the alembic upgrade ::
         # Run the alembic command
         alembic revision --autogenerate -m "Added Setting Table"
 
-----
+.. note:: Remember to check the file generated, and add it to git.
+
+Settings Table Examples
+```````````````````````
 
 Here is some example code for using the settings table.
 
-Place the code in the :command:`start():` method in
+Place this code in the :command:`start():` method in
 :file:`peek_plugin_tutorial/_private/server/ServerEntryHook.py`
 
 ::
