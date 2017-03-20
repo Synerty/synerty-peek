@@ -2,7 +2,7 @@
 
 
 Scaffolding From Scratch
-------------------------
+````````````````````````
 
 In this section we'll create the basic files we need for a plugin.
 
@@ -11,7 +11,17 @@ In this section we'll create the basic files we need for a plugin.
 We'll finish up with a plugin which we can build a python package for, but it won't
 run on any services, we'll add that later.
 
-----
+Create Directory :file:`peek-plugin-tutorial`
+---------------------------------------------
+
+:file:`peek-plugin-tutorial` is the name of the project directory, it could be anything.
+For consistency, we name it the same as the plugin with hypons instead of underscores,
+Python can't import directories with hypons, so there will be no confusion there.
+
+This directory will contain our plugin package, documentation, build scripts, README,
+license, etc. These won't be included when the python package is built and deployed.
+
+--
 
 Create the plugin project root directory, and CD to it. ::
 
@@ -19,17 +29,19 @@ Create the plugin project root directory, and CD to it. ::
 
 Commands: ::
 
-        mkdir -p peek-plugin-tutorial
+        mkdir peek-plugin-tutorial
         cd peek-plugin-tutorial
 
-:file:`peek-plugin-tutorial` is the name of the project directory, it could be anything.
-But for consistency, we name it the same as the plugin with hypons instead of underscores,
-Python can't import directories with hypons, so there will be no confusion there.
-
-This directory will contain our plugin package, documentation, build scripts, README,
-license, etc. These won't be included when the python package is built and deployed.
-
 ----
+
+.. note:: Future commands will be run from the plugin project root directory.
+
+Add File :file:`.gitignore`
+---------------------------
+
+The :file:`.gitignore` file tells the git version control software to ignore certain
+files in the project.
+`gitignore - Specifies intentionally untracked files to ignore <https://git-scm.com/docs/gitignore>`_.
 
 Create :file:`.gitignore`, and populate it with the following ::
 
@@ -54,52 +66,77 @@ Create :file:`.gitignore`, and populate it with the following ::
         .vscode
 
 
+
+Add Package :file:`peek_plugin_tutorial`
+----------------------------------------
+
+Package :file:`peek_plugin_tutorial` is the root
+`python package <https://docs.python.org/3.5/tutorial/modules.html#packages>`_.
+ for our plugin.
+
+This package will contain everything that is packaged up and deployed for the Peek
+Platform to run. This includes:
+
+*   The public declarations of the APIs used by other plugins.
+    They are declared using
+    `Python Abstract Base Classes <https://docs.python.org/3.5/library/abc.html>`_.
+
+*   Private code that other plugins shouldn't reference.
+
+*   Angular2 Components, modules, services and HTML.
+
+
 ----
 
-.. note:: Future commands will be run from the plugin project root directory.
+.. note::   Commands will be run from the plugin project root directory, which is
+            :file:`peek-plugin-tutorial`.
 
-Create the main directories of your plugin. ::
 
-        peek-plugin-tutorial/
-        └── peek_plugin_tutorial
-            └── _private
+Create the :file:`peek_plugin_tutorial` Package. Commands: ::
 
-Commands: ::
-
-        mkdir -p peek-plugin-tutorial/peek_plugin_tutorial/_private
-
-:file:`peek_plugin_tutorial` is the python package directory for our plugin, this
-directory will contain the declarations of the APIs used by other plugins. They are
-declared using
-`Python Abstract Base Classes <https://docs.python.org/3.5/library/abc.html>`_.
-
-:file:`_private` will contain the parts of the plugin that won't be exposed/shared
-for other plugins to use.
+        mkdir -p peek_plugin_tutorial
+        touch peek_plugin_tutorial/__init__.py
 
 ----
 
-Create two :file:`__init__.py` files, these make python recognise the directories as
-python packages.
+Add the version string to the :file:`peek_plugin_tutorial` package. ::
 
-File :file:`peek_plugin_tutorial/__init__.py` contains the following ::
-
-        __version__ = '0.0.18'
+        echo "__version__ = '0.0.1'" > peek_plugin_tutorial/__init__.py
 
 
-File :file:`peek_plugin_tutorial/_private/__init__.py` is empty.
+.. note:: This version is automatically updated by the :command:`publish.sh` script.
 
-Commands: ::
+Add Package :file:`_private`
+----------------------------
 
-        echo "__version__ = '0.0.18'" > peek_plugin_tutorial/__init__.py
+Package :file:`peek_plugin_tutorial._private` will contain the parts of the plugin
+that won't be exposed/shared for other plugins to use.
+
+----
+
+Create the :file:`peek_plugin_tutorial._private` Package. Commands: ::
+
+        mkdir -p peek_plugin_tutorial/_private
         touch peek_plugin_tutorial/_private/__init__.py
 
-The structure will be: ::
+
+
+The structure should now be: ::
 
         peek-plugin-tutorial
+        └── .gitignore
         └── peek_plugin_tutorial
-            ├── __init__.py # CREATE
+            ├── __init__.py
             └── _private
-                └── __init__.py # CREATE
+                └── __init__.py
+
+
+Add File :file:`setup.py`
+-------------------------
+
+The :file:`setup.py` file tells the python distribution tools how to create a
+distributable file for the plugin.
+`Read more here <https://packaging.python.org/distributing/#setup-py>`_.
 
 ----
 
@@ -128,6 +165,20 @@ values:
         download_url = 'https://bitbucket.org/synerty/%s/get/%s.zip'
         download_url %= pip_package_name, package_version
         url = 'https://bitbucket.org/synerty/%s' % pip_package_name
+
+
+
+Add File :file:`publish.sh`
+---------------------------
+
+The :file:`publish.sh` file is custom script for building and publishing the plugin that
+performs the following tasks:
+
+*   Updates the version number in the project text files.
+*   Pushes tags to git
+*   Copies the built releases to $RELEASE_DIR if defined
+*   Runs setup.py
+*   Pushes the release to pypi.python.org
 
 ----
 
@@ -159,6 +210,24 @@ Here is a suggestion: ::
         =================
 
         This is a Peek Plugin, from the tutorial.
+
+
+
+
+
+Add File :file:`plugin_package.json`
+------------------------------------
+
+The :file:`plugin_package.json` describes the plugin to the Peek Platform. These details
+include:
+
+*   The version
+*   The name
+*   Which services the plugin needs
+*   Additional settings for each service
+*   File locations for the Angular applications (admin, desktop and mobile)
+*   The path of the icon for the plugin,
+*   ect.
 
 ----
 
@@ -193,6 +262,18 @@ Check that your plugin now looks like this: ::
         ├── README.rst
         └── setup.py
 
+Add File :file:`PluginNames.py`
+-------------------------------
+
+The :file:`PluginNames.py` file defines some constants that are used throughout the
+plugin. More details on where these are used will be later in the documentation.
+
+Since all of the plugin is on the one package, both the part of the plugin running on the
+server and the part of the plugin running on the client can import this file.
+
+Guaranteeing that there is no missmatch of names when they send data to each other.
+
+
 ----
 
 Create the :file:`peek_plugin_tutorial/_private/PluginNames.py` file with the following
@@ -203,6 +284,15 @@ contents: ::
         tutorialObservableName = "peek_plugin_tutorial"
         tutorialActionProcessorName = "peek_plugin_tutorial"
 
+
+Install in Development Mode
+---------------------------
+
+Installing the plugin in development mode, links the development directory of the plugin
+(the directory we create in these instructions) into the python virtual environment.
+
+With this link in place, any python code that want's to use our plugin, is able to import
+it, and the code run will be the code we're working on.
 
 ----
 
