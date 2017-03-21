@@ -164,7 +164,7 @@ It should somthing like this: ::
             ...
         }
 
-.. note:: This file is created in :ref:`deploy_peek_platform`
+.. note:: This file is created in :ref:`administer_peek_platform`
 
 ----
 

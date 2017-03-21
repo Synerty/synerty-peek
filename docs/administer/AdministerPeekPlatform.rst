@@ -1,9 +1,11 @@
+.. _administer_peek_platform:
+
 ========================
 Administer Peek Platform
 ========================
 
-Configuring Platform (config.json)
-----------------------------------
+Configuring Platform :file:`config.json`
+----------------------------------------
 
 Update config.json files. This tells the peek platform services how to connect to each
 other, connect to the database, which plugins to load, etc.
