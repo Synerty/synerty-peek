@@ -313,7 +313,14 @@ Now bring up a web browser and navigate to
 If you see this, then congratulations, you've just enabled your plugin to use the
 Peek Platform, Mobile Service Web App.
 
-.. image:: PeekAdminSuccess.png
+.. image:: LearnAddMobileWebHomeScreen.png
+
+----
+
+Click on the Tutorial app, you should then see your plugins default route component.
+
+.. image:: LearnAddMobileNSHomeScreen.png
+
 
 Running the Mobile NativeScript App
 -----------------------------------
