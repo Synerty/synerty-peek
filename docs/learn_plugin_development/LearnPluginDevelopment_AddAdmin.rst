@@ -177,6 +177,10 @@ The Peek Server service takes care of combining all the plugin files into the bu
 directories in the peek_admin package. We will need to restart Peek Server for it to
 include our plugin in the admin UI.
 
+See :ref:`learn_plugin_development_frontend_preparing` for more details.
+
+Check File :file:`~/peek-server.home/config.json`
+`````````````````````````````````````````````````
 
 Check the :file:`~/peek-server.home/config.json` file:
 
@@ -198,7 +202,8 @@ Example: ::
         }
 
 
-----
+Run :file:`run_peek_server`
+```````````````````````````
 
 You can now run the peek server, you should see your plugin load. ::
 

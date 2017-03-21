@@ -1,14 +1,19 @@
 .. _learn_plugin_development_add_agent:
 
-=======================================
-Adding the Agent Service (Needs recopy)
-=======================================
+========================
+Adding the Agent Service
+========================
 
 This document is a stripped version of :ref:`learn_plugin_development_add_server`.
 
-
 Add Package :file:`_private/agent`
 ----------------------------------
+
+
+Create directory :file:`peek_plugin_tutorial/_private/agent`
+
+Create an empty package file in the agent directory,
+:file:`peek_plugin_tutorial/_private/agent/__init__.py`
 
 Commands: ::
 
@@ -16,26 +21,26 @@ Commands: ::
         touch peek_plugin_tutorial/_private/agent/__init__.py
 
 
-Add File :file:`agentEntryHook.py`
+Add File :file:`AgentEntryHook.py`
 ----------------------------------
 
-Create the file :file:`peek_plugin_tutorial/_private/agent/agentEntryHook.py`
+Create the file :file:`peek_plugin_tutorial/_private/agent/AgentEntryHook.py`
 and populate it with the following contents.
 
 ::
 
         import logging
 
-        from peek_plugin_base.agent.PluginagentEntryHookABC import PluginagentEntryHookABC
+        from peek_plugin_base.agent.PluginAgentEntryHookABC import PluginAgentEntryHookABC
 
         logger = logging.getLogger(__name__)
 
 
-        class agentEntryHook(PluginagentEntryHookABC):
+        class AgentEntryHook(PluginAgentEntryHookABC):
             def __init__(self, *args, **kwargs):
                 """" Constructor """
                 # Call the base classes constructor
-                PluginagentEntryHookABC.__init__(self, *args, **kwargs)
+                PluginAgentEntryHookABC.__init__(self, *args, **kwargs)
 
                 #: Loaded Objects, This is a list of all objects created when we start
                 self._loadedObjects = []
@@ -83,16 +88,15 @@ and populate it with the following contents.
 Edit :file:`peek_plugin_tutorial/__init__.py`
 ---------------------------------------------
 
-
 Edit the file :file:`peek_plugin_tutorial/__init__.py`, and add the following: ::
 
-        from peek_plugin_base.agent.PluginagentEntryHookABC import PluginagentEntryHookABC
+        from peek_plugin_base.agent.PluginAgentEntryHookABC import PluginAgentEntryHookABC
         from typing import Type
 
 
-        def peekagentEntryHook() -> Type[PluginagentEntryHookABC]:
-            from ._private.agent.agentEntryHook import agentEntryHook
-            return agentEntryHook
+        def peekAgentEntryHook() -> Type[PluginAgentEntryHookABC]:
+            from ._private.agent.AgentEntryHook import AgentEntryHook
+            return AgentEntryHook
 
 
 Edit :file:`plugin_package.json`
@@ -128,22 +132,47 @@ Here is an example ::
         }
 
 
-Running on the agent Service
+----
+
+The plugin should now be ready for the agent to load.
+
+Running on the Agent Service
 ----------------------------
+
 
 Edit :file:`~/peek-agent.home/config.json`:
 
 #.  Ensure **logging.level** is set to **"DEBUG"**
 #.  Add **"peek_plugin_tutorial"** to the **plugin.enabled** array
 
+.. note:: It would be helpful if this is the only plugin enabled at this point.
+
+It should somthing like this: ::
+
+        {
+            ...
+            "logging": {
+                "level": "DEBUG"
+            },
+            ...
+            "plugin": {
+                "enabled": [
+                    "peek_plugin_tutorial"
+                ],
+                ...
+            },
+            ...
+        }
+
+.. note:: This file is created in :ref:`deploy_peek_platform`
+
 ----
 
-You can now run the peek agent, you should see your plugin load. 
-:file:`run_peek_agent` ::
+You can now run the peek agent, you should see your plugin load. ::
 
         peek@peek:~$ run_peek_agent
         ...
-        DEBUG peek_plugin_tutorial._private.agent.agentEntryHook:Loaded
-        DEBUG peek_plugin_tutorial._private.agent.agentEntryHook:Started
+        DEBUG peek_plugin_tutorial._private.agent.AgentEntryHook:Loaded
+        DEBUG peek_plugin_tutorial._private.agent.AgentEntryHook:Started
         ...
 

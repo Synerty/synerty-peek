@@ -5,7 +5,8 @@ set -o errexit
 
 # This replaces agent with Whatever
 #
-# We use agent, because we just copy LearnPluginDevelopment_AddAgent.rst to agent and then strip it down.
+# We use "server", because we just copy LearnPluginDevelopment_AddServer.rst
+#   to LearnPluginDevelopment_AddClient.rst and then strip it down.
 #
 
 function replace {
