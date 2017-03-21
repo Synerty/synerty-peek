@@ -423,6 +423,22 @@ classes.
 .. tip::    You can add any kind of SQL you want to this script, if you want default data,
             then this is the place to add it.
 
+----
+
+Now the database needs to be upgraded, run the upgrade script created in the last step,
+with the following command: ::
+
+        alembic upgrade head
+
+You should see output similar to: ::
+
+        peek@peek MINGW64 ~/peek-plugin-tutorial/peek_plugin_tutorial/_private
+        $ alembic upgrade head
+        21-Mar-2017 02:06:27 INFO alembic.runtime.migration:Context impl PostgresqlImpl.
+        21-Mar-2017 02:06:27 INFO alembic.runtime.migration:Will assume transactional DDL.
+        21-Mar-2017 02:06:27 INFO alembic.runtime.migration:Running upgrade  -> 0b12f40fadba, Added StringInt Table
+        21-Mar-2017 02:06:27 DEBUG alembic.runtime.migration:new branch insert 0b12f40fadba
+
 
 Adding a Settings Table
 -----------------------
@@ -469,6 +485,13 @@ Open a :command:`bash` window, run the alembic upgrade ::
         alembic revision --autogenerate -m "Added Setting Table"
 
 .. note:: Remember to check the file generated, and add it to git.
+
+----
+
+Run the upgrade script created in the last step with the following command: ::
+
+        alembic upgrade head
+
 
 Settings Table Examples
 ```````````````````````
