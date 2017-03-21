@@ -23,13 +23,13 @@ New-Item $baseDir -ItemType directory;
 # Define the node packages we want to download
 $nodePackages = @(
     @{"dir" = "$baseDir\client-build-ns";
-        "packageJsonUrl" = "https://raw.githubusercontent.com/Synerty/peek-client-fe/master/peek_client_fe/build-ns/package.json"
+        "packageJsonUrl" = "https://raw.githubusercontent.com/Synerty/peek-mobile/master/peek_mobile/build-ns/package.json"
     },
     @{"dir" = "$baseDir\client-build-web";
-        "packageJsonUrl" = "https://raw.githubusercontent.com/Synerty/peek-client-fe/master/peek_client_fe/build-web/package.json"
+        "packageJsonUrl" = "https://raw.githubusercontent.com/Synerty/peek-mobile/master/peek_mobile/build-web/package.json"
     },
     @{"dir" = "$baseDir\server-build-web";
-        "packageJsonUrl" = "https://raw.githubusercontent.com/Synerty/peek-server-fe/master/peek_server_fe/build-web/package.json"
+        "packageJsonUrl" = "https://raw.githubusercontent.com/Synerty/peek-admin/master/peek_admin/build-web/package.json"
     }
 );
 

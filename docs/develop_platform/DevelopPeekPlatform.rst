@@ -41,13 +41,13 @@ synerty-peek Repositories
 
 *  peek-client
 
-*  peek-client-fe
+*  peek-mobile
 
 *  peek-platform
 
 *  peek-server
 
-*  peek-server-fe
+*  peek-admin
 
 *  peek-worker
 
@@ -84,10 +84,10 @@ Use this script to clone all repositories.  Update {gitAccount} in the script be
         REPOS="$REPOS peek-plugin-base"
         REPOS="$REPOS peek-agent"
         REPOS="$REPOS peek-client"
-        REPOS="$REPOS peek-client-fe"
+        REPOS="$REPOS peek-mobile"
         REPOS="$REPOS peek-platform"
         REPOS="$REPOS peek-server"
-        REPOS="$REPOS peek-server-fe"
+        REPOS="$REPOS peek-admin"
         REPOS="$REPOS peek-worker"
 
         if [ ! -d ~peek/Documents/peek-dev ]; then
@@ -118,13 +118,13 @@ Install Front End Modules
 Remove the old npm modules files and re-install for both client and server front and
 packages.  Run the following commands: ::
 
-        cd ~peek/Documents/peek-dev/peek-client-fe/peek_client_fe/build-web
+        cd ~peek/Documents/peek-dev/peek-mobile/peek_mobile/build-web
         [ -d node_modules ] && rm -rf node_modules
         npm install
-        cd ~peek/Documents/peek-dev/peek-client-fe/peek_client_fe/build-ns
+        cd ~peek/Documents/peek-dev/peek-mobile/peek_mobile/build-ns
         [ -d node_modules ] && rm -rf node_modules
         npm install
-        cd ~peek/Documents/peek-dev/peek-server-fe/peek_server_fe/build-web
+        cd ~peek/Documents/peek-dev/peek-admin/peek_admin/build-web
         [ -d node_modules ] && rm -rf node_modules
         npm install
 
@@ -146,14 +146,14 @@ Compile Front End Packages
 ``````````````````````````
 
 Symlink the tsconfig.json and node_modules file and directory in the parent directory
-of peek-client-fe, peek-server-fe and the plugins. These steps are run in the directory
+of peek-mobile, peek-admin and the plugins. These steps are run in the directory
 where the projects are checked out from. These are required for the frontend typescript
 compiler.
 
 Run the following commands: ::
 
-        cd ~peek/Documents/peek-dev/peek-client-fe/peek_client_fe/build-web
+        cd ~peek/Documents/peek-dev/peek-mobile/peek_mobile/build-web
         ng build
-        cd ~peek/Documents/peek-dev/peek-server-fe/peek_server_fe/build-web
+        cd ~peek/Documents/peek-dev/peek-admin/peek_admin/build-web
         ng build
 

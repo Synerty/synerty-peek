@@ -23,8 +23,8 @@ Setup Pycharm IDE
     #. Project -> Project Dependencies
 
         #.  peek_platform depends on -> plugin_base
-        #.  peek_server depends on -> peek_platform, peek_server_fe
-        #.  peek_client depends on -> peek_platform, peek_client_fe
+        #.  peek_server depends on -> peek_platform, peek_admin
+        #.  peek_client depends on -> peek_platform, peek_mobile
         #.  peek_agent depends on -> peek_platform
         #.  peek_worker depends on -> peek_platform
 
