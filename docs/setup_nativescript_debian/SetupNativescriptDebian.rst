@@ -1,3 +1,5 @@
+.. _setup_nativescript_debian:
+
 =========================
 Setup Nativescript Debian
 =========================

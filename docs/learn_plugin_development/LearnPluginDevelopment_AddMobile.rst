@@ -240,12 +240,16 @@ Running the Mobile Web App
 The Peek Client service provides the web service that serves the mobile angular
 web app.
 
-The Peek Server service takes care of combining all the plugin files into the build
-directories in the peek_mobile package. We will need to restart Peek Server for it to
+The Peek Client service takes care of combining all the plugin files into the build
+directories in the peek_mobile package. We will need to restart Peek Client for it to
 include our plugin in the mobile UI.
 
+See :ref:`learn_plugin_development_frontend_preparing` for more details.
 
-Check the :file:`~/peek-server.home/config.json` file:
+Check File :file:`~/peek-client.home/config.json`
+`````````````````````````````````````````````````
+
+Check the :file:`~/peek-client.home/config.json` file:
 
 #.  Ensure **frontend.webBuildEnabled** is set to **true**, with no quotes
 #.  Ensure **frontend.webBuildPrepareEnabled** is set to **true**, with no quotes
@@ -258,7 +262,6 @@ Example: ::
             ...
             "frontend": {
                 ...
-                "nativescriptBuildPrepareEnabled": true,
                 "webBuildEnabled": true,
                 "webBuildPrepareEnabled": true
             },
@@ -266,42 +269,52 @@ Example: ::
         }
 
 
-----
 
-You can now run the peek server, you should see your plugin load. ::
+Run :file:`run_peek_client`
+```````````````````````````
 
-        peek@peek:~$ run_peek_server
+You can now run the peek client, you should see your plugin load. ::
+
+        peek@peek:~$ run_peek_client
         ...
         INFO peek_platform.frontend.WebBuilder:Rebuilding frontend distribution
         ...
-        INFO txhttputil.site.SiteUtil:Peek Admin is alive and listening on http://10.211.55.14:8010
-        ....
+        INFO txhttputil.site.SiteUtil:Peek Client is alive and listening on http://10.211.55.14:8000
+        ...
 
 ----
 
 Now bring up a web browser and navigate to
-`http://localhost:8010 <http://localhost:8010>`_ or the IP mentioned in the output of
-:command:`run_peek_server`.
+`http://localhost:8000 <http://localhost:8000>`_ or the IP mentioned in the output of
+:command:`run_peek_client`.
 
 If you see this, then congratulations, you've just enabled your plugin to use the
-Peek Platform, Admin Service.
+Peek Platform, Mobile Service Web App.
 
 .. image:: PeekAdminSuccess.png
 
 Running the Mobile NativeScript App
 -----------------------------------
 
-The Peek Client service provides the websocket that the NativeScript spp uses. The NativeScript application uses all the same data sources.
+The Peek Client service provides the websocket that the NativeScript spp uses.
+The NativeScript application uses all the same code to run as the Web App, The only
+difference is the view file.
 
-The Peek Server service takes care of combining all the plugin files into the build
-directories in the peek_mobile package. We will need to restart Peek Server for it to
+With Peek, you can develop a web app and a native app, with little more effort.
+
+The Peek Client service takes care of combining all the plugin files into the build
+directories in the peek_mobile package. We will need to restart Peek Client for it to
 include our plugin in the mobile UI.
 
+See :ref:`learn_plugin_development_frontend_preparing` for more details.
 
-Check the :file:`~/peek-server.home/config.json` file:
+
+Check File :file:`~/peek-client.home/config.json`
+`````````````````````````````````````````````````
+
+Check the :file:`~/peek-client.home/config.json` file:
 
 #.  Ensure **frontend.nativescriptBuildPrepareEnabled** is set to **true**, with no quotes
-#.  Ensure **frontend.webBuildPrepareEnabled** is set to **true**, with no quotes
 
 .. note:: It would be helpful if this is the only plugin enabled at this point.
 
@@ -317,23 +330,62 @@ Example: ::
         }
 
 
+
+Run :file:`run_peek_client`
+```````````````````````````
+
+Run the peek client, The NativeScript will be offline with out it. ::
+
+        peek@peek:~$ run_peek_client
+        ...
+        INFO txhttputil.site.SiteUtil:Peek Client is alive and listening on http://10.211.55.14:8010
+        ...
+
+tns run android
+```````````````
+
+This section runs the NativeScript app on an Emulator, or a real Device.
+NativeScript must be installed before proceeding.
+
+*   :ref:`setup_nativescript_windows`
+*   :ref:`setup_nativescript_debian`
+
+
+See
+`Running NativeScript Apps <http://docs.nativescript.org/angular/tutorial/ng-chapter-1#12-running-apps>`_
+for some details on :command:`tns run`.
+
+We use the Android platform to test the apps as it runs on Windows, Mac and Linux.
+
+In this example, NativeScript will run in all connected devices and emulators, or it
+will start an emulator.
+
 ----
 
-You can now run the peek server, you should see your plugin load. ::
+Change directory to the build-ns directory under the peek_mobile python package.
+Run the following in bash to get the path of the build-ns directory: ::
 
-        peek@peek:~$ run_peek_server
-        ...
-        INFO peek_platform.frontend.WebBuilder:Rebuilding frontend distribution
-        ...
-        INFO txhttputil.site.SiteUtil:Peek Admin is alive and listening on http://10.211.55.14:8010
-        ....
+        python << EOPY
+        import os.path as p
+        import peek_mobile
+        print("Using peek_mobile version %s, located at:" % peek_mobile.__version__)
+        print("    " + p.join(p.dirname(peek_mobile.__file__), 'build-ns'))
+        EOPY
+
+Now CD to that directory, Example: ::
+
+        cd /home/peek/project/peek-mobile/peek_mobile/build-ns
 
 ----
 
-Now bring up a web browser and navigate to
-`http://localhost:8010 <http://localhost:8010>`_ or the IP mentioned in the output of
-:command:`run_peek_server`.
+Run :command:`tns run android` ::
+
+    tns run android
+
+It will take up to two minutes to build, install and run.
+
+----
 
 If you see this, then congratulations, you've just enabled your plugin to use the
-Peek Platform, Admin Service.
+Peek Platform, Mobile Service NativeScript App.
 
