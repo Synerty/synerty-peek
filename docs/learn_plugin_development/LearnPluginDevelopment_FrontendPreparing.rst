@@ -141,9 +141,13 @@ then monitors all the source directories, and incrementally updates files as the
 developer works. This includes performing any on the fly changes to the files that are
 required.
 
-To enable the file syncing, enable this option in
-:file:`~/peek-server.home/config.json` or :file:`~/peek-client.home/config.json`
+To enable the file syncing, Set :code:`frontend.syncFilesForDebugEnabled` to :code:`true`
+in :file:`~/peek-server.home/config.json` or :file:`~/peek-client.home/config.json`
 and restart the appropriate service.
+
+You may also want to disable the web building. This isn't requred for the Angular CLI
+development server and it slows down Server and Client restarts.
+Set :code:`frontend.webBuildEnabled` to :code:`false`.
 
 If DEBUG logging is also enabled, you'll see Peek working away when you change files.
 
@@ -154,6 +158,11 @@ If DEBUG logging is also enabled, you'll see Peek working away when you change f
             "frontend": {
                 ...
                 "syncFilesForDebugEnabled": true,
+                "webBuildEnabled": false,
+                ....
+            },
+            "logging": {
+                "level": "DEBUG"
             },
             ...
         }

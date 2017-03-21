@@ -319,7 +319,7 @@ Peek Platform, Mobile Service Web App.
 
 Click on the Tutorial app, you should then see your plugins default route component.
 
-.. image:: LearnAddMobileNSHomeScreen.png
+.. image:: LearnAddMobileWebPluginScreen.png
 
 
 Running the Mobile NativeScript App
@@ -407,6 +407,18 @@ Now CD to that directory, Example: ::
 
 ----
 
+Check the devices that are connected, if one isn't connected, NativeScript will try to
+start the standard android emulator. ::
+
+        peek@peek:~/project/peek-mobile/peek_mobile/build-ns$ tns device list
+        iTunes is not available for this operating system. You will not be able to work with connected iOS devices.
+        ┌───┬─────────────┬──────────┬───────────────────┬──────────┬───────────┐
+        │ # │ Device Name │ Platform │ Device Identifier │ Type     │ Status    │
+        │ 1 │ vbox86p     │ Android  │ emulator-5554     │ Emulator │ Connected │
+        └───┴─────────────┴──────────┴───────────────────┴──────────┴───────────┘
+
+----
+
 Run :command:`tns run android` ::
 
     tns run android
@@ -415,6 +427,18 @@ It will take up to two minutes to build, install and run.
 
 ----
 
+You should see the app start, with a splash screen. Then you will see your plugin on the
+gome screen. Touch the App/Plugin icon.
+
+
+.. image:: LearnAddMobileNSHomeScreen.png
+
+----
+
 If you see this, then congratulations, you've just enabled your plugin to use the
 Peek Platform, Mobile Service NativeScript App.
+
+And if this is your first Native mobile app, Congratulations, the sky is your limit.
+
+.. image:: LearnAddMobileNSPluginScreen.png
 
