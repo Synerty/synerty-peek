@@ -453,8 +453,8 @@ Edit :file:`peek_plugin_tutorial/_private/storage/DeclarativeBase.py`
 
 Add the following lines to the :command:`loadStorageTuples():` method ::
 
-    from . import Setting
-    Setting.__unused = False
+    from . import Settings
+    Settings.__unused = False
 
 
 Create New Alembic Version
