@@ -1,14 +1,19 @@
 .. _learn_plugin_development_add_worker:
 
-================================
-Adding the worker Service (TODO)
-================================
+=========================
+Adding the Worker Service
+=========================
 
 This document is a stripped version of :ref:`learn_plugin_development_add_server`.
 
-
 Add Package :file:`_private/worker`
 -----------------------------------
+
+
+Create directory :file:`peek_plugin_tutorial/_private/worker`
+
+Create an empty package file in the worker directory,
+:file:`peek_plugin_tutorial/_private/worker/__init__.py`
 
 Commands: ::
 
@@ -16,26 +21,26 @@ Commands: ::
         touch peek_plugin_tutorial/_private/worker/__init__.py
 
 
-Add File :file:`workerEntryHook.py`
+Add File :file:`WorkerEntryHook.py`
 -----------------------------------
 
-Create the file :file:`peek_plugin_tutorial/_private/worker/workerEntryHook.py`
+Create the file :file:`peek_plugin_tutorial/_private/worker/WorkerEntryHook.py`
 and populate it with the following contents.
 
 ::
 
         import logging
 
-        from peek_plugin_base.worker.PluginworkerEntryHookABC import PluginworkerEntryHookABC
+        from peek_plugin_base.worker.PluginWorkerEntryHookABC import PluginWorkerEntryHookABC
 
         logger = logging.getLogger(__name__)
 
 
-        class workerEntryHook(PluginworkerEntryHookABC):
+        class WorkerEntryHook(PluginWorkerEntryHookABC):
             def __init__(self, *args, **kwargs):
                 """" Constructor """
                 # Call the base classes constructor
-                PluginworkerEntryHookABC.__init__(self, *args, **kwargs)
+                PluginWorkerEntryHookABC.__init__(self, *args, **kwargs)
 
                 #: Loaded Objects, This is a list of all objects created when we start
                 self._loadedObjects = []
@@ -83,16 +88,15 @@ and populate it with the following contents.
 Edit :file:`peek_plugin_tutorial/__init__.py`
 ---------------------------------------------
 
-
 Edit the file :file:`peek_plugin_tutorial/__init__.py`, and add the following: ::
 
-        from peek_plugin_base.worker.PluginworkerEntryHookABC import PluginworkerEntryHookABC
+        from peek_plugin_base.worker.PluginWorkerEntryHookABC import PluginWorkerEntryHookABC
         from typing import Type
 
 
-        def peekworkerEntryHook() -> Type[PluginworkerEntryHookABC]:
-            from ._private.worker.workerEntryHook import workerEntryHook
-            return workerEntryHook
+        def peekWorkerEntryHook() -> Type[PluginWorkerEntryHookABC]:
+            from ._private.worker.WorkerEntryHook import WorkerEntryHook
+            return WorkerEntryHook
 
 
 Edit :file:`plugin_package.json`
@@ -128,22 +132,47 @@ Here is an example ::
         }
 
 
-Running on the worker Service
+----
+
+The plugin should now be ready for the worker to load.
+
+Running on the Worker Service
 -----------------------------
+
 
 Edit :file:`~/peek-worker.home/config.json`:
 
 #.  Ensure **logging.level** is set to **"DEBUG"**
 #.  Add **"peek_plugin_tutorial"** to the **plugin.enabled** array
 
+.. note:: It would be helpful if this is the only plugin enabled at this point.
+
+It should somthing like this: ::
+
+        {
+            ...
+            "logging": {
+                "level": "DEBUG"
+            },
+            ...
+            "plugin": {
+                "enabled": [
+                    "peek_plugin_tutorial"
+                ],
+                ...
+            },
+            ...
+        }
+
+.. note:: This file is created in :ref:`deploy_peek_platform`
+
 ----
 
-You can now run the peek worker, you should see your plugin load. 
-:file:`run_peek_worker` ::
+You can now run the peek worker, you should see your plugin load. ::
 
         peek@peek:~$ run_peek_worker
         ...
-        DEBUG peek_plugin_tutorial._private.worker.workerEntryHook:Loaded
-        DEBUG peek_plugin_tutorial._private.worker.workerEntryHook:Started
+        DEBUG peek_plugin_tutorial._private.worker.WorkerEntryHook:Loaded
+        DEBUG peek_plugin_tutorial._private.worker.WorkerEntryHook:Started
         ...
 
