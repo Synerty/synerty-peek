@@ -137,7 +137,7 @@ platform that we want to use the admin service:
 #.  Add **"admin"** to the requiresServices section so it looks like ::
 
         "requiresServices": [
-            "server"
+            "admin"
         ]
 
 #.  Add the **admin** section after **requiresServices** section: ::
