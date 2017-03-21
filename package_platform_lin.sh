@@ -29,7 +29,7 @@ Download Shapely >= 1.5.17 and save in the "$DIR/peek_dist/py" directory
 
 ----
 
-:Download: `<https://raw.githubusercontent.com/Synerty/peek-client-fe/master/peek_client_fe/build-ns/package.json>`_
+:Download: `<https://raw.githubusercontent.com/Synerty/peek-mobile/master/peek_mobile/build-ns/package.json>`_
 
 Download the package.json and save in the "$DIR/peek_dist/client-build-ns/tmp" directory
 
@@ -47,7 +47,7 @@ Run the following
 
 ----
 
-:Download: `<https://raw.githubusercontent.com/Synerty/peek-client-fe/master/peek_client_fe/build-web/package.json>`_
+:Download: `<https://raw.githubusercontent.com/Synerty/peek-mobile/master/peek_mobile/build-web/package.json>`_
 
 Download the package.json and save in the "$DIR/peek_dist/client-build-web/tmp" directory
 
@@ -65,7 +65,7 @@ Run the following
 
 ----
 
-:Download: `<https://raw.githubusercontent.com/Synerty/peek-server-fe/master/peek_server_fe/build-web/package.json>`_
+:Download: `<https://raw.githubusercontent.com/Synerty/peek-admin/master/peek_admin/build-web/package.json>`_
 
 Download the package.json and save in the "$DIR/peek_dist/server-build-web/tmp" directory
 
@@ -104,7 +104,7 @@ On the destination server, run the following in git bash
     pip install --no-index --no-cache --find-links $DIST_DIR/py synerty-peek Shapely
 
 
-    mv $DIST_DIR/peek_dist/client-build-ns/node_modules $SP/peek_client_fe/build-ns
-    mv $DIST_DIR/peek_dist/client-build-web/node_modules $SP/peek_client_fe/build-web
-    mv $DIST_DIR/peek_dist/server-build-web/node_modules $SP/peek_server_fe/build-web
+    mv $DIST_DIR/peek_dist/client-build-ns/node_modules $SP/peek_mobile/build-ns
+    mv $DIST_DIR/peek_dist/client-build-web/node_modules $SP/peek_mobile/build-web
+    mv $DIST_DIR/peek_dist/server-build-web/node_modules $SP/peek_admin/build-web
 

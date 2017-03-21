@@ -23,3 +23,4 @@ Learn Plugin Development
     LearnPluginDevelopment_SetupTupleLoader
     LearnPluginDevelopment_SetupPluginApis
     LearnPluginDevelopment_AddWorker
+    LearnPluginDevelopment_FrontendPreparing

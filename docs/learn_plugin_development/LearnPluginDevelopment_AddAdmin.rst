@@ -5,11 +5,16 @@ Adding the Admin Service
 ========================
 
 The admin service is the admin user interface.
+This is known as the "frontend" in web terminology.
+The backend for the Admin service is the Server service.
 
-In this section we'll add the root admin page for the plugin. We only scratch the surface
-of using Angular, thats outside the scope of this guide.
+In this section we'll add the root admin page for the plugin.
 
-We will go into the details of getting data with VortexJS/VortexPY.
+We only scratch the surface of using Angular, that`s outside the scope of this guide.
+
+See :ref:`learn_plugin_development_frontend_preparing` to learn more about how Peek
+peices together the frontend code from the varios plugins.
+
 
 Add Directory :file:`admin-app`
 -------------------------------
@@ -19,7 +24,8 @@ The :file:`admin-app` directory will contain the plugins the Angular application
 Angular "Lazy Loads" this part of the plugin, meaning it only loads it when the user
 navigates to the page, and unloads it when it's finished.
 
-This allows large, single page web applications to be made.
+This allows large, single page web applications to be made. Anything related to the user
+interface should be lazy loaded.
 
 ----
 
@@ -28,7 +34,8 @@ Create directory :file:`peek_plugin_tutorial/_private/admin-app`
 Add File :file:`tutorial.component.html`
 ----------------------------------------
 
-The :file:`tutorial.component.html` file is the default HTML file for the admin frontend.
+The :file:`tutorial.component.html` file is the HTML file for the Angular component
+(:file:`tutorial.component.ts`) we create next.
 
 ----
 
@@ -47,8 +54,8 @@ and populate it with the following contents.
 Add File :file:`tutorial.component.ts`
 --------------------------------------
 
-The :file:`tutorial.component.ts` is the default Angular Component for the admin page
-of the component.
+The :file:`tutorial.component.ts` is the Angular Component for the admin page.
+It's loaded by the default route defined in :file:`tutorial.module.ts`.
 
 `See NgModule for more <https://angular.io/docs/ts/latest/guide/ngmodule.html>`_
 
