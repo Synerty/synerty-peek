@@ -202,13 +202,18 @@ Download Icon :file:`icon.png`
 The Peek mobile interface has a home screen with apps on it, this icon will be the
 tutorial plugins app icon.
 
-.. image:: icon.png
+.. image:: TutorialExampleIcon.png
+   :scale: 30 %
 
 ----
 
-Download
+Create directory :file:`peek_plugin_tutorial/_private/mobile-assets`
 
-The icon file is used
+----
+
+Download this plugin app icon
+`http://synerty-peek.readthedocs.io/en/latest/_images/TutorialExampleIcon.png`_
+to :file:`peek_plugin_tutorial/_private/mobile-assets/icon.png`
 
 
 Edit File :file:`plugin_package.json`
@@ -228,7 +233,9 @@ platform that we want to use the mobile service:
         "mobile": {
             "showHomeLink": true,
             "appDir": "_private/mobile-app",
-            "appModule": "tutorial.module#TutorialModule"
+            "appModule": "tutorial.module#TutorialModule",
+            "assetDir": "_private/mobile-assets",
+            "icon": "/assets/peek_plugin_tutorial/icon.png"
         }
 
 #.  Ensure your JSON is still valid (Your IDE may help here)
