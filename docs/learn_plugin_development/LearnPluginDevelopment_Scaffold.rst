@@ -322,7 +322,9 @@ You can test that it's worked with the following python code, run the following 
 
         python << EOPY
         import peek_plugin_tutorial
+        import os
         print(peek_plugin_tutorial.__version__)
+        print(os.path.dirname(peek_plugin_tutorial.__file__))
         EOPY
 
 
