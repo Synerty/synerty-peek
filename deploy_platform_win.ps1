@@ -64,9 +64,9 @@ pip install --no-index --no-cache --find-links "$releaseDir\py" synerty-peek Sha
 # Move the node_modules into place
 $sp="$venvDir\Lib\site-packages";
 
-Move-Item $releaseDir\client-build-ns\node_modules $sp\peek_mobile\build-ns -Force
-Move-Item $releaseDir\client-build-web\node_modules $sp\peek_mobile\build-web -Force
-Move-Item $releaseDir\server-build-web\node_modules $sp\peek_admin\build-web -Force
+Move-Item $releaseDir\mobile-build-ns\node_modules $sp\peek_mobile\build-ns -Force
+Move-Item $releaseDir\mobile-build-web\node_modules $sp\peek_mobile\build-web -Force
+Move-Item $releaseDir\admin-build-web\node_modules $sp\peek_admin\build-web -Force
 Move-Item $releaseDir\node\* $venvDir\Scripts -Force
 
 # Update the reference to the new environment.
