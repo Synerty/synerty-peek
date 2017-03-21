@@ -17,10 +17,10 @@ Learn Plugin Development
     LearnPluginDevelopment_AddClient
     LearnPluginDevelopment_AddMobile
     LearnPluginDevelopment_AddAgent
+    LearnPluginDevelopment_FrontendPreparing
+    LearnPluginDevelopment_SetupTupleLoader
+    LearnPluginDevelopment_SetupObservables
     LearnPluginDevelopment_SetupActions
     LearnPluginDevelopment_SetupEndpoints
-    LearnPluginDevelopment_SetupObservables
-    LearnPluginDevelopment_SetupTupleLoader
     LearnPluginDevelopment_SetupPluginApis
     LearnPluginDevelopment_AddWorker
-    LearnPluginDevelopment_FrontendPreparing
