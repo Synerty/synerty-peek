@@ -78,7 +78,7 @@ echo
 # -------------------------------------
 echo "Building packages"
 for pkg in $PACKAGES; do
-    if ! (cd ../$pkg && ./publish.sh ${VER} ); then
+    if ! (cd ../$pkg && bash ./publish.sh ${VER} ); then
         echo "${bold}${pkg}${normal} : failed to run publish." >&2
         exit 1
     fi
