@@ -196,6 +196,21 @@ and populate it with the following contents.
         }
 
 
+Download Icon :file:`icon.png`
+------------------------------
+
+The Peek mobile interface has a home screen with apps on it, this icon will be the
+tutorial plugins app icon.
+
+.. image:: icon.png
+
+----
+
+Download
+
+The icon file is used
+
+
 Edit File :file:`plugin_package.json`
 -------------------------------------
 
@@ -205,7 +220,7 @@ platform that we want to use the mobile service:
 #.  Add **"mobile"** to the requiresServices section so it looks like ::
 
         "requiresServices": [
-            "server"
+            "mobile"
         ]
 
 #.  Add the **mobile** section after **requiresServices** section: ::
