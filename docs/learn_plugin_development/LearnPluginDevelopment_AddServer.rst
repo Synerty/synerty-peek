@@ -208,7 +208,7 @@ Edit :file:`~/peek-server.home/config.json`:
 
 .. note:: It would be helpful if this is the only plugin enabled at this point.
 
-It should somthing like this: ::
+It should something like this: ::
 
         {
             ...
