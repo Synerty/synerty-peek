@@ -451,15 +451,15 @@ storing plugin settings.
 This section sets this up for the Tutorial plugin. It's roughly the same process used
 to :ref:`learn_plugin_development_add_storage_add_simple_table`.
 
-Add File :file:`Settings.py`
+Add File :file:`Setting.py`
 ````````````````````````````
 
-Download the :file:`Settings.py` file to :file:`peek_plugin_tutorial/_private/storage`
+Download the :file:`Setting.py` file to :file:`peek_plugin_tutorial/_private/storage`
 from `<https://bitbucket.org/synerty/peek-plugin-noop/raw/master/peek_plugin_noop/_private/storage/Setting.py>`_
 
 ----
 
-Edit :file:`peek_plugin_tutorial/_private/storage/Settings.py`
+Edit :file:`peek_plugin_tutorial/_private/storage/Setting.py`
 
 #.  Find :command:`peek_plugin_noop` and replace it with :command:`peek_plugin_tutorial`.
 
