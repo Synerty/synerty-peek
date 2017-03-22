@@ -24,7 +24,7 @@ To build your own platform release, see the following document
 Windows
 ```````
 
-Open a powershell windows.
+Open a PowerShell windows.
 
 ----
 
@@ -50,9 +50,68 @@ The script will deploy to C:\\Users\\peek.
         $dist = "C:\Users\peek\Downloads\peek_dist_win_0.1.0.zip"
         PowerShell.exe -ExecutionPolicy Bypass -File deploy_platform_win.ps1 $dist
 
+.. note:: Once the script has completed running you will see the message "Activate the
+    new environment from ...".  These commands temporarily configure the environment to
+    use the synerty-peek virtual environment that was just deployed.  For a permanent
+    change you will need to edit your 'Environment Variables'.  See
+    :ref:`configuring_environment_variables` for more details.
+
 ----
 
 The platform is now deployed.
+
+.. _configuring_environment_variables:
+
+Configuring Environment Variables
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Follow this procedure to configure your system to use the synerty-peek virtual
+environment that you have deployed.
+
+These steps can also be followed to roll back to a previous deployed synerty-peek virtual
+environment.
+
+----
+
+Go to 'System Properties' and select 'Environment Variables...'
+
+.. image:: EnvVar-SystemProperties.jpg
+
+----
+
+In the 'User Variables for {WindowsUser}' section, highlight 'PATH' and select 'Edit...'
+
+.. image:: EnvVar-EnvironmentVariables.jpg
+
+----
+
+In the Edit window select 'New' and paste the script:
+
+::
+
+        C:\Users\peek\synerty-peek-#.#.#\Scripts
+
+Click 'Move Up'.  It is important that the variable you have added is above any other
+variables that contain similar script or programs.
+
+.. image:: EnvVar-EditVariables.jpg
+
+----
+
+Select 'OK' on all three windows
+
+----
+
+Confirm that your changes have worked.  In a new command prompt enter the bash shell
+and run:
+
+::
+
+        which python
+
+It should return the variable you have added into the PATH
+
+.. image:: EnvVar-WhichPython.jpg
 
 
 Linux
