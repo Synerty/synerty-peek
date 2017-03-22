@@ -45,9 +45,25 @@ and populate it with the following contents.
 ::
 
         <div class="container">
-            <h1 class="text-center">Tutorial Plugin</h1>
-            <p>Angular2 Lazy Loaded Module</p>
-            <p>This is the root of the admin app for the Tutorial plugin</p>
+          <!-- Nav tabs -->
+          <ul class="nav nav-tabs" role="tablist">
+            <!-- Home Tab -->
+            <li role="presentation" class="active">
+                <a href="#home" aria-controls="home" role="tab" data-toggle="tab">Home</a>
+            </li>
+
+          </ul>
+
+          <!-- Tab panes -->
+          <div class="tab-content">
+            <!-- Home Tab -->
+            <div role="tabpanel" class="tab-pane active" id="home">
+                <h1 class="text-center">Tutorial Plugin</h1>
+                <p>Angular2 Lazy Loaded Module</p>
+                <p>This is the root of the admin app for the Tutorial plugin</p>
+            </div>
+
+          </div>
         </div>
 
 
