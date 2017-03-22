@@ -79,7 +79,7 @@ Go to 'System Properties' and select 'Environment Variables...'
 
 ----
 
-In the 'User Variables for {WindowsUser}' section, highlight 'PATH' and select 'Edit...'
+In the 'System Variables' section, highlight 'PATH' and select 'Edit...'
 
 .. image:: EnvVar-EnvironmentVariables.jpg
 
