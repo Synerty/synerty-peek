@@ -18,7 +18,7 @@ In this document, we'll add the start of both the mobile and web builds for the 
 We only scratch the surface of using Angular, that`s outside the scope of this guide.
 
 See :ref:`learn_plugin_development_frontend_preparing` to learn more about how Peek
-peices together the frontend code from the varios plugins.
+pieces together the frontend code from the various plugins.
 
 Add Directory :file:`mobile-app`
 --------------------------------
@@ -67,7 +67,7 @@ and populate it with the following contents.
 Add File :file:`tutorial.component.ns.html`
 -------------------------------------------
 
-The :file:`tutorial.component.ns.html` file is the default Nativescript **view** for
+The :file:`tutorial.component.ns.html` file is the default NativeScript **view** for
 the Angular component :file:`tutorial.component.ts`.
 
 This is standard NativeScript, it's actually XML, but the IDE provides better assistance
@@ -325,7 +325,7 @@ Click on the Tutorial app, you should then see your plugins default route compon
 Running the Mobile NativeScript App
 -----------------------------------
 
-The Peek Client service provides the websocket that the NativeScript spp uses.
+The Peek Client service provides the websocket that the NativeScript app uses.
 The NativeScript application uses all the same code to run as the Web App, The only
 difference is the view file.
 
@@ -428,7 +428,7 @@ It will take up to two minutes to build, install and run.
 ----
 
 You should see the app start, with a splash screen. Then you will see your plugin on the
-gome screen. Touch the App/Plugin icon.
+home screen. Touch the App/Plugin icon.
 
 
 .. image:: LearnAddMobileNSHomeScreen.png
