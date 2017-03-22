@@ -4,7 +4,7 @@ import shutil
 from setuptools import find_packages, setup
 
 pip_package_name = "synerty-peek"
-package_version = '0.2.9'
+package_version = '0.2.10'
 
 egg_info = "%s.egg-info" % pip_package_name
 if os.path.isdir(egg_info):
@@ -33,7 +33,7 @@ setup(
     name=pip_package_name,
     packages=find_packages(exclude=["*.tests", "*.tests.*", "tests.*", "tests"]),
     install_requires=requirements,
-    version=package_version,
+    zip_safe=False,version=package_version,
     description='Peek Platform - Meta Package to install all services',
     author='Synerty',
     author_email='contact@synerty.com',
