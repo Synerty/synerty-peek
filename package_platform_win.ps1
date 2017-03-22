@@ -36,8 +36,8 @@ $nodePackages = @(
 # ------------------------------------------------------------------------------
 # Download node, npm, @angular/cli, typescript and tslint
 Set-Location "$baseDir";
-$nodeVer = "v7.7.4/node-v7.7.4-win-x64";
-$nodeUrl = "https://nodejs.org/dist/$nodeVer.zip";
+$nodeVer = "node-v7.7.4-win-x64";
+$nodeUrl = "https://nodejs.org/dist/v7.7.4/$nodeVer.zip";
 $nodeFile = "node.zip";
 Invoke-WebRequest -Uri $nodeUrl -UseBasicParsing -OutFile $nodeFile;
 
