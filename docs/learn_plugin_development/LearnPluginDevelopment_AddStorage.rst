@@ -45,9 +45,6 @@ for more details.
 In this delcarative base, we define a metadata with a schema name for this plugin,
 **pl_tutorial**.
 
-Peek has a :command:`loadStorageTuples()` method that imports the tables.
-All the table classes in the plugin will be loaded in this method.
-
 ----
 
 Create a file :file:`peek_plugin_tutorial/_private/storage/DeclarativeBase.py`
@@ -61,6 +58,21 @@ and populate it with the following contents:
 
         metadata = MetaData(schema="pl_tutorial")
         DeclarativeBase = declarative_base(metadata=metadata)
+
+
+Add File :file:`storage/__init__.py`
+------------------------------------
+
+The :file:`storage/__init__.py` package file will have a :command:`loadStorageTuples()`
+method that imports the tables.
+All the table classes in the plugin will be loaded in this method.
+
+----
+
+Create a file :file:`peek_plugin_tutorial/_private/storage/__init__.py`
+and populate it with the following contents:
+
+::
 
 
         def loadStorageTuples():
@@ -127,9 +139,9 @@ the following contents:
 
         from peek_plugin_base.storage.AlembicEnvBase import AlembicEnvBase
 
-        from peek_plugin_tutorial._private.storage import DeclarativeBase
+        from peek_plugin_tutorial._private.storage import DeclarativeBase, loadStorageTuples
 
-        DeclarativeBase.loadStorageTuples()
+        loadStorageTuples()
 
         alembicEnv = AlembicEnvBase(DeclarativeBase.DeclarativeBase.metadata)
         alembicEnv.run()
@@ -257,7 +269,7 @@ Edit the file :file:`peek_plugin_tutorial/_private/server/ServerEntryHook.py`
 When you're finished, You should have a file like this: ::
 
         # Added imports, step 1
-        from peek_plugin_noop._private.storage import DeclarativeBase
+        from peek_plugin_noop._private.storage import loadStorageTuples
         from peek_plugin_base.server.PluginServerStorageEntryHookABC import \
             PluginServerStorageEntryHookABC
 
@@ -268,7 +280,7 @@ When you're finished, You should have a file like this: ::
 
             def load(self) -> None:
                 # Added call to loadStorageTables, step 3
-                DeclarativeBase.loadStorageTuples()
+                loadStorageTuples()
                 logger.debug("Loaded")
 
             # Added implementation for dbMetadata, step 4
@@ -452,7 +464,7 @@ This section sets this up for the Tutorial plugin. It's roughly the same process
 to :ref:`learn_plugin_development_add_storage_add_simple_table`.
 
 Add File :file:`Setting.py`
-````````````````````````````
+```````````````````````````
 
 Download the :file:`Setting.py` file to :file:`peek_plugin_tutorial/_private/storage`
 from `<https://bitbucket.org/synerty/peek-plugin-noop/raw/master/peek_plugin_noop/_private/storage/Setting.py>`_
