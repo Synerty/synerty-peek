@@ -8,8 +8,8 @@ In this section we'll create the basic files we need for a plugin.
 
 :Plugin Name: peek_plugin_tutorial
 
-We'll finish up with a plugin which we can build a python package for, but it won't
-run on any services, we'll add that later.
+    We'll finish up with a plugin which we can build a python package for, but it won't
+    run on any services, we'll add that later.
 
 Create Directory :file:`peek-plugin-tutorial`
 ---------------------------------------------
@@ -89,7 +89,7 @@ Platform to run. This includes:
 ----
 
 .. note::   Commands will be run from the plugin project root directory, which is
-            :file:`peek-plugin-tutorial`.
+:file:`peek-plugin-tutorial`.
 
 
 Create the :file:`peek_plugin_tutorial` Package. Commands: ::
@@ -293,6 +293,82 @@ contents: ::
         tutorialTuplePrefix = "peek_plugin_tutorial."
         tutorialObservableName = "peek_plugin_tutorial"
         tutorialActionProcessorName = "peek_plugin_tutorial"
+
+
+Add Directory :file:`plugin-module/_private`
+--------------------------------------------
+
+We now move onto the frontends, and TypeScript.
+
+The :file:`plugin-module/_private` directory will contain code that shouldn't be used
+outside of this plugin.
+
+The :file:`plugin-module` directory will contain any code that is needs
+to be either:
+
+*   Running all the time in the background.
+
+*   Shared with other modules.
+
+
+This directory is sync'd to :file:`node_modules/@peek/peek_plugin_tutorial` on mobile,
+admin and desktop services.
+
+Developers can use some :file:`index.ts` magic to abstract the layout of their
+directories.
+An exmaple of importing declaration is as follows: ::
+
+        import {tutorialFilt} from "@peek/peek_plugin_tutorial/_private";
+
+
+----
+
+Create directory :file:`peek_plugin_tutorial/plugin-module/_private`,
+with command ::
+
+        mkdir -p peek_plugin_tutorial/plugin-module/_private
+
+
+Add File :file:`PluginNames.ts`
+-------------------------------
+
+The :file:`PluginNames.ts` file defines constants used by this plugin to define,
+payload filts, tuple names, oberservable names, etc.
+
+----
+
+Create file
+:file:`peek_plugin_tutorial/plugin-module/_private/PluginNames.ts`,
+with contents ::
+
+        export let tutorialFilt = {"plugin": "peek_plugin_tutorial"};
+        export let tutorialTuplePrefix = "peek_plugin_tutorial.";
+
+        export let tutorialObservableName = "peek_plugin_tutorial";
+        export let tutorialActionProcessorName = "peek_plugin_tutorial";
+        export let tutorialTupleOfflineServiceName = "peek_plugin_tutorial";
+
+        export let tutorialBaseUrl = "peek_plugin_tutorial";
+
+
+Add File :file:`_private/index.ts`
+----------------------------------
+
+The :file:`_private/index.ts` file defines exports from other files in _private.
+
+This lets the code
+:code:`import tutorialFilt from "@peek/peek_plugin_tutorial/_private";`
+work instead of
+:code:`import tutorialFilt from "@peek/peek_plugin_tutorial/_private/PluginNames";`.
+
+It seems trival a this point, but it becomes more usefull as the TypeScript code grows.
+
+----
+
+Create file
+:file:`peek_plugin_tutorial/plugin-module/_private/index.ts`, with contents ::
+
+        export {*} from "./PluginNames";
 
 
 Install in Development Mode
