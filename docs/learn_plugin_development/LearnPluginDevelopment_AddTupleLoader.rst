@@ -58,7 +58,7 @@ and populate it with the following contents.
         from vortex.handler.TupleDataObservableHandler import TupleDataObservableHandler
         from vortex.sqla_orm.OrmCrudHandler import OrmCrudHandler, OrmCrudHandlerExtension
 
-        # This dict matches what will be used from the Admin class
+        # This dict matches the definition in the Admin angular app.
         filtKey = {"key": "admin.Edit.StringIntTuple"}
         filtKey.update(tutorialFilt)
 
@@ -141,15 +141,11 @@ The method should now look similar to this ::
 
 
 
-Test Backend Changes
+Test Python Services
 --------------------
 
 The backend changes are complete, please run :command:`run_peek_server` to ensure that
 there are no problems here.
-
-::
-
-        HERE
 
 
 Add Directory :file:`edit-string-int-table`
@@ -231,7 +227,8 @@ The :file:`edit.component.ts` is the Angular Component for the new edit page.
 
 In this component:
 
-#.  We inherit from
+#.  We inherit from ComponentLifecycleEventEmitter, this provides a little automatic
+    unsubscription magic for VortexJS
 
 #.  We define the filt, this is a dict that is used by payloads to describe where
     payloads should be routed to on the other end.
@@ -240,25 +237,116 @@ In this component:
 
 #.  We get the VortexService to create a new TupleLoader.
 
-#.  We subscribe to the
+#.  We subscribe to the data from the TupleLoader.
 
 ----
 
-Create the file :file:`peek_plugin_tutorial/_private/admin-app/tutorial.component.ts`
+Create the file
+:file:`peek_plugin_tutorial/_private/admin-app/edit-string-int-table/edit.component.ts`
 and populate it with the following contents.
 
 ::
 
         import {Component, OnInit} from "@angular/core";
+        import {
+            extend,
+            VortexService,
+            ComponentLifecycleEventEmitter,
+            TupleLoader
+        } from "@synerty/vortexjs";
+        import {StringIntTuple,
+            tutorialPluginFilt
+        } from "@peek/peek_plugin_tutorial/_private";
+
 
         @Component({
-            selector: 'tutorial-admin',
-            templateUrl: 'tutorial.component.html'
+            selector: 'pl-tutorial-edit-string-int',
+            templateUrl: './edit.component.html'
         })
-        export class TutorialComponent  implements OnInit {
+        export class EditStringIntComponent extends ComponentLifecycleEventEmitter {
+            // This must match the dict defined in the admin_backend handler
+            private readonly filt = {
+                "key": "admin.Edit.StringIntTuple"
+            };
 
-            ngOnInit() {
+            items: StringIntTuple[] = [];
 
+            loader: TupleLoader;
+
+            constructor(vortexService: VortexService) {
+                super();
+
+                this.loader = vortexService.createTupleLoader(this,
+                    () => extend({}, this.filt, tutorialPluginFilt));
+
+                this.loader.observable
+                    .subscribe((tuples:StringIntTuple[]) => this.items = tuples);
             }
+
+            addRow() {
+                this.items.push(new StringIntTuple());
+            }
+
+            removeRow(item) {
+                if (confirm("Delete Row? All unsaved changes will be lost.")) {
+                    this.loader.del([item]);
+                }
+            }
+
         }
 
+
+Edit File :file:`tutorial.component.html`
+-----------------------------------------
+
+Update the :file:`tutorial.component.html` to insert the new
+:code:`EditStringIntComponent` component into the HTML.
+
+----
+
+Edit the file :file:`peek_plugin_tutorial/_private/admin-app/tutorial.component.html`:
+
+#.  Find the :code:`</ul>` tag and insert the following before that line: ::
+
+        <!-- Edit String Int Tab -->
+        <li role="presentation" class="active">
+            <a href="#editStringInt" aria-controls="editStringInt"
+                role="tab" data-toggle="tab">Edit String Int</a>
+        </li>
+
+#.  Find the :code:`<div class="tab-content">` tag and insert the following after
+    the line it: ::
+
+        <!-- Edit String Int Tab -->
+        <div role="tabpanel" class="tab-pane active" id="editStringInt">
+            <pl-tutorial-edit-string-int></pl-tutorial-edit-string-int>
+        </div>
+
+
+Edit File :file:`tutorial.module.ts`
+------------------------------------
+
+Edit the :file:`tutorial.module.ts` Angular Module to import the
+:code:`EditStringIntComponent` component.
+
+
+----
+
+Edit the :file:`peek_plugin_tutorial/_private/admin-app/tutorial.module.ts`:
+
+#.  Add this import statement with the imports at the top of the file: ::
+
+        import {EditStringIntComponent} from "./edit-string-int-table/edit.component";
+
+#.  Add :code:`EditStringIntComponent` to the :code:`declarations` array, EG: ::
+
+        declarations: [TutorialComponent, EditStringIntComponent]
+
+
+Test Tuple Loader
+-----------------
+
+Restart the Server service, so that it rebuilds the Admin Angular Web app.
+
+Natigate your browser to the admin page, select plugins, and then selec the
+"Edit String Int" tab.
