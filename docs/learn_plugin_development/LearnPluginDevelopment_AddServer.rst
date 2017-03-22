@@ -197,6 +197,8 @@ Running on the Server Service
 File :file:`~/peek-server.home/config.json` is the configuration file for the Server
 service.
 
+.. note:: This file is created in :ref:`administer_peek_platform`
+
 ----
 
 Edit :file:`~/peek-server.home/config.json`:
@@ -222,8 +224,6 @@ It should somthing like this: ::
             },
             ...
         }
-
-.. note:: This file is created in :ref:`administer_peek_platform`
 
 ----
 

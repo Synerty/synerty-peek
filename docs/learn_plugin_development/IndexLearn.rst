@@ -18,7 +18,7 @@ Learn Plugin Development
     LearnPluginDevelopment_AddMobile
     LearnPluginDevelopment_AddAgent
     LearnPluginDevelopment_FrontendPreparing
-    LearnPluginDevelopment_SetupTupleLoader
+    LearnPluginDevelopment_AddTupleLoader
     LearnPluginDevelopment_SetupObservables
     LearnPluginDevelopment_SetupActions
     LearnPluginDevelopment_SetupEndpoints

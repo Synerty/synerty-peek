@@ -212,7 +212,7 @@ Create directory :file:`peek_plugin_tutorial/_private/mobile-assets`
 ----
 
 Download this plugin app icon
-`http://synerty-peek.readthedocs.io/en/latest/_images/TutorialExampleIcon.png`_
+`TutorialExampleIcon.png <http://synerty-peek.readthedocs.io/en/latest/_images/TutorialExampleIcon.png>`_
 to :file:`peek_plugin_tutorial/_private/mobile-assets/icon.png`
 
 

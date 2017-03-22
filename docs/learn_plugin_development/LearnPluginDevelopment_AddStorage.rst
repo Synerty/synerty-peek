@@ -305,7 +305,7 @@ Finally, run the peek server, it should load with out error.
 
 The hard parts done, adding the tables is much easier.
 
-.. _add_a_simple_table:
+.. _learn_plugin_development_add_storage_add_simple_table:
 
 Adding a Simple Table
 ---------------------
@@ -440,6 +440,8 @@ You should see output similar to: ::
         21-Mar-2017 02:06:27 DEBUG alembic.runtime.migration:new branch insert 0b12f40fadba
 
 
+.. _learn_plugin_development_add_storage_settings_table:
+
 Adding a Settings Table
 -----------------------
 
@@ -447,7 +449,7 @@ The Noop plugin has special Settings and SettingsProperty tables that is usefull
 storing plugin settings.
 
 This section sets this up for the Tutorial plugin. It's roughly the same process used
-to :ref:`add_a_simple_table`.
+to :ref:`learn_plugin_development_add_storage_add_simple_table`.
 
 Add File :file:`Settings.py`
 ````````````````````````````
