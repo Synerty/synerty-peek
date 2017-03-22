@@ -335,6 +335,7 @@ run, so this compile arrangement makes sense.
 
 .. image:: PluginsRunningOnMobile.png
 
+.. _overview_noop_plugin_example:
 
 Noop Plugin Example
 -------------------
@@ -350,49 +351,63 @@ The code is available here:
 `Peek Plugin Noop, on bitbucket <https://bitbucket.org/synerty/peek-plugin-noop>`_,
 It's folder structure looks like this :
 
-*   **peek-plugin-noop** (Root project dir, pypi package name)
+*   :file:`peek-plugin-noop` (Root project dir, pypi package name)
 
-    *   **peek_plugin_noop** (The plugin root, this is the python package)
+    *   :file:`peek_plugin_noop` (The plugin root, this is the python package)
 
-        *   **_private** (All protected code lives in here)
+        *   :file:`_private` (All protected code lives in here)
 
-            *   **admin-app**   (The admin web based user interface)
+            *   :file:`admin-app`   (The admin web based user interface)
 
-            *   **admin-assets**   (Static assets for the admin web UI)
+            *   :file:`admin-assets`   (Static assets for the admin web UI)
 
-            *   **agent** (The code that runs on the agent service)
+            *   :file:`agent` (The code that runs on the agent service)
 
-            *   **alembic** (Database schema versioning scripts)
+            *   :file:`alembic` (Database schema versioning scripts)
 
-            *   **client**  (The code that runs on the client service)
+            *   :file:`client`  (The code that runs on the client service)
 
-            *   **desktop-app**   (The user interface that runs on the desktop/web)
+            *   :file:`desktop-app`   (The user interface that runs on the desktop/web)
 
-            *   **desktop-assets**    (Images for the desktop/web)
+            *   :file:`desktop-assets`    (Images for the desktop/web)
 
-            *   **mobile-app**   (The user interface that runs on the mobile/web devices)
+            *   :file:`mobile-app`   (The user interface that runs on the mobile/web devices)
 
-            *   **mobile-assets**    (Images for the mobile/web UI)
+            *   :file:`mobile-assets`    (Images for the mobile/web UI)
 
-            *   **server**  (The code that runs on the server service)
+            *   :file:`server`  (The code that runs on the server service)
 
-            *   **storage**     (SQLAlchemy ORM classes for db access, used by server,worker)
+            *   :file:`storage`     (SQLAlchemy ORM classes for db access, used by server,worker)
 
-            *   **worker**  (The parallel processing  Celery tasks that are run on the worker)
+            *   :file:`tuples`  (Private data structures)
 
-        *   **admin-modules**   (Exposed API, plugins in the admin app can use this)
+            *   :file:`worker`  (The parallel processing  Celery tasks that are run on the worker)
 
-        *   **agent**  (Exposed API, plugins on the agent service use this)
+        *   :file:`plugin-modules`   (Exposed API, index.ts will expose public declarations.
+            Plugins can structure the subfolders however they like, this dir is available
+            from node_modules/@peek/peek_plugin_noop)
 
-        *   **desktop-modules**   (Exposed API, plugins in the desktop/web app can use this)
+            *   :file:`desktop`   (Exposed API, index.ts exposes desktop only declarations)
 
-        *   **client**  (Exposed API, plugins on the client service use this)
+            *   :file:`mobile`   (Exposed API, index.ts exposes mobile only declarations)
 
-        *   **mobile-modules**   (Exposed API, plugins in the mobile/web app can use this)
+            *   :file:`admin`   (Exposed API, index.ts exposes admin only declarations)
 
-        *   **server**  (Exposed API, plugins on the server service use this)
+            *   :file:`_private`   (Code only used by this plugin)
 
-        *   **shared-modules**   (Exposed API, for admin, mobile and desktop)
+                *   :file:`desktop`   (Private desktop declarations)
+
+                *   :file:`mobile`   (Private mobile declarations)
+
+                *   :file:`admin`   (Private admin declarations)
+
+        *   :file:`agent`  (Exposed API, plugins on the agent service use this)
+
+        *   :file:`client`  (Exposed API, plugins on the client service use this)
+
+        *   :file:`server`  (Exposed API, plugins on the server service use this)
+
+        *   :file:`tuples`  (Exposed Tuples, Tuples on any service use these data structures)
 
 
 .. note:: Random Fact : Did you know that python can't import packages with hypons in them?

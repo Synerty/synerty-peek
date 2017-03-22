@@ -1,4 +1,4 @@
-.. _learn_plugin_development_setup_plugin_apis:
+.. _learn_plugin_development_add_plugin_apis:
 
 ========================
 Setup Plugin APIs (TODO)

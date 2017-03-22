@@ -6,7 +6,8 @@ Add Tuple Loader
 
 In this document, we'll use the TulpeLoader from VortexJS to load and update some
 settings from the tables created in
-:ref:`learn_plugin_development_add_storage_add_simple_table`.
+:ref:`learn_plugin_development_add_storage_add_string_int_table` and tuples created in
+:ref:`learn_plugin_development_add_tuples`.
 
 The Admin and Server services talk to each other via a Vortex, this is the name
 given to the transport layer of VortexJS and VortexPY.
@@ -15,6 +16,8 @@ A plugin developer could choose to use standard HTTP requests with JSON, however
 the Vortex maintains a persistent connection unless it's shutdown.
 
 .. image:: LearnAddTupleLoader_PluginOverview.png
+
+This document modifies both the server and admin parts of the plugin.
 
 Add Package :file:`admin_backend`
 ---------------------------------
@@ -31,10 +34,10 @@ the commands ::
         touch peek_plugin_tutorial/_private/server/admin_backend/__init__.py
 
 
-Add File :file:`SimpleTableHandler.py`
---------------------------------------
+Add File :file:`StringIntTableHandler.py`
+-----------------------------------------
 
-The :file:`SimpleTableHandler.py` listens for payload from the Admin service (frontend)
+The :file:`StringIntTableHandler.py` listens for payload from the Admin service (frontend)
 These payloads are delivered by the vortex.
 
 When the :code:`OrmCrudHandler` class in the Server services
@@ -44,7 +47,7 @@ it creates, reads, updates or deletes (CRUD) data in the the database.
 ----
 
 Create the file 
-:file:`peek_plugin_tutorial/_private/admin_backend/SimpleTableHandler.py`
+:file:`peek_plugin_tutorial/_private/admin_backend/StringIntTableHandler.py`
 and populate it with the following contents.
 
 ::
@@ -66,54 +69,178 @@ and populate it with the following contents.
 
 
         # This method creates an instance of the handler class.
-        def makeEditLookupHandler(dbSessionCreator):
+        def makeStringIntTableHandler(dbSessionCreator):
             handler = __CrudHandler(dbSessionCreator, StringIntTuple,
                                     filtKey, retreiveAll=True)
-        
+
+            logger.debug("Started")
             return handler
 
-Add Directory :file:`admin-app`
--------------------------------
 
-The :file:`admin-app` directory will contain the plugins the Angular application.
+Edit File :file:``admin_backend/__init__.py`
+--------------------------------------------
 
-Angular "Lazy Loads" this part of the plugin, meaning it only loads it when the user
-navigates to the page, and unloads it when it's finished.
+In this step, we add a setup method on the admin_backend package, this setup medthod
+then loads all the handlers needed for the backend.
 
-This allows large, single page web applications to be made. Anything related to the user
-interface should be lazy loaded.
+This just helps sectionalise the code a bit.
 
-----
-
-Create directory :file:`peek_plugin_tutorial/_private/admin-app`
-
-Add File :file:`tutorial.component.html`
-----------------------------------------
-
-The :file:`tutorial.component.html` file is the HTML file for the Angular component
-(:file:`tutorial.component.ts`) we create next.
+The :code:`makeAdminBackendHandlers` method is a generator because we use :code:`yield`.
+We can yield more items after the first one, the calling will get an iterable return.
 
 ----
 
-Create the file :file:`peek_plugin_tutorial/_private/admin-app/tutorial.component.html`
+Edit file :file:`peek_plugin_tutorial/_private/server/admin_backend/__init__.py`
+Add the following: ::
+
+        from .StringIntTableHandler import makeStringIntTableHandler
+
+        def makeAdminBackendHandlers(dbSessionCreator):
+            yield makeStringIntTableHandler(dbSessionCreator)
+
+
+Edit File :file:`ServerEntryHook.py`
+------------------------------------
+
+Now, we need to create and destroy our :code:`admin_backend` handlers when the Server
+service starts the plugin.
+
+If you look at :code:`self._loadedObjects`, you'll see that the :code:`stop()` method
+shuts down all objects we add to this array. So adding to this array serves two purposes
+
+#.  It keeps a reference to the object, ensureing it isn't garbage collected when the
+    :code:`start()` method ends.
+
+#.  It ensures all the objects are properly shutdown. In our case, this means it stops
+    listening for payloads.
+
+----
+
+Edit file :file:`peek_plugin_tutorial/_private/server/ServerEntryHook.py` :
+
+#.  Add this import up the top of the file ::
+
+        from .admin_backend import makeAdminBackendHandlers
+
+#.  Add this line after the docstring in the :code:`start()` method ::
+
+        self._loadedObjects.extend(makeAdminBackendHandlers(self.dbSessionCreator))
+
+
+The method should now look similar to this ::
+
+        def start(self):
+            """ Load
+
+            This will be called when the plugin is loaded, just after the db is migrated.
+            Place any custom initialiastion steps here.
+
+            """
+            self._loadedObjects.extend(makeAdminBackendHandlers(self.dbSessionCreator))
+            logger.debug("Started")
+
+
+
+Test Backend Changes
+--------------------
+
+The backend changes are complete, please run :command:`run_peek_server` to ensure that
+there are no problems here.
+
+::
+
+        HERE
+
+
+Add Directory :file:`edit-string-int-table`
+-------------------------------------------
+
+The :file:`edit-string-int-table` directory will contain the view and controller
+that allows us to edit data in the admin app.
+
+----
+
+Create directory :file:`peek_plugin_tutorial/_private/admin-app/edit-string-int-table`
+
+Add File :file:`edit.component.html`
+------------------------------------
+
+The :file:`edit.component.html` file is the HTML file for the Angular component
+(:file:`edit.component.ts`) we create next.
+
+This view will display the data, allow us to edit it and save it.
+
+----
+
+Create the file
+:file:`peek_plugin_tutorial/_private/admin-app/edit-string-int-table/edit.component.html`
 and populate it with the following contents.
 
 ::
 
-        <div class="container">
-            <h1 class="text-center">Tutorial Plugin</h1>
-            <p>Angular2 Lazy Loaded Module</p>
-            <p>This is the root of the admin app for the Tutorial plugin</p>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <table class="table">
+                    <tr>
+                        <th>String 1</th>
+                        <th>Int 1</th>
+                        <th></th>
+                    </tr>
+                    <tr *ngFor="let item of items">
+                        <td>
+                            <input [(ngModel)]="item.string1"
+                                   class="form-control input-sm"
+                                   type="text"/>
+                        </td>
+                        <td>
+                            <input [(ngModel)]="item.int1"
+                                   class="form-control input-sm"
+                                   type="number"/>
+                        </td>
+                        <td>
+                            <div class="btn btn-default" (click)='removeRow(item)'>
+                                <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                <div class="btn-toolbar">
+                    <div class="btn-group">
+                        <div class="btn btn-default" (click)='loader.save(items)'>
+                            Save
+                        </div>
+                        <div class="btn btn-default" (click)='loader.load()'>
+                            Reset
+                        </div>
+                        <div class="btn btn-default" (click)='addRow()'>
+                            Add
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
 
-Add File :file:`tutorial.component.ts`
---------------------------------------
+There are two buttons in this HTML that are related to the TupleLoader, these call
+methods on the loader, :code:`loader.save(items)`, :code:`loader.load()`.
 
-The :file:`tutorial.component.ts` is the Angular Component for the admin page.
-It's loaded by the default route defined in :file:`tutorial.module.ts`.
+Add File :file:`edit.component.ts`
+----------------------------------
 
-`See NgModule for more <https://angular.io/docs/ts/latest/guide/ngmodule.html>`_
+The :file:`edit.component.ts` is the Angular Component for the new edit page.
+
+In this component:
+
+#.  We inherit from
+
+#.  We define the filt, this is a dict that is used by payloads to describe where
+    payloads should be routed to on the other end.
+
+#.  We ask Angular to inject the Vortex services we need, this is in the constructor.
+
+#.  We get the VortexService to create a new TupleLoader.
+
+#.  We subscribe to the
 
 ----
 

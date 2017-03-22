@@ -1,0 +1,338 @@
+.. _learn_plugin_development_add_tuples:
+
+==========
+Add Tuples
+==========
+
+In this document, define tuples in Python and TypeScript. A Tuple is a defined class
+in TypeScript (javascript) or Python.
+
+These are not to be confused with the :code:`tuple` python built in type.
+
+What are it's purposes:
+
+#.  We can work with first class objects :code:`t1.string1`, VS dicts of attributes
+    :code:`t1["string1"]`.
+
+#.  We can add additional methods to the Tuple classes that
+    would not otherwise be available, EG :code:`t1.formattedStringInt()`
+
+#.  Defining Tuples simplifies sending data between services via the vortex,
+    If a Tuple object is sent on one end, it will be a Tuple object
+    when it's deserailised on the other end.
+
+.. important::  It's important to import all the tuples when the plugin is loaded
+                on each Peek python service (worker, client, server and agent).
+
+                The plugin loading code will throw errors if one of our Tuples is
+                imported first by another plugin and not by us.
+
+Objective
+---------
+
+In this procedure we'll do the following:
+
+#.  Create a Tuple in Python and register it.
+
+#.  Create a Tuple in TypeScript and register it.
+
+#.  Create a StringIntTuple in TypeScript and register it.
+
+Add Package :file:`_private.tuples`
+-----------------------------------
+
+The :file:`_private.tuples` python package will contain the private python Tuples.
+
+----
+
+Create the :file:`peek_plugin_tutorial/_private/tuples` package, with
+the commands ::
+
+        mkdir peek_plugin_tutorial/_private/tuples
+        touch peek_plugin_tutorial/_private/tuples/__init__.py
+
+
+Add File :file:`TutorialTuple.py`
+---------------------------------
+
+The :file:`TutorialTuple.py` defines a simple class that we use to work with data.
+This is serialisable by the Vortex.
+
+----
+
+Create the file 
+:file:`peek_plugin_tutorial/_private/tuples/TutorialTuple.py`
+and populate it with the following contents.
+
+::
+
+        from vortex.Tuple import Tuple, addTupleType, TupleField
+
+        from peek_plugin_tutorial._private.PluginNames import tutorialTuplePrefix
+
+
+        @addTupleType
+        class TutorialTuple(Tuple):
+            """ Tutorial Tuple
+
+            This tuple is a create example of defining classes to work with our data.
+            """
+            __tupleType__ = tutorialTuplePrefix + 'TutorialTuple'
+
+            #:  Description of date1
+            dict1 = TupleField(defaultValue=dict)
+
+            #:  Description of date1
+            array1 = TupleField(defaultValue=list)
+
+            #:  Description of date1
+            date1 = TupleField()
+
+
+
+Edit File :file:`_private/tuples/__init__.py`
+---------------------------------------------
+
+In this step, we add a setup method on the tuples package, this setup method
+then loads all the handlers needed for the backend.
+
+----
+
+Edit file :file:`peek_plugin_tutorial/_private/server/admin_backend/__init__.py`
+Add the following: ::
+
+        from .StringIntTableHandler import makeStringIntTableHandler
+
+        def loadPrivateTuples():
+            """ Load Private Tuples
+
+            In this method, we load the private tuples.
+            This registers them so the Vortex can reconstructed them from
+            serialised data.
+
+            """
+            from . import TutorialTuple
+            TutorialTuple.__unused = False
+
+
+
+Add Package :file:`tuples`
+--------------------------
+
+The :file:`tuples` python package will contain the public python Tuples.
+Thats tuples which our plugin wants to share with other plugins.
+
+We won't define any public tuples here, but we'll set it up.
+
+See more at :ref:`learn_plugin_development_add_plugin_apis`.
+
+----
+
+Create the :file:`peek_plugin_tutorial/tuples` package, with
+the commands ::
+
+        mkdir peek_plugin_tutorial/tuples
+        touch peek_plugin_tutorial/tuples/__init__.py
+
+
+
+Edit File :file:`tuples/__init__.py`
+------------------------------------
+
+In this step, we add a setup method on the tuples package, this setup method
+then loads all the handlers needed for the backend.
+
+----
+
+Edit file :file:`peek_plugin_tutorial/_private/server/admin_backend/__init__.py`
+Add the following: ::
+
+        from .StringIntTableHandler import makeStringIntTableHandler
+
+        def loadPublicTuples():
+            """ Load Public Tuples
+
+            In this method, we load the public tuples.
+            This registers them so the Vortex can reconstructed them from
+            serialised data.
+
+            """
+
+
+
+.. _learn_plugin_development_add_tuples_edit_server_entry_hook:
+
+Edit File :file:`ServerEntryHook.py`
+------------------------------------
+
+Now, we need to load all our Tuples when the plugin is loaded, for every service.
+To do this, we call the methods we've added to the :code:`tuple` packages above.
+
+----
+
+Edit file :file:`peek_plugin_tutorial/_private/server/ServerEntryHook.py` :
+
+#.  Add this import up the top of the file ::
+
+        from peek_plugin_tutorial.tuples import loadPublicTuples
+        from .tuples import loadPrivateTuples
+
+#.  Add this line after the docstring in the :code:`load()` method ::
+
+        loadPrivateTuples()
+        loadPublicTuples()
+
+
+The method should now look similar to this ::
+
+        def load(self):
+            ...
+            loadStorageTuples() # This line was added in the "Add Storage" guide
+            loadPrivateTuples()
+            loadPublicTuples()
+            logger.debug("Started")
+
+
+
+Edit File :file:`ClientEntryHook.py`
+------------------------------------
+
+This step applies if you're plugin is using the Client service.
+
+Edit file :file:`peek_plugin_tutorial/_private/server/ClientEntryHook.py` file,
+apply the same edits from step
+:ref:`learn_plugin_development_add_tuples_edit_server_entry_hook`.
+
+
+Edit File :file:`AgentEntryHook.py`
+-----------------------------------
+
+This step applies if you're plugin is using the Agent service.
+
+Edit file :file:`peek_plugin_tutorial/_private/server/AgentEntryHook.py` file,
+apply the same edits from step
+:ref:`learn_plugin_development_add_tuples_edit_server_entry_hook`.
+
+Edit File :file:`WorkerEntryHook.py`
+------------------------------------
+
+This step applies if you're plugin is using the Worker service.
+
+Edit file :file:`peek_plugin_tutorial/_private/server/WorkerEntryHook.py` file,
+apply the same edits from step
+:ref:`learn_plugin_development_add_tuples_edit_server_entry_hook`.
+
+Test Python Services
+--------------------
+
+At this point all the python services should run, you won't see any differences but
+it's a good idea to run them all and check there are no issues.
+
+Add Directory :file:`plugin-module/_private/tuples`
+---------------------------------------------------
+
+We now move onto the frontends, and TypeScript.
+
+The :file:`plugin-module/_private/tuples` directory will contain our example tuple,
+written in TypeScript.
+
+Our exampled tuple will be importable with: ::
+
+        import {TutorialTuple} from "@peek/peek_plugin_tutorial";
+
+----
+
+Create directory :file:`peek_plugin_tutorial/plugin-module/_private/tuples`,
+with command ::
+
+        mkdir -p peek_plugin_tutorial/plugin-module/_private/tuples
+
+
+Add File :file:`TutorialTuple.ts`
+---------------------------------
+
+The :file:`TutorialTuple.ts` file defines a TypeScript class for our
+:code:`TutorialTuple` Tuple.
+
+----
+
+Create file
+:file:`peek_plugin_tutorial/plugin-module/_private/tuples/TutorialTuple.ts`,
+with contents ::
+
+        import {addTupleType, Tuple} from "@synerty/vortexjs";
+        import {tutorialTuplePrefix} from "../plugin-names";
+
+
+        @addTupleType
+        export class TutorialTuple extends Tuple {
+            public static readonly tupleName = tutorialTuplePrefix + "TutorialTuple";
+
+            //  Description of date1
+            dict1 : {};
+
+            //  Description of array1
+            array1 : any[];
+
+            //  Description of date1
+            date1 : Date;
+
+            constructor() {
+                super(TutorialTuple.tupleName)
+            }
+        }
+
+
+
+
+Add File :file:`StringIntTuple.ts`
+----------------------------------
+
+The :file:`StringIntTuple.ts` file defines the TypeScript Tuple for the
+hybrid Tuple/SQL Declarative that represents :code:`StringIntTuple`.
+
+----
+
+Create file
+:file:`peek_plugin_tutorial/plugin-module/_private/tuples/StringIntTuple.ts`,
+with contents ::
+
+        import {addTupleType, Tuple} from "@synerty/vortexjs";
+        import {tutorialTuplePrefix} from "../plugin-names";
+
+
+        @addTupleType
+        export class StringIntTuple extends Tuple {
+            public static readonly tupleName = tutorialTuplePrefix + "StringIntTuple";
+
+            //  Description of date1
+            id : number;
+
+            //  Description of string1
+            string1 : string;
+
+            //  Description of int1
+            int1 : number;
+
+            constructor() {
+                super(StringIntTuple.tupleName)
+            }
+        }
+
+
+Edit File :file:`_private/index.ts`
+-----------------------------------
+
+The :file:`_private/index.ts` file will re-export the Tuple in a more standard way.
+Developers won't need to know the exact path of the file.
+
+----
+
+Edit file :file:`peek_plugin_tutorial/plugin-module/_private/index.ts`,
+Append the line: ::
+
+        export {TutorialTuple} from "tuples/TutorialTuple";
+        export {StringIntTuple} from "tuples/StringIntTuple";
+
+---
+

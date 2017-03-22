@@ -20,11 +20,7 @@ Setup Observables (TODO)
 
 
 
-.. _learn_plugin_development_add_tuple_loader:
 
-================
-Add Tuple Loader
-================
 
 In this document, we'll use the TulpeLoader from VortexJS to load and update some
 settings from the tables created in
