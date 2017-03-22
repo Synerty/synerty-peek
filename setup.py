@@ -33,7 +33,7 @@ setup(
     name=pip_package_name,
     packages=find_packages(exclude=["*.tests", "*.tests.*", "tests.*", "tests"]),
     install_requires=requirements,
-    version=package_version,
+    zip_safe=False,version=package_version,
     description='Peek Platform - Meta Package to install all services',
     author='Synerty',
     author_email='contact@synerty.com',
