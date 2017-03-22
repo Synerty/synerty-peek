@@ -1,6 +1,6 @@
 param([String]$releaseZip)
 
-# Make Powershell stop if it has errors
+# Make PowerShell stop if it has errors
 $ErrorActionPreference = "Stop"
 
 $7zExe="C:\Program Files\7-Zip\7z.exe";
@@ -77,8 +77,8 @@ Write-Host "Setting PEEK_ENV to $venvDir";
 # All done.
 Write-Host "Peek is now deployed to $venvDir";
 Write-Host " ";
-Write-Host "Activate the new envrionment from command :";
+Write-Host "Activate the new environment from command :";
 Write-Host "    set PATH=`"$venvDir\Scripts;%PATH%`"";
 Write-Host " ";
-Write-Host "Activate the new envrionment from powershell :";
+Write-Host "Activate the new environment from PowerShell :";
 Write-Host "    `$env:Path = `"$venvDir\Scripts;`$env:Path`"";
