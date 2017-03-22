@@ -88,7 +88,7 @@ The file copy process, AKA "prepare" or "Combine", is fairly simple:
 
 #.  Compile plugin code copied to node_modules for NativeScript
 
-#.  Copy required files to the platform directiry for NativeScript.
+#.  Copy required files to the platform directory for NativeScript.
 
 At this point the build directories are prepared and ready to run.
 
@@ -145,7 +145,7 @@ To enable the file syncing, Set :code:`frontend.syncFilesForDebugEnabled` to :co
 in :file:`~/peek-server.home/config.json` or :file:`~/peek-client.home/config.json`
 and restart the appropriate service.
 
-You may also want to disable the web building. This isn't requred for the Angular CLI
+You may also want to disable the web building. This isn't required for the Angular CLI
 development server and it slows down Server and Client restarts.
 Set :code:`frontend.webBuildEnabled` to :code:`false`.
 

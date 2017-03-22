@@ -21,8 +21,8 @@ Add Package :file:`_private/storage`
 ------------------------------------
 
 Package :file:`_private/storage` will contain the database ORM
-classes. These define the schema for the database and are used for data maniupation and
-retreival.
+classes. These define the schema for the database and are used for data manipulation and
+retrieval.
 
 ----
 
@@ -42,7 +42,7 @@ declarative bases.
 See `SQLALchemy <http://docs.sqlalchemy.org/en/rel_1_1/orm/tutorial.html#declare-a-mapping>`_
 for more details.
 
-In this delcarative base, we define a metadata with a schema name for this plugin,
+In this declarative base, we define a metadata with a schema name for this plugin,
 **pl_tutorial**.
 
 Peek has a :command:`loadStorageTuples()` method that imports the tables.
@@ -317,7 +317,7 @@ Add File :file:`StringIntTuple.py`
 ``````````````````````````````````
 
 The :file:`StringIntTuple.py` python file defines a database Table class.
-This database Table class desribes a table in the database.
+This database Table class describes a table in the database.
 
 Most of this is straight from the
 `SQLAlchemy Object Relational Tutorial <http://docs.sqlalchemy.org/en/latest/orm/tutorial.html#declare-a-mapping>`_

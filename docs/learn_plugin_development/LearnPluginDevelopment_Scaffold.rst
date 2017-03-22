@@ -205,10 +205,10 @@ Add File :file:`README.rst`
 ---------------------------
 
 The file:`README.rst` file is a verbose description of this plugin, it's the file that
-version control systems, such as BitBucket or Github will display when the project is
+version control systems, such as BitBucket or GitHub will display when the project is
 viewed on their sites.
 
-It's ideal to include a great overvew about the plugin in this file.
+It's ideal to include a great overview about the plugin in this file.
 
 ----
 
@@ -281,7 +281,7 @@ plugin. More details on where these are used will be later in the documentation.
 Since all of the plugin is on the one package, both the part of the plugin running on the
 server and the part of the plugin running on the client can import this file.
 
-Guaranteeing that there is no missmatch of names when they send data to each other.
+Guaranteeing that there is no mismatch of names when they send data to each other.
 
 
 ----
