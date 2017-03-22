@@ -303,8 +303,7 @@ We now move onto the frontends, and TypeScript.
 The :file:`plugin-module/_private` directory will contain code that shouldn't be used
 outside of this plugin.
 
-The :file:`plugin-module` directory will contain any code that is needs
-to be either:
+The :file:`plugin-module` directory will contain any code that needs to be either:
 
 *   Running all the time in the background.
 
@@ -368,7 +367,7 @@ It seems trival a this point, but it becomes more usefull as the TypeScript code
 Create file
 :file:`peek_plugin_tutorial/plugin-module/_private/index.ts`, with contents ::
 
-        export {*} from "./PluginNames";
+        export * from "./PluginNames";
 
 
 Install in Development Mode
