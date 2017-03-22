@@ -20,8 +20,9 @@ Learn Plugin Development
     LearnPluginDevelopment_FrontendPreparing
     LearnPluginDevelopment_AddTuples
     LearnPluginDevelopment_AddTupleLoader
-    LearnPluginDevelopment_SetupObservables
-    LearnPluginDevelopment_SetupActions
-    LearnPluginDevelopment_SetupEndpoints
-    LearnPluginDevelopment_SetupPluginApis
+    LearnPluginDevelopment_AddObservables
+    LearnPluginDevelopment_AddActions
+    LearnPluginDevelopment_AddEndpoints
+    LearnPluginDevelopment_AddPluginApis
     LearnPluginDevelopment_AddWorker
+    LearnPluginDevelopment_AddDocs

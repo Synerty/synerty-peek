@@ -29,7 +29,7 @@ Peek Platform Documentation
     troubleshooting_debian/TroubleshootingDebian
     learn_plugin_development/IndexLearn
     util/IndexUtil
-    api_autodoc/peek_plugin_base/peek_plugin_base
+    api/IndexAPI
 
 
 Indices and tables

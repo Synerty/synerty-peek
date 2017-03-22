@@ -1,8 +1,8 @@
 .. _learn_plugin_development_add_mobile:
 
-=========================
-Adding the Mobile Service
-=========================
+==================
+Add Mobile Service
+==================
 
 The mobile service is for the users. It's the interface designed for mobile devices.
 

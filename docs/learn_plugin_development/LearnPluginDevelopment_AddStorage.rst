@@ -1,8 +1,8 @@
 .. _learn_plugin_development_add_storage:
 
-==========================
-Adding the Storage Service
-==========================
+===================
+Add Storage Service
+===================
 
 The storage service is conceptually a little different to other services in the Peek
 Platform.
@@ -317,7 +317,7 @@ Finally, run the peek server, it should load with out error.
 
 The hard parts done, adding the tables is much easier.
 
-.. _learn_plugin_development_add_storage_add_simple_table:
+.. _learn_plugin_development_add_storage_add_string_int_table:
 
 Adding a Simple Table
 ---------------------
@@ -461,7 +461,7 @@ The Noop plugin has special Settings and SettingsProperty tables that is usefull
 storing plugin settings.
 
 This section sets this up for the Tutorial plugin. It's roughly the same process used
-to :ref:`learn_plugin_development_add_storage_add_simple_table`.
+to :ref:`learn_plugin_development_add_storage_add_string_int_table`.
 
 Add File :file:`Setting.py`
 ```````````````````````````

@@ -1,8 +1,8 @@
-.. _learn_plugin_development_setup_observable:
+.. _learn_plugin_development_add_observable:
 
-========================
-Setup Observables (TODO)
-========================
+======================
+Add Observables (TODO)
+======================
 
 ** TODO **
 
