@@ -269,7 +269,7 @@ Edit the file :file:`peek_plugin_tutorial/_private/server/ServerEntryHook.py`
 When you're finished, You should have a file like this: ::
 
         # Added imports, step 1
-        from peek_plugin_noop._private.storage import loadStorageTuples
+        from peek_plugin_noop._private.storage import DeclarativeBase, loadStorageTuples
         from peek_plugin_base.server.PluginServerStorageEntryHookABC import \
             PluginServerStorageEntryHookABC
 
