@@ -113,8 +113,11 @@ It should return the variable you have added into the PATH
 
 .. image:: EnvVar-WhichPython.jpg
 
-.. NOTE:: If you are developing, run: 'npm -g install nativescript'.  This is required
-    after every deploy.
+.. NOTE:: If you are developing plugins, :command:`python setup.py develop` will need
+    to be run from the directory of each plugin being developed.
+
+.. NOTE:: If you are developing with NativeScript, run: :command:`npm -g install
+    nativescript`.
 
 
 Linux
