@@ -94,6 +94,8 @@ Run the following command ::
 
     npm i -g nativescript
 
+.. NOTE:: If you are developing, this st required after every deploy.ep is
+
 ----
 
 Do you want to run the setup script?
