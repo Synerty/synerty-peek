@@ -279,7 +279,7 @@ and populate it with the following contents.
             TupleLoader
         } from "@synerty/vortexjs";
         import {StringIntTuple,
-            tutorialPluginFilt
+            tutorialFilt
         } from "@peek/peek_plugin_tutorial/_private";
 
 
@@ -302,7 +302,7 @@ and populate it with the following contents.
 
                 this.loader = vortexService.createTupleLoader(this,
                     () => {
-                        let filt = extend({}, this.filt, tutorialPluginFilt);
+                        let filt = extend({}, this.filt, tutorialFilt);
                         // If we wanted to filter the data we get, we could add this
                         // filt["lookupName"] = 'lookupType';
                         return filt;
