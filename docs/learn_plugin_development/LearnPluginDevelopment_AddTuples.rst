@@ -257,7 +257,7 @@ Create file
 with contents ::
 
         import {addTupleType, Tuple} from "@synerty/vortexjs";
-        import {tutorialTuplePrefix} from "../plugin-names";
+        import {tutorialTuplePrefix} from "../PluginNames";
 
 
         @addTupleType
@@ -294,7 +294,7 @@ Create file
 with contents ::
 
         import {addTupleType, Tuple} from "@synerty/vortexjs";
-        import {tutorialTuplePrefix} from "../plugin-names";
+        import {tutorialTuplePrefix} from "../PluginNames";
 
 
         @addTupleType
