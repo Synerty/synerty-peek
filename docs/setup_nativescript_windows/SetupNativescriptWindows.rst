@@ -94,7 +94,7 @@ Run the following command ::
 
     npm i -g nativescript
 
-.. NOTE:: If you are developing, this st required after every deploy.ep is
+.. NOTE:: If you are developing, this step is required after every deploy.
 
 ----
 

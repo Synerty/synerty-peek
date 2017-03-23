@@ -77,8 +77,8 @@ and populate it with the following contents.
             return handler
 
 
-Edit File :file:``admin_backend/__init__.py`
---------------------------------------------
+Edit File :file:`admin_backend/__init__.py`
+-------------------------------------------
 
 In this step, we add a setup method on the admin_backend package, this setup medthod
 then loads all the handlers needed for the backend.
@@ -91,7 +91,9 @@ We can yield more items after the first one, the calling will get an iterable re
 ----
 
 Edit file :file:`peek_plugin_tutorial/_private/server/admin_backend/__init__.py`
-Add the following: ::
+Add the following:
+
+::
 
         from .StringIntTableHandler import makeStringIntTableHandler
 

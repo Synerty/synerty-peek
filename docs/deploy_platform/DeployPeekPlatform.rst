@@ -113,7 +113,7 @@ It should return the variable you have added into the PATH
 
 .. image:: EnvVar-WhichPython.jpg
 
-.. NOTE:: If you are developing run 'npm -g install nativescript'.  This is required
+.. NOTE:: If you are developing, run: 'npm -g install nativescript'.  This is required
     after every deploy.
 
 

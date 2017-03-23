@@ -1,8 +1,8 @@
 .. _learn_plugin_development_add_admin:
 
-========================
-Adding the Admin Service
-========================
+=================
+Add Admin Service
+=================
 
 The admin service is the admin user interface.
 This is known as the "frontend" in web terminology.
