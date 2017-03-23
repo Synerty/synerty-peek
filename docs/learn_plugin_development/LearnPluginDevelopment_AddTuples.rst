@@ -327,8 +327,8 @@ Developers won't need to know the exact path of the file.
 Edit file :file:`peek_plugin_tutorial/plugin-module/_private/index.ts`,
 Append the line: ::
 
-        export {TutorialTuple} from "tuples/TutorialTuple";
-        export {StringIntTuple} from "tuples/StringIntTuple";
+        export {TutorialTuple} from "./tuples/TutorialTuple";
+        export {StringIntTuple} from "./tuples/StringIntTuple";
 
 ---
 
