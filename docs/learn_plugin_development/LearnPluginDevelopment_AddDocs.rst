@@ -1,8 +1,8 @@
 .. _learn_plugin_development_add_docs:
 
-=================
-Add Documentation
-=================
+========================
+Add Documentation (TODO)
+========================
 
 Why does a plugin need documentation? A peek plugin needs documentation to help
 developers focus on what it needs to do, and allow other developers to use and APIs it
@@ -33,6 +33,34 @@ Explain the tools involved.
 
 An example document on directives, image, :ref:, url link, :code:``, :file:``, bullets
 numbered lists, code blocks, titles, toctree, docstring format
+
+----
+
+:file:`file directive` ::
+
+    :file:`file directive`
+
+.. note:: Multi
+          Line
+          NOTE
+
+          Mutli Parapgraph
+
+          -     It can even have bullt
+
+          #.    and numbers
+
+::
+
+    .. note:: Multi Line
+              NOTE
+
+              Mutli Parapgraph
+
+              -     It can even have bullt
+              #.    and numbers
+
+----
 
 
 Instructions on how to setup the documentation, copy conf.py from synerty-peek

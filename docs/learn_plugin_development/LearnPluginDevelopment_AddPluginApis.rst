@@ -4,4 +4,9 @@
 Add Plugin APIs (TODO)
 ======================
 
+Overview
+--------
+
+This doc describes create an API for other plugins to use.
+
 

@@ -437,7 +437,7 @@ TO ::
                                      dbSessionCreator):
 
 
-Pass the argument to the :code:`makeStringIntTableHandler(...) method:
+Pass the argument to the :code:`makeStringIntTableHandler(...)` method:
 
 FROM ::
 
@@ -744,3 +744,63 @@ Testing
 #.  Update the data from the Admin service UI
 
 #.  The data on the mobile all will immediately change.
+
+
+
+Offline Observable
+------------------
+
+The Synerty VortexJS library has an :code:`TupleDataOfflineObserverService`,
+once offline storage has been setup,
+(here :ref:`learn_plugin_development_add_offline_storage`),
+the offline observable is a dropin replacement.
+
+When using the offline observable, it will:
+
+#.  Queue a request to observe the data, sending it to the client
+
+#.  Query the SQL db in the browser/mobile device, and return the data for the observer.
+    This provides instant data for the user.
+
+When new data is sent to the the observer (Mobile/Desktop service)
+from the observable (Client service), the offline observer does two things:
+
+#.  Notifies the subscribers like normal
+
+#.  Stores the data back into the offline db, in the browser / app.
+
+
+Edit File :file:`string-int.component.ts`
+`````````````````````````````````````````
+
+:code:`TupleDataOfflineObserverService` is a drop-in replacement for
+:code:`TupleDataObserverService`.
+
+Switching to use the offline observer requires two edits to
+:file:`string-int.component.ts`.
+
+----
+
+Edit file
+:file:`peek_plugin_tutorial/_private/mobile-app/string-int/string-int.component.ts`.
+
+Add the import for the TupleDataOfflineObserverService: ::
+
+    import TupleDataOfflineObserverService from "@synerty/vortexjs";
+
+Change the type of the :code:`tupleDataObserver` parameter in the component constructor,
+EG,
+
+From ::
+
+        constructor(private tupleDataObserver: TupleDataObserverService, ...) {
+
+To ::
+
+        constructor(private tupleDataObserver: TupleDataOfflineObserverService, ...) {
+
+----
+
+Thats it. Now the String Int data will load on the device, even when the Vortex between
+the device and the Client service is offline.
+

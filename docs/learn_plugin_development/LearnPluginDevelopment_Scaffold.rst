@@ -89,7 +89,7 @@ Platform to run. This includes:
 ----
 
 .. note::   Commands will be run from the plugin project root directory, which is
-:file:`peek-plugin-tutorial`.
+            :file:`peek-plugin-tutorial`.
 
 
 Create the :file:`peek_plugin_tutorial` Package. Commands: ::
