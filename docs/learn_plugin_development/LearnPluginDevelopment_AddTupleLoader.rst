@@ -66,9 +66,8 @@ and populate it with the following contents.
 
         from peek_plugin_tutorial._private.PluginNames import tutorialFilt
         from peek_plugin_tutorial._private.storage.StringIntTuple import StringIntTuple
-        from vortex.TupleSelector import TupleSelector
-        from vortex.handler.TupleDataObservableHandler import TupleDataObservableHandler
-        from vortex.sqla_orm.OrmCrudHandler import OrmCrudHandler, OrmCrudHandlerExtension
+        from vortex.handler.TupleDataObservableHandler import logger
+        from vortex.sqla_orm.OrmCrudHandler import OrmCrudHandler
 
         # This dict matches the definition in the Admin angular app.
         filtKey = {"key": "admin.Edit.StringIntTuple"}
@@ -99,7 +98,7 @@ and populate it with the following contents.
 Edit File :file:`admin_backend/__init__.py`
 -------------------------------------------
 
-In this step, we add a setup method on the admin_backend package, this setup medthod
+In this step, we add a setup method on the admin_backend package, this setup method
 then loads all the handlers needed for the backend.
 
 This just helps sectionalise the code a bit.
@@ -129,7 +128,7 @@ service starts the plugin.
 If you look at :code:`self._loadedObjects`, you'll see that the :code:`stop()` method
 shuts down all objects we add to this array. So adding to this array serves two purposes
 
-#.  It keeps a reference to the object, ensureing it isn't garbage collected when the
+#.  It keeps a reference to the object, ensuring it isn't garbage collected when the
     :code:`start()` method ends.
 
 #.  It ensures all the objects are properly shutdown. In our case, this means it stops
@@ -177,7 +176,11 @@ that allows us to edit data in the admin app.
 
 ----
 
-Create directory :file:`peek_plugin_tutorial/_private/admin-app/edit-string-int-table`
+Create the :file:`peek_plugin_tutorial/_private/admin-app/edit-string-int-table`
+directory, with the command ::
+
+        mkdir peek_plugin_tutorial/_private/admin-app/edit-string-int-table
+
 
 Add File :file:`edit.component.html`
 ------------------------------------
@@ -374,5 +377,5 @@ Test Tuple Loader
 
 Restart the Server service, so that it rebuilds the Admin Angular Web app.
 
-Natigate your browser to the admin page, select plugins, and then selec the
+Navigate your browser to the admin page, select plugins, and then select the
 "Edit String Int" tab.
