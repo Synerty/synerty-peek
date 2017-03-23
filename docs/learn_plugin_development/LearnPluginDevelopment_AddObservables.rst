@@ -363,7 +363,7 @@ Edit the file
 
 #.  Add the following imports: ::
 
-        from .tuple_providers import StringIntTupleProvider
+        from .tuple_providers.StringIntTupleProvider import StringIntTupleProvider
         from peek_plugin_tutorial._private.storage.StringIntTuple import StringIntTuple
 
 #.  Find the line :code:`# Register TupleProviders here` and add this line after it: ::
