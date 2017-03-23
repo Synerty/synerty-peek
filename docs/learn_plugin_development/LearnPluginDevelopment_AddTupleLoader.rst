@@ -338,16 +338,16 @@ Edit the file :file:`peek_plugin_tutorial/_private/admin-app/tutorial.component.
 #.  Find the :code:`</ul>` tag and insert the following before that line: ::
 
         <!-- Edit String Int Tab -->
-        <li role="presentation" class="active">
-            <a href="#editStringInt" aria-controls="editStringInt"
-                role="tab" data-toggle="tab">Edit String Int</a>
+        <li role="presentation">
+            <a href="#editStringInt" aria-controls="editStringInt" role="tab"
+               data-toggle="tab">Edit String Int</a>
         </li>
 
 #.  Find the :code:`<div class="tab-content">` tag and insert the following after
     the line it: ::
 
         <!-- Edit String Int Tab -->
-        <div role="tabpanel" class="tab-pane active" id="editStringInt">
+        <div role="tabpanel" class="tab-pane" id="editStringInt">
             <pl-tutorial-edit-string-int></pl-tutorial-edit-string-int>
         </div>
 
