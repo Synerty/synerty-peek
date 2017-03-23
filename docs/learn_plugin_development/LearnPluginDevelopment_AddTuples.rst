@@ -98,10 +98,8 @@ then loads all the handlers needed for the backend.
 
 ----
 
-Edit file :file:`peek_plugin_tutorial/_private/server/admin_backend/__init__.py`
+Edit file :file:`peek_plugin_tutorial/_private/tuples/__init__.py`
 Add the following: ::
-
-        from .StringIntTableHandler import makeStringIntTableHandler
 
         def loadPrivateTuples():
             """ Load Private Tuples
@@ -120,7 +118,7 @@ Add Package :file:`tuples`
 --------------------------
 
 The :file:`tuples` python package will contain the public python Tuples.
-Thats tuples which our plugin wants to share with other plugins.
+The tuples which our plugin wants to share with other plugins.
 
 We won't define any public tuples here, but we'll set it up.
 
@@ -144,10 +142,8 @@ then loads all the handlers needed for the backend.
 
 ----
 
-Edit file :file:`peek_plugin_tutorial/_private/server/admin_backend/__init__.py`
+Edit file :file:`peek_plugin_tutorial/tuples/__init__.py`
 Add the following: ::
-
-        from .StringIntTableHandler import makeStringIntTableHandler
 
         def loadPublicTuples():
             """ Load Public Tuples
@@ -174,8 +170,8 @@ Edit file :file:`peek_plugin_tutorial/_private/server/ServerEntryHook.py` :
 
 #.  Add this import up the top of the file ::
 
+        from peek_plugin_tutorial._private.tuples import loadPrivateTuples
         from peek_plugin_tutorial.tuples import loadPublicTuples
-        from .tuples import loadPrivateTuples
 
 #.  Add this line after the docstring in the :code:`load()` method ::
 
@@ -190,7 +186,7 @@ The method should now look similar to this ::
             loadStorageTuples() # This line was added in the "Add Storage" guide
             loadPrivateTuples()
             loadPublicTuples()
-            logger.debug("Started")
+            logger.debug("Loaded")
 
 
 
