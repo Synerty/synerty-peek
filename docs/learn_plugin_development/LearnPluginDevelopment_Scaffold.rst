@@ -328,6 +328,24 @@ with command ::
         mkdir -p peek_plugin_tutorial/plugin-module/_private
 
 
+Add File :file:`package.json`
+-----------------------------
+
+The :file:`package.json` file is required to keep NPM from winging, since this
+directory is linked in under :file:`node_modules/@peek`
+
+----
+
+Create file
+:file:`peek_plugin_tutorial/plugin-module/package.json`,
+with contents ::
+
+        {
+          "name": "peek_plugin_tutorial",
+          "version": "0.0.0"
+        }
+
+
 Add File :file:`PluginNames.ts`
 -------------------------------
 
