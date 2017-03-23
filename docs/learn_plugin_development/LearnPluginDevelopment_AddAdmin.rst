@@ -115,6 +115,7 @@ and populate it with the following contents.
 ::
 
         import {CommonModule} from "@angular/common";
+        import {FormsModule} from "@angular/forms";
         import {NgModule} from "@angular/core";
         import {Routes, RouterModule} from "@angular/router";
 
@@ -134,7 +135,8 @@ and populate it with the following contents.
         @NgModule({
             imports: [
                 CommonModule,
-                RouterModule.forChild(pluginRoutes)],
+                RouterModule.forChild(pluginRoutes),
+                FormsModule],
             exports: [],
             providers: [],
             declarations: [TutorialComponent]
