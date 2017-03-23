@@ -20,6 +20,7 @@ Learn Plugin Development
     LearnPluginDevelopment_FrontendPreparing
     LearnPluginDevelopment_AddTuples
     LearnPluginDevelopment_AddTupleLoader
+    LearnPluginDevelopment_AddOfflineStorage
     LearnPluginDevelopment_AddObservables
     LearnPluginDevelopment_AddActions
     LearnPluginDevelopment_AddEndpoints

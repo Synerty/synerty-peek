@@ -1,8 +1,8 @@
 .. _learn_plugin_development_add_docs:
 
-========================
-Add Plugin Documentation
-========================
+=================
+Add Documentation
+=================
 
 Why does a plugin need documentation? A peek plugin needs documentation to help
 developers focus on what it needs to do, and allow other developers to use and APIs it

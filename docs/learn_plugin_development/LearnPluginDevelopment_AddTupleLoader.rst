@@ -4,7 +4,10 @@
 Add Tuple Loader
 ================
 
-In this document, we'll use the TulpeLoader from VortexJS to load and update some
+Outline
+-------
+
+In this document, we'll use the TupleLoader from VortexJS to load and update some
 settings from the tables created in
 :ref:`learn_plugin_development_add_storage_add_string_int_table` and tuples created in
 :ref:`learn_plugin_development_add_tuples`.
@@ -18,6 +21,15 @@ the Vortex maintains a persistent connection unless it's shutdown.
 .. image:: LearnAddTupleLoader_PluginOverview.png
 
 This document modifies both the server and admin parts of the plugin.
+
+Advantages
+``````````
+#.  Easily edit table data.
+
+Disadvantages
+`````````````
+
+#.  Not suitable for multiple users.
 
 Add Package :file:`admin_backend`
 ---------------------------------
