@@ -255,8 +255,18 @@ contents: ::
             "website": "www.synerty.com"
         },
         "requiresServices": [
-        ]
+        ],
+        "admin": {
+            "moduleDir": "plugin-module"
+        },
+        "mobile": {
+            "moduleDir": "plugin-module"
+        },
+        "desktop": {
+            "moduleDir": "plugin-module"
+        }
     }
+
 
 ----
 
