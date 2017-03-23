@@ -43,13 +43,14 @@ Edit the file
         } from "@peek/peek_plugin_tutorial/_private";
 
 
-#.  blah ::
+#.  After the imports, add this function ::
 
         export function tupleOfflineStorageNameServiceFactory() {
-            return new TupleOfflineStorageNameService(fieldSwitchingTupleOfflineServiceName);
+            return new TupleOfflineStorageNameService(tutorialTupleOfflineServiceName);
         }
 
-#.  ba ::
+#.  Finally, add this snippet to the :code:`providers` array in
+    the :code:`@NgModule` decorator ::
 
 
         TupleOfflineStorageService, {
