@@ -51,8 +51,12 @@ The script will deploy to C:\\Users\\peek.
         PowerShell.exe -ExecutionPolicy Bypass -File deploy_platform_win.ps1 $dist
 
 .. note:: Once the script has completed running you will see the message "Activate the
-    new environment from ...".  These commands temporarily configure the environment to
-    use the synerty-peek virtual environment that was just deployed.  For a permanent
+    new environment from ...".
+
+    These commands temporarily configure the environment to
+    use the synerty-peek virtual environment that was just deployed.
+
+    For a permanent
     change you will need to edit your 'Environment Variables'.  See
     :ref:`configuring_environment_variables` for more details.
 
@@ -116,8 +120,8 @@ It should return the variable you have added into the PATH
 .. NOTE:: If you are developing plugins, :command:`python setup.py develop` will need
     to be run from the directory of each plugin being developed.
 
-.. NOTE:: If you are developing with NativeScript, run: :command:`npm -g install
-    nativescript`.
+.. NOTE:: If you are developing with NativeScript,
+    run: :command:`npm -g install nativescript`.
 
 
 Linux

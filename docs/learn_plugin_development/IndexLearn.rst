@@ -24,6 +24,7 @@ Learn Plugin Development
     LearnPluginDevelopment_AddObservables
     LearnPluginDevelopment_AddActions
     LearnPluginDevelopment_AddEndpoints
+    LearnPluginDevelopment_UsePluginApis
     LearnPluginDevelopment_AddPluginApis
     LearnPluginDevelopment_AddWorker
     LearnPluginDevelopment_AddDocs

@@ -78,6 +78,13 @@ and populate it with the following contents.
         class __CrudHandler(OrmCrudHandler):
             pass
 
+            # If we only wanted to edit a subset of the data, this is how it's done
+            # def createDeclarative(self, session, payloadFilt):
+            #     lookupName = payloadFilt["lookupName"]
+            #     return (session.query(StringIntTuple)
+            #             .filter(StringIntTuple.lookupName == lookupName)
+            #             .all())
+
 
         # This method creates an instance of the handler class.
         def makeStringIntTableHandler(dbSessionCreator):
@@ -272,7 +279,7 @@ and populate it with the following contents.
             TupleLoader
         } from "@synerty/vortexjs";
         import {StringIntTuple,
-            tutorialPluginFilt
+            tutorialFilt
         } from "@peek/peek_plugin_tutorial/_private";
 
 
@@ -294,7 +301,12 @@ and populate it with the following contents.
                 super();
 
                 this.loader = vortexService.createTupleLoader(this,
-                    () => extend({}, this.filt, tutorialPluginFilt));
+                    () => {
+                        let filt = extend({}, this.filt, tutorialFilt);
+                        // If we wanted to filter the data we get, we could add this
+                        // filt["lookupName"] = 'lookupType';
+                        return filt;
+                    });
 
                 this.loader.observable
                     .subscribe((tuples:StringIntTuple[]) => this.items = tuples);

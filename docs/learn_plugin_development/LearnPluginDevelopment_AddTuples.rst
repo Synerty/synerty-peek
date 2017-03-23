@@ -257,7 +257,7 @@ Create file
 with contents ::
 
         import {addTupleType, Tuple} from "@synerty/vortexjs";
-        import {tutorialTuplePrefix} from "../plugin-names";
+        import {tutorialTuplePrefix} from "../PluginNames";
 
 
         @addTupleType
@@ -294,7 +294,7 @@ Create file
 with contents ::
 
         import {addTupleType, Tuple} from "@synerty/vortexjs";
-        import {tutorialTuplePrefix} from "../plugin-names";
+        import {tutorialTuplePrefix} from "../PluginNames";
 
 
         @addTupleType
@@ -327,8 +327,8 @@ Developers won't need to know the exact path of the file.
 Edit file :file:`peek_plugin_tutorial/plugin-module/_private/index.ts`,
 Append the line: ::
 
-        export {TutorialTuple} from "tuples/TutorialTuple";
-        export {StringIntTuple} from "tuples/StringIntTuple";
+        export {TutorialTuple} from "./tuples/TutorialTuple";
+        export {StringIntTuple} from "./tuples/StringIntTuple";
 
 ---
 
