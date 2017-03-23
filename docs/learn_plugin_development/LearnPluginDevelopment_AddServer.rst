@@ -1,8 +1,8 @@
 .. _learn_plugin_development_add_server:
 
-=========================
-Adding the Server Service
-=========================
+==================
+Add Server Service
+==================
 
 
 Configure the Plugin

@@ -1,8 +1,8 @@
 .. _learn_plugin_development_add_worker:
 
-=========================
-Adding the Worker Service
-=========================
+==================
+Add Worker Service
+==================
 
 This document is a stripped version of :ref:`learn_plugin_development_add_server`.
 
