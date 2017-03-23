@@ -212,17 +212,10 @@ Edit the file
 #.  Add the following imports: ::
 
         // Import the required classes from VortexJS
-        import {
-            TupleDataObservableNameService,
-            TupleDataObserverService,
-            TupleDataOfflineObserverService,
-        } from "@synerty/vortexjs";
+        import {TupleDataObservableNameService, TupleDataObserverService, TupleDataOfflineObserverService} from "@synerty/vortexjs";
 
         // Import the names we need for the
-        import {
-            tutorialObservableName,
-            tutorialFilt
-        } from "@peek/peek_plugin_tutorial/_private";
+        import {tutorialObservableName, tutorialFilt} from "@peek/peek_plugin_tutorial/_private";
 
 
 #.  After the imports, add this function ::
@@ -370,7 +363,7 @@ Edit the file
 
 #.  Add the following imports: ::
 
-        from .tuple_providers import StringIntTupleProvider
+        from .tuple_providers.StringIntTupleProvider import StringIntTupleProvider
         from peek_plugin_tutorial._private.storage.StringIntTuple import StringIntTuple
 
 #.  Find the line :code:`# Register TupleProviders here` and add this line after it: ::
@@ -433,7 +426,7 @@ FROM ::
 
 TO ::
 
-        def makeAdminBackendHandlers(tupleObservable:TupleDataObservableHandler,
+        def makeAdminBackendHandlers(tupleObservable: TupleDataObservableHandler,
                                      dbSessionCreator):
 
 
@@ -460,6 +453,23 @@ argument and notify the observable when an update occurs.
 Edit the file
 :file:`peek_plugin_tutorial/_private/admin_backend/StringIntTableHandler.py`
 
+Add the import: ::
+
+        from vortex.TupleSelector import TupleSelector
+
+Update the imports
+
+FROM ::
+
+        from vortex.handler.TupleDataObservableHandler import logger
+        from vortex.sqla_orm.OrmCrudHandler import OrmCrudHandler
+
+
+TO ::
+
+        from vortex.handler.TupleDataObservableHandler import logger, TupleDataObservableHandler
+        from vortex.sqla_orm.OrmCrudHandler import OrmCrudHandler, OrmCrudHandlerExtension
+
 
 Insert the following class, after the class definition of :code:`class __CrudHandeler` ::
 
@@ -485,6 +495,18 @@ Insert the following class, after the class definition of :code:`class __CrudHan
 
             afterUpdateCommit = _tellObserver
             afterDeleteCommit = _tellObserver
+
+
+Update the instance of handler class
+
+FROM ::
+
+        def makeStringIntTableHandler(dbSessionCreator):
+
+
+TO ::
+
+        def makeStringIntTableHandler(tupleObservable, dbSessionCreator):
 
 
 In the :code:`` method, insert this line just before the return :code:`return handler` ::
