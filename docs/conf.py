@@ -64,7 +64,6 @@ author = __author__
 # built documents.
 #
 # The short X.Y version.
-__version__ = '0.2.10'
 # The full version, including alpha/beta/rc tags.
 release = __version__
 
@@ -110,7 +109,7 @@ html_static_path = ['_static']
 # -- Options for HTMLHelp output ------------------------------------------
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'synerty-peekdoc'
+htmlhelp_basename = __project__+'doc'
 
 
 # -- Options for LaTeX output ---------------------------------------------
@@ -137,8 +136,8 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'synerty-peek.tex', 'synerty-peek Documentation',
-     'Synerty', 'manual'),
+    (master_doc, __project__+'.tex', __project__+' Documentation',
+     __author__, 'manual'),
 ]
 
 
@@ -147,7 +146,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'synerty-peek', 'synerty-peek Documentation',
+    (master_doc, __project__, __project__+' Documentation',
      [author], 1)
 ]
 
@@ -158,8 +157,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'synerty-peek', 'synerty-peek Documentation',
-     author, 'synerty-peek', 'Pluggable platform for Python.',
+    (master_doc, __project__, __project__+' Documentation',
+     author, __project__, 'Pluggable platform for Python.',
      'Miscellaneous'),
 ]
 

@@ -212,15 +212,15 @@ Edit the file
 
         // Import the required classes from VortexJS
         import {
-        TupleDataObservableNameService,
-        TupleDataObserverService,
-        TupleDataOfflineObserverService
+                TupleDataObservableNameService,
+                TupleDataObserverService,
+                TupleDataOfflineObserverService
         } from "@synerty/vortexjs";
 
         // Import the names we need for the
         import {
-        tutorialObservableName,
-        tutorialFilt
+                tutorialObservableName,
+                tutorialFilt
         } from "@peek/peek_plugin_tutorial/_private";
 
 
