@@ -594,14 +594,6 @@ tuple action code from here on.
 
 
 
-FROM ::
-
-        yield makeStringIntTableHandler(dbSessionCreator)
-
-
-TO ::
-
-        yield makeStringIntTableHandler(tupleObservable, dbSessionCreator)
 
 
 
@@ -716,7 +708,14 @@ add the methods to component class ::
             toggleUpperCicked(item) {
                 let action = new StringCapToggleActionTuple();
                 action.stringIntId = item.id;
-                this.actionService.pushAction(action);
+                this.actionService.pushAction(action)
+                .then(()=>{
+                alert('success');
+
+                })
+                .catch ((err)=>{
+                alert(err);
+                });
             }
 
 
@@ -724,7 +723,14 @@ add the methods to component class ::
                 let action = new AddIntValueActionTuple();
                 action.stringIntId = item.id;
                 action.offset = 1;
-                this.actionService.pushAction(action);
+                this.actionService.pushAction(action)
+                .then(()=>{
+                alert('success');
+
+                })
+                .catch ((err)=>{
+                alert(err);
+                });
             }
 
 
@@ -733,7 +739,14 @@ add the methods to component class ::
                 let action = new AddIntValueActionTuple();
                 action.stringIntId = item.id;
                 action.offset = -1;
-                this.actionService.pushAction(action);
+                this.actionService.pushAction(action)
+                .then(()=>{
+                alert('success');
+
+                })
+                .catch ((err)=>{
+                alert(err);
+                });
             }
 
 
