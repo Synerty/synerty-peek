@@ -40,7 +40,7 @@ Edit the file
         // Import the names we need for the
         import {
             tutorialTupleOfflineServiceName
-        } from "../../plugin-module/_private/";
+        } from "@peek/peek_plugin_tutorial/_private";
 
 
 #.  After the imports, add this function ::
