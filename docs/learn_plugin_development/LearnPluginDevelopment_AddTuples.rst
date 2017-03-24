@@ -179,7 +179,6 @@ Edit file :file:`peek_plugin_tutorial/_private/server/ServerEntryHook.py` :
         loadPrivateTuples()
         loadPublicTuples()
 
-
 The method should now look similar to this ::
 
         def load(self):
@@ -190,6 +189,10 @@ The method should now look similar to this ::
             logger.debug("Loaded")
 
 
+.. note:: If you see a message like this in the log:
+    :code:`Tuple type |%s| not registered within this program.`
+    The above steps haven't been completed properly and there is a problem with the
+    tuple loading in the peek services.
 
 Edit File :file:`ClientEntryHook.py`
 ------------------------------------
