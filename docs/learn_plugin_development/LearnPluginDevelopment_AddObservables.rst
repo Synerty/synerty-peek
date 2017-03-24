@@ -256,7 +256,7 @@ It should look similar to the following:
         import {
             tutorialObservableName,
             tutorialFilt
-        } from "@peek/peek_plugin_tutorial/_private";
+        } from "../../plugin-module/_private/";
 
         ...
 
