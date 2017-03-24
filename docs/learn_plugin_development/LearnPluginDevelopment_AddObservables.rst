@@ -211,10 +211,17 @@ Edit the file
 #.  Add the following imports: ::
 
         // Import the required classes from VortexJS
-        import {TupleDataObservableNameService, TupleDataObserverService, TupleDataOfflineObserverService} from "@synerty/vortexjs";
+        import {
+        TupleDataObservableNameService,
+        TupleDataObserverService,
+        TupleDataOfflineObserverService
+        } from "@synerty/vortexjs";
 
         // Import the names we need for the
-        import {tutorialObservableName, tutorialFilt} from "@peek/peek_plugin_tutorial/_private";
+        import {
+        tutorialObservableName,
+        tutorialFilt
+        } from "@peek/peek_plugin_tutorial/_private";
 
 
 #.  After the imports, add this function ::
@@ -397,19 +404,8 @@ Edit the file
 Add the import: ::
 
         from vortex.TupleSelector import TupleSelector
-
-Update the imports
-
-FROM ::
-
-        from vortex.handler.TupleDataObservableHandler import logger
-        from vortex.sqla_orm.OrmCrudHandler import OrmCrudHandler
-
-
-TO ::
-
-        from vortex.handler.TupleDataObservableHandler import logger, TupleDataObservableHandler
-        from vortex.sqla_orm.OrmCrudHandler import OrmCrudHandler, OrmCrudHandlerExtension
+        from vortex.handler.TupleDataObservableHandler import TupleDataObservableHandler
+        from vortex.sqla_orm.OrmCrudHandler import OrmCrudHandlerExtension
 
 
 Insert the following class, after the class definition of :code:`class __CrudHandeler` ::
@@ -730,9 +726,9 @@ Edit File :file:`tutorial.component.mweb.html`
 Edit the  web HTML view file, :file:`tutorial.component.mweb.html` and insert a
 button that will change Angular Routes to our new component.
 
-.. tip::    It's better to make the button call a method on the component that changes
-            the route, this ensures both NativeScript and Web views will route to the
-            same place.
+.. tip::It's better to make the button call a method on the component that changes
+        the route, this ensures both NativeScript and Web views will route to the
+        same place.
 
 ----
 
