@@ -722,9 +722,9 @@ Edit File :file:`tutorial.component.mweb.html`
 Edit the  web HTML view file, :file:`tutorial.component.mweb.html` and insert a
 button that will change Angular Routes to our new component.
 
-.. tip::    It's better to make the button call a method on the component that changes
-the route, this ensures both NativeScript and Web views will route to the
-            same place.
+.. tip::It's better to make the button call a method on the component that changes
+        the route, this ensures both NativeScript and Web views will route to the
+        same place.
 
 ----
 
