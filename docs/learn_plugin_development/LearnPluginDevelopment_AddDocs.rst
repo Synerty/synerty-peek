@@ -32,8 +32,11 @@ reading the result of those tools right now.
 Explain the tools involved.
 
 
-An example document on directives, image, :ref:, url link, :code:``, :file:``, bullets
-numbered lists, code blocks, titles, toctree, docstring format
+An example document on directives, image, :ref:, url link,
+
+:code:``, :file:``
+
+, bullets, numbered lists, code blocks, titles, toctree, docstring format
 
 ----
 
@@ -46,8 +49,8 @@ punctuation character, at least as long as the text and a blank line before and 
 These section titles and headings will be used to create the contents when the
 documentation is built.
 
-.. note:: The Page Title can be seen at the top of this page, "Add Documentation (TODO)
-    ".  Adding a sample of a page title creates a new page title in the contents page.
+.. note:: The Page Title can be seen at the top of this page, "Add Documentation".
+    Adding a sample of a page title creates a new page title in the contents page.
 
 Header 1
 --------
@@ -66,9 +69,9 @@ This is an example of the "Page Title", "Header 1", "Header 2", and "Header 3" r
 
 ::
 
-        ==========
-        Page Title
-        ==========
+        =================
+        Add Documentation
+        =================
 
         Header 1
         --------
@@ -78,6 +81,16 @@ This is an example of the "Page Title", "Header 1", "Header 2", and "Header 3" r
 
         Header 3
         ~~~~~~~~
+
+
+Instruction Divider
+-------------------
+
+----
+
+::
+
+        ----
 
 
 Directives
@@ -109,44 +122,62 @@ as an offset block in a document, sometimes outlined or shaded, with a title mat
 the admonition type.
 
 .. note:: Multi
-          Line
-          NOTE
+    Line
+    NOTE
 
-          Mutli Parapgraph
+    Mutli Parapgraph
 
-          -     Can contain bullets
+    -     Can contain bullets
 
-          #.    and numbers points
+    #.    numbers points
 
-          :ref:`learn_plugin_development_add_docs`
+    and references: :ref:`learn_plugin_development_add_docs`
 
 ::
 
         .. note:: Multi
-                  Line
-                  NOTE
+            Line
+            NOTE
 
-                  Mutli Parapgraph
+            Mutli Parapgraph
 
-                  -     Can contain bullets
+            -     Can contain bullets
 
-                  #.    and numbers points
+            #.    numbers points
 
-                  :ref:`learn_plugin_development_add_docs`
+            and references: :ref:`learn_plugin_development_add_docs`
 
+
+Text Formatting
+---------------
+
+The following roles don’t do anything special except formatting the text in a different
+style:
+
+Inline Markups
+``````````````
+
+Inline markup is quite simple, some examples:
+
+- one asterisk: :code:`*text*`, *text* for emphasis (italics),
+- two asterisks: :code:`**text**`, **text** for strong emphasis (boldface), and
+- backquotes: :code:`:code:`text``, :code:`text` for code samples.
 
 Files
-`````
+~~~~~
 
-:file:`file directive` ::
+The name of a file or directory. Within the contents, you can use curly braces to
+indicate a “variable” part, for example:
 
+:file:`learn_plugin_development/LearnPluginDevelopment_AddDocs.rst`
 
+::
 
-    :file:`file directive`
+        :file:`learn_plugin_development/LearnPluginDevelopment_AddDocs.rst`
 
 
 Reference Links
----------------
+~~~~~~~~~~~~~~~
 
 Reference link names must be unique throughout the entire documentation.
 
@@ -162,9 +193,9 @@ An example of the reference link above the section title:
 
         .. _learn_plugin_development_add_docs:
 
-        ========================
-        Add Documentation (TODO)
-        ========================
+        =================
+        Add Documentation
+        =================
 
 An example of the reference link:
 
@@ -173,21 +204,206 @@ An example of the reference link:
         :ref:`learn_plugin_development_add_docs`
 
 
-:file:`file directive` ::
+URL Link
+~~~~~~~~
 
 
 
-    :file:`file directive`
+Code Block
+``````````
 
-.. note:: Multi
-          Line
-          NOTE
 
-          Mutli Parapgraph
+::
 
-          -     Can contain bullets
+        this.code
 
-          #.    and numbers
+
+::
+
+                ::
+
+                        this.code
+
+
+Bullets
+```````
+
+- First point
+
+- Second point
+
+::
+
+        - First point
+
+        - Second point
+
+
+Numbered Lists
+``````````````
+
+#.  First point
+
+#.  Second point
+
+::
+
+        #.  First point
+
+        #.  Second point
+
+
+.. _learn_plugin_development_add_docs_toctree:
+
+toctree TODO
+------------
+
+
+
+Docstring Format TODO
+---------------------
+
+
+Document Generator TODO
+-----------------------
+
+Sphinx is a tool that makes it easy to create intelligent and beautiful documentation.
+
+The following sections go on to guide the reader to setup Sphinx Document Generator.
+
+.. important:: Windows users must use **bash** and run the commands from the plugin
+    root directory.
+
+Documentation Configuration
+```````````````````````````
+
+The build configuration file has already been developed by Synerty.
+
+Create Directory :file:`docs`
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+This folder will contain all of the files used to build the documentation.  Make sure
+you add everything in this directory to git.
+
+Create directory :file:`docs`, run the following command:
+
+::
+
+        mkdir -p docs
+
+
+Copy file :file:`docs/conf.py`
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+Copy file :file:`conf.py` from synerty-peek, run the following command:
+
+.. note:: Make sure you update the release version in the following command.
+
+::
+
+        cp ~/synerty-peek-#.#.#/docs/conf.py docs/conf.py
+
+
+Edit file :file:`docs/conf.py`
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+::
+
+        __project__ = 'Synerty Peek'
+        __copyright__ = '2016, Synerty'
+        __author__ = 'Synerty'
+        __version__ = '0.2.10'
+
+
+Required Files
+``````````````
+
+Add file :file:`modules.rst'
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Create :file:`modules.rst`, and populate it with the following
+
+::
+
+        {insert plugin name} package
+        ============================
+
+        Module contents
+        ---------------
+
+        .. automodule:: {insert plugin name}
+            :members:
+            :undoc-members:
+            :show-inheritance:
+
+
+Add file :file:`index.rst`
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Create :file:`index.rst`, and populate it with the following
+
+::
+
+        ==================================
+        {insert plugin name} Documentation
+        ==================================
+
+        .. toctree::
+            :maxdepth: 3
+            :caption: Contents:
+
+
+        Indices and tables
+        ==================
+
+        * :ref:`genindex`
+        * :ref:`modindex`
+        * :ref:`search`
+
+
+Build Documentation
+-------------------
+
+Debug Documentation
+-------------------
+
+Synerty has written a shell script to build run Sphinx API that builds the
+documentation when a file is modified.
+
+Deploy :file:`watch-docs.sh` Shell Script
+`````````````````````````````````````````
+
+
+Copy file :file:`docs/watch-docs.sh`
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Copy file :file:`watch-docs.sh` from synerty-peek, run the following command:
+
+.. note:: Make sure you update the release version in the following command.
+
+::
+
+        cp ~/synerty-peek-#.#.#/docs/watch-docs.sh docs/watch-docs.sh
+
+
+Edit file :file:`watch-docs.sh`
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Remove line from file :file:`watch-docs.sh`:
+
+::
+
+        ARGS="$ARGS --watch `modPath 'peek_plugin_base'`"
+
+
+Run :file:`watch-docs.sh`
+`````````````````````````
+
+
 
 ----
 
