@@ -71,7 +71,6 @@ the commands ::
         mkdir peek_plugin_tutorial/_private/server/tuple_providers
         touch peek_plugin_tutorial/_private/server/tuple_providers/__init__.py
 
-
 Add File :file:`TupleDataObservable.py`
 ```````````````````````````````````````
 
@@ -202,7 +201,7 @@ Edit File :file:`tutorial.module.ts`
 ````````````````````````````````````
 
 Edit the :file:`tutorial.module.ts` Angular module for the tutorial plugin to
-add the provider entry for the storage service.
+add the provider entry for the Observer service.
 
 ----
 
@@ -281,6 +280,7 @@ It should look similar to the following:
 At this point, all of the observable setup is done. It's much easier to work with the
 observable code from here on.
 
+.. _learn_plugin_development_add_observable_add_tuple_provider:
 
 Add Tuple Provider
 ------------------
@@ -382,65 +382,6 @@ This setup of the admin editing data, and having it change on Mobile/Desktop dev
 won't be the only way the observable is notified, however, it is a good setup for admin
 configurable items in dropdown lists, etc.
 
-Edit File :file:`ServerEntryHook.py`
-````````````````````````````````````
-
-We need to update :file:`ServerEntryHook.py`, to pass the new observable
-
-----
-
-Edit the file :file:`peek_plugin_tutorial/_private/server/ServerEntryHook.py`,
-Add :code:`tupleObservable` to the list of arguments passed to the
-:code:`makeAdminBackendHandlers()` method:
-
-FROM: ::
-
-         self._loadedObjects.extend(makeAdminBackendHandlers(self.dbSessionCreator))
-
-TO: ::
-
-         self._loadedObjects.extend(
-                makeAdminBackendHandlers(tupleObservable, self.dbSessionCreator))
-
-
-Edit File :file:`admin_backend/__init__.py`
-```````````````````````````````````````````
-
-Edit `admin_backend/__init__.py` to take the observable parameter and pass it to the
-tuple provider handlers.
-
-----
-
-Edit file :file:`peek_plugin_tutorial/_private/server/admin_backend/__init__.py`
-
-Add the import: ::
-
-        from vortex.handler.TupleDataObservableHandler import TupleDataObservableHandler
-
-Add the function call argument:
-
-FROM ::
-
-        def makeAdminBackendHandlers(dbSessionCreator):
-
-
-TO ::
-
-        def makeAdminBackendHandlers(tupleObservable: TupleDataObservableHandler,
-                                     dbSessionCreator):
-
-
-Pass the argument to the :code:`makeStringIntTableHandler(...)` method:
-
-FROM ::
-
-        yield makeStringIntTableHandler(dbSessionCreator)
-
-
-TO ::
-
-        yield makeStringIntTableHandler(tupleObservable, dbSessionCreator)
-
 
 Edit File :file:`StringIntTableHandler.py`
 ``````````````````````````````````````````
@@ -513,11 +454,74 @@ In the :code:`` method, insert this line just before the return :code:`return ha
 
         handler.addExtension(StringIntTuple, __ExtUpdateObservable(tupleObservable))
 
+
+Edit File :file:`admin_backend/__init__.py`
+```````````````````````````````````````````
+
+Edit `admin_backend/__init__.py` to take the observable parameter and pass it to the
+tuple provider handlers.
+
+----
+
+Edit file :file:`peek_plugin_tutorial/_private/server/admin_backend/__init__.py`
+
+Add the import: ::
+
+        from vortex.handler.TupleDataObservableHandler import TupleDataObservableHandler
+
+Add the function call argument:
+
+FROM ::
+
+        def makeAdminBackendHandlers(dbSessionCreator):
+
+
+TO ::
+
+        def makeAdminBackendHandlers(tupleObservable: TupleDataObservableHandler,
+                                     dbSessionCreator):
+
+
+Pass the argument to the :code:`makeStringIntTableHandler(...)` method:
+
+FROM ::
+
+        yield makeStringIntTableHandler(dbSessionCreator)
+
+
+TO ::
+
+        yield makeStringIntTableHandler(tupleObservable, dbSessionCreator)
+
+
+
+Edit File :file:`ServerEntryHook.py`
+````````````````````````````````````
+
+We need to update :file:`ServerEntryHook.py`, to pass the new observable
+
+----
+
+Edit the file :file:`peek_plugin_tutorial/_private/server/ServerEntryHook.py`,
+Add :code:`tupleObservable` to the list of arguments passed to the
+:code:`makeAdminBackendHandlers()` method:
+
+FROM: ::
+
+         self._loadedObjects.extend(makeAdminBackendHandlers(self.dbSessionCreator))
+
+TO: ::
+
+         self._loadedObjects.extend(
+                makeAdminBackendHandlers(tupleObservable, self.dbSessionCreator))
+
+
 ----
 
 The tuple data observable will now notify it's observers when an admin updates the
 StringInt data.
 
+.. _learn_plugin_development_add_observable_add_mobile_view:
 
 Add Mobile View
 ---------------
@@ -825,4 +829,25 @@ To ::
 
 Thats it. Now the String Int data will load on the device, even when the Vortex between
 the device and the Client service is offline.
+
+
+Add More Observables
+--------------------
+
+This was a long tutorial, but the good news is that you don't have to repeat all this
+every time. Here are the steps you need to repeat to observe more data, altering
+them to suit of course.
+
+Create the Python tuples, either
+:ref:`learn_plugin_development_add_storage_add_string_int_table`
+or :ref:`learn_plugin_development_add_tuples_tutorial_tuple_py`
+
+Add the TypeScript tuples,
+:ref:`learn_plugin_development_add_tuples_tutorial_tuple_ts`.
+
+Add a Server service tuple provider,
+:ref:`learn_plugin_development_add_observable_add_tuple_provider`
+
+Then, add the Mobile, Desktop or Admin side, add the views and Angular component,
+:ref:`learn_plugin_development_add_observable_add_mobile_view`.
 

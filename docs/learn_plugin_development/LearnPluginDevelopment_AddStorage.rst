@@ -319,8 +319,8 @@ The hard parts done, adding the tables is much easier.
 
 .. _learn_plugin_development_add_storage_add_string_int_table:
 
-Adding a Simple Table
----------------------
+Adding a StringInt Table
+------------------------
 
 This section adds a simple table, For lack of a better idea, lets have a table of strings
 and Integers.

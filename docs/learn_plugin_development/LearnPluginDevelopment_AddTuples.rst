@@ -51,6 +51,7 @@ the commands ::
         mkdir peek_plugin_tutorial/_private/tuples
         touch peek_plugin_tutorial/_private/tuples/__init__.py
 
+.. _learn_plugin_development_add_tuples_tutorial_tuple_py:
 
 Add File :file:`TutorialTuple.py`
 ---------------------------------
@@ -243,6 +244,8 @@ with command ::
 
         mkdir -p peek_plugin_tutorial/plugin-module/_private/tuples
 
+
+.. _learn_plugin_development_add_tuples_tutorial_tuple_ts:
 
 Add File :file:`TutorialTuple.ts`
 ---------------------------------
