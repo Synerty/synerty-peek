@@ -246,7 +246,7 @@ Edit the file :file:`peek_plugin_tutorial/_private/server/ServerEntryHook.py`
 
 #.  Add the following import up the top of the file ::
 
-        from peek_plugin_tutorial._private.storage import DeclarativeBase
+        from peek_plugin_tutorial._private.storage import DeclarativeBase, loadStorageTuples
         from peek_plugin_base.server.PluginServerStorageEntryHookABC import PluginServerStorageEntryHookABC
 
 #.  Add **PluginServerStorageEntryHookABC** to the list of classes **"ServerEntryHook"**
@@ -254,10 +254,10 @@ Edit the file :file:`peek_plugin_tutorial/_private/server/ServerEntryHook.py`
 
         class ServerEntryHook(PluginServerEntryHookABC, PluginServerStorageEntryHookABC):
 
-#.  Call the following method from the **load(self):** method ::
+#.  Add the following method from the **load(self):** method ::
 
         def load(self) -> None:
-            DeclarativeBase.loadStorageTuples() # <-- Add this line
+            loadStorageTuples() # <-- Add this line
             logger.debug("Loaded")
 
 #.  Implement the **dbMetadata(self):** property ::
@@ -269,7 +269,7 @@ Edit the file :file:`peek_plugin_tutorial/_private/server/ServerEntryHook.py`
 When you're finished, You should have a file like this: ::
 
         # Added imports, step 1
-        from peek_plugin_noop._private.storage import DeclarativeBase, loadStorageTuples
+        from peek_plugin_tutorial._private.storage import DeclarativeBase, loadStorageTuples
         from peek_plugin_base.server.PluginServerStorageEntryHookABC import \
             PluginServerStorageEntryHookABC
 
@@ -288,7 +288,61 @@ When you're finished, You should have a file like this: ::
             def dbMetadata(self):
                 return DeclarativeBase.metadata
 
+.. _learn_plugin_development_add_storage_edit_client_entry_hook:
 
+Edit File :file:`ClientEntryHook.py`
+------------------------------------
+
+This step applies if you're plugin is using the Client service.
+
+The :file:`ClientEntryHook.py` file needs to be updated to do the following:
+
+*   Ensure that the storage Tables are loaded on plugin load.
+
+----
+
+Edit the file :file:`peek_plugin_tutorial/_private/client/ClientEntryHook.py`
+
+#.  Add the following import up the top of the file ::
+
+        from peek_plugin_tutorial._private.storage import loadStorageTuples
+
+#.  Add the following method from the **load(self):** method ::
+
+        def load(self) -> None:
+            loadStorageTuples() # <-- Add this line
+            logger.debug("Loaded")
+
+When you're finished, You should have a file like this: ::
+
+        # Added imports, step 1
+        from peek_plugin_tutorial._private.storage import loadStorageTuples
+
+        ...
+
+            def load(self) -> None:
+                # Added call to loadStorageTables, step 2
+                loadStorageTuples()
+                logger.debug("Loaded")
+
+
+Edit File :file:`AgentEntryHook.py`
+-----------------------------------
+
+This step applies if you're plugin is using the Agent service.
+
+Edit file :file:`peek_plugin_tutorial/_private/agent/AgentEntryHook.py` file,
+apply the same edits from step
+:ref:`learn_plugin_development_add_storage_edit_client_entry_hook`.
+
+Edit File :file:`WorkerEntryHook.py`
+------------------------------------
+
+This step applies if you're plugin is using the Worker service.
+
+Edit file :file:`peek_plugin_tutorial/_private/worker/WorkerEntryHook.py` file,
+apply the same edits from step
+:ref:`learn_plugin_development_add_storage_edit_client_entry_hook`.
 
 
 Add File :file:`alembic.ini`
@@ -368,12 +422,17 @@ and reconstructed as the proper python class. VortexPY is present in these three
             __tupleType__ = tutorialTuplePrefix + 'StringIntTuple'
 
 
-Edit File :file:`DeclarativeBase.py`
-````````````````````````````````````
+Edit File :file:`storage/__inti__.py`
+`````````````````````````````````````
 
-Edit the file :file:`peek_plugin_tutorial/_private/storage/DeclarativeBase.py`
+Add imports to our load storage tuples method.  Load the tuples for Alembic to generate
+database update script.  Allows vortex to reconstruct the tuples.
 
-#.  Add the lines to the **loadStoragetuples():** method ::
+----
+
+Edit the file :file:`peek_plugin_tutorial/_private/storage/__inti__.py`
+
+#.  Add the lines to the :code:`loadStorageTuples():` method ::
 
         from . import StringIntTuple
         StringIntTuple.__unused = False

@@ -179,7 +179,6 @@ Edit file :file:`peek_plugin_tutorial/_private/server/ServerEntryHook.py` :
         loadPrivateTuples()
         loadPublicTuples()
 
-
 The method should now look similar to this ::
 
         def load(self):
@@ -190,11 +189,18 @@ The method should now look similar to this ::
             logger.debug("Loaded")
 
 
+.. note:: If you see a message like this in the log:
+    :code:`Tuple type |%s| not registered within this program.`
+    The above steps haven't been completed properly and there is a problem with the
+    tuple loading in the peek services.
 
 Edit File :file:`ClientEntryHook.py`
 ------------------------------------
 
 This step applies if you're plugin is using the Client service.
+
+.. note:: This service was add earlier in this tutorial, see
+    :ref:`learn_plugin_development_add_client`
 
 Edit file :file:`peek_plugin_tutorial/_private/server/ClientEntryHook.py` file,
 apply the same edits from step
@@ -206,7 +212,7 @@ Edit File :file:`AgentEntryHook.py`
 
 This step applies if you're plugin is using the Agent service.
 
-Edit file :file:`peek_plugin_tutorial/_private/server/AgentEntryHook.py` file,
+Edit file :file:`peek_plugin_tutorial/_private/agent/AgentEntryHook.py` file,
 apply the same edits from step
 :ref:`learn_plugin_development_add_tuples_edit_server_entry_hook`.
 
@@ -215,7 +221,7 @@ Edit File :file:`WorkerEntryHook.py`
 
 This step applies if you're plugin is using the Worker service.
 
-Edit file :file:`peek_plugin_tutorial/_private/server/WorkerEntryHook.py` file,
+Edit file :file:`peek_plugin_tutorial/_private/worker/WorkerEntryHook.py` file,
 apply the same edits from step
 :ref:`learn_plugin_development_add_tuples_edit_server_entry_hook`.
 
