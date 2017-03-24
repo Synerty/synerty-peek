@@ -1,10 +1,13 @@
 .. _learn_plugin_development_add_client:
 
-=========================
-Adding the Client Service
-=========================
+==================
+Add Client Service
+==================
 
 This document is a stripped version of :ref:`learn_plugin_development_add_server`.
+
+.. note:: Ensure you have completed the Edit File :file:`ClientEntryHook.py`, see
+    :ref:`learn_plugin_development_add_storage_edit_client_entry_hook`
 
 Add Package :file:`_private/client`
 -----------------------------------
