@@ -157,32 +157,6 @@ and populate it with the following contents.
             __tupleType__ = tutorialTuplePrefix + "AddIntValueActionTuple"
         
             stringIntId = TupleField()
-
-
-Add File :file:`StringIntDecreaseActionTuple.py`
-````````````````````````````````````````````````
-
-The :file:`StringIntDecreaseActionTuple.py` defines a python action tuple.
-
-----
-
-Create the file 
-:file:`peek_plugin_tutorial/_private/tuples/StringIntDecreaseActionTuple.py`
-and populate it with the following contents.
-
-::
-
-        from vortex.Tuple import addTupleType, TupleField
-        from vortex.TupleAction import TupleActionABC
-
-        from peek_plugin_tutorial._private.PluginNames import tutorialTuplePrefix
-
-        
-        @addTupleType
-        class StringIntDecreaseActionTuple(TupleActionABC):
-            __tupleType__ = tutorialTuplePrefix + "StringIntDecreaseActionTuple"
-        
-            stringIntId = TupleField()
             offset = TupleField()
 
 
@@ -200,9 +174,6 @@ Find the method :code:`loadPrivateTuples()`, append the following lines: ::
 
             from . import AddIntValueActionTuple
             AddIntValueActionTuple.__unused = False
-
-            from . import StringIntDecreaseActionTuple
-            StringIntDecreaseActionTuple.__unused = False
 
             from . import StringCapToggleActionTuple
             StringCapToggleActionTuple.__unused = False
@@ -267,33 +238,6 @@ with contents ::
             }
         }
 
-Add :file:`StringIntDecreaseActionTuple.ts`
-```````````````````````````````````````````
-
-The :file:`StringIntDecreaseActionTuple.ts` file defines a TypeScript class for our
-:code:`StringIntDecreaseActionTuple` Tuple Action.
-
-----
-
-Create file
-:file:`peek_plugin_tutorial/plugin-module/_private/tuples/StringIntDecreaseActionTuple.ts`,
-with contents ::
-
-        import {addTupleType, Tuple, TupleActionABC} from "@synerty/vortexjs";
-        import {tutorialTuplePrefix} from "../PluginNames";
-
-        @addTupleType
-        export class StringIntDecreaseActionTuple extends TupleActionABC {
-            static readonly tupleName = tutorialTuplePrefix + "StringIntDecreaseActionTuple";
-
-            stringIntId: number;
-            offset: number;
-
-            constructor() {
-                super(StringIntDecreaseActionTuple.tupleName)
-            }
-        }
-
 
 Edit File :file:`_private/index.ts`
 ```````````````````````````````````
@@ -306,9 +250,8 @@ Developers won't need to know the exact path of the file.
 Edit file :file:`peek_plugin_tutorial/plugin-module/_private/index.ts`,
 Append the lines: ::
 
-        export {AddIntValueActionTuple} from "./tuples/AddIntValueActionTuple";
         export {StringCapToggleActionTuple} from "./tuples/StringCapToggleActionTuple";
-        export {StringIntDecreaseActionTuple} from "./tuples/StringIntDecreaseActionTuple";
+        export {AddIntValueActionTuple} from "./tuples/AddIntValueActionTuple";
 
 
 Server Service Setup
@@ -359,9 +302,8 @@ and populate it with the following contents.
         from vortex.handler.TupleDataObservableHandler import TupleDataObservableHandler
 
         from peek_plugin_tutorial._private.storage.StringIntTuple import StringIntTuple
-        from peek_plugin_tutorial._private.tuples.AddIntValueActionTuple import AddIntValueActionTuple
-        from peek_plugin_tutorial._private.tuples.StringIntDecreaseActionTuple import StringIntDecreaseActionTuple
         from peek_plugin_tutorial._private.tuples.StringCapToggleActionTuple import StringCapToggleActionTuple
+        from peek_plugin_tutorial._private.tuples.AddIntValueActionTuple import AddIntValueActionTuple
 
         logger = logging.getLogger(__name__)
 
@@ -378,9 +320,6 @@ and populate it with the following contents.
 
                 if isinstance(tupleAction, AddIntValueActionTuple):
                     return self._processAddIntValue(tupleAction)
-
-                if isinstance(tupleAction, StringIntDecreaseActionTuple):
-                    return self._processIncrease(tupleAction)
 
                 if isinstance(tupleAction, StringCapToggleActionTuple):
                     return self._processCapToggleString(tupleAction)
@@ -430,29 +369,7 @@ and populate it with the following contents.
                     row.int1 += action.offset
                     session.commit()
 
-                    logger.debug("Incremented by %s" + action.offset)
-
-                    # Notify the observer of the update
-                    # This tuple selector must exactly match what the UI observes
-                    tupleSelector = TupleSelector(StringIntTuple.tupleName(), {})
-                    self._tupleObservable.notifyOfTupleUpdate(tupleSelector)
-
-                finally:
-                    # Always close the session after we create it
-                    session.close()
-
-            @deferToThreadWrap
-            def _processIntDecreaseString(self, action: StringIntDecreaseActionTuple):
-                try:
-                    # Perform update using SQLALchemy
-                    session = self._dbSessionCreator()
-                    row = (session.query(StringIntTuple)
-                           .filter(StringIntTuple.id == action.stringIntId)
-                           .one())
-                    row.int1 += action.offset
-                    session.commit()
-
-                    logger.debug("Decrease by %s" + action.offset)
+                    logger.debug("Int changed by %u", action.offset)
 
                     # Notify the observer of the update
                     # This tuple selector must exactly match what the UI observes
@@ -693,7 +610,6 @@ add to imports ::
 
         import {
             AddIntValueActionTuple,
-            StringIntDecreaseActionTuple,
             StringCapToggleActionTuple
         } from "@peek/peek_plugin_tutorial/_private";
 
@@ -735,7 +651,7 @@ add the methods to component class ::
 
 
         decrementCicked(item) {
-            let action = new AddIntValueActionTuple();
+            let action = new StringIntDecreaseActionTuple();
             action.stringIntId = item.id;
             action.offset = -1;
             this.actionService.pushAction(action)
@@ -747,7 +663,6 @@ add the methods to component class ::
                     alert(err);
                 });
         }
-
 
 
 edit File :file:`string-int.component.mweb.html`
@@ -768,21 +683,28 @@ and populate it with the following contents.
 
             <table class="table table-striped">
                 <thead>
-                    <tr>
-                        <th>String</th>
-                        <th>Int</th>
-                        <th></th>
-                    </tr>
+                <tr>
+                    <th>String</th>
+                    <th>Int</th>
+                    <th></th>
+                </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let item of stringInts">
-                        <td>{{item.string1}}</td>
-                        <td>{{item.int1}}</td>
-                           <td> <!-- BRENTON xxxxxxx add three buttons-->
-            <Button class="btn btn-default" (click)="toggleUpperCicked(item)">Back to Main</Button>
-            <Button class="btn btn-default" (click)="incrementCicked(item)">Back to Main</Button>
-            <Button class="btn btn-default" (click)="decrementCicked(item)">Back to Main</Button></td>
-                    </tr>
+                <tr *ngFor="let item of stringInts">
+                    <td>{{item.string1}}</td>
+                    <td>{{item.int1}}</td>
+                    <td>
+                        <Button class="btn btn-default" (click)="toggleUpperCicked(item)">
+                            Toggle Caps
+                        </Button>
+                        <Button class="btn btn-default" (click)="incrementCicked(item)">
+                            Increment Int
+                        </Button>
+                        <Button class="btn btn-default" (click)="decrementCicked(item)">
+                            Decrement Int
+                        </Button>
+                    </td>
+                </tr>
                 </tbody>
             </table>
         </div>
@@ -800,7 +722,7 @@ and populate it with the following contents.
 
 ::
 
-        <StackLayout class="p-20" >
+        <StackLayout class="p-20">
             <Button text="Back to Main" (tap)="mainClicked()"></Button>
 
             <GridLayout columns="4*, 1*" rows="auto" width="*">
@@ -810,7 +732,7 @@ and populate it with the following contents.
 
             <ListView [items]="stringInts">
                 <template let-item="item" let-i="index" let-odd="odd" let-even="even">
-                    <StackLayout [class.odd]="odd" [class.even]="even" >
+                    <StackLayout [class.odd]="odd" [class.even]="even">
                         <GridLayout columns="4*, 1*" rows="auto" width="*">
                             <!-- String -->
                             <Label class="h3 peek-field-data-text" row="0" col="0"
@@ -821,29 +743,14 @@ and populate it with the following contents.
                             <Label class="h3 peek-field-data-text" row="0" col="1"
                                    [text]="item.int1"></Label>
 
-
-
                         </GridLayout>
-                            <!-- BRENTON xxxxxxx add three buttons-->
-            <Button text="Back to Main" (tap)="toggleUpperCicked(item)"></Button>
-            <Button text="Back to Main" (tap)="incrementCicked(item)"></Button>
-            <Button text="Back to Main" (tap)="decrementCicked(item)"></Button>
+                        <Button text="Toggle Caps" (tap)="toggleUpperCicked(item)"></Button>
+                        <Button text="Increment Int" (tap)="incrementCicked(item)"></Button>
+                        <Button text="Decrement Int" (tap)="decrementCicked(item)"></Button>
                     </StackLayout>
                 </template>
             </ListView>
         </StackLayout>
-
-
-todo from here
-
-
-todo from here
-
-todo from here
-
-todo from here
-
-todo from here
 
 
 Testing
