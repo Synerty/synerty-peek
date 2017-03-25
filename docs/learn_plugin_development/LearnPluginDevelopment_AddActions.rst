@@ -618,7 +618,7 @@ Edit the file
 
         TupleActionPushOfflineService, TupleActionPushService, {
             provide: TupleActionPushNameService,
-            useFactory:tupleActionPushNameServiceFactory
+            useFactory: tupleActionPushNameServiceFactory
         },
 
 
@@ -633,8 +633,7 @@ It should look similar to the following: ::
         } from "@synerty/vortexjs";
 
         import {
-            tutorialActionProcessorName,
-            tutorialFilt
+            tutorialActionProcessorName
         } from "@peek/peek_plugin_tutorial/_private";
 
         ...
@@ -651,7 +650,7 @@ It should look similar to the following: ::
                 ...
                 TupleActionPushOfflineService, TupleActionPushService, {
                     provide: TupleActionPushNameService,
-                    useFactory:tupleActionPushNameServiceFactory
+                    useFactory: tupleActionPushNameServiceFactory
                 },
                 ...
             ]
@@ -675,6 +674,80 @@ Add Mobile View
 ---------------
 
 Finally, lets add a new component to the mobile screen.
+
+
+edit File :file:`string-int.component.ts`
+`````````````````````````````````````````
+
+todo
+
+
+----
+
+edit the file
+:file:`peek_plugin_tutorial/_private/mobile-app/string-int/string-int.component.ts`
+
+add to imports ::
+
+        import {TupleActionPushService} from "@synerty/vortexjs";
+
+        import {
+            AddIntValueActionTuple,
+            StringIntDecreaseActionTuple,
+            StringCapToggleActionTuple
+        } from "@peek/peek_plugin_tutorial/_private";
+
+
+add to constructor arguments ::
+
+        private actionService: TupleActionPushService,
+
+add the methods to component class ::
+
+
+        toggleUpperCicked(item) {
+            let action = new StringCapToggleActionTuple();
+            action.stringIntId = item.id;
+            this.actionService.pushAction(action)
+                .then(() => {
+                    alert('success');
+
+                })
+                .catch((err) => {
+                    alert(err);
+                });
+        }
+
+
+        incrementCicked(item) {
+            let action = new AddIntValueActionTuple();
+            action.stringIntId = item.id;
+            action.offset = 1;
+            this.actionService.pushAction(action)
+                .then(() => {
+                    alert('success');
+
+                })
+                .catch((err) => {
+                    alert(err);
+                });
+        }
+
+
+        decrementCicked(item) {
+            let action = new AddIntValueActionTuple();
+            action.stringIntId = item.id;
+            action.offset = -1;
+            this.actionService.pushAction(action)
+                .then(() => {
+                    alert('success');
+
+                })
+                .catch((err) => {
+                    alert(err);
+                });
+        }
+
 
 
 edit File :file:`string-int.component.mweb.html`
@@ -759,70 +832,6 @@ and populate it with the following contents.
                 </template>
             </ListView>
         </StackLayout>
-
-
-edit File :file:`string-int.component.ts`
-`````````````````````````````````````````
-
-todo
-
-
-----
-
-edit the file
-:file:`peek_plugin_tutorial/_private/mobile-app/string-int/string-int.component.ts`
-
-add to constructor arguments ::
-
-        private actionService: TupleActionPushService,
-
-add the methods to component class ::
-
-
-            toggleUpperCicked(item) {
-                let action = new StringCapToggleActionTuple();
-                action.stringIntId = item.id;
-                this.actionService.pushAction(action)
-                .then(()=>{
-                alert('success');
-
-                })
-                .catch ((err)=>{
-                alert(err);
-                });
-            }
-
-
-            incrementCicked(item) {
-                let action = new AddIntValueActionTuple();
-                action.stringIntId = item.id;
-                action.offset = 1;
-                this.actionService.pushAction(action)
-                .then(()=>{
-                alert('success');
-
-                })
-                .catch ((err)=>{
-                alert(err);
-                });
-            }
-
-
-
-            decrementCicked(item) {
-                let action = new AddIntValueActionTuple();
-                action.stringIntId = item.id;
-                action.offset = -1;
-                this.actionService.pushAction(action)
-                .then(()=>{
-                alert('success');
-
-                })
-                .catch ((err)=>{
-                alert(err);
-                });
-            }
-
 
 
 todo from here
