@@ -25,20 +25,160 @@ These are a few of the conundrums around the complexity of software documentatio
 Fortunately there are some fantastic tools around to solve these issues, and you're
 reading the result of those tools right now.
 
-----------------
-
-@brenton NOTES:
-
-Explain the tools involved.
-
-
-An example document on directives, image, :ref:, url link,
-
-:code:``, :file:``
-
-, bullets, numbered lists, code blocks, titles, toctree, docstring format
-
 ----
+
+TODO: @Brenton
+
+Instructions on how to setup the documentation, copy conf.py from synerty-peek
+
+#.  Introduction + TOC
+
+    #.  Functional design (What the plugin does)
+
+    #.  How it works
+
+    #.  Tutorial API
+
+
+Document Generator TODO
+-----------------------
+
+Sphinx is a tool that makes it easy to create intelligent and beautiful documentation.
+
+The following sections go on to guide the reader to setup Sphinx Document Generator.
+
+.. important:: Windows users must use **bash** and run the commands from the plugin
+    root directory.
+
+Documentation Configuration
+```````````````````````````
+
+The build configuration file has already been developed by Synerty.
+
+Create Directory :file:`docs`
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+This folder will contain all of the files used to build the documentation.  Make sure
+you add everything in this directory to git.
+
+Create directory :file:`docs`, run the following command:
+
+::
+
+        mkdir -p docs
+
+
+Copy file :file:`docs/conf.py`
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+Copy file :file:`conf.py` from synerty-peek, run the following command:
+
+.. note:: Make sure you update the release version in the following command.
+
+::
+
+        cp ~/synerty-peek-#.#.#/docs/conf.py docs/conf.py
+
+
+Edit file :file:`docs/conf.py`
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+::
+
+        __project__ = 'Synerty Peek'
+        __copyright__ = '2016, Synerty'
+        __author__ = 'Synerty'
+        __version__ = '0.2.10'
+
+
+Required Files
+``````````````
+
+Add file :file:`modules.rst'
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Create :file:`modules.rst`, and populate it with the following
+
+::
+
+        {insert plugin name} package
+        ============================
+
+        Module contents
+        ---------------
+
+        .. automodule:: {insert plugin name}
+            :members:
+            :undoc-members:
+            :show-inheritance:
+
+
+Add file :file:`index.rst`
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Create :file:`index.rst`, and populate it with the following
+
+::
+
+        ==================================
+        {insert plugin name} Documentation
+        ==================================
+
+        .. toctree::
+            :maxdepth: 3
+            :caption: Contents:
+
+
+        Indices and tables
+        ==================
+
+        * :ref:`genindex`
+        * :ref:`modindex`
+        * :ref:`search`
+
+
+Build Documentation
+-------------------
+
+Debug Documentation
+-------------------
+
+Synerty has written a shell script to build run Sphinx API that builds the
+documentation when a file is modified.
+
+Deploy :file:`watch-docs.sh` Shell Script
+`````````````````````````````````````````
+
+
+Copy file :file:`docs/watch-docs.sh`
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Copy file :file:`watch-docs.sh` from synerty-peek, run the following command:
+
+.. note:: Make sure you update the release version in the following command.
+
+::
+
+        cp ~/synerty-peek-#.#.#/docs/watch-docs.sh docs/watch-docs.sh
+
+
+Edit file :file:`watch-docs.sh`
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Remove line from file :file:`watch-docs.sh`:
+
+::
+
+        ARGS="$ARGS --watch `modPath 'peek_plugin_base'`"
+
+
+Run :file:`watch-docs.sh`
+`````````````````````````
+
 
 Sections
 --------
@@ -55,11 +195,19 @@ documentation is built.
 Header 1
 --------
 
+Sample paragraph.
+
 Header 2
 ````````
 
+Sample paragraph.
+
 Header 3
 ~~~~~~~~
+
+Sample paragraph.
+
+----
 
 If you expand the page contents you will notice that "Header 3" isn't available in the
 page contents.  This is because the maxdepth of the toctree is '2'.
@@ -262,159 +410,3 @@ toctree TODO
 
 Docstring Format TODO
 ---------------------
-
-
-Document Generator TODO
------------------------
-
-Sphinx is a tool that makes it easy to create intelligent and beautiful documentation.
-
-The following sections go on to guide the reader to setup Sphinx Document Generator.
-
-.. important:: Windows users must use **bash** and run the commands from the plugin
-    root directory.
-
-Documentation Configuration
-```````````````````````````
-
-The build configuration file has already been developed by Synerty.
-
-Create Directory :file:`docs`
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-This folder will contain all of the files used to build the documentation.  Make sure
-you add everything in this directory to git.
-
-Create directory :file:`docs`, run the following command:
-
-::
-
-        mkdir -p docs
-
-
-Copy file :file:`docs/conf.py`
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-
-Copy file :file:`conf.py` from synerty-peek, run the following command:
-
-.. note:: Make sure you update the release version in the following command.
-
-::
-
-        cp ~/synerty-peek-#.#.#/docs/conf.py docs/conf.py
-
-
-Edit file :file:`docs/conf.py`
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-
-::
-
-        __project__ = 'Synerty Peek'
-        __copyright__ = '2016, Synerty'
-        __author__ = 'Synerty'
-        __version__ = '0.2.10'
-
-
-Required Files
-``````````````
-
-Add file :file:`modules.rst'
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Create :file:`modules.rst`, and populate it with the following
-
-::
-
-        {insert plugin name} package
-        ============================
-
-        Module contents
-        ---------------
-
-        .. automodule:: {insert plugin name}
-            :members:
-            :undoc-members:
-            :show-inheritance:
-
-
-Add file :file:`index.rst`
-~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Create :file:`index.rst`, and populate it with the following
-
-::
-
-        ==================================
-        {insert plugin name} Documentation
-        ==================================
-
-        .. toctree::
-            :maxdepth: 3
-            :caption: Contents:
-
-
-        Indices and tables
-        ==================
-
-        * :ref:`genindex`
-        * :ref:`modindex`
-        * :ref:`search`
-
-
-Build Documentation
--------------------
-
-Debug Documentation
--------------------
-
-Synerty has written a shell script to build run Sphinx API that builds the
-documentation when a file is modified.
-
-Deploy :file:`watch-docs.sh` Shell Script
-`````````````````````````````````````````
-
-
-Copy file :file:`docs/watch-docs.sh`
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Copy file :file:`watch-docs.sh` from synerty-peek, run the following command:
-
-.. note:: Make sure you update the release version in the following command.
-
-::
-
-        cp ~/synerty-peek-#.#.#/docs/watch-docs.sh docs/watch-docs.sh
-
-
-Edit file :file:`watch-docs.sh`
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Remove line from file :file:`watch-docs.sh`:
-
-::
-
-        ARGS="$ARGS --watch `modPath 'peek_plugin_base'`"
-
-
-Run :file:`watch-docs.sh`
-`````````````````````````
-
-
-
-----
-
-
-Instructions on how to setup the documentation, copy conf.py from synerty-peek
-
-#.  Introduction + TOC
-
-    #.  Functional design (What the plugin does)
-
-    #.  How it works
-
-    #.  Tutorial API
-
