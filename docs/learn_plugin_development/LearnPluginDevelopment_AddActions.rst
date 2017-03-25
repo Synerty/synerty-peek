@@ -544,7 +544,7 @@ and populate it with the following contents.
         from peek_plugin_base.PeekVortexUtil import peekServerName
         from peek_plugin_tutorial._private.PluginNames import tutorialFilt
         from peek_plugin_tutorial._private.PluginNames import tutorialActionProcessorName
-        from vortex.handler.TupleDataObservableProxyHandler import TupleDataObservableProxyHandler
+        from vortex.handler.TupleActionProcessorProxy import TupleActionProcessorProxy
 
 
         def makeTupleActionProcessorProxy():
@@ -552,7 +552,6 @@ and populate it with the following contents.
                         tupleActionProcessorName=tutorialActionProcessorName,
                         proxyToVortexName=peekServerName,
                         additionalFilt=tutorialFilt)
-
 
 
 Edit File :file:`ClientEntryHook.py`
@@ -597,13 +596,12 @@ Edit the file
         import {
             TupleActionPushNameService,
             TupleActionPushOfflineService,
-            TupleActionPushService,
+            TupleActionPushService
         } from "@synerty/vortexjs";
 
         // Import the names we need for the
         import {
-            tutorialActionProcessorName,
-            tutorialFilt
+            tutorialActionProcessorName
         } from "@peek/peek_plugin_tutorial/_private";
 
 
@@ -631,7 +629,7 @@ It should look similar to the following: ::
         import {
             TupleActionPushNameService,
             TupleActionPushOfflineService,
-            TupleActionPushService,
+            TupleActionPushService
         } from "@synerty/vortexjs";
 
         import {
