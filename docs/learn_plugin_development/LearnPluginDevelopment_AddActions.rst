@@ -22,7 +22,7 @@ A Tuple Action represents an action the user has taken, this can be:
 The Action design is ideal for apps where there are many users observing
 data more than altering it or performing actions against it.
 
-Typically, users can only only perform so many updates per a minute. TupleActions takes
+Typically, users can only perform so many updates per a minute. TupleActions takes
 the approach of having many small, discrete "Actions" that can be sent back to the
 server as they are performed.
 
@@ -82,7 +82,7 @@ Advantages
 Disadvantages
 `````````````
 
-#.  This could lead to higher resource usage and less efficiont commits.
+#.  This could lead to higher resource usage and less efficient commits.
 
 
 Objective
@@ -107,6 +107,32 @@ Add Python Tuples
 
 
 
+Add File :file:`StringCapToggleActionTuple.py`
+``````````````````````````````````````````````
+
+The :file:`StringCapToggleActionTuple.py` defines a python action tuple.
+
+----
+
+Create the file
+:file:`peek_plugin_tutorial/_private/tuples/StringCapToggleActionTuple.py`
+and populate it with the following contents.
+
+::
+
+        from vortex.Tuple import addTupleType, TupleField
+        from vortex.TupleAction import TupleActionABC
+
+        from peek_plugin_tutorial._private.PluginNames import tutorialTuplePrefix
+
+
+        @addTupleType
+        class StringCapToggleActionTuple(TupleActionABC):
+            __tupleType__ = tutorialTuplePrefix + "StringCapToggleActionTuple"
+
+            stringIntId = TupleField()
+
+
 Add File :file:`AddIntValueActionTuple.py`
 ``````````````````````````````````````````
 
@@ -123,7 +149,7 @@ and populate it with the following contents.
         from vortex.Tuple import addTupleType, TupleField
         from vortex.TupleAction import TupleActionABC
 
-        from tutorial_data_dms._private.PluginNames import tutorialTuplePrefix
+        from peek_plugin_tutorial._private.PluginNames import tutorialTuplePrefix
 
         
         @addTupleType
@@ -131,7 +157,6 @@ and populate it with the following contents.
             __tupleType__ = tutorialTuplePrefix + "AddIntValueActionTuple"
         
             stringIntId = TupleField()
-
 
 
 Add File :file:`StringIntDecreaseActionTuple.py`
@@ -150,7 +175,7 @@ and populate it with the following contents.
         from vortex.Tuple import addTupleType, TupleField
         from vortex.TupleAction import TupleActionABC
 
-        from tutorial_data_dms._private.PluginNames import tutorialTuplePrefix
+        from peek_plugin_tutorial._private.PluginNames import tutorialTuplePrefix
 
         
         @addTupleType
@@ -178,6 +203,9 @@ Find the method :code:`loadPrivateTuples()`, append the following lines: ::
 
             from . import StringIntDecreaseActionTuple
             StringIntDecreaseActionTuple.__unused = False
+
+            from . import StringCapToggleActionTuple
+            StringCapToggleActionTuple.__unused = False
 
 
 Add TypeScript Tuples
@@ -239,6 +267,32 @@ with contents ::
             }
         }
 
+Add :file:`StringIntDecreaseActionTuple.ts`
+```````````````````````````````````````````
+
+The :file:`StringIntDecreaseActionTuple.ts` file defines a TypeScript class for our
+:code:`StringIntDecreaseActionTuple` Tuple Action.
+
+----
+
+Create file
+:file:`peek_plugin_tutorial/plugin-module/_private/tuples/StringIntDecreaseActionTuple.ts`,
+with contents ::
+
+        import {addTupleType, Tuple, TupleActionABC} from "@synerty/vortexjs";
+        import {tutorialTuplePrefix} from "../PluginNames";
+
+        @addTupleType
+        export class StringIntDecreaseActionTuple extends TupleActionABC {
+            static readonly tupleName = tutorialTuplePrefix + "StringIntDecreaseActionTuple";
+
+            stringIntId: number;
+            offset: number;
+
+            constructor() {
+                super(StringIntDecreaseActionTuple.tupleName)
+            }
+        }
 
 
 Edit File :file:`_private/index.ts`
@@ -254,7 +308,7 @@ Append the lines: ::
 
         export {AddIntValueActionTuple} from "./tuples/AddIntValueActionTuple";
         export {StringCapToggleActionTuple} from "./tuples/StringCapToggleActionTuple";
-
+        export {StringIntDecreaseActionTuple} from "./tuples/StringIntDecreaseActionTuple";
 
 
 Server Service Setup
@@ -289,7 +343,7 @@ In this example we have everything in MainController.
 ----
 
 Create the file
-:file:`peek_plugin_tutorial/_private/server/controller/TupleDataObservable.py`
+:file:`peek_plugin_tutorial/_private/server/controller/MainController.py`
 and populate it with the following contents.
 
 ::
@@ -306,6 +360,7 @@ and populate it with the following contents.
 
         from peek_plugin_tutorial._private.storage.StringIntTuple import StringIntTuple
         from peek_plugin_tutorial._private.tuples.AddIntValueActionTuple import AddIntValueActionTuple
+        from peek_plugin_tutorial._private.tuples.StringIntDecreaseActionTuple import StringIntDecreaseActionTuple
         from peek_plugin_tutorial._private.tuples.StringCapToggleActionTuple import StringCapToggleActionTuple
 
         logger = logging.getLogger(__name__)
@@ -322,10 +377,13 @@ and populate it with the following contents.
             def processTupleAction(self, tupleAction: TupleActionABC) -> Deferred:
 
                 if isinstance(tupleAction, AddIntValueActionTuple):
+                    return self._processAddIntValue(tupleAction)
+
+                if isinstance(tupleAction, StringIntDecreaseActionTuple):
                     return self._processIncrease(tupleAction)
 
                 if isinstance(tupleAction, StringCapToggleActionTuple):
-                    return self._processIncrease(tupleAction)
+                    return self._processCapToggleString(tupleAction)
 
                 raise NotImplementedError(tupleAction.tupleName())
 
@@ -361,7 +419,6 @@ and populate it with the following contents.
                     # Always close the session after we create it
                     session.close()
 
-
             @deferToThreadWrap
             def _processAddIntValue(self, action: AddIntValueActionTuple):
                 try:
@@ -384,7 +441,27 @@ and populate it with the following contents.
                     # Always close the session after we create it
                     session.close()
 
+            @deferToThreadWrap
+            def _processIntDecreaseString(self, action: StringIntDecreaseActionTuple):
+                try:
+                    # Perform update using SQLALchemy
+                    session = self._dbSessionCreator()
+                    row = (session.query(StringIntTuple)
+                           .filter(StringIntTuple.id == action.stringIntId)
+                           .one())
+                    row.int1 += action.offset
+                    session.commit()
 
+                    logger.debug("Decrease by %s" + action.offset)
+
+                    # Notify the observer of the update
+                    # This tuple selector must exactly match what the UI observes
+                    tupleSelector = TupleSelector(StringIntTuple.tupleName(), {})
+                    self._tupleDataObserver.notifyOfTupleUpdate(tupleSelector)
+
+                finally:
+                    # Always close the session after we create it
+                    session.close()
 
 
 Add File :file:`TupleActionProcessor.py`
@@ -403,18 +480,17 @@ and populate it with the following contents.
 
         from vortex.handler.TupleActionProcessor import TupleActionProcessor
 
-        from peek_plugin_tutorial._private.PluginNames import tutorialFiltFilt
+        from peek_plugin_tutorial._private.PluginNames import tutorialFilt
         from peek_plugin_tutorial._private.PluginNames import tutorialActionProcessorName
-        from .controller.MainController import  MainController
+        from .controller.MainController import MainController
 
 
         def makeTupleActionProcessorHandler(mainController: MainController):
             processor = TupleActionProcessor(
                 tupleActionProcessorName=tutorialActionProcessorName,
-                additionalFilt=tutorialFiltFilt,
+                additionalFilt=tutorialFilt,
                 defaultDelegate=mainController)
             return processor
-
 
 
 Edit File :file:`ServerEntryHook.py`
@@ -427,12 +503,12 @@ We need to update :file:`ServerEntryHook.py`, it will initialise the
 
 Edit the file :file:`peek_plugin_tutorial/_private/server/ServerEntryHook.py`:
 
-#.  Add this import at the top of the file with the other imports: ::
+#.  Add these imports at the top of the file with the other imports: ::
 
         from .TupleActionProcessor import makeTupleActionProcessorHandler
         from .controller.MainController import MainController
 
-#.  Add this line just before :code:`logger.debug("started")` in
+#.  Add these line just before :code:`logger.debug("started")` in
     the :code:`start()` method: ::
 
 
