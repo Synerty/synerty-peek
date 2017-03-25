@@ -12,11 +12,11 @@ Learn Plugin Development
     LearnPluginDevelopment_FirstSteps
     LearnPluginDevelopment_Scaffold
     LearnPluginDevelopment_AddServer
+    LearnPluginDevelopment_AddClient
+    LearnPluginDevelopment_AddAgent
     LearnPluginDevelopment_AddStorage
     LearnPluginDevelopment_AddAdmin
-    LearnPluginDevelopment_AddClient
     LearnPluginDevelopment_AddMobile
-    LearnPluginDevelopment_AddAgent
     LearnPluginDevelopment_FrontendPreparing
     LearnPluginDevelopment_AddTuples
     LearnPluginDevelopment_AddTupleLoader
