@@ -413,7 +413,7 @@ and populate it with the following contents.
                     # Notify the observer of the update
                     # This tuple selector must exactly match what the UI observes
                     tupleSelector = TupleSelector(StringIntTuple.tupleName(), {})
-                    self._tupleDataObserver.notifyOfTupleUpdate(tupleSelector)
+                    self._tupleObservable.notifyOfTupleUpdate(tupleSelector)
 
                 finally:
                     # Always close the session after we create it
@@ -435,7 +435,7 @@ and populate it with the following contents.
                     # Notify the observer of the update
                     # This tuple selector must exactly match what the UI observes
                     tupleSelector = TupleSelector(StringIntTuple.tupleName(), {})
-                    self._tupleDataObserver.notifyOfTupleUpdate(tupleSelector)
+                    self._tupleObservable.notifyOfTupleUpdate(tupleSelector)
 
                 finally:
                     # Always close the session after we create it
@@ -457,7 +457,7 @@ and populate it with the following contents.
                     # Notify the observer of the update
                     # This tuple selector must exactly match what the UI observes
                     tupleSelector = TupleSelector(StringIntTuple.tupleName(), {})
-                    self._tupleDataObserver.notifyOfTupleUpdate(tupleSelector)
+                    self._tupleObservable.notifyOfTupleUpdate(tupleSelector)
 
                 finally:
                     # Always close the session after we create it
