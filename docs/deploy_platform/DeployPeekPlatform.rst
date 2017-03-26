@@ -6,25 +6,24 @@ Deploy Peek Platform
 
 .. note:: The Windows or Debian requirements must be followed before following this guide.
 
-Deploy Platform Release
------------------------
-
 This section describes how to deploy a peek platform release.
 
 Peek is deployed into python virtual environments, a new virtual environment is created
 for every deployment.
 
 This ensures that each install is clean, has the right dependencies and there is a
-rollback path (switch back to the old virtual environment.
+rollback path (switch back to the old virtual environment).
 
 To build your own platform release, see the following document
-
-    **Package Peek Platform**
+:ref:`package_peek_platform`.
 
 Windows
-```````
+-------
 
-Open a PowerShell windows.
+Deploy Virtual Environment
+``````````````````````````
+
+Open a PowerShell window.
 
 ----
 
@@ -39,15 +38,15 @@ This is the only step in this section that requires the internet.
 
 ----
 
-Run the platform deploy script.
-At the end it will print out where it has deployed the new environment to.
-Ensure you update the **$dist** variable with the path to your release.
+Run the platform deploy script.  The script will complete with a print out of where the
+new environment was deployed.  Ensure you update the **$dist** variable with the path to
+your release.
 
-The script will deploy to C:\\Users\\peek.
+The script will deploy to :file:`C:\\Users\\peek`.
 
 ::
 
-        $dist = "C:\Users\peek\Downloads\peek_dist_win_0.1.0.zip"
+        $dist = "C:\Users\peek\Downloads\peek_dist_win_#.#.#.zip"
         PowerShell.exe -ExecutionPolicy Bypass -File deploy_platform_win.ps1 $dist
 
 .. note:: Once the script has completed running you will see the message "Activate the
@@ -56,8 +55,7 @@ The script will deploy to C:\\Users\\peek.
     These commands temporarily configure the environment to
     use the synerty-peek virtual environment that was just deployed.
 
-    For a permanent
-    change you will need to edit your 'Environment Variables'.  See
+    For a permanent change you will need to edit your 'Environment Variables'.  See
     :ref:`configuring_environment_variables` for more details.
 
 ----
@@ -67,7 +65,7 @@ The platform is now deployed.
 .. _configuring_environment_variables:
 
 Configuring Environment Variables
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+`````````````````````````````````
 
 Follow this procedure to configure your system to use the synerty-peek virtual
 environment that you have deployed.
@@ -117,14 +115,79 @@ It should return the variable you have added into the PATH
 
 .. image:: EnvVar-WhichPython.jpg
 
-.. NOTE:: If you are developing plugins, :command:`python setup.py develop` will need
-    to be run from the directory of each plugin being developed.
+Plugin Development
+``````````````````
 
-.. NOTE:: If you are developing with NativeScript,
-    run: :command:`npm -g install nativescript`.
+For every new peek platform environment that is deployed, your development plugins will
+require setting up in the new environment.
+
+----
+
+Open the command prompt and enter the bash shell
+
+----
+
+Change to the plugin root directory
+
+----
+
+Run the following command:
+
+::
+
+        python setup.py develop
+
+
+----
+
+Repeat for each plugin being developed
+
+NativeScript Development
+````````````````````````
+
+Follow these steps if you are developing with NativeScript
+
+----
+
+Open the command prompt and enter the bash shell
+
+----
+
+Run the following command:
+
+::
+
+        npm -g install nativescript
+
+
+Run Deployed Peek Services
+``````````````````````````
+
+Run the platform services from bash with the following commands: ::
+
+        # Check to ensure we're using the right python
+        which python
+
+        # Run the peek server
+        run_peek_server
+
+        # Run the peek client
+        run_peek_client
+
+        # Run the peek agent
+        run_peek_agent
+
+        # Run the peek worker
+        run_peek_worker
 
 
 Linux
-`````
+-----
 
 **TODO**
+
+What Next?
+----------
+
+Refer back to the :ref:`how_to_use_peek_documentation` guide to see which document to
+follow next.

@@ -159,3 +159,9 @@ Your virtual device will be retrieved and deployed
 With a device selected in the "Your virtual devices" list select the "Start" button
 
 Your device emulation will start in a new window
+
+What Next?
+----------
+
+Refer back to the :ref:`how_to_use_peek_documentation` guide to see which document to
+follow next.
