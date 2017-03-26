@@ -339,7 +339,7 @@ apply the same edits from step
 :ref:`learn_plugin_development_add_storage_edit_client_entry_hook`.
 
 Edit File :file:`WorkerEntryHook.py`
-------------------------------------
+````````````````````````````````````
 
 This step applies if you're plugin is using the Worker service.
 
