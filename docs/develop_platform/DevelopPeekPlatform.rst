@@ -8,6 +8,39 @@ Develop Peek Platform
 Most development will be for the plugins, not platform, so these instructions are not
 high priority.
 
+Synerty recommends the Atlassian suite of developer tools.
+
+Bitbucket to manage and share your Git repositories
+
+:URL: `<https://bitbucket.org>`_
+
+SourceTree to visually manage and interact with your Git repositories
+
+:URL: `<https://www.sourcetreeapp.com>`_
+
+Bitbucket can be integrated with Jira (issue management) and Bamboo (continuous
+integration).
+
+.. note::   The reader needs be familiar with, or will become familar with the following:
+
+            *   `GIT <https://git-scm.com>`_
+            *   `Python3.5+ <https://www.python.org>`_
+            *   `Python Twisted <http://twistedmatrix.com>`_
+            *   HTML
+            *   CSS
+            *   `Bootstrap3 <http://getbootstrap.com>`_
+            *   `TypeScript <https://www.typescriptlang.org>`_
+            *   `Angular <https://angular.io>`_ (Angular2+, not AngularJS aka Angular1)
+            *   `NativeScript <https://www.nativescript.org>`_
+
+
+.. note:: This a cross platform development guide, all commands are writen for bash.
+
+    Bash is installed by default on Linux.
+
+    Windows users should use bash from msys, which comes with git for windows,
+    :ref:`setup_msys_git`.
+
 Development Setup Objective
 ---------------------------
 
@@ -31,7 +64,7 @@ On a Windows machine the follow commands will be run using the bash shell, see
 synerty-peek Repositories
 `````````````````````````
 
-:Synerty's Repositories: `<https://github.com/Synerty>`_
+:Synerty's Repositories: `<https://bitbucket.org/account/user/synerty/projects/PEEK>`_
 
 *  synerty-peek
 
@@ -56,24 +89,26 @@ Clone Peek Repositories
 
 Checkout repositories all in the same folder
 
+https://brentonford@bitbucket.org/synerty/synerty-peek.git
+
 Use this script to insert individual peek modules.  Update {gitAccount} and
 {repository} in the script below: ::
 
         GIT="{gitAccount}"
         REPO="{repository}"
 
-        if [ ! -d ~peek/Documents/peek-dev ]; then
-            mkdir ~peek/Documents/peek-dev
-            cd ~peek/Documents/peek-dev/
-            git clone https://github.com/$GIT/$REPO.git
-            cd ~peek/Documents/peek-mobile/$REPO
+        if [ ! -d ~peek/peek-dev ]; then
+            mkdir ~peek/peek-dev
+            cd ~peek/peek-dev/
+            git clone https://$GIT@bitbucket.org/synerty/$REPO.git
+            cd ~peek/peek-mobile/$REPO
             git config --unset core.symlink
             git config --add core.symlink true
         else
             echo "ALERT: `pwd` directory already exists.  Please investigate then retry."
         fi
 
-        cd ~peek/Documents/peek-dev/
+        cd ~peek/peek-dev/
         ls -l
 
 Use this script to clone all repositories.  Update {gitAccount} in the script below: ::
@@ -90,20 +125,20 @@ Use this script to clone all repositories.  Update {gitAccount} in the script be
         REPOS="$REPOS peek-admin"
         REPOS="$REPOS peek-worker"
 
-        if [ ! -d ~peek/Documents/peek-dev ]; then
-        mkdir ~peek/Documents/peek-dev
-        cd ~peek/Documents/peek-dev/
+        if [ ! -d ~peek/peek-dev ]; then
+        mkdir ~peek/peek-dev
+        cd ~peek/peek-dev/
         for REPO in ${REPOS[*]}
         do
             echo $REPO
-            git clone https://github.com/$GIT/$REPO.git
-            cd ~peek/Documents/peek-dev/$REPO
+            git clone https://$GIT@bitbucket.org/synerty/$REPO.git
+            cd ~peek/peek-dev/$REPO
             git config --unset core.symlink
             git config --add core.symlink true
-            cd ~peek/Documents/peek-dev/
+            cd ~peek/peek-dev/
         done
         else
-            cd ~peek/Documents/peek-dev/
+            cd ~peek/peek-dev/
             echo "ALERT: `pwd` directory already exists.  Please investigate then retry."
         fi
         ls -l
@@ -118,13 +153,13 @@ Install Front End Modules
 Remove the old npm modules files and re-install for both client and server front and
 packages.  Run the following commands: ::
 
-        cd ~peek/Documents/peek-dev/peek-mobile/peek_mobile/build-web
+        cd ~peek/peek-dev/peek-mobile/peek_mobile/build-web
         [ -d node_modules ] && rm -rf node_modules
         npm install
-        cd ~peek/Documents/peek-dev/peek-mobile/peek_mobile/build-ns
+        cd ~peek/peek-dev/peek-mobile/peek_mobile/build-ns
         [ -d node_modules ] && rm -rf node_modules
         npm install
-        cd ~peek/Documents/peek-dev/peek-admin/peek_admin/build-web
+        cd ~peek/peek-dev/peek-admin/peek_admin/build-web
         [ -d node_modules ] && rm -rf node_modules
         npm install
 
@@ -135,7 +170,7 @@ These steps link the projects under site-packages and installs their dependencie
 
 For synerty-peek, run the following commands: ::
 
-        cd ~peek/Documents/peek-dev/synerty-peek
+        cd ~peek/peek-dev/synerty-peek
         ./pip_uninstall_and_develop.sh
 
 For repositories and plugins, run from their directory ::
@@ -152,8 +187,18 @@ compiler.
 
 Run the following commands: ::
 
-        cd ~peek/Documents/peek-dev/peek-mobile/peek_mobile/build-web
+        cd ~peek/peek-dev/peek-mobile/peek_mobile/build-web
         ng build
-        cd ~peek/Documents/peek-dev/peek-admin/peek_admin/build-web
+        cd ~peek/peek-dev/peek-admin/peek_admin/build-web
         ng build
 
+
+Develop
+```````
+You are ready to develop synerty-peek services
+
+What Next?
+----------
+
+Refer back to the :ref:`how_to_use_peek_documentation` guide to see which document to
+follow next.

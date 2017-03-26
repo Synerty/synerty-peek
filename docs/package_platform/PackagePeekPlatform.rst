@@ -1,3 +1,5 @@
+.. _package_peek_platform:
+
 =====================
 Package Peek Platform
 =====================
@@ -15,7 +17,7 @@ This section contains the steps to build your own platform release.
 
 ----
 
-Open a powershell window.
+Open a PowerShell window.
 
 ----
 
@@ -53,27 +55,8 @@ Building a Linux Release
 
 **TODO**
 
-Building synerty-peek
----------------------
+What Next?
+----------
 
-
-The peek package has build scripts that generate a platform build.
-::
-
-        ./publish_platform.sh #.#.##
-        ./pypi_upload.sh
-
-.. NOTE:: Prod build, it tags, commits and test uploads to testpypi.  If you're building
-    for development, skip this step and go back to Development.
-
-
-.. NOTE:: Dev build, it doesn't tag, commit or test upload, but still generates a build.
-
-.. WARNING:: Omitting the dot before dev will cause the script to fail as setuptools
-    adds the dot in if it's not there, which means the cp commands won't match files.
-
-Dev build example
-::
-
-        ./publish_platform.sh 0.0.1.dev1
-
+Refer back to the :ref:`how_to_use_peek_documentation` guide to see which document to
+follow next.
