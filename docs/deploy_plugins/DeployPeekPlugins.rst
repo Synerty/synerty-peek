@@ -38,3 +38,10 @@ Pip install the plugins with the following command
     # Install the plugin packages
     # NOTE: The dependencies were taken care of by pip wheel in the plugin release build
     pip install --no-deps $(ls * -name)
+
+
+What Next?
+----------
+
+Refer back to the :ref:`how_to_use_peek_documentation` guide to see which document to
+follow next.

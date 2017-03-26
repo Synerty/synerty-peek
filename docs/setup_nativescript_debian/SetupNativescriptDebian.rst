@@ -146,3 +146,9 @@ Confirm Environment Variable JAVA_HOME ::
     with internet access.  Package the installed nodejs files and installed modules
     'C:\Users\peek\nodejs'.  Unpackage in the same directory location on the offline
     server.
+
+What Next?
+----------
+
+Refer back to the :ref:`how_to_use_peek_documentation` guide to see which document to
+follow next.
