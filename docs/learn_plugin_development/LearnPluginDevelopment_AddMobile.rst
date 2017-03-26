@@ -20,8 +20,11 @@ We only scratch the surface of using Angular, that`s outside the scope of this g
 See :ref:`learn_plugin_development_frontend_preparing` to learn more about how Peek
 pieces together the frontend code from the various plugins.
 
+Mobile File Structure
+---------------------
+
 Add Directory :file:`mobile-app`
---------------------------------
+````````````````````````````````
 
 The :file:`mobile-app` directory will contain the plugins the mobile Angular application.
 
@@ -36,7 +39,7 @@ interface should be lazy loaded.
 Create directory :file:`peek_plugin_tutorial/_private/mobile-app`
 
 Add File :file:`tutorial.component.mweb.html`
----------------------------------------------
+`````````````````````````````````````````````
 
 The :file:`tutorial.component.mweb.html` file is the web app HTML **view** for
 the Angular component :file:`tutorial.component.ts`.
@@ -65,7 +68,7 @@ and populate it with the following contents.
 
 
 Add File :file:`tutorial.component.ns.html`
--------------------------------------------
+```````````````````````````````````````````
 
 The :file:`tutorial.component.ns.html` file is the default NativeScript **view** for
 the Angular component :file:`tutorial.component.ts`.
@@ -107,7 +110,7 @@ and populate it with the following contents.
 
 
 Add File :file:`tutorial.component.ts`
---------------------------------------
+``````````````````````````````````````
 
 The :file:`tutorial.component.ts` is the Angular Component for the mobile page.
 It's loaded by the default route defined in :file:`tutorial.module.ts`.
@@ -139,7 +142,7 @@ and populate it with the following contents.
 
 
 Add File :file:`tutorial.module.ts`
------------------------------------
+```````````````````````````````````
 
 The :file:`tutorial.module.ts` is the main Angular module of the plugin.
 
@@ -197,7 +200,7 @@ and populate it with the following contents.
 
 
 Download Icon :file:`icon.png`
-------------------------------
+``````````````````````````````
 
 The Peek mobile interface has a home screen with apps on it, this icon will be the
 tutorial plugins app icon.
@@ -217,7 +220,7 @@ to :file:`peek_plugin_tutorial/_private/mobile-assets/icon.png`
 
 
 Edit File :file:`plugin_package.json`
--------------------------------------
+`````````````````````````````````````
 
 Finally, Edit the file :file:`peek_plugin_tutorial/plugin_package.json` to tell the
 platform that we want to use the mobile service:

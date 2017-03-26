@@ -1,8 +1,8 @@
 .. _learn_plugin_development_scaffold:
 
-
+========================
 Scaffolding From Scratch
-````````````````````````
+========================
 
 In this section we'll create the basic files we need for a plugin.
 
@@ -11,8 +11,11 @@ In this section we'll create the basic files we need for a plugin.
     We'll finish up with a plugin which we can build a python package for, but it won't
     run on any services, we'll add that later.
 
+Plugin File Structure
+---------------------
+
 Create Directory :file:`peek-plugin-tutorial`
----------------------------------------------
+`````````````````````````````````````````````
 
 :file:`peek-plugin-tutorial` is the name of the project directory, it could be anything.
 For consistency, we name it the same as the plugin with hypons instead of underscores,
@@ -37,7 +40,7 @@ Commands: ::
 .. note:: Future commands will be run from the plugin project root directory.
 
 Add File :file:`.gitignore`
----------------------------
+```````````````````````````
 
 The :file:`.gitignore` file tells the git version control software to ignore certain
 files in the project.
@@ -68,7 +71,7 @@ Create :file:`.gitignore`, and populate it with the following ::
 
 
 Add Package :file:`peek_plugin_tutorial`
-----------------------------------------
+````````````````````````````````````````
 
 Package :file:`peek_plugin_tutorial` is the root
 `python package <https://docs.python.org/3.5/tutorial/modules.html#packages>`_.
@@ -107,7 +110,7 @@ Add the version string to the :file:`peek_plugin_tutorial` package. ::
 .. note:: This version is automatically updated by the :command:`publish.sh` script.
 
 Add Package :file:`_private`
-----------------------------
+````````````````````````````
 
 Package :file:`peek_plugin_tutorial._private` will contain the parts of the plugin
 that won't be exposed/shared for other plugins to use.
@@ -132,7 +135,7 @@ The structure should now be: ::
 
 
 Add File :file:`setup.py`
--------------------------
+`````````````````````````
 
 The :file:`setup.py` file tells the python distribution tools how to create a
 distributable file for the plugin.
@@ -169,7 +172,7 @@ values:
 
 
 Add File :file:`publish.sh`
----------------------------
+```````````````````````````
 
 The :file:`publish.sh` file is custom script for building and publishing the plugin that
 performs the following tasks:
@@ -202,7 +205,7 @@ Modify the options near the top. We've modified the following:
 ----
 
 Add File :file:`README.rst`
----------------------------
+```````````````````````````
 
 The file:`README.rst` file is a verbose description of this plugin, it's the file that
 version control systems, such as BitBucket or GitHub will display when the project is
@@ -226,7 +229,7 @@ Here is a suggestion: ::
 .. _package_json_explaination:
 
 Add File :file:`plugin_package.json`
-------------------------------------
+````````````````````````````````````
 
 The :file:`plugin_package.json` describes the plugin to the Peek Platform. These details
 include:
@@ -283,7 +286,7 @@ Check that your plugin now looks like this: ::
         └── setup.py
 
 Add File :file:`PluginNames.py`
--------------------------------
+```````````````````````````````
 
 The :file:`PluginNames.py` file defines some constants that are used throughout the
 plugin. More details on where these are used will be later in the documentation.
@@ -306,7 +309,7 @@ contents: ::
 
 
 Add Directory :file:`plugin-module/_private`
---------------------------------------------
+````````````````````````````````````````````
 
 We now move onto the frontends, and TypeScript.
 
@@ -339,7 +342,7 @@ with command ::
 
 
 Add File :file:`package.json`
------------------------------
+`````````````````````````````
 
 The :file:`package.json` file is required to keep NPM from winging, since this
 directory is linked in under :file:`node_modules/@peek`
@@ -357,7 +360,7 @@ with contents ::
 
 
 Add File :file:`PluginNames.ts`
--------------------------------
+```````````````````````````````
 
 The :file:`PluginNames.ts` file defines constants used by this plugin to define,
 payload filts, tuple names, oberservable names, etc.
@@ -379,7 +382,7 @@ with contents ::
 
 
 Add File :file:`_private/index.ts`
-----------------------------------
+``````````````````````````````````
 
 The :file:`_private/index.ts` file defines exports from other files in _private.
 
@@ -434,4 +437,3 @@ You can test that it's worked with the following python code, run the following 
 ----
 
 You now have a basic plugin. In the next section we'll make it run on some services.
-

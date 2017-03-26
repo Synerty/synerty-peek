@@ -13,11 +13,13 @@ In this section we'll add the root admin page for the plugin.
 We only scratch the surface of using Angular, that`s outside the scope of this guide.
 
 See :ref:`learn_plugin_development_frontend_preparing` to learn more about how Peek
-peices together the frontend code from the varios plugins.
+pieces together the frontend code from the various plugins.
 
+Admin File Structure
+--------------------
 
 Add Directory :file:`admin-app`
--------------------------------
+```````````````````````````````
 
 The :file:`admin-app` directory will contain the plugins the Angular application.
 
@@ -32,7 +34,7 @@ interface should be lazy loaded.
 Create directory :file:`peek_plugin_tutorial/_private/admin-app`
 
 Add File :file:`tutorial.component.html`
-----------------------------------------
+````````````````````````````````````````
 
 The :file:`tutorial.component.html` file is the HTML file for the Angular component
 (:file:`tutorial.component.ts`) we create next.
@@ -68,7 +70,7 @@ and populate it with the following contents.
 
 
 Add File :file:`tutorial.component.ts`
---------------------------------------
+``````````````````````````````````````
 
 The :file:`tutorial.component.ts` is the Angular Component for the admin page.
 It's loaded by the default route defined in :file:`tutorial.module.ts`.
@@ -97,7 +99,7 @@ and populate it with the following contents.
 
 
 Add File :file:`tutorial.module.ts`
------------------------------------
+```````````````````````````````````
 
 The :file:`tutorial.module.ts` is the main Angular module of the plugin.
 
@@ -105,7 +107,6 @@ This file can describe other routes, that will load other components. This is st
 Angular.
 
 `See NgModule for more <https://angular.io/docs/ts/latest/guide/ngmodule.html>`_
-
 
 ----
 
@@ -148,7 +149,7 @@ and populate it with the following contents.
 
 
 Edit File :file:`plugin_package.json`
--------------------------------------
+`````````````````````````````````````
 
 Finally, Edit the file :file:`peek_plugin_tutorial/plugin_package.json` to tell the
 platform that we want to use the admin service:

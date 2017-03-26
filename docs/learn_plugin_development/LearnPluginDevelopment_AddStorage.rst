@@ -17,8 +17,11 @@ The Storage schema upgrades are managed by the Server service.
 
 .. note:: The Server service must be enabled to use the Storage service.
 
+Storage File Structure
+----------------------
+
 Add Package :file:`_private/storage`
-------------------------------------
+````````````````````````````````````
 
 Package :file:`_private/storage` will contain the database ORM
 classes. These define the schema for the database and are used for data manipulation and
@@ -33,7 +36,7 @@ Create the :file:`peek_plugin_tutorial._private/storage` Package. Commands: ::
 
 
 Add File :file:`DeclarativeBase.py`
------------------------------------
+```````````````````````````````````
 
 The :file:`DeclarativeBase.py` file  defines an SQLAlchemy declarative base class.
 All Table classes inheriting this base class belong together, you can have multiple
@@ -61,7 +64,7 @@ and populate it with the following contents:
 
 
 Add File :file:`storage/__init__.py`
-------------------------------------
+````````````````````````````````````
 
 The :file:`storage/__init__.py` package file will have a :command:`loadStorageTuples()`
 method that imports the tables.
@@ -88,7 +91,7 @@ and populate it with the following contents:
 
 
 Add Package :file:`alembic`
----------------------------
+```````````````````````````
 
 Alembic is the database upgrade library Peek uses. The :file:`alembic` package is where
 the alembic configuration will be kept.
@@ -107,7 +110,7 @@ Command: ::
 
 
 Add Package :file:`versions`
-----------------------------
+````````````````````````````
 
 The :file:`versions` package is where the Alembic database upgrade scripts are kept.
 
@@ -123,7 +126,7 @@ Command: ::
 
 
 Add File :file:`env.py`
------------------------
+```````````````````````
 
 The :file:`env.py` is loaded by Alembic to get it's configuration and environment.
 
@@ -148,7 +151,7 @@ the following contents:
 
 
 Add File :file:`script.py.mako`
--------------------------------
+```````````````````````````````
 
 The :file:`script.py.mako` file is a template that is used by Alembic to create new
 database version scripts.
@@ -193,7 +196,7 @@ the following contents:
 
 
 Edit File :file:`plugin_package.json`
--------------------------------------
+`````````````````````````````````````
 
 For more details about the :file:`plugin_package.json`,
 see :ref:`About plugin_package.json <package_json_explaination>`.
@@ -231,7 +234,7 @@ Here is an example ::
 
 
 Edit File :file:`ServerEntryHook.py`
-------------------------------------
+````````````````````````````````````
 
 The :file:`ServerEntryHook.py` file needs to be updated to do the following:
 
@@ -291,7 +294,7 @@ When you're finished, You should have a file like this: ::
 .. _learn_plugin_development_add_storage_edit_client_entry_hook:
 
 Edit File :file:`ClientEntryHook.py`
-------------------------------------
+````````````````````````````````````
 
 This step applies if you're plugin is using the Client service.
 
@@ -327,7 +330,7 @@ When you're finished, You should have a file like this: ::
 
 
 Edit File :file:`AgentEntryHook.py`
------------------------------------
+```````````````````````````````````
 
 This step applies if you're plugin is using the Agent service.
 
@@ -346,7 +349,7 @@ apply the same edits from step
 
 
 Add File :file:`alembic.ini`
-----------------------------
+````````````````````````````
 
 The :file:`alembic.ini` file is the first file Alembic laods, it tells Alembic
 how to connect to the database and where it's "alembic" directory is.

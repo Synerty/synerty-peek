@@ -6,9 +6,11 @@ Add Agent Service
 
 This document is a stripped version of :ref:`learn_plugin_development_add_server`.
 
-Add Package :file:`_private/agent`
-----------------------------------
+Agent File Structure
+--------------------
 
+Add Package :file:`_private/agent`
+``````````````````````````````````
 
 Create directory :file:`peek_plugin_tutorial/_private/agent`
 
@@ -22,7 +24,7 @@ Commands: ::
 
 
 Add File :file:`AgentEntryHook.py`
-----------------------------------
+``````````````````````````````````
 
 Create the file :file:`peek_plugin_tutorial/_private/agent/AgentEntryHook.py`
 and populate it with the following contents.
@@ -86,7 +88,7 @@ and populate it with the following contents.
 
 
 Edit :file:`peek_plugin_tutorial/__init__.py`
----------------------------------------------
+`````````````````````````````````````````````
 
 Edit the file :file:`peek_plugin_tutorial/__init__.py`, and add the following: ::
 
@@ -100,8 +102,7 @@ Edit the file :file:`peek_plugin_tutorial/__init__.py`, and add the following: :
 
 
 Edit :file:`plugin_package.json`
---------------------------------
-
+````````````````````````````````
 
 Edit the file :file:`peek_plugin_tutorial/plugin_package.json` :
 
@@ -138,7 +139,6 @@ The plugin should now be ready for the agent to load.
 
 Running on the Agent Service
 ----------------------------
-
 
 Edit :file:`~/peek-agent.home/config.json`:
 
