@@ -4,7 +4,6 @@
 Add Actions
 ===========
 
-
 Outline
 -------
 
@@ -72,7 +71,6 @@ either a success or failure response from the Client service.
 
 .. image:: LearnAction_Response.png
 
-
 Advantages
 ``````````
 #.  Reduces the risk of one update overwriting another.
@@ -83,7 +81,6 @@ Disadvantages
 `````````````
 
 #.  This could lead to higher resource usage and less efficient commits.
-
 
 Objective
 ---------
@@ -104,8 +101,6 @@ This is the order:
 
 Add Python Tuples
 -----------------
-
-
 
 Add File :file:`StringCapToggleActionTuple.py`
 ``````````````````````````````````````````````
@@ -181,7 +176,6 @@ Find the method :code:`loadPrivateTuples()`, append the following lines: ::
 
 Add TypeScript Tuples
 ---------------------
-
 
 Add :file:`StringCapToggleActionTuple.ts`
 `````````````````````````````````````````
@@ -264,7 +258,7 @@ The :file:`controller` python package will contain the classes that provide logi
 the plugin, like a brain controlling limbs.
 
 .. note:: Though the tutorial creates "controllers", the plugin developer can decide how
-            ever they want to structure this.
+    ever they want to structure this.
 
 ----
 
@@ -385,7 +379,7 @@ Add File :file:`TupleActionProcessor.py`
 ````````````````````````````````````````
 
 The class in file :file:`TupleActionProcessor.py`, accepts all tuple actions for this
-plugin and calls the relevent :code:`TupleActionProcessorDelegateABC`.
+plugin and calls the relevant :code:`TupleActionProcessorDelegateABC`.
 
 ----
 
@@ -495,7 +489,6 @@ Mobile Service Setup
 
 Now we need to edit the Angular module in the mobile-app and add the providers:
 
-
 Edit File :file:`tutorial.module.ts`
 ````````````````````````````````````
 
@@ -582,29 +575,25 @@ It should look similar to the following: ::
 At this point, all of the Tuple Action setup is done. It's much easier to work with the
 tuple action code from here on.
 
-
-
-
-
-
 Add Mobile View
 ---------------
 
 Finally, lets add a new component to the mobile screen.
 
-
-edit File :file:`string-int.component.ts`
+Edit File :file:`string-int.component.ts`
 `````````````````````````````````````````
 
-todo
-
+Edit the file, :file:`string-int.component.ts` to connect the tuple action to the
+frontend.
 
 ----
 
 edit the file
 :file:`peek_plugin_tutorial/_private/mobile-app/string-int/string-int.component.ts`
 
-add to imports ::
+#.  Add the following imports:
+
+::
 
         import {TupleActionPushService} from "@synerty/vortexjs";
 
@@ -614,12 +603,18 @@ add to imports ::
         } from "@peek/peek_plugin_tutorial/_private";
 
 
-add to constructor arguments ::
+#.  Add :code:`private actionService: TupleActionPushService` to the constructor
+    argument:
 
-        private actionService: TupleActionPushService,
+::
 
-add the methods to component class ::
+        constructor(private actionService: TupleActionPushService,
+            ...) {
 
+#.  Finally, add the methods to the :code:`StringIntComponent` class after the
+    :code:`constructor`:
+
+::
 
         toggleUpperCicked(item) {
             let action = new StringCapToggleActionTuple();
@@ -634,7 +629,6 @@ add the methods to component class ::
                 });
         }
 
-
         incrementCicked(item) {
             let action = new AddIntValueActionTuple();
             action.stringIntId = item.id;
@@ -648,7 +642,6 @@ add the methods to component class ::
                     alert(err);
                 });
         }
-
 
         decrementCicked(item) {
             let action = new StringIntDecreaseActionTuple();
@@ -665,16 +658,71 @@ add the methods to component class ::
         }
 
 
-edit File :file:`string-int.component.mweb.html`
+It should look similar to the following:
+
+::
+
+        ...
+
+        import {
+            AddIntValueActionTuple,
+            StringCapToggleActionTuple
+        } from "@peek/peek_plugin_tutorial/_private";
+
+        ...
+
+            constructor(private actionService: TupleActionPushService,
+                        ...) {
+
+            ...
+
+            incrementCicked(item) {
+                let action = new AddIntValueActionTuple();
+                action.stringIntId = item.id;
+                action.offset = 1;
+                this.actionService.pushAction(action)
+                    .then(() => {
+                        alert('success');
+
+                    })
+                    .catch((err) => {
+                        alert(err);
+                    });
+            }
+
+
+            decrementCicked(item) {
+                let action = new AddIntValueActionTuple();
+                action.stringIntId = item.id;
+                action.offset = -1;
+                this.actionService.pushAction(action)
+                    .then(() => {
+                        alert('success');
+
+                    })
+                    .catch((err) => {
+                        alert(err);
+                    });
+            }
+
+            mainClicked() {
+                this.router.navigate([tutorialBaseUrl]);
+            }
+
+        }
+
+
+Edit File :file:`string-int.component.mweb.html`
 ````````````````````````````````````````````````
 
-todo
+Edit the web HTML view file, :file:`string-int.component.mweb.html` and insert buttons
+that will change initiate the created tuple actions.
 
 ----
 
-edit the file
+Edit the file
 :file:`peek_plugin_tutorial/_private/mobile-app/string-int/string-int.component.mweb.html`
-and populate it with the following contents.
+and populate it with the following contents:
 
 ::
 
@@ -710,13 +758,15 @@ and populate it with the following contents.
         </div>
 
 
-edit File :file:`string-int.component.ns.html`
+Edit File :file:`string-int.component.ns.html`
 ``````````````````````````````````````````````
-todo
+
+Edit the NativeScript XML view file, :file:`string-int.component.ns.html` and insert
+buttons that will change initiate the created tuple actions.
 
 ----
 
-edit the file
+Edit the file
 :file:`peek_plugin_tutorial/_private/mobile-app/string-int/string-int.component.ns.html`
 and populate it with the following contents.
 
@@ -757,16 +807,22 @@ Testing
 -------
 
 #.  Open mobile Peek web app
+
 #.  Tap the Tutorial app icon
-#.  tap the "String Ints" button
 
-#.  Expect to see the string ints data.
+#.  Tap the "String Ints" button
 
-#.  Update the data from the Admin service UI
+#.  Expect to see the string ints data
 
-#.  The data on the mobile all will immediately change.
+#.  Select the "Toggle Caps" button
 
+#.  If successful an alert will appear stating "success".  If you receive an error, go
+    back through the "Add Actions" instructions.  Restart the server service and retry
+    step five
 
+#.  You will see the data update instantly
+
+#.  Return to step five for buttons "Increment Int" and "Decrement Int"
 
 Offline Observable
 ------------------
@@ -774,7 +830,7 @@ Offline Observable
 The Synerty VortexJS library has an :code:`TupleDataOfflineObserverService`,
 once offline storage has been setup,
 (here :ref:`learn_plugin_development_add_offline_storage`),
-the offline observable is a dropin replacement.
+the offline observable is a drop in replacement.
 
 When using the offline observable, it will:
 
@@ -790,7 +846,6 @@ from the observable (Client service), the offline observer does two things:
 
 #.  Stores the data back into the offline db, in the browser / app.
 
-
 Edit File :file:`string-int.component.ts`
 `````````````````````````````````````````
 
@@ -805,7 +860,9 @@ Switching to use the offline observer requires two edits to
 Edit file
 :file:`peek_plugin_tutorial/_private/mobile-app/string-int/string-int.component.ts`.
 
-Add the import for the TupleDataOfflineObserverService: ::
+Add the import for the TupleDataOfflineObserverService:
+
+::
 
     import TupleDataOfflineObserverService from "@synerty/vortexjs";
 
@@ -822,6 +879,6 @@ To ::
 
 ----
 
-Thats it. Now the String Int data will load on the device, even when the Vortex between
+That's it. Now the String Int data will load on the device, even when the Vortex between
 the device and the Client service is offline.
 
