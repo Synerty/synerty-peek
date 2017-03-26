@@ -31,8 +31,11 @@ Disadvantages
 
 #.  Not suitable for multiple users.
 
+Tuple Loader File Structure
+---------------------------
+
 Add Package :file:`admin_backend`
----------------------------------
+`````````````````````````````````
 
 The :file:`admin_backend` python package will contain the classes that provide
 data sources to the Admin web app.
@@ -47,7 +50,7 @@ the commands ::
 
 
 Add File :file:`StringIntTableHandler.py`
------------------------------------------
+`````````````````````````````````````````
 
 The :file:`StringIntTableHandler.py` listens for payload from the Admin service (frontend)
 These payloads are delivered by the vortex.
@@ -96,7 +99,7 @@ and populate it with the following contents.
 
 
 Edit File :file:`admin_backend/__init__.py`
--------------------------------------------
+```````````````````````````````````````````
 
 In this step, we add a setup method on the admin_backend package, this setup method
 then loads all the handlers needed for the backend.
@@ -120,7 +123,7 @@ Add the following:
 
 
 Edit File :file:`ServerEntryHook.py`
-------------------------------------
+````````````````````````````````````
 
 Now, we need to create and destroy our :code:`admin_backend` handlers when the Server
 service starts the plugin.
@@ -167,9 +170,11 @@ Test Python Services
 The backend changes are complete, please run :command:`run_peek_server` to ensure that
 there are no problems here.
 
+Tuple Loader Frontends and TypeScript
+-------------------------------------
 
 Add Directory :file:`edit-string-int-table`
--------------------------------------------
+```````````````````````````````````````````
 
 The :file:`edit-string-int-table` directory will contain the view and controller
 that allows us to edit data in the admin app.
@@ -183,7 +188,7 @@ directory, with the command ::
 
 
 Add File :file:`edit.component.html`
-------------------------------------
+````````````````````````````````````
 
 The :file:`edit.component.html` file is the HTML file for the Angular component
 (:file:`edit.component.ts`) we create next.
@@ -245,7 +250,7 @@ There are two buttons in this HTML that are related to the TupleLoader, these ca
 methods on the loader, :code:`loader.save(items)`, :code:`loader.load()`.
 
 Add File :file:`edit.component.ts`
-----------------------------------
+``````````````````````````````````
 
 The :file:`edit.component.ts` is the Angular Component for the new edit page.
 
@@ -326,7 +331,7 @@ and populate it with the following contents.
 
 
 Edit File :file:`tutorial.component.html`
------------------------------------------
+`````````````````````````````````````````
 
 Update the :file:`tutorial.component.html` to insert the new
 :code:`EditStringIntComponent` component into the HTML.
@@ -353,7 +358,7 @@ Edit the file :file:`peek_plugin_tutorial/_private/admin-app/tutorial.component.
 
 
 Edit File :file:`tutorial.module.ts`
-------------------------------------
+````````````````````````````````````
 
 Edit the :file:`tutorial.module.ts` Angular Module to import the
 :code:`EditStringIntComponent` component.

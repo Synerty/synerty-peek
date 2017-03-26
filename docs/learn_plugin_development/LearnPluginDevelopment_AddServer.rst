@@ -4,9 +4,6 @@
 Add Server Service
 ==================
 
-
-Configure the Plugin
---------------------
 This section adds the basic files require for the plugin to run on the servers service.
 Create the following files and directories.
 
@@ -20,9 +17,11 @@ The platform loads the plugins python package, and then calls the appropriate
 The object returned must implement the right interfaces, the platform then calls methods
 on this object to load, start, stop, unload, etc the plugin.
 
+Server File Structure
+---------------------
 
 Add Package :file:`_private/server`
------------------------------------
+```````````````````````````````````
 
 This step creates the :file:`_private/server`
 `python package <https://docs.python.org/3.5/tutorial/modules.html#packages>`_.
@@ -48,7 +47,7 @@ Commands: ::
 
 
 Add File :file:`ServerEntryHook.py`
------------------------------------
+```````````````````````````````````
 
 This file/class is the entry point for the plugin on the Server service.
 When the server service starts this plugin, it will call the :command:`load()` then the
@@ -129,7 +128,7 @@ and populate it with the following contents.
 
 
 Edit :file:`peek_plugin_tutorial/__init__.py`
----------------------------------------------
+`````````````````````````````````````````````
 
 When the Server service loads the plugin, it first calls the
 :command:`peekServerEntryHook()` method from the :command:`peek_plugin_tutorial` package.
@@ -154,7 +153,7 @@ Edit the file :file:`peek_plugin_tutorial/__init__.py`, and add the following: :
 
 
 Edit :file:`plugin_package.json`
---------------------------------
+````````````````````````````````
 
 These updates to the :file:`plugin_package.json` tell the Peek Platform that we require
 the "server" service to run, and additional configuration options we have for that
@@ -238,4 +237,3 @@ You can now run the peek server, you should see your plugin load. ::
         DEBUG peek_plugin_tutorial._private.server.ServerEntryHook:Loaded
         DEBUG peek_plugin_tutorial._private.server.ServerEntryHook:Started
         ...
-

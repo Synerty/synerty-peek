@@ -9,9 +9,11 @@ This document is a stripped version of :ref:`learn_plugin_development_add_server
 .. note:: Ensure you have completed the Edit File :file:`ClientEntryHook.py`, see
     :ref:`learn_plugin_development_add_storage_edit_client_entry_hook`
 
-Add Package :file:`_private/client`
------------------------------------
+Client File Structure
+---------------------
 
+Add Package :file:`_private/client`
+```````````````````````````````````
 
 Create directory :file:`peek_plugin_tutorial/_private/client`
 
@@ -25,7 +27,7 @@ Commands: ::
 
 
 Add File :file:`ClientEntryHook.py`
------------------------------------
+```````````````````````````````````
 
 Create the file :file:`peek_plugin_tutorial/_private/client/ClientEntryHook.py`
 and populate it with the following contents.
@@ -89,7 +91,7 @@ and populate it with the following contents.
 
 
 Edit :file:`peek_plugin_tutorial/__init__.py`
----------------------------------------------
+`````````````````````````````````````````````
 
 Edit the file :file:`peek_plugin_tutorial/__init__.py`, and add the following: ::
 
@@ -103,8 +105,7 @@ Edit the file :file:`peek_plugin_tutorial/__init__.py`, and add the following: :
 
 
 Edit :file:`plugin_package.json`
---------------------------------
-
+````````````````````````````````
 
 Edit the file :file:`peek_plugin_tutorial/plugin_package.json` :
 
@@ -141,7 +142,6 @@ The plugin should now be ready for the client to load.
 
 Running on the Client Service
 -----------------------------
-
 
 Edit :file:`~/peek-client.home/config.json`:
 

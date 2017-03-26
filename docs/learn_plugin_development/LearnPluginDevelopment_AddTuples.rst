@@ -38,8 +38,11 @@ In this procedure we'll do the following:
 
 #.  Create a StringIntTuple in TypeScript and register it.
 
+Tuples File Structure
+---------------------
+
 Add Package :file:`_private.tuples`
------------------------------------
+```````````````````````````````````
 
 The :file:`_private.tuples` python package will contain the private python Tuples.
 
@@ -54,7 +57,7 @@ the commands ::
 .. _learn_plugin_development_add_tuples_tutorial_tuple_py:
 
 Add File :file:`TutorialTuple.py`
----------------------------------
+`````````````````````````````````
 
 The :file:`TutorialTuple.py` defines a simple class that we use to work with data.
 This is serialisable by the Vortex.
@@ -92,7 +95,7 @@ and populate it with the following contents.
 
 
 Edit File :file:`_private/tuples/__init__.py`
----------------------------------------------
+`````````````````````````````````````````````
 
 In this step, we add a setup method on the tuples package, this setup method
 then loads all the handlers needed for the backend.
@@ -116,7 +119,7 @@ Add the following: ::
 
 
 Add Package :file:`tuples`
---------------------------
+``````````````````````````
 
 The :file:`tuples` python package will contain the public python Tuples.
 The tuples which our plugin wants to share with other plugins.
@@ -136,7 +139,7 @@ the commands ::
 
 
 Edit File :file:`tuples/__init__.py`
-------------------------------------
+````````````````````````````````````
 
 In this step, we add a setup method on the tuples package, this setup method
 then loads all the handlers needed for the backend.
@@ -160,7 +163,7 @@ Add the following: ::
 .. _learn_plugin_development_add_tuples_edit_server_entry_hook:
 
 Edit File :file:`ServerEntryHook.py`
-------------------------------------
+````````````````````````````````````
 
 Now, we need to load all our Tuples when the plugin is loaded, for every service.
 To do this, we call the methods we've added to the :code:`tuple` packages above.
@@ -195,7 +198,7 @@ The method should now look similar to this ::
     tuple loading in the peek services.
 
 Edit File :file:`ClientEntryHook.py`
-------------------------------------
+````````````````````````````````````
 
 This step applies if you're plugin is using the Client service.
 
@@ -208,7 +211,7 @@ apply the same edits from step
 
 
 Edit File :file:`AgentEntryHook.py`
------------------------------------
+```````````````````````````````````
 
 This step applies if you're plugin is using the Agent service.
 
@@ -217,7 +220,7 @@ apply the same edits from step
 :ref:`learn_plugin_development_add_tuples_edit_server_entry_hook`.
 
 Edit File :file:`WorkerEntryHook.py`
-------------------------------------
+````````````````````````````````````
 
 This step applies if you're plugin is using the Worker service.
 
@@ -231,10 +234,13 @@ Test Python Services
 At this point all the python services should run, you won't see any differences but
 it's a good idea to run them all and check there are no issues.
 
-Add Directory :file:`plugin-module/_private/tuples`
----------------------------------------------------
+Tuples Frontends and TypeScript
+-------------------------------
 
 We now move onto the frontends, and TypeScript.
+
+Add Directory :file:`plugin-module/_private/tuples`
+```````````````````````````````````````````````````
 
 The :file:`plugin-module/_private/tuples` directory will contain our example tuple,
 written in TypeScript.
@@ -254,7 +260,7 @@ with command ::
 .. _learn_plugin_development_add_tuples_tutorial_tuple_ts:
 
 Add File :file:`TutorialTuple.ts`
----------------------------------
+`````````````````````````````````
 
 The :file:`TutorialTuple.ts` file defines a TypeScript class for our
 :code:`TutorialTuple` Tuple.
@@ -291,7 +297,7 @@ with contents ::
 
 
 Add File :file:`StringIntTuple.ts`
-----------------------------------
+``````````````````````````````````
 
 The :file:`StringIntTuple.ts` file defines the TypeScript Tuple for the
 hybrid Tuple/SQL Declarative that represents :code:`StringIntTuple`.
@@ -326,7 +332,7 @@ with contents ::
 
 
 Edit File :file:`_private/index.ts`
------------------------------------
+```````````````````````````````````
 
 The :file:`_private/index.ts` file will re-export the Tuple in a more standard way.
 Developers won't need to know the exact path of the file.
