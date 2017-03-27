@@ -539,9 +539,10 @@ Edit :file:`peek_plugin_tutorial/_private/storage/Setting.py`
 
 #.  Find :command:`noopTuplePrefix` and replace it with :command:`tutorialTuplePrefix`.
 
-----
+Edit File :file:`__init__.py`
+`````````````````````````````
 
-Edit :file:`peek_plugin_tutorial/_private/storage/DeclarativeBase.py`
+Edit :file:`peek_plugin_tutorial/_private/storage/__init__.py`
 
 Add the following lines to the :command:`loadStorageTuples():` method ::
 
