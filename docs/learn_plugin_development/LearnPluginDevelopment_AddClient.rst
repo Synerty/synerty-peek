@@ -167,7 +167,9 @@ It should something like this: ::
             ...
         }
 
-.. note:: This file is created in :ref:`administer_peek_platform`
+
+.. note:: This file is created in :ref:`administer_peek_platform`.  Running the Client
+    Service will also create the file.
 
 ----
 
