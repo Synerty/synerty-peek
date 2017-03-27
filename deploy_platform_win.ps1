@@ -78,8 +78,50 @@ Write-Host "Setting PEEK_ENV to $venvDir";
 # All done.
 Write-Host "Peek is now deployed to $venvDir";
 Write-Host " ";
-Write-Host "Activate the new environment from command :";
-Write-Host "    set PATH=`"$venvDir\Scripts;%PATH%`"";
-Write-Host " ";
-Write-Host "Activate the new environment from PowerShell :";
-Write-Host "    `$env:Path = `"$venvDir\Scripts;`$env:Path`"";
+
+# Ask if the user would like to update the PATH environment variables
+$title = "Environment Variables"
+$message = "Do you want to update the PATH System Environment Variables with the newly deploy virtual environment: '"+$venvDir+"' and remove any other 'synerty-peek' System Environment Variables?"
+
+$yes = New-Object System.Management.Automation.Host.ChoiceDescription "&Yes", `
+    "I want to update the PATH System Environment Variables."
+
+$no = New-Object System.Management.Automation.Host.ChoiceDescription "&No", `
+    "I do NOT want the PATH System Environment Variables changed."
+
+$options = [System.Management.Automation.Host.ChoiceDescription[]]($yes, $no)
+
+$result = $host.ui.PromptForChoice($title, $message, $options, 0) 
+
+switch ($result)
+    {
+        0 {"You selected Yes.";
+
+            $PathVariables = $venvDir;
+
+            Write-Host "Added PATH variable:" $PathVariables;
+
+            ([Environment]::GetEnvironmentVariable("PATH", "Machine")).split(';') | foreach-object { 
+                if ($_ -notmatch $SynertyPeek) 
+                { $PathVariables=$PathVariables+';'+$_ } 
+                Else 
+                { Write-Host " ";
+                    Write-Host "Removed PATH variable:" $_ ;
+                } 
+            }
+            [Environment]::SetEnvironmentVariable("PATH", $PathVariables, "Machine");
+            Write-Host " ";
+            Write-Host "Environment Variables have been updated."
+            Write-Host " ";
+            Write-Host "IMPORTANT, you must restart the PowerShell window for the Environment Variable changes to take effect!"
+        }
+    
+        1 {"You selected No.";
+            Write-Host " ";
+            Write-Host "Activate the new environment from command :";
+            Write-Host "    set PATH=`"$venvDir\Scripts;%PATH%`"";
+            Write-Host " ";
+            Write-Host "Activate the new environment from PowerShell :";
+            Write-Host "    `$env:Path = `"$venvDir\Scripts;`$env:Path`"";
+        }
+    }
