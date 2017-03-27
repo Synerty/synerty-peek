@@ -539,9 +539,10 @@ Edit :file:`peek_plugin_tutorial/_private/storage/Setting.py`
 
 #.  Find :command:`noopTuplePrefix` and replace it with :command:`tutorialTuplePrefix`.
 
-----
+Edit File :file:`__init__.py`
+`````````````````````````````
 
-Edit :file:`peek_plugin_tutorial/_private/storage/DeclarativeBase.py`
+Edit :file:`peek_plugin_tutorial/_private/storage/__init__.py`
 
 Add the following lines to the :command:`loadStorageTuples():` method ::
 
@@ -574,8 +575,20 @@ Settings Table Examples
 
 Here is some example code for using the settings table.
 
-Place this code in the :command:`start():` method in
-:file:`peek_plugin_tutorial/_private/server/ServerEntryHook.py`
+----
+
+Edit the file :file:`peek_plugin_tutorial/_private/server/ServerEntryHook.py`
+
+Add the following import up the top of the file:
+
+::
+
+    from peek_plugin_pof_events._private.storage.Setting import globalSetting, PROPERTY1
+
+
+----
+
+Place this code in the :command:`start():` method:
 
 ::
 

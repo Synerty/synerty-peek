@@ -164,7 +164,9 @@ It should somthing like this: ::
             ...
         }
 
-.. note:: This file is created in :ref:`administer_peek_platform`
+
+.. note:: This file is created in :ref:`administer_peek_platform`.  Running the Agent
+    Service will also create the file.
 
 ----
 

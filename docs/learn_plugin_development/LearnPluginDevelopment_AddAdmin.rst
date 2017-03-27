@@ -180,6 +180,8 @@ Here is an example ::
             ],
             ...
             "admin": {
+                ...
+
                 "showHomeLink": true,
                 "appDir": "_private/admin-app",
                 "appModule": "tutorial.module#TutorialModule"
