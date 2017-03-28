@@ -38,43 +38,47 @@ The following sections go on to guide the reader to setup Sphinx Document Genera
 Documentation Configuration
 ---------------------------
 
-The build configuration file has already been developed by Synerty.
+The build configuration file has already been setup by Synerty.
 
-Create Directory :file:`docs`
-`````````````````````````````
+Create Directories :file:`docs` & :file:`dist`
+``````````````````````````````````````````````
 
-This folder will contain all of the files used to build the documentation.  Make sure
-you add everything in this directory to git.
+The :file:`docs` folder will contain all of the files used to build the documentation.
+Make sure you add everything in this directory to git.
 
-Create directory :file:`docs`, run the following command:
+The :file:`dist` folder will contain all of the generated documentation.  These files
+should not be in git as they are reproducible, see
+:ref:`learn_plugin_development_add_docs_build_documentation`
 
-::
-
-        mkdir -p docs
-
-
-Copy file :file:`docs/conf.py`
-``````````````````````````````
-
-Copy file :file:`conf.py` from synerty-peek, run the following command:
-
-.. note:: Make sure you update the release version in the following command.
+Create directories :file:`docs` and :file:`dist`, run the following command:
 
 ::
 
-        cp ~/synerty-peek-#.#.#/docs/conf.py docs/conf.py
+        mkdir -p docs dist
 
 
-----
+Download file :file:`docs/conf.py`
+``````````````````````````````````
 
-Edit file :file:`docs/conf.py`, updating the following lines as required:
+Download :file:`conf.py` from `synerty-peek/docs/conf.py <https://bitbucket.org/synerty/synerty-peek/raw/a8e84463b992e2d941248dded4bf49ee3b114ede/docs/conf.py>`_
+
+Modify these values:
 
 ::
 
         __project__ = 'Synerty Peek'
         __copyright__ = '2016, Synerty'
         __author__ = 'Synerty'
-        __version__ = '0.2.10'
+        __version__ = '#.#.#'
+
+
+Remove everything after and including (approx line 167):
+
+::
+
+        ###############################################################################
+        # Begin apidoc hack
+        ###############################################################################
 
 
 Required Files
@@ -94,16 +98,26 @@ Create :file:`docs/modules.rst`, and populate it with the following:
 
 ::
 
-        {insert plugin name} package
+        ============================
+        peek-plugin-tutorial package
         ============================
 
-        Module contents
-        ---------------
-
-        .. automodule:: {insert plugin name}
+        .. automodule:: peek_plugin_tutorial
             :members:
             :undoc-members:
             :show-inheritance:
+
+
+Modify these lines to suit your plugin name:
+
+::
+
+        peek-plugin-tutorial package
+
+
+::
+
+        .. automodule:: peek_plugin_tutorial
 
 
 Symlink file :file:`README.rst`
@@ -146,6 +160,7 @@ Create :file:`index.rst`, and populate it with the following:
             :caption: Contents:
 
             README
+            module
 
         Indices and tables
         ==================
@@ -155,28 +170,87 @@ Create :file:`index.rst`, and populate it with the following:
         * :ref:`search`
 
 
+Build or Debug
+``````````````
+
+You have created all the configuration files for the documentation generator, let’s
+make a first build of the docs.
+
+You can either
+:ref:`learn_plugin_development_add_docs_build_documentation`
+or
+:ref:`learn_plugin_development_add_docs_debug_documentation`
+
+.. _learn_plugin_development_add_docs_build_documentation:
+
 Build Documentation
 -------------------
 
-**TODO**
+.. note:: If this is **NOT** the first build of the documentation or you have previously
+    run the
+    :ref:`learn_plugin_development_add_docs_debug_documentation`, you will need to cleanup
+    the old :file:`dist` files.  Run the command
+    :code:`rm -rf dist/*`
 
-TODO: @Brenton
+Sphinx-build
+````````````
 
-Instructions on how to setup the documentation, copy conf.py from synerty-peek
+A build is started with the sphinx-build program, called like this:
 
-#.  Introduction + TOC
+::
 
-    #.  Functional design (What the plugin does)
+        sphinx-build -b html docs/ dist/
 
-    #.  How it works
+.. note:: The -b option selects a builder; in this example Sphinx will build HTML files.
 
-    #.  Tutorial API
+A successful build should look like this:
+
+::
+
+        peek@DESKTOP-U08T8NG MINGW64 ~/peek-plugin-tutorial (master)
+        $ sphinx-build -b html docs/ dist/
+        Running Sphinx v1.5.3
+        making output directory...
+        loading pickled environment... not yet created
+        building [mo]: targets for 0 po files that are out of date
+        building [html]: targets for 3 source files that are out of date
+        updating environment: 3 added, 0 changed, 0 removed
+        reading sources... [100%] module
+        looking for now-outdated files... none found
+        pickling environment... done
+        checking consistency... done
+        preparing documents... done
+        writing output... [100%] module
+        generating indices... genindex py-modindex
+        highlighting module code... [100%] peek_plugin_tutorial
+        writing additional pages... search
+        copying static files... done
+        copying extra files... done
+        dumping search index in English (code: en) ... done
+        dumping object inventory... done
+        build succeeded.
+
+
+Open :file:`dist/index.html`
+````````````````````````````
+
+The generated documentation files are in the :file:`dist` folder.
+
+Open :file:`dist/index.html` in a web browser to view the generated documentation.
+
+.. _learn_plugin_development_add_docs_debug_documentation:
 
 Debug Documentation
 -------------------
 
 Synerty has written a shell script to build run Sphinx API that builds the
 documentation when a file is modified.
+
+.. note:: If this is **NOT** the first debugging of the documentation or you have
+    previously run the
+    :ref:`learn_plugin_development_add_docs_debug_documentation`, you will need to cleanup
+    the old :file:`dist` files.  Run the command
+    :code:`rm -rf dist/*`
 
 Copy file :file:`docs/watch-docs.sh`
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -217,6 +291,16 @@ In a web browser, go to the following url:
 
         http://localhost:8020
 
+----
+
+The :file:`watch-docs.sh` shell script will rebuild the documentation when it see a change
+ in the
+:file:`docs` folder.
+
+.. note:: The :file:`watch-docs.sh` shell script won't always build a change in the
+toctree while running.  If you update the toctree or modify headings it is good
+practice to stop :file:`watch-docs.sh`, run :code:`rm -rf dist/*` and restart
+:file:`watch-docs.sh`.
 
 .. _learn_plugin_development_add_docs_sections:
 
@@ -539,7 +623,8 @@ Below is an abstract from file
             logger.debug("Loaded")
 
 
-Below is an abstract from file :file:`peek-plugin-base\peek_plugin_base\PeekPlatformCommonHookABC.py`
+Below is an abstract from file
+:file:`peek-plugin-base/peek_plugin_base/PeekPlatformCommonHookABC.py`
 
 ::
 
