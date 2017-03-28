@@ -298,7 +298,7 @@ Inline markup is quite simple, some examples:
 - backquotes: :code:`:code:`text``, :code:`text` for code samples.
 
 Files
-~~~~~
+`````
 
 The name of a file or directory. Within the contents, you can use curly braces to
 indicate a “variable” part, for example:
@@ -311,7 +311,7 @@ indicate a “variable” part, for example:
 
 
 Reference Links
-~~~~~~~~~~~~~~~
+```````````````
 
 Reference link names must be unique throughout the entire documentation.
 
@@ -339,7 +339,7 @@ An example of the reference link:
 
 
 URL Link
-~~~~~~~~
+````````
 
 A raw link can be entered without a title, but if a title is entered be sure to leave a
 space before the URL address:
