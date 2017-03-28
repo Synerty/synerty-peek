@@ -1,8 +1,8 @@
 .. _learn_plugin_development_add_docs:
 
-========================
-Add Documentation (TODO)
-========================
+=================
+Add Documentation
+=================
 
 Why does a plugin need documentation? A peek plugin needs documentation to help
 developers focus on what it needs to do, and allow other developers to use and APIs it
@@ -25,23 +25,8 @@ These are a few of the conundrums around the complexity of software documentatio
 Fortunately there are some fantastic tools around to solve these issues, and you're
 reading the result of those tools right now.
 
-----
-
-TODO: @Brenton
-
-Instructions on how to setup the documentation, copy conf.py from synerty-peek
-
-#.  Introduction + TOC
-
-    #.  Functional design (What the plugin does)
-
-    #.  How it works
-
-    #.  Tutorial API
-
-
-Document Generator TODO
------------------------
+Document Generator
+------------------
 
 Sphinx is a tool that makes it easy to create intelligent and beautiful documentation.
 
@@ -51,12 +36,12 @@ The following sections go on to guide the reader to setup Sphinx Document Genera
     root directory.
 
 Documentation Configuration
-```````````````````````````
+---------------------------
 
 The build configuration file has already been developed by Synerty.
 
 Create Directory :file:`docs`
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+`````````````````````````````
 
 This folder will contain all of the files used to build the documentation.  Make sure
 you add everything in this directory to git.
@@ -69,9 +54,7 @@ Create directory :file:`docs`, run the following command:
 
 
 Copy file :file:`docs/conf.py`
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
+``````````````````````````````
 
 Copy file :file:`conf.py` from synerty-peek, run the following command:
 
@@ -82,10 +65,9 @@ Copy file :file:`conf.py` from synerty-peek, run the following command:
         cp ~/synerty-peek-#.#.#/docs/conf.py docs/conf.py
 
 
-Edit file :file:`docs/conf.py`
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+----
 
-
+Edit file :file:`docs/conf.py`, updating the following lines as required:
 
 ::
 
@@ -96,12 +78,19 @@ Edit file :file:`docs/conf.py`
 
 
 Required Files
-``````````````
+--------------
 
-Add file :file:`modules.rst'
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Add file :file:`docs/modules.rst`
+`````````````````````````````````
 
-Create :file:`modules.rst`, and populate it with the following
+The file :file:`modules.rst`, is the contents for the code documentation.  This
+extension can import the modules you are documenting, and pull in documentation from
+docstrings in a semi-automatic way.  See
+:ref:`learn_plugin_development_add_docs_docstring_format`.
+
+----
+
+Create :file:`docs/modules.rst`, and populate it with the following:
 
 ::
 
@@ -117,10 +106,34 @@ Create :file:`modules.rst`, and populate it with the following
             :show-inheritance:
 
 
-Add file :file:`index.rst`
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+Symlink file :file:`README.rst`
+```````````````````````````````
 
-Create :file:`index.rst`, and populate it with the following
+The document generator is unable to read files in parent directories.  A symlink of the
+ :file:`README.rst` will need to be created in the :file:`docs/` directory.
+
+The :file:`README.rst` file should already be created in the plugins root directory, if
+not see:
+:ref:`learn_plugin_development_scaffold_add_file_readme`
+
+Commands:
+
+::
+
+        cd docs/
+        ln -s ../README.rst ./README.rst
+
+
+Add file :file:`index.rst`
+``````````````````````````
+
+The :file:`index.rst` file will add relations between the single files that the
+documentation is made of, as well as tables of contents.  See
+:ref:`learn_plugin_development_add_docs_toctree`
+
+----
+
+Create :file:`index.rst`, and populate it with the following:
 
 ::
 
@@ -132,6 +145,7 @@ Create :file:`index.rst`, and populate it with the following
             :maxdepth: 3
             :caption: Contents:
 
+            README
 
         Indices and tables
         ==================
@@ -144,15 +158,25 @@ Create :file:`index.rst`, and populate it with the following
 Build Documentation
 -------------------
 
+**TODO**
+
+TODO: @Brenton
+
+Instructions on how to setup the documentation, copy conf.py from synerty-peek
+
+#.  Introduction + TOC
+
+    #.  Functional design (What the plugin does)
+
+    #.  How it works
+
+    #.  Tutorial API
+
 Debug Documentation
 -------------------
 
 Synerty has written a shell script to build run Sphinx API that builds the
 documentation when a file is modified.
-
-Deploy :file:`watch-docs.sh` Shell Script
-`````````````````````````````````````````
-
 
 Copy file :file:`docs/watch-docs.sh`
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -179,6 +203,22 @@ Remove line from file :file:`watch-docs.sh`:
 Run :file:`watch-docs.sh`
 `````````````````````````
 
+::
+
+        cd docs/
+        ./watch-docs.sh
+
+
+----
+
+In a web browser, go to the following url:
+
+::
+
+        http://localhost:8020
+
+
+.. _learn_plugin_development_add_docs_sections:
 
 Sections
 --------
@@ -189,13 +229,11 @@ punctuation character, at least as long as the text and a blank line before and 
 These section titles and headings will be used to create the contents when the
 documentation is built.
 
-.. note:: The Page Title can be seen at the top of this page, "Add Documentation".
-    Adding a sample of a page title creates a new page title in the contents page.
+.. note:: - The Page Title can be seen at the top of this page,
+        :ref:`learn_plugin_development_add_docs`.
 
-Header 1
---------
-
-Sample paragraph.
+    - Header 1 can be seen at the top of this section,
+        :ref:`learn_plugin_development_add_docs_sections`.
 
 Header 2
 ````````
@@ -213,7 +251,8 @@ If you expand the page contents you will notice that "Header 3" isn't available 
 page contents.  This is because the maxdepth of the toctree is '2'.
 see :ref:`learn_plugin_development_add_docs_toctree`
 
-This is an example of the "Page Title", "Header 1", "Header 2", and "Header 3" raw text:
+This is an example of the "Add Documentation"(Page Title), "Sections"(Header 1), "Header
+2", and "Header 3" raw text:
 
 ::
 
@@ -221,7 +260,7 @@ This is an example of the "Page Title", "Header 1", "Header 2", and "Header 3" r
         Add Documentation
         =================
 
-        Header 1
+        Sections
         --------
 
         Header 2
@@ -234,11 +273,128 @@ This is an example of the "Page Title", "Header 1", "Header 2", and "Header 3" r
 Instruction Divider
 -------------------
 
+Four dashes with a leading blank line and following blank line.
+
 ----
 
 ::
 
         ----
+
+
+Text Formatting
+---------------
+
+The following roles don’t do anything special except formatting the text in a different
+style.
+
+Inline Markups
+``````````````
+
+Inline markup is quite simple, some examples:
+
+- one asterisk: :code:`*text*`, *text* for emphasis (italics),
+- two asterisks: :code:`**text**`, **text** for strong emphasis (boldface), and
+- backquotes: :code:`:code:`text``, :code:`text` for code samples.
+
+Files
+`````
+
+The name of a file or directory. Within the contents, you can use curly braces to
+indicate a “variable” part, for example:
+
+:file:`learn_plugin_development/LearnPluginDevelopment_AddDocs.rst`
+
+::
+
+        :file:`learn_plugin_development/LearnPluginDevelopment_AddDocs.rst`
+
+
+Reference Links
+```````````````
+
+Reference link names must be unique throughout the entire documentation.
+
+Place a label directly before a section title.
+
+The link name will match the section title.
+
+:ref:`learn_plugin_development_add_docs`
+
+An example of the reference link above the section title:
+
+::
+
+        .. _learn_plugin_development_add_docs:
+
+        =================
+        Add Documentation
+        =================
+
+An example of the reference link:
+
+::
+
+        :ref:`learn_plugin_development_add_docs`
+
+
+URL Link
+````````
+
+A raw link can be entered without a title, but if a title is entered be sure to leave a
+space before the URL address:
+
+`Synerty <http://www.synerty.com/>`_
+
+::
+
+    `Synerty <http://www.synerty.com/>`_
+
+
+Code Block
+``````````
+
+Two semi-colons followed by a blank line and two leading tabs for each line of code.
+The code block is ended by contents written without leading tabs.
+
+::
+
+        this.code
+
+
+::
+
+                ::
+
+                        this.code
+
+
+Bullets
+```````
+
+- First point
+
+- Second point
+
+::
+
+        - First point
+
+        - Second point
+
+
+Numbered Lists
+``````````````
+
+#.  First point
+
+#.  Second point
+
+::
+
+        #.  First point
+
+        #.  Second point
 
 
 Directives
@@ -296,117 +452,113 @@ the admonition type.
             and references: :ref:`learn_plugin_development_add_docs`
 
 
-Text Formatting
----------------
-
-The following roles don’t do anything special except formatting the text in a different
-style:
-
-Inline Markups
-``````````````
-
-Inline markup is quite simple, some examples:
-
-- one asterisk: :code:`*text*`, *text* for emphasis (italics),
-- two asterisks: :code:`**text**`, **text** for strong emphasis (boldface), and
-- backquotes: :code:`:code:`text``, :code:`text` for code samples.
-
-Files
-~~~~~
-
-The name of a file or directory. Within the contents, you can use curly braces to
-indicate a “variable” part, for example:
-
-:file:`learn_plugin_development/LearnPluginDevelopment_AddDocs.rst`
-
-::
-
-        :file:`learn_plugin_development/LearnPluginDevelopment_AddDocs.rst`
-
-
-Reference Links
-~~~~~~~~~~~~~~~
-
-Reference link names must be unique throughout the entire documentation.
-
-Place a label directly before a section title.
-
-The link name will match the section title.
-
-:ref:`learn_plugin_development_add_docs`
-
-An example of the reference link above the section title:
-
-::
-
-        .. _learn_plugin_development_add_docs:
-
-        =================
-        Add Documentation
-        =================
-
-An example of the reference link:
-
-::
-
-        :ref:`learn_plugin_development_add_docs`
-
-
-URL Link
-~~~~~~~~
-
-
-
-Code Block
-``````````
-
-
-::
-
-        this.code
-
-
-::
-
-                ::
-
-                        this.code
-
-
-Bullets
-```````
-
-- First point
-
-- Second point
-
-::
-
-        - First point
-
-        - Second point
-
-
-Numbered Lists
-``````````````
-
-#.  First point
-
-#.  Second point
-
-::
-
-        #.  First point
-
-        #.  Second point
-
-
 .. _learn_plugin_development_add_docs_toctree:
 
-toctree TODO
-------------
+TOC tree
+````````
+
+This directive inserts a table of contents at the current location, including sub-TOC
+trees.
+
+Document titles in the toctree will be automatically read from the title of the
+referenced document.
+
+----
+
+Here is an example:
+
+::
+
+        =====================
+        Example Documentation
+        =====================
+
+        .. toctree::
+            :maxdepth: 2
+            :caption: Contents:
+
+            intro
+            strings
+            datatypes
+            numeric
+            (many more documents listed here)
 
 
+.. _learn_plugin_development_add_docs_docstring_format:
 
-Docstring Format TODO
----------------------
+Docstring Format
+````````````````
+
+This extension :file:`sphinx.ext.atuodoc`, can import the modules you are documenting,
+and pull in documentation from docstrings in a semi-automatic way.
+
+.. warning:: autodoc imports the modules to be documented. If any modules have side
+    effects on import, these will be executed by autodoc when sphinx-build is run. If
+    you document scripts (as opposed to library modules), make sure their main routine
+    is protected by a if __name__ == '__main__' condition.
+
+A docstring is a string literal that occurs as the first statement in a module,
+function, class, or method definition.
+
+All modules should normally have docstrings, and all functions and classes exported by
+a module should also have docstrings. Public methods (including the __init__
+constructor) should also have docstrings. A package may be documented in the module
+docstring of the __init__.py file in the package directory.
+
+Example:
+
+::
+
+        """
+        This is a reST style.
+
+        :param param1: this is a first param
+        :param param2: this is a second param
+        :returns: this is a description of what is returned
+        :raises keyError: raises an exception
+        """
+
+
+Below is an abstract from file
+:file:`peek_plugin_tutorial/_private/server/ServerEntryHook.py`, create in the step
+:ref:`learn_plugin_development_add_server_add_file_ServerEntryHook`.
+
+::
+
+        def load(self) -> None:
+            """ Start
+
+            This will be called to start the plugin.
+            Start, means what ever we choose to do here. This includes:
+
+            -   Create Controllers
+
+            -   Create payload, observable and tuple action handlers.
+
+            """
+            logger.debug("Loaded")
+
+
+Below is an abstract from file :file:`peek-plugin-base\peek_plugin_base\PeekPlatformCommonHookABC.py`
+
+::
+
+        class PeekPlatformCommonHookABC(metaclass=ABCMeta):
+
+            @abstractmethod
+            def getOtherPluginApi(self, pluginName:str) -> Optional[object]:
+                """ Get Other Plugin Api
+
+                Asks the plugin for it's api object and return it to this plugin.
+                The API returned matches the platform service.
+
+                :param pluginName: The name of the plugin to retrieve the API for
+                :return: An instance of the other plugins API for this Peek Platform Service.
+
+                """
+
+
+What Next?
+----------
+
+Start developing your own plugins.

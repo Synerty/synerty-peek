@@ -118,6 +118,8 @@ It should return the variable you have added into the PATH
 Plugin Development
 ``````````````````
 
+Follow these steps if you are already developing peek-plugin's on this machine.
+
 For every new peek platform environment that is deployed, your development plugins will
 require setting up in the new environment.
 

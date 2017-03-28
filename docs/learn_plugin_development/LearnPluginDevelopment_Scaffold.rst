@@ -204,6 +204,8 @@ Modify the options near the top. We've modified the following:
 
 ----
 
+.. _learn_plugin_development_scaffold_add_file_readme:
+
 Add File :file:`README.rst`
 ```````````````````````````
 

@@ -45,6 +45,7 @@ Commands: ::
         mkdir peek_plugin_tutorial/_private/server
         touch peek_plugin_tutorial/_private/server/__init__.py
 
+.. _learn_plugin_development_add_server_add_file_ServerEntryHook:
 
 Add File :file:`ServerEntryHook.py`
 ```````````````````````````````````
