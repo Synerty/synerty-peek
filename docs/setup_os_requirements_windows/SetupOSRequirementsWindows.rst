@@ -26,6 +26,7 @@ Below is a list of all the required software:
 *  PostgresSQL 9.6.2+ or Microsoft® SQL Server® 2014 Express
 *  Node.js 7+ and NPM 3+
 *  Python 3.5
+*  Virtualenv
 *  FreeTDS
 
 Optional  Software
@@ -363,6 +364,20 @@ Confirm PATH(s) to environment variables ::
 
         C:\Users\peek\Python35\
         C:\Users\peek\Python35\Scripts\
+
+Virtual Environment
+```````````````````
+
+synerty-peek is deployed into python virtual environments.
+Install Virtualenv.
+
+----
+
+Open the command prompt and run the following command:
+
+::
+
+        pip install virtualenv
 
 SymLinks
 ````````
