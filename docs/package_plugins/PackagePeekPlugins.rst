@@ -9,24 +9,24 @@ the plugins after the platform release has installed.
 
 ----
 
-Open bash, and run the following
+Open the command prompt and enter the bash shell
+
+----
+
+Now build the wheels
+.. note:: This WILL pull down some platform dependencies, it will also compile cx_Oracle
 
 ::
 
-    # CD to the synerty-peek project
-    cd synerty-peek
+        cd $RELEASE_DIR
+        pip wheel *
 
-    # Ensure RELEASE_DIR is where you want it
-    echo $RELEASE_DIR
-    ./publish_plugins.sh V.E.R
 
-    # Now build the wheels
-    # NOTE: This WILL pull down some platform dependencies, it will also compile cx_Oracle
-    cd $RELEASE_DIR
-    pip wheel *
+Now clean out the src packages:
 
-    # Now clean out the src packages
-    rm *.tar.gz
+::
+
+        rm *.tar.gz
 
 
 What Next?
