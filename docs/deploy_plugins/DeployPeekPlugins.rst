@@ -14,31 +14,54 @@ This section deploys the plugins to the new virtual environment.
 For more information about plugin development and building plugin packages / releases
 see: :ref:`develop_peek_plugins`
 
-Windows
-```````
+Deploy a Windows Release
+------------------------
 
-Open a power shell window
-
-----
-
-CD to the folder where the plugin packages are located
+Open a PowerShell window.
 
 ----
 
-Pip install the plugins with the following command
+Change to a working directory:
 
 ::
 
-    # Activate the virtual environment
-    # NOTE: Make sure you have the right virtual environment
-    # Here we use "synerty-peek-0.1.0"
+        Set-Location C:\\Users\\peek
 
-    $env:Path = "C:\Users\peek\synerty-peek-0.1.0\Scripts;$env:Path"
 
-    # Install the plugin packages
-    # NOTE: The dependencies were taken care of by pip wheel in the plugin release build
-    pip install --no-deps $(ls * -name)
+----
 
+Download the platform deploy script. This is the only step in this section that
+requires the internet.
+
+::
+
+        $file = "deploy_plugin_win.ps1"
+        $uri = "/$file";
+        Invoke-WebRequest -Uri $uri -UseBasicParsing -OutFile $file;
+
+
+----
+
+Run the platform deploy script. The script will complete with a print out of where the
+new environment was deployed. Ensure you update the **$dist** variable with the path to
+your release.
+
+The script will deploy to :file:`C:\\Users\\peek`.
+
+::
+
+        $dist = "C:\Users\peek\Downloads\dist_win_peek_plugin_pof_events_#.#.#.zip"
+        PowerShell.exe -ExecutionPolicy Bypass -File deploy_platform_win.ps1 $dist
+
+
+----
+
+The plugin is now installed.
+
+Deploy a Linux Release
+----------------------
+
+**TODO**
 
 What Next?
 ----------

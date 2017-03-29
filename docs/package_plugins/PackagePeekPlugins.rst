@@ -2,32 +2,68 @@
 Package Peek Plugins
 ====================
 
-**TODO** This is really just for Synerty internal plugins at this stage.
-
 A release is a zip file containing all the required python packages to install
 the plugins after the platform release has installed.
 
+Building a Windows Release
+--------------------------
+
+This section contains the steps to build your own platform release.
+
 ----
 
-Open the command prompt and enter the bash shell
+Open a PowerShell window.
 
 ----
 
-Now build the wheels
-.. note:: This WILL pull down some platform dependencies, it will also compile cx_Oracle
+Change to a working directory where you have the peek plugin wheel.
 
 ::
 
-        cd $RELEASE_DIR
-        pip wheel *
+        Set-Location C:\\Users\\peek
 
 
-Now clean out the src packages:
+----
+
+Set the plugin you wish to package using the wheel file name:
 
 ::
 
-        rm *.tar.gz
+        $plugin = "peek-plugin-example-0.0.1.tar.gz"
 
+
+.. note:: To install a public release from
+    `PyPI - the Python Package Index <https://pypi.python.org/pypi>`_
+    set only the plugin name, :code:`$plugin = "peek-plugin-example`
+
+----
+
+Download the plugin build script. Run the following commands in the PowerShell window:
+
+::
+
+        $file = "package_plugin_win.ps1";
+        $uri = "https://bitbucket.org/synerty/peek-plugin-noop/raw/4570f98feb26f6f27c1073f5e2339389c7c534ef/$file";
+        Invoke-WebRequest -Uri $uri -UseBasicParsing -OutFile $file;
+
+
+----
+
+Run the plugin build script.
+
+::
+
+        PowerShell.exe -ExecutionPolicy Bypass -File package_plugin_win.ps1 -plugin $plugin
+
+
+The script will download the latest peek platform release and all its dependencies.
+
+Take note of the end of the script, it will print out where the release is.
+
+Building a Linux Release
+------------------------
+
+**TODO**
 
 What Next?
 ----------

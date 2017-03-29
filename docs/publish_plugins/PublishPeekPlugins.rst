@@ -37,7 +37,9 @@ Run the follow command being sure to increment the version number:
 
 
 .. note:: For a public release run,
-    :code:`./publish.sh #.#.# peek-plugin-example`
+    :code:`./publish.sh #.#.# peek-plugin-example`.
+    The script will upload your package to
+    `PyPI - the Python Package Index <https://pypi.python.org/pypi>`_
 
 What Next?
 ----------
