@@ -12,7 +12,7 @@ other, connect to the database, which plugins to load, etc.
 
 .. note:: Running the services of Peek will automatically create and fill out
     the missing parts of config.json files with defaults.  So we can start with just what
-     we want to fill out.
+    we want to fill out.
 
 
 Peek Server
@@ -96,15 +96,25 @@ If there are no plugins installed, this file will be populated as:
 Running synerty-peek
 --------------------
 
-$ python ~/Python35/Lib/site-packages/peek_server/run_peek_server.py
+Run the following in bash:
+
+::
+
+        run_peek_server
+
 
 chrome: http://127.0.0.1:8010/
 
 Update plugin settings
 
-$ python ~/Python35/Lib/site-packages/peek_client/run_peek_client.py
+::
+
+        run_peek_client
+
 
 chrome: http://127.0.0.1:8000/
 
-$ python ~/Python35/Lib/site-packages/peek_agent/run_peek_agent.py
+::
+
+        run_peek_agent
 
