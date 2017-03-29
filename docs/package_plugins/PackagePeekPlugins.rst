@@ -38,7 +38,7 @@ Set the plugin you wish to package using the wheel file name:
 
 ----
 
-Download the platform build script. Run the following commands in the power shell window:
+Download the plugin build script. Run the following commands in the PowerShell window:
 
 ::
 
@@ -49,7 +49,7 @@ Download the platform build script. Run the following commands in the power shel
 
 ----
 
-Run the platform build script.
+Run the plugin build script.
 
 ::
 
