@@ -10,53 +10,87 @@ Configuring Platform :file:`config.json`
 Update config.json files. This tells the peek platform services how to connect to each
 other, connect to the database, which plugins to load, etc.
 
-.. note:: Peek will automatically fill out the missing parts of config.json files.
-            So we can start with just what we want to fill out.
+.. note:: Running the services of Peek will automatically create and fill out
+    the missing parts of config.json files with defaults.  So we can start with just what
+     we want to fill out.
 
 
 Peek Server
 ```````````
 
-Create directory **C:\Users\peek\peek-server.home**
-Create file **C:\Users\peek\peek-server.home\config.json**
+Create directory :file:`C:\\Users\\peek\\peek-server.home`
 
-Populate the file with the
+----
+
+Create file :file:`C:\\Users\\peek\\peek-server.home\\config.json`
+
+----
+
+Populate the file :file:`C:\\Users\\peek\\peek-server.home\\config.json` with the
     *   SQLAlchemy connect URL
     *   Enabled plugins
 
 ::
 
-    {
-    "plugin": {
-        "enabled": [
-            "peek_plugin_noop",
-            "peek_plugin_etc"
-        ]
-    },
-    "sqlalchemy": {
-        "connectUrl": "postgresql://postgres:jjc@localhost/peek"
-    }
+        {
+        "plugin": {
+            "enabled": [
+                "peek_plugin_noop",
+                "peek_plugin_etc"
+            ]
+        },
+        "sqlalchemy": {
+            "connectUrl": "postgresql://postgres:jjc@localhost/peek"
+        }
+
+
+.. note:: In the SQLAlchemy connect URL the :code:`jjc` needs to be replaced with the
+    password you used when installing postgres.
+
+For MSSQL the SQAlchemy connection string will be like:
+
+::
+
+        "sqlalchemy": {
+           "connectUrl": "mssql+pymssql://.\\peek:PASSWORD@localhost/peek",
+           "engineArgs": {
+               "max_overflow": 50,
+               "pool_recycle": 600,
+               "pool_size": 20,
+               "pool_timeout": 60
+           }
+
 
 Peek Client, Agent and Worker
 `````````````````````````````
 For each of "client", "agent" and "worker" names, do the following
 
-Create directory **C:\Users\peek\peek-<name>.home**
-Create file **C:\Users\peek\peek-<name>.home\config.json**
+Create directory :file:`C:\\Users\\peek\\peek-<name>.home`
+Create file :file:`C:\\Users\\peek\\peek-<name>.home\config.json`
 
-Populate the file with the
-    *   Enabled plugins
+Populate the file :file:`C:\\Users\\peek\\peek-server.home\\config.json` with the
+    *   Enabled plugins (the plugins you have installed)
 
 ::
 
-    {
-    "plugin": {
-        "enabled": [
-            "peek_plugin_noop",
-            "peek_plugin_etc"
-        ]
-    }
+        {
+        "plugin": {
+            "enabled": [
+                "peek_plugin_noop",
+                "peek_plugin_etc"
+            ]
+        }
 
+
+If there are no plugins installed, this file will be populated as:
+
+::
+
+        {
+        "plugin": {
+            "enabled": [
+            ]
+        }
 
 
 Running synerty-peek
