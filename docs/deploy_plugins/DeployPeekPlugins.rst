@@ -4,64 +4,81 @@
 Deploy Peek Plugins
 ===================
 
-.. note:: The Windows or Debian requirements must be followed before following this guide.
+Deploying a Production Release
+------------------------------
 
-Deploying Plugins
------------------
-
-This section deploys the plugins to the new virtual environment.
+This section deploys the plugins to a virtual environment, see
+:ref:`deploy_peek_platform`.
 
 For more information about plugin development and building plugin packages / releases
 see: :ref:`develop_peek_plugins`
 
-Deploy a Windows Release
-------------------------
-
-Open a PowerShell window.
+.. important:: Windows users must use bash.
 
 ----
 
-Change to a working directory:
+Download the :file:`plugin_release_dir.zip` file created in :ref:`package_peek_plugins`
+
+----
+
+Create the release directory:
 
 ::
 
-        Set-Location C:\\Users\\peek
+        mkdir ~/plugin-release-dir
 
+
+.. note::You may need to clean up any previously packaged releases:
+    :code:`rm -rf ~/plugin-release-dir`
 
 ----
 
-Download the platform deploy script. This is the only step in this section that
-requires the internet.
+Change to release directory:
 
 ::
 
-        $file = "deploy_plugin_win.ps1"
-        $uri = "/$file";
-        Invoke-WebRequest -Uri $uri -UseBasicParsing -OutFile $file;
+        cd ~/plugin-release-dir
 
 
 ----
 
-Run the platform deploy script. The script will complete with a print out of where the
-new environment was deployed. Ensure you update the **$dist** variable with the path to
-your release.
-
-The script will deploy to :file:`C:\\Users\\peek`.
+Unzip the contents of :file:`plugin_release_dir.zip`:
 
 ::
 
-        $dist = "C:\Users\peek\Downloads\dist_win_peek_plugin_pof_events_#.#.#.zip"
-        PowerShell.exe -ExecutionPolicy Bypass -File deploy_platform_win.ps1 $dist
+        unzip ~/Downloads/plugin_release_dir.zip
 
 
 ----
 
-The plugin is now installed.
+Ensure that you're in the Virtual Environment that you want your plugins deployed:
 
-Deploy a Linux Release
-----------------------
+::
 
-**TODO**
+        which python
+
+
+----
+
+Deploy the plugins:
+
+::
+
+        pip install *
+
+
+----
+
+Read through :ref:`administer_peek_platform` about updating the service
+:file:`conf.json` files to include the deployed plugins.
+
+----
+
+Restart the :file:`server` service
+
+----
+
+You have successfully deployed your peek plugins
 
 What Next?
 ----------

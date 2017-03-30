@@ -4,10 +4,12 @@
 Publish Peek Plugins
 ====================
 
-Building a Production Release
+Generate a Production Release
 -----------------------------
 
-The peek package has build scripts that generate a platform build
+The peek package has build scripts that generate a platform build.
+
+.. important:: Windows users must use bash.
 
 ----
 

@@ -1,69 +1,88 @@
+.. _package_peek_plugins:
+
 ====================
 Package Peek Plugins
 ====================
 
+Packaging a Production Release
+------------------------------
+
 A release is a zip file containing all the required python packages to install
 the plugins after the platform release has installed.
 
-Building a Windows Release
---------------------------
-
-This section contains the steps to build your own platform release.
+.. important:: Windows users must use bash.
 
 ----
 
-Open a PowerShell window.
-
-----
-
-Change to a working directory where you have the peek plugin wheel.
+Create the release directory:
 
 ::
 
-        Set-Location C:\\Users\\peek
+        mkdir ~/plugin-release-dir
+
+
+.. note:: You should clean up any previously packaged releases:
+    :code:`rm -rf ~/plugin-release-dir`
+
+----
+
+Change to release directory:
+
+::
+
+        cd ~/plugin-release-dir
 
 
 ----
 
-Set the plugin you wish to package using the wheel file name:
+Copy your private plugins into the release directory:
 
 ::
 
-        $plugin = "peek-plugin-example-0.0.1.tar.gz"
+        cp ~/peek-plugin-example/dist/peek-plugin-example-#.#.#.tar.gz .
 
 
-.. note:: To install a public release from
-    `PyPI - the Python Package Index <https://pypi.python.org/pypi>`_
-    set only the plugin name, :code:`$plugin = "peek-plugin-example`
+.. note:: Repeat this step for each private plugin.
 
 ----
 
-Download the plugin build script. Run the following commands in the PowerShell window:
+Build Wheel archives for your private requirements and dependencies:
 
 ::
 
-        $file = "package_plugin_win.ps1";
-        $uri = "https://bitbucket.org/synerty/peek-plugin-noop/raw/4570f98feb26f6f27c1073f5e2339389c7c534ef/$file";
-        Invoke-WebRequest -Uri $uri -UseBasicParsing -OutFile $file;
+        pip wheel *.tar.gz
 
 
 ----
 
-Run the plugin build script.
+Build Wheel archives for your public requirements and dependencies:
 
 ::
 
-        PowerShell.exe -ExecutionPolicy Bypass -File package_plugin_win.ps1 -plugin $plugin
+        pip wheel peek-plugin-noop
 
 
-The script will download the latest peek platform release and all its dependencies.
+.. note:: This is an example of a single plugin from
+    `PyPI - the Python Package Index <https://pypi.python.org/pypi>`_.
+    Include as many as you require in the single command line.
 
-Take note of the end of the script, it will print out where the release is.
+----
 
-Building a Linux Release
-------------------------
+Zip the contents:
 
-**TODO**
+::
+
+        zip plugin_release_dir.zip *
+
+
+----
+
+Cleanup the release directory:
+
+::
+
+        rm -rf *.whl *.tar.gz
+
 
 What Next?
 ----------
