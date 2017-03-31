@@ -52,13 +52,8 @@ For MSSQL the SQAlchemy connection string will be like:
 ::
 
         "sqlalchemy": {
-           "connectUrl": "mssql+pymssql://.\\peek:PASSWORD@localhost/peek",
-           "engineArgs": {
-               "max_overflow": 50,
-               "pool_recycle": 600,
-               "pool_size": 20,
-               "pool_timeout": 60
-           }
+           "connectUrl": "mssql+pymssql://.\\peek:PASSWORD@localhost/peek"
+        }
 
 
 Peek Client, Agent and Worker
