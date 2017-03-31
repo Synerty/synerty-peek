@@ -61,7 +61,7 @@ Peek Client, Agent and Worker
 For each of "client", "agent" and "worker" names, do the following
 
 Create directory :file:`C:\\Users\\peek\\peek-<name>.home`
-Create file :file:`C:\\Users\\peek\\peek-<name>.home\config.json`
+Create file :file:`C:\\Users\\peek\\peek-<name>.home\\config.json`
 
 Populate the file :file:`C:\\Users\\peek\\peek-server.home\\config.json` with the
     *   Enabled plugins (the plugins you have installed)
