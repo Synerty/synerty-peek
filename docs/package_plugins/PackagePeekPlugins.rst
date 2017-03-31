@@ -68,6 +68,12 @@ Build Wheel archives for your public requirements and dependencies:
 
 ----
 
+Cleanup the dist files directory:
+
+::
+
+        rm -rf *.tar.gz
+
 Zip the contents:
 
 ::
@@ -81,7 +87,7 @@ Cleanup the release directory:
 
 ::
 
-        rm -rf *.whl *.tar.gz
+        rm -rf *.whl
 
 
 What Next?
