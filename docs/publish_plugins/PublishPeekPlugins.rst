@@ -55,7 +55,7 @@ Create file :file:`~/.pypirc` and populate with the following:
 Register a Plugin
 `````````````````
 
-Before you can publicly upload a plugin, you need to register you Plugin on
+Before you can publicly upload a plugin, you need to register the Plugin on
 `Test PyPI <https://testpypi.python.org/pypi>`_ and
 `PyPI <https://pypi.python.org/pypi>`_.
 
