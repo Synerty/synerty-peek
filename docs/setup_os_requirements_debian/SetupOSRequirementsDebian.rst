@@ -2,15 +2,58 @@
 Setup OS Requirements Debian
 ============================
 
-.. note:: For offline installation some steps are required to be installed on another
-    online server for the files to be packaged and transfered to the offline server.
+This section describes how to perform the setup for Debian Linux 8.  The Peek platform
+is designed to run on Linux.
 
-Debian Linux
-------------
+Please read through all of the documentation before commencing the installation procedure.
 
-This section desribes how to perform the setup for Debian Linux 8
-The python environment will be installed under the user Peek will run as. This should be
-**peek** with a home of **/home/peek**
+Installation Objective
+----------------------
+
+This Installation Guide contains specific Debian Linux 8 operating system requirements
+for the configuring of synerty-peek.
+
+Required Software
+`````````````````
+
+Some of the software to be installed requires internet access. For offline installation
+some steps are required to be installed on another online server for the files to be
+packaged and transferred to the offline server.
+
+Below is a list of all the required software:
+
+
+- sudo (For licencing and upgrades)
+
+- C Compiler (gcc, Python and Node build dependencies)
+
+- Postgres 9.5
+
+- NodeJS 7.1
+
+- Python 3.5
+
+Optional Software
+`````````````````
+
+- rsync
+
+- git
+
+- Installing Oracle Libraries
+
+Installing Oracle Libraries is required if you intend on installing the peek agent.
+Instruction for installing the Oracle Libraries are in the Online Installation Guide.
+
+Installation Guide
+------------------
+
+Run all commands from a terminal window remotely via ssh.
+
+Create User
+```````````
+
+Create User :code:`peek` with a home of :code:`/home/peek`
 
 Installing General Prerequisites
 ````````````````````````````````
@@ -28,11 +71,43 @@ Installing General Prerequisites
 
         apt-get install -y $PKG
 
+
+Setting the Environment
+```````````````````````
+
+.. important:: This is done before the software is installed.
+
+Edit :file:`~/.bashrc` and insert the following after the first block comment but
+before lines like: :code:`# If not running interactively, don't do anything` ::
+
+        export PEEK_PY_VER="3.5.2"
+        export PEEK_NODE_VER="7.1.0"
+        export LD_LIBRARY_PATH="/home/peek/cpython-${PEEK_PY_VER}/oracle/instantclient_12_1:$LD_LIBRARY_PATH"
+        export ORACLE_HOME="/home/peek/cpython-${PEEK_PY_VER}/oracle/instantclient_12_1"
+        export PATH="/home/peek/cpython-${PEEK_PY_VER}/bin:/home/peek/node-v${PEEK_NODE_VER}/bin:$PATH"
+
+
+Here's an example ::
+
+        # ~/.bashrc: executed by bash(1) for non-login shells.
+        # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
+        # for examples
+
+        export PEEK_PY_VER="3.5.2"
+        export PEEK_NODE_VER="7.1.0"
+        export LD_LIBRARY_PATH="/home/peek/cpython-${PEEK_PY_VER}/oracle/instantclient_12_1:$LD_LIBRARY_PATH"
+        export ORACLE_HOME="/home/peek/cpython-${PEEK_PY_VER}/oracle/instantclient_12_1"
+        export PATH="/home/peek/cpython-${PEEK_PY_VER}/bin:/home/peek/node-v${PEEK_NODE_VER}/bin:$PATH"
+
+        # If not running interactively, don't do anything
+        ...
+
+
 Installing the PostGreSQL database
 ``````````````````````````````````
 Install the relational database we use on Linux.
 
-#.  Add the latest PostGreSQL repository ::
+#. Add the latest PostGreSQL repository ::
 
         F=/etc/apt/sources.list.d/postgresql.list
         echo "deb http://apt.postgresql.org/pub/repos/apt/ jessie-pgdg main" > $F
@@ -40,14 +115,12 @@ Install the relational database we use on Linux.
 
         apt-get update
 
-#.  Install PostGresQL ::
+#. Install PostGresQL ::
 
-        # The SQL Server we use on Linux
         apt-get install -y postgis postgresql-9.5
 
-#.  Configure the DB and User ::
+#. Configure the User ::
 
-        PEEK_PG_PASS="PASSWORD"
         F=/etc/postgresql/9.5/main/pg_hba.conf
 
         if ! grep -q 'peek' $F; then
@@ -57,34 +130,27 @@ Install the relational database we use on Linux.
         su - postgres
         createuser -d -r -s peek
 
-        # Create the db
+
+#. Create the database ::
+
         createdb -O peek peek
 
-        # Set the password
+
+#. Set the database password ::
+
         psql <<EOF
-        alter role peek password "${PEEK_PG_PASS}";
+        \password
         \q
         EOF
 
-        # Cleanup traces of the password
+        # Set the password as "PASSWORD"
+
+
+#. Cleanup traces of the password ::
+
         [ -e ~/.psql_history ] && rm ~/.psql_history || true
-        exit #su
+        exit
 
-Setting the Environment
-```````````````````````
-
-NOTE: This is done before the software is installed.
-
-#.  Edit **~/.bashrc** and insert the following after the first block comment.
-    :NOTE: Make sure these are before any lines like:
-    # If not running interactively, don't do anything ::
-
-        ##### SET THE PEEK ENVIRONMENT #####
-        export PEEK_PY_VER="3.5.2"
-        export PEEK_NODE_VER="7.1.0"
-        export LD_LIBRARY_PATH="/home/peek/cpython-${PEEK_PY_VER}/oracle/instantclient_12_1:$LD_LIBRARY_PATH"
-        export ORACLE_HOME="/home/peek/cpython-${PEEK_PY_VER}/oracle/instantclient_12_1"
-        export PATH="/home/peek/cpython-${PEEK_PY_VER}/bin:/home/peek/node-v${PEEK_NODE_VER}/bin:$PATH"
 
 Compiling and Installing NodeJS
 ```````````````````````````````
@@ -95,6 +161,7 @@ Compiling and Installing NodeJS
         PKGS="$PKGS libexpat-dev libncurses-dev zlib1g-dev libgmp-dev"
         apt-get install $PKGS
 
+
 #.  Download the supported node version ::
 
         PEEK_NODE_VER="7.1.0"
@@ -102,12 +169,14 @@ Compiling and Installing NodeJS
 
         wget "https://nodejs.org/dist/v${PEEK_NODE_VER}/node-v${PEEK_NODE_VER}-linux-x64.tar.xz"
         tar xvJf node-v${PEEK_NODE_VER}-linux-x64.tar.xz
-        cd node-v${PEEK_NODE_VER}
+        cd node-v${PEEK_NODE_VER}-linux-x64
+
 
 #.  Configure the NodeJS Build ::
 
-        ./configure --prefix=/home/peek/node-v${PEEK_NODE_VER}
+        ./configure --prefix=/home/peek/node-v${PEEK_NODE_VER}-linux-x64
         make -j4 && make install
+
 
 #.  Test that the setup is working ::
 
@@ -117,15 +186,17 @@ Compiling and Installing NodeJS
         which npm
         echo "It should be /home/peek/node-v7.1.0/bin/npm"
 
+
 #.  Install the required NPM packages ::
 
         npm -g upgrade npm
         npm -g install @angular/cli typescript tslint
 
+
 Compiling and Installing Python
 ```````````````````````````````
 
-#.  Install the required debian packages ::
+#.  Install the required Debian packages ::
 
         # Required for the build
         PKG="libbz2-dev libcurl4-gnutls-dev samba-dev libsmbclient-dev libcups2-dev"
@@ -143,6 +214,7 @@ Compiling and Installing Python
 
         apt-get install -y $PKG
 
+
 #.  Download and unarchive the supported version of Python ::
 
         cd ~
@@ -150,18 +222,22 @@ Compiling and Installing Python
         wget "https://www.python.org/ftp/python/${PEEK_PY_VER}/Python-${PEEK_PY_VER}.tgz"
         tar xf Python-${PEEK_PY_VER}.tgz
 
+
 #.  Configure the build ::
 
         cd Python-${VER}
         ./configure --prefix=/home/peek/cpython-${PEEK_PY_VER}/ --enable-optimizations
 
+
 #.  Make and Make install the software ::
 
         make -j4 && make install
 
-#.  Symlink the site packages for convienence ::
+
+#.  Symlink the site packages for convenience ::
 
         ln -s /home/peek/cpython-3.5.2/lib/python3.5/site-packages /home/peek/peek-site-packages
+
 
 #.  Test that the setup is working ::
 
@@ -171,16 +247,17 @@ Compiling and Installing Python
         which pip
         echo "It should be /home/peek/cpython-3.5.2/bin/pip"
 
+
 Installing Oracle Libraries (Optional)
 ``````````````````````````````````````
 
 The oracle libraries are optional. Install them where the agent runs if you are going to
 interface with an oracle database.
 
-#.  Install the OS dependencies ::
+#.  Install the OS dependencies for Oracle Instant Client ::
 
-        # For oracle instant client
         apt-get install -y libaio1
+
 
 #.  Make the directory where the oracle client will live ::
 
@@ -188,15 +265,16 @@ interface with an oracle database.
         echo "Oracle client dir will be $ORACLE_DIR"
         mkdir $ORACLE_DIR && cd $ORACLE_DIR
 
+
 #.  Download the following from oracle.
-    The version used in these instructions is **12.1.0.2.0**.
+    The version used in these instructions is :file:`12.1.0.2.0`.
     Copy them to the directory created in the step above.
 
-    #.  Download the "Instant Client Package - Basic" from
-        http://www.oracle.com/technetwork/topics/linuxx86-64soft-092277.html
+    - Download the
+    `Instant Client Package - Basic <http://www.oracle.com/technetwork/topics/linuxx86-64soft-092277.html>`_
 
-    #.  Download the "Instant Client Package - SDK" from
-        http://www.oracle.com/technetwork/topics/linuxx86-64soft-092277.html
+    - Download the
+    `Instant Client Package - SDK <http://www.oracle.com/technetwork/topics/linuxx86-64soft-092277.html>`_
 
 #.  Symlink the oracle client lib ::
 
@@ -204,9 +282,11 @@ interface with an oracle database.
         ln -snf libclntsh.so.12.1 libclntsh.so
         ls -l libclntsh.so
 
-#.  Now you can install the cx_Oracle python package. ::
+
+#.  Now you can install the cx_Oracle python package ::
 
         pip install cx_Oracle
+
 
 #.  Now test it with some python ::
 
@@ -215,4 +295,5 @@ interface with an oracle database.
         print con.version
         # Expcect to see "12.1.0.2.0"
         con.close()
+
 
