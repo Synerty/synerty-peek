@@ -56,14 +56,15 @@ Register a Plugin
 `````````````````
 
 Before you can publicly upload a plugin, you need to register the Plugin on
-`Test PyPI <https://testpypi.python.org/pypi>`_ and
-`PyPI <https://pypi.python.org/pypi>`_.
+`Test PyPI <https://testpypi.python.org/pypi>`_.
+
+.. note:: Registration is only required for the test site.
 
 Change root directory of peek-plugin, example:
 
 ::
 
-        cd ~peek/peek-plugin-example/
+        cd /peek-plugin-example/
 
 
 ----
@@ -72,8 +73,7 @@ Run the following lines:
 
 ::
 
-        python setup.py register -r https://testpypi.python.org/pypi
-        python setup.py register
+        python setup.py register -r pypitest
 
 
 Generate a Production Release
