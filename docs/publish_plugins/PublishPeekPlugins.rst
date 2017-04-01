@@ -12,6 +12,8 @@ The Python Package Index
 
 The Python Package Index is a repository of software for the Python programming language.
 
+.. _publish_peek_plugins_setting_up_your_pypi_accounts:
+
 Setting up your PyPI Accounts
 `````````````````````````````
 
@@ -52,6 +54,8 @@ Create file :file:`~/.pypirc` and populate with the following:
 
 .. note:: Make sure you update the :code:`username` and :code:`password`.
 
+.. _publish_peek_plugins_register_a_plugin:
+
 Register a Plugin
 `````````````````
 
@@ -74,6 +78,24 @@ Run the following lines:
 ::
 
         python setup.py register -r pypitest
+
+
+Expected Response:
+
+::
+
+        $ python setup.py register -r pypitest
+        running register
+        running egg_info
+        writing top-level names to peek_plugin_tutorial.egg-info\top_level.txt
+        writing dependency_links to peek_plugin_tutorial.egg-info\dependency_links.txt
+        writing requirements to peek_plugin_tutorial.egg-info\requires.txt
+        writing peek_plugin_tutorial.egg-info\PKG-INFO
+        reading manifest file 'peek_plugin_tutorial.egg-info\SOURCES.txt'
+        writing manifest file 'peek_plugin_tutorial.egg-info\SOURCES.txt'
+        running check
+        Registering peek-plugin-tutorial to https://testpypi.python.org/pypi
+        Server response (200): OK
 
 
 Generate a Production Release
@@ -103,6 +125,12 @@ Ensure RELEASE_DIR is where you want it:
         echo $RELEASE_DIR
 
 
+Create Private Plugin Release
+`````````````````````````````
+
+.. note:: Do not follow this step if you intend on using a public release, see
+    :ref:`publish_peek_plugins_create_testpypi_public_release`
+
 Run the follow command being sure to increment the version number:
 
 ::
@@ -110,10 +138,95 @@ Run the follow command being sure to increment the version number:
         ./publish.sh #.#.#
 
 
-.. note:: For a public release run,
-    :code:`./publish.sh #.#.# pypitest`.
-    The script will upload your package to
-    `Test PyPI <https://testpypi.python.org/pypi>`_
+Expected response like:
+
+::
+
+        $ ./publish.sh 0.0.7
+        Setting version to 0.0.7
+
+        ...
+
+        Not publishing to any pypi indexes
+
+
+.. _publish_peek_plugins_create_testpypi_public_release:
+
+Create TestPyPI Public Release
+``````````````````````````````
+
+Requirements:
+
+- :ref:`publish_peek_plugins_setting_up_your_pypi_accounts`
+
+- :ref:`publish_peek_plugins_register_a_plugin`
+
+Run the follow command being sure to increment the version number:
+
+::
+
+        ./publish.sh #.#.# pypitest
+
+
+Expected response like:
+
+::
+
+        $ ./publish.sh 0.0.7 pypitest
+        Setting version to 0.0.7
+
+        ...
+
+        Writing peek-plugin-tutorial-0.0.7\setup.cfg
+        Creating tar archive
+        removing 'peek-plugin-tutorial-0.0.7' (and everything under it)
+        running upload
+        Submitting dist\peek-plugin-tutorial-0.0.7.tar.gz to https://testpypi.python.org/pypi
+        Server response (200): OK
+
+
+----
+
+Check uploaded release on `Test PyPI <https://testpypi.python.org/pypi>`_.
+
+----
+
+Confirm release is functioning as expected before following the next step,
+:ref:`publish_peek_plugins_create_pypi_public_release`
+
+.. _publish_peek_plugins_create_pypi_public_release:
+
+Create PyPI Public Release
+``````````````````````````
+
+Requirements:
+
+- :ref:`publish_peek_plugins_create_testpypi_public_release`
+
+Run the follow command:
+
+::
+
+        python setup.py sdist upload -r pypi
+
+
+Expected response like:
+
+::
+
+        $ python setup.py sdist upload -r pypi
+        running sdist
+
+        ...
+
+        running upload
+        Submitting dist\peek-plugin-tutorial-0.0.7.tar.gz to https://upload.pypi.org/legacy/
+        Server response (200): OK
+
+
+----
+
+Check uploaded release on `PyPI <https://pypi.python.org/pypi>`_.
 
 What Next?
 ----------
