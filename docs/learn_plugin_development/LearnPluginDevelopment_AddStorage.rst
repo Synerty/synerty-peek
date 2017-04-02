@@ -575,6 +575,8 @@ Settings Table Examples
 
 Here is some example code for using the settings table.
 
+.. note:: This is only example code, you should not leave it in.
+
 ----
 
 Edit the file :file:`peek_plugin_tutorial/_private/server/ServerEntryHook.py`
@@ -588,23 +590,23 @@ Add the following import up the top of the file:
 
 ----
 
-Place this code in the :command:`start():` method:
+To Place this code in the :command:`start():` method:
 
 ::
 
-        session = self.dbSessionCreator()
-
-        # This will retrieve all the settings
-        allSettings = globalSetting(session)
-        logger.debug(allSettings)
-
-        # This will retrieve the value of property1
-        value1 = globalSetting(session, key=PROPERTY1)
-        logger.debug("value1 = %s" % value1)
-
-        # This will set property1
-        globalSetting(session, key=PROPERTY1, value="new value 1")
-        session.commit()
-
-        session.close()
+# session = self.dbSessionCreator()
+#
+# # This will retrieve all the settings
+# allSettings = globalSetting(session)
+# logger.debug(allSettings)
+#
+# # This will retrieve the value of property1
+# value1 = globalSetting(session, key=PROPERTY1)
+# logger.debug("value1 = %s" % value1)
+#
+# # This will set property1
+# globalSetting(session, key=PROPERTY1, value="new value 1")
+# session.commit()
+#
+# session.close()
 
