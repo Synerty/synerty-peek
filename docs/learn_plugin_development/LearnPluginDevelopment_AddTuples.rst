@@ -331,6 +331,48 @@ with contents ::
         }
 
 
+
+Add File :file:`SettingPropertyTuple.ts`
+````````````````````````````````````````
+
+The :file:`SettingPropertyTuple.ts` file defines the TypeScript Tuple for the
+hybrid Tuple/SQL Declarative that represents :code:`SettingPropertyTuple`.
+
+The code:`SettingProperty` storage table is the in the :code:`storage/Settings.py` file,
+It's the table that stores the key/value pairs.
+
+----
+
+Create file
+:file:`peek_plugin_tutorial/plugin-module/_private/tuples/SettingPropertyTuple.ts`,
+with contents ::
+
+        import {addTupleType, Tuple} from "@synerty/vortexjs";
+        import {tutorialTuplePrefix} from "../PluginNames";
+
+
+        @addTupleType
+        export class SettingPropertyTuple extends Tuple {
+            // The tuple name here should end in "Tuple" as well, but it doesn't, as it's a table
+            public static readonly tupleName = tutorialTuplePrefix + "SettingProperty";
+
+            id: number;
+            settingId: number;
+            key: string;
+            type: string;
+
+            int_value: number;
+            char_value: string;
+            boolean_value: boolean;
+
+
+            constructor() {
+                super(SettingPropertyTuple.tupleName)
+            }
+        }
+
+
+
 Edit File :file:`_private/index.ts`
 ```````````````````````````````````
 
@@ -344,6 +386,7 @@ Append the line: ::
 
         export {TutorialTuple} from "./tuples/TutorialTuple";
         export {StringIntTuple} from "./tuples/StringIntTuple";
+        export {SettingPropertyTuple} from "./tuples/SettingPropertyTuple";
 
 ---
 
