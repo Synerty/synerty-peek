@@ -157,6 +157,10 @@ Create the peek user, run the following script: ::
         CONNECTION LIMIT -1
         PASSWORD 'PASSWORD';
 
+.. note:: Replace :code:`PASSWORD` with a password of your choice or requirements
+
+Example:
+
 .. image:: pgAdmin4-userQuery.jpg
 
 ----
