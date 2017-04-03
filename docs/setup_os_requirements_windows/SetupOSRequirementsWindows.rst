@@ -106,7 +106,7 @@ Install using the ISO
 
 :Download: `<https://www.microsoft.com/en-US/download/details.aspx?id=48146>`_
 
-.. _postgressql:
+.. _requirements_windows_postgressql:
 
 PostgresSQL
 ```````````
