@@ -68,7 +68,7 @@ Change root directory of peek-plugin, example:
 
 ::
 
-        cd /peek-plugin-example/
+        cd peek-plugin-example/
 
 
 ----
@@ -115,8 +115,10 @@ Change root directory of peek-plugin, example:
 
 ::
 
-        cd ~peek/peek-plugin-example/
+        cd peek-plugin-example/
 
+
+----
 
 Ensure RELEASE_DIR is where you want it:
 
@@ -130,6 +132,17 @@ Create Private Plugin Release
 
 .. note:: Do not follow this step if you intend on using a public release, see
     :ref:`publish_peek_plugins_create_testpypi_public_release`
+
+Ensure that the file :file:`publish.sh` variable :code:`PYPI_PUBLISH` is blank
+
+::
+
+        # Leave blank not to publish
+        # Or select one of the index servers defined in ~/.pypirc
+        PYPI_PUBLISH=""
+
+
+----
 
 Run the follow command being sure to increment the version number:
 
@@ -161,18 +174,30 @@ Requirements:
 
 - :ref:`publish_peek_plugins_register_a_plugin`
 
+Ensure that the file :file:`publish.sh` variable :code:`PYPI_PUBLISH` is set to the
+index of the test server defined in :file:`~/.pypirc`:
+
+::
+
+        # Leave blank not to publish
+        # Or select one of the index servers defined in ~/.pypirc
+        PYPI_PUBLISH="pypitest"
+
+
+----
+
 Run the follow command being sure to increment the version number:
 
 ::
 
-        ./publish.sh #.#.# pypitest
+        ./publish.sh #.#.#
 
 
 Expected response like:
 
 ::
 
-        $ ./publish.sh 0.0.7 pypitest
+        $ ./publish.sh 0.0.7
         Setting version to 0.0.7
 
         ...
