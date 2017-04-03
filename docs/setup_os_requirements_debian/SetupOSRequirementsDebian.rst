@@ -105,7 +105,7 @@ Install the Python and Node build dependencies:
 ::
 
         PKG="build-essential curl git m4 ruby texinfo libbz2-dev libcurl4-openssl-dev"
-        PKG="$PKG libexpat-dev libncurses-dev zlib1g-dev libgmp-dev"
+        PKG="$PKG libexpat-dev libncurses-dev zlib1g-dev libgmp-dev virtualenv"
         sudo apt-get install -y $PKG
 
 
