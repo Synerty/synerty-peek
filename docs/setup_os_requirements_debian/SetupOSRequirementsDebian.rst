@@ -51,7 +51,7 @@ Switch to the :code:`root` user:
 
 ::
 
-    su root
+    su -
 
 
 ----
@@ -227,7 +227,7 @@ Make the directory where the oracle client will live ::
 
         cd ~
         PEEK_PY_VER="3.5.2"
-        ORACLE_DIR="/home/peek/cpython-${PEEK_PY_VER}/oracle"
+        ORACLE_DIR="/home/peek/oracle"
         echo "Oracle client dir will be $ORACLE_DIR"
         mkdir -p $ORACLE_DIR && cd $ORACLE_DIR
 
