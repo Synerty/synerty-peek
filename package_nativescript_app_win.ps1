@@ -1,7 +1,7 @@
 param([String]$wantedVer)
 
 # Make Powershell stop if it has errors
-$ErrorActionPreference = "Stop
+$ErrorActionPreference = "Stop"
 
 if (-Not [string]::IsNullOrEmpty($wantedVer)) {
     Write-Host "Requested version is $wantedVer"
