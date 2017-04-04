@@ -31,18 +31,21 @@ This is the only step in this section that requires the internet.
         $uri = "https://raw.githubusercontent.com/Synerty/synerty-peek/master/$file";
         Invoke-WebRequest -Uri $uri -UseBasicParsing -OutFile $file;
 
+
 ----
 
 Run the deploy NativeScript App dependencies script.  The script will complete with a
 print out of the environment the NativeScript App dependencies were deployed.  Ensure you
-update the **$dist** variable with the path to your release.
+update the **$ver** variable with the environment version you're deploying. Also update
+the **$dist** variable with the path to your release.
 
 The script will deploy to :file:`C:\\Users\\peek`.
 
 ::
 
-        $dist = "C:\Users\peek\Downloads\peek_dist_nativescript_app_win_#.#.#.zip"
-        PowerShell.exe -ExecutionPolicy Bypass -File deploy_nativescript_app_win.ps1 $dist
+        $ver = "#.#.#"
+        $dist = "C:\Users\peek\Downloads\peek_dist_nativescript_app_win.zip"
+        PowerShell.exe -ExecutionPolicy Bypass -File deploy_nativescript_app_win.ps1 $ver $dist
 
 
 ----

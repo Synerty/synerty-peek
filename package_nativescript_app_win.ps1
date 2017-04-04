@@ -1,16 +1,11 @@
-param([String]$wantedVer)
 
 # Make Powershell stop if it has errors
 $ErrorActionPreference = "Stop"
 
-if (-Not [string]::IsNullOrEmpty($wantedVer)) {
-    Write-Host "Requested version is $wantedVer"
-}
-
 # Get the current location
 $startDir=Get-Location
 
-$baseDir="$startDir\peek_dist_win";
+$baseDir="$startDir\peek_dist_nativescript_app_win";
 
 # Delete the existing dist dir if it exists
 If (Test-Path $baseDir){
@@ -58,9 +53,8 @@ foreach ($element in $nodePackages) {
 Set-Location $startDir;
 
 # Finally, version the directory
-$releaseDir="$($baseDir)_$($peekPkgVer)";
+$releaseDir="$($baseDir)";
 $relaseZip="$($releaseDir).zip"
-Move-Item $baseDir $releaseDir -Force;
 
 # Create the zip file
 Add-Type -Assembly System.IO.Compression.FileSystem;
@@ -69,5 +63,5 @@ $compressionLevel = [System.IO.Compression.CompressionLevel]::Optimal;
     $releaseDir, $relaseZip, $compressionLevel, $false)
 
 # We're all done.
-Write-Host "Successfully created release $peekPkgVer";
+Write-Host "Successfully packaged the NativeScript App dependencies";
 Write-Host "Located at $relaseZip";
