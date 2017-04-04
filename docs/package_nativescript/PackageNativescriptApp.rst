@@ -28,6 +28,7 @@ Create and change to a working directory where you're happy for the release to b
 
     Set-Location C:\Users\peek
 
+
 ----
 
 Download the package NativeScript App dependencies script.
@@ -39,6 +40,7 @@ Run the following commands in the PowerShell window.
     $uri = "https://raw.githubusercontent.com/Synerty/synerty-peek/master/$file";
     Invoke-WebRequest -Uri $uri -UseBasicParsing -OutFile $file;
 
+
 ----
 
 Run the package NativeScript App dependencies script.
@@ -46,6 +48,7 @@ Run the package NativeScript App dependencies script.
 ::
 
     PowerShell.exe -ExecutionPolicy Bypass -File package_nativescript_app_win.ps1
+
 
 The script will download the NativeScript App dependencies.
 
