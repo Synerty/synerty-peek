@@ -24,6 +24,27 @@ If (Test-Path $releaseDir){
 # Create our new release dir
 New-Item $releaseDir -ItemType directory;
 
+# This variable is the path of the virtualenv being deployed to
+$venvDir = "C:\Users\peek\synerty-peek-$peekPkgVer";
+
+# Check if this release is already deployed
+If (Test-Path $venvDir){
+} else {
+    Write-Error "This release doesn't exist, check the version number you passed into the script and run again.";
+}
+
+# Check if this node_modules already exists
+$sp="$venvDir\Lib\site-packages";
+
+If (Test-Path "$sp\peek_mobile\build-ns\node_modules"){
+    Write-Host " "
+    Write-Host "Directory already exists : $sp\peek_mobile\build-ns\node_modules";
+    Write-Host " "
+    Write-Host "To remove, run: Remove-Item $sp\peek_mobile\build-ns\node_modules -Force -Recurse"
+    Write-Host " "
+    Write-Error "This NativeScript App already exist, delete it to re-deploy";
+}
+
 # Decompress the release
 Write-Host "Extracting release to $releaseDir";
 
@@ -35,24 +56,6 @@ if (Test-Path $7zExe) {
     Write-Host "Using standard windows zip handler, this will be slow";
     Add-Type -Assembly System.IO.Compression.FileSystem;
     [System.IO.Compression.ZipFile]::ExtractToDirectory($releaseZip, $releaseDir);
-}
-
-# This variable is the path of the virtualenv being deployed to
-$venvDir = "C:\Users\peek\synerty-peek-$peekPkgVer";
-
-# Check if this release is already deployed
-If (Test-Path $venvDir){
-} else {
-    Write-Error "This release doesn't exist, check the version number you passed into the script and run again.";
-}
-
-# ------------------------------------------------------------------------------
-# Check if this node_modules already exists
-$sp="$venvDir\Lib\site-packages";
-
-If (Test-Path $sp\mobile-build-ns\node_modules){
-    Write-Host "directory already exists : $sp\mobile-build-ns\node_modules";
-    Write-Error "This NativeScript App already exist, delete it to re-deploy";
 }
 
 # Move the node_modules into place
