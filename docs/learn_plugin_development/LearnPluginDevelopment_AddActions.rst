@@ -616,7 +616,7 @@ edit the file
 
 ::
 
-        toggleUpperCicked(item) {
+        toggleUpperClicked(item) {
             let action = new StringCapToggleActionTuple();
             action.stringIntId = item.id;
             this.actionService.pushAction(action)
@@ -629,7 +629,7 @@ edit the file
                 });
         }
 
-        incrementCicked(item) {
+        incrementClicked(item) {
             let action = new AddIntValueActionTuple();
             action.stringIntId = item.id;
             action.offset = 1;
@@ -643,7 +643,7 @@ edit the file
                 });
         }
 
-        decrementCicked(item) {
+        decrementClicked(item) {
             let action = new StringIntDecreaseActionTuple();
             action.stringIntId = item.id;
             action.offset = -1;
@@ -676,7 +676,7 @@ It should look similar to the following:
 
             ...
 
-            incrementCicked(item) {
+            incrementClicked(item) {
                 let action = new AddIntValueActionTuple();
                 action.stringIntId = item.id;
                 action.offset = 1;
@@ -691,7 +691,7 @@ It should look similar to the following:
             }
 
 
-            decrementCicked(item) {
+            decrementClicked(item) {
                 let action = new AddIntValueActionTuple();
                 action.stringIntId = item.id;
                 action.offset = -1;
@@ -742,13 +742,13 @@ and populate it with the following contents:
                     <td>{{item.string1}}</td>
                     <td>{{item.int1}}</td>
                     <td>
-                        <Button class="btn btn-default" (click)="toggleUpperCicked(item)">
+                        <Button class="btn btn-default" (click)="toggleUpperClicked(item)">
                             Toggle Caps
                         </Button>
-                        <Button class="btn btn-default" (click)="incrementCicked(item)">
+                        <Button class="btn btn-default" (click)="incrementClicked(item)">
                             Increment Int
                         </Button>
-                        <Button class="btn btn-default" (click)="decrementCicked(item)">
+                        <Button class="btn btn-default" (click)="decrementClicked(item)">
                             Decrement Int
                         </Button>
                     </td>
@@ -794,9 +794,9 @@ and populate it with the following contents.
                                    [text]="item.int1"></Label>
 
                         </GridLayout>
-                        <Button text="Toggle Caps" (tap)="toggleUpperCicked(item)"></Button>
-                        <Button text="Increment Int" (tap)="incrementCicked(item)"></Button>
-                        <Button text="Decrement Int" (tap)="decrementCicked(item)"></Button>
+                        <Button text="Toggle Caps" (tap)="toggleUpperClicked(item)"></Button>
+                        <Button text="Increment Int" (tap)="incrementClicked(item)"></Button>
+                        <Button text="Decrement Int" (tap)="decrementClicked(item)"></Button>
                     </StackLayout>
                 </template>
             </ListView>
