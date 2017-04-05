@@ -62,7 +62,7 @@ Download file :file:`docs/conf.py`
 
 Download :file:`conf.py` from `synerty-peek/docs/conf.py <https://bitbucket.org/synerty/synerty-peek/raw/a8e84463b992e2d941248dded4bf49ee3b114ede/docs/conf.py>`_
 
-Modify these values:
+Modify these values at the beginning of the file:
 
 ::
 
@@ -72,13 +72,52 @@ Modify these values:
         __version__ = '#.#.#'
 
 
-Remove everything after and including (approx line 167):
+Edit the end of the file:
 
 ::
 
         ###############################################################################
-        # Begin apidoc hack
+        # End apidoc hack
         ###############################################################################
+
+        # Create APIs with the AutoAPI hack above
+        import peek_plugin_tutorial
+        createApiDocs(peek_plugin_turorial.__file__)
+
+        # import peek_platform
+        # createApiDocs(peek_platform.__file__)
+
+
+Add file :file:`rtfd_requirements.txt`
+``````````````````````````````````````
+
+The :file:`rtfd_requirements.txt` file is required for the :code:`autoapi`
+
+Create :file:`rtfd_requirements.txt`, and populate it with the following:
+
+::
+
+        pytmpdir
+
+
+Download file :file:`docs/watch-docs.sh`
+````````````````````````````````````````
+
+This script is used for debugging the documentation, see
+:ref:`learn_plugin_development_add_docs_debug_documentation`.
+
+Download :file:`watch-docs.sh` from
+`synerty-peek/docs/watch-docs.sh <https://bitbucket.org/synerty/synerty-peek/raw/addd9fc6434260e7d4b067c9f27161c723ee52fe/docs/watch-docs.sh>`_
+
+Edit File :file:`.gitignore`
+````````````````````````````
+
+Append the following to file :file:`.gitignore`:
+
+::
+
+        # docs
+        docs/api_autodoc
 
 
 Required Files
@@ -160,7 +199,7 @@ Create :file:`index.rst`, and populate it with the following:
             :caption: Contents:
 
             README
-            module
+            modules
 
         Indices and tables
         ==================
@@ -251,28 +290,6 @@ documentation when a file is modified.
     :ref:`learn_plugin_development_add_docs_debug_documentation`, you will need to cleanup
     the old :file:`dist` files.  Run the command
     :code:`rm -rf dist/*`
-
-Copy file :file:`docs/watch-docs.sh`
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Copy file :file:`watch-docs.sh` from synerty-peek, run the following command:
-
-.. note:: Make sure you update the release version in the following command.
-
-::
-
-        cp ~/synerty-peek-#.#.#/docs/watch-docs.sh docs/watch-docs.sh
-
-
-Edit file :file:`watch-docs.sh`
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Remove line from file :file:`watch-docs.sh`:
-
-::
-
-        ARGS="$ARGS --watch `modPath 'peek_plugin_base'`"
-
 
 Run :file:`watch-docs.sh`
 `````````````````````````
