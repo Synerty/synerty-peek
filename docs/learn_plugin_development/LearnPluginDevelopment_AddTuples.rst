@@ -338,7 +338,7 @@ Add File :file:`SettingPropertyTuple.ts`
 The :file:`SettingPropertyTuple.ts` file defines the TypeScript Tuple for the
 hybrid Tuple/SQL Declarative that represents :code:`SettingPropertyTuple`.
 
-The code:`SettingProperty` storage table is the in the :code:`storage/Settings.py` file,
+The :code:`SettingProperty` storage table is the in the :code:`storage/Settings.py` file,
 It's the table that stores the key/value pairs.
 
 ----
@@ -388,7 +388,6 @@ Append the line: ::
         export {StringIntTuple} from "./tuples/StringIntTuple";
         export {SettingPropertyTuple} from "./tuples/SettingPropertyTuple";
 
----
+----
 
 This document is complete.
-

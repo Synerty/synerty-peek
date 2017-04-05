@@ -461,7 +461,7 @@ and populate it with the following contents.
 
 
         # This method creates an instance of the handler class.
-        def makeSettingPropertyHandler(tupleObservable, dbSessionCreator):
+        def makeSettingPropertyHandler(dbSessionCreator):
             handler = __CrudHandler(dbSessionCreator, SettingProperty,
                                     filtKey, retreiveAll=True)
 
@@ -488,7 +488,7 @@ Edit file :file:`peek_plugin_tutorial/_private/server/admin_backend/__init__.py`
 #. Find the method :code:`def makeAdminBackendHandlers(dbSessionCreator):`
 Add the following line to it ::
 
-            yield makeSettingPropertyHandler(tupleObservable, dbSessionCreator)
+            yield makeSettingPropertyHandler(dbSessionCreator)
 
 
 Settings Admin Service
