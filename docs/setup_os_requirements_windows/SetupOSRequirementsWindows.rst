@@ -106,7 +106,7 @@ Install using the ISO
 
 :Download: `<https://www.microsoft.com/en-US/download/details.aspx?id=48146>`_
 
-.. _postgressql:
+.. _requirements_windows_postgressql:
 
 PostgresSQL
 ```````````
@@ -156,6 +156,10 @@ Create the peek user, run the following script: ::
         REPLICATION
         CONNECTION LIMIT -1
         PASSWORD 'PASSWORD';
+
+.. note:: Replace :code:`PASSWORD` with a password of your choice or requirements
+
+Example:
 
 .. image:: pgAdmin4-userQuery.jpg
 
@@ -306,13 +310,14 @@ Add PATH to environment variables ::
 
 ----
 
-Create 'freetds.conf' in "C:\" ::
+Create file :file:`freetds.conf` in :code:`C:\` ::
 
         [global]
             port = 1433
             instance = peek
-            tds version = 7.0
+            tds version = 7.4
             dump file = /tmp/freetds.log
+
 
 dll files
 ~~~~~~~~~

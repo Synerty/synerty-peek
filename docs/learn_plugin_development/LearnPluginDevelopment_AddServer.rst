@@ -85,6 +85,15 @@ and populate it with the following contents.
                 self._loadedObjects = []
 
             def load(self) -> None:
+                """ Load
+
+                This will be called when the plugin is loaded, just after the db is migrated.
+                Place any custom initialiastion steps here.
+
+                """
+                logger.debug("Loaded")
+
+            def start(self):
                 """ Start
 
                 This will be called to start the plugin.
@@ -93,15 +102,6 @@ and populate it with the following contents.
                 -   Create Controllers
 
                 -   Create payload, observable and tuple action handlers.
-
-                """
-                logger.debug("Loaded")
-
-            def start(self):
-                """ Load
-
-                This will be called when the plugin is loaded, just after the db is migrated.
-                Place any custom initialiastion steps here.
 
                 """
                 logger.debug("Started")

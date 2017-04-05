@@ -186,7 +186,42 @@ Run the platform services from bash with the following commands: ::
 Linux
 -----
 
-**TODO**
+Run all commands from a terminal window remotely via ssh.
+
+Deploy Virtual Environment
+``````````````````````````
+
+Download the platform deploy script.
+
+.. note:: This is the only step in this section that requires the internet.
+
+::
+
+        file="deploy_platform_deb8.sh"
+        uri="https://raw.githubusercontent.com/Synerty/synerty-peek/master/$file"
+        wget $uri
+
+
+Run the platform deploy script.  The script will complete with a print out of where the
+new environment was deployed.  Ensure you update the **$dist** variable with the path to
+your release.
+
+The script will deploy to :file:`/home/peek/`.
+
+::
+
+        dist="/home/peek/Downloads/peek_dist_lin_#.#.#.zip"
+        ./deploy_platform_deb8.sh $dist
+
+.. note:: Once the script has completed running you will see the message "Activate the
+    new environment edit ...".
+
+    This command configures the environment to use the synerty-peek virtual environment
+    that was just deployed.
+
+----
+
+The platform is now deployed.
 
 What Next?
 ----------

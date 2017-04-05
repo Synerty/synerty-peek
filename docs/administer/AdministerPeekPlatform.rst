@@ -40,12 +40,13 @@ Populate the file :file:`C:\\Users\\peek\\peek-server.home\\config.json` with th
             ]
         },
         "sqlalchemy": {
-            "connectUrl": "postgresql://postgres:jjc@localhost/peek"
+            "connectUrl": "postgresql://peek:PASSWORD@localhost/peek"
         }
 
 
-.. note:: In the SQLAlchemy connect URL the :code:`jjc` needs to be replaced with the
-    password you used when installing postgres.
+.. note:: In the SQLAlchemy connect URL the :code:`PASSWORD` needs to be replaced with the
+    password you used when installing postgres, see
+    :ref:`requirements_windows_postgressql`.
 
 For MSSQL the SQAlchemy connection string will be like:
 
