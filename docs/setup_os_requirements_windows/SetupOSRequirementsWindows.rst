@@ -310,13 +310,14 @@ Add PATH to environment variables ::
 
 ----
 
-Create 'freetds.conf' in "C:\" ::
+Create file :file:`freetds.conf` in :code:`C:\` ::
 
         [global]
             port = 1433
             instance = peek
-            tds version = 7.0
+            tds version = 7.4
             dump file = /tmp/freetds.log
+
 
 dll files
 ~~~~~~~~~

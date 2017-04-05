@@ -32,10 +32,18 @@ Optional Software
 
 - rsync
 
+rsync is a fast and versatile file-copying tool which can copy locally and to/from a
+remote host.
+
 - Installing Oracle Libraries
 
 Installing Oracle Libraries is required if you intend on installing the peek agent.
 Instruction for installing the Oracle Libraries are in the Online Installation Guide.
+
+- FreeTDS
+
+FreeTDS is an open source driver for the TDS protocol, this is the protocol used to
+talk to the MSSQL SQLServer database.
 
 Installation Guide
 ------------------
@@ -137,13 +145,13 @@ Install Shapely and GEOAlchemy packages:
         PKG="libgeos-dev libgeos-c1"
         sudo apt-get install -y $PKG
 
-Install rsync package, this aren't required but good to have:
+
+Install rsync package, this isn't required but good to have:
 
 ::
 
         PKG="rsync"
         sudo apt-get install -y $PKG
-
 
 
 Installing the PostGreSQL database
@@ -211,10 +219,40 @@ Cleanup traces of the password ::
 Installing Oracle Libraries (Optional)
 ``````````````````````````````````````
 
-.. note:: Run the commands in this step as the :code:`peek` user.
-
 The oracle libraries are optional. Install them where the agent runs if you are going to
 interface with an oracle database.
+
+Setting the Environment
+~~~~~~~~~~~~~~~~~~~~~~~
+
+.. important:: This is done before the software is installed.
+
+Edit :file:`~/.bashrc` and insert the following after the first block comment but
+before lines like: :code:`# If not running interactively, don't do anything` ::
+
+        export LD_LIBRARY_PATH="/home/peek/oracle/instantclient_12_1:$LD_LIBRARY_PATH"
+        export ORACLE_HOME="/home/peek/oracle/instantclient_12_1"
+        export PATH="/home/peek/oracle:$PATH"
+
+
+Here's an example ::
+
+        # ~/.bashrc: executed by bash(1) for non-login shells.
+        # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
+        # for examples
+
+        ...
+
+        export LD_LIBRARY_PATH="/home/peek/oracle/instantclient_12_1:$LD_LIBRARY_PATH"
+        export ORACLE_HOME="/home/peek/oracle/instantclient_12_1"
+        export PATH="/home/peek/oracle:$PATH"
+
+        # If not running interactively, don't do anything
+        ...
+
+
+Install Oracle Client
+~~~~~~~~~~~~~~~~~~~~~
 
 Install the OS dependencies for Oracle Instant Client ::
 
@@ -246,6 +284,57 @@ Download the full oracle client.
 ::
 
         unzip linuxamd64_12102_client.zip
+
+
+FreeTDS (Optional)
+``````````````````
+
+FreeTDS is an open source driver for the TDS protocol, this is the protocol used to
+talk to the MSSQL SQLServer database.
+
+Peek needs this installed if it uses the pymssql python database driver, which depends on
+FreeTDS.
+
+Install FreeTDS:
+
+::
+
+        sudo apt-get install freetds-dev
+
+
+Create file :file:`freetds.conf` in :code:`~/freetds` ::
+
+        [global]
+            port = 1433
+            instance = peek
+            tds version = 7.4
+            dump file = /tmp/freetds.log
+
+
+Setting the Environment
+~~~~~~~~~~~~~~~~~~~~~~~
+
+.. important:: This is done before the software is installed.
+
+Edit :file:`~/.bashrc` and insert the following after the first block comment but
+before lines like: :code:`# If not running interactively, don't do anything` ::
+
+        export LD_LIBRARY_PATH="/home/peek/freetds:$LD_LIBRARY_PATH"
+        export PATH="/home/peek/freetds:$PATH"
+
+
+Here's an example ::
+
+        # ~/.bashrc: executed by bash(1) for non-login shells.
+        # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
+        # for examples
+
+        ...
+
+        export LD_LIBRARY_PATH="/home/peek/freetds:$LD_LIBRARY_PATH"
+
+        # If not running interactively, don't do anything
+        ...
 
 
 What Next?
