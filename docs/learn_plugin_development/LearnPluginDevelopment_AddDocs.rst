@@ -69,6 +69,7 @@ RST files.
 
 Download :file:`conf.py` from
 `synerty-peek/docs/conf.py <https://bitbucket.org/synerty/synerty-peek/raw/master/docs/conf.py>`_
+to :file:`docs/conf.py`.
 
 ----
 
@@ -79,11 +80,13 @@ Modify these values: ::
         __author__ = 'Synerty'
         __version__ = '#.#.#'
 
+----
 
 At the very end of :file:`conf.py` file, you will see imports and calls to
 :code:`createApiDocs(peek_plugin_xxx.__file__)` method.
 
-If your plugin will have a python API, then update these two lines to import your plugin:
+If your plugin will have a python API, then update these two lines to import your plugin,
+and generate API documentation for it.
 
 From: ::
 
@@ -241,6 +244,9 @@ or
 Build Documentation
 -------------------
 
+This section will build the documentation locally as HTML files.
+From there the developer can copy it somewhere else, etc.
+
 .. note:: If this is **NOT** the first build of the documentation or you have previously
     run the
     :ref:`learn_plugin_development_add_docs_debug_documentation`, you will need to cleanup
@@ -300,8 +306,8 @@ Open :file:`dist/docs/index.html` in a web browser to view the generated documen
 Debug Documentation
 -------------------
 
-Synerty has written a shell script to build run Sphinx API that builds the
-documentation when a file is modified.
+Synerty has written a shell script that runs a sphinx auto build utility.
+It builds the documentation when a file is modified.
 
 .. note:: If this is **NOT** the first debugging of the documentation or you have
     previously run the
