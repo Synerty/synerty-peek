@@ -5,7 +5,7 @@ Add Documentation
 =================
 
 Why does a plugin need documentation? A peek plugin needs documentation to help
-developers focus on what it needs to do, and allow other developers to use and APIs it
+developers focus on what it needs to do, and allow other developers to use the APIs it
 shares.
 
 Then it helps Peek admins determine the plugins requirements and if there is a need for
@@ -40,8 +40,8 @@ Documentation Configuration
 
 The build configuration file has already been setup by Synerty.
 
-Create Directories :file:`docs` & :file:`dist`
-``````````````````````````````````````````````
+Create Directories :file:`docs`
+```````````````````````````````
 
 The :file:`docs` folder will contain all of the files used to build the documentation.
 Make sure you add everything in this directory to git.
@@ -54,17 +54,25 @@ Create directories :file:`docs` and :file:`dist`, run the following command:
 
 ::
 
-        mkdir -p docs dist
+        mkdir -p docs
 
 
 Download file :file:`docs/conf.py`
 ``````````````````````````````````
 
-Download :file:`conf.py` from `synerty-peek/docs/conf.py <https://bitbucket.org/synerty/synerty-peek/raw/a8e84463b992e2d941248dded4bf49ee3b114ede/docs/conf.py>`_
+The :file:`conf.py` file contains the configuration required to build the documentation.
 
-Modify these values:
+Synerty has created a version of this file that automatically generates the api doc
+RST files.
 
-::
+----
+
+Download :file:`conf.py` from
+`synerty-peek/docs/conf.py <https://bitbucket.org/synerty/synerty-peek/raw/master/docs/conf.py>`_
+
+----
+
+Modify these values: ::
 
         __project__ = 'Synerty Peek'
         __copyright__ = '2016, Synerty'
@@ -72,78 +80,125 @@ Modify these values:
         __version__ = '#.#.#'
 
 
-Remove everything after and including (approx line 167):
+At the very end of :file:`conf.py` file, you will see imports and calls to
+:code:`createApiDocs(peek_plugin_xxx.__file__)` method.
 
-::
+If your plugin will have a python API, then update these two lines to import your plugin:
 
-        ###############################################################################
-        # Begin apidoc hack
-        ###############################################################################
+From: ::
 
+        import peek_plugin_base
+        createApiDocs(peek_plugin_base.__file__)
+
+Example To : ::
+
+        import peek_plugin_tutorial
+        createApiDocs(peek_plugin_tutorial.__file__)
+
+Otherwise, comment it out.
 
 Required Files
 --------------
 
-Add file :file:`docs/modules.rst`
-`````````````````````````````````
+.. note:: All instructions in this document are relative to the plugin root directory
+            (the one with hypons), not the plugin python package
+            (the one with underscores).
 
-The file :file:`modules.rst`, is the contents for the code documentation.  This
-extension can import the modules you are documenting, and pull in documentation from
-docstrings in a semi-automatic way.  See
-:ref:`learn_plugin_development_add_docs_docstring_format`.
+Add Directory :file:`overview`
+``````````````````````````````
+
+The :file:`overview` will contain the the :file:`overview.rst` file and all images
+that it uses. For now, there are none.
 
 ----
 
-Create :file:`docs/modules.rst`, and populate it with the following:
+Create the directory with this command: ::
 
-::
+    mkdir docs/overview
 
-        ============================
-        peek-plugin-tutorial package
-        ============================
+Add File :file:`overview.rst`
+`````````````````````````````
 
-        .. automodule:: peek_plugin_tutorial
-            :members:
-            :undoc-members:
-            :show-inheritance:
+The :file:`docs/overview/overview.rst` Should contain a basic overview of the plugin.
 
+----
 
-Modify these lines to suit your plugin name:
-
-::
-
-        peek-plugin-tutorial package
+Create file :file:`docs/overview/overview.rst` and populate it with the following
+contents: ::
 
 
-::
+        ========
+        Overview
+        ========
 
-        .. automodule:: peek_plugin_tutorial
+        Plugin Objective
+        ----------------
+
+        The goal of this plugin is to ...
 
 
-Symlink file :file:`README.rst`
-```````````````````````````````
+        Plugin Uses
+        -----------
 
-The document generator is unable to read files in parent directories.  A symlink of the
- :file:`README.rst` will need to be created in the :file:`docs/` directory.
+        Possible uses for this plugin are ...
 
-The :file:`README.rst` file should already be created in the plugins root directory, if
-not see:
-:ref:`learn_plugin_development_scaffold_add_file_readme`
 
-Commands:
+        How It Works
+        ------------
 
-::
+        This plugin achives it's functionality by ...
 
-        cd docs/
-        ln -s ../README.rst ./README.rst
+
+
+Add Directory :file:`api`
+`````````````````````````
+
+The :file:`api` will contain the the :file:`index_api.rst` file and all images
+that it uses. For now, there are none.
+
+----
+
+Create the directory with this command: ::
+
+    mkdir docs/api
+
+
+Add File :file:`index_api.rst`
+``````````````````````````````
+
+The :file:`index_api.rst` contains links to any information useful to other
+develeopers wanting to leverage this plugin
+
+----
+
+Create file :file:`docs/api/index_api.rst` and populate it with the following
+contents: ::
+
+
+
+        .. _api_reference:
+
+        =============
+        API Reference
+        =============
+
+        .. toctree::
+            :maxdepth: 2
+            :caption: Contents:
+
+            ../api_autodoc/peek_plugin_tutorial/peek_plugin_tutorial
+
 
 
 Add file :file:`index.rst`
 ``````````````````````````
 
 The :file:`index.rst` file will add relations between the single files that the
-documentation is made of, as well as tables of contents.  See
-:ref:`learn_plugin_development_add_docs_toctree`
+documentation is made of, as well as tables of contents.
+See :ref:`learn_plugin_development_add_docs_toctree`
+
+.. note:: Add more files to plugin table of contents by addding them after
+            :code:`overview/overview`
 
 ----
 
@@ -159,8 +214,8 @@ Create :file:`index.rst`, and populate it with the following:
             :maxdepth: 3
             :caption: Contents:
 
-            README
-            module
+            overview/overview
+            api/index_api
 
         Indices and tables
         ==================
@@ -199,7 +254,9 @@ A build is started with the sphinx-build program, called like this:
 
 ::
 
-        sphinx-build -b html docs/ dist/
+        [ -d dist ] && rm -rf dist
+        mkdir -p dist/docs
+        sphinx-build -b html docs/ dist/docs/
 
 .. note:: The -b option selects a builder; in this example Sphinx will build HTML files.
 
@@ -208,7 +265,7 @@ A successful build should look like this:
 ::
 
         peek@DESKTOP-U08T8NG MINGW64 ~/peek-plugin-tutorial (master)
-        $ sphinx-build -b html docs/ dist/
+        $ sphinx-build -b html docs/ dist/docs/
         Running Sphinx v1.5.3
         making output directory...
         loading pickled environment... not yet created
@@ -231,12 +288,12 @@ A successful build should look like this:
         build succeeded.
 
 
-Open :file:`dist/index.html`
+Open :file:`dist/docs/index.html`
 ````````````````````````````
 
-The generated documentation files are in the :file:`dist` folder.
+The generated documentation files are in the :file:`dist/docs` folder.
 
-Open :file:`dist/index.html` in a web browser to view the generated documentation.
+Open :file:`dist/docs/index.html` in a web browser to view the generated documentation.
 
 .. _learn_plugin_development_add_docs_debug_documentation:
 
@@ -252,26 +309,29 @@ documentation when a file is modified.
     the old :file:`dist` files.  Run the command
     :code:`rm -rf dist/*`
 
-Copy file :file:`docs/watch-docs.sh`
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Download File :file:`watch-docs.sh`
+```````````````````````````````````
 
-Copy file :file:`watch-docs.sh` from synerty-peek, run the following command:
+The :file:`watch-docs.sh` script runs an auto building / auto refreshing web server that
+is fantastic for quick local documentation development.
 
-.. note:: Make sure you update the release version in the following command.
+----
 
-::
+Download :file:`watch-docs.sh` from
+`synerty-peek/docs/watch-docs.sh <https://bitbucket.org/synerty/synerty-peek/raw/master/docs/watch-docs.sh>`_
+to :file:`docs/watch-docs.sh`
 
-        cp ~/synerty-peek-#.#.#/docs/watch-docs.sh docs/watch-docs.sh
+----
 
+Edit :file:`docs/watch-docs.sh` to update the plugin package name.
 
-Edit file :file:`watch-docs.sh`
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Remove line from file :file:`watch-docs.sh`:
-
-::
+Change the line: ::
 
         ARGS="$ARGS --watch `modPath 'peek_plugin_base'`"
+
+to: ::
+
+        ARGS="$ARGS --watch `modPath 'peek_plugin_tutorial'`"
 
 
 Run :file:`watch-docs.sh`

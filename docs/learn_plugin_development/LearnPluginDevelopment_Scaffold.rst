@@ -67,6 +67,7 @@ Create :file:`.gitignore`, and populate it with the following ::
         dist
         .idea
         .vscode
+        docs/api_autoapi
 
 
 
