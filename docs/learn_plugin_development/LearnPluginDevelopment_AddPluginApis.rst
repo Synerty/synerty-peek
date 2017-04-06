@@ -1,12 +1,12 @@
 .. _learn_plugin_development_add_plugin_apis:
 
-======================
-Add Plugin APIs (TODO)
-======================
+===============
+Add Plugin APIs
+===============
 
 Overview
 --------
 
-This doc describes create an API for other plugins to use.
+
 
 

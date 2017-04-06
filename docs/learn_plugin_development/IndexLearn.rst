@@ -17,14 +17,13 @@ Learn Plugin Development
     LearnPluginDevelopment_AddStorage
     LearnPluginDevelopment_AddAdmin
     LearnPluginDevelopment_AddMobile
-    LearnPluginDevelopment_FrontendPreparing
+    LearnPluginDevelopment_AboutFrontendPreparing
     LearnPluginDevelopment_AddTuples
     LearnPluginDevelopment_AddTupleLoader
     LearnPluginDevelopment_AddOfflineStorage
     LearnPluginDevelopment_AddObservables
     LearnPluginDevelopment_AddActions
-    LearnPluginDevelopment_AddEndpoints
-    LearnPluginDevelopment_UsePluginApis
+    LearnPluginDevelopment_AddRpc
     LearnPluginDevelopment_AddPluginApis
     LearnPluginDevelopment_AddWorker
     LearnPluginDevelopment_AddDocs
