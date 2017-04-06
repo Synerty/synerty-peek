@@ -126,7 +126,7 @@ The tuples which our plugin wants to share with other plugins.
 
 We won't define any public tuples here, but we'll set it up.
 
-See more at :ref:`learn_plugin_development_add_plugin_apis`.
+See more at :ref:`learn_plugin_development_add_plugin_python_apis`.
 
 ----
 

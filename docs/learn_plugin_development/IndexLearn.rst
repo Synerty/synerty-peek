@@ -23,7 +23,8 @@ Learn Plugin Development
     LearnPluginDevelopment_AddOfflineStorage
     LearnPluginDevelopment_AddObservables
     LearnPluginDevelopment_AddActions
-    LearnPluginDevelopment_AddRpc
-    LearnPluginDevelopment_AddPluginApis
+    LearnPluginDevelopment_AddVortexRpc
+    LearnPluginDevelopment_AddPluginPythonApi
+    LearnPluginDevelopment_AddPluginTypeScriptApi
     LearnPluginDevelopment_AddWorker
     LearnPluginDevelopment_AddDocs
