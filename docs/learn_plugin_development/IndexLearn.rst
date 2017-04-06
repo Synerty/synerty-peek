@@ -11,6 +11,7 @@ Learn Plugin Development
 
     LearnPluginDevelopment_FirstSteps
     LearnPluginDevelopment_Scaffold
+    LearnPluginDevelopment_AddDocs
     LearnPluginDevelopment_AddServer
     LearnPluginDevelopment_AddClient
     LearnPluginDevelopment_AddAgent
@@ -27,4 +28,3 @@ Learn Plugin Development
     LearnPluginDevelopment_AddPluginPythonApi
     LearnPluginDevelopment_AddPluginTypeScriptApi
     LearnPluginDevelopment_AddWorker
-    LearnPluginDevelopment_AddDocs
