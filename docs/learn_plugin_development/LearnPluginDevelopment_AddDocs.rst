@@ -255,6 +255,23 @@ Create :file:`index.rst`, and populate it with the following:
         * :ref:`search`
 
 
+
+
+
+Add file :file:`rtfd_requirements.txt`
+``````````````````````````````````````
+
+The :file:`rtfd_requirements.txt` is required for building docs on `readthedocs.org`_
+
+----
+
+Create :file:`docs/rtfd_requirements.txt`, and populate it with the following:
+
+::
+
+        pytmpdir
+
+
 Build or Debug
 ``````````````
 
