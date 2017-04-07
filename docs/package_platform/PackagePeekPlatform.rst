@@ -35,7 +35,7 @@ Run the following commands in the power shell window.
 ::
 
     $file = "package_platform_win.ps1";
-    $uri = "https://raw.githubusercontent.com/Synerty/synerty-peek/master/$file";
+    $uri = "https://bitbucket.org/synerty/synerty-peek/raw/d172037655a14c1c2bcdacf84f8a0448da876b6e/$file";
     Invoke-WebRequest -Uri $uri -UseBasicParsing -OutFile $file;
 
 ----
@@ -61,7 +61,7 @@ Run the following commands in the power shell window.
 ::
 
         file="package_platform_deb8.sh";
-        uri="https://raw.githubusercontent.com/Synerty/synerty-peek/master/$file";
+        uri="https://bitbucket.org/synerty/synerty-peek/raw/d172037655a14c1c2bcdacf84f8a0448da876b6e/$file";
         wget $uri
 
 
