@@ -270,6 +270,8 @@ Create :file:`docs/rtfd_requirements.txt`, and populate it with the following:
 ::
 
         pytmpdir
+        peek_plugin_base
+
 
 
 Build or Debug
