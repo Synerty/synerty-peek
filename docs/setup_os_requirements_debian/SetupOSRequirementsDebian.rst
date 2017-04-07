@@ -135,6 +135,7 @@ Install packages require for pip installs:
         PKG="$PKG libxslt1-dev"
         PKG="$PKG libpq-dev"
         PKG="$PKG libsqlite3-dev"
+        PKG="$PKG python3-pip"
         sudo apt-get install -y $PKG
 
 

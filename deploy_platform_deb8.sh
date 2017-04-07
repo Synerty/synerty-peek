@@ -3,9 +3,9 @@
 releaseZip="${releaseZip:-$1}" # If VER is not defined, try arg 1
 
 # Get the current location
-StartDir=`pwd`
+startDir=`pwd`
 
-releaseDir="$startDir/peek_dist_deb8"
+releaseDir="$startDir/peek_dist"
 
 # Delete the existing dist dir if it exists
 echo "Delete the existing dist dir if it exists"
@@ -16,8 +16,8 @@ echo "Create the new release dir $releaseDir"
 mkdir -p $releaseDir
 
 # Decompress the release
-echo "Decompress the release $releaseZip to $releaseDir"
-unzip $releaseZip -d $releaseDir
+echo "Decompress the release $releaseZip to $startDir"
+unzip $releaseZip -d $startDir
 
 # Get the release name from the package
 echo "Get the release name from the package"
@@ -34,7 +34,6 @@ venvDir="/home/peek/synerty-peek-$peekPkgVer";
 echo "Set virtual environment: $venvDir"
 
 # Delete the existing dist dir if it exists
-echo "Delete the existing dist dir if it exists"
 [ -d $venvDir ] && echo "This release is already deployed, delete it to re-deploy"; exit
 
 # Create the new virtual environment
