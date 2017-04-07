@@ -213,11 +213,11 @@ The script will deploy to :file:`/home/peek/`.
         dist="/home/peek/Downloads/peek_dist_lin_#.#.#.zip"
         ./deploy_platform_deb8.sh $dist
 
-.. note:: Once the script has completed running you will see the message "Activate the
-    new environment edit ...".
+Once the script has completed running you will see the message "Activate the
+new environment edit ...".
 
-    This command configures the environment to use the synerty-peek virtual environment
-    that was just deployed.
+This command configures the environment to use the synerty-peek virtual environment
+that was just deployed.
 
 ----
 

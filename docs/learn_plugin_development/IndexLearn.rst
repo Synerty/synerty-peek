@@ -11,20 +11,20 @@ Learn Plugin Development
 
     LearnPluginDevelopment_FirstSteps
     LearnPluginDevelopment_Scaffold
+    LearnPluginDevelopment_AddDocs
     LearnPluginDevelopment_AddServer
     LearnPluginDevelopment_AddClient
     LearnPluginDevelopment_AddAgent
     LearnPluginDevelopment_AddStorage
     LearnPluginDevelopment_AddAdmin
     LearnPluginDevelopment_AddMobile
-    LearnPluginDevelopment_FrontendPreparing
+    LearnPluginDevelopment_AboutFrontendPreparing
     LearnPluginDevelopment_AddTuples
     LearnPluginDevelopment_AddTupleLoader
     LearnPluginDevelopment_AddOfflineStorage
     LearnPluginDevelopment_AddObservables
     LearnPluginDevelopment_AddActions
-    LearnPluginDevelopment_AddEndpoints
-    LearnPluginDevelopment_UsePluginApis
-    LearnPluginDevelopment_AddPluginApis
+    LearnPluginDevelopment_AddVortexRpc
+    LearnPluginDevelopment_AddPluginPythonApi
+    LearnPluginDevelopment_AddPluginTypeScriptApi
     LearnPluginDevelopment_AddWorker
-    LearnPluginDevelopment_AddDocs

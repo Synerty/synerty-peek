@@ -1,8 +1,8 @@
 .. _learn_plugin_development_frontend_preparing:
 
-==================
-Frontend Preparing
-==================
+========================
+About Frontend Preparing
+========================
 
 The Peek Platform is extensible with plugins.
 Unlike with the Python code, the frontend code can't be just imported, The frontend

@@ -128,7 +128,7 @@ index of the PyPI server defined in :file:`~/.pypirc`:
 
 ----
 
-Run the follow command being sure to increment the version number:
+Run the follow command, being sure to increment the version number:
 
 ::
 

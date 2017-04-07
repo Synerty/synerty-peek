@@ -53,7 +53,29 @@ Take note of the end of the script, it will print out where the release is.
 Building a Linux Release
 ------------------------
 
-**TODO**
+This section contains the steps to build your own platform release.
+
+Download the platform build script.
+Run the following commands in the power shell window.
+
+::
+
+        file="package_platform_deb8.sh";
+        uri="https://raw.githubusercontent.com/Synerty/synerty-peek/master/$file";
+        wget $uri
+
+
+----
+
+Run the platform build script.
+
+::
+
+       ./package_platform_deb8.sh
+
+The script will download the latest peek platform release and all its dependencies.
+
+Take note of the end of the script, it will print out where the release is.
 
 What Next?
 ----------
