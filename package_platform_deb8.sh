@@ -1,108 +1,38 @@
 #!/usr/bin/env bash
 
-# Add wget to the path if required
 DIR=`pwd`
 
-[ -d peek_dist ] && rm -rf peek_dist
-mkdir -p peek_dist/py
-mkdir -p peek_dist/client-build-ns/tmp
-mkdir -p peek_dist/client-build-web/tmp
-mkdir -p peek_dist/server-build-web/tmp
+releaseDIR="$DIR/peek_dist"
 
+[ -d peek_dist ] && rm -rf $releaseDIR
 
-cd $DIR/peek_dist/py
+pyDIR="$releaseDIR/py"
+mkdir -p $pyDIR
+mobileBuildWebDIR="$releaseDIR/mobile-build-web"
+mkdir -p "$mobileBuildWebDIR/tmp"
+adminBuildWebDIR="$releaseDIR/admin-build-web"
+mkdir -p "$adminBuildWebDIR/tmp"
+
+cd "$mobileBuildWebDIR/tmp"
+wget 'https://bitbucket.org/synerty/peek-mobile/raw/a210c0c4e4d38737d4f95b5bc14aa44883e91e65/peek_mobile/build-web/package.json'
+npm install
+cd ..
+mv tmp/node_modules .
+rm -rf tmp
+
+cd "$adminBuildWebDIR/tmp"
+wget 'https://bitbucket.org/synerty/peek-admin/raw/ce28c00052fbb75bf022072850b95882783794f4/peek_admin/build-web/package.json'
+npm install
+cd ..
+mv tmp/node_modules .
+rm -rf tmp
+
+cd $pyDIR
 pip install wheel
 pip wheel --no-cache synerty-peek
 
-----
+cd $DIR
 
-Leave the gitbash terminal open
-
-----
-
-:Download: `<http://www.lfd.uci.edu/~gohlke/pythonlibs/#shapely>`_
-:From: `<https://pypi.python.org/pypi/Shapely>`_
-
-Download Shapely >= 1.5.17 and save in the "$DIR/peek_dist/py" directory
-
-----
-
-:Download: `<https://raw.githubusercontent.com/Synerty/peek-mobile/master/peek_mobile/build-ns/package.json>`_
-
-Download the package.json and save in the "$DIR/peek_dist/client-build-ns/tmp" directory
-
-----
-
-Run the following
-
-::
-
-    cd $DIR/peek_dist/client-build-ns/tmp
-    npm install
-    cd ..
-    mv tmp/node_modules .
-    rm -rf tmp
-
-----
-
-:Download: `<https://raw.githubusercontent.com/Synerty/peek-mobile/master/peek_mobile/build-web/package.json>`_
-
-Download the package.json and save in the "$DIR/peek_dist/client-build-web/tmp" directory
-
-----
-
-Run the following
-
-::
-
-    cd $DIR/peek_dist/client-build-web/tmp
-    npm install
-    cd ..
-    mv tmp/node_modules .
-    rm -rf tmp
-
-----
-
-:Download: `<https://raw.githubusercontent.com/Synerty/peek-admin/master/peek_admin/build-web/package.json>`_
-
-Download the package.json and save in the "$DIR/peek_dist/server-build-web/tmp" directory
-
-----
-
-Run the following
-
-::
-
-    cd $DIR/peek_dist/server-build-web/tmp
-    npm install
-    cd ..
-    mv tmp/node_modules .
-    rm -rf tmp
-
-    cd $DIR
-
-----
-
-Archive the peek_dist dir and move it to the offline server
-
-Windows Install
----------------
-
-On the destination server, run the following in git bash
-
-::
-
-    DIST_DIR="/c/users/peek/peek_dist"
-    SP="/c/Users/peek/peek_x.x.x/Lib/site-packages"
-
-    cd /c/users/peek
-    virtualenv peek_x.x.x
-    /c/users/peek/peek_x.x.x/activate
-
-    pip install --no-index --no-cache --find-links $DIST_DIR/py synerty-peek Shapely
-
-
-    mv $DIST_DIR/peek_dist/client-build-ns/node_modules $SP/peek_mobile/build-ns
-    mv $DIST_DIR/peek_dist/client-build-web/node_modules $SP/peek_mobile/build-web
-    mv $DIST_DIR/peek_dist/server-build-web/node_modules $SP/peek_admin/build-web
-
+# Decompress the release
+echo "Compress the release $releaseDIR to $DIR"
+unzip $releaseDIR -d $DIR
