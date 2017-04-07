@@ -1,6 +1,4 @@
 #!/usr/bin/env bash
-exit
-
 
 # Add wget to the path if required
 DIR=`pwd`
