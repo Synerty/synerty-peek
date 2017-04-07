@@ -174,6 +174,10 @@ import sphinx
 from pytmpdir.Directory import Directory
 from sphinx.apidoc import *
 
+# AutoAPI related config values
+
+autoclass_content = "both"
+
 
 class _Opts:
     # 'Directory to place all output'
