@@ -35,4 +35,4 @@ cd $DIR
 
 # Decompress the release
 echo "Compress the release $releaseDIR to $DIR"
-unzip $releaseDIR -d $DIR
+zip -r peek_dist_lin.zip $releaseDIR
