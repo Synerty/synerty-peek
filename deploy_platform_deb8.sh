@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-exit
 
 releaseZip="${releaseZip:-$1}" # If VER is not defined, try arg 1
 
@@ -42,10 +41,10 @@ echo "Delete the existing dist dir if it exists"
 virtualenv $venvDir
 
 # Activate the virtual environment
-set PATH="$venvDir\Scripts;%PATH%"
+export PATH="$venvDir\Scripts;%PATH%"
 
 # install synerty
-pip install --no-index --no-cache --find-links "$releaseDir\py" synerty-peek Shapely
+pip install --no-index --no-cache --find-links "$releaseDir\py" synerty-peek
 
 # Move the node_modules into place
 sp="$venvDir/Lib/site-packages";

@@ -231,7 +231,7 @@ Edit :file:`~/.bashrc` and insert the following after the first block comment bu
 before lines like: :code:`# If not running interactively, don't do anything` ::
 
         export LD_LIBRARY_PATH="/home/peek/oracle/instantclient_12_1:$LD_LIBRARY_PATH"
-        export ORACLE_HOME="/home/peek/oracle/instantclient_12_1"
+        export ORACLE_HOME="/home/peek/oracle/client12g"
         export PATH="/home/peek/oracle:$PATH"
 
 
@@ -244,7 +244,7 @@ Here's an example ::
         ...
 
         export LD_LIBRARY_PATH="/home/peek/oracle/instantclient_12_1:$LD_LIBRARY_PATH"
-        export ORACLE_HOME="/home/peek/oracle/instantclient_12_1"
+        export ORACLE_HOME="/home/peek/oracle/client12g"
         export PATH="/home/peek/oracle:$PATH"
 
         # If not running interactively, don't do anything
@@ -264,9 +264,7 @@ Install the OS dependencies for Oracle Instant Client ::
 Make the directory where the oracle client will live ::
 
         cd ~
-        PEEK_PY_VER="3.5.2"
         ORACLE_DIR="/home/peek/oracle"
-        echo "Oracle client dir will be $ORACLE_DIR"
         mkdir -p $ORACLE_DIR && cd $ORACLE_DIR
 
 
@@ -279,11 +277,43 @@ Download the full oracle client.
     - Download:
     `Oracle Database 12c Release 2 Client (12.2.0.1.0) for Linux 64 <http://download.oracle.com/otn/linux/oracle12c/122010/linuxx64_12201_client.zip>`_
 
+.. note:: To upload the zip file to the server try this command, be sure to update the
+    "servername" to the server ip address:
+    :code:`scp Downloads/linuxamd64_12102_client.zip peek@servername:/home/peek/oracle/linuxamd64_12102_client.zip`
+
+
     Unpackage in the :file:`ORACLE_DIR`:
 
 ::
 
-        unzip linuxamd64_12102_client.zip
+        unzip linuxamd64_12101_client.zip
+
+
+----
+
+Edit the response file :file:`client/response/client_install.rsp`, update the following
+lines:
+
+::
+
+        UNIX_GROUP_NAME=peek
+
+        INVENTORY_LOCATION=/home/peek/oraInventory
+
+        ORACLE_HOME=/home/peek/oracle/client12g
+
+        ORACLE_BASE=/home/peek/oracle
+
+        oracle.install.client.installType=Administrator
+
+
+----
+
+
+::
+
+        cd $ORACLE_DIR/client
+        ./runInstaller -silent -force -nowait -ignoreSysprereqs -ignorePrereq -responseFile "/home/peek/oracle/client/response/client_install.rsp"
 
 
 FreeTDS (Optional)
@@ -302,7 +332,9 @@ Install FreeTDS:
         sudo apt-get install freetds-dev
 
 
-Create file :file:`freetds.conf` in :code:`~/freetds` ::
+Create file :file:`freetds.conf` in :code:`~/freetds` and populate with the following:
+
+::
 
         [global]
             port = 1433
@@ -320,7 +352,6 @@ Edit :file:`~/.bashrc` and insert the following after the first block comment bu
 before lines like: :code:`# If not running interactively, don't do anything` ::
 
         export LD_LIBRARY_PATH="/home/peek/freetds:$LD_LIBRARY_PATH"
-        export PATH="/home/peek/freetds:$PATH"
 
 
 Here's an example ::
