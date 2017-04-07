@@ -107,6 +107,32 @@ Required Files
             (the one with hypons), not the plugin python package
             (the one with underscores).
 
+Add Directory :file:`_static`
+`````````````````````````````
+
+The :file:`_static` is required got the doc build.
+
+----
+
+Create the directory with this command: ::
+
+    mkdir docs/_static
+
+
+Add File :file:`.gitkeep`
+`````````````````````````
+
+The :file:`docs/_static/.gitkeep` ensures that the _static directory will exist in git.
+
+----
+
+Create file :file:`docs/_static/.gitkeep` with no contents.
+
+Create it with this command: ::
+
+    touch docs/_static/.gitkeep
+
+
 Add Directory :file:`overview`
 ``````````````````````````````
 
@@ -118,6 +144,7 @@ that it uses. For now, there are none.
 Create the directory with this command: ::
 
     mkdir docs/overview
+
 
 Add File :file:`overview.rst`
 `````````````````````````````
