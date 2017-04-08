@@ -33,7 +33,7 @@ This is the only step in this section that requires the internet.
 ::
 
         $file = "deploy_platform_win.ps1"
-        $uri = "https://raw.githubusercontent.com/Synerty/synerty-peek/master/$file";
+        $uri = "https://bitbucket.org/synerty/synerty-peek/raw/d172037655a14c1c2bcdacf84f8a0448da876b6e/$file";
         Invoke-WebRequest -Uri $uri -UseBasicParsing -OutFile $file;
 
 ----
@@ -194,11 +194,15 @@ Deploy Virtual Environment
 Download the platform deploy script.
 
 .. note:: This is the only step in this section that requires the internet.
+    If you don't have internet access you may try this command, be sure to update the
+    "servername" to the server ip address:
+    :code:`scp Downloads/deploy_platform_deb8.sh peek@servername:/home/peek/deploy_platform_deb8.sh`
+
 
 ::
 
         file="deploy_platform_deb8.sh"
-        uri="https://raw.githubusercontent.com/Synerty/synerty-peek/master/$file"
+        uri="https://bitbucket.org/synerty/synerty-peek/raw/d172037655a14c1c2bcdacf84f8a0448da876b6e/$file"
         wget $uri
 
 
