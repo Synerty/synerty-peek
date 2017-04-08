@@ -189,8 +189,9 @@ and populate it with the following contents.
         @NgModule({
             imports: [
                 CommonModule,
-                PeekModuleFactory.RouterModule.forChild(pluginRoutes)],
-                ...PeekModuleFactory.FormsModules,
+                PeekModuleFactory.RouterModule.forChild(pluginRoutes),
+                ...PeekModuleFactory.FormsModules
+            ],
             exports: [],
             providers: [],
             declarations: [TutorialComponent]
