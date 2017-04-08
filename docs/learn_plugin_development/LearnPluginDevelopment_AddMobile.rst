@@ -190,6 +190,7 @@ and populate it with the following contents.
             imports: [
                 CommonModule,
                 PeekModuleFactory.RouterModule.forChild(pluginRoutes)],
+                ...PeekModuleFactory.FormsModules,
             exports: [],
             providers: [],
             declarations: [TutorialComponent]
