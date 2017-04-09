@@ -179,3 +179,20 @@ Or ::
 
 
 The NativeScript and Web apps will automatically update as the developer changes things.
+
+
+Troubleshooting
+---------------
+
+
+OSError: inotify instance limit reached
+```````````````````````````````````````
+
+If you receive an error when starting the server or client on Linux, stating
+:code:`OSError: inotify instance limit reached`, running the following command may
+solve the issue. ::
+
+    sudo sysctl fs.inotify.max_user_watches=65535
+
+Otherwise, try rebooting.
+
