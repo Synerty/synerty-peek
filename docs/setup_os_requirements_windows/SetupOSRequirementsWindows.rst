@@ -63,10 +63,14 @@ When peek generates it's config it should automatically choose the right interpr
 Installation Guide
 ------------------
 
-Create Account
-``````````````
+The following sections begin the installation procedure.
+
+Create Peek OS User
+-------------------
 
 Create a windows user account for peek with admin rights.
+
+.. tip:: Search for **Computer Management** from the start menu, and use that.
 
 ----
 
@@ -76,10 +80,16 @@ Create a windows user account for peek with admin rights.
 
 ----
 
-sign in to the peek account
+Sign in to the peek account.
 
-Microsoft .NET Framework 3.5 Service Pack 1
-```````````````````````````````````````````
+.. important:: All steps after this point assume you're logged in as the peek user.
+
+.. tip:: Run the ":command:`control userpasswords2`" command from the run window
+            to have peek automatically login.
+            This is useful for development virtual machines.
+
+MS .NET Framework 3.5 SP1
+-------------------------
 
 **Online Installation:**
 
@@ -93,7 +103,7 @@ Microsoft .NET Framework 3.5 Service Pack 1
 .. note:: Restart if prompted to restart.
 
 Visual C++ Build Tools 2015
-```````````````````````````
+---------------------------
 
 **Online Installation:**
 
@@ -106,17 +116,62 @@ Install using the ISO
 
 :Download: `<https://www.microsoft.com/en-US/download/details.aspx?id=48146>`_
 
+Install Python 3.6
+------------------
+
+:Download: `<https://www.python.org/ftp/python/3.6.1/python-3.6.1-amd64.exe>`_
+:From: `<https://www.python.org/downloads/windows/>`_
+
+----
+
+Check the 'Add Python 3.6 to PATH' and select 'Customize Installation'
+
+.. image:: Python-Install.jpg
+
+----
+
+Update the 'Customize install location' to PATH C:\Users\peek\Python35\
+
+.. image:: Python-AdvancedOptions.jpg
+
+----
+
+Confirm PATH(s) to environment variables ::
+
+        echo %PATH%
+
+        ...
+
+        C:\Users\peek\Python36\
+        C:\Users\peek\Python36\Scripts\
+
+
+Virtual Environment
+```````````````````
+
+synerty-peek is deployed into python virtual environments.
+Install the virtualenv python package
+
+----
+
+Open the command prompt and run the following command:
+
+::
+
+        pip install virtualenv
+
+
 .. _requirements_windows_postgressql:
 
-PostgresSQL
-```````````
+PostgresSQL (Optional)
+----------------------
 
-.. NOTE:: This install procedure contains instructions for both PostgresSQL and MSSQL.
+This install procedure contains instructions for both PostgresSQL and MSSQL.
 
-    Synerty recommends PostGreSQL for Production, Development, Windows and Linux servers.
+Synerty recommends PostGreSQL for Production, Development, Windows and Linux servers.
 
-    To install Microsoft® SQL Server® 2014 Express, see:
-    :ref:`microsoft_sql_server_2014_express`
+To install Microsoft® SQL Server® 2014 Express, goto section :
+:ref:`microsoft_sql_server_2014_express`
 
 :Download: `<https://www.enterprisedb.com/downloads/postgres-postgresql-downloads#windows>`_
 :From: `<https://www.postgresql.org>`_
@@ -182,11 +237,15 @@ Confirm database was created
 
 .. _microsoft_sql_server_2014_express:
 
-Microsoft® SQL Server® 2014 Express
-```````````````````````````````````
+MS SQL Server 2014 Express (Optional)
+-------------------------------------
 
-.. NOTE:: This install procedure contains instructions for both PostgresSQL and MSSQL.
-    To install PostgresSQL, see: :ref:`postgressql`
+This install procedure contains instructions for both PostgresSQL and MSSQL.
+To install PostgresSQL, see: :ref:`postgressql`
+
+The MS SQL Server Express server is suitable for a development environment, for
+production servers, Synerty recommends using PostGreSQL or
+MS SQL Server 2014 R2 Standard.
 
 :From: `<https://www.microsoft.com/en-ca/download/details.aspx?id=42299>`_
 
@@ -202,30 +261,43 @@ Select "New SQL Server stand-alone installation"
 
 ----
 
-Feature Selection: check all Features
+On the **Feature Selection**
+
+#.  check all Features
 
 .. image:: SQLServer-FeatureSelection.jpg
 
 ----
 
-Instance Configuration: change the named instance to 'peek'. This will update the
+On the **Instance Configuration** screen
+
+#.  change the named instance to 'peek'. This will update the
 'Instance ID'
 
 ----
 
-Server Configuration: Select browse from the 'Account Name' drop-list and check names
-for 'peek'.  Select ok then enter the account password
+On the **Server Configuration** screen,
+
+#.  Select browse from the 'Account Name' drop-list
+#.  Enter "peek" in the text box
+#.  Click Check Names
+#.  Click OK
+#.  Enter the password for the new peek SQL user.
+#.  Click Next
 
 .. image:: SQLServer-ServerConfiguration.jpg
 
 ----
 
-Database Engine Configuration: Select "Mixed Mode" and enter a password
+On the **Database Engine Configuration** screen.
+
+#.  Select "Mixed Mode"
+#.  Enter and re-enter the SA password
 
 .. image:: SQLServer-DBEngConfig.jpg
 
 Create Peek Database
-~~~~~~~~~~~~~~~~~~~~
+````````````````````
 
 Start Microsoft SQL Server Management Studio
 
@@ -235,10 +307,19 @@ Connect to PEEK database engine
 
 ----
 
-Create new database 'peek'
+Create new database 'peek'.
 
-SQL Server Configuration Manager
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#.  Right click on "Databases"
+#.  Select "New Databases"
+#.  Enter "peek" in the "Database name" field
+#.  Click OK
+
+----
+
+The peek database is now created
+
+Enable Local TCP Connections
+````````````````````````````
 
 Open the SQL Server Configuration Manager (SQLServerManager12.msc) from the start menu
 
@@ -252,27 +333,36 @@ Select, Protocols for PEEK
 
 ----
 
-Go to, TCP/IP Properties and select the IP Addresses tab
-
-----
-
-Go to, section with the IP Address set to 127.0.0.1
-
-----
-
-Set Enabled "Yes"
-
-----
-
-Set TCP Port to "1433"
-
-.. image:: set_tcp_port.jpg
+Double click the row with Protocol Name = "TCP/IP"
 
 ----
 
 Enable the TCP/IP Protocol
 
+#.  On the Protocol tab
+
+#.  Set "Enabled" = "Yes"
+
+#.  Set "Listen All" = "No"
+
 .. image:: enable_tcpip.png
+
+----
+
+Enable the IP
+
+#.  Select the IP Addresses tab
+
+    Go to the section where "IP Address" = "127.0.0.1"
+
+#. Set Enabled "Yes"
+
+#.  Set TCP Port to "1433"
+
+    Click OK
+
+.. image:: set_tcp_port.jpg
+
 
 ----
 
@@ -284,14 +374,16 @@ Restart the server service.
 
 .. image:: SQLServer-RestartServices.jpg
 
-FreeTDS
-~~~~~~~
+Install FreeTDS
+---------------
 
 FreeTDS is an open source driver for the TDS protocol, this is the protocol used to
 talk to the MSSQL SQLServer database.
 
 Peek needs this installed as it uses the pymssql python database driver, which depends on
 FreeTDS.
+
+----
 
 :Download: `<https://github.com/ramiro/freetds/releases/download/v0.95.95/freetds-v0.95.95-win-x86_64-vs2015.zip>`_
 :From: `<https://github.com/ramiro/freetds/releases>`_
@@ -300,17 +392,26 @@ FreeTDS.
 
 Unzip contents into ::
 
-        C:\Users\peek\freetds-v0.95.95
+        C:\Users\peek
 
 ----
 
-Add PATH to environment variables ::
-
-        C:\Users\peek\freetds-v0.95.95\bin
+Rename :file:`C:\\users\\peek\\freetds-v0.95.95` to :file:`C:\\users\\peek\\freetds`
 
 ----
 
-Create file :file:`freetds.conf` in :code:`C:\` ::
+Under Control Panel -> System -> Advanced system settings
+
+Add the following to PATH in the "System" environment variables ::
+
+        C:\Users\peek\freetds\bin
+
+.. tip:: On Win 10, enter "environment" in the task bar search and select
+            **Edit the system environment variables**
+
+----
+
+Create file :file:`freetds.conf` in :file:`C:\\` ::
 
         [global]
             port = 1433
@@ -320,7 +421,7 @@ Create file :file:`freetds.conf` in :code:`C:\` ::
 
 
 dll files
-~~~~~~~~~
+`````````
 
 :Download: `<http://indy.fulgan.com/SSL/openssl-1.0.2j-x64_86-win64.zip>`_
 :From: `<http://indy.fulgan.com/SSL/>`_
@@ -341,70 +442,77 @@ You will need to duplicate the above files and name them as per below:
 
 *  ssleay32MD.dll
 
-Python 3.5
-``````````
+Install Oracle Client (Optional)
+--------------------------------
 
-:Download: `<https://www.python.org/ftp/python/3.5.3/python-3.5.3rc1-amd64.exe>`_
-:From: `<https://www.python.org/downloads/windows/>`_
-
-----
-
-Check the 'Add Python 3.5 to PATH' and select 'Customize Installation'
-
-.. image:: Python-Install.jpg
+The oracle libraries are optional. Install them where the agent runs if you are going to
+interface with an oracle database.
 
 ----
 
-Update the 'Customize install location' to PATH C:\Users\peek\Python35\
+Download the following from oracle.
 
-.. image:: Python-AdvancedOptions.jpg
+The version used in these instructions is **12.2.0.1.0**.
 
-----
+#.  Download the "Instant Client Package - Basic" from
+    http://www.oracle.com/technetwork/topics/winx64soft-089540.html
 
-Confirm PATH(s) to environment variables ::
-
-        echo %PATH%
-
-        ...
-
-        C:\Users\peek\Python35\
-        C:\Users\peek\Python35\Scripts\
-
-Virtual Environment
-```````````````````
-
-synerty-peek is deployed into python virtual environments.
-Install Virtualenv.
+#.  Download the "Instant Client Package - SDK" from
+    http://www.oracle.com/technetwork/topics/winx64soft-089540.html
 
 ----
 
-Open the command prompt and run the following command:
+Extract both the zip files to :file:`C:\\Users\\peek\\oracle`
 
-::
+----
 
-        pip install virtualenv
+Under Control Panel -> System -> Advanced system settings
 
-SymLinks
-````````
+Add the following to PATH in the "System" environment variables ::
 
-Enabling SymLinks.
+        C:\Users\peek\oracle\instantclient_12_2
 
-`<https://github.com/git-for-windows/git/wiki/Symbolic-Links>`_
+.. tip:: On Win 10, enter "environment" in the task bar search and select
+            **Edit the system environment variables**
+
+----
+
+Symlink the oracle client lib ::
+
+        cd $ORACLE_HOME
+        ln -snf libclntsh.so.12.1 libclntsh.so
+        ls -l libclntsh.so
+
+----
+
+Reboot windows, or logout and login to ensure the PATH updates.
+
+Enable SymLinks
+---------------
+
+Enabling SymLinks for development.
+Peek no longer uses Symlinks, so this step can be skipped.
+
+Thanks to : `<https://github.com/git-for-windows/git/wiki/Symbolic-Links>`_
+for the instructions.
 
 ----
 
 Launch: "gpedit.msc" and Navigate to
-    Computer configuration
-        Windows Settings
-        Security Settings
-        Local Policies
-        User Rights Assignment
+
+#.  Computer configuration
+
+#.  Windows Settings
+
+#.  Security Settings
+
+#.  Local Policies
+
+#.  User Rights Assignment
+
+#.  Double click on "Create symbolic links"
 
 .. image:: gpedit-CreateSymlinks.jpg
-
-----
-
-Double click on "Create symbolic links"
 
 ----
 
@@ -421,7 +529,7 @@ You will need to logout and log back in for the change to take effect
     Administrator.
 
 Enable Development
-``````````````````
+------------------
 
 This applies to windows 10, and may apply to other windows versions as well.
 
@@ -449,33 +557,7 @@ Select 'Developer Mode', and acknowledge the warning.
 
 .. image:: DevMode-ForDevelopers.jpg
 
-Installing Oracle Libraries
----------------------------
 
-The oracle libraries are optional. Install them where the agent runs if you are going
-to interface with an oracle database.
-
-Oracle Instant Client
-`````````````````````
-
-:Download: `<http://download.oracle.com/otn/nt/oracle12c/121020/winx64_12102_client.zip>`_
-:From: `<http://www.oracle.com/technetwork/database/enterprise-edition/downloads/database12c-win64-download-2297732.html>`_
-
-----
-
-Unzip contents into a temporary location
-
-Run the installer (setup.exe)
-
-Select the following options
-
-:Install Type: Runtime
-:Oracle Base: C:\\Users\\peek\\oracle
-:Oracle Home: C:\\Users\\peek\\oracle\\client12c
-
-----
-
-Reboot windows, or logout and login to ensure the PATH updates.
 
 What Next?
 ----------
