@@ -56,24 +56,30 @@ Invoke-WebRequest -Uri $shapeUrl -UseBasicParsing -OutFile $shapeFile;
 # Download node, npm, @angular/cli, typescript and tslint
 
 Set-Location "$baseDir";
-$nodeVer = "node-v7.7.4-win-x64";
-$nodeUrl = "https://nodejs.org/dist/v7.7.4/$nodeVer.zip";
+$nodeVer = "7.7.4";
+
+# Download the file
+$nodeUrl = "https://nodejs.org/dist/v$nodeVer/node-v$nodeVer-win-x64.zip";
 $nodeFile = "node.zip";
 Invoke-WebRequest -Uri $nodeUrl -UseBasicParsing -OutFile $nodeFile;
 
+# Unzip it
 Write-Host "Using standard windows zip handler, this will be slow";
 Add-Type -Assembly System.IO.Compression.FileSystem;
 [System.IO.Compression.ZipFile]::ExtractToDirectory("$baseDir\$nodeFile", $baseDir);
 
-# Remove the src files
+# Remove the downloaded file
 Remove-Item "$baseDir\$nodeFile" -Force -Recurse;
+
+# Move NODE into place
 Move-Item "$nodeVer" "node"
 
 # Set the path for future NODE commands
 $env:Path = "$baseDir\node;$env:Path"
 
-Set-Location "$baseDir\node";
-npm -g install --prefix "$baseDir\node" @angular/cli typescript tslint;
+# Install the required NPM packages
+npm -g upgrade npm
+npm -g install @angular/cli typescript tslint;
 
 
 # ------------------------------------------------------------------------------

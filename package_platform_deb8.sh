@@ -45,33 +45,26 @@ fi
 
 nodeDir="$baseDir/node"
 
-#.  Download the supported node version ::
-PEEK_NODE_VER="7.1.0"
-mkdir $baseDir/node_src &&  cd $baseDir/node_src
-
-wget "https://nodejs.org/dist/v${PEEK_NODE_VER}/node-v${PEEK_NODE_VER}-linux-x64.tar.xz"
-tar xvJf node-v${PEEK_NODE_VER}-linux-x64.tar.xz
-cd node-v${PEEK_NODE_VER}
-
-#.  Configure the NodeJS Build ::
-
-./configure --prefix=$nodeDir
-make install
-
-# Remove the src files
 cd $baseDir
-rm -rf node_src
+nodeVer="7.7.4"
+
+# Download the file
+nodeFile="node-v${PEEK_NODE_VER}-linux-x64.tar.xz"
+wget "https://nodejs.org/dist/v${PEEK_NODE_VER}/node-v${PEEK_NODE_VER}-linux-x64.tar.xz"
+
+# Unzip it
+tar xJf ${nodeFile}
+mv node-v${PEEK_NODE_VER}-linux-x64 ${nodeDir}
+
+# Remove the downloaded file
+rm -rf ${nodeFile}
+
+# Move NODE into place
 
 # Set the path for future NODE commands
 PATH="$nodeDir/bin:$PATH"
 
-which node
-echo "It should be $nodeDir/bin/node"
-
-which npm
-echo "It should be $nodeDir/bin/npm"
-
-#.  Install the required NPM packages ::
+# Install the required NPM packages
 npm -g upgrade npm
 npm -g --prefix "$nodeDir" @angular/cli typescript tslint
 
