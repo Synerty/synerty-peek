@@ -137,8 +137,8 @@ switch ($result) {
         Write-Host " ";
         Write-Host "Environment Variables have been updated."
         Write-Host " ";
-        Write-Host @"IMPORTANT, you must restart the PowerShell window for the
-                        Environment Variable changes to take effect!"@
+        Write-Host "IMPORTANT, you must restart the PowerShell window for the";
+        Write-Host "Environment Variable changes to take effect!";
     }
 
     1 {
