@@ -2,60 +2,97 @@
 
 releaseZip="${releaseZip:-$1}" # If VER is not defined, try arg 1
 
+# ------------------------------------------------------------------------------
+# Initialise variables and paths
+
 # Get the current location
 startDir=`pwd`
 
-releaseDir="$startDir/peek_dist"
+releaseDir="~/peek_dist_deb8"
 
 # Delete the existing dist dir if it exists
 echo "Delete the existing dist dir if it exists"
-[ -d $releaseDir ] && rm -rf $releaseDir
+[ -d ${releaseDir} ] && rm -rf ${releaseDir}
+
+# ------------------------------------------------------------------------------
+# Extract the release to a interim directory
 
 # Create the new release dir
-echo "Create the new release dir $releaseDir"
-mkdir -p $releaseDir
+echo "Create the new release dir ${releaseDir}"
+mkdir -p ${releaseDir}
 
 # Decompress the release
-echo "Decompress the release $releaseZip to $startDir"
-unzip $releaseZip -d $startDir
+echo "Decompress the release ${releaseZip} to ${releaseDir}"
+tar xjf ${releaseZip} -C ${releaseDir}
+
+# ------------------------------------------------------------------------------
+# Create teh virtual environment
 
 # Get the release name from the package
 echo "Get the release name from the package"
-fullFile=$(find $releaseDir/py -name 'synerty_peek*')
-echo $fullFile
-peekPkgName=${fullFile##*/}
-peekPkgName=${peekPkgName%-*-*-*}
-echo "package name: $peekPkgName"
-peekPkgVer=${peekPkgName##*-}
-echo "package version: $peekPkgVer"
+peekPkgVer=`cd $releaseDir/py && ls synerty_peek-* | cut -d'-' -f2`
 
 # This variable is the path of the new virtualenv
-venvDir="/home/peek/synerty-peek-$peekPkgVer";
-echo "Set virtual environment: $venvDir"
+venvDir="/home/peek/synerty-peek-${peekPkgVer}"
 
+
+# Check if this release is already deployed
 # Delete the existing dist dir if it exists
-[ -d $venvDir ] && echo "This release is already deployed, delete it to re-deploy"; exit
+if [ -d ${venvDir} ]; then
+    echo "directory already exists : ${venvDir}"
+    echo "This release is already deployed, delete it to re-deploy"
+fi
 
 # Create the new virtual environment
 virtualenv $venvDir
 
 # Activate the virtual environment
-export PATH="$venvDir\Scripts;%PATH%"
+export PATH="$venvDir\bin:$PATH"
 
-# install synerty
+# ------------------------------------------------------------------------------
+# Install the python packages
+
+# install the py wheels from the release
 pip install --no-index --no-cache --find-links "$releaseDir\py" synerty-peek
 
+# ------------------------------------------------------------------------------
+# Install node
+
+# Copy the node_modules into place
+# This is crude, we kind of mash the two together
+cp -pr $releaseDir/node/* ${venvDir}
+
+# ------------------------------------------------------------------------------
+# Install the frontend node_modules
+
+# Make a var pointing to site-packages
+sp="$venvDir/Lib/site-packages"
+
 # Move the node_modules into place
-sp="$venvDir/Lib/site-packages";
 mv $releaseDir/mobile-build-web/node_modules $sp/peek_mobile/build-web
 mv $releaseDir/admin-build-web/node_modules $sp/peek_admin/build-web
-mv $releaseDir/node/* $venvDir/Scripts
+
+# ------------------------------------------------------------------------------
+# Show complete message
 
 echo " "
 echo "Peek is now deployed to $venvDir"
+
+# ------------------------------------------------------------------------------
+# OPTIONALLY - Update the environment for the user.
+
+q='"'
+d='$'
+
 echo " "
-echo "Activate the new environment, edit '~/.bashrc' and insert the following after the
-first block comment but before lines like: '# If not running interactively, don't do
-anything'"
-echo "export PATH="$venvDir\Scripts:$PATH""
+echo "Run the following to switch to the new releases environment :";
+echo "export PATH=${q}${venvDir}\bin:${d}{PATH}${q}"
 echo " "
+
+read -p "Do you want to permanently enable this release? " -n 1 -r
+echo    # (optional) move to a new line
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+    sed -i "s;export PEEK_VER.*;export PEEK_VER=${q}${venvDir}${q};" ~/.bashrc
+    echo "Done, Close and reopen your terminal for the update to take effect"
+fi

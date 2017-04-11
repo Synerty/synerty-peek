@@ -554,6 +554,11 @@ Insert : ::
         export PEEK_PY_VER="3.6.1"
         export PATH="/home/peek/cpython-${PEEK_PY_VER}/bin:$PATH"
 
+        # Set the variables for the platform release
+        # These are updated by the deploy script
+        export PEEK_ENV=""
+        export PATH="${PEEK_ENV}/bin:$PATH"
+
 ----
 
 Download and unarchive the supported version of Python ::

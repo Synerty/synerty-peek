@@ -10,6 +10,9 @@ if ([string]::IsNullOrEmpty($releaseZip) -or [string]::IsNullOrWhitespace($relea
 }
 
 
+# ------------------------------------------------------------------------------
+# Initialise variables and paths
+
 # Get the current location
 $startDir=Get-Location
 
@@ -19,6 +22,9 @@ $releaseDir="C:\Users\peek\peek_dist_win";
 If (Test-Path $releaseDir){
     Remove-Item $releaseDir -Force -Recurse;
 }
+
+# ------------------------------------------------------------------------------
+# Extract the release to a interim directory
 
 # Create our new release dir
 New-Item $releaseDir -ItemType directory;
@@ -35,6 +41,10 @@ if (Test-Path $7zExe) {
     Add-Type -Assembly System.IO.Compression.FileSystem;
     [System.IO.Compression.ZipFile]::ExtractToDirectory($releaseZip, $releaseDir);
 }
+
+# ------------------------------------------------------------------------------
+# Create teh virtual environment
+
 # Get the release name from the package
 $peekPkgName = Get-ChildItem "$releaseDir\py" |
                     Where-Object {$_.Name.StartsWith("synerty_peek-")} |
@@ -51,33 +61,43 @@ If (Test-Path $venvDir){
 }
 
 # Create the new virtual environment
-virtualenv.exe $venvDir
+virtualenv.exe $venvDir;
 
 # Activate the virtual environment
-$env:Path = "$venvDir\Scripts;$env:Path"
+$env:Path = "$venvDir\Scripts;$env:Path";
 
-# Create the location of pip
-# Instead of naming synerty-peek,
-# Another approach is to install all packages " --no-deps * ",
-pip install --no-index --no-cache --find-links "$releaseDir\py" synerty-peek Shapely
+# ------------------------------------------------------------------------------
+# Install the python packages
+
+# install the py wheels from the release
+pip install --no-index --no-cache --find-links "$releaseDir\py" synerty-peek Shapely pymssql
+
+# ------------------------------------------------------------------------------
+# Install node
 
 # Move the node_modules into place
-$sp="$venvDir\Lib\site-packages";
-
-# node modules are not required unless developing, which will be installed later.
-# Move-Item $releaseDir\mobile-build-ns\node_modules $sp\peek_mobile\build-ns -Force
-Move-Item $releaseDir\mobile-build-web\node_modules $sp\peek_mobile\build-web -Force
-Move-Item $releaseDir\admin-build-web\node_modules $sp\peek_admin\build-web -Force
+# This is crude, we kind of mash the two together
 Move-Item $releaseDir\node\* $venvDir\Scripts -Force
 
-# Update the reference to the new environment.
-# We probably won't want to do this here when we setup services.
-Write-Host "Setting PEEK_ENV to $venvDir";
-[Environment]::SetEnvironmentVariable("PEEK_VENV", $venvDir, "User");
+# ------------------------------------------------------------------------------
+# Install the frontend node_modules
+
+# Make a var pointing to site-packages
+$sp="$venvDir\Lib\site-packages";
+
+# Move the node_modules into place
+Move-Item $releaseDir\mobile-build-web\node_modules $sp\peek_mobile\build-web -Force
+Move-Item $releaseDir\admin-build-web\node_modules $sp\peek_admin\build-web -Force
+
+# ------------------------------------------------------------------------------
+# Show complete message
 
 # All done.
 Write-Host "Peek is now deployed to $venvDir";
 Write-Host " ";
+
+# ------------------------------------------------------------------------------
+# OPTIONALLY - Update the environment for the user.
 
 # Ask if the user would like to update the PATH environment variables
 $title = "Environment Variables"
@@ -96,6 +116,11 @@ $result = $host.ui.PromptForChoice($title, $message, $options, 0)
 switch ($result)
     {
         0 {"You selected Yes.";
+
+            # Update the reference to the new environment.
+            # We probably won't want to do this here when we setup services.
+            Write-Host "Setting PEEK_ENV to $venvDir";
+            [Environment]::SetEnvironmentVariable("PEEK_VENV", $venvDir, "User");
 
             $PathVariables = $venvDir;
 
