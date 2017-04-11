@@ -51,12 +51,12 @@ cd $baseDir
 nodeVer="7.7.4"
 
 # Download the file
-nodeFile="node-v${PEEK_NODE_VER}-linux-x64.tar.xz"
-wget -nv "https://nodejs.org/dist/v${PEEK_NODE_VER}/node-v${PEEK_NODE_VER}-linux-x64.tar.xz"
+nodeFile="node-v${nodeVer}-linux-x64.tar.xz"
+wget -nv "https://nodejs.org/dist/v${nodeVer}/node-v${nodeVer}-linux-x64.tar.xz"
 
 # Unzip it
 tar xJf ${nodeFile}
-mv node-v${PEEK_NODE_VER}-linux-x64 ${nodeDir}
+mv node-v${nodeVer}-linux-x64 ${nodeDir}
 
 # Remove the downloaded file
 rm -rf ${nodeFile}

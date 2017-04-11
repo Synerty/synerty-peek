@@ -469,6 +469,9 @@ Install C libraries that some python packages link to when they install:
 
         PKG=""
 
+        # For the cryptography package
+        PKG="$PKG libffi-dev"
+
         # For the python Samba client
         PKG="$PKG samba-dev libsmbclient-dev libcups2-dev"
 

@@ -107,7 +107,7 @@ read -p "Do you want to permanently enable this release? " -n 1 -r
 echo    # (optional) move to a new line
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
-    sed -i "s;export PEEK_VER.*;export PEEK_VER=${q}${venvDir}${q};" ~/.bashrc
+    sed -i "s;export PEEK_ENV.*;export PEEK_ENV=${q}${venvDir}${q};" ~/.bashrc
     echo " "
     echo "Done"
     echo " "
