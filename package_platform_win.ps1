@@ -24,6 +24,7 @@ New-Item $baseDir -ItemType directory;
 # Download the peek platform and all it's dependencies
 New-Item "$baseDir\py" -ItemType directory;
 Set-Location "$baseDir\py";
+
 Write-Host "Downloading and creating windows wheels";
 pip wheel --no-cache synerty-peek;
 
@@ -39,6 +40,12 @@ if (-Not [string]::IsNullOrEmpty($wantedVer) -and $peekPkgVer -ne $wantedVer) {
 } else {
     Write-Host "We've downloaded version $peekPkgVer";
 }
+
+
+# Download pymssql, As to 11/Apr/2017, there are no standard built wheels for 3.6.1
+$pymssqlUrl = 'http://www.lfd.uci.edu/%7Egohlke/pythonlibs/tuoh5y4k/pymssql-2.1.3-cp36-cp36m-win_amd64.whl';
+$pymssqlFile = 'pymssql-2.1.3-cp36-cp36m-win_amd64.whl';
+Invoke-WebRequest -Uri $pymssqlUrl -UseBasicParsing -OutFile $pymssqlFile;
 
 # Download shapely, it's not a dependency on windows because pip doesn't try to get the windows dist.
 $shapeUrl = 'http://www.lfd.uci.edu/~gohlke/pythonlibs/tuth5y6k/Shapely-1.5.17-cp35-cp35m-win_amd64.whl';
