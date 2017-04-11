@@ -602,6 +602,13 @@ Install the virtualenv python package ::
         pip install virtualenv
 
 
+----
+
+The Wheel package is required for building platform and plugin releases ::
+
+        pip install wheel
+
+
 Install PostGreSQL
 ------------------
 

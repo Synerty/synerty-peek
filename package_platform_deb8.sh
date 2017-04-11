@@ -1,38 +1,113 @@
 #!/usr/bin/env bash
 
+set -o nounset
+set -o errexit
+
+wantedVer=${1-}
+
+if [ -n ${wantedVer} ]; then
+    echo "Requested version is $wantedVer"
+fi
+
 DIR=`pwd`
 
-releaseDIR="$DIR/peek_dist"
+$baseDir="$DIR/peek_dist_deb8"
 
-[ -d peek_dist ] && rm -rf $releaseDIR
+[ -d $baseDir ] && rm -rf $baseDir
 
-pyDIR="$releaseDIR/py"
+
+# ------------------------------------------------------------------------------
+# Compile the python wheels for the linux distribution
+
+pyDIR="$$/py"
 mkdir -p $pyDIR
-mobileBuildWebDIR="$releaseDIR/mobile-build-web"
-mkdir -p "$mobileBuildWebDIR/tmp"
-adminBuildWebDIR="$releaseDIR/admin-build-web"
-mkdir -p "$adminBuildWebDIR/tmp"
-
-cd "$mobileBuildWebDIR/tmp"
-wget 'https://bitbucket.org/synerty/peek-mobile/raw/a210c0c4e4d38737d4f95b5bc14aa44883e91e65/peek_mobile/build-web/package.json'
-npm install
-cd ..
-mv tmp/node_modules .
-rm -rf tmp
-
-cd "$adminBuildWebDIR/tmp"
-wget 'https://bitbucket.org/synerty/peek-admin/raw/ce28c00052fbb75bf022072850b95882783794f4/peek_admin/build-web/package.json'
-npm install
-cd ..
-mv tmp/node_modules .
-rm -rf tmp
 
 cd $pyDIR
 pip install wheel
 pip wheel --no-cache synerty-peek
 
-cd $DIR
+# The outer brackets convert it to an array
+$peekPkgVer = `ls synerty_peek-* | cut -d'-' -f1`
+
+if [ -n ${wantedVer} -a ${wantedVer} -ne ${peekPkgVer} ]; then
+   echo "We've downloaded version ${peekPkgVer}, but you wanted ver ${wantedVer}"
+else
+    echo "We've downloaded version ${peekPkgVer}"
+fi
+
+# Shapely is installed with the wheel command as dependency
+
+# ------------------------------------------------------------------------------
+# Compile nodejs for the release.
+# This should be portable.
+
+nodeDir="$baseDir/node"
+
+#.  Download the supported node version ::
+PEEK_NODE_VER="7.1.0"
+mkdir $baseDir/node_src &&  cd $baseDir/node_src
+
+wget "https://nodejs.org/dist/v${PEEK_NODE_VER}/node-v${PEEK_NODE_VER}-linux-x64.tar.xz"
+tar xvJf node-v${PEEK_NODE_VER}-linux-x64.tar.xz
+cd node-v${PEEK_NODE_VER}
+
+#.  Configure the NodeJS Build ::
+
+./configure --prefix=$nodeDir
+make install
+
+# Remove the src files
+cd $baseDir
+rm -rf node_src
+
+#.  Test that the setup is working ::
+PATH="$nodeDir/bin:$PATH"
+
+which node
+echo "It should be $nodeDir/bin/node"
+
+which npm
+echo "It should be $nodeDir/bin/npm"
+
+#.  Install the required NPM packages ::
+npm -g upgrade npm
+npm -g --prefix "$nodeDir" @angular/cli typescript tslint
+
+# ------------------------------------------------------------------------------
+# This function downloads the node modules and prepares them for the release
+
+function downloadNodeModules {
+    DIR=$1
+    URL=$2
+
+    mkdir -p "$DIR/tmp"
+
+    cd "$DIR/tmp"
+    wget "$URL"
+    npm install
+    cd ..
+    mv tmp/node_modules .
+    rm -rf tmp
+}
+
+# ------------------------------------------------------------------------------
+# MOBILE node modules
+
+mobileBuildWebDIR="$$/mobile-build-web"
+mobileJsonUrl='https://bitbucket.org/synerty/peek-mobile/raw/master/peek_mobile/build-web/package.json'
+
+downloadNodeModules $mobileBuildWebDIR $mobileJsonUrl
+
+# ------------------------------------------------------------------------------
+# ADMIN node modules
+
+adminBuildWebDIR="$$/admin-build-web"
+adminJsonUrl='https://bitbucket.org/synerty/peek-admin/raw/master/peek_admin/build-web/package.json'
+
+downloadNodeModules $adminBuildWebDIR $adminJsonUrl
+
+# ------------------------------------------------------------------------------
 
 # Decompress the release
-echo "Compress the release $releaseDIR to $DIR"
-zip -r peek_dist_lin.zip $releaseDIR
+echo "Compress the release $$ to $DIR"
+bzip2 -r peek_dist_lin.zip $

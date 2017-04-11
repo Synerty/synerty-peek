@@ -20,37 +20,6 @@ If (Test-Path $baseDir){
 # Create our new dist dir
 New-Item $baseDir -ItemType directory;
 
-# Define the node packages we want to download
-$nodePackages = @(
-    # node modules are not required unless developing, which will be installed later.
-    # @{"dir" = "$baseDir\mobile-build-ns";
-    #     "packageJsonUrl" = "https://raw.githubusercontent.com/Synerty/peek-mobile/master/peek_mobile/build-ns/package.json"
-    # },
-    @{"dir" = "$baseDir\mobile-build-web";
-        "packageJsonUrl" = "https://raw.githubusercontent.com/Synerty/peek-mobile/master/peek_mobile/build-web/package.json"
-    },
-    @{"dir" = "$baseDir\admin-build-web";
-        "packageJsonUrl" = "https://raw.githubusercontent.com/Synerty/peek-admin/master/peek_admin/build-web/package.json"
-    }
-);
-
-# ------------------------------------------------------------------------------
-# Download node, npm, @angular/cli, typescript and tslint
-Set-Location "$baseDir";
-$nodeVer = "node-v7.7.4-win-x64";
-$nodeUrl = "https://nodejs.org/dist/v7.7.4/$nodeVer.zip";
-$nodeFile = "node.zip";
-Invoke-WebRequest -Uri $nodeUrl -UseBasicParsing -OutFile $nodeFile;
-
-Write-Host "Using standard windows zip handler, this will be slow";
-Add-Type -Assembly System.IO.Compression.FileSystem;
-[System.IO.Compression.ZipFile]::ExtractToDirectory("$baseDir\$nodeFile", $baseDir);
-
-Remove-Item "$baseDir\$nodeFile" -Force -Recurse;
-Move-Item "$nodeVer" "node"
-Set-Location "$baseDir\node";
-npm -g install --prefix "$baseDir\node" @angular/cli typescript tslint;
-
 # ------------------------------------------------------------------------------
 # Download the peek platform and all it's dependencies
 New-Item "$baseDir\py" -ItemType directory;
@@ -77,7 +46,41 @@ $shapeFile = 'Shapely-1.5.17-cp35-cp35m-win_amd64.whl';
 Invoke-WebRequest -Uri $shapeUrl -UseBasicParsing -OutFile $shapeFile;
 
 # ------------------------------------------------------------------------------
+# Download node, npm, @angular/cli, typescript and tslint
+Set-Location "$baseDir";
+$nodeVer = "node-v7.7.4-win-x64";
+$nodeUrl = "https://nodejs.org/dist/v7.7.4/$nodeVer.zip";
+$nodeFile = "node.zip";
+Invoke-WebRequest -Uri $nodeUrl -UseBasicParsing -OutFile $nodeFile;
+
+Write-Host "Using standard windows zip handler, this will be slow";
+Add-Type -Assembly System.IO.Compression.FileSystem;
+[System.IO.Compression.ZipFile]::ExtractToDirectory("$baseDir\$nodeFile", $baseDir);
+
+Remove-Item "$baseDir\$nodeFile" -Force -Recurse;
+Move-Item "$nodeVer" "node"
+Set-Location "$baseDir\node";
+.\npm -g install --prefix "$baseDir\node" @angular/cli typescript tslint;
+
+
+# ------------------------------------------------------------------------------
 # Download the node_packages
+
+
+# Define the node packages we want to download
+$nodePackages = @(
+    # node modules are not required unless developing, which will be installed later.
+    # @{"dir" = "$baseDir\mobile-build-ns";
+    #     "packageJsonUrl" = "https://raw.githubusercontent.com/Synerty/peek-mobile/master/peek_mobile/build-ns/package.json"
+    # },
+    @{"dir" = "$baseDir\mobile-build-web";
+        "packageJsonUrl" = "https://raw.githubusercontent.com/Synerty/peek-mobile/master/peek_mobile/build-web/package.json"
+    },
+    @{"dir" = "$baseDir\admin-build-web";
+        "packageJsonUrl" = "https://raw.githubusercontent.com/Synerty/peek-admin/master/peek_admin/build-web/package.json"
+    }
+);
+
 foreach ($element in $nodePackages) {
     # Get the variables for this package
     $nmDir = $element.Get_Item("dir");

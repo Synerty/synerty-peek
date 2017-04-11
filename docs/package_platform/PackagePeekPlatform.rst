@@ -17,6 +17,10 @@ This section contains the steps to build your own platform release.
 
 ----
 
+Ensure that msys git is installed. :ref:`setup_msys_git`.
+
+----
+
 Open a PowerShell window.
 
 ----
@@ -35,7 +39,7 @@ Run the following commands in the power shell window.
 ::
 
     $file = "package_platform_win.ps1";
-    $uri = "https://bitbucket.org/synerty/synerty-peek/raw/d172037655a14c1c2bcdacf84f8a0448da876b6e/$file";
+    $uri = "https://bitbucket.org/synerty/synerty-peek/raw/master/$file";
     Invoke-WebRequest -Uri $uri -UseBasicParsing -OutFile $file;
 
 ----
@@ -50,6 +54,8 @@ The script will download the latest peek platform release and all its dependenci
 
 Take note of the end of the script, it will print out where the release is.
 
+
+
 Building a Linux Release
 ------------------------
 
@@ -61,7 +67,7 @@ Run the following commands in the power shell window.
 ::
 
         file="package_platform_deb8.sh";
-        uri="https://bitbucket.org/synerty/synerty-peek/raw/d172037655a14c1c2bcdacf84f8a0448da876b6e/$file";
+        uri="https://bitbucket.org/synerty/synerty-peek/raw/master/$file";
         wget $uri
 
 

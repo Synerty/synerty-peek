@@ -11,13 +11,13 @@ Setup Msys Git
 
 ----
 
-Configuring Extra Options: check 'Enable Symbolic Links'
+Use all default options, Except on the **Configure Extra Options** screen.
+
+On the **Configuring Extra Options** screen, check 'Enable Symbolic Links'
 
 .. image:: GIT-ExtraOptions.jpg
 
 ----
 
-Add PATH to environment variables ::
-
-        C:\Program Files\Git\bin
-
+Open a new command or powershell window, and type :command:`git`, it should find the
+git command.

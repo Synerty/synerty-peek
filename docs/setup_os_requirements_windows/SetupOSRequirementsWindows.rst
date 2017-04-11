@@ -161,6 +161,13 @@ Open the command prompt and run the following command:
         pip install virtualenv
 
 
+----
+
+The Wheel package is required for building platform and plugin releases ::
+
+        pip install wheel
+
+
 .. _requirements_windows_postgressql:
 
 PostgresSQL (Optional)
