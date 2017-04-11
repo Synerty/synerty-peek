@@ -22,10 +22,12 @@ New-Item $baseDir -ItemType directory;
 
 # ------------------------------------------------------------------------------
 # Download the peek platform and all it's dependencies
+
+# Create the dir for the py wheels
 New-Item "$baseDir\py" -ItemType directory;
 Set-Location "$baseDir\py";
 
-Write-Host "Downloading and creating windows wheels";
+Write-Host "Downloading and creating wheels";
 pip wheel --no-cache synerty-peek;
 
 # Make sure we've downloaded the right version
@@ -109,7 +111,7 @@ foreach ($element in $nodePackages) {
     New-Item "$nmDir\tmp" -ItemType directory;
     Set-Location "$nmDir\tmp";
 
-    # Download pacakge.json
+    # Download package.json
     Invoke-WebRequest -Uri $packageJsonUrl -UseBasicParsing -OutFile "package.json";
 
     # run npm install
@@ -130,15 +132,18 @@ Set-Location $startDir;
 
 # Finally, version the directory
 $releaseDir="$($baseDir)_$($peekPkgVer)";
-$relaseZip="$($releaseDir).zip"
+$releaseZip="$($releaseDir).zip"
 Move-Item $baseDir $releaseDir -Force;
 
 # Create the zip file
 Add-Type -Assembly System.IO.Compression.FileSystem;
 $compressionLevel = [System.IO.Compression.CompressionLevel]::Optimal;
 [System.IO.Compression.ZipFile]::CreateFromDirectory(
-    $releaseDir, $relaseZip, $compressionLevel, $false)
+    $releaseDir, $releaseZip, $compressionLevel, $false)
+
+# Remove the working dir
+Remove-Item "$releaseDir -Force -Recurse;
 
 # We're all done.
 Write-Host "Successfully created release $peekPkgVer";
-Write-Host "Located at $relaseZip";
+Write-Host "Located at $releaseZip";
