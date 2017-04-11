@@ -77,7 +77,7 @@ Run the platform build script.
 
 ::
 
-       ./package_platform_deb8.sh
+       bash package_platform_deb8.sh
 
 The script will download the latest peek platform release and all its dependencies.
 
