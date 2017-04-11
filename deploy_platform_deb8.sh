@@ -19,8 +19,10 @@ startDir=`pwd`
 releaseDir=`echo ~/peek_dist_deb8`
 
 # Delete the existing dist dir if it exists
-echo "Delete the existing dist dir if it exists"
-[ -d ${releaseDir} ] && rm -rf ${releaseDir}
+if [ -d ${releaseDir} ]; then
+    echo "Deleting old extracted release"
+    rm -rf ${releaseDir}
+fi
 
 # ------------------------------------------------------------------------------
 # Extract the release to a interim directory
@@ -54,7 +56,7 @@ fi
 virtualenv $venvDir
 
 # Activate the virtual environment
-export PATH="$venvDir\bin:$PATH"
+export PATH="$venvDir/bin:$PATH"
 
 # ------------------------------------------------------------------------------
 # Install the python packages
@@ -73,7 +75,7 @@ cp -pr $releaseDir/node/* ${venvDir}
 # Install the frontend node_modules
 
 # Make a var pointing to site-packages
-sp="$venvDir/Lib/site-packages"
+sp="$venvDir/lib/python3.6/site-packages"
 
 # Move the node_modules into place
 mv $releaseDir/mobile-build-web/node_modules $sp/peek_mobile/build-web
@@ -98,7 +100,7 @@ d='$'
 
 echo " "
 echo "Run the following to switch to the new releases environment :";
-echo "export PATH=${q}${venvDir}\bin:${d}{PATH}${q}"
+echo "export PATH=${q}${venvDir}/bin:${d}{PATH}${q}"
 echo " "
 
 read -p "Do you want to permanently enable this release? " -n 1 -r
@@ -106,5 +108,8 @@ echo    # (optional) move to a new line
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
     sed -i "s;export PEEK_VER.*;export PEEK_VER=${q}${venvDir}${q};" ~/.bashrc
-    echo "Done, Close and reopen your terminal for the update to take effect"
+    echo " "
+    echo "Done"
+    echo " "
+    echo "Close and reopen your terminal for the update to take effect"
 fi

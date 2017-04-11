@@ -12,7 +12,7 @@ Synerty recommends the Atlassian suite of developer tools.
 
 Bitbucket to manage and share your Git repositories
 
-:URL: `<https://bitbucket.org>`_
+:URL: `<https://www.bitbucket.org>`_
 
 SourceTree to visually manage and interact with your Git repositories
 
@@ -89,18 +89,17 @@ Clone Peek Repositories
 
 Checkout repositories all in the same folder
 
-https://brentonford@bitbucket.org/synerty/synerty-peek.git
+https://bitbucket.org/synerty/synerty-peek.git
 
 Use this script to insert individual peek modules.  Update {gitAccount} and
 {repository} in the script below: ::
 
-        GIT="{gitAccount}"
         REPO="{repository}"
 
         if [ ! -d ~peek/peek-dev ]; then
             mkdir ~peek/peek-dev
             cd ~peek/peek-dev/
-            git clone https://$GIT@bitbucket.org/synerty/$REPO.git
+            git clone https://bitbucket.org/synerty/$REPO.git
             cd ~peek/peek-mobile/$REPO
             git config --unset core.symlink
             git config --add core.symlink true
@@ -113,7 +112,6 @@ Use this script to insert individual peek modules.  Update {gitAccount} and
 
 Use this script to clone all repositories.  Update {gitAccount} in the script below: ::
 
-        GIT="{gitAccount}"
 
         REPOS="synerty-peek"
         REPOS="$REPOS peek-plugin-base"
@@ -131,7 +129,7 @@ Use this script to clone all repositories.  Update {gitAccount} in the script be
         for REPO in ${REPOS[*]}
         do
             echo $REPO
-            git clone https://$GIT@bitbucket.org/synerty/$REPO.git
+            git clone https://bitbucket.org/synerty/$REPO.git
             cd ~peek/peek-dev/$REPO
             git config --unset core.symlink
             git config --add core.symlink true

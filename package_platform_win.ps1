@@ -8,12 +8,12 @@ if (-Not [string]::IsNullOrEmpty($wantedVer)) {
 }
 
 # Get the current location
-$startDir=Get-Location
+$startDir = Get-Location
 
-$baseDir="$startDir\peek_dist_win";
+$baseDir = "$startDir\peek_dist_win";
 
 # Delete the existing dist dir if it exists
-If (Test-Path $baseDir){
+If (Test-Path $baseDir) {
     Remove-Item $baseDir -Force -Recurse;
 }
 
@@ -32,8 +32,8 @@ pip wheel --no-cache synerty-peek;
 
 # Make sure we've downloaded the right version
 $peekPkgName = Get-ChildItem ".\" |
-                    Where-Object {$_.Name.StartsWith("synerty_peek-")} |
-                    Select-Object -exp Name;
+    Where-Object {$_.Name.StartsWith("synerty_peek-")} |
+    Select-Object -exp Name;
 $peekPkgVer = $peekPkgName.Split('-')[1];
 
 if (-Not [string]::IsNullOrEmpty($wantedVer) -and $peekPkgVer -ne $wantedVer) {
@@ -44,15 +44,34 @@ if (-Not [string]::IsNullOrEmpty($wantedVer) -and $peekPkgVer -ne $wantedVer) {
 }
 
 
-# Download pymssql, As to 11/Apr/2017, there are no standard built wheels for 3.6.1
-$pymssqlUrl = 'http://www.lfd.uci.edu/%7Egohlke/pythonlibs/tuoh5y4k/pymssql-2.1.3-cp36-cp36m-win_amd64.whl';
-$pymssqlFile = 'pymssql-2.1.3-cp36-cp36m-win_amd64.whl';
-Invoke-WebRequest -Uri $pymssqlUrl -UseBasicParsing -OutFile $pymssqlFile;
+# Define the extra wheels we need to download
+$extraWheels = @(
+    # Download shapely, it's not a dependency on windows because pip doesn't try to get the windows dist.
+    @{
+        "file" = "Shapely-1.5.17-cp36-cp36m-win_amd64.whl";
+        "url" = "http://www.lfd.uci.edu/~gohlke/pythonlibs/tuoh5y4k"
+    },
 
-# Download shapely, it's not a dependency on windows because pip doesn't try to get the windows dist.
-$shapeUrl = 'http://www.lfd.uci.edu/~gohlke/pythonlibs/tuth5y6k/Shapely-1.5.17-cp35-cp35m-win_amd64.whl';
-$shapeFile = 'Shapely-1.5.17-cp35-cp35m-win_amd64.whl';
-Invoke-WebRequest -Uri $shapeUrl -UseBasicParsing -OutFile $shapeFile;
+    # Download pymssql, As to 11/Apr/2017, there are no standard built wheels for 3.6.1
+    @{
+        "file" = "pymssql-2.1.3-cp36-cp36m-win_amd64.whl";
+        "url" = "http://www.lfd.uci.edu/%7Egohlke/pythonlibs/tuoh5y4k"
+    }
+);
+
+# Download and check the extra wheels
+foreach ($wheel in $extraWheels) {
+    # Get the variables for this package
+    $file = $wheel.Get_Item("file");
+    $url = "$($wheel.Get_Item("url"))/$($file)";
+
+    Invoke-WebRequest -Uri $url -UseBasicParsing -OutFile $file;
+
+    if ( (get-item $file).length -lt 10000) {
+        Write-Error "$file has a new version update"
+    }
+}
+
 
 # ------------------------------------------------------------------------------
 # Download node, npm, @angular/cli, typescript and tslint
@@ -74,10 +93,10 @@ Add-Type -Assembly System.IO.Compression.FileSystem;
 Remove-Item "$baseDir\$nodeFile" -Force -Recurse;
 
 # Move NODE into place
-Move-Item "node-v$nodeVer-win-x64" "node"
+Move-Item "node-v$nodeVer-win-x64" "node";
 
 # Set the path for future NODE commands
-$env:Path = "$baseDir\node;$env:Path"
+$env:Path = "$baseDir\node;$env:Path";
 
 # Install the required NPM packages
 npm -g upgrade npm
@@ -127,18 +146,24 @@ foreach ($element in $nodePackages) {
 Set-Location $startDir;
 
 # Finally, version the directory
-$releaseDir="$($baseDir)_$($peekPkgVer)";
-$releaseZip="$($releaseDir).zip"
+$releaseDir = "$($baseDir)_$($peekPkgVer)";
+$releaseZip = "$($releaseDir).zip"
 Move-Item $baseDir $releaseDir -Force;
 
+# Delete an old release zip if it exists
+If (Test-Path $releaseZip) {
+    Remove-Item $releaseZip -Force;
+}
+
 # Create the zip file
+Write-Host "Compressing the release";
 Add-Type -Assembly System.IO.Compression.FileSystem;
 $compressionLevel = [System.IO.Compression.CompressionLevel]::Optimal;
 [System.IO.Compression.ZipFile]::CreateFromDirectory(
     $releaseDir, $releaseZip, $compressionLevel, $false)
 
 # Remove the working dir
-Remove-Item "$releaseDir -Force -Recurse;
+Remove-Item $releaseDir -Force -Recurse;
 
 # We're all done.
 Write-Host "Successfully created release $peekPkgVer";

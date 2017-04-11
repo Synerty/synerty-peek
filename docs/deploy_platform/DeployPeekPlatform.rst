@@ -33,14 +33,15 @@ This is the only step in this section that requires the internet.
 ::
 
         $file = "deploy_platform_win.ps1"
-        $uri = "https://bitbucket.org/synerty/synerty-peek/raw/d172037655a14c1c2bcdacf84f8a0448da876b6e/$file";
+        $uri = "https://bitbucket.org/synerty/synerty-peek/raw/master/$file";
         Invoke-WebRequest -Uri $uri -UseBasicParsing -OutFile $file;
 
 ----
 
-Run the platform deploy script.  The script will complete with a print out of where the
-new environment was deployed.  Ensure you update the **$dist** variable with the path to
-your release.
+Run the platform deploy script. The script will complete with a print out of where the
+new environment was deployed.
+
+Ensure you update the **$dist** variable with the path to your release.
 
 The script will deploy to :file:`C:\\Users\\peek`.
 

@@ -117,9 +117,14 @@ releaseZip="${releaseDir}.tar.bz2"
 mv ${baseDir} ${releaseDir}
 
 
+# Delete an old release zip if it exists
+if [ -f ${releaseZip} ]; then
+    rm ${releaseZip}
+fi
+
 # Create the zip file
-echo "Compress the release"
-tar cjf ${releaseZip} -C ${releaseDir} ${releaseDir}/*
+echo "Compressing the release"
+(cd ${releaseDir} && tar cjf ${releaseZip} *)
 
 # Remove the working dir
 rm -rf ${releaseDir}

@@ -106,7 +106,7 @@ Write-Host " ";
 
 # Ask if the user would like to update the PATH environment variables
 $title = "Environment Variables"
-$message = "Do you want to update the PATH System Environment Variables with the newly deploy virtual environment: '"+$venvDir+"' and remove any other 'synerty-peek' System Environment Variables?"
+$message = "Do you want to update the system to use the release just installed?"
 
 $yes = New-Object System.Management.Automation.Host.ChoiceDescription "&Yes", `
     "I want to update the PATH System Environment Variables."
@@ -118,40 +118,37 @@ $options = [System.Management.Automation.Host.ChoiceDescription[]]($yes, $no)
 
 $result = $host.ui.PromptForChoice($title, $message, $options, 0) 
 
-switch ($result)
-    {
-        0 {"You selected Yes.";
+switch ($result) {
+    0 {
+        Write-Host "You selected Yes.";
 
-            # Update the reference to the new environment.
-            # We probably won't want to do this here when we setup services.
-            Write-Host "Setting PEEK_ENV to $venvDir";
-            [Environment]::SetEnvironmentVariable("PEEK_VENV", $venvDir, "User");
+        $newPath = "$venvDir\Scripts";
+        Write-Host "Added PATH variable:" $newPath;
 
-            $PathVariables = $venvDir;
-
-            Write-Host "Added PATH variable:" $PathVariables;
-
-            ([Environment]::GetEnvironmentVariable("PATH", "Machine")).split(';') | foreach-object { 
-                if ($_ -notmatch $SynertyPeek) 
-                { $PathVariables=$PathVariables+';'+$_ } 
-                Else 
-                { Write-Host " ";
-                    Write-Host "Removed PATH variable:" $_ ;
-                } 
+        ([Environment]::GetEnvironmentVariable("PATH", "User")).split(';') | foreach-object {
+            if ($_ -notmatch 'synerty-peek') {
+                $newPath = $newPath + ';' + $_
             }
-            [Environment]::SetEnvironmentVariable("PATH", $PathVariables, "Machine");
-            Write-Host " ";
-            Write-Host "Environment Variables have been updated."
-            Write-Host " ";
-            Write-Host "IMPORTANT, you must restart the PowerShell window for the Environment Variable changes to take effect!"
+            else {
+                Write-Host "Removed PATH variable:" $_ ;
+            }
         }
-    
-        1 {"You selected No.";
-            Write-Host " ";
-            Write-Host "Activate the new environment from command :";
-            Write-Host "    set PATH=`"$venvDir\Scripts;%PATH%`"";
-            Write-Host " ";
-            Write-Host "Activate the new environment from PowerShell :";
-            Write-Host "    `$env:Path = `"$venvDir\Scripts;`$env:Path`"";
-        }
+        [Environment]::SetEnvironmentVariable("PATH", $newPath, "User");
+        Write-Host " ";
+        Write-Host "Environment Variables have been updated."
+        Write-Host " ";
+        Write-Host @"IMPORTANT, you must restart the PowerShell window for the
+                        Environment Variable changes to take effect!"@
     }
+
+    1 {
+        Write-Host "You selected No.";
+        Write-Host " ";
+        Write-Host "Activate the new environment from command :";
+        Write-Host "    set PATH=`"$venvDir\Scripts;%PATH%`"";
+        Write-Host " ";
+        Write-Host "Activate the new environment from PowerShell :";
+        Write-Host "    `$env:Path = `"$venvDir\Scripts;`$env:Path`"";
+    }
+}
+

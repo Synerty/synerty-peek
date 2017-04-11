@@ -583,6 +583,13 @@ Make and Make install the software ::
 
 ----
 
+Cleanup the download and build dir ::
+
+        cd
+        rm -rf Python-${PEEK_PY_VER}*
+
+----
+
 Symlink the python3 commands so they are the only ones picked up by path. ::
 
         cd /home/peek/cpython-${PEEK_PY_VER}/bin

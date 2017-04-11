@@ -8,7 +8,7 @@ Synerty recommends the Atlassian suite of developer tools.
 
 Bitbucket to manage and share your Git repositories
 
-:URL: `<https://bitbucket.org>`_
+:URL: `<https://www.bitbucket.org>`_
 
 SourceTree to visually manage and interact with your Git repositories
 
