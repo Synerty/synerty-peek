@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+source ~/.bashrc
+
 set -o nounset
 set -o errexit
 
@@ -11,7 +13,7 @@ fi
 
 DIR=`pwd`
 
-$baseDir="$DIR/peek_dist_deb8"
+baseDir="$DIR/peek_dist_deb8"
 
 [ -d $baseDir ] && rm -rf $baseDir
 
