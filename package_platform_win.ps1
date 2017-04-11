@@ -72,7 +72,7 @@ Add-Type -Assembly System.IO.Compression.FileSystem;
 Remove-Item "$baseDir\$nodeFile" -Force -Recurse;
 
 # Move NODE into place
-Move-Item "$nodeVer" "node"
+Move-Item "node-v$nodeVer-win-x64" "node"
 
 # Set the path for future NODE commands
 $env:Path = "$baseDir\node;$env:Path"

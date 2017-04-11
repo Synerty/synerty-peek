@@ -66,7 +66,7 @@ PATH="$nodeDir/bin:$PATH"
 
 # Install the required NPM packages
 npm -g upgrade npm
-npm -g --prefix "$nodeDir" @angular/cli typescript tslint
+npm -g @angular/cli typescript tslint
 
 # ------------------------------------------------------------------------------
 # This function downloads the node modules and prepares them for the release
