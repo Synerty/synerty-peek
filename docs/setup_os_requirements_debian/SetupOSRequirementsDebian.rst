@@ -437,7 +437,11 @@ Edit the file :file:`/etc/resolv.conf`, and update it.
 Installing General Prerequisites
 --------------------------------
 
+This section installs the OS packages required.
+
 .. note:: Run the commands in this step as the :code:`peek` user.
+
+----
 
 Install the C Compiler package, used for compiling python or VMWare tools, etc:
 
@@ -446,6 +450,7 @@ Install the C Compiler package, used for compiling python or VMWare tools, etc:
         PKG="gcc make linux-headers-amd64"
         sudo apt-get install -y $PKG
 
+----
 
 Install the Python build dependencies:
 
@@ -456,7 +461,7 @@ Install the Python build dependencies:
         PKG="$PKG libbz2-dev"
         sudo apt-get install -y $PKG
 
-
+----
 
 Install C libraries that some python packages link to when they install:
 
@@ -483,7 +488,7 @@ Install C libraries that some python packages link to when they install:
 
         sudo apt-get install -y $PKG
 
-
+----
 
 Install rsync and git packages:
 
@@ -491,6 +496,13 @@ Install rsync and git packages:
 
         PKG="rsync git unzip"
         sudo apt-get install -y $PKG
+
+----
+
+Cleanup the downloaded packages ::
+
+        sudo apt-get clean
+
 
 Installing VMWare Tools (Optional)
 ----------------------------------
@@ -642,6 +654,7 @@ Add the latest PostGreSQL repository ::
 Install PostGresQL ::
 
         sudo apt-get install -y postgis postgresql-9.5
+        sudo apt-get clean
 
 
 ----
