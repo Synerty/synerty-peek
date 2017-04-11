@@ -1,6 +1,14 @@
 #!/usr/bin/env bash
 
-releaseZip="${releaseZip:-$1}" # If VER is not defined, try arg 1
+set -o nounset
+set -o errexit
+
+releaseZip="${1}"
+
+if ! [ -f $releaseZip ]; then
+    echo "Release doesn't exist : $releaseZip"
+    exit 1
+fi
 
 # ------------------------------------------------------------------------------
 # Initialise variables and paths
@@ -8,7 +16,7 @@ releaseZip="${releaseZip:-$1}" # If VER is not defined, try arg 1
 # Get the current location
 startDir=`pwd`
 
-releaseDir="~/peek_dist_deb8"
+releaseDir=`echo ~/peek_dist_deb8`
 
 # Delete the existing dist dir if it exists
 echo "Delete the existing dist dir if it exists"
@@ -18,15 +26,14 @@ echo "Delete the existing dist dir if it exists"
 # Extract the release to a interim directory
 
 # Create the new release dir
-echo "Create the new release dir ${releaseDir}"
 mkdir -p ${releaseDir}
 
 # Decompress the release
-echo "Decompress the release ${releaseZip} to ${releaseDir}"
+echo "Extracting release to $releaseDir"
 tar xjf ${releaseZip} -C ${releaseDir}
 
 # ------------------------------------------------------------------------------
-# Create teh virtual environment
+# Create the virtual environment
 
 # Get the release name from the package
 echo "Get the release name from the package"
@@ -53,7 +60,7 @@ export PATH="$venvDir\bin:$PATH"
 # Install the python packages
 
 # install the py wheels from the release
-pip install --no-index --no-cache --find-links "$releaseDir\py" synerty-peek
+pip install --no-index --no-cache --find-links "$releaseDir/py" synerty-peek
 
 # ------------------------------------------------------------------------------
 # Install node
@@ -71,6 +78,11 @@ sp="$venvDir/Lib/site-packages"
 # Move the node_modules into place
 mv $releaseDir/mobile-build-web/node_modules $sp/peek_mobile/build-web
 mv $releaseDir/admin-build-web/node_modules $sp/peek_admin/build-web
+
+# ------------------------------------------------------------------------------
+# Remove release dir
+
+rm -rf ${releaseDir}
 
 # ------------------------------------------------------------------------------
 # Show complete message

@@ -60,7 +60,7 @@ The script will deploy to :file:`C:\\Users\\peek`.
 
 ----
 
-The platform is now deployed.
+The platform is now deployed, see the admin page next. :ref:`admin_run_synerty_peek`
 
 .. _configuring_environment_variables:
 
@@ -115,81 +115,12 @@ It should return the variable you have added into the PATH
 
 .. image:: EnvVar-WhichPython.jpg
 
-Plugin Development
-``````````````````
-
-Follow these steps if you are already developing peek-plugin's on this machine.
-
-For every new peek platform environment that is deployed, your development plugins will
-require setting up in the new environment.
-
-----
-
-Open the command prompt and enter the bash shell
-
-----
-
-Change to the plugin root directory
-
-----
-
-Run the following command:
-
-::
-
-        python setup.py develop
-
-
-----
-
-Repeat for each plugin being developed
-
-NativeScript Development
-````````````````````````
-
-Follow these steps if you are developing with NativeScript
-
-----
-
-Open the command prompt and enter the bash shell
-
-----
-
-Run the following command:
-
-::
-
-        npm -g install nativescript
-
-
-Run Deployed Peek Services
-``````````````````````````
-
-Run the platform services from bash with the following commands: ::
-
-        # Check to ensure we're using the right python
-        which python
-
-        # Run the peek server
-        run_peek_server
-
-        # Run the peek client
-        run_peek_client
-
-        # Run the peek agent
-        run_peek_agent
-
-        # Run the peek worker
-        run_peek_worker
-
-
 Linux
 -----
 
 Run all commands from a terminal window remotely via ssh.
 
-Deploy Virtual Environment
-``````````````````````````
+----
 
 Download the platform deploy script.
 
@@ -201,21 +132,24 @@ Download the platform deploy script.
 
 ::
 
-        file="deploy_platform_deb8.sh"
-        uri="https://bitbucket.org/synerty/synerty-peek/raw/d172037655a14c1c2bcdacf84f8a0448da876b6e/$file"
+        uri="https://bitbucket.org/synerty/synerty-peek/raw/master/deploy_platform_deb8.sh"
         wget $uri
 
+----
 
-Run the platform deploy script.  The script will complete with a print out of where the
-new environment was deployed.  Ensure you update the **$dist** variable with the path to
-your release.
+Run the platform deploy script. The script will complete with a print out of where the
+new environment was deployed.
+
+Ensure you update the **$dist** variable with the path to your release.
 
 The script will deploy to :file:`/home/peek/`.
 
 ::
 
-        dist="/home/peek/Downloads/peek_dist_lin_#.#.#.zip"
+        dist="/home/peek/Downloads/peek_dist_deb8_#.#.#.tar.bz2"
         ./deploy_platform_deb8.sh $dist
+
+----
 
 Once the script has completed running you will see the message "Activate the
 new environment edit ...".
@@ -225,7 +159,30 @@ that was just deployed.
 
 ----
 
-The platform is now deployed.
+The platform is now deployed, see the admin page next. :ref:`admin_run_synerty_peek`
+
+Development Considerations
+--------------------------
+
+Deploying an new platform will clear out some of the setup for developing plugins or
+the platform.
+
+If you've run these commands as part of any development setups, you'll need to run
+them again now
+
+----
+
+Example, run this for each python package/plugin you're developing. ::
+
+        python setup.py develop
+
+
+----
+
+Install the :command:`tns` command line tools again: ::
+
+        npm -g install nativescript
+
 
 What Next?
 ----------

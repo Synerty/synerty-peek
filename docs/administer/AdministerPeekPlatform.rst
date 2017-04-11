@@ -88,6 +88,7 @@ If there are no plugins installed, this file will be populated as:
             ]
         }
 
+.. _admin_run_synerty_peek:
 
 Running synerty-peek
 --------------------
@@ -113,4 +114,6 @@ chrome: http://127.0.0.1:8000/
 ::
 
         run_peek_agent
+
+
 

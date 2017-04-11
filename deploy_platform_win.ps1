@@ -90,6 +90,11 @@ Move-Item $releaseDir\mobile-build-web\node_modules $sp\peek_mobile\build-web -F
 Move-Item $releaseDir\admin-build-web\node_modules $sp\peek_admin\build-web -Force
 
 # ------------------------------------------------------------------------------
+# Remove release dir
+
+Remove-Item $releaseDir -Force -Recurse;
+
+# ------------------------------------------------------------------------------
 # Show complete message
 
 # All done.

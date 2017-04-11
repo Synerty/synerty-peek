@@ -31,7 +31,7 @@ pip wheel --no-cache synerty-peek
 # Make sure we've downloaded the right version
 peekPkgVer=`ls synerty_peek-* | cut -d'-' -f2`
 
-if [ -n ${wantedVer} -a ${wantedVer} -ne ${peekPkgVer} ]; then
+if [ -n "${wantedVer}" -a "${wantedVer}" -ne "${peekPkgVer}" ]; then
    echo "We've downloaded version ${peekPkgVer}, but you wanted ver ${wantedVer}"
 else
     echo "We've downloaded version ${peekPkgVer}"
@@ -119,7 +119,7 @@ mv ${baseDir} ${releaseDir}
 
 # Create the zip file
 echo "Compress the release"
-tar cjf ${releaseZip} ${releaseDir}
+tar cjf ${releaseZip} -C ${releaseDir} ${releaseDir}/*
 
 # Remove the working dir
 rm -rf ${releaseDir}
