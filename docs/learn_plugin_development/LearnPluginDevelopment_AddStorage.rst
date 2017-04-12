@@ -362,11 +362,14 @@ the following contents, make sure to update the **sqlalchemy.url** line.
 .. note:: The database connection string is only used when creating database upgrade
     scripts.
 
+:MS Sql Server: :code:`mssql+pymssql://peek:PASSWORD@127.0.0.1/peek`
+:PostGreSQL: :code:`postgresql://peek:PASSWORD@127.0.0.1/peek`
+
 ::
 
         [alembic]
         script_location = alembic
-        sqlalchemy.url = postgresql://peek:PASSWORD@localhost/peek
+        sqlalchemy.url = postgresql://peek:PASSWORD@127.0.0.1/peek
 
 ----
 

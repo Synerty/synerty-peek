@@ -15,16 +15,20 @@ peek-admin
 peek-server
 synerty-peek"
 
-export PLUGINS="
-peek-plugin-active-task
-peek-plugin-user
-peek-plugin-chat
-peek-plugin-data-dms
-peek-plugin-pof-field-switching
-peek-plugin-pof-sql
-peek-plugin-pof-soap
-peek-plugin-pof-chat"
 
+# Dynamicall list plugins
+
+# Get the location of this script
+here=$(dirname `readlink -f $(dirname $0)`)
+echo $here
+
+# Plugins are siblings to this project
+if ls -d $here/peek-plugin-* 2> /dev/null 2>&1; then
+    export PLUGINS=`ls -d $here/peek-plugin-* | grep -v peek-plugin-base`
+else
+    echo "There are no plugins at $here"
+    export PLUGINS=""
+fi
 
 export bold=$(tput bold)
 export normal=$(tput sgr0)
