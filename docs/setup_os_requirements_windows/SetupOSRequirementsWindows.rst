@@ -283,16 +283,7 @@ On the **Instance Configuration** screen
 
 ----
 
-On the **Server Configuration** screen,
-
-#.  Select browse from the 'Account Name' drop-list
-#.  Enter "peek" in the text box
-#.  Click Check Names
-#.  Click OK
-#.  Enter the password for the new peek SQL user.
-#.  Click Next
-
-.. image:: SQLServer-ServerConfiguration.jpg
+On the **Server Configuration** screen, Click Next.
 
 ----
 
@@ -302,6 +293,10 @@ On the **Database Engine Configuration** screen.
 #.  Enter and re-enter the SA password
 
 .. image:: SQLServer-DBEngConfig.jpg
+
+----
+
+Click through the remainder of the installtion steps.
 
 Create Peek Database
 ````````````````````
@@ -324,6 +319,38 @@ Create new database 'peek'.
 ----
 
 The peek database is now created
+
+
+Create Peek User
+````````````````
+
+This section creates the peek SQL user.
+
+----
+
+Still in the **SQL Server Management Studio**,
+
+#.  Click **New Query**
+#.  Paste the following SQL in, and alter the password.
+#.  Click **Execute**
+
+
+::
+
+        USE [master]
+        GO
+        CREATE LOGIN [peek] WITH PASSWORD=N'PA$$WORD', DEFAULT_DATABASE=[peek],
+            CHECK_EXPIRATION=OFF, CHECK_POLICY=ON
+        GO
+        USE [peek]
+        GO
+        CREATE USER [peek] FOR LOGIN [peek]
+        GO
+        USE [peek]
+        GO
+        ALTER ROLE [db_owner] ADD MEMBER [peek]
+        GO
+
 
 Enable Local TCP Connections
 ````````````````````````````
@@ -424,7 +451,7 @@ Create file :file:`freetds.conf` in :file:`C:\\` ::
             port = 1433
             instance = peek
             tds version = 7.4
-            dump file = /tmp/freetds.log
+            dump file = c:\users\peek\freetds.log
 
 
 dll files
@@ -481,14 +508,6 @@ Add the following to PATH in the "System" environment variables ::
 
 .. tip:: On Win 10, enter "environment" in the task bar search and select
             **Edit the system environment variables**
-
-----
-
-Symlink the oracle client lib ::
-
-        cd $ORACLE_HOME
-        ln -snf libclntsh.so.12.1 libclntsh.so
-        ls -l libclntsh.so
 
 ----
 

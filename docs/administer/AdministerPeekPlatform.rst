@@ -4,6 +4,8 @@
 Administer Peek Platform
 ========================
 
+.. _admin_configure_synerty_peek:
+
 Configuring Platform :file:`config.json`
 ----------------------------------------
 
@@ -18,102 +20,215 @@ other, connect to the database, which plugins to load, etc.
 Peek Server
 ```````````
 
-Create directory :file:`C:\\Users\\peek\\peek-server.home`
+This section sets up the config files for the **server** service.
 
 ----
 
-Create file :file:`C:\\Users\\peek\\peek-server.home\\config.json`
+Create following file and parent directory:
+
+:Windows: :file:`C:\\Users\\peek\\peek-server.home\\config.json`
+:Linux: :file:`/home/peek/peek-server.home/config.json`
+
+.. tip:: Run the service, it will create some of it's config before failing
+            to connect to the db.
 
 ----
 
-Populate the file :file:`C:\\Users\\peek\\peek-server.home\\config.json` with the
-    *   SQLAlchemy connect URL
+Populate the file :file:`config.json` with the
+    *   SQLAlchemy connect URL (See options below)
+    *   Enabled plugins
+
+Select the right :code:`connectUrl` for your database, ensure you update :code:`PASSWORD`.
+
+:MS Sql Server: :code:`mssql+pymssql://peek:PASSWORD@127.0.0.1/peek`
+:PostGreSQL: :code:`postgresql://peek:PASSWORD@localhost/peek`
+
+::
+
+
+        {
+            "plugin": {
+                "enabled": [
+                    "peek_plugin_noop",
+                    "peek_plugin_etc"
+                ]
+            },
+            "sqlalchemy": {
+                "connectUrl": "postgresql://peek:PASSWORD@localhost/peek"
+            }
+        }
+
+
+Peek Client
+```````````
+
+This section sets up the config files for the **client** service.
+
+----
+
+Create following file and parent directory:
+
+:Windows: :file:`C:\\Users\\peek\\peek-client.home\\config.json`
+:Linux: :file:`/home/peek/peek-client.home/config.json`
+
+.. tip:: Run the service, it will create some of it's config,
+            it might raise errors though.
+
+----
+
+Populate the file :file:`config.json` with the
+    *   Enabled plugins
+    *   Disable NativeScript preparing
+
+::
+
+        {
+            "frontend": {
+                "nativescriptBuildPrepareEnabled": false
+            },
+            "plugin": {
+                "enabled": [
+                    "peek_plugin_noop",
+                    "peek_plugin_etc"
+                ]
+            }
+        }
+
+
+
+Peek Agent
+``````````
+
+This section sets up the config files for the **agent** service.
+
+----
+
+Create following file and parent directory:
+
+:Windows: :file:`C:\\Users\\peek\\peek-agent.home\\config.json`
+:Linux: :file:`/home/peek/peek-agent.home/config.json`
+
+.. tip:: Run the service, it will create some of it's config,
+            it might raise errors though.
+
+----
+
+Populate the file :file:`config.json` with the
     *   Enabled plugins
 
 ::
 
         {
-        "plugin": {
-            "enabled": [
-                "peek_plugin_noop",
-                "peek_plugin_etc"
-            ]
-        },
-        "sqlalchemy": {
-            "connectUrl": "postgresql://peek:PASSWORD@localhost/peek"
+            "plugin": {
+                "enabled": [
+                    "peek_plugin_noop",
+                    "peek_plugin_etc"
+                ]
+            }
         }
 
-
-.. note:: In the SQLAlchemy connect URL the :code:`PASSWORD` needs to be replaced with the
-    password you used when installing postgres, see
-    :ref:`requirements_windows_postgressql`.
-
-For MSSQL the SQAlchemy connection string will be like:
-
-::
-
-        "sqlalchemy": {
-           "connectUrl": "mssql+pymssql://.\\peek:PASSWORD@localhost/peek"
-        }
-
-
-Peek Client, Agent and Worker
-`````````````````````````````
-For each of "client", "agent" and "worker" names, do the following
-
-Create directory :file:`C:\\Users\\peek\\peek-<name>.home`
-Create file :file:`C:\\Users\\peek\\peek-<name>.home\\config.json`
-
-Populate the file :file:`C:\\Users\\peek\\peek-server.home\\config.json` with the
-    *   Enabled plugins (the plugins you have installed)
-
-::
-
-        {
-        "plugin": {
-            "enabled": [
-                "peek_plugin_noop",
-                "peek_plugin_etc"
-            ]
-        }
-
-
-If there are no plugins installed, this file will be populated as:
-
-::
-
-        {
-        "plugin": {
-            "enabled": [
-            ]
-        }
 
 .. _admin_run_synerty_peek:
 
-Running synerty-peek
---------------------
+Run Peek Manually
+-----------------
 
-Run the following in bash:
+This section describes the best practices for running the peek platform manually
 
-::
+----
+
+To use bash on windows, install msys git. :ref:`setup_msys_git`, otherwise use
+powershell on windows.
+
+Check Environment
+`````````````````
+
+Make sure that the right environment is activated. Run the following commands.
+
+----
+
+PowerShell ::
+
+        (Get-Command python).source
+        (Get-Command run_peek_server).source
+
+Or Bash ::
+
+        which python
+        which run_peek_server
+
+----
+
+Confirm that the output contains the release you wish to use.
+
+run_peek_server
+```````````````
+
+This section runs the peek server service of the platform and opens the admin page.
+
+----
+
+Run the following in bash, cmd or powershell ::
 
         run_peek_server
 
 
-chrome: http://127.0.0.1:8010/
+----
 
-Update plugin settings
+Open the following URL in a browser, Chrome is recommended.
 
-::
+`<http://127.0.0.1:8010/>`_
+
+This is the administration page for the peek platform, otherwise known as the
+"Admin" service.
+
+
+run_peek_client
+```````````````
+
+This section runs the peek client service, this serves the desktop and mobile web apps
+and provides data to all desktop and mobile native apps
+
+----
+
+Run the following in bash, cmd or powershell ::
 
         run_peek_client
 
 
-chrome: http://127.0.0.1:8000/
+----
 
-::
+Open the following URL in a browser, Chrome is recommended.
+
+`<http://127.0.0.1:8000/>`_
+
+This is the mobile web app for the peek platform.
+
+
+run_peek_agent
+``````````````
+
+The Agent is used to connect to external systems, this section runs the agent service.
+
+----
+
+Run the following in bash, cmd or powershell ::
 
         run_peek_agent
 
 
+Whats Next
+``````````
 
+Now that the platform is running, See the next section,
+:ref:`admin_updating_plugin_settings`
+
+
+.. _admin_updating_plugin_settings:
+
+Updating Plugin Settings
+------------------------
+
+Plugins are intended to be entierly configured via the peek server Admin page.
+
+Navigate to `<http://127.0.0.1:8010/>`_ and click the plugins dropdown.

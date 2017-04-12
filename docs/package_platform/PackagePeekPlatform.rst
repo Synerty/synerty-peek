@@ -19,6 +19,8 @@ This section contains the steps to build your own platform release.
 
 Ensure that msys git is installed. :ref:`setup_msys_git`.
 
+The python package scripts use git to detect git ignored files.
+
 ----
 
 Open a PowerShell window.

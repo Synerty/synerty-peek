@@ -45,76 +45,33 @@ Ensure you update the **$dist** variable with the path to your release.
 
 The script will deploy to :file:`C:\\Users\\peek`.
 
+.. tip:: There are 80,000 files in the release, to speed up the extract, try these:
+
+        *   Turn off antivirus, including the built in "Windows defender" in Win10
+        *   Ensure 7zip is installed, the deploy script checks and uses this if it's
+            present.
+
 ::
 
         $dist = "C:\Users\peek\Downloads\peek_dist_win_#.#.#.zip"
         PowerShell.exe -ExecutionPolicy Bypass -File deploy_platform_win.ps1 $dist
 
-.. note:: Once the script has completed running you will see the message "Activate the
-    new environment from ...".
+----
 
-    These commands temporarily configure the environment to
-    use the synerty-peek virtual environment that was just deployed.
+When the script completes, you will be prompted to update the environment.
 
-    For a permanent change you will need to edit your 'Environment Variables'.  See
-    :ref:`configuring_environment_variables` for more details.
+Press **Enter** to make this reality.
+
+Otherwise, you will be given commands to temporarily configure the environment to
+use the synerty-peek virtual environment that was just deployed.
 
 ----
 
-The platform is now deployed, see the admin page next. :ref:`admin_run_synerty_peek`
+The platform is now deployed, see the admin page next.
 
-.. _configuring_environment_variables:
+*   :ref:`admin_configure_synerty_peek`
+*   :ref:`admin_run_synerty_peek`
 
-Configuring Environment Variables
-`````````````````````````````````
-
-Follow this procedure to configure your system to use the synerty-peek virtual
-environment that you have deployed.
-
-These steps can also be followed to roll back to a previous deployed synerty-peek virtual
-environment.
-
-----
-
-Go to 'System Properties' and select 'Environment Variables...'
-
-.. image:: EnvVar-SystemProperties.jpg
-
-----
-
-In the 'System Variables' section, highlight 'PATH' and select 'Edit...'
-
-.. image:: EnvVar-EnvironmentVariables.jpg
-
-----
-
-In the Edit window select 'New' and paste the script:
-
-::
-
-        C:\Users\peek\synerty-peek-#.#.#\Scripts
-
-Click 'Move Up'.  It is important that the variable you have added is above any other
-variables that contain similar script or programs.
-
-.. image:: EnvVar-EditVariables.jpg
-
-----
-
-Select 'OK' on all three windows
-
-----
-
-Confirm that your changes have worked.  In a new command prompt enter the bash shell
-and run:
-
-::
-
-        which python
-
-It should return the variable you have added into the PATH
-
-.. image:: EnvVar-WhichPython.jpg
 
 Linux
 -----
@@ -141,7 +98,7 @@ Download the platform deploy script.
 Run the platform deploy script. The script will complete with a print out of where the
 new environment was deployed.
 
-Ensure you update the **$dist** variable with the path to your release.
+Ensure you update the **dist** variable with the path to your release.
 
 The script will deploy to :file:`/home/peek/`.
 
@@ -160,7 +117,11 @@ that was just deployed.
 
 ----
 
-The platform is now deployed, see the admin page next. :ref:`admin_run_synerty_peek`
+The platform is now deployed, see the admin page next.
+
+*   :ref:`admin_configure_synerty_peek`
+*   :ref:`admin_run_synerty_peek`
+
 
 Development Considerations
 --------------------------
