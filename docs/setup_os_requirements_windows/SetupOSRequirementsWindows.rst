@@ -339,7 +339,7 @@ Still in the **SQL Server Management Studio**,
 
         USE [master]
         GO
-        CREATE LOGIN [peek] WITH PASSWORD=N'PA$$WORD', DEFAULT_DATABASE=[peek],
+        CREATE LOGIN [peek] WITH PASSWORD=N'PASSWORD', DEFAULT_DATABASE=[peek],
             CHECK_EXPIRATION=OFF, CHECK_POLICY=ON
         GO
         USE [peek]

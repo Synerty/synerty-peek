@@ -17,11 +17,13 @@ synerty-peek"
 
 export PLUGINS="
 peek-plugin-active-task
-peek-plugin-data-dms
-peek-plugin-pof-soap
 peek-plugin-user
+peek-plugin-chat
+peek-plugin-data-dms
 peek-plugin-pof-field-switching
-peek-plugin-pof-sql"
+peek-plugin-pof-sql
+peek-plugin-pof-soap
+peek-plugin-pof-chat"
 
 
 export bold=$(tput bold)
