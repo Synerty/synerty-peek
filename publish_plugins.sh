@@ -78,7 +78,7 @@ echo
 # -------------------------------------
 echo "Building packages"
 for plugin in $PLUGINS; do
-    if ! (cd ../$plugin && ./publish.sh ${VER} ); then
+    if ! (cd ../$plugin && bash publish.sh ${VER} "" ); then
         echo "${bold}${plugin}${normal} : failed to run publish." >&2
         exit 1
     fi

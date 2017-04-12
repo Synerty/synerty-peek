@@ -30,6 +30,19 @@ else
     export PLUGINS=""
 fi
 
+# Ignore all that, define the ones JJC wants for Orion
+
+export PLUGINS="
+peek-plugin-data-dms
+peek-plugin-user
+peek-plugin-active-task
+peek-plugin-chat
+peek-plugin-pof-sql
+peek-plugin-pof-soap
+peek-plugin-pof-chat
+peek-plugin-pof-field-switching
+peek-plugin-pof-event"
+
 export bold=$(tput bold)
 export normal=$(tput sgr0)
 
