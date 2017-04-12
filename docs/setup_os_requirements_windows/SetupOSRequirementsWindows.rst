@@ -509,6 +509,14 @@ Add the following to PATH in the "System" environment variables ::
 .. tip:: On Win 10, enter "environment" in the task bar search and select
             **Edit the system environment variables**
 
+
+----
+
+The Oracle instant client needs :file:`msvcr120.dll` to run, download and install the
+x64 version from the following microsoft site.
+
+`<https://www.microsoft.com/en-ca/download/details.aspx?id=40784>`_
+
 ----
 
 Reboot windows, or logout and login to ensure the PATH updates.
