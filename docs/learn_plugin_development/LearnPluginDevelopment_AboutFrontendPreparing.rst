@@ -192,7 +192,7 @@ If you receive an error when starting the server or client on Linux, stating
 :code:`OSError: inotify instance limit reached`, running the following command may
 solve the issue. ::
 
-    sudo sysctl fs.inotify.max_user_watches=65535
+    sudo sysctl fs.inotify.max_user_watches=200000
 
 Otherwise, try rebooting.
 
