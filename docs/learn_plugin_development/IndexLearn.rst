@@ -27,4 +27,5 @@ Learn Plugin Development
     LearnPluginDevelopment_AddVortexRpc
     LearnPluginDevelopment_AddPluginPythonApi
     LearnPluginDevelopment_AddPluginTypeScriptApi
+    LearnPluginDevelopment_UsePluginApis
     LearnPluginDevelopment_AddWorker
