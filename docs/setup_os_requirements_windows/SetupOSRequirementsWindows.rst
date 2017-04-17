@@ -248,7 +248,7 @@ MS SQL Server 2014 Express (Optional)
 -------------------------------------
 
 This install procedure contains instructions for both PostgresSQL and MSSQL.
-To install PostgresSQL, see: :ref:`postgressql`
+To install PostgresSQL, see: :ref:`requirements_windows_postgressql`
 
 The MS SQL Server Express server is suitable for a development environment, for
 production servers, Synerty recommends using PostGreSQL or
