@@ -140,7 +140,7 @@ and populate it with the following contents.
                 It will know what else needs updating after the insert (IE, The observable)
 
                 Notice the :code:`deferToThread=True` argument in :code:`@vortexRPC`?
-                Because this code is blocking code, not written for twised, we need to
+                Because this code is blocking code, not written for twisted, we need to
                 defer it to a thread so it doesn't block twisteds main reactor.
 
                 As it's no longer in the twisted thread, all the code in this method
@@ -257,7 +257,7 @@ and populate it with the following contents.
                 Yield here, will cause the flow of code to return to the twisted.reactor
                 until the deferreds callback or errback is called.
 
-                The errback will cause en exception, which we'd catch with a standard
+                The errback will cause an exception, which we'd catch with a standard
                 try/except block.
 
                 """
@@ -449,7 +449,7 @@ will call via RPC.
 ----
 
 Create the file
-:file:`peek_plugin_tutorial/_private/agent/ServerToAgentRpcCallExample.py`
+:file:`peek_plugin_tutorial/_private/server/ServerToAgentRpcCallExample.py`
 and populate it with the following contents.
 
 ::
