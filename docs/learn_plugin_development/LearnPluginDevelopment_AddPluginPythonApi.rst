@@ -41,7 +41,7 @@ directly on it.
 The ABC (Abstract Base Class) is purely for documentation purposes,
 and allows the real implementation to be hidden in the :code:`_private` package.
 
-In this example, we're going to expose an API for the service service in
+In this example, we're going to expose an API for the Server service in
 the :code:`peek_plugin_tutorial` plugin.
 
 We'll then get the API for the :code:`peek_plugin_active_task` plugin and create
@@ -55,12 +55,10 @@ Setup Server API
 In this section, we define an API on the Peek Server service for the
 :code:`peek_plugin_tutorial` plugin.
 
-
 Add File :file:`DoSomethingTuple.py`
 ````````````````````````````````````
 
 File :file:`DoSomethingTuple.py` defines a public tuple that will be returned from the API.
-
 
 ----
 
@@ -128,7 +126,6 @@ Add File :file:`TutorialApiABC.py`
 File :file:`TutorialApiABC.py` defines the interface of the API, including what should
 be detailed docstrings. It doesn't contain any implementation.
 
-
 ----
 
 Create the file
@@ -161,7 +158,6 @@ Add File :file:`TutorialApi.py`
 
 File :file:`TutorialApi.py` is the implementation of the API. An insance of this class
 will be passed to other APIs when they ask for it.
-
 
 ----
 
@@ -245,11 +241,9 @@ Edit the file :file:`peek_plugin_tutorial/_private/server/ServerEntryHook.py`:
             return self._api
 
 
-
 ----
 
 The API is now accessible from other plugins.
-
 
 Use Server API
 --------------
@@ -257,29 +251,24 @@ Use Server API
 In this section we'll get a reference to the Active Task API and then create a task on
 the mobile UI.
 
+.. note:: In order to use this example, you will need to have the
+    :code:`peek_plugin_user` plugin installed and enabled in
+    both the Client and Server services, via their config.json files.
+
+    The user plugin is public, it can be installed with
+    :command:`pip install peek-plugin-user`.
 
 .. note:: In order to use this example, you will need to have the
-            :code:`peek_plugin_user` plugin installed and enabled in
-            both the Client and Server services, via their config.json files.
+    :code:`peek_plugin_active_task` plugin installed and enabled in
+    both the Client and Server services, via their config.json files.
 
-            The user plugin is public, it can be installed with
-            :command:`pip install peek-plugin-user`.
-
-
-.. note:: In order to use this example, you will need to have the
-            :code:`peek_plugin_active_task` plugin installed and enabled in
-            both the Client and Server services, via their config.json files.
-
-            The active task plugin is public, it can be installed with
-            :command:`pip install peek-plugin-active-task`.
-
-
+    The active task plugin is public, it can be installed with
+    :command:`pip install peek-plugin-active-task`.
 
 Add File :file:`ExampleUseTaskApi.py`
 `````````````````````````````````````
 
 File :file:`ExampleUseTaskApi.py` contains the code that uses the Active Tasks API.
-
 
 ----
 
@@ -335,7 +324,6 @@ Replace the :code:`"userId"` with your user id.
 
             def shutdown(self):
                 pass
-
 
 
 Edit File :file:`ServerEntryHook.py`
