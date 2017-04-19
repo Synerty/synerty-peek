@@ -128,6 +128,7 @@ and populate it with the following contents.
         export const pluginRoutes: Routes = [
             {
                 path: '',
+                pathMatch: 'full',
                 component: TutorialComponent
             }
 
