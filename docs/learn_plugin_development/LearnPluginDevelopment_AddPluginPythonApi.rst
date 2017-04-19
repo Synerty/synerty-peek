@@ -309,7 +309,7 @@ Replace the :code:`"userId"` with your user id.
                     uniqueId=str(datetime.utcnow()),
                     userId="userId",  # <----- Set to your user id
                     title="A task from tutorial plugin",
-                    description="Tutorials task descroption",
+                    description="Tutorials task description",
                     routePath="/peek_plugin_tutorial",
                     autoDelete=NewTask.AUTO_DELETE_ON_SELECT,
                     overwriteExisting=True,
@@ -337,6 +337,7 @@ Edit the file :file:`peek_plugin_tutorial/_private/server/ServerEntryHook.py`:
 
 #.  Add this import at the top of the file with the other imports: ::
 
+        from peek_plugin_active_task.server.ActiveTaskApiABC import ActiveTaskApiABC
         from .ExampleUseTaskApi import ExampleUseTaskApi
 
 
@@ -353,3 +354,26 @@ Edit the file :file:`peek_plugin_tutorial/_private/server/ServerEntryHook.py`:
                 ExampleUseTaskApi(mainController, activeTaskApi).start()
         )
 
+
+Testing TODO
+-------
+
+#.  Open Peek Admin Dashboard
+
+#.  Confirm plugins, :code:`Active Task` and :code:`Login / Logout` have loaded
+
+    .. image:: LearnAddPluginPythonApi_AdminDashboardPluginsActiveTask.jpg
+
+    #.  peek_plugin_active_task
+
+    #.  peek_plugin_users
+
+----
+
+#.  Open mobile Peek web app
+
+#.  If successful an alert will appear.
+
+#.  Tap Task icon located in the top right corner
+
+#.  You will see the task in the list
