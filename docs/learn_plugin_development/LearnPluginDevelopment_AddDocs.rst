@@ -261,7 +261,7 @@ Create :file:`index.rst`, and populate it with the following:
 Add file :file:`rtfd_requirements.txt`
 ``````````````````````````````````````
 
-The :file:`rtfd_requirements.txt` is required for building docs on `readthedocs.org`_
+The :file:`rtfd_requirements.txt` is required for building docs on `<readthedocs.org>`_
 
 ----
 
@@ -341,7 +341,7 @@ A successful build should look like this:
 
 
 Open :file:`dist/docs/index.html`
-````````````````````````````
+`````````````````````````````````
 
 The generated documentation files are in the :file:`dist/docs` folder.
 
@@ -406,13 +406,12 @@ In a web browser, go to the following url:
 ----
 
 The :file:`watch-docs.sh` shell script will rebuild the documentation when it see a change
- in the
-:file:`docs` folder.
+in the :file:`docs` folder.
 
 .. note:: The :file:`watch-docs.sh` shell script won't always build a change in the
-toctree while running.  If you update the toctree or modify headings it is good
-practice to stop :file:`watch-docs.sh`, run :code:`rm -rf dist/*` and restart
-:file:`watch-docs.sh`.
+    toctree while running.  If you update the toctree or modify headings it is good
+    practice to stop :file:`watch-docs.sh`, run :code:`rm -rf dist/*` and restart
+    :file:`watch-docs.sh`.
 
 .. _learn_plugin_development_add_docs_sections:
 

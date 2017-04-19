@@ -8,12 +8,11 @@ Outline
 -------
 
 Peek has distributed services, and one plugin is usually run on more than one of these
-services. This can make it incredible complicated for code within the plugin that runs on
+services. This can make it incredibly complicated for code within the plugin that runs on
 the agent service, to talk to the server service for example.
 
-On this document, we go through using the Vortex RPC to simplify communications between
+In this document, we go through using the Vortex RPC to simplify communications between
 the server and agent service.
-
 
 What is RPC
 -----------
@@ -39,8 +38,8 @@ Server RPC Setup
 In this section we setup the files required to define an RPC on the server that will
 only accept calls from the agent.
 
-The RPC example could be much simpler, the intension is to show more of a good design
-VS the bare minimum RPC example.
+The RPC example could be much simpler, the intention is to show more of a good design
+verses the bare minimum RPC example.
 
 .. image:: LearnRPC_AgentToServer.png
 
@@ -66,7 +65,6 @@ File :file:`RpcForAgent.py` defines the methods the agent will call via RPC.
 
 In this example we have just one file, however it it will be good practice to have
 multiple files if the require RPC methods grow too large.
-
 
 ----
 
@@ -142,7 +140,7 @@ and populate it with the following contents.
                 It will know what else needs updating after the insert (IE, The observable)
 
                 Notice the :code:`deferToThread=True` argument in :code:`@vortexRPC`?
-                Because this code is blocking code, not written for twised, we need to
+                Because this code is blocking code, not written for twisted, we need to
                 defer it to a thread so it doesn't block twisteds main reactor.
 
                 As it's no longer in the twisted thread, all the code in this method
@@ -194,9 +192,8 @@ Edit the file :file:`peek_plugin_tutorial/_private/server/ServerEntryHook.py`:
 #.  Add this line just before the :code:`logger.debug("Started")` line at the end
     of the :code:`start()` method: ::
 
-
         # Initialise the RpcForAgent
-        self._loadedObjects.append(RpcForAgent(mainController, self.dbSessionCreator)
+        self._loadedObjects.extend(RpcForAgent(mainController, self.dbSessionCreator)
                                    .makeHandlers())
 
 
@@ -210,7 +207,6 @@ Agent Calling Server RPC
 This section implements the code in the agent that will call the RPC methods
 that the server has defined.
 
-
 Add File :file:`AgentToServerRpcCallExample.py`
 ```````````````````````````````````````````````
 
@@ -219,7 +215,6 @@ call via RPC.
 
 In this example we have just one file, however it it will be good practice to have
 multiple files if the require RPC methods grow too large.
-
 
 ----
 
@@ -243,9 +238,9 @@ and populate it with the following contents.
         class AgentToServerRpcCallExample:
             def start(self):
                 # kickoff the example
-                # Tell the reactor to start it in 1 second, we shouldn't do things like this in
-                # the plugins start method.
-                reactor.callLater(1, self.runWithInlineCallback)
+                # Tell the reactor to start it in 5 seconds, we shouldn't do things like
+                # this in the plugins start method.
+                reactor.callLater(5, self.runWithInlineCallback)
 
                 # Return self, to make it simpler for the AgentEntryHook
                 return self
@@ -262,7 +257,7 @@ and populate it with the following contents.
                 Yield here, will cause the flow of code to return to the twisted.reactor
                 until the deferreds callback or errback is called.
 
-                The errback will cause en exception, which we'd catch with a standard
+                The errback will cause an exception, which we'd catch with a standard
                 try/except block.
 
                 """
@@ -322,7 +317,8 @@ and populate it with the following contents.
 Edit File :file:`AgentEntryHook.py`
 ```````````````````````````````````
 
-We need to update :file:`AgentEntryHook.py`, to initialise the AgentToServerRpcCallExample.
+We need to update :file:`AgentEntryHook.py`, to initialise the
+AgentToServerRpcCallExample.
 
 ----
 
@@ -332,18 +328,17 @@ Edit the file :file:`peek_plugin_tutorial/_private/agent/AgentEntryHook.py`:
 
         from .AgentToServerRpcCallExample import AgentToServerRpcCallExample
 
+
 #.  Add this line just before the :code:`logger.debug("Started")` line at the end
     of the :code:`start()` method: ::
 
-
         # Initialise and start the AgentToServerRpcCallExample
-        self._loadedObjects.append(AgentToServerRpcCallExample().start())
+        self._loadedObjects.extend(AgentToServerRpcCallExample().start())
 
 
 ----
 
 The agent will now call the server RPC methods.
-
 
 Agent RPC Setup
 ---------------
@@ -356,15 +351,12 @@ Some example use cases would be:
 *   Agent to connect to remote server via SSH and pull back some data
 *   Agent to push an update to a corporate system via HTTP
 
-
 .. image:: LearnRPC_ServerToAgent.png
-
 
 Add File :file:`RpcForServer.py`
 ````````````````````````````````
 
 File :file:`RpcForServer.py` defines the methods the server will call via RPC.
-
 
 ----
 
@@ -428,16 +420,15 @@ Edit the file :file:`peek_plugin_tutorial/_private/agent/AgentEntryHook.py`:
 
         from .RpcForServer import RpcForServer
 
+
 #.  Add this line just before the :code:`logger.debug("Started")` line at the end
     of the :code:`start()` method: ::
-
 
         # Initialise and start the RPC for Server
         self._loadedObjects.append(RpcForServer().makeHandlers())
 
 
 ----
-
 
 The sever side RPC is now setup.
 
@@ -458,7 +449,7 @@ will call via RPC.
 ----
 
 Create the file
-:file:`peek_plugin_tutorial/_private/agent/ServerToAgentRpcCallExample.py`
+:file:`peek_plugin_tutorial/_private/server/ServerToAgentRpcCallExample.py`
 and populate it with the following contents.
 
 ::
@@ -476,9 +467,9 @@ and populate it with the following contents.
         class ServerToAgentRpcCallExample:
             def start(self):
                 # kickoff the example
-                # Tell the reactor to start it in 1 second, we shouldn't do things like this in
-                # the plugins start method.
-                reactor.callLater(1, self.run)
+                # Tell the reactor to start it in 20 seconds, we shouldn't do things like
+                # this in the plugins start method.
+                reactor.callLater(20, self.run)
 
                 return self
 
@@ -506,9 +497,9 @@ Edit the file :file:`peek_plugin_tutorial/_private/server/ServerEntryHook.py`:
 
         from .ServerToAgentRpcCallExample import ServerToAgentRpcCallExample
 
+
 #.  Add this line just before the :code:`logger.debug("Started")` line at the end
     of the :code:`start()` method: ::
-
 
         # Initialise and start the RPC for Server
         self._loadedObjects.append(ServerToAgentRpcCallExample().start())
