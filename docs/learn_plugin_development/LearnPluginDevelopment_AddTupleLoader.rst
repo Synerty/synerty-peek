@@ -146,10 +146,14 @@ and populate it with the following contents.
 
 ::
 
+        import logging
+
         from peek_plugin_tutorial._private.PluginNames import tutorialFilt
         from peek_plugin_tutorial._private.storage.StringIntTuple import StringIntTuple
-        from vortex.handler.TupleDataObservableHandler import logger
+
         from vortex.sqla_orm.OrmCrudHandler import OrmCrudHandler
+
+        logger = logging.getLogger(__name__)
 
         # This dict matches the definition in the Admin angular app.
         filtKey = {"key": "admin.Edit.StringIntTuple"}
@@ -441,11 +445,13 @@ and populate it with the following contents.
 
 ::
 
-        from vortex.handler.TupleDataObservableHandler import logger
+        import logging
         from vortex.sqla_orm.OrmCrudHandler import OrmCrudHandler
 
         from peek_plugin_tutorial._private.PluginNames import tutorialFilt
         from peek_plugin_tutorial._private.storage.Setting import SettingProperty, globalSetting
+
+        logger = logging.getLogger(__name__)
 
         # This dict matches the definition in the Admin angular app.
         filtKey = {"key": "admin.Edit.SettingProperty"}
