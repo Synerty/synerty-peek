@@ -193,7 +193,7 @@ Edit the file :file:`peek_plugin_tutorial/_private/server/ServerEntryHook.py`:
     of the :code:`start()` method: ::
 
         # Initialise the RpcForAgent
-        self._loadedObjects.append(RpcForAgent(mainController, self.dbSessionCreator)
+        self._loadedObjects.extend(RpcForAgent(mainController, self.dbSessionCreator)
                                    .makeHandlers())
 
 
@@ -238,9 +238,9 @@ and populate it with the following contents.
         class AgentToServerRpcCallExample:
             def start(self):
                 # kickoff the example
-                # Tell the reactor to start it in 1 second, we shouldn't do things like this in
-                # the plugins start method.
-                reactor.callLater(1, self.runWithInlineCallback)
+                # Tell the reactor to start it in 5 seconds, we shouldn't do things like
+                # this in the plugins start method.
+                reactor.callLater(5, self.runWithInlineCallback)
 
                 # Return self, to make it simpler for the AgentEntryHook
                 return self
@@ -333,7 +333,7 @@ Edit the file :file:`peek_plugin_tutorial/_private/agent/AgentEntryHook.py`:
     of the :code:`start()` method: ::
 
         # Initialise and start the AgentToServerRpcCallExample
-        self._loadedObjects.append(AgentToServerRpcCallExample().start())
+        self._loadedObjects.extend(AgentToServerRpcCallExample().start())
 
 
 ----
@@ -467,9 +467,9 @@ and populate it with the following contents.
         class ServerToAgentRpcCallExample:
             def start(self):
                 # kickoff the example
-                # Tell the reactor to start it in 1 second, we shouldn't do things like this in
-                # the plugins start method.
-                reactor.callLater(1, self.run)
+                # Tell the reactor to start it in 20 seconds, we shouldn't do things like
+                # this in the plugins start method.
+                reactor.callLater(20, self.run)
 
                 return self
 
