@@ -209,11 +209,13 @@ Edit file :file:`peek_plugin_tutorial/_private/server/ClientEntryHook.py` file,
 apply the same edits from step
 :ref:`learn_plugin_development_add_tuples_edit_server_entry_hook`.
 
-
 Edit File :file:`AgentEntryHook.py`
 ```````````````````````````````````
 
 This step applies if you're plugin is using the Agent service.
+
+.. note:: This service was add earlier in this tutorial, see
+    :ref:`learn_plugin_development_add_agent`
 
 Edit file :file:`peek_plugin_tutorial/_private/agent/AgentEntryHook.py` file,
 apply the same edits from step
@@ -223,6 +225,9 @@ Edit File :file:`WorkerEntryHook.py`
 ````````````````````````````````````
 
 This step applies if you're plugin is using the Worker service.
+
+.. note:: This service is added in this tutorial, see
+    :ref:`learn_plugin_development_add_worker`
 
 Edit file :file:`peek_plugin_tutorial/_private/worker/WorkerEntryHook.py` file,
 apply the same edits from step

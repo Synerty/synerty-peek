@@ -508,3 +508,57 @@ Edit the file :file:`peek_plugin_tutorial/_private/server/ServerEntryHook.py`:
 ----
 
 The server will now call the RPC method on the agent when it starts.
+
+Testing
+-------
+
+#.  Open a command window and run: :code:`run_peek_server`
+
+#.  Open a command window and run: :code:`run_peek_agent`
+
+#.  Examine the logs of both command windows
+
+:code:`run_peek_server` log example:
+
+::
+
+        19-Apr-2017 09:24:42 DEBUG vortex.rpc.RPC:Received RPC call for peek_plugin_tutorial._private.server.agent_handlers.RpcForAgent.RpcForAgent.updateStatus
+        19-Apr-2017 09:24:42 DEBUG peek_plugin_tutorial._private.server.controller.MainController:Agent said : Agent RPC Example Started
+        19-Apr-2017 09:24:42 DEBUG vortex.rpc.RPC:Received RPC call for peek_plugin_tutorial._private.server.agent_handlers.RpcForAgent.RpcForAgent.addInts
+        19-Apr-2017 09:24:42 DEBUG vortex.rpc.RPC:Received RPC call for peek_plugin_tutorial._private.server.agent_handlers.RpcForAgent.RpcForAgent.addInts
+        19-Apr-2017 09:24:42 DEBUG vortex.rpc.RPC:Received RPC call for peek_plugin_tutorial._private.server.agent_handlers.RpcForAgent.RpcForAgent.addInts
+        19-Apr-2017 09:24:42 DEBUG vortex.rpc.RPC:Received RPC call for peek_plugin_tutorial._private.server.agent_handlers.RpcForAgent.RpcForAgent.addInts
+        19-Apr-2017 09:24:42 DEBUG vortex.rpc.RPC:Received RPC call for peek_plugin_tutorial._private.server.agent_handlers.RpcForAgent.RpcForAgent.addInts
+        19-Apr-2017 09:24:42 DEBUG vortex.rpc.RPC:Received RPC call for peek_plugin_tutorial._private.server.agent_handlers.RpcForAgent.RpcForAgent.addStringInt
+        19-Apr-2017 09:24:42 DEBUG vortex.rpc.RPC:Received RPC call for peek_plugin_tutorial._private.server.agent_handlers.RpcForAgent.RpcForAgent.updateStatus
+        19-Apr-2017 09:24:42 DEBUG peek_plugin_tutorial._private.server.controller.MainController:Agent said : Agent RPC Example Completed
+
+
+:code:`run_peek_agent` log example:
+
+::
+
+        19-Apr-2017 09:24:42 DEBUG vortex.rpc.RPC:Calling RPC for peek_plugin_tutorial._private.server.agent_handlers.RpcForAgent.RpcForAgent.updateStatus
+        19-Apr-2017 09:24:42 DEBUG vortex.rpc.RPC:Received RPC result for peek_plugin_tutorial._private.server.agent_handlers.RpcForAgent.RpcForAgent.updateStatus
+        19-Apr-2017 09:24:42 DEBUG peek_plugin_tutorial._private.agent.AgentToServerRpcCallExample:seedInt = 5
+        19-Apr-2017 09:24:42 DEBUG vortex.rpc.RPC:Calling RPC for peek_plugin_tutorial._private.server.agent_handlers.RpcForAgent.RpcForAgent.addInts
+        19-Apr-2017 09:24:42 DEBUG vortex.rpc.RPC:Received RPC result for peek_plugin_tutorial._private.server.agent_handlers.RpcForAgent.RpcForAgent.addInts
+        19-Apr-2017 09:24:42 DEBUG peek_plugin_tutorial._private.agent.AgentToServerRpcCallExample:seedInt = 12
+        19-Apr-2017 09:24:42 DEBUG vortex.rpc.RPC:Calling RPC for peek_plugin_tutorial._private.server.agent_handlers.RpcForAgent.RpcForAgent.addInts
+        19-Apr-2017 09:24:42 DEBUG vortex.rpc.RPC:Received RPC result for peek_plugin_tutorial._private.server.agent_handlers.RpcForAgent.RpcForAgent.addInts
+        19-Apr-2017 09:24:42 DEBUG peek_plugin_tutorial._private.agent.AgentToServerRpcCallExample:seedInt = 19
+        19-Apr-2017 09:24:42 DEBUG vortex.rpc.RPC:Calling RPC for peek_plugin_tutorial._private.server.agent_handlers.RpcForAgent.RpcForAgent.addInts
+        19-Apr-2017 09:24:42 DEBUG vortex.rpc.RPC:Received RPC result for peek_plugin_tutorial._private.server.agent_handlers.RpcForAgent.RpcForAgent.addInts
+        19-Apr-2017 09:24:42 DEBUG peek_plugin_tutorial._private.agent.AgentToServerRpcCallExample:seedInt = 26
+        19-Apr-2017 09:24:42 DEBUG vortex.rpc.RPC:Calling RPC for peek_plugin_tutorial._private.server.agent_handlers.RpcForAgent.RpcForAgent.addInts
+        19-Apr-2017 09:24:42 DEBUG vortex.rpc.RPC:Received RPC result for peek_plugin_tutorial._private.server.agent_handlers.RpcForAgent.RpcForAgent.addInts
+        19-Apr-2017 09:24:42 DEBUG peek_plugin_tutorial._private.agent.AgentToServerRpcCallExample:seedInt = 33
+        19-Apr-2017 09:24:42 DEBUG vortex.rpc.RPC:Calling RPC for peek_plugin_tutorial._private.server.agent_handlers.RpcForAgent.RpcForAgent.addInts
+        19-Apr-2017 09:24:42 DEBUG vortex.rpc.RPC:Received RPC result for peek_plugin_tutorial._private.server.agent_handlers.RpcForAgent.RpcForAgent.addInts
+        19-Apr-2017 09:24:42 DEBUG peek_plugin_tutorial._private.agent.AgentToServerRpcCallExample:seedInt = 40
+        19-Apr-2017 09:24:42 DEBUG vortex.rpc.RPC:Calling RPC for peek_plugin_tutorial._private.server.agent_handlers.RpcForAgent.RpcForAgent.addStringInt
+        19-Apr-2017 09:24:42 DEBUG peek_plugin_tutorial._private.agent.AgentToServerRpcCallExample:runWithInlineCallback finished
+        19-Apr-2017 09:24:42 DEBUG vortex.rpc.RPC:Received RPC result for peek_plugin_tutorial._private.server.agent_handlers.RpcForAgent.RpcForAgent.addStringInt
+        19-Apr-2017 09:24:42 DEBUG vortex.rpc.RPC:Calling RPC for peek_plugin_tutorial._private.server.agent_handlers.RpcForAgent.RpcForAgent.updateStatus
+        19-Apr-2017 09:24:42 DEBUG vortex.rpc.RPC:Received RPC result for peek_plugin_tutorial._private.server.agent_handlers.RpcForAgent.RpcForAgent.updateStatus
+
