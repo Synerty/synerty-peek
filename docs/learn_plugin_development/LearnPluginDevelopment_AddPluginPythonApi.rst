@@ -288,12 +288,11 @@ Replace the :code:`"userId"` with your user id.
 
         from peek_plugin_active_task.server.ActiveTaskApiABC import ActiveTaskApiABC, NewTask
         from peek_plugin_tutorial._private.server.controller.MainController import MainController
-        from peek_plugin_tutorial.server.TutorialApiABC import TutorialApiABC
 
         logger = logging.getLogger(__name__)
 
 
-        class ExampleUseTaskApi(TutorialApiABC):
+        class ExampleUseTaskApi:
             def __init__(self, mainController: MainController, activeTaskApi: ActiveTaskApiABC):
                 self._mainController = mainController
                 self._activeTaskApi = activeTaskApi
@@ -355,24 +354,10 @@ Edit the file :file:`peek_plugin_tutorial/_private/server/ServerEntryHook.py`:
         )
 
 
-Testing TODO
+Testing
 -------
 
-#.  Open Peek Admin Dashboard
-
-#.  Confirm plugins, :code:`Active Task` and :code:`Login / Logout` have loaded
-
-    .. image:: LearnAddPluginPythonApi_AdminDashboardPluginsActiveTask.jpg
-
-    #.  peek_plugin_active_task
-
-    #.  peek_plugin_users
-
-----
-
 #.  Open mobile Peek web app
-
-#.  If successful an alert will appear.
 
 #.  Tap Task icon located in the top right corner
 
