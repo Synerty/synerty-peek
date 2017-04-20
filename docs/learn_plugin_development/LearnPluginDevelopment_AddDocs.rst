@@ -93,10 +93,19 @@ From: ::
         import peek_plugin_base
         createApiDocs(peek_plugin_base.__file__)
 
-Example To : ::
 
-        import peek_plugin_tutorial
+Example To: ::
+
+        try:
+            import peek_plugin_tutorial
+
+        except ImportError:
+            # Otherwise, add the plugin root dir to the import path, for read the docs.
+            sys.path.append(os.path.dirname(os.path.dirname(__file__)))
+            import peek_plugin_tutorial
+
         createApiDocs(peek_plugin_tutorial.__file__)
+
 
 Otherwise, comment it out.
 
@@ -104,13 +113,13 @@ Required Files
 --------------
 
 .. note:: All instructions in this document are relative to the plugin root directory
-            (the one with hypons), not the plugin python package
+            (the one with hyphens), not the plugin python package
             (the one with underscores).
 
 Add Directory :file:`_static`
 `````````````````````````````
 
-The :file:`_static` is required got the doc build.
+The :file:`_static` is required for the doc build.
 
 ----
 
@@ -176,7 +185,7 @@ contents: ::
         How It Works
         ------------
 
-        This plugin achives it's functionality by ...
+        This plugin achieves it's functionality by ...
 
 
 
@@ -412,6 +421,95 @@ in the :file:`docs` folder.
     toctree while running.  If you update the toctree or modify headings it is good
     practice to stop :file:`watch-docs.sh`, run :code:`rm -rf dist/*` and restart
     :file:`watch-docs.sh`.
+
+Publish Documentation on readthedocs
+------------------------------------
+
+`Read the Docs <https://readthedocs.org>`_ hosts documentation, making your documentation
+fully searchable and easy to find.  Your documentation can be imported from versioning
+control such as Git.  Read the Docs support webhooks to build the documentation after
+the latest code commit.
+
+Create an account on `Read the Docs <https://readthedocs.org>`_
+
+Add a Project to Read the Docs
+``````````````````````````````
+
+View "My Projects"
+
+.. image:: LearnAddDocs_readthedocs-MyProjects.jpg
+
+#.  Go to the users drop down at the top right and select "My Projects"
+
+----
+
+Import Projects
+
+.. image:: LearnAddDocs_readthedocs-ImportProjects.jpg
+
+#.  Select "Import a Project"
+
+----
+
+Import Manually
+
+.. image:: LearnAddDocs_readthedocs-ImportManually.jpg
+
+#.  Select "Import Manually"
+
+----
+
+Project Details
+
+.. image:: LearnAddDocs_readthedocs-ProjectDetails.jpg
+
+#.  Enter the name of the project
+
+#.  Enter your git repository location
+
+#.  Select "Next"
+
+----
+
+Project
+
+.. image:: LearnAddDocs_readthedocs-Project.jpg
+
+#.  Go to the "Admin" page
+
+----
+
+Advanced Settings
+
+.. image:: LearnAddDocs_readthedocs-Settings.jpg
+
+#.  Enter the location of the requirements files
+
+#.  Enter the location of the sphinx configuration file
+
+#.  Uncheck the "Enable PDF Build"
+
+#.  Uncheck the "Enable EPUB Build"
+
+#.  Select the Python interpreter 3.+
+
+Troubleshooting readthedocs
+```````````````````````````
+
+Build the Documentation
+
+.. image:: LearnAddDocs_readthedocs-Builds.jpg
+
+#.  Force a Documentation build by selecting "Build Version"
+
+#.  View the recent build log
+
+----
+
+Investigate the build log:
+
+.. image:: LearnAddDocs_readthedocs-BuildLog.jpg
+
 
 .. _learn_plugin_development_add_docs_sections:
 
