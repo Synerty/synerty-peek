@@ -93,10 +93,19 @@ From: ::
         import peek_plugin_base
         createApiDocs(peek_plugin_base.__file__)
 
-Example To : ::
 
-        import peek_plugin_tutorial
+Example To: ::
+
+        try:
+            import peek_plugin_tutorial
+
+        except ImportError:
+            # Otherwise, add the plugin root dir to the import path, for read the docs.
+            sys.path.append(os.path.dirname(os.path.dirname(__file__)))
+            import peek_plugin_tutorial
+
         createApiDocs(peek_plugin_tutorial.__file__)
+
 
 Otherwise, comment it out.
 
@@ -104,13 +113,13 @@ Required Files
 --------------
 
 .. note:: All instructions in this document are relative to the plugin root directory
-            (the one with hypons), not the plugin python package
+            (the one with hyphens), not the plugin python package
             (the one with underscores).
 
 Add Directory :file:`_static`
 `````````````````````````````
 
-The :file:`_static` is required got the doc build.
+The :file:`_static` is required for the doc build.
 
 ----
 
@@ -176,7 +185,7 @@ contents: ::
         How It Works
         ------------
 
-        This plugin achives it's functionality by ...
+        This plugin achieves it's functionality by ...
 
 
 
