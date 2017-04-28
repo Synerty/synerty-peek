@@ -357,7 +357,7 @@ Create file
 with contents ::
 
         {
-          "name": "peek_plugin_tutorial",
+          "name": "@peek/peek_plugin_tutorial",
           "version": "0.0.0"
         }
 
