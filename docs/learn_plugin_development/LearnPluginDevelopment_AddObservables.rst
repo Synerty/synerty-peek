@@ -366,7 +366,7 @@ Edit the :file:`TupleDataObservable.py` python module, and register the new
 ----
 
 Edit the file
-:file:`peek_plugin_tutorial/_private/storage/TupleDataObservable.py`:
+:file:`peek_plugin_tutorial/_private/server/TupleDataObservable.py`:
 
 #.  Add the following imports: ::
 
@@ -399,7 +399,7 @@ argument and notify the observable when an update occurs.
 ----
 
 Edit the file
-:file:`peek_plugin_tutorial/_private/admin_backend/StringIntTableHandler.py`
+:file:`peek_plugin_tutorial/_private/server/admin_backend/StringIntTableHandler.py`
 
 Add the import: ::
 
