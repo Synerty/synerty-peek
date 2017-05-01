@@ -808,7 +808,7 @@ Edit file
 
 Add the import for the TupleDataOfflineObserverService: ::
 
-    import TupleDataOfflineObserverService from "@synerty/vortexjs";
+        import {TupleDataOfflineObserverService} from "@synerty/vortexjs";
 
 Change the type of the :code:`tupleDataObserver` parameter in the component constructor,
 EG,
@@ -823,7 +823,7 @@ To ::
 
 ----
 
-Thats it. Now the String Int data will load on the device, even when the Vortex between
+That's it. Now the String Int data will load on the device, even when the Vortex between
 the device and the Client service is offline.
 
 
