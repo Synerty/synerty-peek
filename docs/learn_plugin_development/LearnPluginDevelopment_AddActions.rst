@@ -644,7 +644,7 @@ edit the file
         }
 
         decrementClicked(item) {
-            let action = new StringIntDecreaseActionTuple();
+            let action = new AddIntValueActionTuple();
             action.stringIntId = item.id;
             action.offset = -1;
             this.actionService.pushAction(action)
