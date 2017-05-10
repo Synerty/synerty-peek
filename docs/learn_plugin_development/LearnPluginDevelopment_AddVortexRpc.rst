@@ -38,7 +38,7 @@ Server RPC Setup
 In this section we setup the files required to define an RPC on the server that will
 only accept calls from the agent.
 
-The RPC example could be much simpler, the intention is to show more of a good design
+The RPC example could be much simpler, the intenftion is to show more of a good design
 verses the bare minimum RPC example.
 
 .. image:: LearnRPC_AgentToServer.png
@@ -333,7 +333,7 @@ Edit the file :file:`peek_plugin_tutorial/_private/agent/AgentEntryHook.py`:
     of the :code:`start()` method: ::
 
         # Initialise and start the AgentToServerRpcCallExample
-        self._loadedObjects.extend(AgentToServerRpcCallExample().start())
+        self._loadedObjects.append(AgentToServerRpcCallExample().start())
 
 
 ----
@@ -425,7 +425,7 @@ Edit the file :file:`peek_plugin_tutorial/_private/agent/AgentEntryHook.py`:
     of the :code:`start()` method: ::
 
         # Initialise and start the RPC for Server
-        self._loadedObjects.append(RpcForServer().makeHandlers())
+        self._loadedObjects.extend(RpcForServer().makeHandlers())
 
 
 ----
