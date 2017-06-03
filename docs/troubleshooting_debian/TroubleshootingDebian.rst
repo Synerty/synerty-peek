@@ -27,3 +27,15 @@ Run the following commands in Python:
     # Expcect to see "12.1.0.2.0"
     con.close()
 
+
+OSError: inotify instance limit reached
+```````````````````````````````````````
+
+To solve this problem, run the following command as root
+
+::
+
+        echo "fs.inotify.max_user_instances=2048" >> /etc/sysctl.conf
+        sysctl -p
+
+
