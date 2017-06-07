@@ -41,6 +41,7 @@ peek-plugin-pof-sql
 peek-plugin-pof-soap
 peek-plugin-pof-chat
 peek-plugin-pof-field-switching
+peek-plugin-pof-field-incidents
 peek-plugin-pof-event"
 
 export bold=$(tput bold)
