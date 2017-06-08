@@ -64,7 +64,7 @@ Deploy the plugins:
 
 ::
 
-        pip install --find-links=. peek-plugin*
+        pip install --no-index --find-links=. peek-plugin*
 
 
 ----
