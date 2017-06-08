@@ -67,8 +67,8 @@ rm -rf ${nodeFile}
 PATH="$nodeDir/bin:$PATH"
 
 # Install the required NPM packages
-npm cache clean
 npm -g upgrade npm
+npm cache clean --force
 npm -g install @angular/cli typescript tslint
 
 # ------------------------------------------------------------------------------

@@ -99,8 +99,8 @@ Move-Item "node-v$nodeVer-win-x64" "node";
 $env:Path = "$baseDir\node;$env:Path";
 
 # Install the required NPM packages
-npm cache clean
 npm -g upgrade npm
+npm cache clean --force
 npm -g install @angular/cli typescript tslint;
 
 
