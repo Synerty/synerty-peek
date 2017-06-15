@@ -77,7 +77,8 @@ npm -g install @angular/cli typescript tslint
 function downloadNodeModules {
     # Get the variables for this package
     nmDir=$1
-    packageJsonUrl=$2
+    packageJsonUrl="$2/package.json"
+    packageLockJsonUrl="$2/package-lock.json"
 
     # Create the tmp dir
     mkdir -p "$nmDir/tmp"
@@ -85,6 +86,9 @@ function downloadNodeModules {
 
     # Download package.json
     wget -nv "$packageJsonUrl"
+
+    # Download package-lock.json
+    wget -nv "$packageLockJsonUrl"
 
     # run npm install
     npm install
@@ -100,17 +104,17 @@ function downloadNodeModules {
 
 # MOBILE node modules
 mobileBuildWebDIR="$baseDir/mobile-build-web"
-mobileJsonUrl='https://bitbucket.org/synerty/peek-mobile/raw/master/peek_mobile/build-web/package.json'
+mobileJsonUrl='https://bitbucket.org/synerty/peek-mobile/raw/master/peek_mobile/build-web'
 downloadNodeModules $mobileBuildWebDIR $mobileJsonUrl
 
 # DESKTOP node modules
 desktopBuildWebDIR="$baseDir/desktop-build-web"
-desktopJsonUrl='https://bitbucket.org/synerty/peek-desktop/raw/master/peek_desktop/build-web/package.json'
+desktopJsonUrl='https://bitbucket.org/synerty/peek-desktop/raw/master/peek_desktop/build-web'
 downloadNodeModules $desktopBuildWebDIR $desktopJsonUrl
 
 # ADMIN node modules
 adminBuildWebDIR="$baseDir/admin-build-web"
-adminJsonUrl='https://bitbucket.org/synerty/peek-admin/raw/master/peek_admin/build-web/package.json'
+adminJsonUrl='https://bitbucket.org/synerty/peek-admin/raw/master/peek_admin/build-web'
 downloadNodeModules $adminBuildWebDIR $adminJsonUrl
 
 # ------------------------------------------------------------------------------

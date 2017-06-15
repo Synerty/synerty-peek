@@ -111,20 +111,22 @@ npm -g install @angular/cli typescript tslint;
 # Define the node packages we want to download
 $nodePackages = @(
     @{"dir" = "$baseDir\mobile-build-web";
-        "packageJsonUrl" = "https://raw.githubusercontent.com/Synerty/peek-mobile/master/peek_mobile/build-web/package.json"
+        "packageJsonBaseUrl" = "https://raw.githubusercontent.com/Synerty/peek-mobile/master/peek_mobile/build-web"
     },
     @{"dir" = "$baseDir\desktop-build-web";
-        "packageJsonUrl" = "https://raw.githubusercontent.com/Synerty/peek-desktop/master/peek_desktop/build-web/package.json"
+        "packageJsonBaseUrl" = "https://raw.githubusercontent.com/Synerty/peek-desktop/master/peek_desktop/build-web"
     },
     @{"dir" = "$baseDir\admin-build-web";
-        "packageJsonUrl" = "https://raw.githubusercontent.com/Synerty/peek-admin/master/peek_admin/build-web/package.json"
+        "packageJsonBaseUrl" = "https://raw.githubusercontent.com/Synerty/peek-admin/master/peek_admin/build-web"
     }
 );
 
 foreach ($element in $nodePackages) {
     # Get the variables for this package
     $nmDir = $element.Get_Item("dir");
-    $packageJsonUrl = $element.Get_Item("packageJsonUrl");
+    $packageJsonBaseUrl = $element.Get_Item("packageJsonBaseUrl");
+    $packageJsonUrl = $packageJsonBaseUrl + "/package.json";
+    $packageLockJsonUrl = $packageJsonBaseUrl + "/package-lock.json";
 
     # Create the tmp dir
     New-Item "$nmDir\tmp" -ItemType directory;
@@ -132,6 +134,9 @@ foreach ($element in $nodePackages) {
 
     # Download package.json
     Invoke-WebRequest -Uri $packageJsonUrl -UseBasicParsing -OutFile "package.json";
+
+    # Download package-lock.json
+    Invoke-WebRequest -Uri $packageLockJsonUrl -UseBasicParsing -OutFile "package-lock.json";
 
     # run npm install
     npm install
