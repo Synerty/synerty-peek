@@ -87,6 +87,7 @@ $sp="$venvDir\Lib\site-packages";
 
 # Move the node_modules into place
 Move-Item $releaseDir\mobile-build-web\node_modules $sp\peek_mobile\build-web -Force
+Move-Item $releaseDir\desktop-build-web\node_modules $sp\peek_desktop\build-web -Force
 Move-Item $releaseDir\admin-build-web\node_modules $sp\peek_admin\build-web -Force
 
 # ------------------------------------------------------------------------------

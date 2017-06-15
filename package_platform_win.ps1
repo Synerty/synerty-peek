@@ -113,6 +113,9 @@ $nodePackages = @(
     @{"dir" = "$baseDir\mobile-build-web";
         "packageJsonUrl" = "https://raw.githubusercontent.com/Synerty/peek-mobile/master/peek_mobile/build-web/package.json"
     },
+    @{"dir" = "$baseDir\desktop-build-web";
+        "packageJsonUrl" = "https://raw.githubusercontent.com/Synerty/peek-desktop/master/peek_desktop/build-web/package.json"
+    },
     @{"dir" = "$baseDir\admin-build-web";
         "packageJsonUrl" = "https://raw.githubusercontent.com/Synerty/peek-admin/master/peek_admin/build-web/package.json"
     }

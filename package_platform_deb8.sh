@@ -103,6 +103,11 @@ mobileBuildWebDIR="$baseDir/mobile-build-web"
 mobileJsonUrl='https://bitbucket.org/synerty/peek-mobile/raw/master/peek_mobile/build-web/package.json'
 downloadNodeModules $mobileBuildWebDIR $mobileJsonUrl
 
+# DESKTOP node modules
+desktopBuildWebDIR="$baseDir/desktop-build-web"
+desktopJsonUrl='https://bitbucket.org/synerty/peek-desktop/raw/master/peek_desktop/build-web/package.json'
+downloadNodeModules $desktopBuildWebDIR $desktopJsonUrl
+
 # ADMIN node modules
 adminBuildWebDIR="$baseDir/admin-build-web"
 adminJsonUrl='https://bitbucket.org/synerty/peek-admin/raw/master/peek_admin/build-web/package.json'
