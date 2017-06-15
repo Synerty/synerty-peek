@@ -8,6 +8,7 @@ export PACKAGES="
 peek-plugin-base
 peek-platform
 peek-agent
+peek-desktop
 peek-worker
 peek-mobile
 peek-client
