@@ -194,7 +194,7 @@ with contents ::
         
         @addTupleType
         export class StringCapToggleActionTuple extends TupleActionABC {
-            static readonly tupleName = tutorialTuplePrefix + "StringCapToggleActionTuple";
+            public static readonly tupleName = tutorialTuplePrefix + "StringCapToggleActionTuple";
         
             stringIntId: number;
         
@@ -222,7 +222,7 @@ with contents ::
         
         @addTupleType
         export class AddIntValueActionTuple extends TupleActionABC {
-            static readonly tupleName = tutorialTuplePrefix + "AddIntValueActionTuple";
+            public static readonly tupleName = tutorialTuplePrefix + "AddIntValueActionTuple";
         
             stringIntId: number;
             offset: number;
