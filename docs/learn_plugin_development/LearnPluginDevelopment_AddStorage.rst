@@ -48,6 +48,8 @@ for more details.
 In this declarative base, we define a metadata with a schema name for this plugin,
 **pl_tutorial**.
 
+All the table classes in the plugin will be loaded in this method.
+
 ----
 
 Create a file :file:`peek_plugin_tutorial/_private/storage/DeclarativeBase.py`
@@ -61,21 +63,6 @@ and populate it with the following contents:
 
         metadata = MetaData(schema="pl_tutorial")
         DeclarativeBase = declarative_base(metadata=metadata)
-
-
-Add File :file:`storage/__init__.py`
-````````````````````````````````````
-
-The :file:`storage/__init__.py` package file will have a :command:`loadStorageTuples()`
-method that imports the tables.
-All the table classes in the plugin will be loaded in this method.
-
-----
-
-Create a file :file:`peek_plugin_tutorial/_private/storage/__init__.py`
-and populate it with the following contents:
-
-::
 
 
         def loadStorageTuples():
@@ -130,7 +117,7 @@ Add File :file:`env.py`
 
 The :file:`env.py` is loaded by Alembic to get it's configuration and environment.
 
-Notice that the :command:`loadStorageTuples()` are loaded? Alembic needs the table
+Notice that that :command:`loadStorageTuples()` is called? Alembic needs the table
 classes loaded to create the version control scripts.
 
 ----
@@ -142,11 +129,11 @@ the following contents:
 
         from peek_plugin_base.storage.AlembicEnvBase import AlembicEnvBase
 
-        from peek_plugin_tutorial._private.storage import DeclarativeBase, loadStorageTuples
+        from peek_plugin_tutorial._private.storage import DeclarativeBase
 
-        loadStorageTuples()
+        DeclarativeBase.loadStorageTuples()
 
-        alembicEnv = AlembicEnvBase(DeclarativeBase.DeclarativeBase.metadata)
+        alembicEnv = AlembicEnvBase(DeclarativeBase.metadata)
         alembicEnv.run()
 
 
@@ -249,7 +236,8 @@ Edit the file :file:`peek_plugin_tutorial/_private/server/ServerEntryHook.py`
 
 #.  Add the following import up the top of the file ::
 
-        from peek_plugin_tutorial._private.storage import DeclarativeBase, loadStorageTuples
+        from peek_plugin_tutorial._private.storage import DeclarativeBase
+        from peek_plugin_tutorial._private.storage.DeclarativeBase import loadStorageTuples
         from peek_plugin_base.server.PluginServerStorageEntryHookABC import PluginServerStorageEntryHookABC
 
 #.  Add **PluginServerStorageEntryHookABC** to the list of classes **"ServerEntryHook"**
@@ -272,7 +260,8 @@ Edit the file :file:`peek_plugin_tutorial/_private/server/ServerEntryHook.py`
 When you're finished, You should have a file like this: ::
 
         # Added imports, step 1
-        from peek_plugin_tutorial._private.storage import DeclarativeBase, loadStorageTuples
+        from peek_plugin_tutorial._private.storage import DeclarativeBase
+        from peek_plugin_tutorial._private.storage.DeclarativeBase import loadStorageTuples
         from peek_plugin_base.server.PluginServerStorageEntryHookABC import \
             PluginServerStorageEntryHookABC
 
@@ -308,7 +297,7 @@ Edit the file :file:`peek_plugin_tutorial/_private/client/ClientEntryHook.py`
 
 #.  Add the following import up the top of the file ::
 
-        from peek_plugin_tutorial._private.storage import loadStorageTuples
+        from peek_core_device._private.storage.DeclarativeBase import loadStorageTuples
 
 #.  Add the following method from the **load(self):** method ::
 
@@ -319,7 +308,7 @@ Edit the file :file:`peek_plugin_tutorial/_private/client/ClientEntryHook.py`
 When you're finished, You should have a file like this: ::
 
         # Added imports, step 1
-        from peek_plugin_tutorial._private.storage import loadStorageTuples
+        from peek_core_device._private.storage.DeclarativeBase import loadStorageTuples
 
         ...
 
@@ -428,7 +417,7 @@ and reconstructed as the proper python class. VortexPY is present in these three
             __tupleType__ = tutorialTuplePrefix + 'StringIntTuple'
 
 
-Edit File :file:`storage/__inti__.py`
+Edit File :file:`storage/DeclarativeBase.py`
 `````````````````````````````````````
 
 Add imports to our load storage tuples method.  Load the tuples for Alembic to generate
@@ -436,7 +425,7 @@ database update script.  Allows vortex to reconstruct the tuples.
 
 ----
 
-Edit the file :file:`peek_plugin_tutorial/_private/storage/__inti__.py`
+Edit the file :file:`peek_plugin_tutorial/_private/storage/DeclarativeBase.py`
 
 #.  Add the lines to the :code:`loadStorageTuples():` method ::
 
@@ -542,10 +531,10 @@ Edit :file:`peek_plugin_tutorial/_private/storage/Setting.py`
 
 #.  Find :command:`noopTuplePrefix` and replace it with :command:`tutorialTuplePrefix`.
 
-Edit File :file:`__init__.py`
+Edit File :file:`DeclarativeBase.py`
 `````````````````````````````
 
-Edit :file:`peek_plugin_tutorial/_private/storage/__init__.py`
+Edit :file:`peek_plugin_tutorial/_private/storage/DeclarativeBase.py`
 
 Add the following lines to the :command:`loadStorageTuples():` method ::
 
