@@ -139,7 +139,8 @@ and populate it with the following contents.
             imports: [
                 CommonModule,
                 RouterModule.forChild(pluginRoutes),
-                FormsModule],
+                FormsModule
+            ],
             exports: [],
             providers: [],
             declarations: [TutorialComponent]

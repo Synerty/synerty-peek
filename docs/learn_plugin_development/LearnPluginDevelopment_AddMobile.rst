@@ -186,6 +186,7 @@ and populate it with the following contents.
         @NgModule({
             imports: [
                 CommonModule,
+                PeekModuleFactory.RouterModule,
                 PeekModuleFactory.RouterModule.forChild(pluginRoutes),
                 ...PeekModuleFactory.FormsModules
             ],
