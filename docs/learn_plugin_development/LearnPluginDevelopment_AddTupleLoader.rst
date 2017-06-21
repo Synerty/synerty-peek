@@ -365,7 +365,10 @@ and populate it with the following contents.
             }
 
             addRow() {
-                this.items.push(new StringIntTuple());
+                let t = new StringIntTuple();
+                // Add any values needed for this list here, EG, for a lookup list you might add:
+                // t.lookupName = this.lookupName;
+                this.items.push(t);
             }
 
             removeRow(item) {
