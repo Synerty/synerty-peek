@@ -245,6 +245,21 @@ and populate it with the following contents.
 ::
 
         <div class="panel panel-default">
+            <div class="panel-heading">Edit String Ints
+                <div class="btn-toolbar pull-right">
+                    <div class="btn-group">
+                        <div class="btn btn-default btn-sm" (click)='save()'>
+                            Save
+                        </div>
+                        <div class="btn btn-default btn-sm" (click)='loader.load()'>
+                            Reset
+                        </div>
+                        <div class="btn btn-default btn-sm" (click)='addRow()'>
+                            Add
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="panel-body">
                 <table class="table">
                     <tr>
@@ -270,19 +285,6 @@ and populate it with the following contents.
                         </td>
                     </tr>
                 </table>
-                <div class="btn-toolbar">
-                    <div class="btn-group">
-                        <div class="btn btn-default" (click)='loader.save(items)'>
-                            Save
-                        </div>
-                        <div class="btn btn-default" (click)='loader.load()'>
-                            Reset
-                        </div>
-                        <div class="btn btn-default" (click)='addRow()'>
-                            Add
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
 
@@ -340,6 +342,7 @@ and populate it with the following contents.
             };
 
             items: StringIntTuple[] = [];
+            itemsToDelete: StringIntTuple[] = [];
 
             loader: TupleLoader;
 
@@ -355,7 +358,10 @@ and populate it with the following contents.
                     });
 
                 this.loader.observable
-                    .subscribe((tuples:StringIntTuple[]) => this.items = tuples);
+                    .subscribe((tuples:StringIntTuple[]) => {
+                        this.items = tuples;
+                        this.itemsToDelete = [];
+                    });
             }
 
             addRow() {
@@ -363,9 +369,24 @@ and populate it with the following contents.
             }
 
             removeRow(item) {
-                if (confirm("Delete Row? All unsaved changes will be lost.")) {
-                    this.loader.del([item]);
+                if (item.id != null)
+                    this.itemsToDelete.push(item);
+
+                let index: number = this.items.indexOf(item);
+                if (index !== -1) {
+                    this.items.splice(index, 1);
                 }
+            }
+
+            save() {
+                let itemsToDelete = this.itemsToDelete;
+
+                this.loader.save(this.items)
+                    .then(() => {
+                        if (itemsToDelete.length != 0) {
+                            return this.loader.del(itemsToDelete);
+                        }
+                    });
             }
 
         }
