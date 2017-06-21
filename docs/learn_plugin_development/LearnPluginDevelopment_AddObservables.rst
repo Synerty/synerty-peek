@@ -349,12 +349,9 @@ and populate it with the following contents.
                     )
 
                     # Create the vortex message
-                    msg = Payload(filt, tuples=tasks).toVortexMsg()
+                    return Payload(filt, tuples=tasks).toVortexMsg()
 
                 finally:
-                    session.close()
-
-                return msg
 
 
 Edit File :file:`TupleDataObservable.py`
