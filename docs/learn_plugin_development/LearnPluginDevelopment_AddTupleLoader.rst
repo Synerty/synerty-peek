@@ -534,7 +534,8 @@ and populate it with the following contents.
 ::
 
         <div class="panel panel-default">
-            <div class="panel-body"><form autocomplete="off" novalidate>
+            <div class="panel-body">
+                <form autocomplete="off" novalidate>
                     <table class="table">
                         <tr>
                             <th>Setting</th>
@@ -543,10 +544,12 @@ and populate it with the following contents.
                         <tr *ngFor="let item of items">
                             <td>{{item.key}}</td>
                             <td *ngIf="item.type == 'boolean' ">
-                                <input [(ngModel)]="item.boolean_value"
-                                       [name]="item.key"
-                                       type="number"
-                                       class="form-control input-sm"/>
+                                <Button class="btn"
+                                        [class.btn-success]="item.boolean_value"
+                                        [class.btn-danger]="!item.boolean_value"
+                                        (click)="item.boolean_value = ! item.boolean_value">
+                                    {{item.boolean_value ? "True" : "False"}}
+                                </Button>
                             </td>
                             <td *ngIf="item.type == 'integer' ">
                                 <input [(ngModel)]="item.int_value"
@@ -571,10 +574,10 @@ and populate it with the following contents.
 
                     <div class="btn-toolbar">
                         <div class="btn-group">
-                            <div class="btn btn-default" (click)='loader.save()'>
+                            <div class="btn btn-default" (click)='saveClicked()'>
                                 Save
                             </div>
-                            <div class="btn btn-default" (click)='loader.load()'>
+                            <div class="btn btn-default" (click)='resetClicked()'>
                                 Reset
                             </div>
                         </div>
@@ -601,6 +604,7 @@ and populate it with the following contents.
 ::
 
         import {Component} from "@angular/core";
+        import {Ng2BalloonMsgService} from "@synerty/ng2-balloon-msg";
         import {
             ComponentLifecycleEventEmitter,
             extend,
@@ -624,7 +628,8 @@ and populate it with the following contents.
 
             loader: TupleLoader;
 
-            constructor(vortexService: VortexService) {
+            constructor(private balloonMsg: Ng2BalloonMsgService,
+                        vortexService: VortexService) {
                 super();
 
                 this.loader = vortexService.createTupleLoader(this,
@@ -632,6 +637,18 @@ and populate it with the following contents.
 
                 this.loader.observable
                     .subscribe((tuples:SettingPropertyTuple[]) => this.items = tuples);
+            }
+
+            saveClicked() {
+                this.loader.save()
+                    .then(() => this.balloonMsg.showSuccess("Save Successful"))
+                    .catch(e => this.balloonMsg.showError(e));
+            }
+
+            resetClicked() {
+                this.loader.load()
+                    .then(() => this.balloonMsg.showSuccess("Reset Successful"))
+                    .catch(e => this.balloonMsg.showError(e));
             }
 
         }
