@@ -112,7 +112,7 @@ The live data is serialised payloads, transferred over HTTP or Websockets. This 
 VortexJS library at work.
 
 The Client service buffers observable data from the server. The client will ask the server
-for data once, and then notify multiple users connected to the Client service when the
+for data once, and then notifyDeviceInfo multiple users connected to the Client service when the
 data arrives. However, Plugins can implement their own logic for this if required.
 
 The Client serves all HTTP resources to the Desktop web apps and Mobile web apps,
@@ -231,7 +231,7 @@ The peek platform provides support for plugins to share the APIs with other plug
 This means we can build functionality into the platform, by writing plugins.
 For example, here are two publicly release plugins for Peek that add functionality :
 
-    * Active Task Plugin - Allowing plugins to notify mobile device users
+    * Active Task Plugin - Allowing plugins to notifyDeviceInfo mobile device users
     * User Plugin - Providing simple user directory and authentication.
 
 The "Active Task plugin" requires the "User Plugin".

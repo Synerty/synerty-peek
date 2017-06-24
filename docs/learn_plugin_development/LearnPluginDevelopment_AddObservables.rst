@@ -51,7 +51,7 @@ This is the order:
 
 #.  Add the Observable scaffolding for the project.
 #.  Add the Server side Tuple Provider
-#.  Tell the Admin TupleLoader to notify the Observable when it makes updates.
+#.  Tell the Admin TupleLoader to notifyDeviceInfo the Observable when it makes updates.
 #.  Add a new Mobile Angular component to observe and display the data.
 
 Server Service Setup
@@ -391,7 +391,7 @@ Edit File :file:`StringIntTableHandler.py`
 ``````````````````````````````````````````
 
 Edit the :file:`StringIntTableHandler.py` file to accept the :code:`tupleObservable`
-argument and notify the observable when an update occurs.
+argument and notifyDeviceInfo the observable when an update occurs.
 
 ----
 
@@ -511,7 +511,7 @@ TO: ::
 
 ----
 
-The tuple data observable will now notify it's observers when an admin updates the
+The tuple data observable will now notifyDeviceInfo it's observers when an admin updates the
 StringInt data.
 
 .. _learn_plugin_development_add_observable_add_mobile_view:

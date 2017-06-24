@@ -30,6 +30,7 @@ Peek Platform Documentation
     learn_plugin_development/IndexLearn
     util/IndexUtil
     api/IndexAPI
+    upgrade_notes/IndexUpgrade
 
 
 Indices and tables
