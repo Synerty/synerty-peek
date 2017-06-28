@@ -646,9 +646,8 @@ Install the relational database we use on Linux.
 Add the latest PostGreSQL repository ::
 
         F=/etc/apt/sources.list.d/postgresql.list
-        echo "deb http://apt.postgresql.org/pub/repos/apt/ jessie-pgdg " | sudo tee $F
-        wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc |
-        sudo apt-key add -
+        echo "deb http://apt.postgresql.org/pub/repos/apt/ jessie-pgdg main" | sudo tee $F
+        wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
         sudo apt-get update
 
 
