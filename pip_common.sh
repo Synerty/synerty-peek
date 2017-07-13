@@ -43,7 +43,11 @@ peek-plugin-pof-soap
 peek-plugin-pof-chat
 peek-plugin-pof-field-switching
 peek-plugin-pof-field-incidents
-peek-plugin-pof-event"
+peek-plugin-pof-event
+peek-plugin-diagram
+peek-plugin-livedb
+peek-plugin-pof-diagram-page
+peek-plugin-pof-diagram-rt"
 
 export bold=$(tput bold)
 export normal=$(tput sgr0)
