@@ -111,13 +111,13 @@ npm -g install @angular/cli typescript tslint;
 # Define the node packages we want to download
 $nodePackages = @(
     @{"dir" = "$baseDir\mobile-build-web";
-        "packageJsonBaseUrl" = "https://raw.githubusercontent.com/Synerty/peek-mobile/master/peek_mobile/build-web"
+        "packageJsonBaseUrl" = "https://raw.githubusercontent.com/Synerty/peek-mobile/$peekPkgVer/peek_mobile/build-web"
     },
     @{"dir" = "$baseDir\desktop-build-web";
-        "packageJsonBaseUrl" = "https://raw.githubusercontent.com/Synerty/peek-desktop/master/peek_desktop/build-web"
+        "packageJsonBaseUrl" = "https://raw.githubusercontent.com/Synerty/peek-desktop/$peekPkgVer/peek_desktop/build-web"
     },
     @{"dir" = "$baseDir\admin-build-web";
-        "packageJsonBaseUrl" = "https://raw.githubusercontent.com/Synerty/peek-admin/master/peek_admin/build-web"
+        "packageJsonBaseUrl" = "https://raw.githubusercontent.com/Synerty/peek-admin/$peekPkgVer/peek_admin/build-web"
     }
 );
 
