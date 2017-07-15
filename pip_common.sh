@@ -38,14 +38,14 @@ peek-plugin-data-dms
 peek-plugin-user
 peek-plugin-inbox
 peek-plugin-chat
+peek-plugin-livedb
+peek-plugin-diagram
 peek-plugin-pof-sql
 peek-plugin-pof-soap
 peek-plugin-pof-chat
 peek-plugin-pof-field-switching
 peek-plugin-pof-field-incidents
 peek-plugin-pof-event
-peek-plugin-diagram
-peek-plugin-livedb
 peek-plugin-pof-diagram-page
 peek-plugin-pof-livedb"
 
