@@ -36,7 +36,7 @@ fi
 export PLUGINS="
 peek-plugin-data-dms
 peek-plugin-user
-peek-plugin-active-task
+peek-plugin-inbox
 peek-plugin-chat
 peek-plugin-pof-sql
 peek-plugin-pof-soap
@@ -47,7 +47,7 @@ peek-plugin-pof-event
 peek-plugin-diagram
 peek-plugin-livedb
 peek-plugin-pof-diagram-page
-peek-plugin-pof-diagram-rt"
+peek-plugin-pof-livedb"
 
 export bold=$(tput bold)
 export normal=$(tput sgr0)
