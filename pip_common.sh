@@ -14,7 +14,8 @@ peek-mobile
 peek-client
 peek-admin
 peek-server
-synerty-peek"
+synerty-peek
+peek-core-device"
 
 
 # Dynamicall list plugins
