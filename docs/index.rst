@@ -10,6 +10,7 @@ Peek Platform Documentation
     overview/Overview
     setup_os_requirements_windows/SetupOSRequirementsWindows
     setup_os_requirements_debian/SetupOSRequirementsDebian
+    setup_os_requirements_macos/SetupOSRequirementsMacOS
     deploy_platform/DeployPeekPlatform
     deploy_plugins/DeployPeekPlugins
     administer/AdministerPeekPlatform
