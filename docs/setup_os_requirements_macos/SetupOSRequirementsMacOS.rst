@@ -73,26 +73,6 @@ This section installs the OS packages required.
 
 ----
 
-Install the C Compiler package, used for compiling python or VMWare tools, etc:
-
-::
-
-        PKG="gcc make linux-headers-amd64"
-        sudo apt-get install -y $PKG
-
-----
-
-Install the Python build dependencies:
-
-::
-
-        PKG="build-essential curl git m4 ruby texinfo libbz2-dev libcurl4-openssl-dev"
-        PKG="$PKG libexpat-dev libncurses-dev zlib1g-dev libgmp-dev"
-        PKG="$PKG libbz2-dev"
-        sudo apt-get install -y $PKG
-
-----
-
 Install C libraries that some python packages link to when they install:
 
 ::
