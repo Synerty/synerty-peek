@@ -1,16 +1,20 @@
+.. _setup_os_requirements_macos:
+
 ===========================
 Setup OS Requirements MacOS
 ===========================
 
-This section describes how to perform the setup for MacOS (previosly OSX).
+This section describes how to perform the setup for MacOS (previously OSX).
 
 Please read through all of the documentation before commencing the installation procedure.
+
 
 Installation Objective
 ----------------------
 
-This Installation Guide contains specific Debian Linux 8 operating system requirements
+This Installation Guide contains specific Mac 10.12 Sierra operating system requirements
 for the configuring of synerty-peek.
+
 
 Required Software
 `````````````````
@@ -21,21 +25,15 @@ packaged and transferred to the offline server.
 
 Below is a list of all the required software:
 
+*   Xcode (from the app store)
+
+*   Oracle JDK
+
+*   Fink
 
 *   Python 3.6.x
 
 *   Postgres 9.5
-
-Suggested Software
-``````````````````
-
-The following utilities are often useful.
-
-*   rsync
-
-*   git
-
-*   unzip
 
 
 Optional Software
@@ -54,75 +52,97 @@ talk to the MSSQL SQLServer database.
 Installation Guide
 ------------------
 
-Follow the remaining section in this document to prepare your debian operating system for
+Follow the remaining section in this document to prepare your macOS operating system 
 to run the Peek Platform.
 
 The instructions on this page don't install the peek platform, that's done later.
 
-
-
-
-
-
-TODO Installing General Prerequisites
--------------------------------------
-
-This section installs the OS packages required.
-
 .. note:: Run the commands in this step as the :code:`peek` user.
 
-----
 
-Install C libraries that some python packages link to when they install:
+Installing Xcode
+----------------
 
-::
-
-        PKG=""
-
-        # For the cryptography package
-        PKG="$PKG libffi-dev"
-
-        # For the python Samba client
-        PKG="$PKG samba-dev libsmbclient-dev libcups2-dev"
-
-        # For Shapely and GEOAlchemy
-        PKG="$PKG libgeos-dev libgeos-c1"
-
-        # For LXML and the Oracle client
-        PKG="$PKG libxml2 libxml2-dev"
-        PKG="$PKG libxslt1.1 libxslt1-dev"
-
-        # For the PostGresQL connector
-        PKG="$PKG libpq-dev"
-
-        # For the SQLite python connector
-        PKG="$PKG libsqlite3-dev"
-        PKG="$PKG libsqlite3-dev"
-
-        sudo apt-get install -y $PKG
+From the app store, install Xcode.
 
 ----
 
-Install rsync and git packages:
-
-::
-
-        PKG="rsync git unzip"
-        sudo apt-get install -y $PKG
+Run Xcode and accept 'Agree' to the license.  Xcode will then install components.
 
 ----
 
-Cleanup the downloaded packages ::
+Exit Xcode
 
-        sudo apt-get clean
+----
+
+Run Terminal
+
+----
+
+Apple's Command Line Developer Tools can be installed on recent OS versions by 
+running this command in the Terminal: ::
+
+        sudo xcode-select --install
+
+----
+
+A popup will appear, select 'Install' then 'Agree' to the license.
+
+----
+
+Agree to the Xcode license in Terminal run: ::
+
+        sudo xcodebuild -license
+
+Scroll to the bottom, type 'Agree' and hit 'Enter'
 
 
+Install an Oracle JDK
+---------------------
+
+Download the macOS disk image:
+
+http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
 
 
-Install Python 3.6
+Install Fink
+------------
+
+Download the Fink Source Release
+
+http://downloads.sourceforge.net/fink/fink-0.41.1.tar.gz
+
+----
+
+In the terminal prompt run: ::
+
+        sudo xcode-select -switch /Applications/Xcode.app/Contents/Developer
+        cd $HOME/Downloads
+        tar -xvf fink-0.41.1.tar.gz
+        cd fink-0.41.1
+        ./bootstrap
+
+
+Select defaults
+
+----
+
+After installation is completed, run the following command in the terminal: ::
+
+        /sw/bin/pathsetup.sh
+
+
+----
+
+Download package description files and patches, 
+in a new terminal run the following commands: ::
+
+        fink selfupdate-rsync
+        fink index -f
+
+
+TODO Install Python 3.6
 ------------------
-
-----
 
 Setup paths
 
