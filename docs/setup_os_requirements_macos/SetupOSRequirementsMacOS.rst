@@ -141,15 +141,23 @@ in a new terminal run the following commands: ::
         fink index -f
 
 
+Install XQuartz
+---------------
+
+Download the disk image and install XQuartz:
+
+https://dl.bintray.com/xquartz/downloads/XQuartz-2.7.11.dmg
+
+
+.. note:: After installing XQuartz you will need to restart terminal.
+
+
 TODO Install Python 3.6
 ------------------
 
-Setup paths
+In terminal run: ::
 
-----
-
-Download and install
-https://www.python.org/ftp/python/3.6.2/python-3.6.2-macosx10.6.pkg
+        fink install python36
 
 ----
 
@@ -163,11 +171,11 @@ Insert : ::
 
         ##### SET THE PEEK ENVIRONMENT #####
         # Setup the variables for PYTHON
-        export PEEK_PY_VER="3.6.1"
+        export PEEK_PY_VER="3.6.2"
 
         # Set the variables for the platform release
         # These are updated by the deploy script
-        export PEEK_ENV=""
+        export PEEK_ENV="/sw"
         export PATH="${PEEK_ENV}/bin:$PATH"
 
 ----
@@ -178,32 +186,39 @@ Close and re-open the terminal.
 
 Symlink the python3 commands so they are the only ones picked up by path. ::
 
-        cd /Library/Frameworks/Python.framework/Versions/3.6/bin
-        ln -s python3 python
+        cd /sw/bin/
+        ln -s python3.6 python
+
+----
+
+In terminal run: ::
+
+        fink install pip-py36
 
 ----
 
 Test that the setup is working ::
 
         which python
-        echo "It should be /Library/Frameworks/Python.framework/Versions/3.6/bin/python"
+        
+        python --version
 
         which pip
-        echo "It should be /Library/Frameworks/Python.framework/Versions/3.6/bin/pip"
 
 ----
 
 synerty-peek is deployed into python virtual environments.
+
 Install the virtualenv python package ::
 
-        pip install virtualenv
+        fink install virtualenv-py36
 
 
 ----
 
 The Wheel package is required for building platform and plugin releases ::
 
-        pip install wheel
+        fink install wheel-py36
 
 
 Install PostGreSQL
