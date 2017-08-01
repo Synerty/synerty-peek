@@ -169,14 +169,19 @@ Make sure these are before any lines like: ::
 
 Insert : ::
 
+        ##### SET THE FINK ENVIRONMENT #####
+        # Set PATH to include fink
+        export PATH="/sw/bin:$PATH"
+
         ##### SET THE PEEK ENVIRONMENT #####
         # Setup the variables for PYTHON
         export PEEK_PY_VER="3.6.2"
 
         # Set the variables for the platform release
         # These are updated by the deploy script
-        export PEEK_ENV="/sw"
+        export PEEK_ENV=""
         export PATH="${PEEK_ENV}/bin:$PATH"
+
 
 ----
 
@@ -187,7 +192,7 @@ Close and re-open the terminal.
 Symlink the python3 commands so they are the only ones picked up by path. ::
 
         cd /sw/bin/
-        ln -s python3.6 python
+        sudo ln -s python3.6 python
 
 ----
 
@@ -200,10 +205,17 @@ In terminal run: ::
 Test that the setup is working ::
 
         which python
+        echo "It should be /sw/bin/python"
         
         python --version
+        echo "It should be Python 3.6.2"
 
         which pip
+        echo "It should be /sw/bin/pip"
+
+        pip --version
+        echo "It should be pip 9.0.1 from /sw/lib/python3.6/site-packages (python 3.6)"
+
 
 ----
 
@@ -211,14 +223,14 @@ synerty-peek is deployed into python virtual environments.
 
 Install the virtualenv python package ::
 
-        fink install virtualenv-py36
+        sudo pip install virtualenv
 
 
 ----
 
 The Wheel package is required for building platform and plugin releases ::
 
-        fink install wheel-py36
+        sudo pip install wheel
 
 
 Install PostGreSQL
