@@ -362,38 +362,33 @@ which depends on FreeTDS.
 
 ----
 
-Edit :file:`~/.bashrc` and insert the following after the first block comment
-
-Make sure these are before any lines like: ::
-
-        # If not running interactively, don't do anything
-
-Insert : ::
-
-        # Setup the variables for FREE TDS
-        export LD_LIBRARY_PATH="/home/peek/freetds:$LD_LIBRARY_PATH"
-
-----
-
 Install FreeTDS:
 
 ::
 
-        sudo apt-get install freetds-dev
+        fink install freetds
 
 
 ----
 
-Create file :file:`freetds.conf` in :code:`~/freetds` and populate with the following:
+Confirm the installation ::
 
-::
+        tsql -C
 
-        [global]
-            port = 1433
-            instance = peek
-            tds version = 7.4
-            dump file = /tmp/freetds.log
+You should see something similar to: ::
 
+        Compile-time settings (established with the "configure" script)
+                                       Version: freetds v0.91
+                        freetds.conf directory: /sw/etc/freetds
+                MS db-lib source compatibility: no
+                   Sybase binary compatibility: yes
+                                 Thread safety: yes
+                                 iconv library: yes
+                                   TDS version: 4.2
+                                         iODBC: no
+                                      unixodbc: yes
+                         SSPI "trusted" logins: no
+                                      Kerberos: no
 
 
 What Next?
