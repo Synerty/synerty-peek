@@ -238,126 +238,31 @@ Install PostGreSQL
 
 Install the relational database we use on macOS.
 
-Download PostGresQL:
+In terminal run: ::
 
-https://www.enterprisedb.com/downloads/postgres-postgresql-downloads
+        fink install postgresql96 postgis95
 
-----
-
-Open the disk image and run the installer.
-
-----
-
-Installation Directory ::
-
-        /Library/PostgreSQL/9.6
-
-
-----
-
-Data Directory ::
-
-        /Library/PostgreSQL/9.6/data
-
-
-----
-
-Password ::
-
-        PASSWORD
-
-----
-
-Port ::
-
-        5432
-
-
-----
-
-Locale ::
-
-        [Default Locale]
-
-
-----
-
-Finish installation.
-
-Ensure the Stackbuilder is checked to run, this is where we will install Postgis from.
-
-----
-
-In Stack Builder select the Postgres server you just created: ::
-
-        PostgreSQL 9.6 on port 5432
-
-
-----
-
-Select Postgis Application under 'Spatial Extensions'
-
-----
-
-Update the postgres password: ::
-
-        sudo passwd postgres
-
-        PASSWORD
-
-
-----
-
-Update postgres user as sudoer
-
-Run the following command un terminal: ::
-
-        sudo visudo
-
-
-Update the section that look similar to the foloowing and make it match the following: ::
-
-        # root and users in group wheel can run anything on any machine as any user
-        root            ALL = (ALL) ALL
-        %admin          ALL = (ALL) ALL
-        postgres        ALL = (ALL) ALL
-
-
-----
 
 Create the peek SQL user: ::
 
-        F=/Library/PostgreSQL/9.6/data/pg_hba.conf
+        F=/sw/var/postgresql-9.6/data/pg_hba.conf
         if ! sudo grep -q 'peek' $F; then
-            echo "# TYPE  DATABASE    USER        ADDRESS        METHOD" | sudo tee $F -a
-            echo "local   all         postgres                   peer" | sudo tee $F -a
-            echo "# "local" is for Unix domain socket connections only" | sudo tee $F -a
-            echo "local   all         all                        peer" | sudo tee $F -a
-            echo "# IPv4 local connections:" | sudo tee $F -a
-            echo "host    all         all         127.0.0.1/32   md5" | sudo tee $F -a
-            echo "# IPv6 local connections:" | sudo tee $F -a
-            echo "host    all         all         ::1/128        md5" | sudo tee $F -a
+            echo "# TYPE  DATABASE    USER        ADDRESS        METHOD" | sudo tee -a $F
+            echo "local   all         postgres                   peer" | sudo tee -a $F
+            echo "# "local" is for Unix domain socket connections only" | sudo tee -a $F
+            echo "local   all         all                        peer" | sudo tee -a $F
+            echo "# IPv4 local connections:" | sudo tee -a $F
+            echo "host    all         all         127.0.0.1/32   md5" | sudo tee -a $F
+            echo "# IPv6 local connections:" | sudo tee -a $F
+            echo "host    all         all         ::1/128        md5" | sudo tee -a $F
         fi
-        sudo su - postgres
-
-
-Edit **~/.bash_profile** and insert the following after the first block comment.
-
-Make sure these are before any lines like: ::
-
-        # If not running interactively, don't do anything
-
-Insert: ::
-
-        ##### SET THE Postgres ENVIRONMENT #####
-        # Set PATH to include postgres utilities
-        export PATH="/Library/PostgreSQL/9.6/bin:$PATH"
-
-
-Re-open terminal
 
         sudo su - postgres
-        createuser -d -r -s peek
+
+        /sw/bin/pg_ctl start -D /sw/var/postgresql-9.6/data/
+        /sw/bin/pg_ctl reload -D /sw/var/postgresql-9.6/data/
+
+        /sw/bin/createuser -d -r -s peek
         exit # Exit postgres user
 
 
