@@ -169,14 +169,19 @@ Make sure these are before any lines like: ::
 
 Insert : ::
 
+        ##### SET THE FINK ENVIRONMENT #####
+        # Set PATH to include fink
+        export PATH="/sw/bin:$PATH"
+
         ##### SET THE PEEK ENVIRONMENT #####
         # Setup the variables for PYTHON
         export PEEK_PY_VER="3.6.2"
 
         # Set the variables for the platform release
         # These are updated by the deploy script
-        export PEEK_ENV="/sw"
+        export PEEK_ENV=""
         export PATH="${PEEK_ENV}/bin:$PATH"
+
 
 ----
 
@@ -187,7 +192,7 @@ Close and re-open the terminal.
 Symlink the python3 commands so they are the only ones picked up by path. ::
 
         cd /sw/bin/
-        ln -s python3.6 python
+        sudo ln -s python3.6 python
 
 ----
 
@@ -200,10 +205,17 @@ In terminal run: ::
 Test that the setup is working ::
 
         which python
+        echo "It should be /sw/bin/python"
         
         python --version
+        echo "It should be Python 3.6.2"
 
         which pip
+        echo "It should be /sw/bin/pip"
+
+        pip --version
+        echo "It should be pip 9.0.1 from /sw/lib/python3.6/site-packages (python 3.6)"
+
 
 ----
 
@@ -211,49 +223,46 @@ synerty-peek is deployed into python virtual environments.
 
 Install the virtualenv python package ::
 
-        fink install virtualenv-py36
+        sudo pip install virtualenv
 
 
 ----
 
 The Wheel package is required for building platform and plugin releases ::
 
-        fink install wheel-py36
+        sudo pip install wheel
 
 
 Install PostGreSQL
 ------------------
 
-Install the relational database we use on Linux.
+Install the relational database we use on macOS.
 
-.. note:: Run the commands in this step as the :code:`peek` user.
+In terminal run: ::
 
-Add the latest PostGreSQL repository ::
-
-        F=/etc/apt/sources.list.d/postgresql.list
-        echo "deb http://apt.postgresql.org/pub/repos/apt/ jessie-pgdg main" | sudo tee $F
-        wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
-        sudo apt-get update
+        fink install postgresql96 postgis95
 
 
-----
+Create the peek SQL user: ::
 
-Install PostGresQL ::
-
-        sudo apt-get install -y postgis postgresql-9.5
-        sudo apt-get clean
-
-
-----
-
-Create the peek SQL user ::
-
-        F=/etc/postgresql/9.5/main/pg_hba.conf
+        F=/sw/var/postgresql-9.6/data/pg_hba.conf
         if ! sudo grep -q 'peek' $F; then
-            echo "host  peek    peek    127.0.0.1/32    trust" | sudo tee $F -a
+            echo "# TYPE  DATABASE    USER        ADDRESS        METHOD" | sudo tee -a $F
+            echo "local   all         postgres                   peer" | sudo tee -a $F
+            echo "# "local" is for Unix domain socket connections only" | sudo tee -a $F
+            echo "local   all         all                        peer" | sudo tee -a $F
+            echo "# IPv4 local connections:" | sudo tee -a $F
+            echo "host    all         all         127.0.0.1/32   md5" | sudo tee -a $F
+            echo "# IPv6 local connections:" | sudo tee -a $F
+            echo "host    all         all         ::1/128        md5" | sudo tee -a $F
         fi
+
         sudo su - postgres
-        createuser -d -r -s peek
+
+        /sw/bin/pg_ctl start -D /sw/var/postgresql-9.6/data/
+        /sw/bin/pg_ctl reload -D /sw/var/postgresql-9.6/data/
+
+        /sw/bin/createuser -d -r -s peek
         exit # Exit postgres user
 
 
@@ -289,57 +298,57 @@ Install Oracle Client (Optional)
 The oracle libraries are optional. Install them where the agent runs if you are going to
 interface with an oracle database.
 
-----
-
-Edit :file:`~/.bashrc` and insert the following after the first block comment
-
-Make sure these are before any lines like: ::
-
-        # If not running interactively, don't do anything
-
-Insert : ::
-
-        # Setup the variables for ORACLE
-        export LD_LIBRARY_PATH="/home/peek/oracle/instantclient_12_2:$LD_LIBRARY_PATH"
-        export ORACLE_HOME="/home/peek/oracle/instantclient_12_2"
-
-
-----
-
 Make the directory where the oracle client will live ::
 
-        mkdir /home/peek/oracle
+        mkdir ~/oracle
+
 
 ----
 
 Download the following from oracle.
 
-The version used in these instructions is **12.2.0.1.0**.
+The version used in these instructions is **12.1.0.2.0**.
+
+.. note:: Oracle version 12.2 is not available for macOS.
 
 #.  Download the "Instant Client Package - Basic" from
-    http://www.oracle.com/technetwork/topics/linuxx86-64soft-092277.html
+    http://www.oracle.com/technetwork/topics/intel-macsoft-096467.html
 
 #.  Download the "Instant Client Package - SDK" from
-    http://www.oracle.com/technetwork/topics/linuxx86-64soft-092277.html
+    http://www.oracle.com/technetwork/topics/intel-macsoft-096467.html
 
-Copy these files to :file:`/home/peek/oracle` on the peek server.
+Copy these files to :file:`~/oracle` on the peek server.
 
 ----
 
 Extract the files. ::
-
+        
         cd ~/oracle
-        unzip instantclient-sdk-linux.x64-12.2.0.1.0.zip
-        unzip instantclient-basic-linux.x64-12.2.0.1.0.zip
+        unzip instantclient-basic-macos.x64-12.1.0.2.0.zip
+        unzip instantclient-sdk-macos.x64-12.1.0.2.0.zip
 
 
 ----
 
-Symlink the oracle client lib ::
+Create the appropriate libclntsh.dylib link for the version of Instant Client: ::
 
-        cd $ORACLE_HOME
-        ln -snf libclntsh.so.12.1 libclntsh.so
-        ls -l libclntsh.so
+        cd ~/oracle/instantclient_12_1
+        ln -s libclntsh.dylib.12.1 libclntsh.dylib
+
+
+----
+
+Add links to $HOME/lib or /usr/local/lib to enable applications to find the libraries: ::
+
+        mkdir ~/lib
+        ln -s ~/instantclient_12_1/libclntsh.dylib ~/lib/
+
+
+----
+
+Update PATH: ::
+
+        export PATH=~/oracle/instantclient_12_1:$PATH
 
 
 FreeTDS (Optional)
@@ -353,38 +362,33 @@ which depends on FreeTDS.
 
 ----
 
-Edit :file:`~/.bashrc` and insert the following after the first block comment
-
-Make sure these are before any lines like: ::
-
-        # If not running interactively, don't do anything
-
-Insert : ::
-
-        # Setup the variables for FREE TDS
-        export LD_LIBRARY_PATH="/home/peek/freetds:$LD_LIBRARY_PATH"
-
-----
-
 Install FreeTDS:
 
 ::
 
-        sudo apt-get install freetds-dev
+        fink install freetds
 
 
 ----
 
-Create file :file:`freetds.conf` in :code:`~/freetds` and populate with the following:
+Confirm the installation ::
 
-::
+        tsql -C
 
-        [global]
-            port = 1433
-            instance = peek
-            tds version = 7.4
-            dump file = /tmp/freetds.log
+You should see something similar to: ::
 
+        Compile-time settings (established with the "configure" script)
+                                       Version: freetds v0.91
+                        freetds.conf directory: /sw/etc/freetds
+                MS db-lib source compatibility: no
+                   Sybase binary compatibility: yes
+                                 Thread safety: yes
+                                 iconv library: yes
+                                   TDS version: 4.2
+                                         iODBC: no
+                                      unixodbc: yes
+                         SSPI "trusted" logins: no
+                                      Kerberos: no
 
 
 What Next?
