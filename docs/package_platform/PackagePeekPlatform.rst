@@ -57,7 +57,6 @@ The script will download the latest peek platform release and all its dependenci
 Take note of the end of the script, it will print out where the release is.
 
 
-
 Building a Linux Release
 ------------------------
 
@@ -85,6 +84,35 @@ The script will download the latest peek platform release and all its dependenci
 
 Take note of the end of the script, it will print out where the release is.
 
+
+Building a macOS Release
+------------------------
+
+This section contains the steps to build your own platform release.
+
+Download the platform build script.
+Run the following commands in the power shell window.
+
+::
+
+        file="package_platform_macos.sh";
+        uri="https://bitbucket.org/synerty/synerty-peek/raw/master/$file";
+        curl -O $uri
+
+
+----
+
+Run the platform build script.
+
+::
+
+       bash package_platform_macos.sh
+
+The script will download the latest peek platform release and all its dependencies.
+
+Take note of the end of the script, it will print out where the release is.
+
+ 
 What Next?
 ----------
 

@@ -373,7 +373,7 @@ Install FreeTDS:
 
 ::
 
-        fink install freetds
+        fink install freetds freetds-common freetds-dev
 
 
 ----
