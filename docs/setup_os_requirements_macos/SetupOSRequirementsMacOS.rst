@@ -243,19 +243,27 @@ In terminal run: ::
         fink install postgresql96 postgis95
 
 
-Create the peek SQL user: ::
+----
+
+Update the PostGreSQL unix user auth config: ::
 
         F=/sw/var/postgresql-9.6/data/pg_hba.conf
-        if ! sudo grep -q 'peek' $F; then
-            echo "# TYPE  DATABASE    USER        ADDRESS        METHOD" | sudo tee -a $F
-            echo "local   all         postgres                   peer" | sudo tee -a $F
-            echo "# "local" is for Unix domain socket connections only" | sudo tee -a $F
-            echo "local   all         all                        peer" | sudo tee -a $F
-            echo "# IPv4 local connections:" | sudo tee -a $F
-            echo "host    all         all         127.0.0.1/32   md5" | sudo tee -a $F
-            echo "# IPv6 local connections:" | sudo tee -a $F
-            echo "host    all         all         ::1/128        md5" | sudo tee -a $F
-        fi
+        cat | sudo tee $F <<EOF
+        # TYPE  DATABASE        USER            ADDRESS                 METHOD
+        local   all             postgres                                peer
+
+        # "local" is for Unix domain socket connections only
+        local   all             all                                     peer
+        # IPv4 local connections:
+        host    all             all             127.0.0.1/32            md5
+        # IPv6 local connections:
+        host    all             all             ::1/128                 md5
+        EOF
+
+
+----
+
+Create the peek SQL user: ::
 
         sudo su - postgres
 
@@ -366,7 +374,7 @@ Install FreeTDS:
 
 ::
 
-        fink install freetds
+        fink install freetds freetds-common freetds-dev
 
 
 ----

@@ -123,6 +123,58 @@ The platform is now deployed, see the admin page next.
 *   :ref:`admin_run_synerty_peek`
 
 
+macOS
+-----
+
+Run all commands from a terminal window remotely via ssh.
+
+----
+
+Download the platform deploy script.
+
+.. note:: This is the only step in this section that requires the internet.
+    If you don't have internet access you may try this command, be sure to update the
+    "servername" to the server ip address:
+    :code:`scp Downloads/deploy_platform_macos.sh peek@servername:/Users/peek/deploy_platform_macos.sh`
+
+
+::
+
+        uri="https://bitbucket.org/synerty/synerty-peek/raw/master/deploy_platform_macos.sh"
+        curl -O $uri
+
+
+----
+
+Run the platform deploy script. The script will complete with a print out of where the
+new environment was deployed.
+
+Ensure you update the **dist** variable with the path to your release.
+
+The script will deploy to :file:`/Users/peek/`.
+
+::
+
+        dist="/Users/peek/Downloads/peek_dist_macos_#.#.#.tar.bz2"
+        bash deploy_platform_macos.sh $dist
+
+
+----
+
+Once the script has completed running you will see the message "Activate the
+new environment edit ...".
+
+This command configures the environment to use the synerty-peek virtual environment
+that was just deployed.
+
+----
+
+The platform is now deployed, see the admin page next.
+
+*   :ref:`admin_configure_synerty_peek`
+*   :ref:`admin_run_synerty_peek`
+
+
 Development Considerations
 --------------------------
 
