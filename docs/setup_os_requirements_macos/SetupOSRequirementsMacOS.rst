@@ -247,6 +247,7 @@ In terminal run: ::
 
 Update the PostGreSQL unix user auth config: ::
 
+        F=/sw/var/postgresql-9.6/data/pg_hba.conf
         cat | sudo tee $F <<EOF
         # TYPE  DATABASE        USER            ADDRESS                 METHOD
         local   all             postgres                                peer
