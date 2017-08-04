@@ -69,7 +69,7 @@ pip install --no-index --no-cache --find-links "$releaseDir/py" synerty-peek
 
 # Copy the node_modules into place
 # This is crude, we kind of mash the two together
-cp -pr $releaseDir/node/* ${venvDir}
+rsync -a $releaseDir/node/* ${venvDir}
 
 # ------------------------------------------------------------------------------
 # Install the frontend node_modules

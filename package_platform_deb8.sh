@@ -48,7 +48,7 @@ fi
 nodeDir="$baseDir/node"
 
 cd $baseDir
-nodeVer="7.7.4"
+nodeVer="8.2.1"
 
 # Download the file
 nodeFile="node-v${nodeVer}-linux-x64.tar.xz"
@@ -67,7 +67,6 @@ rm -rf ${nodeFile}
 PATH="$nodeDir/bin:$PATH"
 
 # Install the required NPM packages
-npm -g upgrade npm
 npm cache clean --force
 npm -g install @angular/cli typescript tslint
 
