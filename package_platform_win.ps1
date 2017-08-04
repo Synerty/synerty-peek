@@ -76,7 +76,7 @@ foreach ($wheel in $extraWheels) {
 # Download node, npm, @angular/cli, typescript and tslint
 
 Set-Location "$baseDir";
-$nodeVer = "7.7.4";
+$nodeVer = "8.2.1";
 
 # Download the file
 $nodeUrl = "https://nodejs.org/dist/v$nodeVer/node-v$nodeVer-win-x64.zip";
@@ -98,7 +98,6 @@ Move-Item "node-v$nodeVer-win-x64" "node";
 $env:Path = "$baseDir\node;$env:Path";
 
 # Install the required NPM packages
-npm -g upgrade npm
 npm cache clean --force
 npm -g install @angular/cli typescript tslint;
 
