@@ -117,6 +117,19 @@ adminJsonUrl="https://bitbucket.org/synerty/peek-admin/raw/${peekPkgVer}/peek_ad
 downloadNodeModules $adminBuildWebDIR $adminJsonUrl
 
 # ------------------------------------------------------------------------------
+# Copy over the init scripts for this platform
+
+mkdir $baseDir/init
+
+pushd $baseDir/init
+for s in peek_server peek_worker peek_agent peek_client
+do
+    wget -nv https://bitbucket.org/synerty/synerty-peek/raw/${peekPkgVer}/scripts/deb8/init/$s
+done
+popd
+
+
+# ------------------------------------------------------------------------------
 # Set the location back to where we were.
 cd $startDir
 
