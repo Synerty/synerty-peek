@@ -83,11 +83,6 @@ mv $releaseDir/desktop-build-web/node_modules $sp/peek_desktop/build-web
 mv $releaseDir/admin-build-web/node_modules $sp/peek_admin/build-web
 
 # ------------------------------------------------------------------------------
-# Remove release dir
-
-rm -rf ${releaseDir}
-
-# ------------------------------------------------------------------------------
 # Show complete message
 
 echo " "
@@ -114,3 +109,29 @@ then
     echo " "
     echo "Close and reopen your terminal for the update to take effect"
 fi
+
+
+
+# ------------------------------------------------------------------------------
+# OPTIONALLY - Set the init scripts for auto start
+
+read -p "Do you want to update the init scripts to auto start peek? " -n 1 -r
+echo    # (optional) move to a new line
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+    for s in peek_server peek_worker peek_client peek_agent
+    do
+        sudo cp -p $releaseDir/init/$s /etc/init.d/
+        sudo chmod +x /etc/init.d/$s
+        sudo update-rc.d $s enable
+        sudo service $s restart
+    done
+    echo " "
+    echo "Done"
+    echo " "
+fi
+
+# ------------------------------------------------------------------------------
+# Remove release dir
+
+rm -rf ${releaseDir}

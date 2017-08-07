@@ -83,11 +83,6 @@ mv $releaseDir/desktop-build-web/node_modules $sp/peek_desktop/build-web
 mv $releaseDir/admin-build-web/node_modules $sp/peek_admin/build-web
 
 # ------------------------------------------------------------------------------
-# Remove release dir
-
-rm -rf ${releaseDir}
-
-# ------------------------------------------------------------------------------
 # Show complete message
 
 echo " "
@@ -114,3 +109,8 @@ then
     echo " "
     echo "Close and reopen your terminal for the update to take effect"
 fi
+
+# ------------------------------------------------------------------------------
+# Remove release dir
+
+rm -rf ${releaseDir}

@@ -648,6 +648,15 @@ Install redis and rabbitmq ::
         sudo apt-get install -y redis-server rabbitmq-server
         sudo apt-get clean
 
+----
+
+Enable the RabbitMQ management plugins: ::
+
+        sudo rabbitmq-plugins enable rabbitmq_mqtt
+        sudo rabbitmq-plugins enable rabbitmq_management
+        sudo service rabbitmq-server restart
+
+
 
 Install PostGreSQL
 ------------------

@@ -91,11 +91,6 @@ Move-Item $releaseDir\desktop-build-web\node_modules $sp\peek_desktop\build-web 
 Move-Item $releaseDir\admin-build-web\node_modules $sp\peek_admin\build-web -Force
 
 # ------------------------------------------------------------------------------
-# Remove release dir
-
-Remove-Item $releaseDir -Force -Recurse;
-
-# ------------------------------------------------------------------------------
 # Show complete message
 
 # All done.
@@ -152,4 +147,9 @@ switch ($result) {
         Write-Host "    `$env:Path = `"$venvDir\Scripts;`$env:Path`"";
     }
 }
+
+# ------------------------------------------------------------------------------
+# Remove release dir
+
+Remove-Item $releaseDir -Force -Recurse;
 
