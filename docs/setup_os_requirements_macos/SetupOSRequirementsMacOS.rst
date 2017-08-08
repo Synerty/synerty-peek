@@ -152,7 +152,7 @@ https://dl.bintray.com/xquartz/downloads/XQuartz-2.7.11.dmg
 .. note:: After installing XQuartz you will need to restart terminal.
 
 
-TODO Install Python 3.6
+Install Python 3.6
 ------------------
 
 In terminal run: ::
@@ -161,7 +161,7 @@ In terminal run: ::
 
 ----
 
-Edit :code:`~/.bash_profile` and insert the following after the first block comment.
+Edit :file:`~/.bash_profile` and insert the following after the first block comment.
 
 Make sure these are before any lines like: ::
 
@@ -231,6 +231,51 @@ Install the virtualenv python package ::
 The Wheel package is required for building platform and plugin releases ::
 
         sudo pip install wheel
+
+
+Install Worker Dependencies
+---------------------------
+
+Install the parallel processing queue we use for the peek-worker tasks.
+
+Install Redis via fink with the foloowing command: ::
+
+        fink install redis
+
+
+----
+
+Download and unpack RabbitMQ: ::
+
+        cd /Users/peek/
+        curl -O https://github.com/rabbitmq/rabbitmq-server/releases/download/rabbitmq_v3_6_10/rabbitmq-server-mac-standalone-3.6.10.tar.xz
+        fink install xz
+        xz -d rabbitmq-server-mac-standalone-3.6.10.tar.xz
+        tar -xvf rabbitmq-server-mac-standalone-3.6.10.tar
+
+
+----
+
+Edit :file:`~/.bash_profile` and insert the following after the first block comment.
+
+Make sure these are before any lines like: ::
+
+        # If not running interactively, don't do anything
+
+Insert: ::
+
+        ##### SET THE RabbitMQ ENVIRONMENT #####
+        # Set PATH to include RabbitMQ
+        export PATH="/Users/peek/rabbitmq_server-3.6.10/sbin:$PATH"
+
+
+----
+
+Enable the RabbitMQ management plugins: ::
+
+        sudo rabbitmq-plugins enable rabbitmq_mqtt
+        sudo rabbitmq-plugins enable rabbitmq_management
+        sudo rabbitmq-server restart
 
 
 Install PostGreSQL
