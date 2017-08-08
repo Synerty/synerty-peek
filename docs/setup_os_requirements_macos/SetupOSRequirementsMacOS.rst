@@ -161,7 +161,7 @@ In terminal run: ::
 
 ----
 
-Edit **~/.bash_profile** and insert the following after the first block comment.
+Edit :code:`~/.bash_profile` and insert the following after the first block comment.
 
 Make sure these are before any lines like: ::
 
@@ -263,6 +263,13 @@ Update the PostGreSQL unix user auth config: ::
 
 ----
 
+Update the postgres user shell: ::
+
+        sudo dscl . -change /users/postgres UserShell /dev/null /bin/sh
+
+
+----
+
 Create the peek SQL user: ::
 
         sudo su - postgres
@@ -315,7 +322,7 @@ Make the directory where the oracle client will live ::
 
 Download the following from oracle.
 
-The version used in these instructions is **12.1.0.2.0**.
+The version used in these instructions is :code:`12.1.0.2.0`.
 
 .. note:: Oracle version 12.2 is not available for macOS.
 
@@ -346,10 +353,11 @@ Create the appropriate libclntsh.dylib link for the version of Instant Client: :
 
 ----
 
-Add links to $HOME/lib or /usr/local/lib to enable applications to find the libraries: ::
+Add links to $HOME/lib to enable applications to find the libraries: ::
 
         mkdir ~/lib
-        ln -s ~/instantclient_12_1/libclntsh.dylib ~/lib/
+        ln -s ~/oracle/instantclient_12_1/libclntsh.dylib ~/lib/
+        export DYLD_LIBRARY_PATH=~/oracle/instantclient_12_1
 
 
 ----
@@ -357,6 +365,27 @@ Add links to $HOME/lib or /usr/local/lib to enable applications to find the libr
 Update PATH: ::
 
         export PATH=~/oracle/instantclient_12_1:$PATH
+
+
+----
+
+Edit :file:`~/.bash_profile` and insert the following after the first block comment.
+
+Make sure these are before any lines like: ::
+
+        # If not running interactively, don't do anything
+
+Insert : ::
+
+        ##### SET THE ORACLE ENVIRONMENT #####
+        # Set PATH to include oracle
+        export PATH="~/oracle/instantclient_12_1:$PATH"
+
+        ##### SET THE DYLD_LIBRARY_PATH #####
+        export DYLD_LIBRARY_PATH=~/oracle/instantclient_12_1
+
+
+----
 
 
 FreeTDS (Optional)
