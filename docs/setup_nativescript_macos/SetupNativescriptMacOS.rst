@@ -71,7 +71,7 @@ Do you have Xcode installed (Xcode was installed during the OS Requirements Setu
 
 software license agreements:
 
-:Answer: agree
+:Answer: select 'q' then type 'agree' enter
 
 ----
 
@@ -89,7 +89,7 @@ Allow the script to install Java SE Development Kit?
 
 Allow the script to install Android SDK?
 
-:Answer: Y
+:Answer: N
 
 ----
 
@@ -122,7 +122,7 @@ Check the installation with tns ::
 
 Confirm Environment Variable ANDROID_HOME ::
 
-        /usr/local/Caskroom/android-sdk/3859397,26.0.1
+        /usr/local/opt/android-sdk
 
 ----
 
