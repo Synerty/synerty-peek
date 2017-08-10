@@ -57,8 +57,31 @@ to run the Peek Platform.
 
 The instructions on this page don't install the peek platform, that's done later.
 
-.. note:: Run the commands in this step as the :code:`peek` user.
 
+Create Peek Platform OS User
+----------------------------
+
+Alternatively to creating a :code:`peek` user, if you are developing with peek you 
+might want to Symlink the :code:`/Users/*developerAccount*` to :code:`/Users/peek`.  
+If doing this run: :code:`sudo ln -s /Users/*developerAccount*/ /Users/peek` then 
+skip to the next step :ref:`installing_xcode`.
+
+Create a user account for :code:`peek` with admin rights.
+
+
+----
+
+:Account Type: Administrator
+:Username: peek
+:Password: PA$$W0RD
+
+----
+
+Sign in to the peek account.
+
+.. important:: All steps after this point assume you're logged in as the peek user.
+
+.. _installing_xcode:
 
 Installing Xcode
 ----------------
