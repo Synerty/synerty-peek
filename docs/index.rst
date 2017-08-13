@@ -16,6 +16,7 @@ Peek Platform Documentation
     administer/AdministerPeekPlatform
     setup_nativescript_windows/SetupNativescriptWindows
     setup_nativescript_debian/SetupNativescriptDebian
+    setup_nativescript_macos/SetupNativescriptMacOS
     package_nativescript/PackageNativescriptApp
     deploy_nativescript/DeployNativescriptApp
     develop_plugins/DevelopPeekPlugins
