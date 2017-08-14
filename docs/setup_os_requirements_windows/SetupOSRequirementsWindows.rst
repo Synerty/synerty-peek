@@ -168,6 +168,54 @@ The Wheel package is required for building platform and plugin releases ::
         pip install wheel
 
 
+Install Worker Dependencies
+---------------------------
+
+Install the parallel processing queue we use for the peek-worker tasks.
+
+Download and install Redis:
+
+:Download: https://github.com/MicrosoftArchive/redis/releases/download/win-3.0.504/Redis-x64-3.0.504.msi
+
+----
+
+Download and install Erlang:
+
+:Download: http://erlang.org/download/otp_win64_20.0.exe
+
+----
+
+Download and install RabbitMQ:
+
+:Download: https://github.com/rabbitmq/rabbitmq-server/releases/download/rabbitmq_v3_6_10/rabbitmq-server-3.6.10.exe
+
+----
+
+Under Control Panel -> System -> Advanced system settings
+
+Add the following to PATH in the “System” environment variables ::
+
+        C:\Program Files\RabbitMQ Server\rabbitmq_server-3.6.10\sbin
+
+.. tip:: On Win 10, enter "environment" in the task bar search and select
+            **Edit the system environment variables**
+
+
+----
+
+Enable the RabbitMQ management plugins: ::
+
+        rabbitmq-plugins enable rabbitmq_mqtt
+        rabbitmq-plugins enable rabbitmq_management
+
+
+----
+
+Confirm the RabbitMQ Management Console and the RabbitMQ MQTT Adaptor are listed under the :code:`running applications`: ::
+
+        rabbitmqctl status
+
+
 .. _requirements_windows_postgressql:
 
 PostgresSQL (Optional)

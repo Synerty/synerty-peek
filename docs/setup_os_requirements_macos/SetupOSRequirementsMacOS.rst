@@ -152,7 +152,7 @@ https://dl.bintray.com/xquartz/downloads/XQuartz-2.7.11.dmg
 .. note:: After installing XQuartz you will need to restart terminal.
 
 
-TODO Install Python 3.6
+Install Python 3.6
 ------------------
 
 In terminal run: ::
@@ -161,7 +161,7 @@ In terminal run: ::
 
 ----
 
-Edit **~/.bash_profile** and insert the following after the first block comment.
+Edit :file:`~/.bash_profile` and insert the following after the first block comment.
 
 Make sure these are before any lines like: ::
 
@@ -233,6 +233,51 @@ The Wheel package is required for building platform and plugin releases ::
         sudo pip install wheel
 
 
+Install Worker Dependencies
+---------------------------
+
+Install the parallel processing queue we use for the peek-worker tasks.
+
+Install Redis via fink with the foloowing command: ::
+
+        fink install redis
+
+
+----
+
+Download and unpack RabbitMQ: ::
+
+        cd /Users/peek/
+        curl -O https://github.com/rabbitmq/rabbitmq-server/releases/download/rabbitmq_v3_6_10/rabbitmq-server-mac-standalone-3.6.10.tar.xz
+        fink install xz
+        xz -d rabbitmq-server-mac-standalone-3.6.10.tar.xz
+        tar -xvf rabbitmq-server-mac-standalone-3.6.10.tar
+
+
+----
+
+Edit :file:`~/.bash_profile` and insert the following after the first block comment.
+
+Make sure these are before any lines like: ::
+
+        # If not running interactively, don't do anything
+
+Insert: ::
+
+        ##### SET THE RabbitMQ ENVIRONMENT #####
+        # Set PATH to include RabbitMQ
+        export PATH="/Users/peek/rabbitmq_server-3.6.10/sbin:$PATH"
+
+
+----
+
+Enable the RabbitMQ management plugins: ::
+
+        sudo rabbitmq-plugins enable rabbitmq_mqtt
+        sudo rabbitmq-plugins enable rabbitmq_management
+        sudo rabbitmq-server restart
+
+
 Install PostGreSQL
 ------------------
 
@@ -259,6 +304,13 @@ Update the PostGreSQL unix user auth config: ::
         # IPv6 local connections:
         host    all             all             ::1/128                 md5
         EOF
+
+
+----
+
+Update the postgres user shell: ::
+
+        sudo dscl . -change /users/postgres UserShell /dev/null /bin/sh
 
 
 ----
@@ -315,7 +367,7 @@ Make the directory where the oracle client will live ::
 
 Download the following from oracle.
 
-The version used in these instructions is **12.1.0.2.0**.
+The version used in these instructions is :code:`12.1.0.2.0`.
 
 .. note:: Oracle version 12.2 is not available for macOS.
 
@@ -346,10 +398,11 @@ Create the appropriate libclntsh.dylib link for the version of Instant Client: :
 
 ----
 
-Add links to $HOME/lib or /usr/local/lib to enable applications to find the libraries: ::
+Add links to $HOME/lib to enable applications to find the libraries: ::
 
         mkdir ~/lib
-        ln -s ~/instantclient_12_1/libclntsh.dylib ~/lib/
+        ln -s ~/oracle/instantclient_12_1/libclntsh.dylib ~/lib/
+        export DYLD_LIBRARY_PATH=~/oracle/instantclient_12_1
 
 
 ----
@@ -357,6 +410,27 @@ Add links to $HOME/lib or /usr/local/lib to enable applications to find the libr
 Update PATH: ::
 
         export PATH=~/oracle/instantclient_12_1:$PATH
+
+
+----
+
+Edit :file:`~/.bash_profile` and insert the following after the first block comment.
+
+Make sure these are before any lines like: ::
+
+        # If not running interactively, don't do anything
+
+Insert : ::
+
+        ##### SET THE ORACLE ENVIRONMENT #####
+        # Set PATH to include oracle
+        export PATH="~/oracle/instantclient_12_1:$PATH"
+
+        ##### SET THE DYLD_LIBRARY_PATH #####
+        export DYLD_LIBRARY_PATH=~/oracle/instantclient_12_1
+
+
+----
 
 
 FreeTDS (Optional)
