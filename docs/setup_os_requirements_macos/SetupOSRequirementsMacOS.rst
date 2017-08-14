@@ -447,7 +447,8 @@ Insert : ::
 
         ##### SET THE ORACLE ENVIRONMENT #####
         # Set PATH to include oracle
-        export PATH="~/oracle/instantclient_12_1:$PATH"
+        export PATH=~/oracle/instantclient_12_1:$PATH
+        export ORACLE_HOME=~/oracle/instantclient_12_1
 
         ##### SET THE DYLD_LIBRARY_PATH #####
         export DYLD_LIBRARY_PATH=~/oracle/instantclient_12_1
