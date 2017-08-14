@@ -23,7 +23,10 @@ This install procedure requires software installed by the prerequisites steps.
 Optional  Software
 ``````````````````
 
+*   Android Studio
+
 *   VirtualBox
+
 *   Geny Motion
 
 Required Software
@@ -38,22 +41,109 @@ Below is a list of all the required software:
 Installation Guide
 ------------------
 
-Nativescript Package
-````````````````````
 
-This section installs the following:
-    *   Nativescript command line utility (tns)
-    *   Nativescript build tools
-    *   Android emulator (with no images)
-    *   Android SDK (With no SDKs)
+Android Studio
+``````````````
+
+Android Studio is required if you intend to develop the Android NativeScript app.
+
+:Download: `Android Studio <https://developer.android.com/studio/index.html>`_
 
 ----
 
+Launch the Android Studio DMG file.
+
+----
+
+Drag and drop Android Studio into the Applications folder, then launch Android Studio.
+
+----
+
+Select whether you want to import previous Android Studio settings, then click OK.
+
+----
+
+The Android Studio Setup Wizard guides you though the rest of the setup, which includes downloading Android SDK
+components that are required for development.
+
+----
+
+Installation Type
+
+Select Custom
+
+----
+
+SDK Component Setup
+
+:Check: Performance
+
+.. note:: If you're install inside a virtual machine you'll get the following message during the installation of
+    Android Studio.
+
+    Unable to install Intel HAXM
+    HAXM doesn't support nested virtual machines.
+    Unfortunately, the Android Emulator can't support virtual machine acceleration from within a virtual machine.
+
+
+SDK Manager
+```````````
+
+In the Android Manager Welcome screen open the :code:`Configure` drop down at the bottom of the window and select
+:code:`SDK Manager`
+
+----
+
+Go to the :code:`SDK Tools` tab
+
+----
+
+At the bottom of the window:
+
+:Check: :code:`Show Package Details`
+
+----
+
+In the list:
+
+:check: Android SDK Build-Tools :code:`25.0.3`
+
+----
+
+Close Android Studio
+
+----
+
+Edit :file:`~/.bash_profile` and insert the following after the first block comment.
+
+Make sure these are before any lines like: ::
+
+        # If not running interactively, don't do anything
+
+Insert : ::
+
+        # Set the variables for the android home directory
+        export ANDROID_HOME=/Users/peek/Library/Android/sdk
+
+
+Nativescript Package
+````````````````````
+
 Install the required NPM packages
+
+----
+
+Create android dummy repositories file: ::
+
+        touch ~/.android/repositories.cfg
+
+
+----
 
 Run the following command in terminal: ::
 
-        npm i -g nativescript
+        npm -g install nativescript@latest typescript tslint node-sass
+
 
 ----
 
@@ -105,9 +195,22 @@ Allow the script to install xcodeproj?
 
 ----
 
-Do you want to install Android emulator??
+Do you want to install Android emulator?
 
 :Answer: N
+
+----
+
+Confirm Environment Variables ::
+
+        echo $ANDROID_SDK_ROOT
+
+        # Should be "/Users/peek/Library/Android/sdk"
+
+        echo $JAVA_HOME
+
+        # Should be "/Library/Java/Home"
+
 
 ----
 
@@ -115,20 +218,9 @@ Check the installation with tns ::
 
         tns doctor
 
+
 .. note:: At this point you may find your self in a real life infinite loop.
     as tns doctor may ask you to run the setup script again if the setup is broken.
-
-----
-
-Confirm Environment Variable ANDROID_HOME ::
-
-        /usr/local/opt/android-sdk
-
-----
-
-Confirm Environment Variable JAVA_HOME ::
-
-        /Library/Java/Home
 
 
 Android Emulator Setup
@@ -150,22 +242,36 @@ Install GenyMotion, all default options
 
 ----
 
-Run both GenyMotion and Virtualbox
+Run GenyMotion
 
 ----
 
-In GenyMotion select the add button to create a virtual device
+Create Android device
 
-----
+1.  Select the 'Add' button to create a virtual device
 
-Select a device and select next
+2.  Select a device and select next
 
-----
-
-Update the "Virtual device name" to something shorter (easier to remember and type) and
-select next
+3.  Update the "Virtual device name" to something shorter (easier to remember and type) and
+    select next
 
 Your virtual device will be retrieved and deployed
+
+----
+
+ABD Tool Connection Settings
+
+.. image:: SetupMacOS-genyMotionSettings.jpg
+
+1.  Select 'Settings'
+
+2.  Select the 'ABD' tab
+
+3.  Check the 'Use custom Android SDK tools'
+
+4.  Paste :code:`/Users/peek/Library/Android/sdk`
+
+5.  Confirm the the Android SDK tools are found successfully
 
 ----
 
