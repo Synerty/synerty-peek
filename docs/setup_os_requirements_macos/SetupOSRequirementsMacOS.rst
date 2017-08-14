@@ -29,7 +29,7 @@ Below is a list of all the required software:
 
 *   Oracle JDK
 
-*   Fink
+*   Homebrew
 
 *   Python 3.6.x
 
@@ -117,7 +117,7 @@ Agree to the Xcode license in Terminal run: ::
 
         sudo xcodebuild -license
 
-Scroll to the bottom, type 'Agree' and hit 'Enter'
+Type q then type 'Agree' and hit 'Enter'
 
 
 Install an Oracle JDK
@@ -128,40 +128,12 @@ Download the macOS disk image:
 http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
 
 
-Install Fink
-------------
+Homebrew
+--------
 
-Download the Fink Source Release
+To install Homebrew, run the following command in terminal: ::
 
-http://downloads.sourceforge.net/fink/fink-0.41.1.tar.gz
-
-----
-
-In the terminal prompt run: ::
-
-        sudo xcode-select -switch /Applications/Xcode.app/Contents/Developer
-        cd $HOME/Downloads
-        tar -xvf fink-0.41.1.tar.gz
-        cd fink-0.41.1
-        ./bootstrap
-
-
-Select defaults
-
-----
-
-After installation is completed, run the following command in the terminal: ::
-
-        /sw/bin/pathsetup.sh
-
-
-----
-
-Download package description files and patches, 
-in a new terminal run the following commands: ::
-
-        fink selfupdate-rsync
-        fink index -f
+        /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
 
 Install XQuartz
@@ -180,7 +152,18 @@ Install Python 3.6
 
 In terminal run: ::
 
-        fink install python36
+        brew install python3
+
+
+----
+
+Symlink the python3 commands so they are the only ones picked up by path. ::
+
+        cd /usr/local/Cellar/python3/3.6.2/bin/
+        ln -s python3 python
+        ln -s pip3 pip
+        ln -s wheel3 wheel
+
 
 ----
 
@@ -192,9 +175,9 @@ Make sure these are before any lines like: ::
 
 Insert : ::
 
-        ##### SET THE FINK ENVIRONMENT #####
-        # Set PATH to include fink
-        export PATH="/sw/bin:$PATH"
+        #### SET THE HOMEBREW PYTHON ENVIRONMENT ####
+        # Set PATH to include python
+        export PATH=/usr/local/Cellar/python3/3.6.2/bin:$PATH
 
         ##### SET THE PEEK ENVIRONMENT #####
         # Setup the variables for PYTHON
@@ -208,36 +191,15 @@ Insert : ::
 
 ----
 
-Close and re-open the terminal.
+Open a new terminal and test that the setup is working ::
 
-----
+        which python && echo "/usr/local/Cellar/python3/3.6.2/bin/python"
 
-Symlink the python3 commands so they are the only ones picked up by path. ::
+        python --version && echo "Python 3.6.2"
 
-        cd /sw/bin/
-        sudo ln -s python3.6 python
+        which pip && echo "/usr/local/Cellar/python3/3.6.2/bin/pip"
 
-----
-
-In terminal run: ::
-
-        fink install pip-py36
-
-----
-
-Test that the setup is working ::
-
-        which python
-        echo "It should be /sw/bin/python"
-        
-        python --version
-        echo "It should be Python 3.6.2"
-
-        which pip
-        echo "It should be /sw/bin/pip"
-
-        pip --version
-        echo "It should be pip 9.0.1 from /sw/lib/python3.6/site-packages (python 3.6)"
+        pip --version && echo "pip 9.0.1 from /usr/local/lib/python3.6/site-packages (python 3.6)"
 
 
 ----
@@ -246,14 +208,7 @@ synerty-peek is deployed into python virtual environments.
 
 Install the virtualenv python package ::
 
-        sudo pip install virtualenv
-
-
-----
-
-The Wheel package is required for building platform and plugin releases ::
-
-        sudo pip install wheel
+        pip install virtualenv
 
 
 Install Worker Dependencies
@@ -261,20 +216,28 @@ Install Worker Dependencies
 
 Install the parallel processing queue we use for the peek-worker tasks.
 
-Install Redis via fink with the foloowing command: ::
 
-        fink install redis
+Redis
+`````
+
+Install Redis via Homebrew with the following command: ::
+
+        brew install redis
 
 
 ----
 
-Download and unpack RabbitMQ: ::
+Open new terminal and test that Redis setup is working ::
 
-        cd /Users/peek/
-        curl -O https://github.com/rabbitmq/rabbitmq-server/releases/download/rabbitmq_v3_6_10/rabbitmq-server-mac-standalone-3.6.10.tar.xz
-        fink install xz
-        xz -d rabbitmq-server-mac-standalone-3.6.10.tar.xz
-        tar -xvf rabbitmq-server-mac-standalone-3.6.10.tar
+        which redis-server && echo "/usr/local/bin/redis-server"
+
+
+RabbitMQ
+````````
+
+Install RabbitMQ via Homebrew with the following command: ::
+
+        brew install rabbitmq
 
 
 ----
@@ -289,16 +252,23 @@ Insert: ::
 
         ##### SET THE RabbitMQ ENVIRONMENT #####
         # Set PATH to include RabbitMQ
-        export PATH="/Users/peek/rabbitmq_server-3.6.10/sbin:$PATH"
+        export PATH=/usr/local/sbin:$PATH
+
+
+----
+
+Open new terminal and test that RabbitMQ setup is working ::
+
+        which rabbitmq-server && echo "/usr/local/sbin/rabbitmq-server
 
 
 ----
 
 Enable the RabbitMQ management plugins: ::
 
-        sudo rabbitmq-plugins enable rabbitmq_mqtt
-        sudo rabbitmq-plugins enable rabbitmq_management
-        sudo rabbitmq-server restart
+        rabbitmq-server -detached
+        rabbitmq-plugins enable rabbitmq_mqtt
+        rabbitmq-plugins enable rabbitmq_management
 
 
 Install PostGreSQL
@@ -308,14 +278,21 @@ Install the relational database we use on macOS.
 
 In terminal run: ::
 
-        fink install postgresql96 postgis95
+        brew install postgresql
+
+
+----
+
+have launchd start postgresql now and restart at login: ::
+
+        brew services start postgresql
 
 
 ----
 
 Update the PostGreSQL unix user auth config: ::
 
-        F=/sw/var/postgresql-9.6/data/pg_hba.conf
+        F=/usr/local/var/postgres/pg_hba.conf
         cat | sudo tee $F <<EOF
         # TYPE  DATABASE        USER            ADDRESS                 METHOD
         local   all             postgres                                peer
@@ -327,26 +304,6 @@ Update the PostGreSQL unix user auth config: ::
         # IPv6 local connections:
         host    all             all             ::1/128                 md5
         EOF
-
-
-----
-
-Update the postgres user shell: ::
-
-        sudo dscl . -change /users/postgres UserShell /dev/null /bin/sh
-
-
-----
-
-Create the peek SQL user: ::
-
-        sudo su - postgres
-
-        /sw/bin/pg_ctl start -D /sw/var/postgresql-9.6/data/
-        /sw/bin/pg_ctl reload -D /sw/var/postgresql-9.6/data/
-
-        /sw/bin/createuser -d -r -s peek
-        exit # Exit postgres user
 
 
 ----
@@ -405,7 +362,7 @@ Copy these files to :file:`~/oracle` on the peek server.
 ----
 
 Extract the files. ::
-        
+
         cd ~/oracle
         unzip instantclient-basic-macos.x64-12.1.0.2.0.zip
         unzip instantclient-sdk-macos.x64-12.1.0.2.0.zip
@@ -425,14 +382,6 @@ Add links to $HOME/lib to enable applications to find the libraries: ::
 
         mkdir ~/lib
         ln -s ~/oracle/instantclient_12_1/libclntsh.dylib ~/lib/
-        export DYLD_LIBRARY_PATH=~/oracle/instantclient_12_1
-
-
-----
-
-Update PATH: ::
-
-        export PATH=~/oracle/instantclient_12_1:$PATH
 
 
 ----
@@ -468,11 +417,9 @@ which depends on FreeTDS.
 
 ----
 
-Install FreeTDS:
+Install FreeTDS via Homebrew: ::
 
-::
-
-        fink install freetds freetds-common freetds-dev
+        brew install freetds
 
 
 ----
@@ -484,17 +431,20 @@ Confirm the installation ::
 You should see something similar to: ::
 
         Compile-time settings (established with the "configure" script)
-                                       Version: freetds v0.91
-                        freetds.conf directory: /sw/etc/freetds
-                MS db-lib source compatibility: no
-                   Sybase binary compatibility: yes
-                                 Thread safety: yes
-                                 iconv library: yes
-                                   TDS version: 4.2
-                                         iODBC: no
-                                      unixodbc: yes
-                         SSPI "trusted" logins: no
-                                      Kerberos: no
+                                    Version: freetds v1.00.54
+                     freetds.conf directory: /usr/local/Cellar/freetds/1.00.54/etc
+             MS db-lib source compatibility: no
+                Sybase binary compatibility: no
+                              Thread safety: yes
+                              iconv library: yes
+                                TDS version: 7.3
+                                      iODBC: no
+                                   unixodbc: no
+                      SSPI "trusted" logins: no
+                                   Kerberos: no
+                                    OpenSSL: yes
+                                     GnuTLS: no
+                                       MARS: no
 
 
 What Next?
