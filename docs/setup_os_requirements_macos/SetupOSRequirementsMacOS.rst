@@ -105,7 +105,7 @@ Run Terminal
 Apple's Command Line Developer Tools can be installed on recent OS versions by 
 running this command in the Terminal: ::
 
-        sudo xcode-select --install
+        xcode-select --install
 
 ----
 
@@ -117,7 +117,7 @@ Agree to the Xcode license in Terminal run: ::
 
         sudo xcodebuild -license
 
-Type q then type 'Agree' and hit 'Enter'
+Type :code:`q`, type :code:`agree` and hit 'Enter'
 
 
 Install an Oracle JDK
@@ -177,7 +177,7 @@ Insert : ::
 
         #### SET THE HOMEBREW PYTHON ENVIRONMENT ####
         # Set PATH to include python
-        export PATH=/usr/local/Cellar/python3/3.6.2/bin:$PATH
+        export PATH="/usr/local/Cellar/python3/3.6.2/bin:$PATH"
 
         ##### SET THE PEEK ENVIRONMENT #####
         # Setup the variables for PYTHON
@@ -238,6 +238,12 @@ RabbitMQ
 Install RabbitMQ via Homebrew with the following command: ::
 
         brew install rabbitmq
+
+
+----
+
+Have launchd start rabbitmq now and start at login: ::
+
         brew services start rabbitmq
 
 
@@ -253,14 +259,14 @@ Insert: ::
 
         ##### SET THE RabbitMQ ENVIRONMENT #####
         # Set PATH to include RabbitMQ
-        export PATH=/usr/local/sbin:$PATH
+        export PATH="/usr/local/sbin:$PATH"
 
 
 ----
 
 Open new terminal and test that RabbitMQ setup is working ::
 
-        which rabbitmq-server && echo "/usr/local/sbin/rabbitmq-server
+        which rabbitmq-server && echo "/usr/local/sbin/rabbitmq-server"
 
 
 ----
@@ -283,7 +289,7 @@ In terminal run: ::
 
 ----
 
-have launchd start postgresql now and restart at login: ::
+Have launchd start postgresql now and start at login: ::
 
         brew services start postgresql
 
@@ -396,11 +402,11 @@ Insert : ::
 
         ##### SET THE ORACLE ENVIRONMENT #####
         # Set PATH to include oracle
-        export PATH=~/oracle/instantclient_12_1:$PATH
-        export ORACLE_HOME=~/oracle/instantclient_12_1
+        export PATH="~/oracle/instantclient_12_1:$PATH"
+        export ORACLE_HOME="~/oracle/instantclient_12_1"
 
         ##### SET THE DYLD_LIBRARY_PATH #####
-        export DYLD_LIBRARY_PATH=~/oracle/instantclient_12_1
+        export DYLD_LIBRARY_PATH="~/oracle/instantclient_12_1"
 
 
 ----
