@@ -238,6 +238,7 @@ RabbitMQ
 Install RabbitMQ via Homebrew with the following command: ::
 
         brew install rabbitmq
+        brew services start rabbitmq
 
 
 ----
@@ -266,7 +267,6 @@ Open new terminal and test that RabbitMQ setup is working ::
 
 Enable the RabbitMQ management plugins: ::
 
-        rabbitmq-server -detached
         rabbitmq-plugins enable rabbitmq_mqtt
         rabbitmq-plugins enable rabbitmq_management
 
@@ -419,7 +419,23 @@ which depends on FreeTDS.
 
 Install FreeTDS via Homebrew: ::
 
-        brew install freetds
+        brew install freetds@0.91
+        brew link --force freetds@0.91
+
+
+----
+
+Edit :file:`~/.bash_profile` and insert the following after the first block comment.
+
+Make sure these are before any lines like: ::
+
+        # If not running interactively, don't do anything
+
+Insert : ::
+
+        ##### SET THE FINK ENVIRONMENT #####
+        # Set PATH to include fink
+        export PATH="/usr/local/opt/freetds@0.91/bin:$PATH"
 
 
 ----
@@ -431,20 +447,17 @@ Confirm the installation ::
 You should see something similar to: ::
 
         Compile-time settings (established with the "configure" script)
-                                    Version: freetds v1.00.54
-                     freetds.conf directory: /usr/local/Cellar/freetds/1.00.54/etc
+                                    Version: freetds v0.91.112
+                     freetds.conf directory: /usr/local/Cellar/freetds@0.91/0.91.112/etc
              MS db-lib source compatibility: no
                 Sybase binary compatibility: no
                               Thread safety: yes
                               iconv library: yes
-                                TDS version: 7.3
+                                TDS version: 7.1
                                       iODBC: no
                                    unixodbc: no
                       SSPI "trusted" logins: no
                                    Kerberos: no
-                                    OpenSSL: yes
-                                     GnuTLS: no
-                                       MARS: no
 
 
 What Next?
