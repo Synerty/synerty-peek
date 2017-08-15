@@ -238,6 +238,7 @@ RabbitMQ
 Install RabbitMQ via Homebrew with the following command: ::
 
         brew install rabbitmq
+        brew services start rabbitmq
 
 
 ----
@@ -266,7 +267,6 @@ Open new terminal and test that RabbitMQ setup is working ::
 
 Enable the RabbitMQ management plugins: ::
 
-        rabbitmq-server -detached
         rabbitmq-plugins enable rabbitmq_mqtt
         rabbitmq-plugins enable rabbitmq_management
 
