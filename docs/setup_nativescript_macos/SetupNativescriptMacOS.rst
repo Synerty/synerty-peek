@@ -110,20 +110,11 @@ In the list:
 
 ----
 
-Close Android Studio
+Select 'ok' and confirm the install
 
 ----
 
-Edit :file:`~/.bash_profile` and insert the following after the first block comment.
-
-Make sure these are before any lines like: ::
-
-        # If not running interactively, don't do anything
-
-Insert : ::
-
-        # Set the variables for the android home directory
-        export ANDROID_HOME=/Users/peek/Library/Android/sdk
+Close Android Studio
 
 
 Nativescript Package
@@ -140,7 +131,29 @@ Create android dummy repositories file: ::
 
 ----
 
-Run the following command in terminal: ::
+Create symlinks for NativeScript install: ::
+
+        ln -s /Users/peek/Library/Android/sdk /usr/local/opt/android-sdk
+        sudo ln -s /Library/Java/JavaVirtualMachines/jdk1.8.0_144.jdk/Contents/Home /Library/Java/Home
+
+
+----
+
+Edit :file:`~/.bash_profile` and insert the following after the first block comment.
+
+Make sure these are before any lines like: ::
+
+        # If not running interactively, don't do anything
+
+Insert : ::
+
+        ##### SET THE ANDROID ENVIRONMENT #####
+        export ANDROID_HOME="/Users/peek/Library/Android/sdk"
+
+
+----
+
+Run the following command in a new terminal: ::
 
         npm -g install nativescript@latest typescript tslint node-sass
 
@@ -161,19 +174,19 @@ Do you have Xcode installed (Xcode was installed during the OS Requirements Setu
 
 software license agreements:
 
-:Answer: select 'q' then type 'agree' enter
+:Answer: Type :code:`q`, :code:`agree` and hit 'enter'
 
 ----
 
 Allow the script to install Homebrew?
 
-:Answer: Y
+:Answer: N
 
 ----
 
 Allow the script to install Java SE Development Kit?
 
-:Answer: Y
+:Answer: N
 
 ----
 
@@ -201,20 +214,7 @@ Do you want to install Android emulator?
 
 ----
 
-Confirm Environment Variables ::
-
-        echo $ANDROID_SDK_ROOT
-
-        # Should be "/Users/peek/Library/Android/sdk"
-
-        echo $JAVA_HOME
-
-        # Should be "/Library/Java/Home"
-
-
-----
-
-Check the installation with tns ::
+Check the installation with tns in a new terminal: ::
 
         tns doctor
 
