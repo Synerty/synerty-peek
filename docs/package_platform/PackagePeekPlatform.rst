@@ -41,7 +41,7 @@ Run the following commands in the power shell window.
 ::
 
     $file = "package_platform_win.ps1";
-    $uri = "https://bitbucket.org/synerty/synerty-peek/scripts/win/raw/master/$file";
+    $uri = "https://bitbucket.org/synerty/synerty-peek/raw/78e74de72071d82d9b29b0d4726ad336dc855c17/scripts/win/$file";
     Invoke-WebRequest -Uri $uri -UseBasicParsing -OutFile $file;
 
 ----
@@ -50,7 +50,7 @@ Run the platform build script.
 
 ::
 
-    PowerShell.exe -ExecutionPolicy Bypass -File package_platform_win.ps1
+    PowerShell.exe -ExecutionPolicy Bypass -File $file
 
 The script will download the latest peek platform release and all its dependencies.
 
@@ -68,7 +68,7 @@ Run the following commands in the power shell window.
 ::
 
         file="package_platform_deb8.sh";
-        uri="https://bitbucket.org/synerty/synerty-peek/scripts/deb8/raw/master/$file";
+        uri="https://bitbucket.org/synerty/synerty-peek/raw/78e74de72071d82d9b29b0d4726ad336dc855c17/scripts/deb8/$file";
         wget $uri
 
 
@@ -78,7 +78,7 @@ Run the platform build script.
 
 ::
 
-       bash package_platform_deb8.sh
+       bash $file
 
 The script will download the latest peek platform release and all its dependencies.
 
@@ -96,7 +96,7 @@ Run the following commands in the power shell window.
 ::
 
         file="package_platform_macos.sh";
-        uri="https://bitbucket.org/synerty/synerty-peek/scripts/macos/raw/master/$file";
+        uri="https://bitbucket.org/synerty/synerty-peek/raw/78e74de72071d82d9b29b0d4726ad336dc855c17/scripts/macos/$file";
         curl -O $uri
 
 
@@ -106,7 +106,7 @@ Run the platform build script.
 
 ::
 
-       bash package_platform_macos.sh
+       bash $file
 
 The script will download the latest peek platform release and all its dependencies.
 

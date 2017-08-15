@@ -33,7 +33,7 @@ This is the only step in this section that requires the internet.
 ::
 
         $file = "deploy_platform_win.ps1"
-        $uri = "https://bitbucket.org/synerty/synerty-peek/scripts/win/raw/master/$file";
+        $uri = "https://bitbucket.org/synerty/synerty-peek/raw/e521e5ef030e3fc572cc0b42e8cbf697f8768e19/scripts/win/$file";
         Invoke-WebRequest -Uri $uri -UseBasicParsing -OutFile $file;
 
 ----
@@ -54,7 +54,7 @@ The script will deploy to :file:`C:\\Users\\peek`.
 ::
 
         $dist = "C:\Users\peek\Downloads\peek_dist_win_#.#.#.zip"
-        PowerShell.exe -ExecutionPolicy Bypass -File deploy_platform_win.ps1 $dist
+        PowerShell.exe -ExecutionPolicy Bypass -File $file $dist
 
 ----
 
@@ -90,7 +90,7 @@ Download the platform deploy script.
 
 ::
 
-        uri="https://bitbucket.org/synerty/synerty-peek/scripts/deb8/raw/master/deploy_platform_deb8.sh"
+        uri="https://bitbucket.org/synerty/synerty-peek/raw/e521e5ef030e3fc572cc0b42e8cbf697f8768e19/scripts/deb8/deploy_platform_deb8.sh"
         wget $uri
 
 ----
@@ -139,8 +139,8 @@ Download the platform deploy script.
 
 
 ::
-
-        uri="https://bitbucket.org/synerty/synerty-peek/scripts/macos/raw/master/deploy_platform_macos.sh"
+        file="deploy_platform_macos.sh"
+        uri="https://bitbucket.org/synerty/synerty-peek/raw/78e74de72071d82d9b29b0d4726ad336dc855c17/scripts/macos/$file"
         curl -O $uri
 
 
@@ -156,7 +156,7 @@ The script will deploy to :file:`/Users/peek/`.
 ::
 
         dist="/Users/peek/Downloads/peek_dist_macos_#.#.#.tar.bz2"
-        bash deploy_platform_macos.sh $dist
+        bash $file $dist
 
 
 ----
