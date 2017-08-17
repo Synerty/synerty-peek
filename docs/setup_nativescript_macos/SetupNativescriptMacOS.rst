@@ -223,10 +223,15 @@ Check the installation with tns in a new terminal: ::
     as tns doctor may ask you to run the setup script again if the setup is broken.
 
 
+.. _android_emulator_setup:
+
 Android Emulator Setup
 ----------------------
 
 You can use any emulator.  Synerty has written instructions for GenyMotion.
+
+.. warning:: If you've setup your development console in a VM, you'll need to install the Android emulator on the host
+    machine.  Skip to these instructions: :ref:`android_emulator_setup_for_vm`.
 
 ----
 
@@ -278,6 +283,60 @@ ABD Tool Connection Settings
 With a device selected in the "Your virtual devices" list select the "Start" button
 
 Your device emulation will start in a new window
+
+In a terminal run :code:`tns device` to check tns can find your device.
+
+
+.. _android_emulator_setup_for_vm:
+
+Android Emulator Setup for VM
+-----------------------------
+
+If you've setup your development console in a VM, you'll need to install the Android emulator on the **HOST MACHINE**.
+
+Follow the :ref:`android_emulator_setup` instructions on the host machine then continue the following these
+instructions.
+
+.. warning:: If you are **NOT** using a VM these instructions are not required.
+
+----
+
+Go to the **HOST MACHINE**.
+
+With your emulator device started, run the following commands in terminal: ::
+
+        adb shell ifconfig
+        adb tcpip 5556
+
+
+----
+
+Go to the **VM** and run the following commands in terminal.
+
+Install Android Platform Tools: ::
+
+        brew cask install android-platform-tools
+
+
+----
+
+Connect to your genyMotion device: ::
+
+        adb connect <ip_of_genymotion>:5556
+
+
+----
+
+List attached devices: ::
+
+        adb devices
+
+
+----
+
+Change to the :code:`build_ns` directory, check that tns can find the device: ::
+
+        tns devices
 
 
 What Next?
