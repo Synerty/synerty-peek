@@ -3,6 +3,8 @@ param([String]$wantedVer)
 # Make Powershell stop if it has errors
 $ErrorActionPreference = "Stop"
 
+$7zExe="C:\Program Files\7-Zip\7z.exe";
+
 if (-Not [string]::IsNullOrEmpty($wantedVer)) {
     Write-Host "Requested version is $wantedVer"
 }
