@@ -33,7 +33,7 @@ This is the only step in this section that requires the internet.
 ::
 
         $file = "deploy_platform_win.ps1"
-        $uri = "https://bitbucket.org/synerty/synerty-peek/raw/e521e5ef030e3fc572cc0b42e8cbf697f8768e19/scripts/win/$file";
+        $uri = "https://bitbucket.org/synerty/synerty-peek/raw/master/scripts/win/$file";
         Invoke-WebRequest -Uri $uri -UseBasicParsing -OutFile $file;
 
 ----
@@ -90,7 +90,7 @@ Download the platform deploy script.
 
 ::
 
-        uri="https://bitbucket.org/synerty/synerty-peek/raw/e521e5ef030e3fc572cc0b42e8cbf697f8768e19/scripts/deb8/deploy_platform_deb8.sh"
+        uri="https://bitbucket.org/synerty/synerty-peek/raw/master/scripts/deb8/deploy_platform_deb8.sh"
         wget $uri
 
 ----
@@ -139,8 +139,9 @@ Download the platform deploy script.
 
 
 ::
+
         file="deploy_platform_macos.sh"
-        uri="https://bitbucket.org/synerty/synerty-peek/raw/78e74de72071d82d9b29b0d4726ad336dc855c17/scripts/macos/$file"
+        uri="https://bitbucket.org/synerty/synerty-peek/raw/master/scripts/macos/$file"
         curl -O $uri
 
 
