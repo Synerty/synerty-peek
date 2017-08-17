@@ -41,7 +41,7 @@ Run the following commands in the power shell window.
 ::
 
     $file = "package_platform_win.ps1";
-    $uri = "https://bitbucket.org/synerty/synerty-peek/raw/78e74de72071d82d9b29b0d4726ad336dc855c17/scripts/win/$file";
+    $uri = "https://bitbucket.org/synerty/synerty-peek/raw/master/scripts/win/$file";
     Invoke-WebRequest -Uri $uri -UseBasicParsing -OutFile $file;
 
 ----
@@ -68,7 +68,7 @@ Run the following commands in the power shell window.
 ::
 
         file="package_platform_deb8.sh";
-        uri="https://bitbucket.org/synerty/synerty-peek/raw/78e74de72071d82d9b29b0d4726ad336dc855c17/scripts/deb8/$file";
+        uri="https://bitbucket.org/synerty/synerty-peek/raw/master/scripts/deb8/$file";
         wget $uri
 
 
@@ -96,7 +96,7 @@ Run the following commands in the power shell window.
 ::
 
         file="package_platform_macos.sh";
-        uri="https://bitbucket.org/synerty/synerty-peek/raw/78e74de72071d82d9b29b0d4726ad336dc855c17/scripts/macos/$file";
+        uri="https://bitbucket.org/synerty/synerty-peek/raw/master/scripts/macos/$file";
         curl -O $uri
 
 
