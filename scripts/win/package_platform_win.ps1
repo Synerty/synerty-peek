@@ -84,9 +84,17 @@ $nodeFile = "node.zip";
 Invoke-WebRequest -Uri $nodeUrl -UseBasicParsing -OutFile $nodeFile;
 
 # Unzip it
-Write-Host "Using standard windows zip handler, this will be slow";
-Add-Type -Assembly System.IO.Compression.FileSystem;
-[System.IO.Compression.ZipFile]::ExtractToDirectory("$baseDir\$nodeFile", $baseDir);
+
+
+if (Test-Path $7zExe) {
+    Write-Host "7z is present, this will be faster";
+    Invoke-Expression "&`"$7zExe`" x -y -r `"$baseDir\$nodeFile`" -o`"$baseDir`"";
+
+} else {
+    Write-Host "Using standard windows zip handler, this will be slow";
+    Add-Type -Assembly System.IO.Compression.FileSystem;
+    [System.IO.Compression.ZipFile]::ExtractToDirectory("$baseDir\$nodeFile", $baseDir);
+}
 
 # Remove the downloaded file
 Remove-Item "$baseDir\$nodeFile" -Force -Recurse;
