@@ -339,6 +339,20 @@ Change to the :code:`build_ns` directory, check that tns can find the device: ::
         tns devices
 
 
+Change Open File Limit on macOS
+-------------------------------
+
+macOS has a low limit on the maximum number of open files.  This becomes an issue when running node applications.
+
+Run the following commands in terminal: ::
+
+        echo kern.maxfiles=65536 | sudo tee -a /etc/sysctl.conf
+        echo kern.maxfilesperproc=65536 | sudo tee -a /etc/sysctl.conf
+        sudo sysctl -w kern.maxfiles=65536
+        sudo sysctl -w kern.maxfilesperproc=65536
+        ulimit -n 65536 65536
+
+
 What Next?
 ----------
 
