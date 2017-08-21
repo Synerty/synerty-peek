@@ -193,13 +193,21 @@ Insert : ::
 
 Open a new terminal and test that the setup is working ::
 
-        which python && echo "/usr/local/Cellar/python3/3.6.2/bin/python"
+        which python 
+        
+        echo "It should be /usr/local/Cellar/python3/3.6.2/bin/python"
 
-        python --version && echo "Python 3.6.2"
+        python --version 
+        
+        echo "It should be Python 3.6.2"
 
-        which pip && echo "/usr/local/Cellar/python3/3.6.2/bin/pip"
+        which pip 
+        
+        echo "It should be /usr/local/Cellar/python3/3.6.2/bin/pip"
 
-        pip --version && echo "pip 9.0.1 from /usr/local/lib/python3.6/site-packages (python 3.6)"
+        pip --version 
+        
+        echo "It should be pip 9.0.1 from /usr/local/lib/python3.6/site-packages (python 3.6)"
 
 
 ----
@@ -229,7 +237,9 @@ Install Redis via Homebrew with the following command: ::
 
 Open new terminal and test that Redis setup is working ::
 
-        which redis-server && echo "/usr/local/bin/redis-server"
+        which redis-server 
+        
+        echo "It should be /usr/local/bin/redis-server"
 
 
 RabbitMQ
@@ -242,7 +252,7 @@ Install RabbitMQ via Homebrew with the following command: ::
 
 ----
 
-Have launchd start rabbitmq now and start at login: ::
+Start rabbitmq and create start at login launchd service: ::
 
         brew services start rabbitmq
 
@@ -266,7 +276,9 @@ Insert: ::
 
 Open new terminal and test that RabbitMQ setup is working ::
 
-        which rabbitmq-server && echo "/usr/local/sbin/rabbitmq-server"
+        which rabbitmq-server 
+        
+        echo "It should be /usr/local/sbin/rabbitmq-server"
 
 
 ----
@@ -289,7 +301,7 @@ In terminal run: ::
 
 ----
 
-Have launchd start postgresql now and start at login: ::
+Start postgresql and create start at login launchd service: ::
 
         brew services start postgresql
 
