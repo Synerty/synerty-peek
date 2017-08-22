@@ -70,7 +70,7 @@ components that are required for development.
 
 Installation Type
 
-Select Custom
+:Select: Custom
 
 ----
 
@@ -214,7 +214,7 @@ Do you want to install Android emulator?
 
 ----
 
-Check the installation with tns in a new terminal: ::
+Check the installation with :code:`tns` in a new terminal: ::
 
         tns doctor
 
