@@ -107,6 +107,7 @@ running this command in the Terminal: ::
 
         xcode-select --install
 
+
 ----
 
 A popup will appear, select 'Install' then 'Agree' to the license.
@@ -116,6 +117,7 @@ A popup will appear, select 'Install' then 'Agree' to the license.
 Agree to the Xcode license in Terminal run: ::
 
         sudo xcodebuild -license
+
 
 Type :code:`q`, type :code:`agree` and hit 'Enter'
 
@@ -167,13 +169,7 @@ Symlink the python3 commands so they are the only ones picked up by path. ::
 
 ----
 
-Edit :file:`~/.bash_profile` and insert the following after the first block comment.
-
-Make sure these are before any lines like: ::
-
-        # If not running interactively, don't do anything
-
-Insert : ::
+Edit :file:`~/.bash_profile` and insert the following: ::
 
         #### SET THE HOMEBREW PYTHON ENVIRONMENT ####
         # Set PATH to include python
@@ -259,13 +255,7 @@ Start rabbitmq and create start at login launchd service: ::
 
 ----
 
-Edit :file:`~/.bash_profile` and insert the following after the first block comment.
-
-Make sure these are before any lines like: ::
-
-        # If not running interactively, don't do anything
-
-Insert: ::
+Edit :file:`~/.bash_profile` and insert the following: ::
 
         ##### SET THE RabbitMQ ENVIRONMENT #####
         # Set PATH to include RabbitMQ
@@ -404,13 +394,7 @@ Add links to $HOME/lib to enable applications to find the libraries: ::
 
 ----
 
-Edit :file:`~/.bash_profile` and insert the following after the first block comment.
-
-Make sure these are before any lines like: ::
-
-        # If not running interactively, don't do anything
-
-Insert : ::
+Edit :file:`~/.bash_profile` and insert the following: ::
 
         ##### SET THE ORACLE ENVIRONMENT #####
         # Set PATH to include oracle
@@ -419,9 +403,6 @@ Insert : ::
 
         ##### SET THE DYLD_LIBRARY_PATH #####
         export DYLD_LIBRARY_PATH="~/oracle/instantclient_12_1"
-
-
-----
 
 
 FreeTDS (Optional)
@@ -443,13 +424,7 @@ Install FreeTDS via Homebrew: ::
 
 ----
 
-Edit :file:`~/.bash_profile` and insert the following after the first block comment.
-
-Make sure these are before any lines like: ::
-
-        # If not running interactively, don't do anything
-
-Insert : ::
+Edit :file:`~/.bash_profile` and insert the following: ::
 
         ##### SET THE FINK ENVIRONMENT #####
         # Set PATH to include fink
@@ -491,19 +466,17 @@ Run the following commands in terminal: ::
         sudo sysctl -w kern.maxfilesperproc=65536
 
 
-
 ----
 
-Edit :file:`~/.bash_profile` and insert the following after the first block comment.
-
-Make sure these are before any lines like: ::
-
-        # If not running interactively, don't do anything
-
-Insert : ::
+Edit :file:`~/.bash_profile` and insert the following: ::
 
         ##### Open File Limit #####
         ulimit -n 65536 65536
+
+
+----
+
+Restart the terminal
 
 
 What Next?
