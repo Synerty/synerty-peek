@@ -386,7 +386,7 @@ Give Peek sudo privielges with the following command: ::
 
 ----
 
-You can now logout from the root console.
+You must now logout from the root console.
 
 Login as Peek
 -------------
@@ -531,7 +531,7 @@ Mount and unzip the tools ::
 Install the tools with the default options ::
 
         cd /tmp/vmware-tools-distrib
-        ./vmware-install.pl -d
+        sudo ./vmware-install.pl -f -d
 
 ----
 
@@ -566,7 +566,7 @@ Insert : ::
 
         ##### SET THE PEEK ENVIRONMENT #####
         # Setup the variables for PYTHON
-        export PEEK_PY_VER="3.6.1"
+        export PEEK_PY_VER="3.6.2"
         export PATH="/home/peek/cpython-${PEEK_PY_VER}/bin:$PATH"
 
         # Set the variables for the platform release
@@ -579,7 +579,7 @@ Insert : ::
 Download and unarchive the supported version of Python ::
 
         cd ~
-        PEEK_PY_VER="3.6.1"
+        PEEK_PY_VER="3.6.2"
         wget "https://www.python.org/ftp/python/${PEEK_PY_VER}/Python-${PEEK_PY_VER}.tgz"
         tar xzf Python-${PEEK_PY_VER}.tgz
 
@@ -616,10 +616,10 @@ Symlink the python3 commands so they are the only ones picked up by path. ::
 Test that the setup is working ::
 
         which python
-        echo "It should be /home/peek/cpython-3.6.1/bin/python"
+        echo "It should be /home/peek/cpython-3.6.2/bin/python"
 
         which pip
-        echo "It should be /home/peek/cpython-3.6.1/bin/pip"
+        echo "It should be /home/peek/cpython-3.6.2/bin/pip"
 
 ----
 
