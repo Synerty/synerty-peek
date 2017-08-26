@@ -107,6 +107,7 @@ running this command in the Terminal: ::
 
         xcode-select --install
 
+
 ----
 
 A popup will appear, select 'Install' then 'Agree' to the license.
@@ -116,6 +117,7 @@ A popup will appear, select 'Install' then 'Agree' to the license.
 Agree to the Xcode license in Terminal run: ::
 
         sudo xcodebuild -license
+
 
 Type :code:`q`, type :code:`agree` and hit 'Enter'
 
@@ -167,13 +169,7 @@ Symlink the python3 commands so they are the only ones picked up by path. ::
 
 ----
 
-Edit :file:`~/.bash_profile` and insert the following after the first block comment.
-
-Make sure these are before any lines like: ::
-
-        # If not running interactively, don't do anything
-
-Insert : ::
+Edit :file:`~/.bash_profile` and insert the following: ::
 
         #### SET THE HOMEBREW PYTHON ENVIRONMENT ####
         # Set PATH to include python
@@ -193,13 +189,21 @@ Insert : ::
 
 Open a new terminal and test that the setup is working ::
 
-        which python && echo "/usr/local/Cellar/python3/3.6.2/bin/python"
+        which python 
+        
+        echo "It should be /usr/local/Cellar/python3/3.6.2/bin/python"
 
-        python --version && echo "Python 3.6.2"
+        python --version 
+        
+        echo "It should be Python 3.6.2"
 
-        which pip && echo "/usr/local/Cellar/python3/3.6.2/bin/pip"
+        which pip 
+        
+        echo "It should be /usr/local/Cellar/python3/3.6.2/bin/pip"
 
-        pip --version && echo "pip 9.0.1 from /usr/local/lib/python3.6/site-packages (python 3.6)"
+        pip --version 
+        
+        echo "It should be pip 9.0.1 from /usr/local/lib/python3.6/site-packages (python 3.6)"
 
 
 ----
@@ -229,7 +233,9 @@ Install Redis via Homebrew with the following command: ::
 
 Open new terminal and test that Redis setup is working ::
 
-        which redis-server && echo "/usr/local/bin/redis-server"
+        which redis-server 
+        
+        echo "It should be /usr/local/bin/redis-server"
 
 
 RabbitMQ
@@ -242,20 +248,14 @@ Install RabbitMQ via Homebrew with the following command: ::
 
 ----
 
-Have launchd start rabbitmq now and start at login: ::
+Start rabbitmq and create start at login launchd service: ::
 
         brew services start rabbitmq
 
 
 ----
 
-Edit :file:`~/.bash_profile` and insert the following after the first block comment.
-
-Make sure these are before any lines like: ::
-
-        # If not running interactively, don't do anything
-
-Insert: ::
+Edit :file:`~/.bash_profile` and insert the following: ::
 
         ##### SET THE RabbitMQ ENVIRONMENT #####
         # Set PATH to include RabbitMQ
@@ -266,7 +266,9 @@ Insert: ::
 
 Open new terminal and test that RabbitMQ setup is working ::
 
-        which rabbitmq-server && echo "/usr/local/sbin/rabbitmq-server"
+        which rabbitmq-server 
+        
+        echo "It should be /usr/local/sbin/rabbitmq-server"
 
 
 ----
@@ -289,7 +291,7 @@ In terminal run: ::
 
 ----
 
-Have launchd start postgresql now and start at login: ::
+Start postgresql and create start at login launchd service: ::
 
         brew services start postgresql
 
@@ -392,13 +394,7 @@ Add links to $HOME/lib to enable applications to find the libraries: ::
 
 ----
 
-Edit :file:`~/.bash_profile` and insert the following after the first block comment.
-
-Make sure these are before any lines like: ::
-
-        # If not running interactively, don't do anything
-
-Insert : ::
+Edit :file:`~/.bash_profile` and insert the following: ::
 
         ##### SET THE ORACLE ENVIRONMENT #####
         # Set PATH to include oracle
@@ -407,9 +403,6 @@ Insert : ::
 
         ##### SET THE DYLD_LIBRARY_PATH #####
         export DYLD_LIBRARY_PATH="~/oracle/instantclient_12_1"
-
-
-----
 
 
 FreeTDS (Optional)
@@ -431,13 +424,7 @@ Install FreeTDS via Homebrew: ::
 
 ----
 
-Edit :file:`~/.bash_profile` and insert the following after the first block comment.
-
-Make sure these are before any lines like: ::
-
-        # If not running interactively, don't do anything
-
-Insert : ::
+Edit :file:`~/.bash_profile` and insert the following: ::
 
         ##### SET THE FINK ENVIRONMENT #####
         # Set PATH to include fink
@@ -464,6 +451,32 @@ You should see something similar to: ::
                                    unixodbc: no
                       SSPI "trusted" logins: no
                                    Kerberos: no
+
+
+Change Open File Limit on macOS
+-------------------------------
+
+macOS has a low limit on the maximum number of open files.  This becomes an issue when running node applications.
+
+Run the following commands in terminal: ::
+
+        echo kern.maxfiles=65536 | sudo tee -a /etc/sysctl.conf
+        echo kern.maxfilesperproc=65536 | sudo tee -a /etc/sysctl.conf
+        sudo sysctl -w kern.maxfiles=65536
+        sudo sysctl -w kern.maxfilesperproc=65536
+
+
+----
+
+Edit :file:`~/.bash_profile` and insert the following: ::
+
+        ##### Open File Limit #####
+        ulimit -n 65536 65536
+
+
+----
+
+Restart the terminal
 
 
 What Next?
