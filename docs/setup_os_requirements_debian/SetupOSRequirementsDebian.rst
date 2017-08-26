@@ -72,15 +72,15 @@ Create a new virtual machine with the following specifications
 
 *   2 CPUs
 *   4gb of ram
-*   30gb of disk space
+*   50gb of disk space
 
 Install OS
 ``````````
 
 Download the debian ISO, navigate to the following site and click **amd64** under
-**Small CDs or USB sticks**
+**netinst CD image**
 
-`Download Debian <https://www.debian.org/distrib/netinst#smallcd>`_
+`Download Debian <https://www.debian.org/releases/jessie/debian-installer/>`_
 
 ----
 
