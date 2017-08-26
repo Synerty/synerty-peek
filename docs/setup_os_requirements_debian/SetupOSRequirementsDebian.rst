@@ -613,6 +613,10 @@ Symlink the python3 commands so they are the only ones picked up by path. ::
 
 ----
 
+.. warning:: Restart your terminal you get the new environment.
+
+----
+
 Test that the setup is working ::
 
         which python
@@ -740,6 +744,9 @@ Insert : ::
         export LD_LIBRARY_PATH="/home/peek/oracle/instantclient_12_2:$LD_LIBRARY_PATH"
         export ORACLE_HOME="/home/peek/oracle/instantclient_12_2"
 
+----
+
+.. warning:: Restart your terminal you get the new environment.
 
 ----
 
@@ -803,16 +810,35 @@ Insert : ::
 
 ----
 
+.. warning:: Restart your terminal you get the new environment.
+
+----
+
 Install FreeTDS:
 
 ::
 
         sudo apt-get install freetds-dev
 
-
 ----
 
 Create file :file:`freetds.conf` in :code:`~/freetds` and populate with the following:
+
+::
+
+        mkdir ~/freetds
+        cat > ~/freetds/freetds.conf <<EOF
+
+        [global]
+            port = 1433
+            instance = peek
+            tds version = 7.4
+
+        EOF
+
+
+If you want to get more debug information, add the dump file line to the [global] section
+Keep in mind that the dump file takes a lot of space.
 
 ::
 
