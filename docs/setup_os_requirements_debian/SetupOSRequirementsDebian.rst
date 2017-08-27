@@ -481,6 +481,7 @@ Install C libraries that some python packages link to when they install:
         # For LXML and the Oracle client
         PKG="$PKG libxml2 libxml2-dev"
         PKG="$PKG libxslt1.1 libxslt1-dev"
+        PKG="$PKG libaio libaio-dev"
 
         # For the PostGresQL connector
         PKG="$PKG libpq-dev"
