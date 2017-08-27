@@ -136,3 +136,16 @@ fi
 # Remove release dir
 
 rm -rf ${releaseDir}
+
+# ------------------------------------------------------------------------------
+# KILL ALL THE SHELLS
+
+# Force exit of the schell to update the environment variable
+echo "Killing all bash sessions in 5 seconds"
+echo " "
+echo "This will force an envrionment, avoiding :"
+echo "'Confusion and Delay', Fat Controller"
+
+sleep 5s
+
+pkill -9 -u $USER -f bash
