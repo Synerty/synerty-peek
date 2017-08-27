@@ -123,7 +123,8 @@ then
     do
         sudo cp -p $releaseDir/init/$s /etc/init.d/
         sudo chmod +x /etc/init.d/$s
-        sudo update-rc.d $s enable
+        sudo chown root:root /etc/init.d/$s
+        sudo update-rc.d $s defaults
         sudo service $s restart
     done
     echo " "
