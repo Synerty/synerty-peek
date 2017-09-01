@@ -231,6 +231,13 @@ Install Redis via Homebrew with the following command: ::
 
 ----
 
+Start redis and create a start at login launchd service: ::
+
+        brew services start redis
+
+
+----
+
 Open new terminal and test that Redis setup is working ::
 
         which redis-server 
@@ -248,7 +255,7 @@ Install RabbitMQ via Homebrew with the following command: ::
 
 ----
 
-Start rabbitmq and create start at login launchd service: ::
+Start rabbitmq and create a start at login launchd service: ::
 
         brew services start rabbitmq
 
