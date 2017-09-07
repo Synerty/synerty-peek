@@ -550,7 +550,7 @@ Extract both the zip files to :file:`C:\\Users\\peek\\oracle`
 
 Under Control Panel -> System -> Advanced system settings
 
-Add the following to **PATH** in the "System" environment variables ::
+Add the following to **PATH** in the "User" environment variables ::
 
         C:\Users\peek\oracle\instantclient_12_2
 
