@@ -550,7 +550,7 @@ Extract both the zip files to :file:`C:\\Users\\peek\\oracle`
 
 Under Control Panel -> System -> Advanced system settings
 
-Add the following to PATH in the "System" environment variables ::
+Add the following to **PATH** in the "System" environment variables ::
 
         C:\Users\peek\oracle\instantclient_12_2
 
@@ -560,8 +560,9 @@ Add the following to PATH in the "System" environment variables ::
 
 ----
 
-The Oracle instant client needs :file:`msvcr120.dll` to run, download and install the
-x64 version from the following microsoft site.
+The Oracle instant client needs :file:`msvcr120.dll` to run.
+
+Download and install the x64 version from the following microsoft site.
 
 `<https://www.microsoft.com/en-ca/download/details.aspx?id=40784>`_
 
