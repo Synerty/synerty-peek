@@ -83,6 +83,15 @@ mv $releaseDir/desktop-build-web/node_modules $sp/peek_desktop/build-web
 mv $releaseDir/admin-build-web/node_modules $sp/peek_admin/build-web
 
 # ------------------------------------------------------------------------------
+# Install the util scripts
+
+# Set the init scripts as executable
+chmod +x $releaseDir/util/*
+
+# Install the scripts into the virtual environment bin directory
+cp -pr $releaseDir/util/* ${venvDir}/bin
+
+# ------------------------------------------------------------------------------
 # Show complete message
 
 echo " "

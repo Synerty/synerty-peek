@@ -119,12 +119,23 @@ downloadNodeModules $adminBuildWebDIR $adminJsonUrl
 # ------------------------------------------------------------------------------
 # Copy over the init scripts for this platform
 
-mkdir $baseDir/init
+mkdir $baseDir/init && pushd $baseDir/init
 
-pushd $baseDir/init
 for s in peek_server peek_worker peek_agent peek_client
 do
     wget -nv https://bitbucket.org/synerty/synerty-peek/raw/${peekPkgVer}/scripts/deb8/init/$s
+done
+popd
+
+# ------------------------------------------------------------------------------
+# Copy over the util scripts for this platform
+
+mkdir $baseDir/util && pushd $baseDir/util
+
+utilScripts="restart_peek.sh"
+for s in $utilScripts
+do
+    wget -nv https://bitbucket.org/synerty/synerty-peek/raw/${peekPkgVer}/scripts/deb8/util/$s
 done
 popd
 
