@@ -31,11 +31,20 @@ Run the following commands in Python:
 OSError: inotify instance limit reached
 ```````````````````````````````````````
 
+This is caused when developing peek. The Peek Platform watches the files in each plugin
+and then copies them the the UI build directories as they change, EG build-ns, build-web.
+
+There are quite a few files to monitor and the limits are nice and conservative on Linux
+by default
+
+----
+
 To solve this problem, run the following command as root
 
 ::
 
         echo "fs.inotify.max_user_instances=2048" >> /etc/sysctl.conf
+        echo "fs.inotify.max_user_watches=524288" >> /etc/sysctl.conf
         sysctl -p
 
 
