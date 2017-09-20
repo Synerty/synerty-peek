@@ -12,7 +12,7 @@ In this section we'll add the root admin page for the plugin.
 
 We only scratch the surface of using Angular, that`s outside the scope of this guide.
 
-See :ref:`learn_plugin_development_frontend_preparing` to learn more about how Peek
+See :ref:`developing_with_the_frontends` to learn more about how Peek
 pieces together the frontend code from the various plugins.
 
 Admin File Structure
@@ -201,7 +201,7 @@ The Peek Server service takes care of combining all the plugin files into the bu
 directories in the peek_admin package. We will need to restart Peek Server for it to
 include our plugin in the admin UI.
 
-See :ref:`learn_plugin_development_frontend_preparing` for more details.
+See :ref:`developing_with_the_frontends` for more details.
 
 Check File :file:`~/peek-server.home/config.json`
 `````````````````````````````````````````````````

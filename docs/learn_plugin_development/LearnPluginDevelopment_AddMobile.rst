@@ -17,7 +17,7 @@ In this document, we'll add the start of both the mobile and web builds for the 
 
 We only scratch the surface of using Angular, that`s outside the scope of this guide.
 
-See :ref:`learn_plugin_development_frontend_preparing` to learn more about how Peek
+See :ref:`developing_with_the_frontends` to learn more about how Peek
 pieces together the frontend code from the various plugins.
 
 Mobile File Structure
@@ -269,7 +269,7 @@ The Peek Client service takes care of combining all the plugin files into the bu
 directories in the peek_mobile package. We will need to restart Peek Client for it to
 include our plugin in the mobile UI.
 
-See :ref:`learn_plugin_development_frontend_preparing` for more details.
+See :ref:`developing_with_the_frontends` for more details.
 
 Check File :file:`~/peek-client.home/config.json`
 `````````````````````````````````````````````````
@@ -338,7 +338,7 @@ The Peek Client service takes care of combining all the plugin files into the bu
 directories in the peek_mobile package. We will need to restart Peek Client for it to
 include our plugin in the mobile UI.
 
-See :ref:`learn_plugin_development_frontend_preparing` for more details.
+See :ref:`developing_with_the_frontends` for more details.
 
 
 Check File :file:`~/peek-client.home/config.json`

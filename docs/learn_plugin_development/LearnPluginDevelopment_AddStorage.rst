@@ -418,7 +418,7 @@ and reconstructed as the proper python class. VortexPY is present in these three
 
 
 Edit File :file:`storage/DeclarativeBase.py`
-`````````````````````````````````````
+````````````````````````````````````````````
 
 Add imports to our load storage tuples method.  Load the tuples for Alembic to generate
 database update script.  Allows vortex to reconstruct the tuples.
@@ -532,7 +532,7 @@ Edit :file:`peek_plugin_tutorial/_private/storage/Setting.py`
 #.  Find :command:`noopTuplePrefix` and replace it with :command:`tutorialTuplePrefix`.
 
 Edit File :file:`DeclarativeBase.py`
-`````````````````````````````
+````````````````````````````````````
 
 Edit :file:`peek_plugin_tutorial/_private/storage/DeclarativeBase.py`
 
