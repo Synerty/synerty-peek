@@ -19,7 +19,7 @@ Peek Platform Documentation
     setup_nativescript_macos/SetupNativescriptMacOS
     package_nativescript/PackageNativescriptApp
     deploy_nativescript/DeployNativescriptApp
-    develop_plugins/DevelopPeekPlugins
+    develop_plugins/IndexDevelopPlugins
     publish_plugins/PublishPeekPlugins
     package_plugins/PackagePeekPlugins
     develop_platform/DevelopPeekPlatform

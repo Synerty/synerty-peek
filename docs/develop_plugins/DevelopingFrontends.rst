@@ -1,12 +1,12 @@
-.. _learn_plugin_development_frontend_preparing:
+.. _developing_with_the_frontends:
 
-========================
-About Frontend Preparing
-========================
+=============================
+Developing With The Frontends
+=============================
 
 The Peek Platform is extensible with plugins.
-Unlike with the Python code, the frontend code can't be just imported, The frontend
-code in the plugins has to be combined into build directories for each service.
+Unlike with the Python code, the frontend code can't be just imported.
+The frontend code in the plugins have to be combined into build directories for each service.
 
 This document describes how Peek combines the Frontend / Angular files into build
 projects.
@@ -92,7 +92,7 @@ The file copy process, AKA "prepare" or "Combine", is fairly simple:
 
 At this point the build directories are prepared and ready to run.
 
-.. image:: LearnFrontendCombining.png
+.. image:: FrontendCombining.png
 
 End User Customisations
 -----------------------
@@ -141,13 +141,14 @@ then monitors all the source directories, and incrementally updates files as the
 developer works. This includes performing any on the fly changes to the files that are
 required.
 
-To enable the file syncing, Set :code:`frontend.syncFilesForDebugEnabled` to :code:`true`
-in :file:`~/peek-server.home/config.json` or :file:`~/peek-client.home/config.json`
-and restart the appropriate service.
+To enable file syncing, in file(s)
+:file:`~/peek-server.home/config.json` or :file:`~/peek-client.home/config.json`
+set :code:`frontend.syncFilesForDebugEnabled` to :code:`true` and restart the appropriate service.
 
 You may also want to disable the web building. This isn't required for the Angular CLI
 development server and it slows down Server and Client restarts.
 Set :code:`frontend.webBuildEnabled` to :code:`false`.
+
 
 If DEBUG logging is also enabled, you'll see Peek working away when you change files.
 
@@ -175,10 +176,82 @@ Now when you run: ::
 Or ::
 
         # Start NativeScript live sync
-        tns run android --watch
+        tns run <Platform>
 
 
 The NativeScript and Web apps will automatically update as the developer changes things.
+
+
+build-web
+`````````
+
+To build the dist dir, and serve it on a normal port run: ::
+
+        ng build -w
+
+
+The :code:`-w` option listens for changes.
+
+To run the packages start scripts run: ::
+
+        npm start
+
+
+Auto refreshes, deletes the dist that ng build creates, and the proxy settings for file resources and http vortex.
+
+
+build-ns
+````````
+
+Running the command :code:`tns device` will list active virtual devices and connected physical devices ::
+
+        $ tns device
+
+        Connected devices & emulators
+        Searching for devices...
+        ┌───┬─────────────────────┬──────────┬──────────────────────────────────────────┬──────────┬───────────┐
+        │ # │ Device Name         │ Platform │ Device Identifier                        │ Type     │ Status    │
+        │ 1 │ Synerty 008 iPad    │ iOS      │ a8f83ceb9ddd5d0df25d618a5a4c6d9bf7a6f5f9 │ Device   │ Connected │
+        │ 2 │ iPad Pro (9.7 inch) │ iOS      │ 57AF4696-FB0A-4E42-94EB-37C38164AAB6     │ Emulator │ Connected │
+        └───┴─────────────────────┴──────────┴──────────────────────────────────────────┴──────────┴───────────┘
+
+
+tns development build command builds the project for the selected target platform and produces an application
+package or an emulator package: ::
+
+        tns build <Platform>
+
+
+tns development run command runs your project on a connected device or in the native emulator, if configured: ::
+
+        tns run <Platform>
+
+
+ or: ::
+
+        tns run <Device ID>
+
+
+Developing on iOS Devices
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Before Peek can be deployed the signing certificate must be transfered to the device using Xcode.
+
+To develop with iOS you'll need a developer account on https://developer.apple.com
+
+Build the iOS Platform directory :code:`tns build ios` then open the :file:`build-ns/platform/ios` directory with Xcode.
+
+.. image:: XcodeSigningCertificate.jpg
+
+#.  Select the :file:`buildns` project
+
+#.  Select the Apple Developer Team
+
+#.  Select the connected physical device
+
+#.  Deploy Peek to the device
+
+After following this procedure you can then use :code:`tns` to deploy Peek as the certificate will remain on the device.
 
 
 Troubleshooting
@@ -194,5 +267,5 @@ solve the issue. ::
 
     sudo sysctl fs.inotify.max_user_watches=200000
 
-Otherwise, try rebooting.
 
+Otherwise, try rebooting.
