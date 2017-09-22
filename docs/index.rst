@@ -8,28 +8,13 @@ Peek Platform Documentation
 
     guide
     overview/Overview
-    setup_os_requirements_windows/SetupOSRequirementsWindows
-    setup_os_requirements_debian/SetupOSRequirementsDebian
-    setup_os_requirements_macos/SetupOSRequirementsMacOS
+    setup_os_requirements/IndexSetupOSRequirements
     deploy_platform/DeployPeekPlatform
     deploy_plugins/DeployPeekPlugins
     administer/AdministerPeekPlatform
-    setup_nativescript_windows/SetupNativescriptWindows
-    setup_nativescript_debian/SetupNativescriptDebian
-    setup_nativescript_macos/SetupNativescriptMacOS
-    package_nativescript/PackageNativescriptApp
-    deploy_nativescript/DeployNativescriptApp
-    develop_plugins/IndexDevelopPlugins
-    publish_plugins/PublishPeekPlugins
-    package_plugins/PackagePeekPlugins
-    develop_platform/DevelopPeekPlatform
-    publish_platform/PublishPeekPlatform
-    package_platform/PackagePeekPlatform
-    setup_pycharm/SetupPycharm
-    setup_vs_code/SetupVSCode
-    troubleshooting_windows/TroubleshootingWindows
-    troubleshooting_debian/TroubleshootingDebian
-    learn_plugin_development/IndexLearn
+    nativescript_app/IndexNativeScriptApp
+    development/IndexPeekDevelopment
+    troubleshooting/IndexTroubleshooting
     util/IndexUtil
     api/IndexAPI
     upgrade_notes/IndexUpgrade
