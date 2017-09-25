@@ -24,7 +24,7 @@
 __project__ = 'Synerty Peek'
 __copyright__ = '2016, Synerty'
 __author__ = 'Synerty'
-__version__ = '0.7.2'
+__version__ = '0.7.4'
 
 import sphinx_rtd_theme
 
