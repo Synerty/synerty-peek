@@ -105,7 +105,7 @@ The script will deploy to :file:`/home/peek/`.
 ::
 
         dist="/home/peek/Downloads/peek_dist_deb8_#.#.#.tar.bz2"
-        ./deploy_platform_deb8.sh $dist
+        bash deploy_platform_deb8.sh $dist
 
 ----
 
