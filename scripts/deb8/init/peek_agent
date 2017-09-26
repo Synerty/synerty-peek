@@ -36,6 +36,8 @@ do_start () {
 do_stop () {
     log_daemon_msg "Stopping system $DAEMON_NAME daemon"
     start-stop-daemon --stop --pidfile $PIDFILE --retry 10
+    # kill the agent, the oracle connects lock it up at present.
+    pkill -9 -f run_peek_agent || true
     log_end_msg $?
 }
 
