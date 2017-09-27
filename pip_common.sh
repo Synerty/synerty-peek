@@ -47,6 +47,7 @@ peek-plugin-pof-soap
 peek-plugin-pof-chat
 peek-plugin-pof-field-switching
 peek-plugin-pof-field-incidents
+peek-plugin-pof-field-assessments
 peek-plugin-pof-event
 peek-plugin-gis-diagram
 peek-plugin-pof-diagram
