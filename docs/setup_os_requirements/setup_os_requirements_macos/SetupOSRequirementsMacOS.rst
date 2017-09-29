@@ -325,14 +325,14 @@ Update the PostGreSQL unix user auth config: ::
 
 Create the database ::
 
-        createdb -O peek peek
+        createdb -O <username> peek
 
 
 ----
 
 Set the database password ::
 
-        psql <<EOF
+        psql -d peek <<EOF
         \password
         \q
         EOF
