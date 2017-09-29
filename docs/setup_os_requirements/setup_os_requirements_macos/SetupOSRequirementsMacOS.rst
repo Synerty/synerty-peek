@@ -332,7 +332,7 @@ Create the database ::
 
 Set the database password ::
 
-        psql <<EOF
+        psql -d peek <<EOF
         \password
         \q
         EOF
