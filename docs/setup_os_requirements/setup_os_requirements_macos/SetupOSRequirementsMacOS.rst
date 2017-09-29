@@ -325,7 +325,7 @@ Update the PostGreSQL unix user auth config: ::
 
 Create the database ::
 
-        createdb -O peek peek
+        createdb -O <username> peek
 
 
 ----
