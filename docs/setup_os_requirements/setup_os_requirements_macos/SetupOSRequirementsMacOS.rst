@@ -311,6 +311,7 @@ Update the PostGreSQL unix user auth config: ::
         cat | sudo tee $F <<EOF
         # TYPE  DATABASE        USER            ADDRESS                 METHOD
         local   all             postgres                                peer
+        local   all             peek                                    trust
 
         # "local" is for Unix domain socket connections only
         local   all             all                                     peer
@@ -323,16 +324,23 @@ Update the PostGreSQL unix user auth config: ::
 
 ----
 
+Create Postgres user ::
+
+        createuser -d -r -s peek
+
+
+----
+
 Create the database ::
 
-        createdb -O <username> peek
+        createdb -O peek peek
 
 
 ----
 
 Set the database password ::
 
-        psql -d peek <<EOF
+        psql -d peek -U peek <<EOF
         \password
         \q
         EOF
