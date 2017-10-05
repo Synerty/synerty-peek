@@ -53,7 +53,9 @@ peek-plugin-gis-diagram
 peek-plugin-pof-diagram
 peek-plugin-pof-diagram-loader
 peek-plugin-pof-livedb-loader
-peek-plugin-gis-diagram-loader"
+peek-plugin-gis-diagram-loader
+peek-plugin-generic-diagram-menu
+peek-plugin-zepben-diagram-menu"
 
 export bold=$(tput bold)
 export normal=$(tput sgr0)
