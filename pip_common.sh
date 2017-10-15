@@ -54,7 +54,9 @@ peek-plugin-pof-diagram
 peek-plugin-pof-diagram-loader
 peek-plugin-pof-livedb-loader
 peek-plugin-gis-diagram-loader
-peek_plugin_pof_gis_location_loader
+peek-plugin-pof-gis-location-loader
+peek-plugin-pof-user-loader
+peek-plugin-pof-email-incidents
 peek-plugin-generic-diagram-menu
 peek-plugin-zepben-diagram-menu"
 
