@@ -15,6 +15,7 @@ peek-client
 peek-admin
 peek-server
 synerty-peek
+peek-core-email
 peek-core-device"
 
 
