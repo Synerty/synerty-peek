@@ -213,7 +213,14 @@ synerty-peek is deployed into python virtual environments.
 
 Install the virtualenv python package ::
 
-        pip install virtualenv 
+        pip install virtualenv
+
+
+----
+
+Install the dev libs that the python packages will need to compile ::
+
+        brew install openssl@1.1
 
 
 Install Worker Dependencies
