@@ -161,10 +161,11 @@ In terminal run: ::
 
 Symlink the python3 commands so they are the only ones picked up by path. ::
 
-        cd /usr/local/Cellar/python3/3.6.2/bin/
+        cd /usr/local/Cellar/python3/3.6.3/bin/
         ln -s python3 python
         ln -s pip3 pip
         ln -s wheel3 wheel
+        cd
 
 
 ----
@@ -173,11 +174,11 @@ Edit :file:`~/.bash_profile` and insert the following: ::
 
         #### SET THE HOMEBREW PYTHON ENVIRONMENT ####
         # Set PATH to include python
-        export PATH="/usr/local/Cellar/python3/3.6.2/bin:$PATH"
+        export PATH="/usr/local/Cellar/python3/3.6.3/bin:$PATH"
 
         ##### SET THE PEEK ENVIRONMENT #####
         # Setup the variables for PYTHON
-        export PEEK_PY_VER="3.6.2"
+        export PEEK_PY_VER="3.6.3"
 
         # Set the variables for the platform release
         # These are updated by the deploy script
@@ -191,15 +192,15 @@ Open a new terminal and test that the setup is working ::
 
         which python 
         
-        echo "It should be /usr/local/Cellar/python3/3.6.2/bin/python"
+        echo "It should be /usr/local/Cellar/python3/3.6.3/bin/python"
 
         python --version 
         
-        echo "It should be Python 3.6.2"
+        echo "It should be Python 3.6.3"
 
         which pip 
         
-        echo "It should be /usr/local/Cellar/python3/3.6.2/bin/pip"
+        echo "It should be /usr/local/Cellar/python3/3.6.3/bin/pip"
 
         pip --version 
         
@@ -212,7 +213,7 @@ synerty-peek is deployed into python virtual environments.
 
 Install the virtualenv python package ::
 
-        pip install virtualenv
+        pip install virtualenv 
 
 
 Install Worker Dependencies
