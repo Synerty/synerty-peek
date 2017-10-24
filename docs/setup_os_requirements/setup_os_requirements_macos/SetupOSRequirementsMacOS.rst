@@ -143,6 +143,12 @@ Install gnu-sed for the build scripts ::
 
         brew install gnu-sed
 
+----
+
+Create the symlinks to prefer the GNU tools ::
+
+        mkdir ~/bin
+        ln -s `which gsed` ~/bin/sed
 
 ----
 
@@ -175,7 +181,8 @@ Symlink the python3 commands so they are the only ones picked up by path. ::
 Edit :file:`~/.bash_profile` and insert the following: ::
 
         #### USE THE GNU TOOLS ####
-        alias sed=gsed
+        # Set PATH to gnu tools
+        export PATH="`echo ~/bin:$PATH`"
 
         #### SET THE HOMEBREW PYTHON ENVIRONMENT ####
         # Set PATH to include python
