@@ -440,6 +440,8 @@ which depends on FreeTDS.
 
 ----
 
+.. note:: FreeTDS 1.x doesn't work, so be sure to install @0.91
+
 Install FreeTDS via Homebrew: ::
 
         brew install freetds@0.91
