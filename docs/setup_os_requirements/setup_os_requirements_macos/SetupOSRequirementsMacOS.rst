@@ -137,16 +137,18 @@ To install Homebrew, run the following command in terminal: ::
 
         /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
+----
 
-Install XQuartz
----------------
+Install gnu-sed for the build scripts ::
 
-Download the disk image and install XQuartz:
-
-https://dl.bintray.com/xquartz/downloads/XQuartz-2.7.11.dmg
+        brew install gnu-sed
 
 
-.. note:: After installing XQuartz you will need to restart terminal.
+----
+
+Install the dev libs that the python packages will need to compile ::
+
+        brew install openssl@1.1
 
 
 Install Python 3.6
@@ -171,6 +173,9 @@ Symlink the python3 commands so they are the only ones picked up by path. ::
 ----
 
 Edit :file:`~/.bash_profile` and insert the following: ::
+
+        #### USE THE GNU TOOLS ####
+        alias sed=gsed
 
         #### SET THE HOMEBREW PYTHON ENVIRONMENT ####
         # Set PATH to include python
@@ -214,13 +219,6 @@ synerty-peek is deployed into python virtual environments.
 Install the virtualenv python package ::
 
         pip install virtualenv
-
-
-----
-
-Install the dev libs that the python packages will need to compile ::
-
-        brew install openssl@1.1
 
 
 Install Worker Dependencies
