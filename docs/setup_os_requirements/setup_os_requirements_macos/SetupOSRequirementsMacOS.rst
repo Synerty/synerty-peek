@@ -368,6 +368,15 @@ Cleanup traces of the password ::
         [ -e ~/.psql_history ] && rm ~/.psql_history
 
 
+----
+
+Finally, Download pgAdmin4 - A graphically PostGreSQL databast administration tool.
+
+Download the latest version of pgAdmin4 for macOS from the following link
+
+https://www.pgadmin.org/download/pgadmin-4-macos/
+
+
 Install Oracle Client (Optional)
 --------------------------------
 
