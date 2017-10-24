@@ -421,11 +421,12 @@ Edit :file:`~/.bash_profile` and insert the following: ::
 
         ##### SET THE ORACLE ENVIRONMENT #####
         # Set PATH to include oracle
-        export PATH="~/oracle/instantclient_12_1:$PATH"
-        export ORACLE_HOME="~/oracle/instantclient_12_1"
+        export ORACLE_HOME="`echo ~/oracle/instantclient_12_1`"
+        export PATH="$ORACLE_HOME:$PATH"
 
         ##### SET THE DYLD_LIBRARY_PATH #####
-        export DYLD_LIBRARY_PATH="~/oracle/instantclient_12_1"
+        export DYLD_LIBRARY_PATH="$DYLD_LIBRARY_PATH:$ORACLE_HOME"
+
 
 
 FreeTDS (Optional)
