@@ -22,16 +22,16 @@ peek-core-device"
 # Dynamicall list plugins
 
 # Get the location of this script
-here=$(dirname `readlink -f $(dirname $0)`)
-echo $here
+#here=$(dirname `readlink -f $(dirname $0)`)
+#echo $here
 
-# Plugins are siblings to this project
-if ls -d $here/peek-plugin-* 2> /dev/null 2>&1; then
-    export PLUGINS=`ls -d $here/peek-plugin-* | grep -v peek-plugin-base`
-else
-    echo "There are no plugins at $here"
-    export PLUGINS=""
-fi
+## Plugins are siblings to this project
+#if ls -d $here/peek-plugin-* 2> /dev/null 2>&1; then
+#    export PLUGINS=`ls -d $here/peek-plugin-* | grep -v peek-plugin-base`
+#else
+#    echo "There are no plugins at $here"
+#    export PLUGINS=""
+#fi
 
 # Ignore all that, define the ones JJC wants for Orion
 
