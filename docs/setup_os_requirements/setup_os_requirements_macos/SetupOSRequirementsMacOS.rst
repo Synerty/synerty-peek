@@ -202,21 +202,18 @@ Edit :file:`~/.bash_profile` and insert the following: ::
 
 Open a new terminal and test that the setup is working ::
 
-        which python 
-        
-        echo "It should be /usr/local/Cellar/python3/3.6.3/bin/python"
+        pass="/usr/local/Cellar/python3/3.6.3/bin/python"
+        [ "`which python`" == "$pass" ] && echo "Success" || echo "FAILED"
 
-        python --version 
-        
-        echo "It should be Python 3.6.3"
+        pass="Python 3.6.3"
+        [ "`python --version`" == "$pass" ] && echo "Success" || echo "FAILED"
 
-        which pip 
-        
-        echo "It should be /usr/local/Cellar/python3/3.6.3/bin/pip"
+        pass="/usr/local/Cellar/python3/3.6.3/bin/pip"
+        [ "`which pip`" == "$pass" ] && echo "Success" || echo "FAILED"
 
-        pip --version 
-        
-        echo "It should be pip 9.0.1 from /usr/local/lib/python3.6/site-packages (python 3.6)"
+
+        pass="pip 9.0.1 from /usr/local/lib/python3.6/site-packages (python 3.6)"
+        [ "`pip --version`" == "$pass" ] && echo "Success" || echo "FAILED"
 
 
 ----
@@ -253,9 +250,8 @@ Start redis and create a start at login launchd service: ::
 
 Open new terminal and test that Redis setup is working ::
 
-        which redis-server 
-        
-        echo "It should be /usr/local/bin/redis-server"
+        pass="/usr/local/bin/redis-server"
+        [ "`which redis-server`" == "$pass" ] && echo "Success" || echo "FAILED"
 
 
 RabbitMQ
@@ -286,9 +282,8 @@ Edit :file:`~/.bash_profile` and insert the following: ::
 
 Open new terminal and test that RabbitMQ setup is working ::
 
-        which rabbitmq-server 
-        
-        echo "It should be /usr/local/sbin/rabbitmq-server"
+        pass="/usr/local/sbin/rabbitmq-server"
+        [ "`which rabbitmq-server`" == "$pass" ] && echo "Success" || echo "FAILED"
 
 
 ----
@@ -392,7 +387,7 @@ Make the directory where the oracle client will live ::
 
 Download the following from oracle.
 
-The version used in these instructions is :code:`12.1.0.2.0`.
+The version used in these instructions is :code:`12.2.0.1.0`.
 
 .. note:: Oracle version 12.2 is not available for macOS.
 
@@ -409,15 +404,15 @@ Copy these files to :file:`~/oracle` on the peek server.
 Extract the files. ::
 
         cd ~/oracle
-        unzip instantclient-basic-macos.x64-12.1.0.2.0.zip
-        unzip instantclient-sdk-macos.x64-12.1.0.2.0.zip
+        unzip instantclient-basic-macos.x64-12.2.0.1.0.zip
+        unzip instantclient-sdk-macos.x64-12.2.0.1.0.zip
 
 
 ----
 
 Create the appropriate libclntsh.dylib link for the version of Instant Client: ::
 
-        cd ~/oracle/instantclient_12_1
+        cd ~/oracle/instantclient_12_2
         ln -s libclntsh.dylib.12.1 libclntsh.dylib
 
 
@@ -426,7 +421,7 @@ Create the appropriate libclntsh.dylib link for the version of Instant Client: :
 Add links to $HOME/lib to enable applications to find the libraries: ::
 
         mkdir ~/lib
-        ln -s ~/oracle/instantclient_12_1/libclntsh.dylib ~/lib/
+        ln -s ~/oracle/instantclient_12_2/libclntsh.dylib ~/lib/
 
 
 ----
@@ -435,7 +430,7 @@ Edit :file:`~/.bash_profile` and insert the following: ::
 
         ##### SET THE ORACLE ENVIRONMENT #####
         # Set PATH to include oracle
-        export ORACLE_HOME="`echo ~/oracle/instantclient_12_1`"
+        export ORACLE_HOME="`echo ~/oracle/instantclient_12_2`"
         export PATH="$ORACLE_HOME:$PATH"
 
         ##### SET THE DYLD_LIBRARY_PATH #####
@@ -497,6 +492,10 @@ Change Open File Limit on macOS
 -------------------------------
 
 macOS has a low limit on the maximum number of open files.  This becomes an issue when running node applications.
+
+Make sure the sudo password timer is reset ::
+
+        sudo echo "Sudo is done, lets go"
 
 Run the following commands in terminal: ::
 
