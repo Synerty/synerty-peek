@@ -41,9 +41,26 @@ Below is a list of all the required software:
 Installation Guide
 ------------------
 
+Dependencies for iOS development
+````````````````````````````````
+
+Install the xcodeproj ruby gem with the following command. ::
+
+        sudo gem install xcodeproj
+
+
+----
+
+Install CocoaPods ::
+
+        sudo gem install cocoapods
+
+
+Dependencies for Android development
+````````````````````````````````````
 
 Android Studio
-``````````````
+~~~~~~~~~~~~~~
 
 Android Studio is required if you intend to develop the Android NativeScript app.
 
@@ -74,9 +91,11 @@ Installation Type
 
 ----
 
-SDK Component Setup
+If you want to run the SDK tools virtual emulator, check the following, or leave them unchecked
+ if you want to use Geny Motion.
 
 :Check: Performance
+:Check: Android Virtual Device
 
 .. note:: If you're install inside a virtual machine you'll get the following message during the installation of
     Android Studio.
@@ -87,10 +106,27 @@ SDK Component Setup
 
 
 SDK Manager
-```````````
+~~~~~~~~~~~
 
 In the Android Manager Welcome screen open the :code:`Configure` drop down at the bottom of the window and select
 :code:`SDK Manager`
+
+----
+
+Go to the :code:`SDK Platforms` tab
+
+----
+
+At the bottom of the window:
+
+:Check: :code:`Show Package Details`
+
+----
+
+In the list:
+
+:Check: Android 7.1.1 :code:`Android SDK Platform 25`
+:Uncheck: Unselect the other APIs
 
 ----
 
@@ -106,7 +142,8 @@ At the bottom of the window:
 
 In the list:
 
-:check: Android SDK Build-Tools :code:`25.0.3`
+:Check: Android SDK Build-Tools :code:`25.0.3`
+:Uncheck: Unselect the other versions.
 
 ----
 
@@ -118,7 +155,7 @@ Close Android Studio
 
 
 Nativescript Package
-````````````````````
+--------------------
 
 Install the required NPM packages
 
@@ -134,7 +171,12 @@ Create android dummy repositories file: ::
 Create symlinks for NativeScript install: ::
 
         ln -s /Users/peek/Library/Android/sdk /usr/local/opt/android-sdk
-        sudo ln -s /Library/Java/JavaVirtualMachines/jdk1.8.0_144.jdk/Contents/Home /Library/Java/Home
+
+        # Find the version of java that you have:
+        ls -d /Library/Java/JavaVirtualMachines/jdk1.8.0_*
+
+        # Set the version of java or just leave this as * if there is only one.
+        sudo ln -s /Library/Java/JavaVirtualMachines/jdk1.8.0_*.jdk/Contents/Home /Library/Java/Home
 
 
 ----
@@ -150,6 +192,7 @@ Insert : ::
         ##### SET THE ANDROID ENVIRONMENT #####
         export ANDROID_HOME="/Users/peek/Library/Android/sdk"
 
+.. warning:: Close and reopen the terminal to ensure the profile takes effect.
 
 ----
 
