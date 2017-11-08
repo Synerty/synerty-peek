@@ -45,19 +45,18 @@ if (-Not [string]::IsNullOrEmpty($wantedVer) -and $peekPkgVer -ne $wantedVer) {
     Write-Host "We've downloaded version $peekPkgVer";
 }
 
-
 # Define the extra wheels we need to download
 $extraWheels = @(
     # Download shapely, it's not a dependency on windows because pip doesn't try to get the windows dist.
     @{
         "file" = "Shapely-1.6.2-cp36-cp36m-win_amd64.whl";
-        "url" = "http://www.lfd.uci.edu/%7Egohlke/pythonlibs/zhckc95n"
+        "url" = "https://download.lfd.uci.edu/%7Egohlke/pythonlibs/zhckc95n"
     },
 
     # Download pymssql, As to 11/Apr/2017, there are no standard built wheels for 3.6.1
     @{
         "file" = "pymssql-2.1.3-cp36-cp36m-win_amd64.whl";
-        "url" = "http://www.lfd.uci.edu/%7Egohlke/pythonlibs/zhckc95n"
+        "url" = "https://download.lfd.uci.edu/%7Egohlke/pythonlibs/zhckc95n"
     }
 );
 
