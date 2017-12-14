@@ -59,7 +59,8 @@ peek-plugin-pof-gis-location-loader
 peek-plugin-pof-user-loader
 peek-plugin-pof-email-incidents
 peek-plugin-generic-diagram-menu
-peek-plugin-zepben-diagram-menu"
+peek-plugin-zepben-diagram-menu
+peek-plugin-unified-search"
 
 export bold=$(tput bold)
 export normal=$(tput sgr0)
