@@ -29,23 +29,9 @@ New-Item $baseDir -ItemType directory;
 New-Item "$baseDir\py" -ItemType directory;
 Set-Location "$baseDir\py";
 
-Write-Host "Downloading and creating wheels";
-pip wheel --no-cache synerty-peek;
+# -------------
 
-# Make sure we've downloaded the right version
-$peekPkgName = Get-ChildItem ".\" |
-    Where-Object {$_.Name.StartsWith("synerty_peek-")} |
-    Select-Object -exp Name;
-$peekPkgVer = $peekPkgName.Split('-')[1];
-
-if (-Not [string]::IsNullOrEmpty($wantedVer) -and $peekPkgVer -ne $wantedVer) {
-    Set-Location "$startDir";
-    Write-Error "We've downloaded version $peekPkgVer, but you wanted ver $wantedVer";
-} else {
-    Write-Host "We've downloaded version $peekPkgVer";
-}
-
-
+Write-Host "Downloading and windows wheels";
 
 # Define the extra wheels we need to download
 $extraWheels = @(
@@ -73,6 +59,24 @@ foreach ($wheel in $extraWheels) {
     if ( (get-item $file).length -lt 10000) {
         Write-Error "$file has a new version update"
     }
+}
+
+# -------------
+
+Write-Host "Downloading and creating wheels";
+pip wheel --no-cache synerty-peek;
+
+# Make sure we've downloaded the right version
+$peekPkgName = Get-ChildItem ".\" |
+    Where-Object {$_.Name.StartsWith("synerty_peek-")} |
+    Select-Object -exp Name;
+$peekPkgVer = $peekPkgName.Split('-')[1];
+
+if (-Not [string]::IsNullOrEmpty($wantedVer) -and $peekPkgVer -ne $wantedVer) {
+    Set-Location "$startDir";
+    Write-Error "We've downloaded version $peekPkgVer, but you wanted ver $wantedVer";
+} else {
+    Write-Host "We've downloaded version $peekPkgVer";
 }
 
 
