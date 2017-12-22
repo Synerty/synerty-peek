@@ -60,7 +60,8 @@ peek-plugin-pof-user-loader
 peek-plugin-pof-email-incidents
 peek-plugin-generic-diagram-menu
 peek-plugin-zepben-diagram-menu
-peek-plugin-unified-search"
+peek-plugin-unified-search
+peek-plugin-gis-dms-positioner"
 
 export bold=$(tput bold)
 export normal=$(tput sgr0)
