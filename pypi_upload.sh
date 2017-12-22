@@ -11,7 +11,7 @@ EXIT=""
 for pkg in $PACKAGES; do
     # if ! (cd ../$pkg && rm -rf dist/* && python setup.py sdist && twine upload dist/*); then
 
-    if [ $pkg -eq 'peek-core-device' ];
+    if [ $pkg == 'peek-core-device' -o  $pkg == 'peek-core-email' ];
     then
         continue;
     fi
