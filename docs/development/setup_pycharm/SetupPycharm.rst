@@ -28,6 +28,14 @@ Setup Pycharm IDE
         #.  peek_agent depends on -> peek_platform
         #.  peek_worker depends on -> peek_platform
 
+    #.  Project -> Project Structure
+
+        #.  peek-mobile -> build-ns -> Excluded (as per the image below)
+        #.  peek-desktop -> build-web -> Excluded
+        #.  peek-admin -> build-web -> Excluded
+
+        .. image:: PyCharmSettingsProjectStructureExclude.jpg
+
     #.  Languages & Frameworks -> Node.js and NPM
 
         #.  Node interpreter -> ~/node-v7.1.0/bin/node
