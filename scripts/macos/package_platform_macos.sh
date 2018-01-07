@@ -68,7 +68,7 @@ PATH="$nodeDir/bin:$PATH"
 
 # Install the required NPM packages
 npm cache clean --force
-npm -g install @angular/cli@1.2.7 typescript@2.3.4 tslint
+npm -g install @angular/cli@1.2.7 typescript@2.6.2 tslint
 
 # ------------------------------------------------------------------------------
 # This function downloads the node modules and prepares them for the release

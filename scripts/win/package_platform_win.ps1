@@ -115,7 +115,7 @@ $env:Path = "$baseDir\node;$env:Path";
 
 # Install the required NPM packages
 npm cache clean --force
-npm -g install @angular/cli@1.2.7 typescript@2.3.4 tslint
+npm -g install @angular/cli@1.2.7 typescript@2.6.2 tslint
 
 
 # ------------------------------------------------------------------------------
