@@ -12,7 +12,9 @@ peek-desktop
 peek-worker
 peek-mobile
 peek-client
+peek-doc-user
 peek-admin
+peek-doc-admin
 peek-server
 synerty-peek
 peek-core-email
