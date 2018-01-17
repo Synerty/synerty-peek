@@ -111,9 +111,3 @@ echo "${DATE}_${VER}" > $RELEASE/stamp
 echo
 echo "Peek Release compressed to dist/${RELEASE_TAR}"
 echo
-
-if [[ ${VER} != *"dev"* ]]; then
-    echo "If you're happy with this you can now run :"
-    echo "./pypi_upload.sh"
-    echo
-fi
