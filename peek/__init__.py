@@ -2,4 +2,4 @@
 __project__ = 'Synerty Peek'
 __copyright__ = '2016, Synerty'
 __author__ = 'Synerty'
-__version__ = '0.8.2.1'
+__version__ = '0.9.0'
