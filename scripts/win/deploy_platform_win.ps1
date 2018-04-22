@@ -112,7 +112,7 @@ $no = New-Object System.Management.Automation.Host.ChoiceDescription "&No", `
 
 $options = [System.Management.Automation.Host.ChoiceDescription[]]($yes, $no)
 
-$result = $host.ui.PromptForChoice($title, $message, $options, 0) 
+$result = $host.ui.PromptForChoice($title, $message, $options, 0)
 
 switch ($result) {
     0 {
@@ -145,6 +145,48 @@ switch ($result) {
         Write-Host " ";
         Write-Host "Activate the new environment from PowerShell :";
         Write-Host "    `$env:Path = `"$venvDir\Scripts;`$env:Path`"";
+    }
+}
+
+# ------------------------------------------------------------------------------
+# OPTIONALLY - Reinstall the services
+
+# Ask if the user would like to update the PATH environment variables
+$title = "Windows Services"
+$message = "Do you want to install/update the Peek windows services"
+
+$yes = New-Object System.Management.Automation.Host.ChoiceDescription "&Yes", `
+    "I want the services setup."
+
+$no = New-Object System.Management.Automation.Host.ChoiceDescription "&No", `
+    "No services for me, this is a dev machine."
+
+$options = [System.Management.Automation.Host.ChoiceDescription[]]($yes, $no)
+
+$result = $host.ui.PromptForChoice($title, $message, $options, 0)
+
+switch ($result) {
+    0 {
+        Write-Host "Ok, We're setting up the services.";
+
+        # Get the password to start the services
+        $pass = Read-Host 'What is the peek windows users password?'
+
+        # Define the list of services to manage
+        $services = @('peek_worker', 'peek_agent', 'peek_client', 'peek_server', 'peek_restarter');
+
+        foreach ($service in $services)
+        {
+            $arguments = "winsvc_$service --username .\peek --password $pass --startup auto install"
+            $arguments = "CMD /C '" + $arguments + "'"
+            Write-Output $arguments
+            Start-Process powershell -Verb runAs -Wait -ArgumentList $arguments
+        }
+
+    }
+
+    1 {
+        Write-Host "Ok, We've left the services alone.";
     }
 }
 
