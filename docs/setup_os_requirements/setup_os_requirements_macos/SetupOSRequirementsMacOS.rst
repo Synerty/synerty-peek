@@ -438,13 +438,13 @@ Edit :file:`~/.bash_profile` and insert the following: ::
 
 
 
-FreeTDS (Optional)
-------------------
+Install FreeTDS (Optional)
+--------------------------
 
 FreeTDS is an open source driver for the TDS protocol, this is the protocol used to
 talk to the MSSQL SQLServer database.
 
-Peek needs this installed if it uses the pymssql python database driver,
+Peek needs a installed if it uses the pymssql python database driver,
 which depends on FreeTDS.
 
 ----

@@ -23,11 +23,12 @@ Below is a list of all the required software:
 
 *  Microsoft .NET Framework 3.5 Service Pack 1
 *  Visual C++ Build Tools 2015
-*  PostgresSQL 9.6.2+ or Microsoft® SQL Server® 2014 Express
-*  Node.js 7+ and NPM 3+
-*  Python 3.5
+*  PostgresSQL 10.3+
+*  Node.js 7+ and NPM 5+
+*  Python 3.6
 *  Virtualenv
 *  FreeTDS
+*  Msys Git
 
 Optional  Software
 ``````````````````
@@ -116,10 +117,43 @@ Install using the ISO
 
 :Download: `<https://www.microsoft.com/en-US/download/details.aspx?id=48146>`_
 
+
+Setup Msys Git
+--------------
+
+:Download: `<https://github.com/git-for-windows/git/releases/download/v2.17.0.windows.1/Git-2.17.0-64-bit.exe>`_
+:From: `<https://git-for-windows.github.io>`_
+
+----
+
+Use all default options, Except on the **Adjusting your PATH environment** screen.
+
+On the "Adjusting your PATH environment" screen,
+select "Use Git and optional Unix tools from the Windows Command Prompt"
+
+.. image:: git_adjusting_path.png
+
+.. note:: This is equivalent to adding "C:\\Program Files\\Git\\mingw64\\bin"
+            and "C:\\Program Files\\Git\\usr\\bin"
+            to the system PATH environment variable.
+
+----
+
+Open a new command window, and type :command:`bash`, it should find the
+bash command.
+
+Press Ctrl+D to exit bash.
+
+----
+
+Open a new command or powershell window, and type :command:`git`, it should find the
+git command.
+
+
 Install Python 3.6
 ------------------
 
-:Download: `<https://www.python.org/ftp/python/3.6.1/python-3.6.1-amd64.exe>`_
+:Download: `<https://www.python.org/ftp/python/3.6.5/python-3.6.5-amd64.exe>`_
 :From: `<https://www.python.org/downloads/windows/>`_
 
 ----
@@ -332,75 +366,86 @@ Download and install the x64 version from the following microsoft site.
 
 Reboot windows, or logout and login to ensure the PATH updates.
 
-Enable SymLinks
----------------
 
-Enabling SymLinks for development.
-Peek no longer uses Symlinks, so this step can be skipped.
+Install FreeTDS (Optional)
+--------------------------
 
-Thanks to : `<https://github.com/git-for-windows/git/wiki/Symbolic-Links>`_
-for the instructions.
+FreeTDS is an open source driver for the TDS protocol, this is the protocol used to
+talk to a MSSQL SQLServer database.
 
-----
-
-Launch: "gpedit.msc" and Navigate to
-
-#.  Computer configuration
-
-#.  Windows Settings
-
-#.  Security Settings
-
-#.  Local Policies
-
-#.  User Rights Assignment
-
-#.  Double click on "Create symbolic links"
-
-.. image:: gpedit-CreateSymlinks.jpg
+Peek needs this installed if it uses the pymssql python database driver,
+which depends on FreeTDS.
 
 ----
 
-Click "Add User or Group", add "peek", then "OK" out of the dialogues.
-
-.. image:: gpedit-AddUser.jpg
-
-----
-
-You will need to logout and log back in for the change to take effect
-
-.. Note:: This setting has no effect on user accounts that belong to the Administrators
-    group.  Those users will always have to run mklink in an elevated environment as
-    Administrator.
-
-Enable Development
-------------------
-
-This applies to windows 10, and may apply to other windows versions as well.
-
-`<https://msdn.microsoft.com/en-us/windows/uwp/get-started/enable-your-device-for-development>`_
-
-Enable your device for development
+:Download: `<https://github.com/ramiro/freetds/releases/download/v0.95.95/freetds-v0.95.95-win-x86_64-vs2015.zip>`_
+:From: `<https://github.com/ramiro/freetds/releases>`_
 
 ----
 
-Click the "Start" menu and select "Settings"
+Unzip contents into ::
+
+        C:\Users\peek
+
 
 ----
 
-Select 'Update & Security'
-
-.. image:: DevMode-UpdateSecurity.jpg
+Rename :file:`C:\\users\\peek\\freetds-v0.95.95` to :file:`C:\\users\\peek\\freetds`
 
 ----
 
-Click on the "For developers" tab on the left.
+Under Control Panel -> System -> Advanced system settings
+
+Add the following to PATH in the "System" environment variables ::
+
+        C:\Users\peek\freetds\bin
+
+.. tip:: On Win 10, enter "environment" in the task bar search and select
+            **Edit the system environment variables**
 
 ----
 
-Select 'Developer Mode', and acknowledge the warning.
+Create file :file:`freetds.conf` in :file:`C:\\` ::
 
-.. image:: DevMode-ForDevelopers.jpg
+        [global]
+            port = 1433
+            instance = peek
+            tds version = 7.4
+
+
+If you want to get more debug information, add the dump file line to the [global] section
+Keep in mind that the dump file takes a lot of space.
+
+::
+
+        [global]
+            port = 1433
+            instance = peek
+            tds version = 7.4
+            dump file = c:\\users\\peek\\freetds.log
+
+
+dll files
+`````````
+
+:Download: `<http://indy.fulgan.com/SSL/openssl-1.0.2j-x64_86-win64.zip>`_
+:From: `<http://indy.fulgan.com/SSL/>`_
+
+----
+
+Ensure these files are in the system32 folder:
+
+*  libeay32.dll
+
+*  ssleay32.dll
+
+----
+
+You will need to duplicate the above files and name them as per below:
+
+*  libeay32MD.dll
+
+*  ssleay32MD.dll
 
 
 
