@@ -6,7 +6,7 @@ REMOTE=${1-}
 source ./pip_common.sh
 
 # -------------------------------------
-for pkgDir in `ls -d ../peek-*` ../synerty-peek; do
+for pkgDir in `ls -d ../peek-*` ../synerty-peek ../vortex* ../tx*; do
     if [ "${REMOTE}" ]
     then
         echo "Pulling ${pkgDir} ${REMOTE}/master"
