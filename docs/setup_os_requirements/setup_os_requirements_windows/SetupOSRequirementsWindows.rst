@@ -1,3 +1,6 @@
+.. _setup_os_requirements_windows:
+
+
 =============================
 Setup OS Requirements Windows
 =============================
@@ -23,7 +26,7 @@ Below is a list of all the required software:
 
 *  Microsoft .NET Framework 3.5 Service Pack 1
 *  Visual C++ Build Tools 2015
-*  PostgresSQL 10.3+
+*  PostgresSQL 10.4+
 *  Node.js 7+ and NPM 5+
 *  Python 3.6
 *  Virtualenv
@@ -252,13 +255,19 @@ Confirm the RabbitMQ Management Console and the RabbitMQ MQTT Adaptor are listed
 
 .. _requirements_windows_postgressql:
 
-PostgresSQL
------------
+Install PostgresSQL
+-------------------
 
 Peek requires PostGreSQL as it's persistent, relational data store.
 
 :Download: `<https://www.enterprisedb.com/downloads/postgres-postgresql-downloads#windows>`_
 :From: `<https://www.postgresql.org>`_
+
+.. note:: Ensure you download the 64bit version or PostGreSQL
+            or the Peek windows service dependencies
+            will not recognise it ("postgresql-10" vs "postgresql-x64-10")
+
+.. image:: pg_win_download.png
 
 ----
 

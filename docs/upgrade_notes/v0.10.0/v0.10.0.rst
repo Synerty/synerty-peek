@@ -1,0 +1,111 @@
+.. _upgrade_to_v0_10_0:
+
+=====================
+v0.10.0 Upgrade Notes
+=====================
+
+Changes
+-------
+
+Vortex PayloadEnvelope
+``````````````````````
+
+This version of peek contains some breaking changes to do with the VortexJS/VortexPY.
+
+A new class called "PayloadEnvelope" has been introduced. PayloadEnvelope wraps a Payload
+and is routed around the Vortexes.
+
+The toVortexMsg/fromVortexMsg methods on the Payload class have been renamed to
+toEncodedPayload/fromEncodedPayload respectivly.
+
+This change was made to improve performance, in some instances the Payload.tuples didn't
+need to be deserialised/reserialised, for example when passing through the peek_client
+service, or being cached in the browsers/mobile devices.
+
+Dependency Bump
+```````````````
+
+Peek dependencies are upgrade as follows:
+
+#.  Python 3.6.5
+#.  PostGreSQL 10.4
+#.  MsysGit - Install setttings change
+
+Windows Services
+````````````````
+
+Peek v0.10.0 now contains windows services. These release notes will describe how to
+install the services.
+
+Deployment
+----------
+
+This version of Peek upgrades several dependencies of the system. Follow these
+instructions to upgrade all the dependencies.
+
+The
+
+----
+
+First, backup the PostGreSQL :code:`peek` database.
+
+----
+
+Delete the virtual environments
+
+delete C:\Users\peek\synerty-peek*
+
+----
+
+#. Uninstall Python
+#. Uninstall "Git version"
+#. Uninstall PostGreSQL
+
+
+----
+
+Delete the old PostGreSQL database data directory.
+
+delete C:\Program Files\PostgreSQL
+
+----
+
+Reinstall the software again based on these instructions:
+
+#.  Install Python
+#.  Install Msys Git
+#.  Install PostGreSQL
+
+:ref:`setup_os_requirements_windows`
+
+
+----
+
+Open PGAdmin4, and restore the database backup.
+
+.. note:: Ensure you restore the database to the :code:`peek` database
+            (not the postgres one)
+
+----
+
+Deploy the platform, Y and Y at the end.
+
+:ref:`deploy_peek_platform`
+
+----
+
+These steps grant "Login as Service" to the ".\peek" user
+
+#.  Run "services.msc"
+#.  Find the peek server service
+#.  Open the properties of the service
+#.  Goto the LogOn tab
+#.  Enter the password twice and hit OK
+#.  A dialog box will appear saying that the Peek users has been granted the right.
+
+----
+
+Deploy the plugins.
+
+:ref:`deploy_peek_plugins`
+

@@ -10,3 +10,4 @@ Upgrade Notes
     :caption: Contents:
 
     v0.6.0
+    v0.10.0/v0.10.0
