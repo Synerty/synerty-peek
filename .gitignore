@@ -100,3 +100,4 @@ MANIFEST
 #peek_platform
 #peek_server
 #peek_worker
+.DS_Store
