@@ -25,7 +25,7 @@ Below is a list of all the required software:
 
 *   Python 3.6.x
 
-*   Postgres 9.5
+*   Postgres 10.4.x
 
 Suggested Software
 ``````````````````
@@ -567,7 +567,7 @@ Insert : ::
 
         ##### SET THE PEEK ENVIRONMENT #####
         # Setup the variables for PYTHON
-        export PEEK_PY_VER="3.6.2"
+        export PEEK_PY_VER="3.6.5"
         export PATH="/home/peek/cpython-${PEEK_PY_VER}/bin:$PATH"
 
         # Set the variables for the platform release
@@ -580,7 +580,7 @@ Insert : ::
 Download and unarchive the supported version of Python ::
 
         cd ~
-        PEEK_PY_VER="3.6.2"
+        PEEK_PY_VER="3.6.5"
         wget "https://www.python.org/ftp/python/${PEEK_PY_VER}/Python-${PEEK_PY_VER}.tgz"
         tar xzf Python-${PEEK_PY_VER}.tgz
 
@@ -621,10 +621,10 @@ Symlink the python3 commands so they are the only ones picked up by path. ::
 Test that the setup is working ::
 
         which python
-        echo "It should be /home/peek/cpython-3.6.2/bin/python"
+        echo "It should be /home/peek/cpython-3.6.5/bin/python"
 
         which pip
-        echo "It should be /home/peek/cpython-3.6.2/bin/pip"
+        echo "It should be /home/peek/cpython-3.6.5/bin/pip"
 
 ----
 
@@ -682,7 +682,7 @@ Add the latest PostGreSQL repository ::
 
 Install PostGresQL ::
 
-        sudo apt-get install -y postgis postgresql-9.5
+        sudo apt-get install -y postgis postgresql-10.4
         sudo apt-get clean
 
 
@@ -690,7 +690,7 @@ Install PostGresQL ::
 
 Create the peek SQL user ::
 
-        F=/etc/postgresql/9.5/main/pg_hba.conf
+        F=/etc/postgresql/10.4/main/pg_hba.conf
         if ! sudo grep -q 'peek' $F; then
             echo "host  peek    peek    127.0.0.1/32    trust" | sudo tee $F -a
         fi
