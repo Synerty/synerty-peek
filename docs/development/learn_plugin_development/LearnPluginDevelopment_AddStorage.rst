@@ -60,6 +60,7 @@ and populate it with the following contents:
         from sqlalchemy.ext.declarative import declarative_base
 
         from sqlalchemy.schema import MetaData
+        from txhttputil.util.ModuleUtil import filterModules
 
         metadata = MetaData(schema="pl_tutorial")
         DeclarativeBase = declarative_base(metadata=metadata)
@@ -75,6 +76,11 @@ and populate it with the following contents:
             deserialized by the vortex.
 
             """
+            for mod in filterModules(__package__, __file__):
+                if mod.startswith("Declarative"):
+                    continue
+                __import__(mod, locals(), globals())
+
 
 
 Add Package :file:`alembic`
@@ -417,21 +423,6 @@ and reconstructed as the proper python class. VortexPY is present in these three
             __tupleType__ = tutorialTuplePrefix + 'StringIntTuple'
 
 
-Edit File :file:`storage/DeclarativeBase.py`
-````````````````````````````````````````````
-
-Add imports to our load storage tuples method.  Load the tuples for Alembic to generate
-database update script.  Allows vortex to reconstruct the tuples.
-
-----
-
-Edit the file :file:`peek_plugin_tutorial/_private/storage/DeclarativeBase.py`
-
-#.  Add the lines to the :code:`loadStorageTuples():` method ::
-
-        from . import StringIntTuple
-        StringIntTuple.__unused = False
-
 
 Create New Alembic Version
 ``````````````````````````
@@ -531,17 +522,6 @@ Edit :file:`peek_plugin_tutorial/_private/storage/Setting.py`
 
 #.  Find :command:`noopTuplePrefix` and replace it with :command:`tutorialTuplePrefix`.
 
-Edit File :file:`DeclarativeBase.py`
-````````````````````````````````````
-
-Edit :file:`peek_plugin_tutorial/_private/storage/DeclarativeBase.py`
-
-Add the following lines to the :command:`loadStorageTuples():` method ::
-
-    from . import Setting
-    Setting.__unused = False
-
-
 Create New Alembic Version
 ``````````````````````````
 
@@ -586,19 +566,20 @@ To Place this code in the :command:`start():` method:
 
 ::
 
-# session = self.dbSessionCreator()
-#
-# # This will retrieve all the settings
-# allSettings = globalSetting(session)
-# logger.debug(allSettings)
-#
-# # This will retrieve the value of property1
-# value1 = globalSetting(session, key=PROPERTY1)
-# logger.debug("value1 = %s" % value1)
-#
-# # This will set property1
-# globalSetting(session, key=PROPERTY1, value="new value 1")
-# session.commit()
-#
-# session.close()
+        # session = self.dbSessionCreator()
+        #
+        # # This will retrieve all the settings
+        # allSettings = globalSetting(session)
+        # logger.debug(allSettings)
+        #
+        # # This will retrieve the value of property1
+        # value1 = globalSetting(session, key=PROPERTY1)
+        # logger.debug("value1 = %s" % value1)
+        #
+        # # This will set property1
+        # globalSetting(session, key=PROPERTY1, value="new value 1")
+        # session.commit()
+        #
+        # session.close()
+
 

@@ -155,24 +155,6 @@ and populate it with the following contents.
             offset = TupleField()
 
 
-Edit File :file:`_private/tuples/__init__.py`
-`````````````````````````````````````````````
-
-In this step, we add a setup method on the tuples package, this setup method
-then loads all the handlers needed for the backend.
-
-----
-
-Edit file :file:`peek_plugin_tutorial/_private/tuples/__init__.py`.
-
-Find the method :code:`loadPrivateTuples()`, append the following lines: ::
-
-            from . import AddIntValueActionTuple
-            AddIntValueActionTuple.__unused = False
-
-            from . import StringCapToggleActionTuple
-            StringCapToggleActionTuple.__unused = False
-
 
 Add TypeScript Tuples
 ---------------------

@@ -84,23 +84,6 @@ and populate it with the following contents.
             result = TupleField(defaultValue=dict)
 
 
-Edit File :file:`tuples.__init__.py`
-````````````````````````````````````
-
-File :file:`tuples.__init__.py` will be modified to load the tuple when the plugin
-loads.
-
-----
-
-Create the file
-:file:`peek_plugin_tutorial/tuples/__init__.py`
-and append the following lines to the :code:`def loadPublicTuples():` method.
-
-::
-
-        from . import DoSomethingTuple
-        DoSomethingTuple.__unused = False
-
 
 Add Package :file:`server`
 ``````````````````````````

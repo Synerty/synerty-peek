@@ -105,6 +105,9 @@ then loads all the handlers needed for the backend.
 Edit file :file:`peek_plugin_tutorial/_private/tuples/__init__.py`
 Add the following: ::
 
+        from txhttputil.util.ModuleUtil import filterModules
+
+
         def loadPrivateTuples():
             """ Load Private Tuples
 
@@ -113,8 +116,8 @@ Add the following: ::
             serialised data.
 
             """
-            from . import TutorialTuple
-            TutorialTuple.__unused = False
+            for mod in filterModules(__name__, __file__):
+                __import__(mod, locals(), globals())
 
 
 
@@ -149,6 +152,9 @@ then loads all the handlers needed for the backend.
 Edit file :file:`peek_plugin_tutorial/tuples/__init__.py`
 Add the following: ::
 
+        from txhttputil.util.ModuleUtil import filterModules
+
+
         def loadPublicTuples():
             """ Load Public Tuples
 
@@ -157,6 +163,9 @@ Add the following: ::
             serialised data.
 
             """
+
+            for mod in filterModules(__name__, __file__):
+                __import__(mod, locals(), globals())
 
 
 
