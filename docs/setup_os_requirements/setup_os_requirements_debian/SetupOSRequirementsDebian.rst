@@ -682,7 +682,7 @@ Add the latest PostGreSQL repository ::
 
 Install PostGresQL ::
 
-        sudo apt-get install -y postgis postgresql-10.4
+        sudo apt-get install -y postgis postgresql-10
         sudo apt-get clean
 
 

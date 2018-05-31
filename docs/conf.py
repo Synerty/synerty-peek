@@ -174,6 +174,8 @@ import sphinx
 from pytmpdir.Directory import Directory
 from sphinx.apidoc import *
 
+import os
+
 # AutoAPI related config values
 
 autoclass_content = "both"
@@ -342,7 +344,7 @@ sphinx.apidoc.is_excluded = is_excluded
 def createApiDocs(modFileName):
     moduleName = os.path.basename(os.path.dirname(modFileName))
 
-    rootpath = path.abspath(path.dirname(modFileName))
+    rootpath = os.path.abspath(path.dirname(modFileName))
     realDstDir = os.path.join(os.path.dirname(__file__), "api_autodoc", moduleName)
 
     tmpDir = Directory()
