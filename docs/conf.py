@@ -296,7 +296,7 @@ def create_package_file(root, master_package, subroot, py_files, opts, subs,
     text += '\n'
 
     # build a list of directories that are szvpackages (contain an INITPY file)
-    subs = [sub for sub in subs if path.isfile(path.join(root, sub, INITPY))]
+    subs = [sub for sub in subs if os.path.isfile(os.path.join(root, sub, INITPY))]
     # if there are some package directories, add a TOC for theses subpackages
 
     if subs:
@@ -305,8 +305,8 @@ def create_package_file(root, master_package, subroot, py_files, opts, subs,
             text += '    %s.%s\n' % (makename(master_package, subroot), sub)
         text += '\n'
 
-    submods = [path.splitext(sub)[0] for sub in py_files
-               if not shall_skip(path.join(root, sub), opts) and
+    submods = [os.path.splitext(sub)[0] for sub in py_files
+               if not shall_skip(os.path.join(root, sub), opts) and
                sub != INITPY]
 
     for submod in submods:
@@ -344,7 +344,7 @@ sphinx.apidoc.is_excluded = is_excluded
 def createApiDocs(modFileName):
     moduleName = os.path.basename(os.path.dirname(modFileName))
 
-    rootpath = os.path.abspath(path.dirname(modFileName))
+    rootpath = os.path.abspath(os.path.dirname(modFileName))
     realDstDir = os.path.join(os.path.dirname(__file__), "api_autodoc", moduleName)
 
     tmpDir = Directory()
