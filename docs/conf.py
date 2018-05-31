@@ -355,7 +355,7 @@ def createApiDocs(modFileName):
     if not os.path.isdir(opts.destdir):
         os.makedirs(opts.destdir)
 
-    modules = recurse_tree(rootpath, [], opts)
+    # modules = recurse_tree(rootpath, [], opts)
     # create_modules_toc_file(modules, opts)
 
 
