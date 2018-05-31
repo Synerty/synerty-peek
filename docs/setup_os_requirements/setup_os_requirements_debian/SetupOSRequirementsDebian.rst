@@ -690,7 +690,7 @@ Install PostGresQL ::
 
 Create the peek SQL user ::
 
-        F=/etc/postgresql/10.4/main/pg_hba.conf
+        F=/etc/postgresql/10/main/pg_hba.conf
         if ! sudo grep -q 'peek' $F; then
             echo "host  peek    peek    127.0.0.1/32    trust" | sudo tee $F -a
         fi
