@@ -41,10 +41,6 @@ fi
 # *     Shapely
 # *     pymssql
 
-python -m nltk.downloader punkt
-python -m nltk.downloader stopwords
-python -m nltk.downloader wordnet
-
 # ------------------------------------------------------------------------------
 # Compile nodejs for the release.
 # This should be portable.
