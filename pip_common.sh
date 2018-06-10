@@ -44,6 +44,8 @@ peek-plugin-user
 peek-plugin-inbox
 peek-plugin-chat
 peek-plugin-livedb
+peek-plugin-docdb
+peek-plugin-search
 peek-plugin-diagram
 peek-plugin-pof-sql
 peek-plugin-pof-soap
@@ -56,6 +58,7 @@ peek-plugin-pof-event
 peek-plugin-gis-diagram
 peek-plugin-pof-diagram
 peek-plugin-pof-diagram-loader
+peek-plugin-pof-equipment-loader
 peek-plugin-pof-livedb-loader
 peek-plugin-gis-diagram-loader
 peek-plugin-pof-gis-location-loader
