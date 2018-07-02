@@ -86,7 +86,7 @@ if (-Not [string]::IsNullOrEmpty($wantedVer) -and $peekPkgVer -ne $wantedVer) {
 # Download node, npm, @angular/cli, typescript and tslint
 
 Set-Location "$baseDir";
-$nodeVer = "8.11.1";
+$nodeVer = "8.11.3";
 
 # Download the file
 $nodeUrl = "https://nodejs.org/dist/v$nodeVer/node-v$nodeVer-win-x64.zip";
@@ -117,7 +117,7 @@ $env:Path = "$baseDir\node;$env:Path";
 
 # Install the required NPM packages
 npm cache clean --force
-npm -g install @angular/cli@1.7.4 typescript@2.6.2 tslint
+npm -g install @angular/cli@~6.0.0 typescript@~2.7.2 tslint
 
 
 # ------------------------------------------------------------------------------

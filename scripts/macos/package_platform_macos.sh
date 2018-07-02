@@ -48,7 +48,7 @@ fi
 nodeDir="$baseDir/node"
 
 cd $baseDir
-nodeVer="8.11.1"
+nodeVer="8.11.3"
 
 # Download the file
 nodeFile="node-v${nodeVer}-darwin-x64.tar.gz"
@@ -68,7 +68,7 @@ PATH="$nodeDir/bin:$PATH"
 
 # Install the required NPM packages
 npm cache clean --force
-npm -g install @angular/cli@1.7.4 typescript@2.6.2 tslint
+npm -g install @angular/cli@~6.0.0 typescript@~2.7.2 tslint
 
 # ------------------------------------------------------------------------------
 # This function downloads the node modules and prepares them for the release
