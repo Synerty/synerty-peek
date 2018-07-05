@@ -103,9 +103,16 @@ At the language selection screen, select: ::
 
 ----
 
+Goto **SOFTWARE SELECTION** screen, select Minimal Install or Server with GUI if 
+you'd like a GUI.
+
+.. image:: rhel_software_selection.jpg
+
+----
+
 Goto **DATE & TIME** screen, select the appropriate time location.
 
-.. image:: rhel_date_and_time.png
+.. image:: rhel_date_and_time.jpg
 
 ----
 
@@ -114,85 +121,139 @@ or leave as default.
 
 ----
 
-Goto **NETWORK & HOST NAME** screen, enter your desired hostname or: ::
+Goto **NETWORK & HOST NAME** screen,
+
+.. image:: rhel_network_hostname.jpg
+
+1. enter your desired hostname or: ::
 
     peek
 
+2. configure IP address,
+
+    Configure IP address:
+
+    .. image:: rhel_network_static_ip.jpg
+
+    a. Goto IPv4 Settings tab,
+
+    b. Set Method to `Manual`,
+
+    c. Add static IP address,
+
+    d. Save.
+
+3. enable network.
+
 ----
 
-Goto **INSTALLATION DESTINATION** screen, for partitioning select: ::
+Goto **INSTALLATION DESTINATION** screen, 
+
+.. image:: rhel_installation_destination.jpg
+
+1. for partitioning select: ::
 
     I will configure partitioning.
 
-.. image:: rhel_installation_destination.png
+2. Select Done.
 
 Partition Table
 ~~~~~~~~~~~~~~~
 
-We'll be creating three partitions, /boot / and swap. For a heavily used production
-server you may want to create more virtual disks and separate out /var, /home, and /tmp.
+We'll be creating three partitions, `/boot`, `/` and `swap`. For a heavily used production
+server you may want to create more virtual disks and separate out `/var`, `/home`, and `/tmp`.
 With one file system per disk.
 
 Having one file system per disk removes the need for the overhead of LVM, and the VM
 software can still expand the disk and filesystem as required.
 
+.. image:: rhel_manual_partitioning.jpg
+
+1. Add partition,
+
+repeat for each partition.
+
 /boot
 ~~~~~
 
-Select the following disk from the **ADD NEW MOUNT POINT** menu: 
+Select the following disk from the **ADD NEW MOUNT POINT** menu:
+
+.. image:: rhel_new_mount_boot.jpg
 
 Mount Point: ::
 
     /boot
 
+
 Desired Capacity: ::
 
     500m
 
-.. image:: rhel_partitioning_boot.png
+
+.. image:: rhel_manual_partitioning_boot.jpg
+
+1. Set Device Type to `standard`,
+
+2. Set File System to `ext2`.
 
 swap
 ~~~~
 
 Select the following disk from the **ADD NEW MOUNT POINT** menu: 
 
+.. image:: rhel_new_mount_swap.jpg
+
 Mount Point: ::
 
     swap
+
 
 Desired Capacity: ::
 
     4g
 
-.. image:: rhel_partitioning_swap.png
 
 / (root)
 ~~~~~~~~
 
 Select the following disk from the **ADD NEW MOUNT POINT** menu: 
 
+.. image:: rhel_new_mount_root.jpg
+
 Mount Point: ::
 
     /
+
 
 Desired Capacity: ::
 
     100%
 
-.. image:: rhel_partitioning_root.png
+
+.. image:: rhel_partitioning_root.jpg
+
+1. Set Device Type to `LVM`,
+
+2. Set File System to `ext4`.
 
 ----
 
-Select **DONE** and **BEGIN INSTALLATION**
+Select **DONE** review the **SUMMARY OF CHANGES**
+
+----
+
+**BEGIN INSTALLATION**
 
 ----
 
 While Red Hat is installing you can configure the **USER SETTINGS**, 
 set **ROOT PASSWORD** and go to the **USER CREATION** screen.
 
+.. image:: rhel_configuration.jpg
+
 Create the **peek** user.
 
-.. image:: rhel_create_user.png
+.. image:: rhel_create_user.jpg
 
 ----
 
@@ -215,6 +276,9 @@ Configure Static IP (Optional)
 
 If this is a production server, oit's more than likely that you want to assign a static IP to the VM.
 Here is how you do this.
+
+.. note:: Only do this is it wasn't done during installation or requires updating.
+    If you installed the GUI you can configure the static IP address with the GUI.
 
 ----
 
