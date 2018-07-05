@@ -202,6 +202,40 @@ After the server has rebooted, deconfigure the RHEL ISO from DVD drive in the VM
 
 The OS installtion is now complete.
 
+Login as Peek
+-------------
+
+Login to the Debian VM as the :code:`peek` user, either via SSH, or the graphical desktop if it's
+installed.
+
+.. important:: All steps after this point assume you're logged in as the peek user.
+
+Configure Static IP (Optional)
+------------------------------
+
+If this is a production server, oit's more than likely that you want to assign a static IP to the VM.
+Here is how you do this.
+
+----
+
+Edit file :file:`/etc/sysconfig/network-scripts/ifcfg-<device>`
+
+----
+
+Update the following lines: ::
+
+
+    DEVICE=<device>
+    BOOTPROTO=none
+    ONBOOT=yes
+    HWADDR=<MAC_ADDRESS>
+    NETMASK=255.255.255.0
+    IPADDR=<IP_ADDRESS>
+    GATEWAY=<GATEWAY_ADDRESS>
+    TYPE=Ethernet
+    USERCTL=no
+    IPV6INIT=no
+    PEERDNS=yes
 
 What Next?
 ----------
