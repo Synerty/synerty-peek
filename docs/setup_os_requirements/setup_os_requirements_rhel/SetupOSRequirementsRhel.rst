@@ -301,6 +301,79 @@ Update the following lines: ::
     IPV6INIT=no
     PEERDNS=yes
 
+Installing General Prerequisites
+--------------------------------
+
+This section installs the OS packages required.
+
+.. note:: Run the commands in this step as the `peek` user.
+
+----
+
+Install the C Compiler package, used for compiling python or VMWare tools, etc: ::
+
+    PKG="gcc gcc-c++ kernel-devel make"
+    sudo yum install $PKG
+
+----
+
+Install the Python build dependencies: ::
+
+    PKG="curl git m4 ruby texinfo bzip2-devel libcurl-devel"
+    PKG="$PKG expat-devel ncurses-libs zlib-devel libgmp-devel"
+    sudo yum install -y $PKG
+
+
+----
+
+Install C libraries that some python packages link to when they install: ::
+
+    PKG=""
+
+    # For the cryptography package
+    PKG="$PKG libffi-devel"
+
+    # For the python Samba client
+    PKG="$PKG samba-devel libsmbclient-devel"
+
+    sudo yum install -y $PKG
+
+    # For Shapely and GEOAlchemy
+    sudo yum install -y http://dl.fedoraproject.org/pub/epel/7/x86_64/Packages/g/geos-3.4.2-2.el7.x86_64.rpm
+    sudo yum install http://dl.fedoraproject.org/pub/epel/7/x86_64/Packages/g/geos-devel-3.4.2-2.el7.x86_64.rpm
+
+    # For LXML and the Oracle client
+    PKG="libxml2 libxml2-devel"
+    PKG="$PKG libxslt libxslt-devel"
+    PKG="$PKG libaio libaio-devel"
+
+    sudo yum install -y $PKG
+
+    # For the PostGresQL connector
+    sudo yum install -y http://dl.fedoraproject.org/pub/epel/7/x86_64/Packages/l/libpqxx-4.0.1-1.el7.x86_64.rpm
+    sudo yum install -y http://dl.fedoraproject.org/pub/epel/7/x86_64/Packages/l/libpqxx-devel-4.0.1-1.el7.x86_64.rpm
+
+    # For the SQLite python connector
+    sudo yum install -y http://dl.fedoraproject.org/pub/epel/7/x86_64/Packages/l/libsqlite3x-20071018-20.el7.x86_64.rpm
+    sudo yum install -y http://dl.fedoraproject.org/pub/epel/7/x86_64/Packages/l/libsqlite3x-devel-20071018-20.el7.x86_64.rpm
+
+
+----
+
+Install rsync: ::
+
+    PKG="rsync unzip"
+
+    sudo yum install -y $PKG
+
+
+----
+
+Cleanup the downloaded packages: ::
+
+    sudo yum clean all
+
+
 What Next?
 ----------
 
