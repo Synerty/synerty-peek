@@ -374,6 +374,52 @@ Cleanup the downloaded packages: ::
     sudo yum clean all
 
 
+Installing VMWare Tools (Optional)
+----------------------------------
+
+This section installs VMWare tools. The compiler tools have been installed from the section 
+above.
+
+----
+
+In the VMWare software, find the option to install VMWare tools.
+
+----
+
+Mount and unzip the tools: ::
+
+    sudo rm -rf /tmp/vmware-*
+    sudo mount /dev/sr0 /mnt
+    sudo tar -xzf /mnt/VM*gz -C /tmp
+    sudo umount /mnt
+
+
+----
+
+Install the tools with the default options: ::
+
+    cd /tmp/vmware-tools-distrib
+    sudo ./vmware-install.pl -f -d
+
+
+----
+
+Cleanup the tools install: ::
+
+    sudo rm -rf /tmp/vmware-*
+
+
+----
+
+Reboot the virtual machine: ::
+
+    sudo shutdown -r now
+
+
+.. note:: Keep in mind, that if the static IP is not set, the IP address of the VM may 
+    change, causing issues when reconnecting with SSH.
+
+
 What Next?
 ----------
 
