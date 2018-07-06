@@ -567,11 +567,14 @@ Insert : ::
         # Setup the variables for PYTHON
         export PEEK_PY_VER="3.6.5"
         export PATH="/home/peek/cpython-${PEEK_PY_VER}/bin:$PATH"
-
+		
         # Set the variables for the platform release
         # These are updated by the deploy script
         export PEEK_ENV=""
-        export PATH="${PEEK_ENV}/bin:$PATH"
+        if [ -n "${PEEK_ENV}" ]; then
+                export PATH="${PEEK_ENV}/bin:$PATH"
+        fi
+
 
 ----
 
