@@ -521,6 +521,59 @@ The Wheel package is required for building platform and plugin releases: ::
     pip install wheel
 
 
+Install Worker Dependencies
+---------------------------
+
+Install the parallel processing queue we use for the peek-worker tasks.
+
+.. note:: Run the commands in this step as the `peek` user.
+
+Install redis: ::
+
+    mkdir /tmp/redis
+    cd /tmp/redis
+
+    # download redis dependencies
+    wget http://www6.atomicorp.com/channels/atomic/centos/7/x86_64/RPMS/jemalloc-3.6.0-1.el7.art.x86_64.rpm
+    
+    # download redis
+    wget http://www6.atomicorp.com/channels/atomic/centos/7/x86_64/RPMS/redis-3.0.7-4.el7.art.x86_64.rpm
+
+    # install redis and dependencies
+    sudo yum install -y jemalloc-* redis-*
+
+    cd ~
+    rm -r /tmp/redis
+
+Install rabbitmq: ::
+
+    # install erlang v20.3
+    sudo yum install -y https://github.com/rabbitmq/erlang-rpm/releases/download/v20.3.6/erlang-20.3.6-1.el7.centos.x86_64.rpm
+
+    # Set rabbitmq repository
+    curl -s https://packagecloud.io/install/repositories/rabbitmq/rabbitmq-server/script.rpm.sh | sudo bash
+
+    # install rabbitmq
+    sudo yum install -y rabbitmq-server
+
+
+----
+
+Cleanup the downloaded packages: ::
+
+    sudo yum clean all
+
+
+----
+
+Enable the RabbitMQ management plugins: ::
+
+    sudo rm /var/lib/rabbitmq/.erlang.cookie
+    sudo rabbitmq-plugins enable rabbitmq_mqtt
+    sudo rabbitmq-plugins enable rabbitmq_management
+    sudo service rabbitmq-server restart
+
+
 What Next?
 ----------
 
