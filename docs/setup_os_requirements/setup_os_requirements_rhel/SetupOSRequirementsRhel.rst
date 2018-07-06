@@ -420,6 +420,107 @@ Reboot the virtual machine: ::
     change, causing issues when reconnecting with SSH.
 
 
+Compile and Install Python 3.6
+------------------------------
+
+The Peek Platform runs on Python. These instructions download, compile and install the 
+latest version of Python.
+
+----
+
+Edit `~/.bashrc` and insert the following after the first block comment.
+
+Make sure these are before any lines like: ::
+
+    # If not running interactiviely, don't do anything
+
+
+Insert: ::
+
+    ##### SET THE PEEK ENVIRONMENT #####
+    # Setup the variables for PYTHON
+    export PEEK_PY_VER="3.6.5"
+    export PATH="/home/peek/cpython-${PEEK_PY_VER}/bin:$PATH"
+
+    # Set the variables for the platform release
+    # These are updated by the deploy script
+    export PEEK_ENV=""
+    [ -n "${PEEK_ENV}" ] && export PATH="${PEEK_ENV}/bin:$PATH"
+
+
+----
+
+Download and unarchive the supported version of Python: ::
+
+    cd ~
+    PEEK_PY_VER="3.6.5"
+    wget "https://www.python.org/ftp/python/${PEEK_PY_VER}/Python-${PEEK_PY_VER}.tgz"
+    tar xzf Python-${PEEK_PY_VER}.tgz
+
+
+----
+
+
+Configure the build: ::
+
+    cd Python-${PEEK_PY_VER}
+    ./configure --prefix=/home/peek/cpython-${PEEK_PY_VER}/ --enable-optimizations
+
+
+----
+
+Make and Make install the software: ::
+
+    make install
+
+
+----
+
+Cleanup the download and build dir: ::
+
+    cd
+    rm -rf Python-${PEEK_PY_VER}*
+
+
+----
+
+Symlink the python3 commands so they are the only ones picked up by path: ::
+
+    cd /home/peek/cpython-${PEEK_PY_VER}/bin
+    ln -s pip3 pip
+    ln -s python3 python
+
+
+----
+
+.. warning:: Restart your terminal to get the new environment.
+
+----
+
+Test that the setup is working: ::
+
+    which python
+    echo "It should be /home/peek/cpython-3.6.5/bin/python"
+
+    which pip
+    echo "It should be /home/peek/cpython-3.6.5/bin/pip"
+
+
+----
+
+synerty-peek is deployed into python virtual environments. Install the virtualenv 
+python package: ::
+
+    pip install virtualenv
+
+
+----
+
+The Wheel package is required for building platform and plugin releases: ::
+
+    pip install wheel
+
+
 What Next?
 ----------
 
