@@ -574,6 +574,62 @@ Enable the RabbitMQ management plugins: ::
     sudo service rabbitmq-server restart
 
 
+Install PostGreSQL
+------------------
+
+Install the relational database we use on Linux.
+
+.. note:: Run the commands in this step as the `peek` user.
+
+Install PostGreSQL: ::
+
+    sudo yum install -y postgresql-server postgresql-contrib
+
+
+Create a new PostGreSQL database cluster: ::
+
+    sudo postgresql-setup initdb
+
+
+Create the peek SQL user: ::
+
+    F="/var/lib/pgsql/data/pg_hba.conf"
+    if ! sudo grep -q 'peek' $F; then
+        echo "host  peek    peek    127.0.0.1/32    trust" | sudo tee $F -a
+    fi
+    sudo systemctl start postgresql
+    sudo systemctl enable postgresql
+    sudo su - postgres
+    createuser -d -r -s peek
+    exit # exit postgres user
+
+
+----
+
+Create the database: ::
+
+    createdb -O peek peek
+
+
+----
+
+Set the database password: ::
+
+    psql <<EOF
+    \password
+    \q
+    EOF
+
+    # Set the password as "PASSWORD"
+
+
+----
+
+Cleanup traces of the password: ::
+
+    [ -e ~/.psql_history ] && rm ~/.psql_history
+
+
 What Next?
 ----------
 
