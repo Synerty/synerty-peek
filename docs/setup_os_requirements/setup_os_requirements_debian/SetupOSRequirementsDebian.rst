@@ -571,9 +571,7 @@ Insert : ::
         # Set the variables for the platform release
         # These are updated by the deploy script
         export PEEK_ENV=""
-        if [ -n "${PEEK_ENV}" ]; then
-                export PATH="${PEEK_ENV}/bin:$PATH"
-        fi
+        [ -n "${PEEK_ENV}" ] && export PATH="${PEEK_ENV}/bin:$PATH"
 
 
 ----
