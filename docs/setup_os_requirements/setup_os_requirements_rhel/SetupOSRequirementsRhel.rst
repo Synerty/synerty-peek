@@ -699,6 +699,72 @@ Symlink the oracle client lib ::
     ls -l libclntsh.so
 
 
+
+Install FreeTDS (Optional)
+--------------------------
+
+FreeTDS is an open source driver for the TDS protocol, this is the protocol used to
+talk to a MSSQL SQLServer database.
+
+Peek needs this installed if it uses the pymssql python database driver,
+which depends on FreeTDS.
+
+----
+
+Edit :file:`~/.bashrc` and insert the following after the first block comment
+
+Make sure these are before any lines like: ::
+
+    # If not running interactively, don't do anything
+
+Insert : ::
+
+    # Setup the variables for FREE TDS
+    export LD_LIBRARY_PATH="/home/peek/freetds:$LD_LIBRARY_PATH"
+
+----
+
+.. warning:: Restart your terminal you get the new environment.
+
+----
+
+Install FreeTDS:
+
+::
+
+    sudo yum install http://dl.fedoraproject.org/pub/epel/7/x86_64/Packages/f/freetds-0.95.81-1.el7.x86_64.rpm
+    sudo yum install http://dl.fedoraproject.org/pub/epel/7/x86_64/Packages/f/freetds-devel-0.95.81-1.el7.x86_64.rpm
+
+
+----
+
+Create file :file:`freetds.conf` in :code:`~/freetds` and populate with the following:
+
+::
+
+    mkdir ~/freetds
+    cat > ~/freetds/freetds.conf <<EOF
+
+    [global]
+        port = 1433
+        instance = peek
+        tds version = 7.4
+
+    EOF
+
+
+If you want to get more debug information, add the dump file line to the [global] section
+Keep in mind that the dump file takes a lot of space.
+
+::
+
+    [global]
+        port = 1433
+        instance = peek
+        tds version = 7.4
+        dump file = /tmp/freetds.log
+
+
 What Next?
 ----------
 
