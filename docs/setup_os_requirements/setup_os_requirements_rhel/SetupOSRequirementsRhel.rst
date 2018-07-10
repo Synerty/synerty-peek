@@ -630,6 +630,67 @@ Cleanup traces of the password: ::
     [ -e ~/.psql_history ] && rm ~/.psql_history
 
 
+Install Oracle Client (Optional)
+--------------------------------
+
+The oracle libraries are optional. Install them where the agent runs if you are 
+going to interface with an oracle database.
+
+----
+
+Edit `~/.bashrc` and insert the following after the first block comment.
+
+Make sure these are before any lines like: ::
+
+    # If not running interactiviely, don't do anything
+
+
+Insert: ::
+
+    # Setup the variables for ORACLE
+    export LD_LIBRARY_PATH="/home/peek/oracle/instantclient_12_2:$LD_LIBRARY_PATH"
+    export ORACLE_HOME="/home/peek/oracle/instantclient_12_2"
+
+.. warning:: Restart your terminal you get the new environment.
+
+----
+
+Make the directory where the oracle client will live ::
+
+        mkdir /home/peek/oracle
+
+----
+
+Download the following from oracle.
+
+The version used in these instructions is **12.2.0.1.0**.
+
+#.  Download the "Instant Client Package - Basic" from
+    http://www.oracle.com/technetwork/topics/linuxx86-64soft-092277.html
+
+#.  Download the "Instant Client Package - SDK" from
+    http://www.oracle.com/technetwork/topics/linuxx86-64soft-092277.html
+
+Copy these files to :file:`/home/peek/oracle` on the peek server.
+
+----
+
+Extract the files. ::
+
+    cd ~/oracle
+    unzip instantclient-sdk-linux.x64-12.2.0.1.0.zip
+    unzip instantclient-basic-linux.x64-12.2.0.1.0.zip
+
+
+----
+
+Symlink the oracle client lib ::
+
+    cd $ORACLE_HOME
+    ln -snf libclntsh.so.12.1 libclntsh.so
+    ls -l libclntsh.so
+
+
 What Next?
 ----------
 
