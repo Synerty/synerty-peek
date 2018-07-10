@@ -310,6 +310,14 @@ This section installs the OS packages required.
 
 ----
 
+To begin, make sure that all the packages currently installed on your RHEL/CentOS 7 
+system are updated to their latest versions: ::
+
+    sudo yum update -y
+
+
+----
+
 Install the C Compiler package, used for compiling python or VMWare tools, etc: ::
 
     PKG="gcc gcc-c++ kernel-devel make"
