@@ -4,7 +4,7 @@
 Package Peek Platform
 =====================
 
-.. note:: The Windows or Linux requirements must be followed before following this guide.
+.. note:: The Windows or Debian requirements must be followed before following this guide.
 
 To install the peek platform, you may use a Synerty provided release or build your own.
 
@@ -67,8 +67,8 @@ Run the following commands in the power shell window.
 
 ::
 
-        file="package_platform_linux.sh";
-        uri="https://bitbucket.org/synerty/synerty-peek/raw/master/scripts/linux/$file";
+        file="package_platform_deb8.sh";
+        uri="https://bitbucket.org/synerty/synerty-peek/raw/master/scripts/deb8/$file";
         wget $uri
 
 

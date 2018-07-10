@@ -3,7 +3,7 @@ Develop Peek Platform
 =====================
 
 .. WARNING:: This document extends, *Setup OS Requirements Windows* or the *Setup OS
-    Requirements Linux* depending on your OS.
+    Requirements Debian* depending on your OS.
 
 Most development will be for the plugins, not platform, so these instructions are not
 high priority.

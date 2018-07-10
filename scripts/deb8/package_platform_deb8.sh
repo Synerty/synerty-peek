@@ -13,7 +13,7 @@ fi
 
 startDir=`pwd`
 
-baseDir="$startDir/peek_dist_linux"
+baseDir="$startDir/peek_dist_deb8"
 
 [ -d $baseDir ] && rm -rf $baseDir
 
@@ -123,7 +123,7 @@ mkdir $baseDir/init && pushd $baseDir/init
 
 for s in peek_server peek_worker peek_agent peek_client
 do
-    wget -nv https://bitbucket.org/synerty/synerty-peek/raw/${peekPkgVer}/scripts/linux/init/$s
+    wget -nv https://bitbucket.org/synerty/synerty-peek/raw/${peekPkgVer}/scripts/deb8/init/$s
 done
 popd
 
@@ -135,7 +135,7 @@ mkdir $baseDir/util && pushd $baseDir/util
 utilScripts="restart_peek.sh"
 for s in $utilScripts
 do
-    wget -nv https://bitbucket.org/synerty/synerty-peek/raw/${peekPkgVer}/scripts/linux/util/$s
+    wget -nv https://bitbucket.org/synerty/synerty-peek/raw/${peekPkgVer}/scripts/deb8/util/$s
 done
 popd
 

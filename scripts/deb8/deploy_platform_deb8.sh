@@ -16,7 +16,7 @@ fi
 # Get the current location
 startDir=`pwd`
 
-releaseDir=`echo ~/peek_dist_linux`
+releaseDir=`echo ~/peek_dist_deb8`
 
 # Delete the existing dist dir if it exists
 if [ -d ${releaseDir} ]; then

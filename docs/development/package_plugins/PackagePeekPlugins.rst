@@ -75,7 +75,7 @@ following:
 
 ----
 
-Make a wheel dir for windows or Linux.
+Make a wheel dir for windows or Linux/Debian8.
 
 Windows: ::
 
@@ -84,8 +84,8 @@ Windows: ::
 
 Linux: ::
 
-        mkdir ~/plugin-release-dir/plugin-linux
-        cd    ~/plugin-release-dir/plugin-linux
+        mkdir ~/plugin-release-dir/plugin-deb8
+        cd    ~/plugin-release-dir/plugin-deb8
 
 ----
 
@@ -122,7 +122,7 @@ Windows: ::
 Linux: ::
 
         cd ~
-        tar cvjf plugin-linux.tar.bz2 -C ~/plugin-release-dir plugin-linux
+        tar cvjf plugin-deb8.tar.bz2 -C ~/plugin-release-dir plugin-deb8
 
 
 ----
