@@ -457,7 +457,7 @@ Install the Python build dependencies:
 ::
 
         PKG="build-essential curl git m4 ruby texinfo libbz2-dev libcurl4-openssl-dev"
-        PKG="$PKG libexpat-dev libncurses-dev zlib1g-dev libgmp-dev"
+        PKG="$PKG libexpat-dev libncurses-dev zlib1g-dev libgmp-dev libssl-dev"
         sudo apt-get install -y $PKG
 
 ----
@@ -565,7 +565,7 @@ Insert : ::
 
         ##### SET THE PEEK ENVIRONMENT #####
         # Setup the variables for PYTHON
-        export PEEK_PY_VER="3.6.5"
+        export PEEK_PY_VER="3.6.6"
         export PATH="/home/peek/cpython-${PEEK_PY_VER}/bin:$PATH"
 		
         # Set the variables for the platform release
@@ -579,7 +579,7 @@ Insert : ::
 Download and unarchive the supported version of Python ::
 
         cd ~
-        PEEK_PY_VER="3.6.5"
+        PEEK_PY_VER="3.6.6"
         wget "https://www.python.org/ftp/python/${PEEK_PY_VER}/Python-${PEEK_PY_VER}.tgz"
         tar xzf Python-${PEEK_PY_VER}.tgz
 
@@ -620,10 +620,10 @@ Symlink the python3 commands so they are the only ones picked up by path. ::
 Test that the setup is working ::
 
         which python
-        echo "It should be /home/peek/cpython-3.6.5/bin/python"
+        echo "It should be /home/peek/cpython-3.6.6/bin/python"
 
         which pip
-        echo "It should be /home/peek/cpython-3.6.5/bin/pip"
+        echo "It should be /home/peek/cpython-3.6.6/bin/pip"
 
 ----
 

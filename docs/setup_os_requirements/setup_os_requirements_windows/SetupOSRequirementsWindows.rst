@@ -156,7 +156,7 @@ git command.
 Install Python 3.6
 ------------------
 
-:Download: `<https://www.python.org/ftp/python/3.6.5/python-3.6.5-amd64.exe>`_
+:Download: `<https://www.python.org/ftp/python/3.6.6/python-3.6.6-amd64.exe>`_
 :From: `<https://www.python.org/downloads/windows/>`_
 
 ----

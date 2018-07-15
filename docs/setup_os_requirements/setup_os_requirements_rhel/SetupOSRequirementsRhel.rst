@@ -328,7 +328,7 @@ Install the C Compiler package, used for compiling python or VMWare tools, etc: 
 Install the Python build dependencies: ::
 
     PKG="curl git m4 ruby texinfo bzip2-devel libcurl-devel"
-    PKG="$PKG expat-devel ncurses-libs zlib-devel libgmp-devel"
+    PKG="$PKG expat-devel ncurses-libs zlib-devel libgmp-devel libssl-devel"
     sudo yum install -y $PKG
 
 
@@ -673,10 +673,10 @@ Download the following from oracle.
 
 The version used in these instructions is **12.2.0.1.0**.
 
-#.  Download the "Instant Client Package - Basic" from
+#.  Download the ZIP "Instant Client Package - Basic" from
     http://www.oracle.com/technetwork/topics/linuxx86-64soft-092277.html
 
-#.  Download the "Instant Client Package - SDK" from
+#.  Download the ZIP "Instant Client Package - SDK" from
     http://www.oracle.com/technetwork/topics/linuxx86-64soft-092277.html
 
 Copy these files to :file:`/home/peek/oracle` on the peek server.
