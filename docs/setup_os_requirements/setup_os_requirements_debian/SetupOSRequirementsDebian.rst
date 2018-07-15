@@ -2,10 +2,12 @@
 Setup OS Requirements Debian
 ============================
 
-This section describes how to perform the setup for Debian Linux 8.  The Peek platform
+This section describes how to perform the setup for Debian Linux 9.  The Peek platform
 is designed to run on Linux.
 
 Please read through all of the documentation before commencing the installation procedure.
+
+.. note:: These instructions are for Debian 9, AKA Stretch
 
 Installation Objective
 ----------------------
@@ -365,7 +367,14 @@ and use that instead of SSH.
 
 ----
 
-Login to the console of the Peek Debian VM as **root** and run the following command: ::
+Login to the console of the Peek Debian VM as **root** and install ifconfig
+ with the following command: ::
+
+    apt-get install net-tools
+
+----
+
+Run the following command: ::
 
     ifconfig
 
@@ -475,12 +484,12 @@ Install C libraries that some python packages link to when they install:
         PKG="$PKG samba-dev libsmbclient-dev libcups2-dev"
 
         # For Shapely and GEOAlchemy
-        PKG="$PKG libgeos-dev libgeos-c1"
+        PKG="$PKG libgeos-dev libgeos-c1v5"
 
         # For LXML and the Oracle client
         PKG="$PKG libxml2 libxml2-dev"
         PKG="$PKG libxslt1.1 libxslt1-dev"
-        PKG="$PKG libaio libaio-dev"
+        PKG="$PKG libaio1 libaio-dev"
 
         # For the PostGresQL connector
         PKG="$PKG libpq-dev"
@@ -672,7 +681,7 @@ Install the relational database we use on Linux.
 Add the latest PostGreSQL repository ::
 
         F=/etc/apt/sources.list.d/postgresql.list
-        echo "deb http://apt.postgresql.org/pub/repos/apt/ jessie-pgdg main" | sudo tee $F
+        echo "deb http://apt.postgresql.org/pub/repos/apt/ stretch-pgdg main" | sudo tee $F
         wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
         sudo apt-get update
 
@@ -681,7 +690,7 @@ Add the latest PostGreSQL repository ::
 
 Install PostGresQL ::
 
-        sudo apt-get install -y postgis postgresql-10
+        sudo apt-get install -y postgresql-10-postgis-2.4 postgresql-10
         sudo apt-get clean
 
 
@@ -760,10 +769,10 @@ Download the following from oracle.
 
 The version used in these instructions is **12.2.0.1.0**.
 
-#.  Download the "Instant Client Package - Basic" from
+#.  Download the ZIP "Instant Client Package - Basic" from
     http://www.oracle.com/technetwork/topics/linuxx86-64soft-092277.html
 
-#.  Download the "Instant Client Package - SDK" from
+#.  Download the ZIP "Instant Client Package - SDK" from
     http://www.oracle.com/technetwork/topics/linuxx86-64soft-092277.html
 
 Copy these files to :file:`/home/peek/oracle` on the peek server.
