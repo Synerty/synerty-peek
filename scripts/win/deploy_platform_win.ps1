@@ -66,6 +66,11 @@ virtualenv.exe $venvDir;
 # Activate the virtual environment
 $env:Path = "$venvDir\Scripts;$env:Path";
 
+$foundPipPath = (get-command pip).source;
+if ( -Not $foundPipPath.StartsWith($venvDir)) {
+    Write-Error "Failed to activate Venv $venvDir\Scripts\pip.exe, got $foundPipPath instead";
+}
+
 # ------------------------------------------------------------------------------
 # Install the python packages
 
@@ -130,6 +135,17 @@ switch ($result) {
             }
         }
         [Environment]::SetEnvironmentVariable("PATH", $newPath, "User");
+
+        $newPath = "";
+        ([Environment]::GetEnvironmentVariable("PATH", "Machine")).split(';') | foreach-object {
+            if ($_ -notmatch 'synerty-peek') {
+                $newPath = $newPath + ';' + $_
+            }
+            else {
+                Write-Host "Removed PATH variable:" $_ ;
+            }
+        }
+        [Environment]::SetEnvironmentVariable("PATH", $newPath, "Machine");
         Write-Host " ";
         Write-Host "Environment Variables have been updated."
         Write-Host " ";

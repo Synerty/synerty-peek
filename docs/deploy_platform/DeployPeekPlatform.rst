@@ -67,6 +67,21 @@ use the synerty-peek virtual environment that was just deployed.
 
 ----
 
+Now check that peek has been installed correctly, open a windows powershell prompt and
+enter the following: ::
+
+        get-command pip
+        # Expect to see C:\Users\peek\synerty-peek-1.0.0\Scripts\pip.exe
+
+        get-command python
+        # Expect to see C:\Users\peek\synerty-peek-1.0.0\Scripts\python.exe
+
+        python -c "import peek_platform; print(peek_platform.__file__)"
+        # Expect to see C:\Users\peek\synerty-peek-1.0.0\lib\site-packages\peek_platform\__init__.py
+
+
+----
+
 The platform is now deployed, see the admin page next.
 
 *   :ref:`admin_configure_synerty_peek`
