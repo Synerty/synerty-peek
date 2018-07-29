@@ -124,6 +124,7 @@ switch ($result) {
         Write-Host "You selected Yes.";
 
         $newPath = "$venvDir\Scripts";
+        $newPath = $newPath + ";$venvDir\Lib\site-packages\pywin32_system32";
         Write-Host "Added PATH variable:" $newPath;
 
         ([Environment]::GetEnvironmentVariable("PATH", "User")).split(';') | foreach-object {
