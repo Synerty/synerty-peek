@@ -53,7 +53,7 @@ First, backup the PostGreSQL :code:`peek` database.
 
 Delete the virtual environments
 
-delete C:\Users\peek\synerty-peek*
+delete C:\\Users\\peek\\synerty-peek*
 
 ----
 
@@ -66,7 +66,9 @@ delete C:\Users\peek\synerty-peek*
 
 Delete the old PostGreSQL database data directory.
 
-delete C:\Program Files\PostgreSQL
+delete C:\\Program Files\\PostgreSQL
+
+delete C:\\Users\\peek\\Python36
 
 ----
 
