@@ -42,7 +42,7 @@ Offline Diagram
 ```````````````
 
 Not to be outdone by the search and docdb plugins, the diagram plugin now has full
-offline support as well for nativescript apps (web is supported, but disabled.
+offline support as well for nativescript apps (web is supported, but it's disabled).
 
 Like the other plugins, the diagram will download and store all diagram grids and lookups
 locally. It will check for updated grids every 15m and download the changes.
@@ -95,8 +95,19 @@ install the services.
 
 :ref:`admin_win_services`
 
-Deployment
-----------
+Linux Deployment
+----------------
+
+Nil, carry on being awesome.
+
+macOS Deployment
+----------------
+
+Update to the latest XCode, 9.4.
+
+
+Windows Deployment
+------------------
 
 This version of Peek upgrades several dependencies of the system. Follow these
 instructions to upgrade all the dependencies.
@@ -131,7 +142,9 @@ Deploy the plugins.
 
 :ref:`deploy_peek_plugins`
 
-----
+
+Enable New Plugins
+------------------
 
 Update the peek config.json files.
 
@@ -139,21 +152,26 @@ Update the peek config.json files.
 #. Add :code:`peek_plugin_docdb` after :code:`peek_plugin_livedb`
 #. Add :code:`peek_plugin_search` after :code:`peek_plugin_livedb`
 #. Add :code:`peek_plugin_pof_equipment_loader`
-after :code:`peek_plugin_pof_diagram_loader`
+   after :code:`peek_plugin_pof_diagram_loader`
 
 ----
 
-Start up the Peek Server, it will rebuild the admin site.
+Start up the Peek Server service, it will rebuild the admin site.
 
 ----
 
-Connect to the admin site at http://localhost:8010 , go to
-Plugins -> PoF Equipment Detail Loader
+Connect to the admin site at http://localhost:8010
 
-Select the "Edit App server Settings" tab, enter the details and save.
+go to Plugins -> PoF Equipment Detail Loader
+
+Select the "Edit App Server Settings" tab, enter the details and save.
 
 The agent needs to be restarted if it was already running.
 
 ----
 
-Start the :code:`peek-restarter` service, the agent, worker and client will now start.
+Restart all Peek services.
+
+For windows, restart the :code:`peek-server` service then
+start the :code:`peek-restarter` service,
+the agent, worker and client will now start.
