@@ -1,3 +1,5 @@
+.. _setup_os_requirements_rhel:
+
 ==========================
 Setup OS Requirements RHEL
 ==========================

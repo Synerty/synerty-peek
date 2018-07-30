@@ -152,6 +152,7 @@ Press Ctrl+D to exit bash.
 Open a new command or powershell window, and type :command:`git`, it should find the
 git command.
 
+.. _setup_os_requirements_windows_python:
 
 Install Python 3.6
 ------------------

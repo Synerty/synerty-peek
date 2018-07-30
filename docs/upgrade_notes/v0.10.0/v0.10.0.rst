@@ -43,8 +43,6 @@ Deployment
 This version of Peek upgrades several dependencies of the system. Follow these
 instructions to upgrade all the dependencies.
 
-The
-
 ----
 
 First, backup the PostGreSQL :code:`peek` database.

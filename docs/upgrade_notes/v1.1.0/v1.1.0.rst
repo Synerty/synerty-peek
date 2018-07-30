@@ -1,0 +1,159 @@
+.. _upgrade_to_v1.1.0:
+
+=====================
+v1.1.0 Upgrade Notes
+=====================
+
+Changes
+-------
+
+Unified Search
+``````````````
+
+Peek now has a new unified search plugin. This plugin is populated by other "loader"
+plugins with all kinds of information.
+
+The search plugin handles the indexing and storage of all the information
+and provides a UI.
+
+There is an Angular service API so other plugins can retrieve search results at will.
+
+Search items consist of some key, value properties, and some paths to route to should
+the user select them.
+
+The search plugin has full offline support, by default it's online.
+
+Document DB
+```````````
+
+Peek now has a new DocDB plugin, as in Json Document.
+
+This plugin stores JSON documents and has a simple UI that presents key/values from the
+document.
+
+The DocDB plugin handles all the storage, memory caching, compressing and transport to
+the clients.
+
+There is an Angular service API so other plugins can retrieve documents at will.
+
+The DocDB plugin has full offline support, by default it's online.
+
+Offline Diagram
+```````````````
+
+Not to be outdone by the search and docdb plugins, the diagram plugin now has full
+offline support as well for nativescript apps (web is supported, but disabled.
+
+Like the other plugins, the diagram will download and store all diagram grids and lookups
+locally. It will check for updated grids every 15m and download the changes.
+
+----
+
+The "LocationIndex" in the diagram has had a small overhaul, previously it insisted on
+caching all the location index chunks to the browser/device before it would locate
+something. Now it supports online queries, significantly improving the speed of the
+initial diagram load.
+
+----
+
+The diagram now highlights equipment when it positions on them.
+
+----
+
+Finally, If you're using a web browser, the diagram updates the URL in the address
+bar, so you can share links or hit reload an the diagram will show restore to its
+previous state.
+
+VortexJS
+````````
+
+The VortexJS performance for the :code:`TupleDataOfflineObserverService` class.
+This is the class that handles most of the locally/offline cached data that is
+reactivly observed from the peek client.
+
+There are preformance and memory improvements, with the memory cached tuples now
+being purged after two minutes, and a significant reduction of the local storage save
+calls.
+
+NativeScript UI
+```````````````
+
+The nativescript UI responsiveness has been significantly improved.
+
+Dependency Bump
+```````````````
+
+Peek dependencies are upgrade as follows:
+
+Python 3.6.6
+
+Windows Services
+````````````````
+
+Peek v1.1.0 now contains windows services. These release notes will describe how to
+install the services.
+
+:ref:`admin_win_services`
+
+Deployment
+----------
+
+This version of Peek upgrades several dependencies of the system. Follow these
+instructions to upgrade all the dependencies.
+
+----
+
+#. Uninstall Python
+
+#. Delete the old Python install and peek virtual environments.
+
+#. delete C:\\Users\\peek\\Python36
+
+#. delete C:\\Users\\peek\\synerty-peek*
+
+#. Reinstall the software again based on these instructions:
+
+#. Install Python 3.6.6
+
+:ref:`setup_os_requirements_windows_python`
+
+
+----
+
+Deploy the platform as per the synerty-peek instructions.
+Take note to answer Y and Y at the end to ensure the services are installed
+
+:ref:`deploy_peek_platform_win`
+
+----
+
+Deploy the plugins.
+
+:ref:`deploy_peek_plugins`
+
+----
+
+Update the peek config.json files.
+
+#. Edit each of C:\Users\peek\peek-XXXX.home\config.json
+#. Add :code:`peek_plugin_docdb` after :code:`peek_plugin_livedb`
+#. Add :code:`peek_plugin_search` after :code:`peek_plugin_livedb`
+#. Add :code:`peek_plugin_pof_equipment_loader`
+after :code:`peek_plugin_pof_diagram_loader`
+
+----
+
+Start up the Peek Server, it will rebuild the admin site.
+
+----
+
+Connect to the admin site at http://localhost:8010 , go to
+Plugins -> PoF Equipment Detail Loader
+
+Select the "Edit App server Settings" tab, enter the details and save.
+
+The agent needs to be restarted if it was already running.
+
+----
+
+Start the :code:`peek-restarter` service, the agent, worker and client will now start.

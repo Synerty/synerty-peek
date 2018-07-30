@@ -9,8 +9,9 @@ Setup OS Requirements
     :caption: Contents:
 
     setup_os_requirements_windows/SetupOSRequirementsWindows
-    setup_os_requirements_debian/SetupOSRequirementsDebian
     setup_os_requirements_macos/SetupOSRequirementsMacOS
+    setup_os_requirements_rhel/SetupOSRequirementsRhel
+    setup_os_requirements_debian/SetupOSRequirementsDebian
 
 What Next?
 ----------

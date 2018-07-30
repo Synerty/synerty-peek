@@ -17,6 +17,8 @@ rollback path (switch back to the old virtual environment).
 To build your own platform release, see the following document
 :ref:`package_peek_platform`.
 
+.. _deploy_peek_platform_win:
+
 Windows
 -------
 
@@ -79,6 +81,20 @@ enter the following: ::
         python -c "import peek_platform; print(peek_platform.__file__)"
         # Expect to see C:\Users\peek\synerty-peek-1.0.0\lib\site-packages\peek_platform\__init__.py
 
+----
+
+Peek on windows can run as a service.
+The following instructions are required to grant the ".\peek" user permissions to start
+services (Grant "Login as Service").
+
+#.  Run "services.msc"
+#.  Find the peek server service
+#.  Open the properties of the service
+#.  Goto the LogOn tab
+#.  Enter the password twice and hit OK
+#.  A dialog box will appear saying that the Peek users has been granted the right.
+
+Thats it, Peek can now start services.
 
 ----
 
