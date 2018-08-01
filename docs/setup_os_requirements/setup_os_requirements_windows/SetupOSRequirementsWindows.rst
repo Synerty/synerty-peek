@@ -168,7 +168,7 @@ Check the 'Add Python 3.6 to PATH' and select 'Customize Installation'
 
 ----
 
-Update the 'Customize install location' to PATH C:\\Users\\peek\\Python36\
+Update the 'Customize install location' to PATH C:\\Users\\peek\\Python36\\
 
 .. image:: Python-AdvancedOptions.jpg
 

@@ -139,7 +139,7 @@ switch ($result) {
 
         $newPath = "";
         ([Environment]::GetEnvironmentVariable("PATH", "Machine")).split(';') | foreach-object {
-            if ($_ -notmatch 'synerty-peek') {
+            if ($_ -notmatch 'synerty-peek' -and $_ -notmatch 'Python3') {
                 $newPath = $newPath + ';' + $_
             }
             else {

@@ -81,6 +81,13 @@ enter the following: ::
         python -c "import peek_platform; print(peek_platform.__file__)"
         # Expect to see C:\Users\peek\synerty-peek-1.0.0\lib\site-packages\peek_platform\__init__.py
 
+
+.. note:: If the paths are not as expected, ensure that the
+            SYSTEM environment PATH variable does not contain any paths with
+            "C:\\Users\\Peek\\Python36\\" in it.
+
+            When a command prompt is open the order of PATH is SYSTEM then USER.
+
 ----
 
 Peek on windows can run as a service.
