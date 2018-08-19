@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+set -o nounset
+set -o errexit
+
 source ./pip_common.sh
 
 # -------------------------------------
