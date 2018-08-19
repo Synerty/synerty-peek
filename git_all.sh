@@ -1,25 +1,28 @@
 #!/usr/bin/env bash
 
+
+RED='\033[0;31m'
+NC='\033[0m' # No Color
+
+
 if [ -z ${1} ]
 then
-echo <<EOF
+echo -e "
 Running with no arguments produces this help
 
 To create and switch to a new peek branch:
-# bash ./git_all.sh checkout -b v1.1.x
+# ${RED}bash ./git_all.sh checkout -b v1.1.x${NC}
 
 To push a new branch and set the upstream:
-# bash ./git_all.sh push -u origin v1.1.x
+# ${RED}bash ./git_all.sh push -u origin v1.1.x${NC}
 
 To switch branches
-# bash ./git_all.sh checkout master
+# ${RED}bash ./git_all.sh checkout master${NC}
 
 To merge branch v1.1.x into master
-# bash ./git_all.sh checkout master
-# bash ./git_all.sh merge v1.1.x
-
-
-EOF
+# ${RED}bash ./git_all.sh checkout master${NC}
+# ${RED}bash ./git_all.sh merge v1.1.x${NC}
+"
 exit 0
 fi
 
