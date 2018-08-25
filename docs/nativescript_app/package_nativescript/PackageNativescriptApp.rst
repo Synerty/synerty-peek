@@ -37,7 +37,7 @@ Run the following commands in the PowerShell window.
 ::
 
     $file = "package_nativescript_app_win.ps1";
-    $uri = "https://raw.githubusercontent.com/Synerty/synerty-peek/master/$file";
+    $uri = "https://bitbucket.org/synerty/synerty-peek/raw/master/$file";
     Invoke-WebRequest -Uri $uri -UseBasicParsing -OutFile $file;
 
 
