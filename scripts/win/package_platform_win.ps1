@@ -149,9 +149,11 @@ foreach ($element in $nodePackages) {
     Set-Location "$nmDir\tmp";
 
     # Download package.json
+    Write-Host "Downloading $packageLockJsonUrl";
     Invoke-WebRequest -Uri $packageJsonUrl -UseBasicParsing -OutFile "package.json";
 
     # Download package-lock.json
+    Write-Host "Downloading $packageLockJsonUrl";
     Invoke-WebRequest -Uri $packageLockJsonUrl -UseBasicParsing -OutFile "package-lock.json";
 
     # run npm install
