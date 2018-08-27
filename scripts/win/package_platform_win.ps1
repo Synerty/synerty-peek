@@ -40,13 +40,13 @@ $extraWheels = @(
     # Download shapely, it's not a dependency on windows because pip doesn't try to get the windows dist.
     @{
         "file" = "Shapely-1.6.4.post1-cp36-cp36m-win_amd64.whl";
-        "url" = "https://download.lfd.uci.edu/pythonlibs/l8ulg3xw"
+        "url" = "https://download.lfd.uci.edu/pythonlibs/o4uhg4xd"
     },
 
     # Download pymssql, As to 11/Apr/2017, there are no standard built wheels for 3.6.1
     @{
         "file" = "pymssql-2.1.3-cp36-cp36m-win_amd64.whl";
-        "url" = "https://download.lfd.uci.edu/pythonlibs/l8ulg3xw"
+        "url" = "https://download.lfd.uci.edu/pythonlibs/o4uhg4xd"
     }
 );
 
@@ -127,13 +127,13 @@ npm -g install @angular/cli@~6.0.0 typescript@~2.7.2 tslint
 # Define the node packages we want to download
 $nodePackages = @(
     @{"dir" = "$baseDir\mobile-build-web";
-        "packageJsonBaseUrl" = "https://raw.githubusercontent.com/Synerty/peek-mobile/$peekPkgVer/peek_mobile/build-web"
+        "packageJsonBaseUrl" = "https://bitbucket.org/synerty/peek-mobile/raw/$peekPkgVer/peek_mobile/build-web"
     },
     @{"dir" = "$baseDir\desktop-build-web";
-        "packageJsonBaseUrl" = "https://raw.githubusercontent.com/Synerty/peek-desktop/$peekPkgVer/peek_desktop/build-web"
+        "packageJsonBaseUrl" = "https://bitbucket.org/synerty/peek-desktop/raw/$peekPkgVer/peek_desktop/build-web"
     },
     @{"dir" = "$baseDir\admin-build-web";
-        "packageJsonBaseUrl" = "https://raw.githubusercontent.com/Synerty/peek-admin/$peekPkgVer/peek_admin/build-web"
+        "packageJsonBaseUrl" = "https://bitbucket.org/synerty/peek-admin/raw/$peekPkgVer/peek_admin/build-web"
     }
 );
 
@@ -149,9 +149,11 @@ foreach ($element in $nodePackages) {
     Set-Location "$nmDir\tmp";
 
     # Download package.json
+    Write-Host "Downloading $packageLockJsonUrl";
     Invoke-WebRequest -Uri $packageJsonUrl -UseBasicParsing -OutFile "package.json";
 
     # Download package-lock.json
+    Write-Host "Downloading $packageLockJsonUrl";
     Invoke-WebRequest -Uri $packageLockJsonUrl -UseBasicParsing -OutFile "package-lock.json";
 
     # run npm install
