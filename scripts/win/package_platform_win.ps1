@@ -45,7 +45,7 @@ $extraWheels = @(
 
     # Download pymssql, As to 11/Apr/2017, there are no standard built wheels for 3.6.1
     @{
-        "file" = "pymssql-2.1.3-cp36-cp36m-win_amd64.whl";
+        "file" = "pymssql-2.1.4-cp36-cp36m-win_amd64.whl";
         "url" = "https://download.lfd.uci.edu/pythonlibs/o4uhg4xd"
     }
 );
