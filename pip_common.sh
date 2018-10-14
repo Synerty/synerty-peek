@@ -39,6 +39,8 @@ peek-core-device"
 
 export PLUGINS="
 peek-plugin-noop
+peek-plugin-tutorial
+peek-plugin-index-blueprint
 peek-plugin-data-dms
 peek-plugin-user
 peek-plugin-inbox
