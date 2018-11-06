@@ -9,3 +9,5 @@ Peek Windows Admin
     :caption: Contents:
 
     admin_win_services
+    win_postgres_backup_restore
+

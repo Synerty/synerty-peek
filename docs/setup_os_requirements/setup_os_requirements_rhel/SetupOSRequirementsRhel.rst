@@ -62,40 +62,42 @@ to run the Peek Platform.
 
 The instructions on this page don't install the peek platform, that's done later.
 
-Install Red Hat Linux Server 7.4 OS
+Install Red Hat Linux Server 7.6 OS
 -----------------------------------
 
-This section installs the Red Hat Linux Server 7.4 64bit operating system.
+This section installs the Red Hat Linux Server 7.6 64bit operating system.
 
 Create VM
 `````````
 
 Create a new virtual machine with the following specifications
 
-*   2 CPUs
-*   4gb of ram
-*   50gb of disk space
+*   4 CPUs
+*   8gb of ram
+*   60gb of disk space
 
 Install OS
 ``````````
 
-Download the RHEL ISO
+Download the RHEL ISO **Red Hat Enterprise Linux 7.6 Binary DVD** from:
 
-`Download RHEL <https://access.redhat.com/site/downloads/content/271/>`_
+`Download RHEL <https://access.redhat.com/downloads/content/69/ver=/rhel---7/7.6/x86_64/product-software>`_
 
 ----
 
 Mount the ISO in the virtual machine and start the virtual machine.
 
-Run through the installer manually, do not let your virtual machine software perform
-a wizard or express install.
+.. note::
+
+    Run through the installer manually, do not let your virtual machine software perform
+    a wizard or express install.
 
 Staring Off
 ~~~~~~~~~~~
 
-At the **Red Hat Enterprise Linux 7.4 installer boot menu** screen, select: ::
+At the **Red Hat Enterprise Linux 7.6 installer boot menu** screen, select: ::
 
-    Install Red Hat Enterprise Linux 7.4
+    Install Red Hat Enterprise Linux 7.6
 
 ----
 
@@ -105,37 +107,126 @@ At the language selection screen, select: ::
 
 ----
 
-Goto **SOFTWARE SELECTION** screen, select Minimal Install or Server with GUI if 
-you'd like a GUI.
+Next you will see a screen that lets you jump to any area to configure.
+The areas that need attention are numbered and explained in the following sections.
 
-.. image:: rhel_software_selection.jpg
+.. image:: config_menu1.png
+
+.. image:: config_menu2.png
 
 ----
 
-Goto **DATE & TIME** screen, select the appropriate time location.
+#1 Goto the  **DATE & TIME** screen, select the appropriate time location.
 
 .. image:: rhel_date_and_time.jpg
 
 ----
 
-Goto **KEYBOARD** screen, select the appropriate keyboard,
-or leave as default.
+#2 Goto the **SOFTWARE SELECTION** screen, select **Minimal Install**
+or **Server with GUI** if you'd like a GUI.
+
+.. image:: rhel_software_selection.jpg
 
 ----
 
-Goto **NETWORK & HOST NAME** screen,
+#3 Goto the **INSTALLATION DESTINATION** screen
+
+The following partitioning is recommended for DEV peek virtual machines.
+
+Select: ::
+
+    I will configure partitioning.
+
+.. image:: rhel_installation_destination.jpg
+
+Select Done.
+
+Partition Table
+~~~~~~~~~~~~~~~
+
+We'll be creating three partitions, `/boot`, `/` and `swap`. For a heavily used production
+server you may want to create more virtual disks and separate out `/var`, `/home`, and `/tmp`.
+With one file system per disk.
+
+Having one file system per disk allows VM
+software to easily expand the disk and filesystem as required.
+
+----
+
+Select **Standard Partition**
+
+Again, This is to allow the virtual machine software to expand the DEV server
+disks more easily.
+
+.. image:: rhel_standard_partitioning.png
+
+----
+
+Add the partitions, for each partition, click the plus.
+
+.. image:: rhel_new_partition.png
+
+----
+
+Set the Mount Point to **/boot**
+
+Set the size to **1g**
+
+Click **Add mount point**
+
+.. image:: rhel_new_mount_boot.png
+
+----
+
+Set the Mount Point to **swap**
+
+Set the size to **8g**
+
+Click **Add mount point**
+
+.. image:: rhel_new_mount_swap.png
+
+----
+
+Set the Mount Point to **/**
+
+Set the size to **100%**
+
+Click **Add mount point**
+
+.. image:: rhel_new_mount_root.png
+
+----
+
+You should have a partition layout as follows, Click **Done**
+
+
+.. image:: rhel_example_partition.png
+
+----
+
+Click **Accept Changes**
+
+
+.. image:: rhel_confrm_partition.png
+
+----
+
+#4 Goto **NETWORK & HOST NAME** screen,
 
 .. image:: rhel_network_hostname.jpg
 
-1. enter your desired hostname or: ::
+1. Enter your desired hostname, for example ::
 
-    peek
+    peek.localdomain
 
-2. configure IP address,
+----
 
-    Configure IP address:
+2. Turn on the Ethernet connection, this will get a DHCP IP Address.
 
-    .. image:: rhel_network_static_ip.jpg
+.. note:: Make note of the DHCP IP Address
+
+Otherwise, Configure a static IP address,
 
     a. Goto IPv4 Settings tab,
 
@@ -145,98 +236,7 @@ Goto **NETWORK & HOST NAME** screen,
 
     d. Save.
 
-3. enable network.
-
-----
-
-Goto **INSTALLATION DESTINATION** screen, 
-
-.. image:: rhel_installation_destination.jpg
-
-1. for partitioning select: ::
-
-    I will configure partitioning.
-
-2. Select Done.
-
-Partition Table
-~~~~~~~~~~~~~~~
-
-We'll be creating three partitions, `/boot`, `/` and `swap`. For a heavily used production
-server you may want to create more virtual disks and separate out `/var`, `/home`, and `/tmp`.
-With one file system per disk.
-
-Having one file system per disk removes the need for the overhead of LVM, and the VM
-software can still expand the disk and filesystem as required.
-
-.. image:: rhel_manual_partitioning.jpg
-
-1. Add partition,
-
-repeat for each partition.
-
-/boot
-~~~~~
-
-Select the following disk from the **ADD NEW MOUNT POINT** menu:
-
-.. image:: rhel_new_mount_boot.jpg
-
-Mount Point: ::
-
-    /boot
-
-
-Desired Capacity: ::
-
-    500m
-
-
-.. image:: rhel_manual_partitioning_boot.jpg
-
-1. Set Device Type to `standard`,
-
-2. Set File System to `ext2`.
-
-swap
-~~~~
-
-Select the following disk from the **ADD NEW MOUNT POINT** menu: 
-
-.. image:: rhel_new_mount_swap.jpg
-
-Mount Point: ::
-
-    swap
-
-
-Desired Capacity: ::
-
-    4g
-
-
-/ (root)
-~~~~~~~~
-
-Select the following disk from the **ADD NEW MOUNT POINT** menu: 
-
-.. image:: rhel_new_mount_root.jpg
-
-Mount Point: ::
-
-    /
-
-
-Desired Capacity: ::
-
-    100%
-
-
-.. image:: rhel_partitioning_root.jpg
-
-1. Set Device Type to `LVM`,
-
-2. Set File System to `ext4`.
+    .. image:: rhel_network_static_ip.jpg
 
 ----
 
@@ -244,67 +244,64 @@ Select **DONE** review the **SUMMARY OF CHANGES**
 
 ----
 
-**BEGIN INSTALLATION**
+Click **BEGIN INSTALLATION**
+
+.. image:: rhel_begin_installation.png
 
 ----
 
-While Red Hat is installing you can configure the **USER SETTINGS**, 
-set **ROOT PASSWORD** and go to the **USER CREATION** screen.
+While RHEL is installing, further installation steps need to be completed.
 
-.. image:: rhel_configuration.jpg
+Configure the **ROOT PASSWORD** and the **USER CREATION*
 
-Create the **peek** user.
-
-.. image:: rhel_create_user.jpg
+.. image:: rhel_installing_root_user_config.png
 
 ----
 
-After the server has rebooted, deconfigure the RHEL ISO from DVD drive in the VM software.
+Configure the root password of the new RHEL VM.
+
+Enter the root password twice, then click **Done**
+
+.. image:: rhel_config_root_pass.png
 
 ----
 
-The OS installtion is now complete.
+Create the **peek** user as follows.
+
+.. image:: rhel_create_user.png
+
+----
+
+Click **Finish configuration**
+
+.. image:: rhel_finish_configuration.png
+
+----
+
+Click **Reboot**
+
+.. image:: rhel_install_reboot.png
+
+----
+
+After the server has rebooted, disconnect and remove the RHEL ISO
+from DVD drive in the VM software.
+
+
+----
+
+The OS installation is now complete.
 
 Login as Peek
 -------------
 
-Login to the Debian VM as the :code:`peek` user, either via SSH, or the graphical desktop if it's
+Login to the RHEL VM as the :code:`peek` user, either via SSH, or the graphical desktop if it's
 installed.
 
 .. important:: All steps after this point assume you're logged in as the peek user.
 
-Configure Static IP (Optional)
-------------------------------
-
-If this is a production server, oit's more than likely that you want to assign a static IP to the VM.
-Here is how you do this.
-
-.. note:: Only do this is it wasn't done during installation or requires updating.
-    If you installed the GUI you can configure the static IP address with the GUI.
-
-----
-
-Edit file :file:`/etc/sysconfig/network-scripts/ifcfg-<device>`
-
-----
-
-Update the following lines: ::
-
-
-    DEVICE=<device>
-    BOOTPROTO=none
-    ONBOOT=yes
-    HWADDR=<MAC_ADDRESS>
-    NETMASK=255.255.255.0
-    IPADDR=<IP_ADDRESS>
-    GATEWAY=<GATEWAY_ADDRESS>
-    TYPE=Ethernet
-    USERCTL=no
-    IPV6INIT=no
-    PEERDNS=yes
-
-Installing General Prerequisites
---------------------------------
+Installing OS Prerequisites
+---------------------------
 
 This section installs the OS packages required.
 

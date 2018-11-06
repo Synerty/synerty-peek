@@ -72,9 +72,9 @@ Create VM
 
 Create a new virtual machine with the following specifications
 
-*   2 CPUs
-*   4gb of ram
-*   50gb of disk space
+*   4 CPUs
+*   8gb of ram
+*   60gb of disk space
 
 Install OS
 ``````````
