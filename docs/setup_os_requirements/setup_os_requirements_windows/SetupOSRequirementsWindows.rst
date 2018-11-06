@@ -73,10 +73,10 @@ Create Peek OS User
 -------------------
 
 Create a windows user account for peek with admin rights.
+Search for **Computer Management** from the start menu, and create the new peek user
+from there.
 
-.. tip:: Search for **Computer Management** from the start menu, and use that.
-
-----
+.. warning:: Make sure the username is all lower case.
 
 :Account Type: Administrator
 :Username: peek
