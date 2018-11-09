@@ -461,6 +461,15 @@ Install the C Compiler package, used for compiling python or VMWare tools, etc:
 
 ----
 
+Install rsync package:
+
+::
+
+        PKG="rsync unzip"
+        sudo apt-get install -y $PKG
+
+----
+
 Install the Python build dependencies:
 
 ::
@@ -475,21 +484,22 @@ Install C libraries that some python packages link to when they install:
 
 ::
 
-        PKG=""
-
         # For the cryptography package
-        PKG="$PKG libffi-dev"
+        PKG="libffi-dev"
 
         # For the python Samba client
         PKG="$PKG samba-dev libsmbclient-dev libcups2-dev"
 
-        # For Shapely and GEOAlchemy
-        PKG="$PKG libgeos-dev libgeos-c1v5"
+        sudo apt-get install -y $PKG
 
-        # For LXML and the Oracle client
-        PKG="$PKG libxml2 libxml2-dev"
-        PKG="$PKG libxslt1.1 libxslt1-dev"
-        PKG="$PKG libaio1 libaio-dev"
+----
+
+Install C libraries that database access python packages link to when they install:
+
+::
+
+        # For Shapely and GEOAlchemy
+        PKG="libgeos-dev libgeos-c1v5"
 
         # For the PostGresQL connector
         PKG="$PKG libpq-dev"
@@ -501,12 +511,16 @@ Install C libraries that some python packages link to when they install:
 
 ----
 
-Install rsync package:
+Install C libraries that the oracle client requires:
 
 ::
 
-        PKG="rsync unzip"
-        sudo apt-get install -y $PKG
+        # For LXML and the Oracle client
+        PKG="libxml2 libxml2-dev"
+        PKG="$PKG libxslt1.1 libxslt1-dev"
+        PKG="$PKG libaio1 libaio-dev"
+
+        sudo yum install -y $PKG
 
 ----
 
@@ -574,7 +588,7 @@ Insert : ::
 
         ##### SET THE PEEK ENVIRONMENT #####
         # Setup the variables for PYTHON
-        export PEEK_PY_VER="3.6.6"
+        export PEEK_PY_VER="3.6.7"
         export PATH="/home/peek/cpython-${PEEK_PY_VER}/bin:$PATH"
 		
         # Set the variables for the platform release
@@ -588,7 +602,7 @@ Insert : ::
 Download and unarchive the supported version of Python ::
 
         cd ~
-        PEEK_PY_VER="3.6.6"
+        PEEK_PY_VER="3.6.7"
         wget "https://www.python.org/ftp/python/${PEEK_PY_VER}/Python-${PEEK_PY_VER}.tgz"
         tar xzf Python-${PEEK_PY_VER}.tgz
 
@@ -629,10 +643,10 @@ Symlink the python3 commands so they are the only ones picked up by path. ::
 Test that the setup is working ::
 
         which python
-        echo "It should be /home/peek/cpython-3.6.6/bin/python"
+        echo "It should be /home/peek/cpython-3.6.7/bin/python"
 
         which pip
-        echo "It should be /home/peek/cpython-3.6.6/bin/pip"
+        echo "It should be /home/peek/cpython-3.6.7/bin/pip"
 
 ----
 

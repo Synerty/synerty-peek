@@ -169,7 +169,7 @@ In terminal run: ::
 
 Symlink the python3 commands so they are the only ones picked up by path. ::
 
-        cd /usr/local/Cellar/python/3.6.6/bin/
+        cd /usr/local/Cellar/python/3.6.7/bin/
         ln -s python3 python
         ln -s pip3 pip
         ln -s wheel3 wheel
@@ -186,11 +186,11 @@ Edit :file:`~/.bash_profile` and insert the following: ::
 
         #### SET THE HOMEBREW PYTHON ENVIRONMENT ####
         # Set PATH to include python
-        export PATH="/usr/local/Cellar/python/3.6.6/bin:$PATH"
+        export PATH="/usr/local/Cellar/python/3.6.7/bin:$PATH"
 
         ##### SET THE PEEK ENVIRONMENT #####
         # Setup the variables for PYTHON
-        export PEEK_PY_VER="3.6.6"
+        export PEEK_PY_VER="3.6.7"
 
         # Set the variables for the platform release
         # These are updated by the deploy script
@@ -202,13 +202,13 @@ Edit :file:`~/.bash_profile` and insert the following: ::
 
 Open a new terminal and test that the setup is working ::
 
-        pass="/usr/local/Cellar/python/3.6.6/bin/python"
+        pass="/usr/local/Cellar/python/3.6.7/bin/python"
         [ "`which python`" == "$pass" ] && echo "Success" || echo "FAILED"
 
-        pass="Python 3.6.6"
+        pass="Python 3.6.7"
         [ "`python --version`" == "$pass" ] && echo "Success" || echo "FAILED"
 
-        pass="/usr/local/Cellar/python/3.6.6/bin/pip"
+        pass="/usr/local/Cellar/python/3.6.7/bin/pip"
         [ "`which pip`" == "$pass" ] && echo "Success" || echo "FAILED"
 
 
