@@ -44,7 +44,7 @@ The following utilities are often useful.
 Optional Software
 `````````````````
 
-- Oracle 12c Client
+- Oracle Client
 
 Installing Oracle Libraries is required if you intend on installing the peek agent.
 Instruction for installing the Oracle Libraries are in the Online Installation Guide.
@@ -555,6 +555,76 @@ Reboot the virtual machine. ::
 Keep in mind, that if the static IP is not set, the IP address of the VM may change,
 causing issues when reconnecting with SSH.
 
+
+
+Install PostGreSQL
+------------------
+
+Install the relational database Peek stores its data in.
+This is PostGreSQL 10.
+
+.. note:: Run the commands in this step as the :code:`peek` user.
+
+Add the latest PostGreSQL repository ::
+
+        F=/etc/apt/sources.list.d/postgresql.list
+        echo "deb http://apt.postgresql.org/pub/repos/apt/ stretch-pgdg main" | sudo tee $F
+        wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+        sudo apt-get update
+
+
+----
+
+Install PostGresQL ::
+
+        sudo apt-get install -y postgresql-10-postgis-2.4 postgresql-10
+        sudo apt-get clean
+
+----
+
+Allow the peek OS user to login to the database as user peek with no password ::
+
+        F=/etc/postgresql/10/main/pg_hba.conf
+        if ! sudo grep -q 'peek' $F; then
+            echo "host  peek    peek    127.0.0.1/32    trust" | sudo tee $F -a
+        fi
+
+----
+
+Create the peek SQL user ::
+
+        sudo su - postgres
+        createuser -d -r -s peek
+        exit # Exit postgres user
+
+
+----
+
+Set the PostGreSQL peek users password ::
+
+        psql <<EOF
+        \password
+        \q
+        EOF
+
+        # Set the password as "PASSWORD" for development machines
+        # Set it to a secure password from https://xkpasswd.net/s/ for production
+
+
+----
+
+Create the database ::
+
+        createdb -O peek peek
+
+----
+
+Cleanup traces of the password ::
+
+        [ ! -e ~/.psql_history ] || rm ~/.psql_history
+
+
+
 Compile and Install Python 3.6
 ------------------------------
 
@@ -690,76 +760,6 @@ Enable the RabbitMQ management plugins: ::
         sudo rabbitmq-plugins enable rabbitmq_mqtt
         sudo rabbitmq-plugins enable rabbitmq_management
         sudo service rabbitmq-server restart
-
-
-
-Install PostGreSQL
-------------------
-
-Install the relational database Peek stores its data in.
-This is PostGreSQL 10.
-
-.. note:: Run the commands in this step as the :code:`peek` user.
-
-Add the latest PostGreSQL repository ::
-
-        F=/etc/apt/sources.list.d/postgresql.list
-        echo "deb http://apt.postgresql.org/pub/repos/apt/ stretch-pgdg main" | sudo tee $F
-        wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
-        sudo apt-get update
-
-
-----
-
-Install PostGresQL ::
-
-        sudo apt-get install -y postgresql-10-postgis-2.4 postgresql-10
-        sudo apt-get clean
-
-----
-
-Allow the peek OS user to login to the database as user peek with no password ::
-
-        F=/etc/postgresql/10/main/pg_hba.conf
-        if ! sudo grep -q 'peek' $F; then
-            echo "host  peek    peek    127.0.0.1/32    trust" | sudo tee $F -a
-        fi
-
-----
-
-Create the peek SQL user ::
-
-        sudo su - postgres
-        createuser -d -r -s peek
-        exit # Exit postgres user
-
-
-----
-
-Set the PostGreSQL peek users password ::
-
-        psql <<EOF
-        \password
-        \q
-        EOF
-
-        # Set the password as "PASSWORD" for development machines
-        # Set it to a secure password from https://xkpasswd.net/s/ for production
-
-
-----
-
-Create the database ::
-
-        createdb -O peek peek
-
-----
-
-Cleanup traces of the password ::
-
-        [ ! -e ~/.psql_history ] || rm ~/.psql_history
-
-
 Install Oracle Client (Optional)
 --------------------------------
 

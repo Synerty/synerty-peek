@@ -157,6 +157,86 @@ Install the dev libs that the python packages will need to compile ::
         brew install openssl@1.1
 
 
+Install PostGreSQL
+------------------
+
+Install the relational database we use on macOS.
+
+In terminal run: ::
+
+        brew install postgresql
+
+
+----
+
+Start postgresql and create start at login launchd service: ::
+
+        brew services start postgresql
+
+
+----
+
+Allow the peek OS user to login to the database as user peek with no password ::
+
+        F=/usr/local/var/postgres/pg_hba.conf
+        cat | sudo tee $F <<EOF
+        # TYPE  DATABASE        USER            ADDRESS                 METHOD
+        local   all             postgres                                peer
+        local   all             peek                                    trust
+
+        # "local" is for Unix domain socket connections only
+        local   all             all                                     peer
+        # IPv4 local connections:
+        host    all             all             127.0.0.1/32            md5
+        # IPv6 local connections:
+        host    all             all             ::1/128                 md5
+        EOF
+
+
+----
+
+Create Postgres user ::
+
+        createuser -d -r -s peek
+
+
+----
+
+Create the database ::
+
+        createdb -O peek peek
+
+
+----
+
+Set the PostGreSQL peek users password ::
+
+        psql -d peek -U peek <<EOF
+        \password
+        \q
+        EOF
+
+        # Set the password as "PASSWORD" for development machines
+        # Set it to a secure password from https://xkpasswd.net/s/ for production
+
+
+----
+
+Cleanup traces of the password ::
+
+        [ ! -e ~/.psql_history ] || rm ~/.psql_history
+
+
+----
+
+Finally, Download pgAdmin4 - A graphically PostGreSQL databast administration tool.
+
+Download the latest version of pgAdmin4 for macOS from the following link
+
+https://www.pgadmin.org/download/pgadmin-4-macos/
+
+
+
 Install Python 3.6
 ------------------
 
@@ -301,85 +381,6 @@ Enable the RabbitMQ management plugins: ::
 
         rabbitmq-plugins enable rabbitmq_mqtt
         rabbitmq-plugins enable rabbitmq_management
-
-
-Install PostGreSQL
-------------------
-
-Install the relational database we use on macOS.
-
-In terminal run: ::
-
-        brew install postgresql
-
-
-----
-
-Start postgresql and create start at login launchd service: ::
-
-        brew services start postgresql
-
-
-----
-
-Allow the peek OS user to login to the database as user peek with no password ::
-
-        F=/usr/local/var/postgres/pg_hba.conf
-        cat | sudo tee $F <<EOF
-        # TYPE  DATABASE        USER            ADDRESS                 METHOD
-        local   all             postgres                                peer
-        local   all             peek                                    trust
-
-        # "local" is for Unix domain socket connections only
-        local   all             all                                     peer
-        # IPv4 local connections:
-        host    all             all             127.0.0.1/32            md5
-        # IPv6 local connections:
-        host    all             all             ::1/128                 md5
-        EOF
-
-
-----
-
-Create Postgres user ::
-
-        createuser -d -r -s peek
-
-
-----
-
-Create the database ::
-
-        createdb -O peek peek
-
-
-----
-
-Set the PostGreSQL peek users password ::
-
-        psql -d peek -U peek <<EOF
-        \password
-        \q
-        EOF
-
-        # Set the password as "PASSWORD" for development machines
-        # Set it to a secure password from https://xkpasswd.net/s/ for production
-
-
-----
-
-Cleanup traces of the password ::
-
-        [ ! -e ~/.psql_history ] || rm ~/.psql_history
-
-
-----
-
-Finally, Download pgAdmin4 - A graphically PostGreSQL databast administration tool.
-
-Download the latest version of pgAdmin4 for macOS from the following link
-
-https://www.pgadmin.org/download/pgadmin-4-macos/
 
 
 Install Oracle Client (Optional)

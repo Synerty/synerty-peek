@@ -44,7 +44,7 @@ The following utilities are often useful.
 Optional Software
 `````````````````
 
-- Oracle 12c Client
+- Oracle Client
 
 Installing Oracle Libraries is required if you intend on installing the peek agent.
 Instruction for installing the Oracle Libraries are in the Online Installation Guide.
@@ -381,6 +381,7 @@ Install rsync: ::
         PKG="rsync"
         PKG="$PKG unzip"
         PKG="$PKG wget"
+        PKG="$PKG bzip2"
 
         sudo yum install -y $PKG
 
@@ -417,10 +418,6 @@ Install C libraries that database access python packages link to when they insta
         # For Shapely and GEOAlchemy
         PKG="${FEDORA_PACKAGES}/g/geos-3.4.2-2.el7.x86_64.rpm"
         PKG="$PKG ${FEDORA_PACKAGES}/g/geos-devel-3.4.2-2.el7.x86_64.rpm"
-
-        # For the PostGresQL connector
-        PKG="$PKG ${FEDORA_PACKAGES}/l/libpqxx-4.0.1-1.el7.x86_64.rpm"
-        PKG="$PKG ${FEDORA_PACKAGES}/l/libpqxx-devel-4.0.1-1.el7.x86_64.rpm"
 
         # For the SQLite python connector
         PKG="$PKG ${FEDORA_PACKAGES}/l/libsqlite3x-20071018-20.el7.x86_64.rpm"
@@ -492,6 +489,88 @@ Reboot the virtual machine: ::
 
 .. note:: Keep in mind, that if the static IP is not set, the IP address of the VM may 
     change, causing issues when reconnecting with SSH.
+
+
+Install PostGreSQL
+------------------
+
+Install the relational database Peek stores its data in.
+This is PostGreSQL 10.
+
+.. note:: Run the commands in this step as the `peek` user.
+
+----
+
+Setup the PostGreSQL repository:
+ ::
+
+    PKG="https://download.postgresql.org/pub/repos/yum/10/redhat/rhel-7-x86_64/pgdg-redhat10-10-2.noarch.rpm"
+    sudo yum install -y $PKG
+
+----
+
+Install PostGreSQL: ::
+
+    PKG="postgresql10"
+    PKG="$PKG postgresql10-server"
+    PKG="$PKG postgresql10-contrib"
+    PKG="$PKG postgresql10-devel"
+    PKG="$PKG postgresql10-libs"
+    sudo yum install -y $PKG
+
+----
+
+Create the PostGreSQL cluster and configure it to auto start: ::
+
+    sudo /usr/pgsql-10/bin/postgresql-10-setup initdb
+    sudo systemctl enable postgresql-10
+    sudo systemctl start postgresql-10
+
+----
+
+Allow the peek OS user to login to the database as user peek with no password ::
+
+    F="/var/lib/pgsql/10/data/pg_hba.conf"
+    if ! sudo grep -q 'peek' $F; then
+        echo "host    peek    peek    127.0.0.1/32    trust" | sudo tee $F -a
+        sudo sed -i 's,127.0.0.1/32            ident,127.0.0.1/32            md5,g' $F
+    fi
+
+----
+
+Create the peek SQL user: ::
+
+    sudo su - postgres
+    createuser -d -r -s peek
+    exit # exit postgres user
+
+
+----
+
+Set the PostGreSQL peek users password: ::
+
+    psql <<EOF
+    \password
+    \q
+    EOF
+
+    # Set the password as "PASSWORD" for development machines
+    # Set it to a secure password from https://xkpasswd.net/s/ for production
+
+
+----
+
+Create the database: ::
+
+    createdb -O peek peek
+
+
+----
+
+Cleanup traces of the password: ::
+
+    [ ! -e ~/.psql_history ] || rm ~/.psql_history
+
 
 
 Compile and Install Python 3.6
@@ -661,82 +740,6 @@ Enable the RabbitMQ management plugins: ::
     sudo rabbitmq-plugins enable rabbitmq_mqtt
     sudo rabbitmq-plugins enable rabbitmq_management
     sudo service rabbitmq-server restart
-
-
-Install PostGreSQL
-------------------
-
-Install the relational database Peek stores its data in.
-This is PostGreSQL 10.
-
-.. note:: Run the commands in this step as the `peek` user.
-
-----
-
-Setup the PostGreSQL repository:
- ::
-
-    PKG="https://download.postgresql.org/pub/repos/yum/10/redhat/rhel-7-x86_64/pgdg-redhat10-10-2.noarch.rpm"
-    sudo yum install -y $PKG
-
-----
-
-Install PostGreSQL: ::
-
-    sudo yum install -y postgresql10-server postgresql10-contrib
-
-----
-
-Create the PostGreSQL cluster and configure it to auto start: ::
-
-    sudo /usr/pgsql-10/bin/postgresql-10-setup initdb
-    sudo systemctl enable postgresql-10
-    sudo systemctl start postgresql-10
-
-----
-
-Allow the peek OS user to login to the database as user peek with no password ::
-
-    F="/var/lib/pgsql/10/data/pg_hba.conf"
-    if ! sudo grep -q 'peek' $F; then
-        echo "host  peek    peek    127.0.0.1/32    trust" | sudo tee $F -a
-    fi
-
-----
-
-Create the peek SQL user: ::
-
-    sudo su - postgres
-    createuser -d -r -s peek
-    exit # exit postgres user
-
-
-----
-
-Set the PostGreSQL peek users password: ::
-
-    psql <<EOF
-    \password
-    \q
-    EOF
-
-    # Set the password as "PASSWORD" for development machines
-    # Set it to a secure password from https://xkpasswd.net/s/ for production
-
-
-----
-
-Create the database: ::
-
-    createdb -O peek peek
-
-
-----
-
-Cleanup traces of the password: ::
-
-    [ ! -e ~/.psql_history ] || rm ~/.psql_history
-
 
 Install Oracle Client (Optional)
 --------------------------------

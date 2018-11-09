@@ -154,6 +154,81 @@ git command.
 
 .. _setup_os_requirements_windows_python:
 
+Install PostgresSQL
+-------------------
+
+Peek requires PostGreSQL as it's persistent, relational data store.
+
+:Download: `<https://www.enterprisedb.com/downloads/postgres-postgresql-downloads#windows>`_
+:From: `<https://www.postgresql.org>`_
+
+.. note:: Ensure you download the 64bit version or PostGreSQL
+            or the Peek windows service dependencies
+            will not recognise it ("postgresql-10" vs "postgresql-x64-10")
+
+.. image:: pg_win_download.png
+
+----
+
+Install PostgresSQL with default settings.
+
+Make a note of the postgres user password that you supply, you'll need this.
+
+.. warning:: Generate a strong password for both peek and postgres users for
+    production use.
+
+    Synerty recommends 32 to 40 chars of  capitals, lower case and numbers, with some
+    punctuation, best to avoid these ` / \\ ' "
+
+    `<https://strongpasswordgenerator.com>`_
+
+----
+
+Run pgAdmin4
+
+----
+
+Open the Query Tool
+
+.. image:: pgAdmin4-queryTool.jpg
+
+----
+
+Create the peek user, run the following script: ::
+
+    CREATE USER peek WITH
+        LOGIN
+        CREATEDB
+        INHERIT
+        REPLICATION
+        CONNECTION LIMIT -1
+        PASSWORD 'PASSWORD';
+
+.. note:: Replace :code:`PASSWORD` with a secure password
+            from https://xkpasswd.net/s/ for production.
+
+Example:
+
+.. image:: pgAdmin4-userQuery.jpg
+
+----
+
+Create the peek database, run the following script: ::
+
+    CREATE DATABASE peek WITH
+        OWNER = peek
+        ENCODING = 'UTF8'
+        CONNECTION LIMIT = -1;
+
+----
+
+Confirm database was created
+
+.. image:: pgAdmin4-refresh.jpg
+
+.. image:: pgAdmin4-peekDatabase.jpg
+
+
 Install Python 3.6
 ------------------
 
@@ -264,81 +339,6 @@ Confirm the RabbitMQ Management Console and the RabbitMQ MQTT Adaptor are listed
 
 
 .. _requirements_windows_postgressql:
-
-Install PostgresSQL
--------------------
-
-Peek requires PostGreSQL as it's persistent, relational data store.
-
-:Download: `<https://www.enterprisedb.com/downloads/postgres-postgresql-downloads#windows>`_
-:From: `<https://www.postgresql.org>`_
-
-.. note:: Ensure you download the 64bit version or PostGreSQL
-            or the Peek windows service dependencies
-            will not recognise it ("postgresql-10" vs "postgresql-x64-10")
-
-.. image:: pg_win_download.png
-
-----
-
-Install PostgresSQL with default settings.
-
-Make a note of the postgres user password that you supply, you'll need this.
-
-.. warning:: Generate a strong password for both peek and postgres users for
-    production use.
-
-    Synerty recommends 32 to 40 chars of  capitals, lower case and numbers, with some
-    punctuation, best to avoid these ` / \\ ' "
-
-    `<https://strongpasswordgenerator.com>`_
-
-----
-
-Run pgAdmin4
-
-----
-
-Open the Query Tool
-
-.. image:: pgAdmin4-queryTool.jpg
-
-----
-
-Create the peek user, run the following script: ::
-
-    CREATE USER peek WITH
-        LOGIN
-        CREATEDB
-        INHERIT
-        REPLICATION
-        CONNECTION LIMIT -1
-        PASSWORD 'PASSWORD';
-
-.. note:: Replace :code:`PASSWORD` with a secure password
-            from https://xkpasswd.net/s/ for production.
-
-Example:
-
-.. image:: pgAdmin4-userQuery.jpg
-
-----
-
-Create the peek database, run the following script: ::
-
-    CREATE DATABASE peek WITH
-        OWNER = peek
-        ENCODING = 'UTF8'
-        CONNECTION LIMIT = -1;
-
-----
-
-Confirm database was created
-
-.. image:: pgAdmin4-refresh.jpg
-
-.. image:: pgAdmin4-peekDatabase.jpg
-
 
 Install Oracle Client (Optional)
 --------------------------------
