@@ -192,6 +192,15 @@ Install the virtualenv python package
 
 ----
 
+Upgrade pip:
+
+::
+
+    pip install --upgrade pip
+
+
+----
+
 Open the command prompt and run the following command:
 
 ::
@@ -306,7 +315,8 @@ Create the peek user, run the following script: ::
         CONNECTION LIMIT -1
         PASSWORD 'PASSWORD';
 
-.. note:: Replace :code:`PASSWORD` with a password of your choice or requirements
+.. note:: Replace :code:`PASSWORD` with a secure password
+            from https://xkpasswd.net/s/ for production.
 
 Example:
 
@@ -340,12 +350,14 @@ interface with an oracle database.
 
 Download the following from oracle.
 
-The version used in these instructions is **12.2.0.1.0**.
+The version used in these instructions is **18.3.0.0.0**.
 
-#.  Download the "Instant Client Package - Basic" from
+#.  Download the ZIP "Basic Package"
+    :file:`instantclient-basic-windows.x64-18.3.0.0.0dbru.zip p` from
     http://www.oracle.com/technetwork/topics/winx64soft-089540.html
 
-#.  Download the "Instant Client Package - SDK" from
+#.  Download the ZIP "SDK Package"
+    :file:`instantclient-sdk-windows.x64-18.3.0.0.0dbru.zip` from
     http://www.oracle.com/technetwork/topics/winx64soft-089540.html
 
 ----
@@ -358,7 +370,7 @@ Under Control Panel -> System -> Advanced system settings
 
 Add the following to **PATH** in the "User" environment variables ::
 
-        C:\Users\peek\oracle\instantclient_12_2
+        C:\Users\peek\oracle\instantclient_18_3
 
 .. tip:: On Win 10, enter "environment" in the task bar search and select
             **Edit the system environment variables**

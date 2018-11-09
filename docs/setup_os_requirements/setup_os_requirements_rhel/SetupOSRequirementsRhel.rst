@@ -300,6 +300,58 @@ installed.
 
 .. important:: All steps after this point assume you're logged in as the peek user.
 
+Registering RHEL
+----------------
+
+The RHEL server must have access to the redhat repositories at rhn.redhat.com to install
+the required packages.
+
+This section describes one way of registering a new RHEL server to a Redhat subscription.
+This is a paid subscription.
+
+----
+
+Run the following command to register the system.
+Replace MY_RHN_USERNAME with your redhat network username.
+ ::
+
+    sudo date
+    # enter the password for peek
+
+    sudo subscription-manager register --username MY_RHN_USERNAME
+    # Enter the password for the RHN account
+
+----
+
+List the subscriptions, and select a pool.
+ ::
+
+    sudo subscription-manager list --available | grep Pool
+
+
+Subscribe to the pool.
+Replace POOL_ID_FROM_ABOVE_COMMAND with the Pool ID from the last command.
+ ::
+
+    sudo subscription-manager subscribe --pool=POOL_ID_FROM_ABOVE_COMMAND
+
+----
+
+Test the subscription with a yum update, this will apply the latest updates.
+ ::
+
+    sudo yum update -y
+
+.. note::
+
+    If you want to remove the server from the pool, and unregister it, run the following.
+
+    ::
+
+        sudo subscription-manager remove --all
+        sudo subscription-manager unregister
+
+
 Installing OS Prerequisites
 ---------------------------
 
@@ -309,69 +361,84 @@ This section installs the OS packages required.
 
 ----
 
-To begin, make sure that all the packages currently installed on your RHEL/CentOS 7 
+To begin, make sure that all the packages currently installed on your RHEL
 system are updated to their latest versions: ::
 
-    sudo yum update -y
+        sudo yum update -y
 
 
 ----
 
 Install the C Compiler package, used for compiling python or VMWare tools, etc: ::
 
-    PKG="gcc gcc-c++ kernel-devel make"
-    sudo yum install $PKG
-
-----
-
-Install the Python build dependencies: ::
-
-    PKG="curl git m4 ruby texinfo bzip2-devel libcurl-devel"
-    PKG="$PKG expat-devel ncurses-libs zlib-devel libgmp-devel libssl-devel"
-    sudo yum install -y $PKG
-
-
-----
-
-Install C libraries that some python packages link to when they install: ::
-
-    PKG=""
-
-    # For the cryptography package
-    PKG="$PKG libffi-devel"
-
-    # For the python Samba client
-    PKG="$PKG samba-devel libsmbclient-devel"
-
-    sudo yum install -y $PKG
-
-    # For Shapely and GEOAlchemy
-    sudo yum install -y http://dl.fedoraproject.org/pub/epel/7/x86_64/Packages/g/geos-3.4.2-2.el7.x86_64.rpm
-    sudo yum install http://dl.fedoraproject.org/pub/epel/7/x86_64/Packages/g/geos-devel-3.4.2-2.el7.x86_64.rpm
-
-    # For LXML and the Oracle client
-    PKG="libxml2 libxml2-devel"
-    PKG="$PKG libxslt libxslt-devel"
-    PKG="$PKG libaio libaio-devel"
-
-    sudo yum install -y $PKG
-
-    # For the PostGresQL connector
-    sudo yum install -y http://dl.fedoraproject.org/pub/epel/7/x86_64/Packages/l/libpqxx-4.0.1-1.el7.x86_64.rpm
-    sudo yum install -y http://dl.fedoraproject.org/pub/epel/7/x86_64/Packages/l/libpqxx-devel-4.0.1-1.el7.x86_64.rpm
-
-    # For the SQLite python connector
-    sudo yum install -y http://dl.fedoraproject.org/pub/epel/7/x86_64/Packages/l/libsqlite3x-20071018-20.el7.x86_64.rpm
-    sudo yum install -y http://dl.fedoraproject.org/pub/epel/7/x86_64/Packages/l/libsqlite3x-devel-20071018-20.el7.x86_64.rpm
-
+        PKG="gcc gcc-c++ kernel-devel make"
+        sudo yum install -y $PKG
 
 ----
 
 Install rsync: ::
 
-    PKG="rsync unzip"
+        PKG="rsync"
+        PKG="$PKG unzip"
+        PKG="$PKG wget"
 
-    sudo yum install -y $PKG
+        sudo yum install -y $PKG
+
+----
+
+Install the Python build dependencies: ::
+
+        PKG="curl git m4 ruby texinfo bzip2-devel libcurl-devel"
+        PKG="$PKG expat-devel ncurses-libs zlib-devel gmp-devel"
+        PKG="$PKG openssl openssl-devel"
+        sudo yum install -y $PKG
+
+
+----
+
+Install C libraries that some python packages link to when they install:
+ ::
+
+        # For the cryptography package
+        PKG="libffi-devel"
+
+        sudo yum install -y $PKG
+
+
+----
+
+Install C libraries that database access python packages link to when they install:
+
+.. warning:: These packages are not from the Redhat Network.
+ ::
+
+        FEDORA_PACKAGES="https://dl.fedoraproject.org/pub/epel/7/x86_64/Packages"
+
+        # For Shapely and GEOAlchemy
+        PKG="${FEDORA_PACKAGES}/g/geos-3.4.2-2.el7.x86_64.rpm"
+        PKG="$PKG ${FEDORA_PACKAGES}/g/geos-devel-3.4.2-2.el7.x86_64.rpm"
+
+        # For the PostGresQL connector
+        PKG="$PKG ${FEDORA_PACKAGES}/l/libpqxx-4.0.1-1.el7.x86_64.rpm"
+        PKG="$PKG ${FEDORA_PACKAGES}/l/libpqxx-devel-4.0.1-1.el7.x86_64.rpm"
+
+        # For the SQLite python connector
+        PKG="$PKG ${FEDORA_PACKAGES}/l/libsqlite3x-20071018-20.el7.x86_64.rpm"
+        PKG="$PKG ${FEDORA_PACKAGES}/l/libsqlite3x-devel-20071018-20.el7.x86_64.rpm"
+
+        sudo yum install -y $PKG
+
+----
+
+Install C libraries that the oracle client requires:
+ ::
+
+        # For LXML and the Oracle client
+        PKG="libxml2 libxml2-devel"
+        PKG="$PKG libxslt libxslt-devel"
+        PKG="$PKG libaio libaio-devel"
+
+        sudo yum install -y $PKG
 
 
 ----
@@ -435,18 +502,12 @@ latest version of Python.
 
 ----
 
-Edit `~/.bashrc` and insert the following after the first block comment.
-
-Make sure these are before any lines like: ::
-
-    # If not running interactiviely, don't do anything
-
-
-Insert: ::
+Edit `~/.bashrc` and append the following to the end of the file.
+ ::
 
     ##### SET THE PEEK ENVIRONMENT #####
     # Setup the variables for PYTHON
-    export PEEK_PY_VER="3.6.5"
+    export PEEK_PY_VER="3.6.7"
     export PATH="/home/peek/cpython-${PEEK_PY_VER}/bin:$PATH"
 
     # Set the variables for the platform release
@@ -460,7 +521,7 @@ Insert: ::
 Download and unarchive the supported version of Python: ::
 
     cd ~
-    PEEK_PY_VER="3.6.5"
+    source .bashrc
     wget "https://www.python.org/ftp/python/${PEEK_PY_VER}/Python-${PEEK_PY_VER}.tgz"
     tar xzf Python-${PEEK_PY_VER}.tgz
 
@@ -506,11 +567,34 @@ Symlink the python3 commands so they are the only ones picked up by path: ::
 
 Test that the setup is working: ::
 
-    which python
-    echo "It should be /home/peek/cpython-3.6.5/bin/python"
 
-    which pip
-    echo "It should be /home/peek/cpython-3.6.5/bin/pip"
+    RED='\033[0;31m'
+    GREEN='\033[0;32m'
+    NC='\033[0m' # No Color
+
+    SHOULD_BE="/home/peek/cpython-${PEEK_PY_VER}/bin/python"
+    if [ `which python` == ${SHOULD_BE} ]
+    then
+        echo -e "${GREEN}SUCCESS${NC} The python path is right"
+    else
+        echo -e "${RED}FAIL${NC} The python path is wrong, It should be ${SHOULD_BE}"
+    fi
+
+    SHOULD_BE="/home/peek/cpython-${PEEK_PY_VER}/bin/pip"
+    if [ `which pip` == ${SHOULD_BE} ]
+    then
+        echo -e "${GREEN}SUCCESS${NC} The pip path is right"
+    else
+        echo -e "${RED}FAIL${NC} The pip path is wrong, It should be ${SHOULD_BE}"
+    fi
+
+
+----
+
+Upgrade pip:
+ ::
+
+    pip install --upgrade pip
 
 
 ----
@@ -519,7 +603,6 @@ synerty-peek is deployed into python virtual environments. Install the virtualen
 python package: ::
 
     pip install virtualenv
-
 
 ----
 
@@ -533,29 +616,28 @@ Install Worker Dependencies
 
 Install the parallel processing queue we use for the peek-worker tasks.
 
-.. note:: Run the commands in this step as the `peek` user.
+.. note:: Run the commands in this section as the `peek` user.
 
 Install redis: ::
 
-    mkdir /tmp/redis
-    cd /tmp/redis
+    ATOMICORP_SITE="https://www6.atomicorp.com/channels/atomic/centos/7/x86_64/RPMS"
 
-    # download redis dependencies
-    wget http://www6.atomicorp.com/channels/atomic/centos/7/x86_64/RPMS/jemalloc-3.6.0-1.el7.art.x86_64.rpm
+    # redis dependencies
+    PKG="${ATOMICORP_SITE}/jemalloc-3.6.0-1.el7.art.x86_64.rpm"
     
-    # download redis
-    wget http://www6.atomicorp.com/channels/atomic/centos/7/x86_64/RPMS/redis-3.0.7-4.el7.art.x86_64.rpm
+    # redis
+    PKG="$PKG ${ATOMICORP_SITE}/redis-3.0.7-4.el7.art.x86_64.rpm"
 
     # install redis and dependencies
-    sudo yum install -y jemalloc-* redis-*
+    sudo yum install -y $PKG
 
-    cd ~
-    rm -r /tmp/redis
+----
 
 Install rabbitmq: ::
 
     # install erlang v20.3
-    sudo yum install -y https://github.com/rabbitmq/erlang-rpm/releases/download/v20.3.6/erlang-20.3.6-1.el7.centos.x86_64.rpm
+    PKG="https://github.com/rabbitmq/erlang-rpm/releases/download/v20.3.6/erlang-20.3.6-1.el7.centos.x86_64.rpm"
+    sudo yum install -y $PKG
 
     # Set rabbitmq repository
     curl -s https://packagecloud.io/install/repositories/rabbitmq/rabbitmq-server/script.rpm.sh | sudo bash
@@ -575,7 +657,7 @@ Cleanup the downloaded packages: ::
 
 Enable the RabbitMQ management plugins: ::
 
-    sudo rm /var/lib/rabbitmq/.erlang.cookie
+    F="/var/lib/rabbitmq/.erlang.cookie"; [ ! -f $F ] || rm -f $F
     sudo rabbitmq-plugins enable rabbitmq_mqtt
     sudo rabbitmq-plugins enable rabbitmq_management
     sudo service rabbitmq-server restart
@@ -584,31 +666,62 @@ Enable the RabbitMQ management plugins: ::
 Install PostGreSQL
 ------------------
 
-Install the relational database we use on Linux.
+Install the relational database Peek stores its data in.
+This is PostGreSQL 10.
 
 .. note:: Run the commands in this step as the `peek` user.
 
+----
+
+Setup the PostGreSQL repository:
+ ::
+
+    PKG="https://download.postgresql.org/pub/repos/yum/10/redhat/rhel-7-x86_64/pgdg-redhat10-10-2.noarch.rpm"
+    sudo yum install -y $PKG
+
+----
+
 Install PostGreSQL: ::
 
-    sudo yum install -y postgresql-server postgresql-contrib
+    sudo yum install -y postgresql10-server postgresql10-contrib
 
+----
 
-Create a new PostGreSQL database cluster: ::
+Create the PostGreSQL cluster and configure it to auto start: ::
 
-    sudo postgresql-setup initdb
+    sudo /usr/pgsql-10/bin/postgresql-10-setup initdb
+    sudo systemctl enable postgresql-10
+    sudo systemctl start postgresql-10
 
+----
 
-Create the peek SQL user: ::
+Allow the peek OS user to login to the database as user peek with no password ::
 
-    F="/var/lib/pgsql/data/pg_hba.conf"
+    F="/var/lib/pgsql/10/data/pg_hba.conf"
     if ! sudo grep -q 'peek' $F; then
         echo "host  peek    peek    127.0.0.1/32    trust" | sudo tee $F -a
     fi
-    sudo systemctl start postgresql
-    sudo systemctl enable postgresql
+
+----
+
+Create the peek SQL user: ::
+
     sudo su - postgres
     createuser -d -r -s peek
     exit # exit postgres user
+
+
+----
+
+Set the PostGreSQL peek users password: ::
+
+    psql <<EOF
+    \password
+    \q
+    EOF
+
+    # Set the password as "PASSWORD" for development machines
+    # Set it to a secure password from https://xkpasswd.net/s/ for production
 
 
 ----
@@ -620,21 +733,9 @@ Create the database: ::
 
 ----
 
-Set the database password: ::
-
-    psql <<EOF
-    \password
-    \q
-    EOF
-
-    # Set the password as "PASSWORD"
-
-
-----
-
 Cleanup traces of the password: ::
 
-    [ -e ~/.psql_history ] && rm ~/.psql_history
+    [ ! -e ~/.psql_history ] || rm ~/.psql_history
 
 
 Install Oracle Client (Optional)
@@ -645,20 +746,17 @@ going to interface with an oracle database.
 
 ----
 
-Edit `~/.bashrc` and insert the following after the first block comment.
+Edit :file:`~/.bashrc` and append the following to the file: ::
 
-Make sure these are before any lines like: ::
+        # Setup the variables for ORACLE
+        export LD_LIBRARY_PATH="/home/peek/oracle/instantclient_18_3:$LD_LIBRARY_PATH"
+        export ORACLE_HOME="/home/peek/oracle/instantclient_18_3"
 
-    # If not running interactiviely, don't do anything
+----
 
+Source the new profile to get the new variables: ::
 
-Insert: ::
-
-    # Setup the variables for ORACLE
-    export LD_LIBRARY_PATH="/home/peek/oracle/instantclient_12_2:$LD_LIBRARY_PATH"
-    export ORACLE_HOME="/home/peek/oracle/instantclient_12_2"
-
-.. warning:: Restart your terminal you get the new environment.
+        source ~/.bashrc
 
 ----
 
@@ -670,12 +768,14 @@ Make the directory where the oracle client will live ::
 
 Download the following from oracle.
 
-The version used in these instructions is **12.2.0.1.0**.
+The version used in these instructions is **18.3.0.0.0**.
 
-#.  Download the ZIP "Instant Client Package - Basic" from
+#.  Download the ZIP "Basic Package"
+    :file:`instantclient-basic-linux.x64-18.3.0.0.0dbru.zip` from
     http://www.oracle.com/technetwork/topics/linuxx86-64soft-092277.html
 
-#.  Download the ZIP "Instant Client Package - SDK" from
+#.  Download the ZIP "SDK Package"
+    :file:`instantclient-sdk-linux.x64-18.3.0.0.0dbru.zip` from
     http://www.oracle.com/technetwork/topics/linuxx86-64soft-092277.html
 
 Copy these files to :file:`/home/peek/oracle` on the peek server.
@@ -684,19 +784,9 @@ Copy these files to :file:`/home/peek/oracle` on the peek server.
 
 Extract the files. ::
 
-    cd ~/oracle
-    unzip instantclient-sdk-linux.x64-12.2.0.1.0.zip
-    unzip instantclient-basic-linux.x64-12.2.0.1.0.zip
-
-
-----
-
-Symlink the oracle client lib ::
-
-    cd $ORACLE_HOME
-    ln -snf libclntsh.so.12.1 libclntsh.so
-    ls -l libclntsh.so
-
+        cd ~/oracle
+        unzip instantclient-basic-linux.x64-18.3.0.0.0dbru.zip*
+        unzip instantclient-sdk-linux.x64-18.3.0.0.0dbru.zip*
 
 
 Install FreeTDS (Optional)
@@ -710,13 +800,7 @@ which depends on FreeTDS.
 
 ----
 
-Edit :file:`~/.bashrc` and insert the following after the first block comment
-
-Make sure these are before any lines like: ::
-
-    # If not running interactively, don't do anything
-
-Insert : ::
+Edit :file:`~/.bashrc` and append the following to the file: ::
 
     # Setup the variables for FREE TDS
     export LD_LIBRARY_PATH="/home/peek/freetds:$LD_LIBRARY_PATH"
@@ -727,19 +811,17 @@ Insert : ::
 
 ----
 
-Install FreeTDS:
+Install FreeTDS: ::
 
-::
-
-    sudo yum install http://dl.fedoraproject.org/pub/epel/7/x86_64/Packages/f/freetds-0.95.81-1.el7.x86_64.rpm
-    sudo yum install http://dl.fedoraproject.org/pub/epel/7/x86_64/Packages/f/freetds-devel-0.95.81-1.el7.x86_64.rpm
+    PKG="https://dl.fedoraproject.org/pub/epel/7/x86_64/Packages/f/freetds-0.95.81-1.el7.x86_64.rpm"
+    PKG="PKG https://dl.fedoraproject.org/pub/epel/7/x86_64/Packages/f/freetds-devel-0.95.81-1.el7.x86_64.rpm"
+    sudo yum install -y $PKG
 
 
 ----
 
 Create file :file:`freetds.conf` in :code:`~/freetds` and populate with the following:
-
-::
+ ::
 
     mkdir ~/freetds
     cat > ~/freetds/freetds.conf <<EOF
@@ -751,11 +833,11 @@ Create file :file:`freetds.conf` in :code:`~/freetds` and populate with the foll
 
     EOF
 
+----
 
 If you want to get more debug information, add the dump file line to the [global] section
 Keep in mind that the dump file takes a lot of space.
-
-::
+ ::
 
     [global]
         port = 1433

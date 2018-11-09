@@ -218,6 +218,15 @@ Open a new terminal and test that the setup is working ::
 
 ----
 
+Upgrade pip:
+
+::
+
+    pip install --upgrade pip
+
+
+----
+
 synerty-peek is deployed into python virtual environments.
 
 Install the virtualenv python package ::
@@ -313,7 +322,7 @@ Start postgresql and create start at login launchd service: ::
 
 ----
 
-Update the PostGreSQL unix user auth config: ::
+Allow the peek OS user to login to the database as user peek with no password ::
 
         F=/usr/local/var/postgres/pg_hba.conf
         cat | sudo tee $F <<EOF
@@ -346,21 +355,22 @@ Create the database ::
 
 ----
 
-Set the database password ::
+Set the PostGreSQL peek users password ::
 
         psql -d peek -U peek <<EOF
         \password
         \q
         EOF
 
-        # Set the password as "PASSWORD"
+        # Set the password as "PASSWORD" for development machines
+        # Set it to a secure password from https://xkpasswd.net/s/ for production
 
 
 ----
 
 Cleanup traces of the password ::
 
-        [ -e ~/.psql_history ] && rm ~/.psql_history
+        [ ! -e ~/.psql_history ] || rm ~/.psql_history
 
 
 ----
