@@ -150,6 +150,7 @@ then
         sudo cp -p $releaseDir/init/${FILE} ${TO}
         sudo chmod +x ${TO}/${FILE}
         sudo chown root:root ${TO}/${FILE}
+        sudo sed -i "s,#PEEK_DIR#,$venvDir/bin,g" ${TO}/${FILE}
         sudo systemctl enable $s
         sudo systemctl restart $s
 
