@@ -710,6 +710,13 @@ Install redis: ::
     # install redis and dependencies
     sudo yum install -y $PKG
 
+
+----
+
+Enable the Redis service: ::
+
+    sudo systemctl restart redis.service
+
 ----
 
 Install rabbitmq: ::
@@ -739,7 +746,7 @@ Enable the RabbitMQ management plugins: ::
     F="/var/lib/rabbitmq/.erlang.cookie"; [ ! -f $F ] || rm -f $F
     sudo rabbitmq-plugins enable rabbitmq_mqtt
     sudo rabbitmq-plugins enable rabbitmq_management
-    sudo service rabbitmq-server restart
+    sudo systemctl restart rabbitmq-server.service
 
 Install Oracle Client (Optional)
 --------------------------------
