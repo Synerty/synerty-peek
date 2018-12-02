@@ -128,7 +128,7 @@ mkdir $baseDir/init && pushd $baseDir/init
 
 for s in peek_server peek_worker peek_agent peek_client
 do
-    wget -nv https://bitbucket.org/synerty/synerty-peek/raw/${peekPkgVer}/scripts/linux/init/$s
+    wget -nv https://bitbucket.org/synerty/synerty-peek/raw/${peekPkgVer}/scripts/linux/init/${s}.service
 done
 popd
 

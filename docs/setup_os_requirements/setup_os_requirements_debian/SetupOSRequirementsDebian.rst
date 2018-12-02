@@ -44,7 +44,7 @@ The following utilities are often useful.
 Optional Software
 `````````````````
 
-- Oracle 12c Client
+- Oracle Client
 
 Installing Oracle Libraries is required if you intend on installing the peek agent.
 Instruction for installing the Oracle Libraries are in the Online Installation Guide.
@@ -434,9 +434,7 @@ Edit the file :file:`/etc/resolv.conf`, and update it.
 
 #.  Replace "localdomain" with your domain
 #.  Replace the IP for the :code:`nameserver` with the IP of you DNS.
-    For multiple name servers, use multiple :code:`nameserver` lines.
-
-::
+    For multiple name servers, use multiple :code:`nameserver` lines. ::
 
         domain localdomain
         search localdomain
@@ -452,18 +450,23 @@ This section installs the OS packages required.
 
 ----
 
-Install the C Compiler package, used for compiling python or VMWare tools, etc:
-
-::
+Install the C Compiler package, used for compiling python or VMWare tools, etc: ::
 
         PKG="gcc make linux-headers-amd64"
         sudo apt-get install -y $PKG
 
 ----
 
-Install the Python build dependencies:
+Install some utility packages: ::
 
-::
+        PKG="rsync"
+        PKG="$PKG unzip"
+
+        sudo apt-get install -y $PKG
+
+----
+
+Install the Python build dependencies: ::
 
         PKG="build-essential curl git m4 ruby texinfo libbz2-dev libcurl4-openssl-dev"
         PKG="$PKG libexpat-dev libncurses-dev zlib1g-dev libgmp-dev libssl-dev"
@@ -471,25 +474,19 @@ Install the Python build dependencies:
 
 ----
 
-Install C libraries that some python packages link to when they install:
-
-::
-
-        PKG=""
+Install C libraries that some python packages link to when they install: ::
 
         # For the cryptography package
-        PKG="$PKG libffi-dev"
+        PKG="libffi-dev"
 
-        # For the python Samba client
-        PKG="$PKG samba-dev libsmbclient-dev libcups2-dev"
+        sudo apt-get install -y $PKG
+
+----
+
+Install C libraries that database access python packages link to when they install: ::
 
         # For Shapely and GEOAlchemy
-        PKG="$PKG libgeos-dev libgeos-c1v5"
-
-        # For LXML and the Oracle client
-        PKG="$PKG libxml2 libxml2-dev"
-        PKG="$PKG libxslt1.1 libxslt1-dev"
-        PKG="$PKG libaio1 libaio-dev"
+        PKG="libgeos-dev libgeos-c1v5"
 
         # For the PostGresQL connector
         PKG="$PKG libpq-dev"
@@ -501,12 +498,14 @@ Install C libraries that some python packages link to when they install:
 
 ----
 
-Install rsync package:
+Install C libraries that the oracle client requires: ::
 
-::
+        # For LXML and the Oracle client
+        PKG="libxml2 libxml2-dev"
+        PKG="$PKG libxslt1.1 libxslt1-dev"
+        PKG="$PKG libaio1 libaio-dev"
 
-        PKG="rsync unzip"
-        sudo apt-get install -y $PKG
+        sudo yum install -y $PKG
 
 ----
 
@@ -556,6 +555,76 @@ Reboot the virtual machine. ::
 Keep in mind, that if the static IP is not set, the IP address of the VM may change,
 causing issues when reconnecting with SSH.
 
+
+
+Install PostGreSQL
+------------------
+
+Install the relational database Peek stores its data in.
+This is PostGreSQL 10.
+
+.. note:: Run the commands in this step as the :code:`peek` user.
+
+Add the latest PostGreSQL repository ::
+
+        F=/etc/apt/sources.list.d/postgresql.list
+        echo "deb http://apt.postgresql.org/pub/repos/apt/ stretch-pgdg main" | sudo tee $F
+        wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+        sudo apt-get update
+
+
+----
+
+Install PostGresQL ::
+
+        sudo apt-get install -y postgresql-10-postgis-2.4 postgresql-10
+        sudo apt-get clean
+
+----
+
+Allow the peek OS user to login to the database as user peek with no password ::
+
+        F=/etc/postgresql/10/main/pg_hba.conf
+        if ! sudo grep -q 'peek' $F; then
+            echo "host  peek    peek    127.0.0.1/32    trust" | sudo tee $F -a
+        fi
+
+----
+
+Create the peek SQL user ::
+
+        sudo su - postgres
+        createuser -d -r -s peek
+        exit # Exit postgres user
+
+
+----
+
+Set the PostGreSQL peek users password ::
+
+        psql <<EOF
+        \password
+        \q
+        EOF
+
+        # Set the password as "PASSWORD" for development machines
+        # Set it to a secure password from https://xkpasswd.net/s/ for production
+
+
+----
+
+Create the database ::
+
+        createdb -O peek peek
+
+----
+
+Cleanup traces of the password ::
+
+        [ ! -e ~/.psql_history ] || rm ~/.psql_history
+
+
+
 Compile and Install Python 3.6
 ------------------------------
 
@@ -574,7 +643,7 @@ Insert : ::
 
         ##### SET THE PEEK ENVIRONMENT #####
         # Setup the variables for PYTHON
-        export PEEK_PY_VER="3.6.6"
+        export PEEK_PY_VER="3.6.7"
         export PATH="/home/peek/cpython-${PEEK_PY_VER}/bin:$PATH"
 		
         # Set the variables for the platform release
@@ -588,7 +657,7 @@ Insert : ::
 Download and unarchive the supported version of Python ::
 
         cd ~
-        PEEK_PY_VER="3.6.6"
+        source .bashrc
         wget "https://www.python.org/ftp/python/${PEEK_PY_VER}/Python-${PEEK_PY_VER}.tgz"
         tar xzf Python-${PEEK_PY_VER}.tgz
 
@@ -628,11 +697,34 @@ Symlink the python3 commands so they are the only ones picked up by path. ::
 
 Test that the setup is working ::
 
-        which python
-        echo "It should be /home/peek/cpython-3.6.6/bin/python"
 
-        which pip
-        echo "It should be /home/peek/cpython-3.6.6/bin/pip"
+        RED='\033[0;31m'
+        GREEN='\033[0;32m'
+        NC='\033[0m' # No Color
+
+        SHOULD_BE="/home/peek/cpython-${PEEK_PY_VER}/bin/python"
+        if [ `which python` == ${SHOULD_BE} ]
+        then
+            echo -e "${GREEN}SUCCESS${NC} The python path is right"
+        else
+            echo -e "${RED}FAIL${NC} The python path is wrong, It should be ${SHOULD_BE}"
+        fi
+
+        SHOULD_BE="/home/peek/cpython-${PEEK_PY_VER}/bin/pip"
+        if [ `which pip` == ${SHOULD_BE} ]
+        then
+            echo -e "${GREEN}SUCCESS${NC} The pip path is right"
+        else
+            echo -e "${RED}FAIL${NC} The pip path is wrong, It should be ${SHOULD_BE}"
+        fi
+
+
+----
+
+Upgrade pip: ::
+
+        pip install --upgrade pip
+
 
 ----
 
@@ -668,94 +760,25 @@ Enable the RabbitMQ management plugins: ::
         sudo rabbitmq-plugins enable rabbitmq_mqtt
         sudo rabbitmq-plugins enable rabbitmq_management
         sudo service rabbitmq-server restart
-
-
-
-Install PostGreSQL
-------------------
-
-Install the relational database we use on Linux.
-
-.. note:: Run the commands in this step as the :code:`peek` user.
-
-Add the latest PostGreSQL repository ::
-
-        F=/etc/apt/sources.list.d/postgresql.list
-        echo "deb http://apt.postgresql.org/pub/repos/apt/ stretch-pgdg main" | sudo tee $F
-        wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
-        sudo apt-get update
-
-
-----
-
-Install PostGresQL ::
-
-        sudo apt-get install -y postgresql-10-postgis-2.4 postgresql-10
-        sudo apt-get clean
-
-
-----
-
-Create the peek SQL user ::
-
-        F=/etc/postgresql/10/main/pg_hba.conf
-        if ! sudo grep -q 'peek' $F; then
-            echo "host  peek    peek    127.0.0.1/32    trust" | sudo tee $F -a
-        fi
-        sudo su - postgres
-        createuser -d -r -s peek
-        exit # Exit postgres user
-
-
-----
-
-Create the database ::
-
-        createdb -O peek peek
-
-
-----
-
-Set the database password ::
-
-        psql <<EOF
-        \password
-        \q
-        EOF
-
-        # Set the password as "PASSWORD"
-
-
-----
-
-Cleanup traces of the password ::
-
-        [ -e ~/.psql_history ] && rm ~/.psql_history
-
-
 Install Oracle Client (Optional)
 --------------------------------
 
-The oracle libraries are optional. Install them where the agent runs if you are going to
-interface with an oracle database.
+The oracle libraries are optional. Install them where the agent runs if you are
+going to interface with an oracle database.
 
 ----
 
-Edit :file:`~/.bashrc` and insert the following after the first block comment
-
-Make sure these are before any lines like: ::
-
-        # If not running interactively, don't do anything
-
-Insert : ::
+Edit :file:`~/.bashrc` and append the following to the file: ::
 
         # Setup the variables for ORACLE
-        export LD_LIBRARY_PATH="/home/peek/oracle/instantclient_12_2:$LD_LIBRARY_PATH"
-        export ORACLE_HOME="/home/peek/oracle/instantclient_12_2"
+        export LD_LIBRARY_PATH="/home/peek/oracle/instantclient_18_3:$LD_LIBRARY_PATH"
+        export ORACLE_HOME="/home/peek/oracle/instantclient_18_3"
 
 ----
 
-.. warning:: Restart your terminal you get the new environment.
+Source the new profile to get the new variables: ::
+
+        source ~/.bashrc
 
 ----
 
@@ -767,12 +790,14 @@ Make the directory where the oracle client will live ::
 
 Download the following from oracle.
 
-The version used in these instructions is **12.2.0.1.0**.
+The version used in these instructions is **18.3.0.0.0**.
 
-#.  Download the ZIP "Instant Client Package - Basic" from
+#.  Download the ZIP "Basic Package"
+    :file:`instantclient-basic-linux.x64-18.3.0.0.0dbru.zip` from
     http://www.oracle.com/technetwork/topics/linuxx86-64soft-092277.html
 
-#.  Download the ZIP "Instant Client Package - SDK" from
+#.  Download the ZIP "SDK Package"
+    :file:`instantclient-sdk-linux.x64-18.3.0.0.0dbru.zip` from
     http://www.oracle.com/technetwork/topics/linuxx86-64soft-092277.html
 
 Copy these files to :file:`/home/peek/oracle` on the peek server.
@@ -782,17 +807,8 @@ Copy these files to :file:`/home/peek/oracle` on the peek server.
 Extract the files. ::
 
         cd ~/oracle
-        unzip instantclient-sdk-linux.x64-12.2.0.1.0.zip
-        unzip instantclient-basic-linux.x64-12.2.0.1.0.zip
-
-
-----
-
-Symlink the oracle client lib ::
-
-        cd $ORACLE_HOME
-        ln -snf libclntsh.so.12.1 libclntsh.so
-        ls -l libclntsh.so
+        unzip instantclient-basic-linux.x64-18.3.0.0.0dbru.zip*
+        unzip instantclient-sdk-linux.x64-18.3.0.0.0dbru.zip*
 
 
 Install FreeTDS (Optional)
@@ -823,17 +839,13 @@ Insert : ::
 
 ----
 
-Install FreeTDS:
-
-::
+Install FreeTDS: ::
 
         sudo apt-get install freetds-dev
 
 ----
 
-Create file :file:`freetds.conf` in :code:`~/freetds` and populate with the following:
-
-::
+Create file :file:`freetds.conf` in :code:`~/freetds` and populate with the following: ::
 
         mkdir ~/freetds
         cat > ~/freetds/freetds.conf <<EOF
@@ -847,9 +859,7 @@ Create file :file:`freetds.conf` in :code:`~/freetds` and populate with the foll
 
 
 If you want to get more debug information, add the dump file line to the [global] section
-Keep in mind that the dump file takes a lot of space.
-
-::
+Keep in mind that the dump file takes a lot of space. ::
 
         [global]
             port = 1433

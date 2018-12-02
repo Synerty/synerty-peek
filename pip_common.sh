@@ -40,11 +40,14 @@ peek-core-device"
 
 export PLUGINS="
 peek-plugin-noop
+peek-plugin-tutorial
+peek-plugin-index-blueprint
 peek-plugin-data-dms
 peek-plugin-user
 peek-plugin-inbox
 peek-plugin-chat
 peek-plugin-livedb
+peek-plugin-graphdb
 peek-plugin-docdb
 peek-plugin-search
 peek-plugin-diagram
@@ -61,6 +64,7 @@ peek-plugin-pof-diagram
 peek-plugin-pof-diagram-loader
 peek-plugin-pof-equipment-loader
 peek-plugin-pof-livedb-loader
+peek-plugin-pof-graphdb-loader
 peek-plugin-gis-diagram-loader
 peek-plugin-pof-gis-location-loader
 peek-plugin-pof-user-loader

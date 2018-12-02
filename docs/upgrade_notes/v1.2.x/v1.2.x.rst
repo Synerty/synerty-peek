@@ -1,0 +1,136 @@
+.. _upgrade_to_v1.2.x:
+
+=====================
+v1.1.0 Upgrade Notes
+=====================
+
+Changes
+-------
+
+Graph DB
+````````
+The new GraphDB plugin provides a connectivity model with trace configs and trace
+ support.
+
+The GraphDB has offline support allowing tracing to be run offline in the native mobile
+app.
+
+PoF Connectivity Model Loader
+`````````````````````````````
+
+The PoF Connectivity Model loader plugin extracts the connectivity model and the trace
+configuration from GEs PowerOn Fusion / PowerOn Advantage, the model and trace configs
+are loaded into the GraphDB.
+
+The loader loads chunks of the connectivity model at a time, and requires "Split Points"
+to be configured.
+
+Diagram Branches
+````````````````
+
+Diagram branches is a new feature allowing plugins to modify the diagram displayed
+as it's being rendered.
+
+Initially this includes changing the colours of shapes to provide trace highlighting
+support, but in the near future, this will be expanded to allow creating, deleting
+and moving shapes.
+
+The branches can be enabled or disabled, and are applied on top of the baseline diagram
+upon each render cycle.
+
+RHEL7 Support
+`````````````
+
+Peek now has installation instructions and support for Redhat Enterprise Linux 7 (RHEL7)
+
+
+Required Dependency Bump
+````````````````````````
+
+Peek required dependencies have been upgraded as follows:
+
+*   Python 3.6.7
+
+Optional Dependency Bump
+````````````````````````
+
+Peeks optional dependencies have been upgraded as follows:
+
+*   Oracle client 12.1 -> Oracle client 18.3
+*   Python Package cx-Oracle==5.3 ->  cx-Oracle>=7.0
+
+
+Windows Services
+````````````````
+
+Nil, carry on.
+
+
+Linux Deployment
+----------------
+
+The Linux service scripts have been modified to use systemd, This is supported by both
+RHEL7 and Debian9. This chane allows the scripts to work on both Linux distributions.
+
+For upgrading from pre v1.2.x, you need to disable and remove the old init scripts on
+Debian. ::
+
+    for service in peek_server peek_worker peek_agent peek_client
+    do
+        service ${service} stop
+        update-rc.d ${service} disable
+        rm /etc/init.d/${service}
+    done
+
+
+macOS Deployment
+----------------
+
+Update to the latest XCode, 10.1.
+
+iOS Deployment
+--------------
+
+The Peek Mobile native app now supports iOS 12.1.
+
+
+Windows Deployment
+------------------
+
+nil.
+
+
+Enable New Plugins
+------------------
+
+Update the peek config.json files.
+
+#. Edit each of C:\Users\peek\peek-XXXX.home\config.json
+#. Add :code:`peek_plugin_graphdb` after :code:`peek_plugin_livedb`
+#. Add :code:`peek_plugin_pof_graphdb_loader`
+   after :code:`peek_plugin_pof_diagram_loader`
+
+----
+
+Start up the Peek Server service, it will rebuild the admin site.
+
+----
+
+Connect to the admin site at http://localhost:8010
+
+go to Plugins -> PoF Connectivity Model Loader
+
+Select the "Edit App Server Settings" tab, enter the details and save.
+
+Select the "Edit Graph Segments" tab, enter selection criteria for the connectivity model
+split pints, and save.
+
+The agent needs to be restarted if it was already running.
+
+----
+
+Restart all Peek services.
+
+For windows, restart the :code:`peek-server` service then
+start the :code:`peek-restarter` service,
+the agent, worker and client will now start.

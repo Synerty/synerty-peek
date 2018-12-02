@@ -154,10 +154,85 @@ git command.
 
 .. _setup_os_requirements_windows_python:
 
+Install PostgresSQL
+-------------------
+
+Peek requires PostGreSQL as it's persistent, relational data store.
+
+:Download: `<https://www.enterprisedb.com/downloads/postgres-postgresql-downloads#windows>`_
+:From: `<https://www.postgresql.org>`_
+
+.. note:: Ensure you download the 64bit version or PostGreSQL
+            or the Peek windows service dependencies
+            will not recognise it ("postgresql-10" vs "postgresql-x64-10")
+
+.. image:: pg_win_download.png
+
+----
+
+Install PostgresSQL with default settings.
+
+Make a note of the postgres user password that you supply, you'll need this.
+
+.. warning:: Generate a strong password for both peek and postgres users for
+    production use.
+
+    Synerty recommends 32 to 40 chars of  capitals, lower case and numbers, with some
+    punctuation, best to avoid these ` / \\ ' "
+
+    `<https://strongpasswordgenerator.com>`_
+
+----
+
+Run pgAdmin4
+
+----
+
+Open the Query Tool
+
+.. image:: pgAdmin4-queryTool.jpg
+
+----
+
+Create the peek user, run the following script: ::
+
+    CREATE USER peek WITH
+        LOGIN
+        CREATEDB
+        INHERIT
+        REPLICATION
+        CONNECTION LIMIT -1
+        PASSWORD 'PASSWORD';
+
+.. note:: Replace :code:`PASSWORD` with a secure password
+            from https://xkpasswd.net/s/ for production.
+
+Example:
+
+.. image:: pgAdmin4-userQuery.jpg
+
+----
+
+Create the peek database, run the following script: ::
+
+    CREATE DATABASE peek WITH
+        OWNER = peek
+        ENCODING = 'UTF8'
+        CONNECTION LIMIT = -1;
+
+----
+
+Confirm database was created
+
+.. image:: pgAdmin4-refresh.jpg
+
+.. image:: pgAdmin4-peekDatabase.jpg
+
+
 Install Python 3.6
 ------------------
 
-:Download: `<https://www.python.org/ftp/python/3.6.6/python-3.6.6-amd64.exe>`_
+:Download: `<https://www.python.org/ftp/python/3.6.7/python-3.6.7-amd64.exe>`_
 :From: `<https://www.python.org/downloads/windows/>`_
 
 ----
@@ -189,6 +264,15 @@ Virtual Environment
 
 synerty-peek is deployed into python virtual environments.
 Install the virtualenv python package
+
+----
+
+Upgrade pip:
+
+::
+
+    pip install --upgrade pip
+
 
 ----
 
@@ -256,80 +340,6 @@ Confirm the RabbitMQ Management Console and the RabbitMQ MQTT Adaptor are listed
 
 .. _requirements_windows_postgressql:
 
-Install PostgresSQL
--------------------
-
-Peek requires PostGreSQL as it's persistent, relational data store.
-
-:Download: `<https://www.enterprisedb.com/downloads/postgres-postgresql-downloads#windows>`_
-:From: `<https://www.postgresql.org>`_
-
-.. note:: Ensure you download the 64bit version or PostGreSQL
-            or the Peek windows service dependencies
-            will not recognise it ("postgresql-10" vs "postgresql-x64-10")
-
-.. image:: pg_win_download.png
-
-----
-
-Install PostgresSQL with default settings.
-
-Make a note of the postgres user password that you supply, you'll need this.
-
-.. warning:: Generate a strong password for both peek and postgres users for
-    production use.
-
-    Synerty recommends 32 to 40 chars of  capitals, lower case and numbers, with some
-    punctuation, best to avoid these ` / \\ ' "
-
-    `<https://strongpasswordgenerator.com>`_
-
-----
-
-Run pgAdmin4
-
-----
-
-Open the Query Tool
-
-.. image:: pgAdmin4-queryTool.jpg
-
-----
-
-Create the peek user, run the following script: ::
-
-    CREATE USER peek WITH
-        LOGIN
-        CREATEDB
-        INHERIT
-        REPLICATION
-        CONNECTION LIMIT -1
-        PASSWORD 'PASSWORD';
-
-.. note:: Replace :code:`PASSWORD` with a password of your choice or requirements
-
-Example:
-
-.. image:: pgAdmin4-userQuery.jpg
-
-----
-
-Create the peek database, run the following script: ::
-
-    CREATE DATABASE peek WITH
-        OWNER = peek
-        ENCODING = 'UTF8'
-        CONNECTION LIMIT = -1;
-
-----
-
-Confirm database was created
-
-.. image:: pgAdmin4-refresh.jpg
-
-.. image:: pgAdmin4-peekDatabase.jpg
-
-
 Install Oracle Client (Optional)
 --------------------------------
 
@@ -340,12 +350,14 @@ interface with an oracle database.
 
 Download the following from oracle.
 
-The version used in these instructions is **12.2.0.1.0**.
+The version used in these instructions is **18.3.0.0.0**.
 
-#.  Download the "Instant Client Package - Basic" from
+#.  Download the ZIP "Basic Package"
+    :file:`instantclient-basic-windows.x64-18.3.0.0.0dbru.zip p` from
     http://www.oracle.com/technetwork/topics/winx64soft-089540.html
 
-#.  Download the "Instant Client Package - SDK" from
+#.  Download the ZIP "SDK Package"
+    :file:`instantclient-sdk-windows.x64-18.3.0.0.0dbru.zip` from
     http://www.oracle.com/technetwork/topics/winx64soft-089540.html
 
 ----
@@ -358,7 +370,7 @@ Under Control Panel -> System -> Advanced system settings
 
 Add the following to **PATH** in the "User" environment variables ::
 
-        C:\Users\peek\oracle\instantclient_12_2
+        C:\Users\peek\oracle\instantclient_18_3
 
 .. tip:: On Win 10, enter "environment" in the task bar search and select
             **Edit the system environment variables**

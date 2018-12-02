@@ -72,7 +72,7 @@ foreach ($wheel in $extraWheels)
 # -------------
 
 Write-Host "Downloading and creating wheels";
-if ([string]::IsNullOrEmpty($wantedVer))
+if ( [string]::IsNullOrEmpty($wantedVer))
 {
     pip wheel --no-cache synerty-peek;
 }

@@ -3,6 +3,20 @@
 set -o nounset
 set -o errexit
 
+
+IS_DEBIAN=0;
+IS_REDHAT=0;
+
+if [ -f /etc/redhat-release ]; then
+    IS_REDHAT=1;
+elif [ -f /etc/debian_version ]; then
+    IS_DEBIAN=1;
+else
+    echo "Unknown OS type" >&2
+    exit 1;
+fi
+
+
 releaseZip="${1}"
 
 if ! [ -f $releaseZip ]; then
@@ -130,11 +144,16 @@ if [[ $REPLY =~ ^[Yy]$ ]]
 then
     for s in peek_server peek_worker peek_client peek_agent
     do
-        sudo cp -p $releaseDir/init/$s /etc/init.d/
-        sudo chmod +x /etc/init.d/$s
-        sudo chown root:root /etc/init.d/$s
-        sudo update-rc.d $s defaults
-        sudo service $s restart
+        FILE="${s}.service"
+        TO="/lib/systemd/system/"
+
+        sudo cp -p $releaseDir/init/${FILE} ${TO}
+        sudo chmod +x ${TO}/${FILE}
+        sudo chown root:root ${TO}/${FILE}
+        sudo sed -i "s,#PEEK_DIR#,$venvDir/bin,g" ${TO}/${FILE}
+        sudo systemctl enable $s
+        sudo systemctl restart $s
+
     done
     echo " "
     echo "Done"
@@ -152,7 +171,7 @@ rm -rf ${releaseDir}
 # Force exit of the schell to update the environment variable
 echo "Killing all bash sessions in 5 seconds"
 echo " "
-echo "This will force an envrionment, avoiding :"
+echo "This will force an environment, avoiding :"
 echo "'Confusion and Delay', Fat Controller"
 
 sleep 5s
