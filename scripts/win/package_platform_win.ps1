@@ -3,6 +3,9 @@ param([String]$wantedVer)
 # Make Powershell stop if it has errors
 $ErrorActionPreference = "Stop"
 
+# Try many TLS versions
+[Net.ServicePointManager]::SecurityProtocol = "tls12, tls11, tls"
+
 $7zExe="C:\Program Files\7-Zip\7z.exe";
 
 if (-Not [string]::IsNullOrEmpty($wantedVer)) {
@@ -150,11 +153,11 @@ foreach ($element in $nodePackages) {
 
     # Download package.json
     Write-Host "Downloading $packageLockJsonUrl";
-    Invoke-WebRequest -Uri $packageJsonUrl -UseBasicParsing -OutFile "package.json";
+    Invoke-WebRequest -Uri $packageJsonUrl -OutFile "package.json";
 
     # Download package-lock.json
     Write-Host "Downloading $packageLockJsonUrl";
-    Invoke-WebRequest -Uri $packageLockJsonUrl -UseBasicParsing -OutFile "package-lock.json";
+    Invoke-WebRequest -Uri $packageLockJsonUrl -OutFile "package-lock.json";
 
     # run npm install
     npm install
