@@ -5,6 +5,9 @@ $wantedVer = $wantedVer -replace "v", ""
 # Make Powershell stop if it has errors
 $ErrorActionPreference = "Stop"
 
+# Try many TLS versions
+[Net.ServicePointManager]::SecurityProtocol = "tls12, tls11, tls"
+
 $7zExe = "C:\Program Files\7-Zip\7z.exe";
 
 if (-Not [string]::IsNullOrEmpty($wantedVer))
