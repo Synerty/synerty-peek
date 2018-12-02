@@ -36,6 +36,7 @@ This is the only step in this section that requires the internet.
 
         $file = "deploy_platform_win.ps1"
         $uri = "https://bitbucket.org/synerty/synerty-peek/raw/master/scripts/win/$file";
+        [Net.ServicePointManager]::SecurityProtocol = "tls12, tls11, tls";
         Invoke-WebRequest -Uri $uri -UseBasicParsing -OutFile $file;
 
 ----
