@@ -14,11 +14,26 @@ if os.path.isfile('MANIFEST'):
     os.remove('MANIFEST')
 
 requirements = [
-    "peek-server",
-    "peek-worker",
+    "peek-plugin-base",
+    "peek-platform",
     "peek-agent",
-    "peek-client"
+    "peek-desktop",
+    "peek-worker",
+    "peek-mobile",
+    "peek-client",
+    "peek-doc-user",
+    "peek-admin",
+    "peek-doc-admin",
+    "peek-server",
+    "synerty-peek",
+    "peek-core-email",
+    "peek-core-device"
 ]
+
+# Force the dependencies to be the same branch
+reqVer = '.'.join(package_version.split('.')[0:2]) + ".*"
+
+requirements = ["%s==%s" % (pkg, reqVer) for pkg in requirements]
 
 doc_requirements = [
     "Sphinx",
@@ -33,7 +48,7 @@ setup(
     name=pip_package_name,
     packages=find_packages(exclude=["*.tests", "*.tests.*", "tests.*", "tests"]),
     install_requires=requirements,
-    zip_safe=False,version=package_version,
+    zip_safe=False, version=package_version,
     description='Peek Platform - Meta Package to install all services',
     author='Synerty',
     author_email='contact@synerty.com',

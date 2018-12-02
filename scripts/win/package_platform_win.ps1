@@ -1,11 +1,14 @@
-param([String]$wantedVer)
+param ([String]$wantedVer)
+
+$wantedVer = $wantedVer -replace "v", ""
 
 # Make Powershell stop if it has errors
 $ErrorActionPreference = "Stop"
 
-$7zExe="C:\Program Files\7-Zip\7z.exe";
+$7zExe = "C:\Program Files\7-Zip\7z.exe";
 
-if (-Not [string]::IsNullOrEmpty($wantedVer)) {
+if (-Not [string]::IsNullOrEmpty($wantedVer))
+{
     Write-Host "Requested version is $wantedVer"
 }
 
@@ -15,7 +18,8 @@ $startDir = Get-Location
 $baseDir = "$startDir\peek_dist_win";
 
 # Delete the existing dist dir if it exists
-If (Test-Path $baseDir) {
+If (Test-Path $baseDir)
+{
     Remove-Item $baseDir -Force -Recurse;
 }
 
@@ -37,28 +41,30 @@ Write-Host "Downloading and windows wheels";
 
 # Define the extra wheels we need to download
 $extraWheels = @(
-    # Download shapely, it's not a dependency on windows because pip doesn't try to get the windows dist.
-    @{
-        "file" = "Shapely-1.6.4.post1-cp36-cp36m-win_amd64.whl";
-        "url" = "https://download.lfd.uci.edu/pythonlibs/h2ufg7oq"
-    },
+# Download shapely, it's not a dependency on windows because pip doesn't try to get the windows dist.
+@{
+    "file" = "Shapely-1.6.4.post1-cp36-cp36m-win_amd64.whl";
+    "url" = "https://download.lfd.uci.edu/pythonlibs/h2ufg7oq"
+},
 
-    # Download pymssql, As to 11/Apr/2017, there are no standard built wheels for 3.6.1
-    @{
-        "file" = "pymssql-2.1.4-cp36-cp36m-win_amd64.whl";
-        "url" = "https://download.lfd.uci.edu/pythonlibs/h2ufg7oq"
-    }
+# Download pymssql, As to 11/Apr/2017, there are no standard built wheels for 3.6.1
+@{
+    "file" = "pymssql-2.1.4-cp36-cp36m-win_amd64.whl";
+    "url" = "https://download.lfd.uci.edu/pythonlibs/h2ufg7oq"
+}
 );
 
 # Download and check the extra wheels
-foreach ($wheel in $extraWheels) {
+foreach ($wheel in $extraWheels)
+{
     # Get the variables for this package
     $file = $wheel.Get_Item("file");
-    $url = "$($wheel.Get_Item("url"))/$($file)";
+    $url = "$($wheel.Get_Item("url") )/$( $file )";
 
     Invoke-WebRequest -Uri $url -UseBasicParsing -OutFile $file;
 
-    if ( (get-item $file).length -lt 10000) {
+    if ((get-item $file).length -lt 10000)
+    {
         Write-Error "$file has a new version update"
     }
 }
@@ -66,18 +72,28 @@ foreach ($wheel in $extraWheels) {
 # -------------
 
 Write-Host "Downloading and creating wheels";
-pip wheel --no-cache synerty-peek;
+if ([string]::IsNullOrEmpty($wantedVer))
+{
+    pip wheel --no-cache synerty-peek;
+}
+else
+{
+    pip wheel --no-cache "synerty-peek==$wantedVer";
+}
 
 # Make sure we've downloaded the right version
 $peekPkgName = Get-ChildItem ".\" |
-    Where-Object {$_.Name.StartsWith("synerty_peek-")} |
+    Where-Object { $_.Name.StartsWith("synerty_peek-") } |
     Select-Object -exp Name;
 $peekPkgVer = $peekPkgName.Split('-')[1];
 
-if (-Not [string]::IsNullOrEmpty($wantedVer) -and $peekPkgVer -ne $wantedVer) {
+if (-Not [string]::IsNullOrEmpty($wantedVer) -and $peekPkgVer -ne $wantedVer)
+{
     Set-Location "$startDir";
     Write-Error "We've downloaded version $peekPkgVer, but you wanted ver $wantedVer";
-} else {
+}
+else
+{
     Write-Host "We've downloaded version $peekPkgVer";
 }
 
@@ -96,11 +112,14 @@ Invoke-WebRequest -Uri $nodeUrl -UseBasicParsing -OutFile $nodeFile;
 # Unzip it
 
 
-if (Test-Path $7zExe) {
+if (Test-Path $7zExe)
+{
     Write-Host "7z is present, this will be faster";
     Invoke-Expression "&`"$7zExe`" x -y -r `"$baseDir\$nodeFile`" -o`"$baseDir`"";
 
-} else {
+}
+else
+{
     Write-Host "Using standard windows zip handler, this will be slow";
     Add-Type -Assembly System.IO.Compression.FileSystem;
     [System.IO.Compression.ZipFile]::ExtractToDirectory("$baseDir\$nodeFile", $baseDir);
@@ -126,18 +145,22 @@ npm -g install @angular/cli@~6.0.0 typescript@~2.7.2 tslint
 
 # Define the node packages we want to download
 $nodePackages = @(
-    @{"dir" = "$baseDir\mobile-build-web";
-        "packageJsonBaseUrl" = "https://bitbucket.org/synerty/peek-mobile/raw/$peekPkgVer/peek_mobile/build-web"
-    },
-    @{"dir" = "$baseDir\desktop-build-web";
-        "packageJsonBaseUrl" = "https://bitbucket.org/synerty/peek-desktop/raw/$peekPkgVer/peek_desktop/build-web"
-    },
-    @{"dir" = "$baseDir\admin-build-web";
-        "packageJsonBaseUrl" = "https://bitbucket.org/synerty/peek-admin/raw/$peekPkgVer/peek_admin/build-web"
-    }
+@{
+    "dir" = "$baseDir\mobile-build-web";
+    "packageJsonBaseUrl" = "https://bitbucket.org/synerty/peek-mobile/raw/$peekPkgVer/peek_mobile/build-web"
+},
+@{
+    "dir" = "$baseDir\desktop-build-web";
+    "packageJsonBaseUrl" = "https://bitbucket.org/synerty/peek-desktop/raw/$peekPkgVer/peek_desktop/build-web"
+},
+@{
+    "dir" = "$baseDir\admin-build-web";
+    "packageJsonBaseUrl" = "https://bitbucket.org/synerty/peek-admin/raw/$peekPkgVer/peek_admin/build-web"
+}
 );
 
-foreach ($element in $nodePackages) {
+foreach ($element in $nodePackages)
+{
     # Get the variables for this package
     $nmDir = $element.Get_Item("dir");
     $packageJsonBaseUrl = $element.Get_Item("packageJsonBaseUrl");
@@ -173,12 +196,13 @@ foreach ($element in $nodePackages) {
 Set-Location $startDir;
 
 # Finally, version the directory
-$releaseDir = "$($baseDir)_$($peekPkgVer)";
-$releaseZip = "$($releaseDir).zip"
+$releaseDir = "$( $baseDir )_$( $peekPkgVer )";
+$releaseZip = "$( $releaseDir ).zip"
 Move-Item $baseDir $releaseDir -Force;
 
 # Delete an old release zip if it exists
-If (Test-Path $releaseZip) {
+If (Test-Path $releaseZip)
+{
     Remove-Item $releaseZip -Force;
 }
 

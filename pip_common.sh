@@ -4,6 +4,7 @@ set -o nounset
 set -o errexit
 # set -x
 
+# Also update setup.py
 export PACKAGES="
 peek-plugin-base
 peek-platform

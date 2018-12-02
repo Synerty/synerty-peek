@@ -6,6 +6,7 @@ set -o nounset
 set -o errexit
 
 wantedVer=${1-}
+wantedVer=${wantedVer/v/}
 
 if [ -n ${wantedVer} ]; then
     echo "Requested version is $wantedVer"
@@ -26,7 +27,11 @@ mkdir -p $baseDir/py
 cd $baseDir/py
 
 echo "Downloading and creating wheels"
-pip wheel --no-cache synerty-peek
+if [ -n ${wantedVer} ]; then
+    pip wheel --no-cache synerty-peek==${wantedVer}
+else
+    pip wheel --no-cache synerty-peek
+fi
 
 # Make sure we've downloaded the right version
 peekPkgVer=`ls synerty_peek-* | cut -d'-' -f2`
