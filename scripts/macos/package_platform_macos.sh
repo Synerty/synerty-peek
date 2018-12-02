@@ -107,18 +107,21 @@ function downloadNodeModules {
 }
 
 # MOBILE node modules
+mobilePackageVer=`cd $baseDir/py && ls peek_mobile-* | cut -d'-' -f2`
 mobileBuildWebDIR="$baseDir/mobile-build-web"
-mobileJsonUrl="https://bitbucket.org/synerty/peek-mobile/raw/${peekPkgVer}/peek_mobile/build-web"
+mobileJsonUrl="https://bitbucket.org/synerty/peek-mobile/raw/${mobilePackageVer}/peek_mobile/build-web"
 downloadNodeModules $mobileBuildWebDIR $mobileJsonUrl
 
 # DESKTOP node modules
+desktopPackageVer=`cd $baseDir/py && ls peek_desktop-* | cut -d'-' -f2`
 desktopBuildWebDIR="$baseDir/desktop-build-web"
-desktopJsonUrl="https://bitbucket.org/synerty/peek-desktop/raw/${peekPkgVer}/peek_desktop/build-web"
+desktopJsonUrl="https://bitbucket.org/synerty/peek-desktop/raw/${desktopPackageVer}/peek_desktop/build-web"
 downloadNodeModules $desktopBuildWebDIR $desktopJsonUrl
 
 # ADMIN node modules
+adminPackageVer=`cd $baseDir/py && ls peek_admin-* | cut -d'-' -f2`
 adminBuildWebDIR="$baseDir/admin-build-web"
-adminJsonUrl="https://bitbucket.org/synerty/peek-admin/raw/${peekPkgVer}/peek_admin/build-web"
+adminJsonUrl="https://bitbucket.org/synerty/peek-admin/raw/${adminPackageVer}/peek_admin/build-web"
 downloadNodeModules $adminBuildWebDIR $adminJsonUrl
 
 # ------------------------------------------------------------------------------

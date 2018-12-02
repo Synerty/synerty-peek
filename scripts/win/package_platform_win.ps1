@@ -149,24 +149,35 @@ npm -g install @angular/cli@~6.0.0 typescript@~2.7.2 tslint
 # Define the node packages we want to download
 $nodePackages = @(
 @{
+    "package" = "peek_mobile";
     "dir" = "$baseDir\mobile-build-web";
-    "packageJsonBaseUrl" = "https://bitbucket.org/synerty/peek-mobile/raw/$peekPkgVer/peek_mobile/build-web"
+    "packageJsonBaseUrl" = "https://bitbucket.org/synerty/peek-mobile/raw/"
 },
 @{
+    "package" = "peek_desktop";
     "dir" = "$baseDir\desktop-build-web";
-    "packageJsonBaseUrl" = "https://bitbucket.org/synerty/peek-desktop/raw/$peekPkgVer/peek_desktop/build-web"
+    "packageJsonBaseUrl" = "https://bitbucket.org/synerty/peek-desktop/raw/"
 },
 @{
+    "package" = "peek_admin";
     "dir" = "$baseDir\admin-build-web";
-    "packageJsonBaseUrl" = "https://bitbucket.org/synerty/peek-admin/raw/$peekPkgVer/peek_admin/build-web"
+    "packageJsonBaseUrl" = "https://bitbucket.org/synerty/peek-admin/raw/"
 }
 );
 
 foreach ($element in $nodePackages)
 {
+    $packageName = $element.Get_Item("package");
+
+    # Make sure we've downloaded the right version
+    $peekPkgName = Get-ChildItem "$baseDir\py" |
+    Where-Object { $_.Name.StartsWith($packageName + "-") } |
+    Select-Object -exp Name;
+    $peekUiPkgVer = $peekPkgName.Split('-')[1];
+
     # Get the variables for this package
     $nmDir = $element.Get_Item("dir");
-    $packageJsonBaseUrl = $element.Get_Item("packageJsonBaseUrl");
+    $packageJsonBaseUrl = $element.Get_Item("packageJsonBaseUrl") + "$peekUiPkgVer/$packageName/build-web";
     $packageJsonUrl = $packageJsonBaseUrl + "/package.json";
     $packageLockJsonUrl = $packageJsonBaseUrl + "/package-lock.json";
 
