@@ -40,13 +40,13 @@ $extraWheels = @(
     # Download shapely, it's not a dependency on windows because pip doesn't try to get the windows dist.
     @{
         "file" = "Shapely-1.6.4.post1-cp36-cp36m-win_amd64.whl";
-        "url" = "https://download.lfd.uci.edu/pythonlibs/o4uhg4xd"
+        "url" = "https://download.lfd.uci.edu/pythonlibs/h2ufg7oq"
     },
 
     # Download pymssql, As to 11/Apr/2017, there are no standard built wheels for 3.6.1
     @{
         "file" = "pymssql-2.1.4-cp36-cp36m-win_amd64.whl";
-        "url" = "https://download.lfd.uci.edu/pythonlibs/o4uhg4xd"
+        "url" = "https://download.lfd.uci.edu/pythonlibs/h2ufg7oq"
     }
 );
 
