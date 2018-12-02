@@ -305,6 +305,7 @@ Guaranteeing that there is no mismatch of names when they send data to each othe
 Create the :file:`peek_plugin_tutorial/_private/PluginNames.py` file with the following
 contents: ::
 
+        tutorialPluginName = "peek_plugin_tutorial"
         tutorialFilt = {"plugin": "peek_plugin_tutorial"}
         tutorialTuplePrefix = "peek_plugin_tutorial."
         tutorialObservableName = "peek_plugin_tutorial"

@@ -271,6 +271,7 @@ Replace the :code:`"userId"` with your user id.
 
         from peek_plugin_active_task.server.ActiveTaskApiABC import ActiveTaskApiABC, NewTask
         from peek_plugin_tutorial._private.server.controller.MainController import MainController
+        from peek_plugin_tutorial._private.PluginNames import tutorialPluginName
 
         logger = logging.getLogger(__name__)
 
@@ -288,6 +289,7 @@ Replace the :code:`"userId"` with your user id.
             def sendTask(self):
                 # First, create the task
                 newTask = NewTask(
+                    pluginName=tutorialPluginName,
                     uniqueId=str(datetime.utcnow()),
                     userId="userId",  # <----- Set to your user id
                     title="A task from tutorial plugin",
