@@ -321,12 +321,17 @@ Open a new terminal and test that the setup is working ::
 
 ----
 
-Upgrade pip:
-
-::
+Upgrade pip: ::
 
     pip install --upgrade pip
 
+----
+
+The following packages are required to package/deploy the macOS release. ::
+
+    pip install Cython
+
+.. note:: This is required for the pymysql setup.py
 
 ----
 

@@ -103,14 +103,6 @@ This section contains the steps to build your own platform release.
 
 ----
 
-The following packages are required to run package the macOS release. ::
-
-    pip install Cython
-
-.. note:: This is required for the pymysql setup.py
-
-----
-
 Download the platform build script.
 Run the following commands in the power shell window.
 
