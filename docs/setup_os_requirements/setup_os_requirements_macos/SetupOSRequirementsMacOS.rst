@@ -57,6 +57,29 @@ to run the Peek Platform.
 
 The instructions on this page don't install the peek platform, that's done later.
 
+Safari Open Safe Files
+----------------------
+
+If you're using safari on the mac (which you probably are), make sure
+**Open "Safe" files after downloading** is turned off.
+
+This will cause Safari to unzip files that have been downloaded, and invalidate
+some of the install steps.
+
+----
+
+In Safari, press :key:`Command+,` to bring up preferences.
+
+----
+
+Uncheck the **Open "Safe" files after downloading** checkbox.
+
+.. image:: safari_safe_files.png
+
+----
+
+Close safari preferences.
+
 
 Create Peek Platform OS User
 ----------------------------
@@ -398,14 +421,14 @@ Make the directory where the oracle client will live ::
 
 Download the following from oracle.
 
-The version used in these instructions is :code:`12.1.0.2.0`.
+The version used in these instructions is :code:`12.2.0.1.0`.
 
-.. note:: Oracle version 12.2 is not available for macOS.
+.. note:: Oracle version 18.3 is not available for macOS.
 
-#.  Download the "Instant Client Package - Basic" from
+#.  Download the "Basic Package" from
     http://www.oracle.com/technetwork/topics/intel-macsoft-096467.html
 
-#.  Download the "Instant Client Package - SDK" from
+#.  Download the "SDK Package" from
     http://www.oracle.com/technetwork/topics/intel-macsoft-096467.html
 
 Copy these files to :file:`~/oracle` on the peek server.
@@ -415,8 +438,8 @@ Copy these files to :file:`~/oracle` on the peek server.
 Extract the files. ::
 
         cd ~/oracle
-        unzip instantclient-basic-macos.x64-12.1.0.2.0.zip
-        unzip instantclient-sdk-macos.x64-12.1.0.2.0.zip
+        unzip instantclient-basic-macos.x64-12.2.0.1.0.zip
+        unzip instantclient-sdk-macos.x64-12.2.0.1.0.zip
 
 
 ----
