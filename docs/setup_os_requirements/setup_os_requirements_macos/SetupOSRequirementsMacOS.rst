@@ -486,7 +486,7 @@ Install FreeTDS via Homebrew: ::
 
 Edit :file:`~/.bash_profile` and insert the following: ::
 
-        ##### SET THE FINK ENVIRONMENT #####
+        ##### SET THE HOMEBREW ENVIRONMENT #####
         # Set PATH to include fink
         export PATH="/usr/local/opt/freetds@0.91/bin:$PATH"
 
