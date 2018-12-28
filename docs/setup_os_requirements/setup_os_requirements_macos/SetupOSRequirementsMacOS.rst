@@ -242,7 +242,7 @@ Install Python 3.7
 
 In terminal run: ::
 
-        brew install python3@3.7.2
+        brew install python
 
 
 ----
