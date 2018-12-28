@@ -292,7 +292,7 @@ Open a new terminal and test that the setup is working ::
         [ "`which pip`" == "$pass" ] && echo "Success" || echo "FAILED"
 
 
-        pass="pip 9.0.1 from /usr/local/lib/python3.7/site-packages (python 3.7)"
+        pass="pip 18.1 from /usr/local/lib/python3.7/site-packages/pip (python 3.7)"
         [ "`pip --version`" == "$pass" ] && echo "Success" || echo "FAILED"
 
 
