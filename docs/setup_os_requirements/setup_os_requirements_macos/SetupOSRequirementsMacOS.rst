@@ -438,24 +438,15 @@ Copy these files to :file:`~/oracle` on the peek server.
 Extract the files. ::
 
         cd ~/oracle
-        unzip instantclient-basic-macos.x64-12.2.0.1.0.zip
-        unzip instantclient-sdk-macos.x64-12.2.0.1.0.zip
-
-
-----
-
-Create the appropriate libclntsh.dylib link for the version of Instant Client: ::
-
-        cd ~/oracle/instantclient_12_1
-        ln -s libclntsh.dylib.12.1 libclntsh.dylib
-
+        unzip instantclient-basic-macos.x64-12.2.0.1.0-2.zip
+        unzip instantclient-sdk-macos.x64-12.2.0.1.0-2.zip
 
 ----
 
 Add links to $HOME/lib to enable applications to find the libraries: ::
 
         mkdir ~/lib
-        ln -s ~/oracle/instantclient_12_1/libclntsh.dylib ~/lib/
+        ln -s ~/oracle/instantclient_12_2/libclntsh.dylib ~/lib/
 
 
 ----
@@ -464,7 +455,7 @@ Edit :file:`~/.bash_profile` and insert the following: ::
 
         ##### SET THE ORACLE ENVIRONMENT #####
         # Set PATH to include oracle
-        export ORACLE_HOME="`echo ~/oracle/instantclient_12_1`"
+        export ORACLE_HOME="`echo ~/oracle/instantclient_12_2`"
         export PATH="$ORACLE_HOME:$PATH"
 
         ##### SET THE DYLD_LIBRARY_PATH #####
