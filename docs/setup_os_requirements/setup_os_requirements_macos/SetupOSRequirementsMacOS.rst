@@ -31,7 +31,7 @@ Below is a list of all the required software:
 
 *   Homebrew
 
-*   Python 3.6.x
+*   Python 3.7.x
 
 *   Postgres 10.3
 
@@ -237,19 +237,19 @@ https://www.pgadmin.org/download/pgadmin-4-macos/
 
 
 
-Install Python 3.6
+Install Python 3.7
 ------------------
 
 In terminal run: ::
 
-        brew install python3
+        brew install python3@3.7.2
 
 
 ----
 
 Symlink the python3 commands so they are the only ones picked up by path. ::
 
-        cd /usr/local/Cellar/python/3.6.7/bin/
+        cd /usr/local/Cellar/python/3.7.2/bin/
         ln -s python3 python
         ln -s pip3 pip
         ln -s wheel3 wheel
@@ -266,11 +266,11 @@ Edit :file:`~/.bash_profile` and insert the following: ::
 
         #### SET THE HOMEBREW PYTHON ENVIRONMENT ####
         # Set PATH to include python
-        export PATH="/usr/local/Cellar/python/3.6.7/bin:$PATH"
+        export PATH="/usr/local/Cellar/python/3.7.2/bin:$PATH"
 
         ##### SET THE PEEK ENVIRONMENT #####
         # Setup the variables for PYTHON
-        export PEEK_PY_VER="3.6.7"
+        export PEEK_PY_VER="3.7.2"
 
         # Set the variables for the platform release
         # These are updated by the deploy script
@@ -282,17 +282,17 @@ Edit :file:`~/.bash_profile` and insert the following: ::
 
 Open a new terminal and test that the setup is working ::
 
-        pass="/usr/local/Cellar/python/3.6.7/bin/python"
+        pass="/usr/local/Cellar/python/3.7.2/bin/python"
         [ "`which python`" == "$pass" ] && echo "Success" || echo "FAILED"
 
-        pass="Python 3.6.7"
+        pass="Python 3.7.2"
         [ "`python --version`" == "$pass" ] && echo "Success" || echo "FAILED"
 
-        pass="/usr/local/Cellar/python/3.6.7/bin/pip"
+        pass="/usr/local/Cellar/python/3.7.2/bin/pip"
         [ "`which pip`" == "$pass" ] && echo "Success" || echo "FAILED"
 
 
-        pass="pip 9.0.1 from /usr/local/lib/python3.6/site-packages (python 3.6)"
+        pass="pip 9.0.1 from /usr/local/lib/python3.7/site-packages (python 3.7)"
         [ "`pip --version`" == "$pass" ] && echo "Success" || echo "FAILED"
 
 
