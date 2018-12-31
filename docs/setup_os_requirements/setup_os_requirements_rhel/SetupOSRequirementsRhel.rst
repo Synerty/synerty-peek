@@ -636,6 +636,7 @@ Symlink the python3 commands so they are the only ones picked up by path: ::
     cd /home/peek/cpython-${PEEK_PY_VER}/bin
     ln -s pip3 pip
     ln -s python3 python
+    cd
 
 
 ----

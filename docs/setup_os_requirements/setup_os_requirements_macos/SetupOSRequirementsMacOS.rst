@@ -177,6 +177,12 @@ Install gnu-sed for the build scripts ::
 
 ----
 
+Install wget, needed for python download ::
+
+        brew install wget
+
+----
+
 Create the symlinks to prefer the GNU tools ::
 
         mkdir ~/bin
@@ -328,6 +334,7 @@ Symlink the python3 commands so they are the only ones picked up by path. ::
         cd /Users/peek/cpython-${PEEK_PY_VER}/bin
         ln -s pip3 pip
         ln -s python3 python
+        cd
 
 ----
 
@@ -360,19 +367,27 @@ Upgrade pip: ::
 
 ----
 
-The following packages are required to package/deploy the macOS release. ::
-
-    pip install Cython
+The following packages are required to package/deploy the macOS release.
 
 .. note:: This is required for the pymysql setup.py
+
+::
+
+    pip install Cython
 
 ----
 
 synerty-peek is deployed into python virtual environments.
-
 Install the virtualenv python package ::
 
         pip install virtualenv
+
+
+----
+
+The Wheel package is required for building platform and plugin releases ::
+
+        pip install wheel
 
 
 Install Worker Dependencies
