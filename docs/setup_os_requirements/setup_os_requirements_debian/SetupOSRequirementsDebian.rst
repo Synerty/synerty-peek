@@ -505,7 +505,7 @@ Install C libraries that the oracle client requires: ::
         PKG="$PKG libxslt1.1 libxslt1-dev"
         PKG="$PKG libaio1 libaio-dev"
 
-        sudo yum install -y $PKG
+        sudo apt-get install -y $PKG
 
 ----
 
