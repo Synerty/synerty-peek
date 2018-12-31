@@ -285,7 +285,7 @@ Edit :file:`~/.bash_profile` and insert the following: ::
         ##### SET THE PEEK ENVIRONMENT #####
         # Setup the variables for PYTHON
         export PEEK_PY_VER="3.6.8"
-        export PATH="/home/peek/cpython-${PEEK_PY_VER}/bin:$PATH"
+        export PATH="/Users/peek/cpython-${PEEK_PY_VER}/bin:$PATH"
 
         # Set the variables for the platform release
         # These are updated by the deploy script
