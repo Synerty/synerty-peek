@@ -106,8 +106,8 @@ Sign in to the peek account.
 
 .. _installing_xcode:
 
-Installing Xcode
-----------------
+Install Xcode
+-------------
 
 From the app store, install Xcode.
 
@@ -154,8 +154,8 @@ http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.h
 
 .. JJC Is this only required for nativescript development?
 
-Homebrew
---------
+Install Homebrew
+----------------
 
 Edit :file:`~/.bash_profile` and insert the following: ::
 
