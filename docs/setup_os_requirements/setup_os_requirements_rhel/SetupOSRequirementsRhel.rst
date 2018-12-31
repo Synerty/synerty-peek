@@ -549,7 +549,7 @@ Create the peek SQL user: ::
 
 Set the PostGreSQL peek users password: ::
 
-    psql <<EOF
+    psql -d postgres -U peek <<EOF
     \password
     \q
     EOF

@@ -234,7 +234,7 @@ Create the database ::
 
 Set the PostGreSQL peek users password ::
 
-        psql -d peek -U peek <<EOF
+        psql -d postgres -U peek <<EOF
         \password
         \q
         EOF
