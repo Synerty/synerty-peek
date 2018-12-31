@@ -371,7 +371,7 @@ The following packages are required to package/deploy the macOS release.
 
 .. note:: This is required for the pymysql setup.py
 
-::
+ ::
 
     pip install Cython
 

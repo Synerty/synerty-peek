@@ -671,8 +671,7 @@ Test that the setup is working: ::
 
 ----
 
-Upgrade pip:
- ::
+Upgrade pip: ::
 
     pip install --upgrade pip
 
