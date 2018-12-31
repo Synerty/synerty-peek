@@ -31,7 +31,7 @@ Below is a list of all the required software:
 
 *   Homebrew
 
-*   Python 3.7.x
+*   Python 3.6.x
 
 *   Postgres 10.3
 
@@ -152,9 +152,18 @@ Download the macOS disk image:
 
 http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
 
+.. JJC Is this only required for nativescript development?
 
 Homebrew
 --------
+
+Edit :file:`~/.bash_profile` and insert the following: ::
+
+        #### USE THE GNU TOOLS ####
+        # Set PATH to gnu tools
+        export PATH="`echo ~/bin:$PATH`"
+
+----
 
 To install Homebrew, run the following command in terminal: ::
 
@@ -177,7 +186,7 @@ Create the symlinks to prefer the GNU tools ::
 
 Install the dev libs that the python packages will need to compile ::
 
-        brew install openssl@1.1
+        brew install openssl@1.1 zlib
 
 
 Install PostGreSQL
@@ -260,40 +269,17 @@ https://www.pgadmin.org/download/pgadmin-4-macos/
 
 
 
-Install Python 3.7
+Install Python 3.6
 ------------------
-
-In terminal run: ::
-
-        brew install python
-
-
-----
-
-Symlink the python3 commands so they are the only ones picked up by path. ::
-
-        cd /usr/local/Cellar/python/3.7.2/bin/
-        ln -s python3 python
-        ln -s pip3 pip
-        ln -s wheel3 wheel
-        cd
-
 
 ----
 
 Edit :file:`~/.bash_profile` and insert the following: ::
 
-        #### USE THE GNU TOOLS ####
-        # Set PATH to gnu tools
-        export PATH="`echo ~/bin:$PATH`"
-
-        #### SET THE HOMEBREW PYTHON ENVIRONMENT ####
-        # Set PATH to include python
-        export PATH="/usr/local/Cellar/python/3.7.2/bin:$PATH"
-
         ##### SET THE PEEK ENVIRONMENT #####
         # Setup the variables for PYTHON
-        export PEEK_PY_VER="3.7.2"
+        export PEEK_PY_VER="3.6.8"
+        export PATH="/home/peek/cpython-${PEEK_PY_VER}/bin:$PATH"
 
         # Set the variables for the platform release
         # These are updated by the deploy script
@@ -303,19 +289,66 @@ Edit :file:`~/.bash_profile` and insert the following: ::
 
 ----
 
+Download and unarchive the supported version of Python ::
+
+        cd ~
+        source .bashrc
+        wget "https://www.python.org/ftp/python/${PEEK_PY_VER}/Python-${PEEK_PY_VER}.tgz"
+        tar xzf Python-${PEEK_PY_VER}.tgz
+
+----
+
+Configure the build ::
+
+        cd Python-${PEEK_PY_VER}
+
+        export LDFLAGS="-L/usr/local/opt/openssl/lib -L/usr/local/opt/zlib/lib"
+        export CPPFLAGS="-I/usr/local/opt/openssl/include -I/usr/local/opt/zlib/include"
+        export PKG_CONFIG_PATH="/usr/local/opt/openssl/lib/pkgconfig:/usr/local/opt/zlib/lib/pkgconfig"
+
+        ./configure --prefix=/Users/peek/cpython-${PEEK_PY_VER}/ --enable-optimizations
+
+----
+
+Make and Make install the software ::
+
+        make install
+
+----
+
+Cleanup the download and build dir ::
+
+        cd
+        rm -rf Python-${PEEK_PY_VER}*
+
+----
+
+Symlink the python3 commands so they are the only ones picked up by path. ::
+
+        cd /Users/peek/cpython-${PEEK_PY_VER}/bin
+        ln -s pip3 pip
+        ln -s python3 python
+
+----
+
+.. warning:: Restart your terminal you get the new environment.
+
+
+----
+
 Open a new terminal and test that the setup is working ::
 
-        pass="/usr/local/Cellar/python/3.7.2/bin/python"
+        pass="/Users/peek/cpython-3.6.8/bin/python"
         [ "`which python`" == "$pass" ] && echo "Success" || echo "FAILED"
 
-        pass="Python 3.7.2"
+        pass="Python 3.6.8"
         [ "`python --version`" == "$pass" ] && echo "Success" || echo "FAILED"
 
-        pass="/usr/local/Cellar/python/3.7.2/bin/pip"
+        pass="/Users/peek/cpython-3.6.8/bin/pip"
         [ "`which pip`" == "$pass" ] && echo "Success" || echo "FAILED"
 
 
-        pass="pip 18.1 from /usr/local/lib/python3.7/site-packages/pip (python 3.7)"
+        pass="pip 18.1 from /Users/peek/cpython-3.6.8/lib/python3.6/site-packages/pip (python 3.6)"
         [ "`pip --version`" == "$pass" ] && echo "Success" || echo "FAILED"
 
 

@@ -25,7 +25,7 @@ packaged and transferred to the offline server.
 Below is a list of all the required software:
 
 
-*   Python 3.7.x
+*   Python 3.6.x
 
 *   Postgres 10.4.x
 
@@ -625,7 +625,7 @@ Cleanup traces of the password ::
 
 
 
-Compile and Install Python 3.7
+Compile and Install Python 3.6
 ------------------------------
 
 The Peek Platform runs on Python. These instructions download, compile and install the
@@ -643,7 +643,7 @@ Insert : ::
 
         ##### SET THE PEEK ENVIRONMENT #####
         # Setup the variables for PYTHON
-        export PEEK_PY_VER="3.7.2"
+        export PEEK_PY_VER="3.6.8"
         export PATH="/home/peek/cpython-${PEEK_PY_VER}/bin:$PATH"
 		
         # Set the variables for the platform release

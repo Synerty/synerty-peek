@@ -28,7 +28,7 @@ Below is a list of all the required software:
 *  Visual C++ Build Tools 2015
 *  PostgresSQL 10.4+
 *  Node.js 7+ and NPM 5+
-*  Python 3.7
+*  Python 3.6
 *  Virtualenv
 *  FreeTDS
 *  Msys Git
@@ -229,15 +229,15 @@ Confirm database was created
 .. image:: pgAdmin4-peekDatabase.jpg
 
 
-Install Python 3.7
+Install Python 3.6
 ------------------
 
-:Download: `<https://www.python.org/ftp/python/3.7.2/python-3.7.2-amd64.exe>`_
+:Download: `<https://www.python.org/ftp/python/3.6.8/python-3.6.8-amd64.exe>`_
 :From: `<https://www.python.org/downloads/windows/>`_
 
 ----
 
-Check the 'Add Python 3.7 to PATH' and select 'Customize Installation'
+Check the 'Add Python 3.6 to PATH' and select 'Customize Installation'
 
 .. image:: Python-Install.jpg
 

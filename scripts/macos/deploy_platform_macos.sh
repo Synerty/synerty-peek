@@ -75,7 +75,7 @@ rsync -a $releaseDir/node/* ${venvDir}
 # Install the frontend node_modules
 
 # Make a var pointing to site-packages
-sp="$venvDir/lib/python3.7/site-packages"
+sp="$venvDir/lib/python3.6/site-packages"
 
 # Move the node_modules into place
 mv $releaseDir/mobile-build-web/node_modules $sp/peek_mobile/build-web
