@@ -292,6 +292,10 @@ Edit :file:`~/.bash_profile` and insert the following: ::
         export PEEK_ENV=""
         export PATH="${PEEK_ENV}/bin:$PATH"
 
+----
+
+.. warning:: Restart your terminal you get the new environment.
+
 
 ----
 
@@ -335,10 +339,6 @@ Symlink the python3 commands so they are the only ones picked up by path. ::
         ln -s pip3 pip
         ln -s python3 python
         cd
-
-----
-
-.. warning:: Restart your terminal you get the new environment.
 
 
 ----

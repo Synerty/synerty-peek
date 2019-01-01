@@ -594,6 +594,9 @@ Edit `~/.bashrc` and append the following to the end of the file.
     export PEEK_ENV=""
     [ -n "${PEEK_ENV}" ] && export PATH="${PEEK_ENV}/bin:$PATH"
 
+----
+
+.. warning:: Restart your terminal to get the new environment.
 
 ----
 
@@ -638,10 +641,6 @@ Symlink the python3 commands so they are the only ones picked up by path: ::
     ln -s python3 python
     cd
 
-
-----
-
-.. warning:: Restart your terminal to get the new environment.
 
 ----
 
