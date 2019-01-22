@@ -74,7 +74,7 @@ the data is reloaded when the destination peek starts.
 
 OR, This will create a more binary backup format, suitable for restoring onto an existing
 peek server. Some databases modules such as postgis, etc will not be dumped with
- the custom format.
+the custom format.
 
 To backup to the custom format change :code:`-F p` to :code:`-F c` and change the file
 name extension from :file:`.sql` to :file:`.dmp`.

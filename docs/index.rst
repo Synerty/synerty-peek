@@ -11,7 +11,7 @@ Peek Platform Documentation
     setup_os_requirements/IndexSetupOSRequirements
     deploy_platform/DeployPeekPlatform
     deploy_plugins/DeployPeekPlugins
-    administer/AdministerPeekPlatform
+    administration/administration
     nativescript_app/IndexNativeScriptApp
     development/IndexPeekDevelopment
     troubleshooting/IndexTroubleshooting
