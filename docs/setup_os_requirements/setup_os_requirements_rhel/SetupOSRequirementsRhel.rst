@@ -252,7 +252,7 @@ Click **BEGIN INSTALLATION**
 
 While RHEL is installing, further installation steps need to be completed.
 
-Configure the **ROOT PASSWORD** and the **USER CREATION*
+Configure the **ROOT PASSWORD** and the **USER CREATION**
 
 .. image:: rhel_installing_root_user_config.png
 
@@ -312,8 +312,7 @@ This is a paid subscription.
 ----
 
 Run the following command to register the system.
-Replace MY_RHN_USERNAME with your redhat network username.
- ::
+Replace MY_RHN_USERNAME with your redhat network username. ::
 
     sudo date
     # enter the password for peek
@@ -330,10 +329,10 @@ List the subscriptions, and select a pool.
 
 
 Subscribe to the pool.
-Replace POOL_ID_FROM_ABOVE_COMMAND with the Pool ID from the last command.
- ::
+Replace POOL_ID_FROM_ABOVE_COMMAND with the Pool ID from the last command.  ::
 
     sudo subscription-manager subscribe --pool=POOL_ID_FROM_ABOVE_COMMAND
+
 
 ----
 
@@ -845,8 +844,7 @@ Create file :file:`freetds.conf` in :code:`~/freetds` and populate with the foll
 ----
 
 If you want to get more debug information, add the dump file line to the [global] section
-Keep in mind that the dump file takes a lot of space.
- ::
+Keep in mind that the dump file takes a lot of space. ::
 
     [global]
         port = 1433

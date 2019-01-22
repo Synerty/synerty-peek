@@ -20,6 +20,7 @@
 # import os
 # import sys
 # sys.path.insert(0, os.path.abspath('.'))
+from sphinx.ext.apidoc import create_modules_toc_file, recurse_tree
 
 __project__ = 'Synerty Peek'
 __copyright__ = '2016, Synerty'
@@ -219,6 +220,9 @@ class _Opts:
     # 'Append module_path to sys.path, used when --full is given'
     append_syspath = True
 
+    # The project header??
+    header = project
+
 
 def _listFiles(dir):
     ignoreFiles = set('.lastHash')
@@ -355,8 +359,8 @@ def createApiDocs(modFileName):
     if not os.path.isdir(opts.destdir):
         os.makedirs(opts.destdir)
 
-    # modules = recurse_tree(rootpath, [], opts)
-    # create_modules_toc_file(modules, opts)
+    modules = recurse_tree(rootpath, [], opts)
+    create_modules_toc_file(modules, opts)
 
 
     # Incrementally update files

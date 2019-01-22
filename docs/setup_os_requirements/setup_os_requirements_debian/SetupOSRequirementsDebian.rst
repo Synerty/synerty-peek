@@ -67,6 +67,7 @@ Install Debian 8 OS
 
 This section installs the Debian 8 64bit Linux operating system.
 
+
 Create VM
 `````````
 
@@ -277,6 +278,7 @@ All done, select: ::
 At the **Write the changes to disk?** prompt, Select: ::
 
     <Yes>
+
 
 Finishing Up
 ~~~~~~~~~~~~
@@ -761,6 +763,7 @@ Enable the RabbitMQ management plugins: ::
         sudo rabbitmq-plugins enable rabbitmq_mqtt
         sudo rabbitmq-plugins enable rabbitmq_management
         sudo service rabbitmq-server restart
+
 Install Oracle Client (Optional)
 --------------------------------
 

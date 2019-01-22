@@ -10,4 +10,4 @@ API Reference
     :caption: Contents:
 
     API_PluginPackageJson
-    ../api_autodoc/peek_plugin_base/peek_plugin_base
+    ../api_autodoc/peek_plugin_base/modules

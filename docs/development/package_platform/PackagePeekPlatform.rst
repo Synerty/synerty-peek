@@ -45,14 +45,14 @@ Run the following commands in the power shell window.
     [Net.ServicePointManager]::SecurityProtocol = "tls12, tls11, tls";
     Invoke-WebRequest -Uri $uri -UseBasicParsing -OutFile $file;
 
-.. note:: If you get a big red error that reads ::
+
+.. note:: If you get a big red error that reads:
 
         Invoke-WebRequest : The request was aborted: Could not create SSL/TLS secure channel.
 
         Then download and use the latest version of PowerShell
 
         https://github.com/PowerShell/PowerShell/releases/download/v6.1.1/PowerShell-6.1.1-win-x64.msi
-
 
 
 ----

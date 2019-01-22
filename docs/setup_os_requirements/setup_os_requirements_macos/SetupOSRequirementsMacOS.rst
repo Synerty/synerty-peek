@@ -68,7 +68,7 @@ some of the install steps.
 
 ----
 
-In Safari, press :key:`Command+,` to bring up preferences.
+In Safari, press :code:`Command + ,` to bring up preferences.
 
 ----
 
@@ -277,8 +277,6 @@ https://www.pgadmin.org/download/pgadmin-4-macos/
 
 Install Python 3.6
 ------------------
-
-----
 
 Edit :file:`~/.bash_profile` and insert the following: ::
 
