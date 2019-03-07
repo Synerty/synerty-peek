@@ -89,7 +89,9 @@ might want to Symlink the :code:`/Users/*developerAccount*` to :code:`/Users/pee
 If doing this run: :code:`sudo ln -s /Users/*developerAccount*/ /Users/peek` then 
 skip to the next step :ref:`installing_xcode`.
 
-Create a user account for :code:`peek` with admin rights.
+Create a user account for :code:`peek` with admin rights. ::
+
+    sudo ln -s /Users/*developerAccount*/ /Users/peek
 
 
 ----
