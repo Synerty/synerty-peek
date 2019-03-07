@@ -474,9 +474,9 @@ Make the directory where the oracle client will live ::
 
 Download the following from oracle.
 
-The version used in these instructions is :code:`12.2.0.1.0`.
+The version used in these instructions is :code:`18.1.0.0.0`.
 
-.. note:: Oracle version 18.3 is not available for macOS.
+.. note:: Oracle version 18.1 is not available for macOS.
 
 #.  Download the "Basic Package" from
     http://www.oracle.com/technetwork/topics/intel-macsoft-096467.html
@@ -491,15 +491,15 @@ Copy these files to :file:`~/oracle` on the peek server.
 Extract the files. ::
 
         cd ~/oracle
-        unzip instantclient-basic-macos.x64-12.2.0.1.0-2.zip
-        unzip instantclient-sdk-macos.x64-12.2.0.1.0-2.zip
+        unzip instantclient-basic-macos.x64-18.1.0.0.0.zip
+        unzip instantclient-sdk-macos.x64-18.1.0.0.0.zip
 
 ----
 
 Add links to $HOME/lib to enable applications to find the libraries: ::
 
         mkdir ~/lib
-        ln -s ~/oracle/instantclient_12_2/libclntsh.dylib ~/lib/
+        ln -s ~/oracle/instantclient_18_1/libclntsh.dylib ~/lib/
 
 
 ----
@@ -508,7 +508,7 @@ Edit :file:`~/.bash_profile` and insert the following: ::
 
         ##### SET THE ORACLE ENVIRONMENT #####
         # Set PATH to include oracle
-        export ORACLE_HOME="`echo ~/oracle/instantclient_12_2`"
+        export ORACLE_HOME="`echo ~/oracle/instantclient_18_1`"
         export PATH="$ORACLE_HOME:$PATH"
 
         ##### SET THE DYLD_LIBRARY_PATH #####
