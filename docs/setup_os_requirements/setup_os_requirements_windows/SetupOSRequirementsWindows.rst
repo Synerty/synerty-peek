@@ -350,14 +350,14 @@ interface with an oracle database.
 
 Download the following from oracle.
 
-The version used in these instructions is **18.3.0.0.0**.
+The version used in these instructions is **18.5.0.0.0**.
 
 #.  Download the ZIP "Basic Package"
-    :file:`instantclient-basic-windows.x64-18.3.0.0.0dbru.zip p` from
+    :file:`instantclient-basic-windows.x64-18.5.0.0.0dbru.zip p` from
     http://www.oracle.com/technetwork/topics/winx64soft-089540.html
 
 #.  Download the ZIP "SDK Package"
-    :file:`instantclient-sdk-windows.x64-18.3.0.0.0dbru.zip` from
+    :file:`instantclient-sdk-windows.x64-18.5.0.0.0dbru.zip` from
     http://www.oracle.com/technetwork/topics/winx64soft-089540.html
 
 ----

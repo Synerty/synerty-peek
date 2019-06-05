@@ -794,14 +794,14 @@ Make the directory where the oracle client will live ::
 
 Download the following from oracle.
 
-The version used in these instructions is **18.3.0.0.0**.
+The version used in these instructions is **18.5.0.0.0**.
 
 #.  Download the ZIP "Basic Package"
-    :file:`instantclient-basic-linux.x64-18.3.0.0.0dbru.zip` from
+    :file:`instantclient-basic-linux.x64-18.5.0.0.0dbru.zip` from
     http://www.oracle.com/technetwork/topics/linuxx86-64soft-092277.html
 
 #.  Download the ZIP "SDK Package"
-    :file:`instantclient-sdk-linux.x64-18.3.0.0.0dbru.zip` from
+    :file:`instantclient-sdk-linux.x64-18.5.0.0.0dbru.zip` from
     http://www.oracle.com/technetwork/topics/linuxx86-64soft-092277.html
 
 Copy these files to :file:`/home/peek/oracle` on the peek server.
@@ -811,8 +811,8 @@ Copy these files to :file:`/home/peek/oracle` on the peek server.
 Extract the files. ::
 
         cd ~/oracle
-        unzip instantclient-basic-linux.x64-18.3.0.0.0dbru.zip*
-        unzip instantclient-sdk-linux.x64-18.3.0.0.0dbru.zip*
+        unzip instantclient-basic-linux.x64-18.5.0.0.0dbru.zip*
+        unzip instantclient-sdk-linux.x64-18.5.0.0.0dbru.zip*
 
 
 Install FreeTDS (Optional)
