@@ -194,7 +194,7 @@ Create the symlinks to prefer the GNU tools ::
 
 Install the dev libs that the python packages will need to compile ::
 
-        brew install openssl@1.1 zlib
+        brew install openssl@1.1 zlib openldap
 
 
 Install PostGreSQL

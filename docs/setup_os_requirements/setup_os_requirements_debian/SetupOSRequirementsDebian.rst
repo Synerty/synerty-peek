@@ -485,6 +485,15 @@ Install C libraries that some python packages link to when they install: ::
 
 ----
 
+Install C libraries required for LDAP:
+ ::
+
+        PKG="openldap-dev"
+
+        sudo apt-get install -y $PKG
+
+----
+
 Install C libraries that database access python packages link to when they install: ::
 
         # For Shapely and GEOAlchemy

@@ -351,8 +351,8 @@ Test the subscription with a yum update, this will apply the latest updates.
         sudo subscription-manager unregister
 
 
-Installing OS Prerequisites
----------------------------
+Installing General Prerequisites
+--------------------------------
 
 This section installs the OS packages required.
 
@@ -404,6 +404,14 @@ Install C libraries that some python packages link to when they install:
 
         sudo yum install -y $PKG
 
+----
+
+Install C libraries required for LDAP:
+ ::
+
+        PKG="openldap-devel"
+
+        sudo yum install -y $PKG
 
 ----
 
