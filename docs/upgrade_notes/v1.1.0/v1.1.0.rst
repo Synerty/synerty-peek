@@ -150,7 +150,7 @@ Update the peek config.json files.
 
 #. Edit each of C:\Users\peek\peek-XXXX.home\config.json
 #. Add :code:`peek_plugin_docdb` after :code:`peek_plugin_livedb`
-#. Add :code:`peek_plugin_search` after :code:`peek_plugin_livedb`
+#. Add :code:`peek_core_search` after :code:`peek_plugin_livedb`
 #. Add :code:`peek_plugin_pof_equipment_loader`
    after :code:`peek_plugin_pof_diagram_loader`
 

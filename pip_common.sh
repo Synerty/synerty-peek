@@ -20,7 +20,9 @@ peek-doc-dev
 peek-server
 synerty-peek
 peek-core-email
-peek-core-device"
+peek-core-device
+peek-core-user
+peek-core-search"
 
 
 # Dynamicall list plugins
@@ -45,13 +47,11 @@ peek-plugin-tutorial
 peek-plugin-index-blueprint
 peek-plugin-data-dms
 peek-plugin-branch
-peek-plugin-user
 peek-plugin-inbox
 peek-plugin-chat
 peek-plugin-livedb
 peek-plugin-graphdb
 peek-plugin-docdb
-peek-plugin-search
 peek-plugin-diagram
 peek-plugin-pof-sql
 peek-plugin-pof-soap

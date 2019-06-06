@@ -99,7 +99,7 @@ This will also pull in all of the dependencies, and allow for an offline install
 
         # Example of pulling in the desired public plugins as well
         PUB="peek-plugin-noop"
-        PUB="$PUB peek-plugin-user"
+        PUB="$PUB peek-core-user"
         PUB="$PUB peek-plugin-active-task"
         PUB="$PUB peek-plugin-chat"
 

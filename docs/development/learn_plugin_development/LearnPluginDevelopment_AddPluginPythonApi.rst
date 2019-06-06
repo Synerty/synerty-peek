@@ -235,11 +235,11 @@ In this section we'll get a reference to the Active Task API and then create a t
 the mobile UI.
 
 .. note:: In order to use this example, you will need to have the
-    :code:`peek_plugin_user` plugin installed and enabled in
+    :code:`peek_core_user` plugin installed and enabled in
     both the Client and Server services, via their config.json files.
 
     The user plugin is public, it can be installed with
-    :command:`pip install peek-plugin-user`.
+    :command:`pip install peek-core-user`.
 
 .. note:: In order to use this example, you will need to have the
     :code:`peek_plugin_active_task` plugin installed and enabled in

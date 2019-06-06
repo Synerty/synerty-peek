@@ -60,7 +60,7 @@ Angular AoT Compilation support. With the new file copy approach, Peek does away
 with on the fly switching of NativeScript VS Angular dependencies.
 
 **Plugins in node_modules**. Plugins in the frontends can leverage each other.
-For example, other plugins can leverage services from :code:`peek_plugin_user` for user
+For example, other plugins can leverage services from :code:`peek_core_user` for user
 authentication. To do this, Peek copies files into node_modules. However, nativescript
 doesn't recompile these files during live sync, so Peek also compiles them and copies them
 to the platforms directory.
