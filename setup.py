@@ -24,6 +24,7 @@ requirements = [
     "peek-doc-user",
     "peek-admin",
     "peek-doc-admin",
+    "peek-doc-dev",
     "peek-server",
     "synerty-peek",
     "peek-core-email",
