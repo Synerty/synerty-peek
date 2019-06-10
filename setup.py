@@ -27,7 +27,9 @@ requirements = [
     "peek-server",
     "synerty-peek",
     "peek-core-email",
-    "peek-core-device"
+    "peek-core-device",
+    "peek-core-user",
+    "peek-core-search"
 ]
 
 # Force the dependencies to be the same branch
