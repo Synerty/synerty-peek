@@ -1,0 +1,127 @@
+.. _upgrade_to_v1.3.x:
+
+=====================
+v1.3.x Upgrade Notes
+=====================
+
+Changes
+-------
+
+Core Plugins
+````````````
+
+The following plugins were renamed and converted to core plugins:
+
+*   peek_plugin_search -> peek_core_search
+
+*   peek_plugin_user -> peek_core_user
+
+These plugins were converted to provide better integration with the platform.
+
+Branch Plugin
+`````````````
+
+A new common branch plugin has been created. This plugin will be used to store the
+details of a branch. The plan is for other plugins that support branches in their models
+to use this plugin as a common reference, EG, enabling a branch in this plugin will
+enable it in the diagram, GraphDB, and DocDB
+
+
+Diagram Branches
+````````````````
+
+Diagram branches is a now fully implemented
+
+The branches can be enabled or disabled, and are applied on top of the baseline diagram
+upon each render cycle.
+
+Branches can be edited with the new Diagram Edit feature.
+
+The diagram now also has a print view support and selectable layers.
+
+The Diagram now requires a user login.
+
+
+LDAP Authentication
+```````````````````
+
+The peek
+
+RHEL7 Support
+`````````````
+
+Peek now has installation instructions and support for Redhat Enterprise Linux 7 (RHEL7)
+
+
+Required Dependency Bump
+````````````````````````
+
+Peek required dependencies have been upgraded as follows:
+
+*   Oracle client 18.5
+*   openldap
+
+OpenLDAP can be installed in MacOS with ::
+
+    brew install openldap
+
+OR Debian Linux ::
+
+    apt-get install openldap-dev
+
+or RHEL Linux ::
+
+    yum instal openldap-devel
+
+
+Windows Services
+````````````````
+
+Nil, carry on.
+
+
+Linux Deployment
+----------------
+
+Nil
+
+
+macOS Deployment
+----------------
+
+Nil
+
+iOS Deployment
+--------------
+
+Peek v1.3.x does not have support for iOS, this will be updated in a figure release
+
+
+Windows Deployment
+------------------
+
+Nil.
+
+.. note:: The windows deployment will change to use Windows Subsystem for Linux in
+            a future release.
+
+Enable New Plugins
+------------------
+
+Update the peek config.json files.
+
+#. Edit each of C:\Users\peek\peek-XXXX.home\config.json
+#. Add :code:`peek_plugin_branch` to the start
+#. Add :code:`peek_plugin_pof_email_nar` at the end
+
+----
+
+Start up the Peek Server service, it will rebuild the admin site.
+
+----
+
+Restart all Peek services.
+
+For windows, restart the :code:`peek-server` service then
+start the :code:`peek-restarter` service,
+the agent, worker and client will now start.
