@@ -151,10 +151,14 @@ then
         sudo chmod +x ${TO}/${FILE}
         sudo chown root:root ${TO}/${FILE}
         sudo sed -i "s,#PEEK_DIR#,$venvDir/bin,g" ${TO}/${FILE}
+        sudo sed -i "s,#ORACLE_HOME#,${ORACLE_HOME},g" ${TO}/${FILE}
         sudo systemctl enable $s
         sudo systemctl restart $s
 
     done
+
+    systemctl daemon-reload
+
     echo " "
     echo "Done"
     echo " "

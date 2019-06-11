@@ -7,8 +7,8 @@ After=syslog.target network.target remote-fs.target nss-lookup.target
 Type=simple
 User=peek
 ExecStart=#PEEK_DIR#/run_peek_agent
-Environment="LD_LIBRARY_PATH=/home/peek/oracle/instantclient_18_3"
-Environment="ORACLE_HOME=/home/peek/oracle/instantclient_18_3"
+Environment="LD_LIBRARY_PATH=#ORACLE_HOME#"
+Environment="ORACLE_HOME=#ORACLE_HOME#"
 
 [Install]
 WantedBy=multi-user.target
