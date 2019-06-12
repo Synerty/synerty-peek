@@ -18,6 +18,18 @@ The following plugins were renamed and converted to core plugins:
 
 These plugins were converted to provide better integration with the platform.
 
+Diagram Generic Menu
+````````````````````
+
+This plugin has been renamed from "peek_plugin_generic_diagram_menu" to
+peek_plugin_diagram_generic_menu" for consistency with the new diagram trace plugin.
+
+Diagram Zepben Menu
+````````````````````
+
+This plugin has been renamed from "peek_plugin_generic_zepben_menu" to
+peek_plugin_diagram_zepben_menu" for consistency with the new diagram trace plugin.
+
 Branch Plugin
 `````````````
 
