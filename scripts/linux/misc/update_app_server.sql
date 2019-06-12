@@ -35,8 +35,14 @@ SET "appHost" = 'APP_HOST_NAME',
     "appOracleUsername" = 'pofinfo',
     "appOraclePassword" = 'POFINFO_PASS';
 
--- PoF LiveDB
+-- PoF LiveDB Loader
 UPDATE pl_pof_livedb_loader."AppServerSettingsTuple"
+SET "appHost" = 'APP_HOST_NAME',
+    "appOracleUsername" = 'pofinfo',
+    "appOraclePassword" = 'POFINFO_PASS';
+
+-- PoF GraphDB Loader
+UPDATE pl_pof_graphdb_loader."AppServerSettingsTuple"
 SET "appHost" = 'APP_HOST_NAME',
     "appOracleUsername" = 'pofinfo',
     "appOraclePassword" = 'POFINFO_PASS';
