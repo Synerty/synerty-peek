@@ -84,30 +84,3 @@ for pkg in $PACKAGES; do
     fi
 done
 echo
-
-RELEASE="dist/peek-release-${VER}"
-RELEASE_TAR="peek-release-${VER}.tar.gz"
-
-[ -d $RELEASE ] && rm -rf $RELEASE
-[ -f dist/$RELEASE_TAR ] && rm dist/$RELEASE_TAR
-
-mkdir -p $RELEASE
-TAR_ARGS=""
-for pkg in $PACKAGES; do
-    cp ../${pkg}/dist/${pkg}-${VER}.tar.gz $RELEASE
-done
-
-echo "${DATE}_${VER}" > $RELEASE/stamp
-
-## Add the latest PIP to the bundle
-(cd $RELEASE && pip download pip setuptools virtualenv)
-
-# Create the tar file
-(cd $RELEASE &&  tar cvzf ../$RELEASE_TAR *)
-
-# Cleanup the build dir.
-[ -d $RELEASE ] && rm -rf $RELEASE
-
-echo
-echo "Peek Release compressed to dist/${RELEASE_TAR}"
-echo

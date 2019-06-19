@@ -66,7 +66,7 @@ python setup.py sdist --format=gztar
 
 if [ ${PYPI_PUBLISH} == "1" ]
 then
-    echo "Publishing ${pkgDir} to PyPI"
+    echo "Publishing ${PIP_PACKAGE} to PyPI"
     twine upload dist/${PIP_PACKAGE}-${VER}.tar.gz
 fi
 
@@ -76,18 +76,18 @@ fi
 if [ $HAS_GIT ]; then
     git reset --hard
 
-    echo "Tagging ${pkgDir}"
+    echo "Tagging ${PIP_PACKAGE}"
     git tag ${VER}
 
-    echo "Pushing ${pkgDir} to BitBucket"
+    echo "Pushing ${PIP_PACKAGE} to BitBucket"
     git push
     git push --tags
 
     if [ ${GITHUB_PUSH} == "1" ]
     then
-        echo "Pushing ${pkgDir} to GitHub"
+        echo "Pushing ${PIP_PACKAGE} to GitHub"
         git remote remove github 2> /dev/null || true
-        git remote add github git@github.com:Synerty/${pkgDir}.git
+        git remote add github git@github.com:Synerty/${PIP_PACKAGE}.git
         git push -f github master || true
     done
 
