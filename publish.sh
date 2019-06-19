@@ -1,18 +1,19 @@
 #!/usr/bin/env bash
 
-PACKAGE="peek"
-
 set -o nounset
 set -o errexit
-#set -x
+set -x
 
-if [ -n "$(git status --porcelain)" ]; then
-    echo "There are uncomitted changes, please make sure all changes are comitted" >&2
+#------------------------------------------------------------------------------
+# Prechecks
+
+if ! [ -f "setup.py" ]; then
+    echo "publish.sh must be run in the directory where setup.py is" >&2
     exit 1
 fi
 
-if ! [ -f "setup.py" ]; then
-    echo "setver.sh must be run in the directory where setup.py is" >&2
+if [ -n "$(git status --porcelain)" ]; then
+    echo "There are uncommitted changes, please make sure all changes are committed" >&2
     exit 1
 fi
 
@@ -23,23 +24,64 @@ if git tag | grep -q "${VER}"; then
     exit 1
 fi
 
+#------------------------------------------------------------------------------
+# Configure package preferences here
+
+source ./publish.settings.sh
+
+PIP_PACKAGE=${PY_PACKAGE//_/-} # Replace _ with -
+
+HAS_GIT=`ls -d .git 2> /dev/null`
+
+#------------------------------------------------------------------------------
+# Set the versions
 echo "Setting version to $VER"
 
-# Update the setup.py
-sed -i "s;^package_version.*=.*;package_version = '${VER}';"  setup.py
+VER_FILES="${VER_FILES} setup.py"
+VER_FILES="${VER_FILES} ${PY_PACKAGE}/__init__.py"
+VER_FILES="${VER_FILES} ${PY_PACKAGE}/plugin_package.json"
 
-# Update the package version
-sed -i "s;.*version.*=.*;__version__ = '${VER}';" ${PACKAGE}/__init__.py
-sed -i "s;.*version.*=.*;__version__ = '${VER}';" docs/conf.py
+function updateFileVers {
+    for file in ${VER_FILES}
+    do
+        if [ -f ${file} ]; then
+            sed -i "s/###PEEKVER###/${VER}/g" ${file}
+            sed -i "s/111.111.111/${VER}/g" ${file}
+            sed -i "s/0.0.0/${VER}/g" ${file}
+        fi
+    done
+}
 
-python setup.py sdist --format=gztar upload
+# Apply the version to the other files
+updateFileVers
+
+#------------------------------------------------------------------------------
+# Clear out old files
+
+rm -rf dist *.egg-info
+
+#------------------------------------------------------------------------------
+# Create the package and upload to pypi
+
+if [ ${PYPI_PUBLISH} == "1" ]
+then
+    python setup.py sdist --format=gztar upload
+else
+    python setup.py sdist --format=gztar
+fi
+
+#------------------------------------------------------------------------------
 # Reset the commit, we don't want versions in the commit
-git commit -a -m "Updated to version ${VER}"
+# Tag and push this release
+if [ $HAS_GIT ]; then
+    git reset --hard
+    git tag ${VER}
+    git push
+    git push --tags
+fi
 
-git tag ${VER}
-git push
-git push --tags
 
-
+#------------------------------------------------------------------------------
+# All done
 
 echo "Publish Complete"
