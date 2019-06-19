@@ -66,7 +66,7 @@ echo
 [ -n "$EXIT" ] && exit 1
 
 # -------------------------------------
-echo "CHECKING for for successful build"
+echo "CHECKING for successful build"
 for pkg in $PACKAGES; do
     if ! (cd ../$pkg && python setup.py sdist --format=gztar); then
         echo "${bold}${pkg}${normal} : failed to build." >&2

@@ -89,7 +89,7 @@ if [ $HAS_GIT ]; then
         git remote remove github 2> /dev/null || true
         git remote add github git@github.com:Synerty/${PIP_PACKAGE}.git
         git push -f github master || true
-    done
+    fi
 
 fi
 
