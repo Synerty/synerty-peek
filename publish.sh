@@ -2,7 +2,6 @@
 
 set -o nounset
 set -o errexit
-set -x
 
 #------------------------------------------------------------------------------
 # Prechecks
@@ -63,11 +62,12 @@ rm -rf dist *.egg-info
 #------------------------------------------------------------------------------
 # Create the package and upload to pypi
 
+python setup.py sdist --format=gztar
+
 if [ ${PYPI_PUBLISH} == "1" ]
 then
-    python setup.py sdist --format=gztar upload
-else
-    python setup.py sdist --format=gztar
+    echo "Publishing ${pkgDir} to PyPI"
+    twine upload dist/${PIP_PACKAGE}-${VER}.tar.gz
 fi
 
 #------------------------------------------------------------------------------
@@ -75,9 +75,22 @@ fi
 # Tag and push this release
 if [ $HAS_GIT ]; then
     git reset --hard
+
+    echo "Tagging ${pkgDir}"
     git tag ${VER}
+
+    echo "Pushing ${pkgDir} to BitBucket"
     git push
     git push --tags
+
+    if [ ${GITHUB_PUSH} == "1" ]
+    then
+        echo "Pushing ${pkgDir} to GitHub"
+        git remote remove github 2> /dev/null || true
+        git remote add github git@github.com:Synerty/${pkgDir}.git
+        git push -f github master || true
+    done
+
 fi
 
 
