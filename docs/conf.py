@@ -173,7 +173,7 @@ import shutil
 
 import sphinx
 from pytmpdir.Directory import Directory
-from sphinx.apidoc import *
+from sphinx.ext.apidoc import *
 
 import os
 
@@ -341,9 +341,9 @@ def is_excluded(root, excludes):
     return False
 
 # Overwrite the apidoc render methods with ours
-sphinx.apidoc.create_package_file = create_package_file
-sphinx.apidoc.create_module_file = create_module_file
-sphinx.apidoc.is_excluded = is_excluded
+sphinx.ext.apidoc.create_package_file = create_package_file
+sphinx.ext.apidoc.create_module_file = create_module_file
+sphinx.ext.apidoc.is_excluded = is_excluded
 
 def createApiDocs(modFileName):
     moduleName = os.path.basename(os.path.dirname(modFileName))
