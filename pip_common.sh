@@ -73,8 +73,9 @@ peek-plugin-pof-gis-location-loader
 peek-plugin-pof-user-loader
 peek-plugin-pof-email-nar
 peek-plugin-pof-email-incidents
-peek-plugin-generic-diagram-menu
-peek-plugin-zepben-diagram-menu
+peek-plugin-diagram-generic-menu
+peek-plugin-diagram-zepben-menu
+peek-plugin-diagram-trace
 peek-plugin-gis-dms-positioner"
 
 export bold=$(tput bold)
