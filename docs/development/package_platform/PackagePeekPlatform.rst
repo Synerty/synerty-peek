@@ -61,7 +61,9 @@ Run the platform build script.
 
 ::
 
-    PowerShell.exe -ExecutionPolicy Bypass -File $file
+    PowerShell.exe -ExecutionPolicy Bypass -File $file <version>
+
+Where <version> is the release you wish to build, for example :code:`1.3.3`
 
 The script will download the latest peek platform release and all its dependencies.
 
@@ -89,7 +91,9 @@ Run the platform build script.
 
 ::
 
-       bash $file
+       bash $file <version>
+
+Where <version> is the release you wish to build, for example :code:`1.3.3`
 
 The script will download the latest peek platform release and all its dependencies.
 
@@ -118,7 +122,9 @@ Run the platform build script.
 
 ::
 
-       bash $file
+       bash $file <version>
+
+Where <version> is the release you wish to build, for example :code:`1.3.3`
 
 The script will download the latest peek platform release and all its dependencies.
 
