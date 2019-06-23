@@ -751,6 +751,7 @@ Install redis: ::
 
 Enable the Redis service: ::
 
+    sudo systemctl enable redis.service
     sudo systemctl restart redis.service
 
 ----
@@ -767,13 +768,18 @@ Install rabbitmq: ::
     # install rabbitmq
     sudo yum install -y rabbitmq-server
 
+----
+
+Enable the RabbitMQ service: ::
+
+    sudo systemctl enable rabbitmq-server.service
+    sudo systemctl restart rabbitmq-server.service
 
 ----
 
 Cleanup the downloaded packages: ::
 
     sudo yum clean all
-
 
 ----
 
