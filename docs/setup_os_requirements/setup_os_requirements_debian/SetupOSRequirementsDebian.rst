@@ -796,8 +796,8 @@ going to interface with an oracle database.
 Edit :file:`~/.bashrc` and append the following to the file: ::
 
         # Setup the variables for ORACLE
-        export LD_LIBRARY_PATH="/home/peek/oracle/instantclient_18_3:$LD_LIBRARY_PATH"
-        export ORACLE_HOME="/home/peek/oracle/instantclient_18_3"
+        export LD_LIBRARY_PATH="/home/peek/oracle/instantclient_18_5:$LD_LIBRARY_PATH"
+        export ORACLE_HOME="/home/peek/oracle/instantclient_18_5"
 
 ----
 

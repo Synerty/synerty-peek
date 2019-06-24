@@ -370,7 +370,7 @@ Under Control Panel -> System -> Advanced system settings
 
 Add the following to **PATH** in the "User" environment variables ::
 
-        C:\Users\peek\oracle\instantclient_18_3
+        C:\Users\peek\oracle\instantclient_18_5
 
 .. tip:: On Win 10, enter "environment" in the task bar search and select
             **Edit the system environment variables**
