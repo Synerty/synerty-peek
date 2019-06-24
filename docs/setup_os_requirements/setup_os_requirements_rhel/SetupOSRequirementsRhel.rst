@@ -351,6 +351,16 @@ Test the subscription with a yum update, this will apply the latest updates.
         sudo subscription-manager unregister
 
 
+
+Removing IPv6 Localhost
+-----------------------
+
+Run the following command to ensure that localhost does not resolve to ::1
+as this effects the PostGreSQL connection. ::
+
+    sudo sed -i '/::1/d' /etc/hosts
+
+
 Installing General Prerequisites
 --------------------------------
 
