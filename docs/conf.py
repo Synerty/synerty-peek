@@ -290,7 +290,7 @@ def create_module_file(package, module, opts):
 
 
 def create_package_file(root, master_package, subroot, py_files, opts, subs,
-                        is_namespace):
+                        is_namespace, excludes=[]):
     """Build the text of the file and write the file."""
 
     text = '.. _%s:\n\n' % makename(master_package, subroot)
