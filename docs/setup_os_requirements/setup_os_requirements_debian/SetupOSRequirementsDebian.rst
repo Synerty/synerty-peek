@@ -773,6 +773,18 @@ Enable the RabbitMQ management plugins: ::
         sudo rabbitmq-plugins enable rabbitmq_management
         sudo service rabbitmq-server restart
 
+
+----
+
+Increase the size of the redis client queue ::
+
+        BEFORE="client-output-buffer-limit pubsub 64mb 16mb 90"
+        AFTER="client-output-buffer-limit pubsub 32mb 8mb 60
+        sudo sed -i "s/${BEFORE}/${AFTER}/g" /etc/redis.conf
+
+        sudo systemctl restart redis
+
+
 Install Oracle Client (Optional)
 --------------------------------
 

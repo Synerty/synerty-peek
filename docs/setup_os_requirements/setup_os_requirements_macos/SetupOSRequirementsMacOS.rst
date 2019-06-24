@@ -419,6 +419,16 @@ Open new terminal and test that Redis setup is working ::
         [ "`which redis-server`" == "$pass" ] && echo "Success" || echo "FAILED"
 
 
+----
+
+Increase the size of the redis client queue ::
+
+        BEFORE="client-output-buffer-limit pubsub 64mb 16mb 90"
+        AFTER="client-output-buffer-limit pubsub 32mb 8mb 60
+        sed -i "s/${BEFORE}/${AFTER}/g" /usr/local/etc/redis.conf
+
+        brew services restart redis
+
 RabbitMQ
 ````````
 
