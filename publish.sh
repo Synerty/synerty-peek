@@ -44,6 +44,7 @@ function updateFileVers {
     for file in ${VER_FILES}
     do
         if [ -f ${file} ]; then
+            sed -i "s/^__version__.*/__version__ = \'${VER}\'/g" ${file}
             sed -i "s/###PEEKVER###/${VER}/g" ${file}
             sed -i "s/111.111.111/${VER}/g" ${file}
             sed -i "s/0.0.0/${VER}/g" ${file}
@@ -74,6 +75,12 @@ fi
 # Reset the commit, we don't want versions in the commit
 # Tag and push this release
 if [ $HAS_GIT ]; then
+    # We need to commit the config file with the version for Read The Docs
+    if [ -n ${VER_FILES_TO_COMMIT} ]; then
+        git add ${VER_FILES_TO_COMMIT}
+        git commit -m "Updated conf.py to ${ver}"
+    fi
+
     git reset --hard
 
     echo "Tagging ${PIP_PACKAGE}"
