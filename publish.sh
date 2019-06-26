@@ -78,7 +78,7 @@ if [ $HAS_GIT ]; then
     # We need to commit the config file with the version for Read The Docs
     if [ -n ${VER_FILES_TO_COMMIT} ]; then
         git add ${VER_FILES_TO_COMMIT}
-        git commit -m "Updated conf.py to ${ver}"
+        git commit -m "Updated conf.py to ${VER}"
     fi
 
     git reset --hard
