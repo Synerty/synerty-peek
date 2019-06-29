@@ -768,9 +768,11 @@ Enable the Redis service: ::
 
 Install rabbitmq: ::
 
-    # install erlang v20.3
-    PKG="https://github.com/rabbitmq/erlang-rpm/releases/download/v20.3.6/erlang-20.3.6-1.el7.centos.x86_64.rpm"
-    sudo yum install -y $PKG
+    # install erlang
+    curl -s https://packagecloud.io/install/repositories/rabbitmq/erlang/script.rpm.sh | sudo bash
+
+    # install erlang
+    sudo yum install -y erlang
 
     # Set rabbitmq repository
     curl -s https://packagecloud.io/install/repositories/rabbitmq/rabbitmq-server/script.rpm.sh | sudo bash
