@@ -156,7 +156,7 @@ files.
 
 ::
 
-    {peek server}:8002/peek_plugin_pof_diagram
+    http://peekserver:8002/peek_plugin_pof_diagram
 
 # 5 Undo the changes
 
