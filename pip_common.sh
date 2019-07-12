@@ -75,8 +75,10 @@ peek-plugin-pof-email-nar
 peek-plugin-pof-email-incidents
 peek-plugin-diagram-generic-menu
 peek-plugin-diagram-zepben-menu
-peek-plugin-diagram-trace
-peek-plugin-gis-dms-positioner"
+peek-plugin-diagram-trace"
+
+## DEPREICATED PLUGINS
+# peek-plugin-gis-dms-positioner
 
 export bold=$(tput bold)
 export normal=$(tput sgr0)
