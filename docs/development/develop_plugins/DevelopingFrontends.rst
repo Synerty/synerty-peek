@@ -100,8 +100,13 @@ End User Customisations
 End users, as in not developers, have the ability to hack the frontends. They may do
 this to change text, update icons, branding, etc.
 
-Peek reads files from either the :file:`~/peek-server.home/frontendCustomisations`
-or :file:`~/peek-client.home/frontendCustomisations` directories and overlays them
+.. note::
+
+    The following directory overlay is for build-web, for NativeScript use the :file:`~/peek-server.home/frontendNodeModuleOverlayDir`
+    or :file:`~/peek-client.home/frontendNodeModuleOverlayDir`.
+
+Peek reads files from either the :file:`~/peek-server.home/frontendSrcOverlayDir`
+or :file:`~/peek-client.home/frontendSrcOverlayDir` directories and overlays them
 on top of the build directories.
 
 This provides end users with the ability to
@@ -119,11 +124,46 @@ files.
             ...
             "frontend": {
                 ...
-                "frontendCustomisations": "/home/peek/peek-client.home/frontendCustomisations",
+                "frontendSrcOverlayDir": "/home/peek/peek-client.home/frontendSrcOverlayDir",
+                "frontendNodeModuleOverlayDir": "/home/peek/peek-client.home/frontendNodeModuleOverlayDir",
             },
             ...
         }
 
+----
+
+#1 Copy the plugin build directory into the frontend folder
+
+::
+
+    cp -r synerty-peek-1.3.4/lib/python3.6/site-packages/peek_desktop/build-web/src/peek_plugin_pof_diagram peek-client.home/frontendSrcOverlayDir/
+
+#2 Remove the files not being updated (we’re updating pofDiagram.component.web.html)
+
+::
+
+    cd peek-client.home/frontendSrcOverlayDir/peek_plugin_pof_diagram/
+    rm -rf coord-set/ show-diagram/ *.ts
+
+#3 Edit the file and restart Peek
+
+::
+
+    vi pofDiagram.component.web.html
+    restart_peek.sh
+
+#4 Monitor the logs and refresh Peek Desktop
+
+::
+
+    http://peekserver:8002/peek_plugin_pof_diagram
+
+# 5 Undo the changes
+
+::
+
+    rm -rf ~/peek-client.home/frontendSrcOverlayDir/peek_plugin_pof_diagram
+    restart_peek.sh
 
 Live Updating for Development
 -----------------------------
