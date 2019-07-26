@@ -157,7 +157,7 @@ then
 
     done
 
-    systemctl daemon-reload
+    sudo systemctl daemon-reload
 
     echo " "
     echo "Done"
