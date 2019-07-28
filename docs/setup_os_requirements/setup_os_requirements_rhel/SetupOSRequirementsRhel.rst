@@ -516,23 +516,11 @@ Allow Peek through the firewall and port forward to the non-privileged port ::
     # Peek Mobile website
     sudo firewall-cmd --add-forward-port=port=8000:proto=tcp:toport=8000
 
-    # Peek Mobile / Desktop websocket
-    sudo firewall-cmd --add-forward-port=port=8001:proto=tcp:toport=8001
-
     # Peek Desktop website
     sudo firewall-cmd --add-forward-port=port=8002:proto=tcp:toport=8002
 
-    # Peek Mobile / Desktop user documentation
-    sudo firewall-cmd --add-forward-port=port=8005:proto=tcp:toport=8005
-
     # Peek Admin web site
     sudo firewall-cmd --add-forward-port=port=8010:proto=tcp:toport=8010
-
-    # Peek Admin websocket
-    sudo firewall-cmd --add-forward-port=port=8013:proto=tcp:toport=8013
-
-    # Peek Administration documentation
-    sudo firewall-cmd --add-forward-port=port=8015:proto=tcp:toport=8015
 
     # Persist the rules
     sudo firewall-cmd --runtime-to-permanent
