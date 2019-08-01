@@ -181,56 +181,100 @@ Issues Log
 Bug
 ```
 
-[PEEK-297] - Peek Desktop - Left Panel Appears unfinished
-[PEEK-298] - DMS Diagram - Remove DMS Diagram landing page
-[PEEK-299] - Pointer Cursor on Select World screen
-[PEEK-301] - Core Search / Diagram / PoF Diagram Loader - show on other world panel should use descriptions
-[PEEK-305] - Core Search - Hide panel after select show link
-[PEEK-306] - Core Search / Diagram / PoF Diagram Loader - hide show on link for current world
-[PEEK-308] - Core Search - Cleanup search results display
-[PEEK-309] - DocDB - Show Properties incomplete
-[PEEK-332] - Diagram Edit - Symbols need to rotate after insertion
-[PEEK-333] - Diagram Edit - Symbols to be selected as a whole
-[PEEK-334] - Peek to use HTTPS
-[PEEK-335] - Peek Server - Peek Admin Doesn't Require Authentication
-[PEEK-336] - Core-User - Restrict Users to a particular AD group
-[PEEK-347] - GraphDB - Running peek_server causes massive memory leak.
-[PEEK-348] - Diagram - Add tooltips to view toolbar
-[PEEK-360] - GraphDB PowerOn Loader - unsupported 'datetime.datetime' and 'NoneType'
-[PEEK-361] - Diagram - Problem with Disp linked DispLayer not matching DispLayer in LookupService
-[PEEK-362] - Search - Property and Object Type fields are sometimes blank
-[PEEK-365] - Diagram Panel - Equipment Panel is just terrible, make it a popover
-[PEEK-367] - Peek fails to load in MS Edge
-[PEEK-393] - Diagram fails to position on, in Edge
-[PEEK-394] - IndexedDB is not open on Edge for diagram
-[PEEK-368] - Diagram Edit - Hide conductor template button in edit mode
-[PEEK-369] - Diagram Edit - Clicking on the items in the branch causes the browser to crash
-[PEEK-371] - Diagram Edit - When creating a new node, show a circle or something before the template is selected
-[PEEK-372] - Diagram - GridCache is not working.
-[PEEK-374] - Logged in on another device message
-[PEEK-379] - Diagram Generic Menu attributes not populating in URL
-[PEEK-381] - Diagram Panel - reduce the number of properties shown.
-[PEEK-383] - Diagram Panel - order the buttons shown by name
-[PEEK-385] - Diagram Panel - Too many properties shown in equipment info
-[PEEK-387] - All peek text is way to big in Peek Desktop
-[PEEK-395] - DocDB - New popups secondary menu falls below other modals (such as search)
-[PEEK-396] - Fix Angular errors preventing ng build --prod, and enable in Peek
+*    [PEEK-297] - Peek Desktop - Left Panel Appears unfinished
+
+*    [PEEK-298] - DMS Diagram - Remove DMS Diagram landing page
+
+*    [PEEK-299] - Pointer Cursor on Select World screen
+
+*    [PEEK-301] - Core Search / Diagram / PoF Diagram Loader - show on other world panel should use descriptions
+
+*    [PEEK-305] - Core Search - Hide panel after select show link
+
+*    [PEEK-306] - Core Search / Diagram / PoF Diagram Loader - hide show on link for current world
+
+*    [PEEK-308] - Core Search - Cleanup search results display
+
+*    [PEEK-309] - DocDB - Show Properties incomplete
+
+*    [PEEK-332] - Diagram Edit - Symbols need to rotate after insertion
+
+*    [PEEK-333] - Diagram Edit - Symbols to be selected as a whole
+
+*    [PEEK-334] - Peek to use HTTPS
+
+*    [PEEK-335] - Peek Server - Peek Admin Doesn't Require Authentication
+
+*    [PEEK-336] - Core-User - Restrict Users to a particular AD group
+
+*    [PEEK-347] - GraphDB - Running peek_server causes massive memory leak.
+
+*    [PEEK-348] - Diagram - Add tooltips to view toolbar
+
+*    [PEEK-360] - GraphDB PowerOn Loader - unsupported 'datetime.datetime' and 'NoneType'
+
+*    [PEEK-361] - Diagram - Problem with Disp linked DispLayer not matching DispLayer in LookupService
+
+*    [PEEK-362] - Search - Property and Object Type fields are sometimes blank
+
+*    [PEEK-365] - Diagram Panel - Equipment Panel is just terrible, make it a popover
+
+*    [PEEK-367] - Peek fails to load in MS Edge
+
+*    [PEEK-393] - Diagram fails to position on, in Edge
+
+*    [PEEK-394] - IndexedDB is not open on Edge for diagram
+
+*    [PEEK-368] - Diagram Edit - Hide conductor template button in edit mode
+
+*    [PEEK-369] - Diagram Edit - Clicking on the items in the branch causes the browser to crash
+
+*    [PEEK-371] - Diagram Edit - When creating a new node, show a circle or something before the template is selected
+
+*    [PEEK-372] - Diagram - GridCache is not working.
+
+*    [PEEK-374] - Logged in on another device message
+
+*    [PEEK-379] - Diagram Generic Menu attributes not populating in URL
+
+*    [PEEK-381] - Diagram Panel - reduce the number of properties shown.
+
+*    [PEEK-383] - Diagram Panel - order the buttons shown by name
+
+*    [PEEK-385] - Diagram Panel - Too many properties shown in equipment info
+
+*    [PEEK-387] - All peek text is way to big in Peek Desktop
+
+*    [PEEK-395] - DocDB - New popups secondary menu falls below other modals (such as search)
+
+*    [PEEK-396] - Fix Angular errors preventing ng build --prod, and enable in Peek
 
 Task
 ````
 
-[PEEK-341] - Add support for action delegates in proxy
-[PEEK-378] - Email NAR - disable send tab before saving
+
+*    [PEEK-341] - Add support for action delegates in proxy
+
+*    [PEEK-378] - Email NAR - disable send tab before saving
 
 Improvement
 ```````````
 
-[PEEK-326] - Add support for partial keywords in search.
-[PEEK-351] - Implement websocket upgrades, so two ports are no longer required
-[PEEK-354] - Add in UI support for ant.design
-[PEEK-355] - Upgrade to Angular 8, etc
-[PEEK-366] - Core User - Add support for multiple browser logins
-[PEEK-389] - Upgrade docdb plugin properties, to reusable popups
-[PEEK-390] - Make "Show on diagram" item popup buttons dynamic again
-[PEEK-391] - Make DocDB popup screens configurable
-[PEEK-392] - Core User - Add alternate login form, suitable for desktops
+
+*    [PEEK-326] - Add support for partial keywords in search.
+
+*    [PEEK-351] - Implement websocket upgrades, so two ports are no longer required
+
+*    [PEEK-354] - Add in UI support for ant.design
+
+*    [PEEK-355] - Upgrade to Angular 8, etc
+
+*    [PEEK-366] - Core User - Add support for multiple browser logins
+
+*    [PEEK-389] - Upgrade docdb plugin properties, to reusable popups
+
+*    [PEEK-390] - Make "Show on diagram" item popup buttons dynamic again
+
+*    [PEEK-391] - Make DocDB popup screens configurable
+
+*    [PEEK-392] - Core User - Add alternate login form, suitable for desktops
