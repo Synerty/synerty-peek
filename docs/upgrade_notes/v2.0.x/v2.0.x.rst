@@ -1,0 +1,236 @@
+.. _upgrade_to_v2.0.x:
+
+====================
+v2.0.x Upgrade Notes
+====================
+
+Changes
+-------
+
+Peek Desktop
+````````````
+
+The Peek Desktop has had a face lift, the unsightly side bar has been slimmed down
+and neatened up.
+
+The scroll bars should not appear any longer.
+
+DocDB Plugin
+`````````````
+
+The DocDB plugin has new information popups:
+
+*   Tooltip
+
+*   Summary
+
+*   Details
+
+These popups are triggered via the DocDB APIs from other plugins.
+
+Search Plugin
+`````````````
+
+The Peek search has been revamped:
+
+*   It now shows as a modal.
+
+*   The search results have been cleaned up
+
+*   The search results now show actions from the DocDB plugin popups
+
+Diagram Generic Menu
+````````````````````
+
+This plugin has been renamed from "peek_plugin_generic_diagram_menu" to
+peek_plugin_docdb_generic_menu" as it now operates on the new DocDB popups.
+
+
+Diagram
+```````
+
+The diagram plugin has the following changes.
+
+VIEW Updates:
+
+*   The top left button now lets users select the Coord Set
+
+*   The draw that used to load on the right hand side is now gone.
+    The diagram instead triggers tooltip
+    and summary popups from DocDB.
+
+
+EDIT Updates:
+
+*   Edit support now highlights a templates as just one object.
+
+*   Edit support now lets you rotate a templates
+
+*   New templates placed on the diagram are no longer invisible.
+
+
+Diagram Positioner
+``````````````````
+
+The old peek_plugin_gis_dms_positioner plugin has been resurected.
+This plugin now uses the DocDB popups, shows locate on actions
+ using the coord-set names, and is smart enough to not show
+ locate actions for the current coord-set.
+
+This replaces the old method of just using the result sof peek-core-search.
+
+Diagram Loaders
+```````````````
+
+All diagram loaders no longer load positions into the search db.
+
+
+Platform Frontend
+`````````````````
+
+This release has upgraded the following major libraries
+
+*   Angular from v6.x to v8.x
+
+*   Typescript from v2.7.x to v3.4.x
+
+*   Other smaller npmjs dependencies, such as rxjs
+
+*   An introduction of ng.ant.design, Bootstrap will be phased out.
+
+
+Platform Backend
+````````````````
+
+The Peek Admin UI now requires a login.
+
+
+LDAP Authentication
+```````````````````
+
+LDAP Authentication has been improved, it now support multiple LDAP configs, including
+multiple LDAP servers, or use it just for different combinations of OUs/Groups.
+
+LDAP Configuration settings must be migrated manually
+
+
+Windows Services
+````````````````
+
+Nil, carry on.
+
+
+Linux Deployment
+----------------
+
+Nil
+
+
+macOS Deployment
+----------------
+
+Nil
+
+iOS Deployment
+--------------
+
+Peek v2.0.x does not have support for iOS, this will be updated in a figure release
+
+
+Windows Deployment
+------------------
+
+Nil.
+
+.. note:: The windows deployment will change to use Windows Subsystem for Linux in
+            a future release.
+
+Enable New Plugins
+------------------
+
+Update the peek config.json files.
+
+#. Edit each of C:\Users\peek\peek-XXXX.home\config.json
+
+#. Add :code:`peek_plugin_diagram_postioner` just after :code:`peek_plugin_diagram_trace`
+
+#. Rename :code:`peek_plugin_diagram_generic_menu`
+    to :code:`peek_plugin_docdb_generic_menu`
+    or on Linux: ::
+
+        sed -i 's/_diagram_generic_menu/_docdb_generic_menu/g' ~/peek*.home/config.json
+
+
+----
+
+Start up the Peek Server service, it will rebuild the admin site.
+
+----
+
+Restart all Peek services.
+
+For windows, restart the :code:`peek-server` service then
+start the :code:`peek-restarter` service,
+the agent, worker and client will now start.
+
+
+Issues Log
+----------
+
+
+Bug
+```
+
+[PEEK-297] - Peek Desktop - Left Panel Appears unfinished
+[PEEK-298] - DMS Diagram - Remove DMS Diagram landing page
+[PEEK-299] - Pointer Cursor on Select World screen
+[PEEK-301] - Core Search / Diagram / PoF Diagram Loader - show on other world panel should use descriptions
+[PEEK-305] - Core Search - Hide panel after select show link
+[PEEK-306] - Core Search / Diagram / PoF Diagram Loader - hide show on link for current world
+[PEEK-308] - Core Search - Cleanup search results display
+[PEEK-309] - DocDB - Show Properties incomplete
+[PEEK-332] - Diagram Edit - Symbols need to rotate after insertion
+[PEEK-333] - Diagram Edit - Symbols to be selected as a whole
+[PEEK-334] - Peek to use HTTPS
+[PEEK-335] - Peek Server - Peek Admin Doesn't Require Authentication
+[PEEK-336] - Core-User - Restrict Users to a particular AD group
+[PEEK-347] - GraphDB - Running peek_server causes massive memory leak.
+[PEEK-348] - Diagram - Add tooltips to view toolbar
+[PEEK-360] - GraphDB PowerOn Loader - unsupported 'datetime.datetime' and 'NoneType'
+[PEEK-361] - Diagram - Problem with Disp linked DispLayer not matching DispLayer in LookupService
+[PEEK-362] - Search - Property and Object Type fields are sometimes blank
+[PEEK-365] - Diagram Panel - Equipment Panel is just terrible, make it a popover
+[PEEK-367] - Peek fails to load in MS Edge
+[PEEK-393] - Diagram fails to position on, in Edge
+[PEEK-394] - IndexedDB is not open on Edge for diagram
+[PEEK-368] - Diagram Edit - Hide conductor template button in edit mode
+[PEEK-369] - Diagram Edit - Clicking on the items in the branch causes the browser to crash
+[PEEK-371] - Diagram Edit - When creating a new node, show a circle or something before the template is selected
+[PEEK-372] - Diagram - GridCache is not working.
+[PEEK-374] - Logged in on another device message
+[PEEK-379] - Diagram Generic Menu attributes not populating in URL
+[PEEK-381] - Diagram Panel - reduce the number of properties shown.
+[PEEK-383] - Diagram Panel - order the buttons shown by name
+[PEEK-385] - Diagram Panel - Too many properties shown in equipment info
+[PEEK-387] - All peek text is way to big in Peek Desktop
+[PEEK-395] - DocDB - New popups secondary menu falls below other modals (such as search)
+[PEEK-396] - Fix Angular errors preventing ng build --prod, and enable in Peek
+
+Task
+````
+
+[PEEK-341] - Add support for action delegates in proxy
+[PEEK-378] - Email NAR - disable send tab before saving
+
+Improvement
+```````````
+
+[PEEK-326] - Add support for partial keywords in search.
+[PEEK-351] - Implement websocket upgrades, so two ports are no longer required
+[PEEK-354] - Add in UI support for ant.design
+[PEEK-355] - Upgrade to Angular 8, etc
+[PEEK-366] - Core User - Add support for multiple browser logins
+[PEEK-389] - Upgrade docdb plugin properties, to reusable popups
+[PEEK-390] - Make "Show on diagram" item popup buttons dynamic again
+[PEEK-391] - Make DocDB popup screens configurable
+[PEEK-392] - Core User - Add alternate login form, suitable for desktops

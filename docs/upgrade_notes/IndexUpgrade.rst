@@ -9,6 +9,7 @@ Upgrade Notes
     :maxdepth: 1
     :caption: Contents:
 
+    v2.0.x/v2.0.x
     v1.3.x/v1.3.x
     v1.2.x/v1.2.x
     v1.1.0/v1.1.0

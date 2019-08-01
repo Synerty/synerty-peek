@@ -52,6 +52,7 @@ peek-plugin-chat
 peek-plugin-livedb
 peek-plugin-graphdb
 peek-plugin-docdb
+peek-plugin-docdb-generic-menu
 peek-plugin-diagram
 peek-plugin-pof-sql
 peek-plugin-pof-soap
@@ -73,9 +74,9 @@ peek-plugin-pof-gis-location-loader
 peek-plugin-pof-user-loader
 peek-plugin-pof-email-nar
 peek-plugin-pof-email-incidents
-peek-plugin-diagram-generic-menu
 peek-plugin-diagram-zepben-menu
-peek-plugin-diagram-trace"
+peek-plugin-diagram-trace
+peek-plugin-diagram-positioner"
 
 ## DEPREICATED PLUGINS
 # peek-plugin-gis-dms-positioner
