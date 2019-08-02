@@ -4,8 +4,53 @@
 v2.0.x Upgrade Notes
 ====================
 
-Changes
--------
+Platform Changes
+----------------
+
+
+Platform Backend
+````````````````
+
+The Peek Admin UI now requires a login.
+
+The admin login recovery password can be found in :file:`~/peek-server.home/config.json`.
+ Under the path httpServer.admin.user.
+
+----
+
+The Peek-Client and Peek-Admin services now provide SSL support, see their respective
+:file:`config.json` file, just provide valid files and SSL will be enabled.
+
+----
+
+The Peek-Client and Peek-Server services have combined the Web-App, websocket
+ and Docs HTTP servers into the one HTTP port.
+
+Docs are available at http://peekserver:port/docs
+
+
+Platform Frontend
+`````````````````
+
+This release has upgraded the following major libraries
+
+*   Angular from v6.x to v8.x
+
+*   Typescript from v2.7.x to v3.4.x
+
+*   Other smaller npmjs dependencies, such as rxjs
+
+*   An introduction of ng.ant.design, Bootstrap will be phased out.
+
+
+LDAP Authentication
+```````````````````
+
+LDAP Authentication has been improved, it now support multiple LDAP configs, including
+multiple LDAP servers, or use it just for different combinations of OUs/Groups.
+
+LDAP Configuration settings must be migrated manually
+
 
 Peek Desktop
 ````````````
@@ -14,6 +59,9 @@ The Peek Desktop has had a face lift, the unsightly side bar has been slimmed do
 and neatened up.
 
 The scroll bars should not appear any longer.
+
+Plugin Changes
+--------------
 
 DocDB Plugin
 `````````````
@@ -84,69 +132,84 @@ Diagram Loaders
 
 All diagram loaders no longer load positions into the search db.
 
-
-Platform Frontend
-`````````````````
-
-This release has upgraded the following major libraries
-
-*   Angular from v6.x to v8.x
-
-*   Typescript from v2.7.x to v3.4.x
-
-*   Other smaller npmjs dependencies, such as rxjs
-
-*   An introduction of ng.ant.design, Bootstrap will be phased out.
-
-
-Platform Backend
-````````````````
-
-The Peek Admin UI now requires a login.
-
-
-LDAP Authentication
-```````````````````
-
-LDAP Authentication has been improved, it now support multiple LDAP configs, including
-multiple LDAP servers, or use it just for different combinations of OUs/Groups.
-
-LDAP Configuration settings must be migrated manually
-
-
-Windows Services
-````````````````
-
-Nil, carry on.
-
+Deployment Changes
+------------------
 
 Linux Deployment
-----------------
+````````````````
 
 Nil
 
 
 macOS Deployment
-----------------
+````````````````
 
 Nil
 
 iOS Deployment
---------------
+``````````````
 
 Peek v2.0.x does not have support for iOS, this will be updated in a figure release
 
 
 Windows Deployment
-------------------
+``````````````````
 
 Nil.
 
 .. note:: The windows deployment will change to use Windows Subsystem for Linux in
             a future release.
 
+Migration Steps
+----------------
+
+Follow the following migration steps to rebuild the data that has changed in this
+update.
+
+Stop Peek
+`````````
+
+Start the migration tasks with Peek stopped.
+
+On Linux this can be done with ::
+
+
+    # Stop Peek
+    sudo true
+    sudo systemctl stop peek_agent
+    sudo systemctl stop peek_client
+    sudo systemctl stop peek_worker
+    sudo systemctl stop peek_server
+
+
+Redis Conf Update
+`````````````````
+
+The Redis Publisher/Subscriber buffer overflows and causes the task to fail, and the
+agent to retry.  (See PEEK-317)
+
+Double the buffer size with the following script ::
+
+    OLD="client-output-buffer-limit pubsub 32mb 8mb 60"
+    NEW="client-output-buffer-limit pubsub 64mb 16mb 90"
+    F="/etc/redis.conf"
+
+    # Check what it is now
+    grep pubsub $F
+
+    # Increase the size
+    sudo sed -i "s/${OLD}/${NEW}/g" $F
+
+    # Check that the change worked
+    grep pubsub $F
+
+    # Restart Redis
+    sudo true
+    sudo systemctl restart redis
+
+
 Enable New Plugins
-------------------
+``````````````````
 
 Update the peek config.json files.
 
@@ -161,17 +224,104 @@ Update the peek config.json files.
         sed -i 's/_diagram_generic_menu/_docdb_generic_menu/g' ~/peek*.home/config.json
 
 
+
+
+
+Truncate Load States
+````````````````````
+
+Due to the changes to the search and diagram plugins, all of the data will need to be
+reloaded.
+
+Run the following SQL, for each applicable plugin that you have installed. ::
+
+
+        -- Search Plugin
+        DROP SCHEMA core_search CASCADE;
+
+        -- DocDB Plugin
+        DROP SCHEMA pl_docdb CASCADE;
+
+        -- PoF Equipment Loader
+        TRUNCATE TABLE pl_pof_equipment_loader."ChunkLoadState";
+
+        -- PoF Diagram Loader
+        DELETE FROM pl_pof_diagram_loader."PageLoadState"
+        WHERE "scope" = 'normal';
+
+        -- PoF Pof GIS Location loader
+        TRUNCATE TABLE pl_pof_gis_location_loader."ChunkLoadState";
+
+        -- GraphDB
+        TRUNCATE TABLE pl_graphdb."GraphDbChunkQueue";
+        TRUNCATE TABLE pl_graphdb."GraphDbEncodedChunk";
+        TRUNCATE TABLE pl_graphdb."GraphDbSegment";
+
+        TRUNCATE TABLE pl_graphdb."ItemKeyIndexCompilerQueue";
+        TRUNCATE TABLE pl_graphdb."ItemKeyIndexEncodedChunk";
+        TRUNCATE TABLE pl_graphdb."ItemKeyIndex";
+
+        -- PoF GraphDB Loader
+        TRUNCATE TABLE pl_pof_graphdb_loader."GraphSegmentLoadState";
+
+
 ----
 
-Start up the Peek Server service, it will rebuild the admin site.
+Start up the Peek Server manually, it will:
+
+ *  Rebuild the admin site
+
+ *  Migrate the database
+
+Open a shell or command prompt and run :code:`run_peek_server`
 
 ----
+
+Once the Peek Server has finished loading :
+
+#.  Load up the peek-admin screen at http://<peek-server>:port.
+
+#.  Click the "Login" button, this will cause the server to write a recovery
+    user to the :file:`peek-server.home/config.json` file with a random password.
+
+#.  Use this recovery username and password to login to the Peek Admin UI.
+
+----
+
+Once Peek Server has finished running, kill it with CTRL+C
+
+Restart Peek
+````````````
 
 Restart all Peek services.
 
 For windows, restart the :code:`peek-server` service then
 start the :code:`peek-restarter` service,
 the agent, worker and client will now start.
+
+
+Reconfigure LDAP
+````````````````
+
+Reconfigure the new LDAP settings from the Peek-Admin site, under Platform -> Users
+
+#.  Enable the use of LDAP from the **General Settings** tab.
+
+#.  Configure the new LDAP settings using the new LDAP Settings tab.
+
+Reconfigure Search Properties
+`````````````````````````````
+
+Reconfigure the search properties from the Peek-Admin site, under Platform -> Search
+
+.. image:: search_props.png
+
+Reconfigure DocDB Properties
+````````````````````````````
+
+Reconfigure the search properties from the Peek-Admin site, under Plugins -> Document DB
+
+.. image:: docdb_props.png
 
 
 Issues Log
