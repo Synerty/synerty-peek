@@ -57,7 +57,7 @@ echo
 echo "CHECKING for existing tag"
 EXIT=""
 for pkg in $PACKAGES; do
-    if (cd ../$pkg && git tag | grep -q "${VER}"); then
+    if (cd ../$pkg && git tag | grep -q "^${VER}$"); then
         echo "${bold}${pkg}${normal} : has an existing git tag for version ${VER}." >&2
         EXIT="Y"
     fi

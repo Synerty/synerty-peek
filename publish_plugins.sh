@@ -57,7 +57,7 @@ echo
 echo "CHECKING for existing tag"
 EXIT=""
 for plugin in $PLUGINS; do
-    if (cd ../$plugin && git tag | grep -q "${VER}"); then
+    if (cd ../$plugin && git tag | grep -q "^${VER}$"); then
         echo "${bold}${plugin}${normal} : has an existing git tag for version ${VER}." >&2
         EXIT="Y"
     fi
