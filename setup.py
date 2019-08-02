@@ -26,7 +26,6 @@ requirements = [
     "peek-doc-admin",
     "peek-doc-dev",
     "peek-server",
-    "synerty-peek",
     "peek-core-email",
     "peek-core-device",
     "peek-core-user",
@@ -36,7 +35,8 @@ requirements = [
 # Force the dependencies to be the same branch
 reqVer = '.'.join(package_version.split('.')[0:2]) + ".*"
 
-requirements = ["%s==%s" % (pkg, reqVer) for pkg in requirements]
+# >=2.0.*,>=2.0.6
+requirements = ["%s==%s,>=%s" % (pkg, reqVer, package_version) for pkg in requirements]
 
 doc_requirements = [
     "Sphinx",
