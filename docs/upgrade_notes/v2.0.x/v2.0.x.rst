@@ -190,6 +190,10 @@ agent to retry.  (See PEEK-317)
 
 Double the buffer size with the following script ::
 
+    # Prime SUDO
+    sudo true
+
+
     OLD="client-output-buffer-limit pubsub 32mb 8mb 60"
     NEW="client-output-buffer-limit pubsub 64mb 16mb 90"
     F="/etc/redis.conf"
@@ -204,7 +208,6 @@ Double the buffer size with the following script ::
     grep pubsub $F
 
     # Restart Redis
-    sudo true
     sudo systemctl restart redis
 
 
@@ -215,7 +218,7 @@ Update the peek config.json files.
 
 #. Edit each of C:\Users\peek\peek-XXXX.home\config.json
 
-#. Add :code:`peek_plugin_diagram_postioner` just after :code:`peek_plugin_diagram_trace`
+#. Add :code:`peek_plugin_diagram_positioner` just after :code:`peek_plugin_diagram_trace`
 
 #. Rename :code:`peek_plugin_diagram_generic_menu`
     to :code:`peek_plugin_docdb_generic_menu`
@@ -235,6 +238,7 @@ reloaded.
 
 Run the following SQL, for each applicable plugin that you have installed. ::
 
+        psql <<EOF
 
         -- Search Plugin
         DROP SCHEMA core_search CASCADE;
@@ -264,6 +268,7 @@ Run the following SQL, for each applicable plugin that you have installed. ::
         -- PoF GraphDB Loader
         TRUNCATE TABLE pl_pof_graphdb_loader."GraphSegmentLoadState";
 
+        EOF
 
 ----
 
@@ -324,9 +329,37 @@ Reconfigure the search properties from the Peek-Admin site, under Plugins -> Doc
 .. image:: docdb_props.png
 
 
-Issues Log
-----------
+v2.0.1 Issues Log
+-----------------
 
+Bug
+```
+
+*    [PEEK-397] - Diagram Button Menu - missing some tooltips
+
+*    [PEEK-399] - Print DMS Diagram - black sections of the canvas shown
+                    in browser print preview
+
+*    [PEEK-400] - Markup Support View Branch - ANT Theme-ing TODO
+
+*    [PEEK-401] - Markup Support View Branch Items - browser unresponsive
+
+*    [PEEK-402] - DMS Diagram Markup Support - unable to edit existing branch
+
+*    [PEEK-405] - VortexJS - unable to begin transaction (3850 disk I/O error)
+
+*    [PEEK-406] - Core User - Logging into the same browser with two browser
+                    windows causes a logout
+
+Improvement
+```````````
+
+*    [PEEK-404] - DMS Diagram Markup Support - Check Save change before close
+
+*    [PEEK-233] - PERFORMANCE - SearchIndexChunkCompilerTask is slow
+
+v2.0.0 Issues Log
+-----------------
 
 Bug
 ```
