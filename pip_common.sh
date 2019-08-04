@@ -67,6 +67,7 @@ peek-plugin-gis-diagram
 peek-plugin-pof-diagram
 peek-plugin-pof-diagram-loader
 peek-plugin-pof-equipment-loader
+peek-plugin-pof-switching-loader
 peek-plugin-pof-livedb-loader
 peek-plugin-pof-graphdb-loader
 peek-plugin-gis-diagram-loader
