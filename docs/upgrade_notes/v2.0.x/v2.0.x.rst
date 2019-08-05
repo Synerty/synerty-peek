@@ -379,6 +379,10 @@ Bug
 
 *    [PEEK-431] - DocDB imports None/'' values
 
+*    [PEEK-432] - PoF Diagram Loader - Deleting pages fails
+
+*    [PEEK-433] - Core User - Logic for not filling out an OU or a CN is buggy
+
 Improvement
 ```````````
 
