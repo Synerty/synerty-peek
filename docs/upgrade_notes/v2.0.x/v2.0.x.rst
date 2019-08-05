@@ -329,7 +329,7 @@ Reconfigure the search properties from the Peek-Admin site, under Plugins -> Doc
 .. image:: docdb_props.png
 
 
-v2.0.4 Issues Log
+v2.0.3 Issues Log
 -----------------
 
 Bug
