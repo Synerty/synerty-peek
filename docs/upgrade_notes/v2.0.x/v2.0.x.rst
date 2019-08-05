@@ -220,6 +220,8 @@ Update the peek config.json files.
 
 #. Add :code:`peek_plugin_diagram_positioner` just after :code:`peek_plugin_diagram_trace`
 
+#. Add :code:`peek_plugin_pof_switching_loader` just after :code:`peek_plugin_pof_equipment_loader`
+
 #. Rename :code:`peek_plugin_diagram_generic_menu`
     to :code:`peek_plugin_docdb_generic_menu`
     or on Linux: ::
