@@ -329,6 +329,61 @@ Reconfigure the search properties from the Peek-Admin site, under Plugins -> Doc
 .. image:: docdb_props.png
 
 
+v2.0.4 Issues Log
+-----------------
+
+Bug
+```
+
+*    [PEEK-408] - GraphDB / Diagram - Trace complains about colours on slow networks (first load)
+
+*    [PEEK-409] - Desktop - If there are no config links, then don't show the config link button
+
+*    [PEEK-410] - Core Device - If no device id is entered, tell the user to enter one, instead of the exception.
+
+*    [PEEK-411] - VortexPY - If VM is suspended the vortex will timeout and force a restart of Peek
+
+*    [PEEK-412] - GIS Diagram - The diagram doesn't load.
+
+*    [PEEK-413] - DocDB - If there are no properties enabled then don't show the tooltip.
+
+*    [PEEK-414] - GIS/DMS Diagram - Switching between diagrams causes lots of errors and fails.
+
+*    [PEEK-415] - Core User - Update Hooks API so desktop logins don't trigger SOAP logins to PowerOn
+
+*    [PEEK-416] - Core User - "Failed to login : not enough arguments for format string" using Ldap
+
+*    [PEEK-417] - Core Search - "key" is not apart of the search object properties in the results
+
+*    [PEEK-418] - PoF Equipment Loader - District Zone field to import
+
+*    [PEEK-420] - DocDB Generic Menu - Add a condition to show the menu or not, use substitutions from the Doc
+
+*    [PEEK-421] - DocDB Generic Menu - Don't show menu option if not all variables are filled.
+
+*    [PEEK-422] - Peek Server - Make recovery password show in config.json with out clicking login on site.
+
+*    [PEEK-423] - Peek Server - Memory issue on agent restart (suspected)
+
+*    [PEEK-424] - DocDB - Admin doc test screen seems not to work.
+
+*    [PEEK-425] - PoF Diagram Loader - Feeder colours does not work
+
+*    [PEEK-426] - Plugins have "PoF" in their names in the admin screen
+
+*    [PEEK-428] - "View Job" has not icon
+
+*    [PEEK-429] - Core Search - If keyword index fails, then it's never retried
+
+*    [PEEK-430] - Core Search - results with no property display poorly
+
+*    [PEEK-431] - DocDB imports None/'' values
+
+Improvement
+```````````
+
+*    [PEEK-427] - Create PoF Switching Job Loader
+
 v2.0.1 Issues Log
 -----------------
 
