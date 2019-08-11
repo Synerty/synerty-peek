@@ -331,6 +331,32 @@ Reconfigure the search properties from the Peek-Admin site, under Plugins -> Doc
 .. image:: docdb_props.png
 
 
+v2.0.4 Issues Log
+-----------------
+
+Improvement
+```````````
+
+*    [PEEK-444] - DocDB Generic Menu - Add generic menu support for condition !=
+
+*    [PEEK-436] - Core Search - Add order to Object Types so the result tabs can be ordered.
+
+*    [PEEK-439] - Diagram Edit - Support undo / redo
+
+Bug
+```
+
+*    [PEEK-434] - PoF Diagram Loader - float() argument must be a string or a number, not 'NoneType'
+
+*    [PEEK-435] - Core Search - ujson.loads(objectPropsById[str(objectId)]) : Expected String or Unicode
+
+*    [PEEK-438] - DocDB Menu - Lookahead REXEXP doesn't work on safari
+
+*    [PEEK-440] - Diagram Trace - Only show trace if key is in graphdb
+
+*    [PEEK-447] - Diagram Edit - Saving a branch with a text disp that has no text throws an error
+
+
 v2.0.3 Issues Log
 -----------------
 
