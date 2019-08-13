@@ -331,6 +331,28 @@ Reconfigure the search properties from the Peek-Admin site, under Plugins -> Doc
 .. image:: docdb_props.png
 
 
+v2.0.5 Issues Log
+-----------------
+
+Improvement
+```````````
+
+*    [PEEK-450] - Diagram Edit - Hide overlays when in edit mode or when viewing branches.
+
+*    [PEEK-451] - Diagram Position - Provide config for default position on zoom level.
+
+*    [PEEK-452] - GraphDB - Upstream / Downstream is not implemented (It is now)
+
+*    [PEEK-453] - Diagram Tracer - Put a limit on the size of the trace
+
+Bug
+```
+
+*    [PEEK-448] - Diagram - Sometimes the diagram loads and is blank
+
+*    [PEEK-449] - Diagram - Performance fix for bounds updating
+
+
 v2.0.4 Issues Log
 -----------------
 
