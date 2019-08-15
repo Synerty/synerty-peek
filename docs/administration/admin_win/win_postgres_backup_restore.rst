@@ -56,19 +56,33 @@ the data is reloaded when the destination peek starts.
     --exclude-table-data 'pl_diagram.\"LocationIndex\"' `
     --exclude-table-data 'pl_diagram.\"LocationIndexCompilerQueue\"' `
     --exclude-table-data 'pl_diagram.\"LocationIndexCompiled\"' `
-    --exclude-table-data 'pl_gis_diagram_loader.\"DxfLoadState\"' `
-    --exclude-table-data 'pl_pof_gis_location_loader.\"ChunkLoadState\"' `
-    --exclude-table-data 'pl_pof_diagram_loader.\"PageLoadState\"' `
+    --exclude-table-data 'pl_diagram.\"BranchIndex\"' `
+    --exclude-table-data 'pl_diagram.\"BranchIndexEncodedChunk\"' `
+    --exclude-table-data 'pl_diagram.\"BranchIndexCompilerQueue\"' `
     --exclude-table-data 'pl_docdb.\"DocDbDocument\"' `
     --exclude-table-data 'pl_docdb.\"DocDbChunkQueue\"' `
     --exclude-table-data 'pl_docdb.\"DocDbEncodedChunkTuple\"' `
-    --exclude-table-data 'pl_search.\"SearchIndex\"' `
-    --exclude-table-data 'pl_search.\"SearchIndexCompilerQueue\"' `
-    --exclude-table-data 'pl_search.\"EncodedSearchIndexChunk\"' `
-    --exclude-table-data 'pl_search.\"SearchObject\"' `
-    --exclude-table-data 'pl_search.\"SearchObjectRoute\"' `
-    --exclude-table-data 'pl_search.\"SearchObjectCompilerQueue\"' `
-    --exclude-table-data 'pl_search.\"EncodedSearchObjectChunk\"' `
+    --exclude-table-data 'core_search.\"SearchIndex\"' `
+    --exclude-table-data 'core_search.\"SearchIndexCompilerQueue\"' `
+    --exclude-table-data 'core_search.\"EncodedSearchIndexChunk\"' `
+    --exclude-table-data 'core_search.\"SearchObject\"' `
+    --exclude-table-data 'core_search.\"SearchObjectRoute\"' `
+    --exclude-table-data 'core_search.\"SearchObjectCompilerQueue\"' `
+    --exclude-table-data 'core_search.\"EncodedSearchObjectChunk\"' `
+    --exclude-table-data 'pl_branch.\"BranchDetail\"' `
+    --exclude-table-data 'pl_livedb.\"LiveDbItem\"' `
+    --exclude-table-data 'pl_graphdb.\"GraphDbChunkQueue\"' `
+    --exclude-table-data 'pl_graphdb.\"GraphDbEncodedChunk\"' `
+    --exclude-table-data 'pl_graphdb.\"GraphDbSegment\"' `
+    --exclude-table-data 'pl_graphdb.\"ItemKeyIndex\"' `
+    --exclude-table-data 'pl_graphdb.\"ItemKeyIndexCompilerQueue\"' `
+    --exclude-table-data 'pl_graphdb.\"ItemKeyIndexEncodedChunk\"' `
+    --exclude-table-data 'pl_pof_user_loader.\"LoadState\"' `
+    --exclude-table-data 'pl_gis_diagram_loader.\"DxfLoadState\"' `
+    --exclude-table-data 'pl_pof_gis_location_loader.\"ChunkLoadState\"' `
+    --exclude-table-data 'pl_pof_diagram_loader.\"PageLoadState\"' `
+    --exclude-table-data 'pl_pof_graphdb_loader.\"GraphSegmentLoadState\"' `
+    --exclude-table-data 'pl_pof_switching_loader.\"ChunkLoadState\"' `
     --exclude-table-data 'pl_pof_equipment_loader.\"ChunkLoadState\"'
 
 

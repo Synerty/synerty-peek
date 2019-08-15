@@ -52,7 +52,6 @@ ARGS=${ARGS}' --exclude-table-data pl_branch."BranchDetail" '
 
 # NOTE, Leave the LiveDB load states, This will reduce the load time.
 ARGS=${ARGS}' --exclude-table-data pl_livedb."LiveDbItem" '
-#ARGS=${ARGS}' --exclude-table-data pl_livedb."LiveDbModelSet" '
 
 
 # Remove the GraphDB data, This only takes 10 minutes to reload
@@ -70,6 +69,9 @@ ARGS=${ARGS}' --exclude-table-data pl_pof_user_loader."LoadState" '
 
 # Clear out the equipment loader state
 ARGS=${ARGS}' --exclude-table-data pl_pof_equipment_loader."ChunkLoadState" '
+
+# Clear out the work package loader state
+ARGS=${ARGS}' --exclude-table-data pl_pof_switching_loader."ChunkLoadState" '
 
 # Remove the diagram load states from the GIS loader
 ARGS=${ARGS}' --exclude-table-data pl_gis_diagram_loader."DxfLoadState" '
