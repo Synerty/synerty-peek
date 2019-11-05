@@ -140,7 +140,7 @@ popd
 
 mkdir $baseDir/util && pushd $baseDir/util
 
-utilScripts="restart_peek.sh"
+utilScripts="restart_peek.sh stop_peek.sh"
 for s in $utilScripts
 do
     wget -nv https://bitbucket.org/synerty/synerty-peek/raw/${peekPkgVer}/scripts/linux/util/$s
