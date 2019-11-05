@@ -1,0 +1,192 @@
+.. _upgrade_to_v2.1.x:
+
+====================
+v2.1.x Upgrade Notes
+====================
+
+Platform Changes
+----------------
+
+Peek Worker
+```````````
+
+We've experienced issues with the Celery library that Peek uses for distributed
+processing. The issue observed is Redis closing client connections due to a Pub/Sub
+buffer overflow. This is believed to be due to Celery not unsubscribing from events
+properly, however investigations showed that the result keys are being cleaned up
+in Redis. We're not sure what the fix is, Hence the passive language of this paragraph.
+
+What we have done is improved the txCelery-Py located at
+    `https://github.com/Synerty/txcelery-py3/commits/master`_ :
+
+*  Task create and result capture are performed in the same thread.
+
+*  Tasks are automatically retried if they fail with a redis connection error.
+
+*  Performance has been greatly reduced by staying in the thread and adding a timeout
+    in the thread. There was a significant overhead in Twisted from entering and
+    exiting threads.
+
+These changes actually all applied to the Peek Server, but they were for distributed
+tasks.
+
+
+Plugin Changes
+--------------
+
+Nil
+
+Deployment Changes
+------------------
+
+Linux Deployment
+````````````````
+
+Nil
+
+
+macOS Deployment
+````````````````
+
+Nil
+
+iOS Deployment
+``````````````
+
+.. note:: Peek v2.0.x does not have support for iOS, this will be updated in a figure release.
+    We're going to Ionics Capacitor framework to create a full hybrid app.
+
+
+Windows Deployment
+``````````````````
+
+Nil.
+
+.. note:: The windows deployment will change to use Windows Subsystem for Linux in
+            a future release.
+
+Migration Steps
+----------------
+
+Follow the following migration steps to rebuild the data that has changed in this
+update.
+
+Stop Peek
+`````````
+
+Start the migration tasks with Peek stopped.
+
+On Linux this can be done with ::
+
+
+    # Stop Peek
+    sudo true
+    sudo systemctl stop peek_agent
+    sudo systemctl stop peek_client
+    sudo systemctl stop peek_worker
+    sudo systemctl stop peek_server
+
+
+Clear Redis and RabbitMQ Queues
+```````````````````````````````
+
+Run the following commands to clear any queues :
+
+    # Purge any outstanding results from the redis task result store
+    sudo redis-cli flushall
+
+    # Purge the RabbitMQ Task Queue
+    sudo rabbitmqctl purge_queue celery
+
+
+Restart Peek
+````````````
+
+Restart all Peek services ::
+
+    sudo true
+    sudo systemctl start peek_server
+    sudo systemctl start peek_worker
+    sudo systemctl start peek_agent
+    sudo systemctl start peek_client
+
+v2.1.1 Issues Log
+-----------------
+
+Bug
+```
+
+*    [PEEK-456] - Core User - Fix user title constraint for users logging in from two ADs
+        with different username
+
+*    [PEEK-482] - Diagram Edit - Order the edit branches list in descending order.
+
+*    [PEEK-483] - Diagram Edit - Set a minimum width for the Ant.Design dropdowns
+        in the shape properties.
+
+*    [PEEK-488] - Queue Compilers - Fail to retry failing task, they wait indefinitely
+
+*    [PEEK-489] - Peek Platform - Twisted thread count is far too small.
+
+*    [PEEK-490] - Queue Compilers - Use too much CPU when not doing anything but waiting
+
+*    [PEEK-491] - Peek server keeps crashing with redis pub/sub buffer overflows.
+
+*    [PEEK-492] - PoN Diagram Loader - Too many concurrent SSH connections during load
+        causes SSH rate limiting
+
+
+v2.1.0 Issues Log
+-----------------
+
+New Feature
+```````````
+
+*    [PEEK-467] - Diagram Edit - Insert Edge components/templates/symbols
+
+Improvement
+```````````
+
+*    [PEEK-466] - Diagram Edit - Edit placed component text
+
+
+Bug
+```
+
+*    [PEEK-320] - PoF Graph DB Loader - Loader continually reimports trace configs
+
+*    [PEEK-457] - Core User / Device - User login sticks on login screen
+
+*    [PEEK-462] - Core Login - login screen hangs after selecting the login button
+
+*    [PEEK-463] - PoF Switching - program details not shown sequentially
+
+*    [PEEK-464] - Diagram Edit - Deleting existing display items doesn't work
+
+*    [PEEK-465] - Diagram Edit - Creating text doesn't popup shape properties
+
+*    [PEEK-468] - PoF SOAP - SOAP isn't compatible with PowerOn Advantage
+
+*    [PEEK-469] - Field Switching - Field confirm for WEB doesn't work
+            - Time date is out of range
+
+*    [PEEK-470] - PoF SOAP - Datetimes now seem to be double localised
+
+*    [PEEK-473] - All Loaders - Workers failing all their retries can
+            end up with queue items in limbo
+
+*    [PEEK-474] - Diagram - Locating on key only (no coord set), will fail
+
+*    [PEEK-475] - PoF Equipment Loader - Loader no longer loads conductors
+
+*    [PEEK-476] - Worker - Fix retry issues with redis connections
+
+*    [PEEK-477] - Queue Compilers - Ensure a chunk isn't compiled twice in paralleled
+
+*    [PEEK-478] - Loader Plugins - Fix worker retry/complete logging messages
+
+*    [PEEK-479] - Diagram - Improve LiveDB item create / poll sequence
+
+*    [PEEK-480] - Diagram - Force Lookup imports to be run sequentially
+
+*    [PEEK-481] - VortexPY - Fix reporting of blocking endpoints
