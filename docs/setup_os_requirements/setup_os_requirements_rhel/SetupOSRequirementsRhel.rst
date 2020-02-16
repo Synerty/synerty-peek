@@ -876,12 +876,10 @@ Edit :file:`~/.bashrc` and append the following to the file: ::
 
 Install FreeTDS: ::
 
-    PKG="https://dl.fedoraproject.org/pub/epel/7/x86_64/Packages/f/freetds-0.95.81-1.el7.x86_64.rpm"
-    sudo yum install -y $PKG
-
-    PKG="https://dl.fedoraproject.org/pub/epel/7/x86_64/Packages/f/freetds-devel-0.95.81-1.el7.x86_64.rpm"
-    sudo yum install -y $PKG
-
+    PKG="https://dl.fedoraproject.org/pub/epel/7/x86_64/Packages/f/freetds-libs-1.1.20-1.el7.x86_64.rpm"
+    PKG="$PKG https://dl.fedoraproject.org/pub/epel/7/x86_64/Packages/f/freetds-1.1.20-1.el7.x86_64.rpm"
+    PKG="$PKG https://dl.fedoraproject.org/pub/epel/7/x86_64/Packages/f/freetds-devel-1.1.20-1.el7.x86_64.rpm"
+    yum install -y $PKG
 
 ----
 
