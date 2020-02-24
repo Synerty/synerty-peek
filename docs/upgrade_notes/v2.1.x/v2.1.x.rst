@@ -110,6 +110,39 @@ Restart all Peek services ::
     sudo systemctl start peek_agent
     sudo systemctl start peek_client
 
+
+v2.1.1 Issues Log
+-----------------
+
+Bug
+```
+*    [PEEK-494] - PowerOn Diagram Loader - RpcForAgentDispImport.storeStateInfoTuple
+        unique constraint violation
+
+*    [PEEK-499] - Field crews using Peek have null token issues on iOS Safari
+
+*    [PEEK-500] - TupleStorageIndexedDbService saveTuplesEncoded never resolves promise
+
+*    [PEEK-503] - Allow auto enroll - remove device register
+
+*    [PEEK-506] - Alphabetically order Symbol Selection
+
+*    [PEEK-512] - txcelery local variable 'async_result' referenced before assignment
+
+*    [PEEK-513] - VortexJS - IndexedDB OfflineTupleActonService
+        throws an error every check
+
+*    [PEEK-514] - Peek runs out of memory and celery connections die.
+
+*    [PEEK-516] - NAR ID including user and date incorrect in E-mail.
+
+Improvement
+```````````
+
+*    [PEEK-493] - Peek Platform - Add stop_peek.sh script
+
+*    [PEEK-508] - Remove default text from placed symbols.
+
 v2.1.1 Issues Log
 -----------------
 
