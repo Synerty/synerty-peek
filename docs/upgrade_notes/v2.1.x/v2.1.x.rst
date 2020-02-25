@@ -111,7 +111,7 @@ Restart all Peek services ::
     sudo systemctl start peek_client
 
 
-v2.1.1 Issues Log
+v2.1.2 Issues Log
 -----------------
 
 Bug
