@@ -147,7 +147,7 @@ deploy_peek_release:
     image: nexus.synerty.com:5000/peek-linux
     only:
         - triggers
-  	- manual
+        - manual
     script:
         - ssh ${PEEK_USER}@${PEEK_URL} "rm -fR /tmp/release_${PKG_TAG_VERSION} && rm -fR /home/peek/synerty-peek-${PKG_TAG_VERSION} && mkdir -p /tmp/release_${PKG_TAG_VERSION}/plugins && mkdir -p /tmp/release_${PKG_TAG_VERSION}/platform"
         - scp scripts/linux/deploy_platform_linux.sh ${PEEK_USER}@${PEEK_URL}:/tmp/release_${PKG_TAG_VERSION}/platform
