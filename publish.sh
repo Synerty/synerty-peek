@@ -18,6 +18,12 @@ fi
 
 VER="${1:?You must pass a version of the format 0.0.0 as the only argument}"
 
+DEVBUILD=0
+if echo ${VER} | grep -q '+'; then
+  echo "This is a DEV build"
+  DEVBUILD=1
+fi
+
 if git tag | grep -q "^${VER}$"; then
     echo "Git tag for version ${VER} already exists." >&2
     exit 1
@@ -65,8 +71,7 @@ rm -rf dist *.egg-info
 
 python setup.py sdist --format=gztar
 
-if [ ${PYPI_PUBLISH} == "1" ]
-then
+if [ ${PYPI_PUBLISH} == "1" -a ${DEVBUILD} -eq 0 ]; then
     echo "Publishing ${PIP_PACKAGE} to PyPI"
     twine upload dist/${PIP_PACKAGE}-${VER}.tar.gz
 fi
@@ -76,21 +81,23 @@ fi
 # Tag and push this release
 if [ $HAS_GIT ]; then
     # We need to commit the config file with the version for Read The Docs
-    if [ -n "${VER_FILES_TO_COMMIT}" ]; then
+    if [ -n "${VER_FILES_TO_COMMIT}"  -a ${DEVBUILD} -eq 0  ]; then
         git add ${VER_FILES_TO_COMMIT}
         git commit -m "Updated conf.py to ${VER}"
     fi
 
     git reset --hard
 
-    echo "Tagging ${PIP_PACKAGE}"
-    git tag ${VER}
+    if [ ${DEVBUILD} -eq 0 ]; then
+      echo "Tagging ${PIP_PACKAGE}"
+      git tag ${VER}
 
-    echo "Pushing ${PIP_PACKAGE} to BitBucket"
-    git push
-    git push --tags
+      echo "Pushing ${PIP_PACKAGE} to BitBucket"
+      git push
+      git push --tags
+    fi
 
-    if [ ${GITHUB_PUSH} == "1" ]
+    if [ ${GITHUB_PUSH} == "1" -a ${DEVBUILD} -eq 0 ]
     then
         echo "Pushing ${PIP_PACKAGE} to GitHub"
         git remote remove github 2> /dev/null || true

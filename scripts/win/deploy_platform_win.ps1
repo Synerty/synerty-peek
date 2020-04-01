@@ -105,19 +105,24 @@ Write-Host " ";
 # ------------------------------------------------------------------------------
 # OPTIONALLY - Update the environment for the user.
 
-# Ask if the user would like to update the PATH environment variables
-$title = "Environment Variables"
-$message = "Do you want to update the system to use the release just installed?"
+if ($PEEK_AUTO_DEPLOY == '1') {
+    $result = 0
 
-$yes = New-Object System.Management.Automation.Host.ChoiceDescription "&Yes", `
-    "I want to update the PATH System Environment Variables."
+} else {
+    # Ask if the user would like to update the PATH environment variables
+    $title = "Environment Variables"
+    $message = "Do you want to update the system to use the release just installed?"
 
-$no = New-Object System.Management.Automation.Host.ChoiceDescription "&No", `
-    "I do NOT want the PATH System Environment Variables changed."
+    $yes = New-Object System.Management.Automation.Host.ChoiceDescription "&Yes", `
+        "I want to update the PATH System Environment Variables."
 
-$options = [System.Management.Automation.Host.ChoiceDescription[]]($yes, $no)
+    $no = New-Object System.Management.Automation.Host.ChoiceDescription "&No", `
+        "I do NOT want the PATH System Environment Variables changed."
 
-$result = $host.ui.PromptForChoice($title, $message, $options, 0)
+    $options = [System.Management.Automation.Host.ChoiceDescription[]]($yes, $no)
+
+    $result = $host.ui.PromptForChoice($title, $message, $options, 0)
+}
 
 switch ($result) {
     0 {
@@ -168,19 +173,24 @@ switch ($result) {
 # ------------------------------------------------------------------------------
 # OPTIONALLY - Reinstall the services
 
-# Ask if the user would like to update the PATH environment variables
-$title = "Windows Services"
-$message = "Do you want to install/update the Peek windows services"
+if ($PEEK_AUTO_DEPLOY == '1') {
+    $result = 0
 
-$yes = New-Object System.Management.Automation.Host.ChoiceDescription "&Yes", `
-    "I want the services setup."
+} else {
+    # Ask if the user would like to update the PATH environment variables
+    $title = "Windows Services"
+    $message = "Do you want to install/update the Peek windows services"
 
-$no = New-Object System.Management.Automation.Host.ChoiceDescription "&No", `
-    "No services for me, this is a dev machine."
+    $yes = New-Object System.Management.Automation.Host.ChoiceDescription "&Yes", `
+        "I want the services setup."
 
-$options = [System.Management.Automation.Host.ChoiceDescription[]]($yes, $no)
+    $no = New-Object System.Management.Automation.Host.ChoiceDescription "&No", `
+        "No services for me, this is a dev machine."
 
-$result = $host.ui.PromptForChoice($title, $message, $options, 0)
+    $options = [System.Management.Automation.Host.ChoiceDescription[]]($yes, $no)
+
+    $result = $host.ui.PromptForChoice($title, $message, $options, 0)
+}
 
 switch ($result) {
     0 {

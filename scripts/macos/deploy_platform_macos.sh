@@ -99,8 +99,14 @@ echo "Run the following to switch to the new releases environment :";
 echo "export PATH=${q}${venvDir}/bin:${d}{PATH}${q}"
 echo " "
 
-read -p "Do you want to permanently enable this release? " -n 1 -r
-echo    # (optional) move to a new line
+if [ "${PEEK_AUTO_DEPLOY+x}" == "1" ]
+then
+    REPLY='Y'
+else
+    read -p "Do you want to permanently enable this release? " -n 1 -r
+    echo    # (optional) move to a new line
+fi
+
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
     sed -i "s,export PEEK_ENV.*,export PEEK_ENV=${q}${venvDir}${q},g" ~/.bash_profile

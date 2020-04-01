@@ -1,0 +1,163 @@
+variables:
+  GIT_CLONE_PATH: $CI_BUILDS_DIR/peek
+  PEEK_NODE_VERSION: v7.1.0
+  LATEST_NODE_VERSION: v12.16.1
+  NVM_DIR: /usr/local/nvm
+  BUILD: build
+  PKG_PLUGIN_LINUX: tmp_pkg_plugin_linux
+  PKG_PLATFORM_LINUX: tmp_pkg_platform_linux
+
+stages:
+    - fetch
+    - test
+    - publish
+    - package
+    - upload
+    - deploy
+
+git_clone:
+    allow_failure: false
+    artifacts:
+        paths:
+            - ${BUILD}/
+        expire_in: 1 day
+    image: nexus.synerty.com:5000/peek-linux
+    only:
+        - triggers
+        - merge_requests
+        - manual
+    script:
+        - ./git_clone.sh ${GIT_CLONE_PATH}/${BUILD} ${GIT_USER} ${GIT_PASSWORD}
+    stage: fetch
+    tags:
+        - linux
+
+unit_tests:
+    allow_failure: false
+    image: nexus.synerty.com:5000/peek-linux
+    only:
+        - triggers
+        - merge_requests
+    script:
+        - echo "Run unit tests"
+    stage: test
+    tags:
+        - linux
+
+sonar:
+    allow_failure: false
+    image: nexus.synerty.com:5000/peek-linux
+    only:
+        - triggers
+        - merge_requests
+    stage: test
+    script:
+        - echo "Run sonar-scanner"
+        - source $NVM_DIR/nvm.sh
+        - nvm use $LATEST_NODE_VERSION
+        - export NODE_PATH=`npm root -g`
+        - npm install -g typescript@3.7.5
+        - ./sonar_push.sh ${GIT_CLONE_PATH}/${BUILD}
+    tags:
+        - linux
+
+publish:
+    allow_failure: false
+    image: nexus.synerty.com:5000/peek-linux
+    only:
+        - triggers
+    stage: publish
+    script:
+        - export GITHUB_PUSH=0
+        - ./publish_platform.sh $PKG_TAG_VERSION ${GIT_CLONE_PATH}/${BUILD}
+        - ./git_clean.sh ${GIT_CLONE_PATH}/${BUILD}
+        - ./publish_plugins.sh $PKG_TAG_VERSION ${GIT_CLONE_PATH}/${BUILD}
+    tags:
+        - linux
+
+
+pkg_plugin_linux:
+    allow_failure: false
+    artifacts:
+        paths:
+            - ${PKG_PLUGIN_LINUX}/
+        expire_in: 1 day
+    image: nexus.synerty.com:5000/peek-linux
+    only:
+        - triggers
+    stage: package
+    script:
+        - mkdir -p ~/.config/pip
+        - mkdir -p ${GIT_CLONE_PATH}/${PKG_PLUGIN_LINUX}
+        - export PIP_INDEX=http://${NEXUS_USER}:${NEXUS_PASSWORD}@${NEXUS_URL}/repository/pypi-all/pypi
+        - export PIP_INDEX_URL=http://${NEXUS_USER}:${NEXUS_PASSWORD}@${NEXUS_URL}/repository/pypi-all/simple
+        - export PIP_TRUSTED_HOST=${NEXUS_URL}
+        - ./package.sh $PKG_TAG_VERSION ${GIT_CLONE_PATH}/${BUILD} ${GIT_CLONE_PATH}/${PKG_PLUGIN_LINUX}
+    tags:
+        - linux
+
+pkg_platform_linux:
+    allow_failure: false
+    artifacts:
+        paths:
+            - ${PKG_PLATFORM_LINUX}/
+        expire_in: 1 day
+    image: nexus.synerty.com:5000/peek-linux
+    only:
+        - triggers
+    stage: package
+    script:
+        - echo "registry=http://${NEXUS_URL}/repository/npm-all/" > ~/.npmrc
+        - echo "_auth=$(echo -n "${NEXUS_USER}:${NEXUS_PASSWORD}" | openssl base64)"    >> ~/.npmrc
+        - export NG_CLI_ANALYTICS=ci
+        - export PIP_INDEX=http://${NEXUS_USER}:${NEXUS_PASSWORD}@${NEXUS_URL}/repository/pypi-all/pypi
+        - export PIP_INDEX_URL=http://${NEXUS_USER}:${NEXUS_PASSWORD}@${NEXUS_URL}/repository/pypi-all/simple
+        - export PIP_TRUSTED_HOST=${NEXUS_URL}
+        - export NPM_CONFIG_REGISTRY="http://${NEXUS_URL}/repository/npm-all/"
+        - export NPM_CONFIG_AUTH=`echo "${NEXUS_USER}:${NEXUS_PASSWORD}" | openssl base64`
+        - export NG_CLI_ANALYTICS=ci
+        - mkdir -p ${GIT_CLONE_PATH}/${PKG_PLATFORM_LINUX}
+        - ./scripts/linux/package_platform_linux_gitlab.sh $PKG_TAG_VERSION ${GIT_CLONE_PATH}/${BUILD} ${GIT_CLONE_PATH}/${PKG_PLATFORM_LINUX}
+    tags:
+        - linux
+
+upload_pkg_plugin_linux:
+    allow_failure: false
+    image: nexus.synerty.com:5000/peek-linux
+    only:
+        - triggers
+    script:
+        - cd $GIT_CLONE_PATH/${PKG_PLATFORM_LINUX} && curl -v -u ${NEXUS_USER}:${NEXUS_PASSWORD} --upload-file peek_dist_linux_${PKG_TAG_VERSION}.tar.bz2 http://${NEXUS_URL}/repository/synerty-packages/
+        - echo "Expecting zip file here"
+        - ls ${GIT_CLONE_PATH}/${PKG_PLUGIN_LINUX}
+        - cd ${GIT_CLONE_PATH}/${PKG_PLUGIN_LINUX} && curl -v -u ${NEXUS_USER}:${NEXUS_PASSWORD} --upload-file peek_linux_plugins_${PKG_TAG_VERSION}.zip http://${NEXUS_URL}/repository/synerty-packages/
+    stage: upload
+    tags:
+        - linux
+
+deploy_peek_release:
+    allow_failure: false
+    before_script:
+        - eval $(ssh-agent -s)
+        - ssh-add <(echo "$PEEK_PRIVATE_KEY")
+        - mkdir -p ~/.ssh
+        - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+    environment:
+        name: PEEK-RELEASE
+    image: nexus.synerty.com:5000/peek-linux
+    only:
+        - triggers
+  	- manual
+    script:
+        - ssh ${PEEK_USER}@${PEEK_URL} "rm -fR /tmp/release_${PKG_TAG_VERSION} && rm -fR /home/peek/synerty-peek-${PKG_TAG_VERSION} && mkdir -p /tmp/release_${PKG_TAG_VERSION}/plugins && mkdir -p /tmp/release_${PKG_TAG_VERSION}/platform"
+        - scp scripts/linux/deploy_platform_linux.sh ${PEEK_USER}@${PEEK_URL}:/tmp/release_${PKG_TAG_VERSION}/platform
+        - ssh ${PEEK_USER}@${PEEK_URL} "cd /tmp/release_${PKG_TAG_VERSION}/platform && curl -v -u ${NEXUS_USER}:${NEXUS_PASSWORD} -X GET http://${NEXUS_URL}/repository/synerty-packages/peek_dist_linux_${PKG_TAG_VERSION}.tar.bz2 > peek_dist_linux.tar.bz2"
+        - ssh ${PEEK_USER}@${PEEK_URL} "cd /tmp/release_${PKG_TAG_VERSION}/plugins && curl -v -u ${NEXUS_USER}:${NEXUS_PASSWORD} -X GET http://${NEXUS_URL}/repository/synerty-packages/peek_linux_plugins_${PKG_TAG_VERSION}.zip > peek_linux_plugins.zip"
+        - ssh ${PEEK_USER}@${PEEK_URL} "rm -fR /home/peek/synerty-peek-${PKG_TAG_VERSION}"
+        - ssh ${PEEK_USER}@${PEEK_URL} "export PEEK_AUTO_DEPLOY='1' && cd /tmp/release_${PKG_TAG_VERSION}/platform && bash deploy_platform_linux.sh /tmp/release_${PKG_TAG_VERSION}/platform/peek_dist_linux.tar.bz2 true"
+        - ssh ${PEEK_USER}@${PEEK_URL} "cd /tmp/release_${PKG_TAG_VERSION}/plugins && unzip peek_linux_plugins.zip && source /home/peek/synerty-peek-${PKG_TAG_VERSION}/bin/activate && pip install --no-index --find-links=. peek-plugin*"
+        - ssh ${PEEK_USER}@${PEEK_URL} "/home/peek/synerty-peek-${PKG_TAG_VERSION}/bin/restart_peek.sh"
+    stage: deploy
+    tags:
+        - linux
+
