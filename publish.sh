@@ -19,7 +19,7 @@ fi
 VER="${1:?You must pass a version of the format 0.0.0 as the only argument}"
 
 DEVBUILD=0
-if echo ${VER} | grep -q '+'; then
+if echo ${VER} | grep -q -e '+' -e '-'; then
   echo "This is a DEV build"
   DEVBUILD=1
 fi
