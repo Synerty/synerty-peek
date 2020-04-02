@@ -1,11 +1,11 @@
 variables:
-  GIT_CLONE_PATH: $CI_BUILDS_DIR/peek
-  PEEK_NODE_VERSION: v7.1.0
-  LATEST_NODE_VERSION: v12.16.1
-  NVM_DIR: /usr/local/nvm
-  BUILD: build
-  PKG_PLUGIN_LINUX: tmp_pkg_plugin_linux
-  PKG_PLATFORM_LINUX: tmp_pkg_platform_linux
+    GIT_CLONE_PATH: $CI_BUILDS_DIR/peek
+    PEEK_NODE_VERSION: v7.1.0
+    LATEST_NODE_VERSION: v12.16.1
+    NVM_DIR: /usr/local/nvm
+    BUILD: build
+    PKG_PLUGIN_LINUX: tmp_pkg_plugin_linux
+    PKG_PLATFORM_LINUX: tmp_pkg_platform_linux
 
 stages:
     - fetch
@@ -61,8 +61,12 @@ sonar:
     tags:
         - linux
 
-publish:
+publish_platform:
     allow_failure: false
+    artifacts:
+        paths:
+            - published_platform_packages/
+        expire_in: 1 day
     image: nexus.synerty.com:5000/peek-linux
     only:
         - triggers
@@ -70,29 +74,27 @@ publish:
     script:
         - export GITHUB_PUSH=0
         - ./publish_platform.sh $PKG_TAG_VERSION ${GIT_CLONE_PATH}/${BUILD}
-        - ./git_clean.sh ${GIT_CLONE_PATH}/${BUILD}
-        - ./publish_plugins.sh $PKG_TAG_VERSION ${GIT_CLONE_PATH}/${BUILD}
+        - mkdir published_platform_packages
+        - mv `echo ${GIT_CLONE_PATH}/${BUILD}/*/dist/*$PKG_TAG_VERSION.tar.gz | grep -v peek-plugin` published_platform_packages
     tags:
         - linux
 
 
-pkg_plugin_linux:
+publish_plugins:
     allow_failure: false
     artifacts:
         paths:
-            - ${PKG_PLUGIN_LINUX}/
+            - published_plugin_packages/
         expire_in: 1 day
     image: nexus.synerty.com:5000/peek-linux
     only:
         - triggers
-    stage: package
+    stage: publish
     script:
-        - mkdir -p ~/.config/pip
-        - mkdir -p ${GIT_CLONE_PATH}/${PKG_PLUGIN_LINUX}
-        - export PIP_INDEX=http://${NEXUS_USER}:${NEXUS_PASSWORD}@${NEXUS_URL}/repository/pypi-all/pypi
-        - export PIP_INDEX_URL=http://${NEXUS_USER}:${NEXUS_PASSWORD}@${NEXUS_URL}/repository/pypi-all/simple
-        - export PIP_TRUSTED_HOST=${NEXUS_URL}
-        - ./package.sh $PKG_TAG_VERSION ${GIT_CLONE_PATH}/${BUILD} ${GIT_CLONE_PATH}/${PKG_PLUGIN_LINUX}
+        - export GITHUB_PUSH=0
+        - ./publish_plugins.sh $PKG_TAG_VERSION ${GIT_CLONE_PATH}/${BUILD}
+        - mkdir published_plugin_packages
+        - mv ${GIT_CLONE_PATH}/${BUILD}/peek-plugin*/dist/*$PKG_TAG_VERSION.tar.gz published_plugin_packages
     tags:
         - linux
 
@@ -117,7 +119,27 @@ pkg_platform_linux:
         - export NPM_CONFIG_AUTH=`echo "${NEXUS_USER}:${NEXUS_PASSWORD}" | openssl base64`
         - export NG_CLI_ANALYTICS=ci
         - mkdir -p ${GIT_CLONE_PATH}/${PKG_PLATFORM_LINUX}
-        - ./scripts/linux/package_platform_linux_gitlab.sh $PKG_TAG_VERSION ${GIT_CLONE_PATH}/${BUILD} ${GIT_CLONE_PATH}/${PKG_PLATFORM_LINUX}
+        - ./scripts/linux/package_platform_linux_gitlab.sh $PKG_TAG_VERSION ${GIT_CLONE_PATH}/published_platform_packages ${GIT_CLONE_PATH}/${PKG_PLATFORM_LINUX}
+    tags:
+        - linux
+
+pkg_plugin_linux:
+    allow_failure: false
+    artifacts:
+        paths:
+            - ${PKG_PLUGIN_LINUX}/
+        expire_in: 1 day
+    image: nexus.synerty.com:5000/peek-linux
+    only:
+        - triggers
+    stage: package
+    script:
+        - mkdir -p ~/.config/pip
+        - mkdir -p ${GIT_CLONE_PATH}/${PKG_PLUGIN_LINUX}
+        - export PIP_INDEX=http://${NEXUS_USER}:${NEXUS_PASSWORD}@${NEXUS_URL}/repository/pypi-all/pypi
+        - export PIP_INDEX_URL=http://${NEXUS_USER}:${NEXUS_PASSWORD}@${NEXUS_URL}/repository/pypi-all/simple
+        - export PIP_TRUSTED_HOST=${NEXUS_URL}
+        - ./scripts/linux/package_plugins_linux_gitlab.sh $PKG_TAG_VERSION ${GIT_CLONE_PATH}/published_plugin_packages ${GIT_CLONE_PATH}/${PKG_PLATFORM_LINUX}
     tags:
         - linux
 
