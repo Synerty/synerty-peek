@@ -33,7 +33,7 @@ fi
 # -------------------------------------
 echo "CHECKING for package existance"
 EXIT=""
-for pkg in $PACKAGES; do
+for pkg in $PLATFORM_PKGS; do
     if [ ! -d "${SRC_PATH}/$pkg" ]; then
         echo "${bold}${pkg}${normal} : ${SRC_PATH}/$pkg does not exist" >&2
         EXIT="Y"
@@ -45,7 +45,7 @@ echo
 # -------------------------------------
 echo "CHECKING for uncommitted changes"
 EXIT=""
-for pkg in $PACKAGES; do
+for pkg in $PLATFORM_PKGS; do
     if [ -n "$(cd ${SRC_PATH}/$pkg && git status --porcelain)" ]; then
         echo "${bold}${pkg}${normal} : has uncomitted changes, make sure all changes are comitted" >&2
         EXIT="Y"
@@ -57,7 +57,7 @@ echo
 # -------------------------------------
 echo "CHECKING for existing tag"
 EXIT=""
-for pkg in $PACKAGES; do
+for pkg in $PLATFORM_PKGS; do
     if (cd ${SRC_PATH}/$pkg && git tag | grep -q "^${VER}$"); then
         echo "${bold}${pkg}${normal} : has an existing git tag for version ${VER}." >&2
         EXIT="Y"
@@ -68,7 +68,7 @@ echo
 
 # -------------------------------------
 echo "CHECKING for successful build"
-for pkg in $PACKAGES; do
+for pkg in $PLATFORM_PKGS; do
     if ! (cd ${SRC_PATH}/$pkg && python setup.py sdist --format=gztar); then
         echo "${bold}${pkg}${normal} : failed to build." >&2
         exit 1
@@ -78,7 +78,7 @@ echo
 
 # -------------------------------------
 echo "Building packages"
-for pkg in $PACKAGES; do
+for pkg in $PLATFORM_PKGS; do
     if ! (cd ${SRC_PATH}/$pkg && bash ./publish.sh ${VER} ); then
         echo "${bold}${pkg}${normal} : failed to run publish." >&2
         exit 1

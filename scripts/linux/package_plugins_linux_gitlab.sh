@@ -9,14 +9,33 @@ source ./pip_common.sh
 
 VER=${1}
 SRC_PATH="${2:-..}"
-DST_PATH="${3:-/tmp/plugin}"
+SRC_PLATFORM_PATH="${3:-..}"
+DST_PATH="${4:-/tmp/plugin}"
 
 
-cd ${SRC_PATH}
-pip wheel --no-cache --find-links=. *.gz
-rm -f peek_*whl
+DIR_TO_TAR="peek_plugins_linux_${VER}"
 
-zip -r peek_linux_plugins_${VER}.zip .
-mv peek_linux_plugins_${VER}.zip ${DST_PATH}/
+# create and change to the directory we'll zip
+cd ${DST_PATH}
+mkdir ${DIR_TO_TAR} && cd ${DIR_TO_TAR}
 
-rm ./*.whl ./*.gz
+# Copy over the plugins
+cp ${SRC_PATH}/*.gz .
+
+# Create the plugins release
+pip wheel --no-cache --find-links=. --find-links=${SRC_PLATFORM_PATH} *.gz
+
+# Delete all the wheels created for the plugins
+rm -f peek_plugin*whl
+
+# Delete all the platform plugins that have been brought in
+rm -f peek_*whl synerty_peek*whl
+
+# CD one directory back so we can tar the directory
+cd ..
+
+# Tar the directory
+tar cjf ${DIR_TO_TAR}.tar.bz2 ${DIR_TO_TAR}
+
+# Cleanup the directory we made
+rm -rf ${DIR_TO_TAR}

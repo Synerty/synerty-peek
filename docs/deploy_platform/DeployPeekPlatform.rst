@@ -56,7 +56,7 @@ The script will deploy to :file:`C:\\Users\\peek`.
 
 ::
 
-        $dist = "C:\Users\peek\Downloads\peek_dist_win_#.#.#.zip"
+        $dist = "C:\Users\peek\Downloads\peek_platform_win_#.#.#.zip"
         PowerShell.exe -ExecutionPolicy Bypass -File $file $dist
 
 ----
@@ -143,7 +143,7 @@ The script will deploy to :file:`/home/peek/`.
 
 ::
 
-        dist="/home/peek/Downloads/peek_dist_linux_#.#.#.tar.bz2"
+        dist="/home/peek/Downloads/peek_platform_linux_#.#.#.tar.bz2"
         bash deploy_platform_linux.sh $dist
 
 ----
@@ -195,7 +195,7 @@ The script will deploy to :file:`/Users/peek/`.
 
 ::
 
-        dist="/Users/peek/Downloads/peek_dist_macos_#.#.#.tar.bz2"
+        dist="/Users/peek/Downloads/peek_platform_macos_#.#.#.tar.bz2"
         bash $file $dist
 
 

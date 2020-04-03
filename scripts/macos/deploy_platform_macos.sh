@@ -16,7 +16,7 @@ fi
 # Get the current location
 startDir=`pwd`
 
-releaseDir=`echo ~/peek_dist_macos`
+releaseDir=`echo ~/peek_platform_macos`
 
 # Delete the existing dist dir if it exists
 if [ -d ${releaseDir} ]; then

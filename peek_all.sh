@@ -29,7 +29,7 @@ then
 fi
 
 # -------------------------------------
-for PKG_NAME in $PACKAGES $PLUGINS; do
+for PKG_NAME in $PLATFORM_PKGS $PLUGIN_PKGS; do
     echo "Running in ${PKG_NAME}: " "$@"
     (cd ../${PKG_NAME} && "$@")
 done

@@ -7,15 +7,16 @@ set -o errexit
 
 wantedVer=${1-}
 wantedVer=${wantedVer/v/}
-srcPath=${2}
+platformReposDir=${2}
+platformPackagesDir=${3}
 
 if [ -n ${wantedVer} ]; then
     echo "Requested version is $wantedVer"
 fi
 
-startDir=${3:-`pwd`}
+startDir=${4:-`pwd`}
 
-baseDir="$startDir/peek_dist_linux"
+baseDir="$startDir/peek_platform_linux"
 
 [ -d $baseDir ] && rm -rf $baseDir
 
@@ -29,9 +30,9 @@ cd $baseDir/py
 
 echo "Downloading and creating wheels"
 if [ -n ${wantedVer} ]; then
-    pip wheel --no-cache synerty-peek==${wantedVer}
+    pip wheel --no-cache synerty-peek==${wantedVer} --find-links=${platformPackagesDir}
 else
-    pip wheel --no-cache synerty-peek
+    pip wheel --no-cache synerty-peek --find-links=${platformPackagesDir}
 fi
 
 # Make sure we've downloaded the right version
@@ -107,17 +108,17 @@ function downloadNodeModules {
 
 # MOBILE node modules
 mobileBuildWebDIR="$baseDir/mobile-build-web"
-mobileJsonUrl="${srcPath}/peek-mobile/peek_mobile/build-web"
+mobileJsonUrl="${platformReposDir}/peek-mobile/peek_mobile/build-web"
 downloadNodeModules $mobileBuildWebDIR $mobileJsonUrl
 
 # DESKTOP node modules
 desktopBuildWebDIR="$baseDir/desktop-build-web"
-desktopJsonUrl="${srcPath}/peek-desktop/peek_desktop/build-web"
+desktopJsonUrl="${platformReposDir}/peek-desktop/peek_desktop/build-web"
 downloadNodeModules $desktopBuildWebDIR $desktopJsonUrl
 
 # ADMIN node modules
 adminBuildWebDIR="$baseDir/admin-build-web"
-adminJsonUrl="${srcPath}/peek-admin/peek_admin/build-web"
+adminJsonUrl="${platformReposDir}/peek-admin/peek_admin/build-web"
 downloadNodeModules $adminBuildWebDIR $adminJsonUrl
 
 # ------------------------------------------------------------------------------
@@ -127,7 +128,7 @@ mkdir $baseDir/init && pushd $baseDir/init
 
 for s in peek_server peek_worker peek_agent peek_client
 do
-    cp ${srcPath}/synerty-peek/scripts/linux/init/${s}.service ${s}.service
+    cp ${platformReposDir}/synerty-peek/scripts/linux/init/${s}.service ${s}.service
 done
 popd
 
@@ -139,7 +140,7 @@ mkdir $baseDir/util && pushd $baseDir/util
 utilScripts="restart_peek.sh stop_peek.sh"
 for s in $utilScripts
 do
-    cp ${srcPath}/synerty-peek/scripts/linux/util/${s} ${s}
+    cp ${platformReposDir}/synerty-peek/scripts/linux/util/${s} ${s}
 done
 popd
 

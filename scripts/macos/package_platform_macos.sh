@@ -14,7 +14,7 @@ fi
 
 startDir=`pwd`
 
-baseDir="$startDir/peek_dist_macos"
+baseDir="$startDir/peek_platform_macos"
 
 [ -d $baseDir ] && rm -rf $baseDir
 

@@ -8,7 +8,7 @@ source ./pip_common.sh
 # -------------------------------------
 echo "Uninstalling all packages"
 EXIT=""
-for pkg in $PACKAGES $PLUGINS; do
+for pkg in $PLATFORM_PKGS $PLUGIN_PKGS; do
     if pip freeze | grep -q "${pkg}==" ; then
         echo "Uninstalling $bold${pkg}$normal"
         if ! pip uninstall -q -y $pkg; then

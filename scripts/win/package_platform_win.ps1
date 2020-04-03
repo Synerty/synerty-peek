@@ -18,7 +18,7 @@ if (-Not [string]::IsNullOrEmpty($wantedVer))
 # Get the current location
 $startDir = Get-Location
 
-$baseDir = "$startDir\peek_dist_win";
+$baseDir = "$startDir\peek_platform_win";
 
 # Delete the existing dist dir if it exists
 If (Test-Path $baseDir)
