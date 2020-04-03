@@ -14,7 +14,7 @@ fi
 
 startDir=`pwd`
 
-baseDir="$startDir/peek_dist_linux"
+baseDir="$startDir/peek_plaform_linux"
 
 [ -d $baseDir ] && rm -rf $baseDir
 

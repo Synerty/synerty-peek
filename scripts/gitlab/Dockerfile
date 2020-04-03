@@ -1,12 +1,13 @@
-FROM ubuntu:18.04
+FROM debian:9
 
 WORKDIR /root
 
 ENV PEEK_PY_VER="3.6.8"
 ENV PEEK_NODE_PACKAGE_VERSION="10.16.0"
 ENV PATH="/root/cpython-${PEEK_PY_VER}/bin:$PATH"
+
 ENV NVM_DIR="/usr/local/nvm"
-ENV LATEST_NODE_VERSION="12.16.1"
+ENV SONAR_NODE_VERSION="12.16.1"
 
 RUN apt update
 # Install the C Compiler package, used for compiling python
@@ -35,15 +36,11 @@ RUN pip install virtualenv
 RUN pip install wheel
 RUN pip install twine
 
+# Setup sonar dependencies
 RUN curl --silent -o- https://raw.githubusercontent.com/creationix/nvm/v0.31.2/install.sh | bash
 
 RUN . $NVM_DIR/nvm.sh \
-    && nvm install $PEEK_NODE_PACKAGE_VERSION \
-    && nvm alias default $PEEK_NODE_PACKAGE_VERSION \
-    && nvm use default
-
-RUN . $NVM_DIR/nvm.sh \
-    && nvm install $LATEST_NODE_VERSION
+    && nvm install $SONAR_NODE_VERSION
 
 RUN . $NVM_DIR/nvm.sh && npm config set user 0
 RUN . $NVM_DIR/nvm.sh && npm config set unsafe-perm true

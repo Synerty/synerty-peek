@@ -16,7 +16,7 @@ if ([string]::IsNullOrEmpty($releaseZip) -or [string]::IsNullOrWhitespace($relea
 # Get the current location
 $startDir=Get-Location
 
-$releaseDir="C:\Users\peek\peek_dist_win";
+$releaseDir="C:\Users\peek\peek_platform_win";
 
 # Delete the existing dist dir if it exists
 If (Test-Path $releaseDir){

@@ -5,7 +5,7 @@ set -o errexit
 # set -x
 
 # Also update setup.py
-export PACKAGES="
+export PLATFORM_PKGS="
 peek-plugin-base
 peek-platform
 peek-agent
@@ -33,15 +33,15 @@ peek-core-search"
 
 ## Plugins are siblings to this project
 #if ls -d $here/peek-plugin-* 2> /dev/null 2>&1; then
-#    export PLUGINS=`ls -d $here/peek-plugin-* | grep -v peek-plugin-base`
+#    export PLUGIN_PKGS=`ls -d $here/peek-plugin-* | grep -v peek-plugin-base`
 #else
 #    echo "There are no plugins at $here"
-#    export PLUGINS=""
+#    export PLUGIN_PKGS=""
 #fi
 
 # Ignore all that, define the ones JJC wants for Orion
 
-export PLUGINS="
+export PLUGIN_PKGS="
 peek-plugin-noop
 peek-plugin-tutorial
 peek-plugin-index-blueprint
@@ -79,7 +79,7 @@ peek-plugin-diagram-zepben-menu
 peek-plugin-diagram-trace
 peek-plugin-diagram-positioner"
 
-## DEPREICATED PLUGINS
+## DEPREICATED PLUGIN_PKGS
 # peek-plugin-gis-dms-positioner
 
 export bold=$(tput bold)
