@@ -111,11 +111,46 @@ Restart all Peek services ::
     sudo systemctl start peek_client
 
 
+v2.1.5 Issues Log
+-----------------
+
+Bug
+```
+
+*    [PEEK-514] - Peek runs out of memory and celery connections die
+
+
+*    [PEEK-525] - Peek Worker chews all ram and crashes
+
+
+*    [PEEK-528] - Running the Peek Agent causing netservd
+     errors on the connected PowerOn Server:
+
+
+*    [PEEK-531] - Add settings for max XXX per child settings
+
+Improvement
+``````````
+
+*    [PEEK-532] - Update deploy_platform_xxxx.sh/ps1 to deploy_release_xxxx.sh/ps
+     and include installing the plugins
+
+v2.1.4 Issues Log
+-----------------
+
+This release was used to test Synertys new CI-CD builds.
+
+v2.1.3 Issues Log
+-----------------
+
+This release was used to test Synertys new CI-CD builds.
+
 v2.1.2 Issues Log
 -----------------
 
 Bug
 ```
+
 *    [PEEK-494] - PowerOn Diagram Loader - RpcForAgentDispImport.storeStateInfoTuple
         unique constraint violation
 
