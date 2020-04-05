@@ -195,7 +195,7 @@ archive_release:
     script:
         - mkdir -p ~/.config/pip
         - mkdir -p ${GIT_CLONE_PATH}/${PEEK_RELEASE_LINUX}
-        - cp ./scripts/linux/deploy_platform_linux.sh ${GIT_CLONE_PATH}/${PEEK_RELEASE_LINUX}
+        - cp ./scripts/linux/deploy_release_linux.sh ${GIT_CLONE_PATH}/${PEEK_RELEASE_LINUX}
         - mv $GIT_CLONE_PATH/${PKG_PLATFORM_LINUX}/peek_platform_linux_${PKG_TAG_VERSION}.tar.bz2 ${GIT_CLONE_PATH}/${PEEK_RELEASE_LINUX}
         - mv $GIT_CLONE_PATH/${PKG_PLUGIN_LINUX}/peek_plugins_linux_${PKG_TAG_VERSION}.tar.bz2 ${GIT_CLONE_PATH}/${PEEK_RELEASE_LINUX}
         - cd ${GIT_CLONE_PATH} && tar cvf ${PEEK_RELEASE_LINUX}.tar ${PEEK_RELEASE_LINUX}
