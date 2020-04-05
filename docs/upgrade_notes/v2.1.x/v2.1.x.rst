@@ -110,6 +110,10 @@ Restart all Peek services ::
     sudo systemctl start peek_agent
     sudo systemctl start peek_client
 
+v2.1.6 Issues Log
+-----------------
+
+This release was used to test Synertys new CI-CD builds.
 
 v2.1.5 Issues Log
 -----------------
