@@ -1,8 +1,8 @@
 .. _deploy_peek_platform:
 
-====================
-Deploy Peek Platform
-====================
+===================
+Deploy Peek Release
+===================
 
 .. note:: The Windows or Debian requirements must be followed before following this guide.
 
@@ -34,17 +34,17 @@ This is the only step in this section that requires the internet.
 
 ::
 
-        $file = "deploy_platform_win.ps1"
-        $uri = "https://bitbucket.org/synerty/synerty-peek/raw/master/scripts/win/$file";
+        $deployScript = "deploy_release_win.ps1"
+        $uri = "https://bitbucket.org/synerty/synerty-peek/raw/master/scripts/win/$deployScript";
         [Net.ServicePointManager]::SecurityProtocol = "tls12, tls11, tls";
-        Invoke-WebRequest -Uri $uri -UseBasicParsing -OutFile $file;
+        Invoke-WebRequest -Uri $uri -UseBasicParsing -OutFile $deployScript;
 
 ----
 
 Run the platform deploy script. The script will complete with a print out of where the
 new environment was deployed.
 
-Ensure you update the **$dist** variable with the path to your release.
+Ensure you update the **$platformArchive** variable with the path to your release.
 
 The script will deploy to :file:`C:\\Users\\peek`.
 
@@ -56,8 +56,9 @@ The script will deploy to :file:`C:\\Users\\peek`.
 
 ::
 
-        $dist = "C:\Users\peek\Downloads\peek_platform_win_#.#.#.zip"
-        PowerShell.exe -ExecutionPolicy Bypass -File $file $dist
+        $platformArchive = "C:\Users\peek\Downloads\peek_platform_win_#.#.#.zip"
+        $pluginsArchive = "C:\Users\peek\Downloads\peek_plugins_win_#.#.#.zip"
+        PowerShell.exe -ExecutionPolicy Bypass -File $deployScript $platformArchive $pluginsArchive
 
 ----
 
@@ -124,12 +125,12 @@ Download the platform deploy script.
 .. note:: This is the only step in this section that requires the internet.
     If you don't have internet access you may try this command, be sure to update the
     "servername" to the server ip address:
-    :code:`scp Downloads/deploy_platform_linux.sh peek@servername:/home/peek/deploy_platform_linux.sh`
+    :code:`scp Downloads/deploy_release_linux.sh peek@servername:/home/peek/deploy_release_linux.sh`
 
 
 ::
 
-        uri="https://bitbucket.org/synerty/synerty-peek/raw/master/scripts/linux/deploy_platform_linux.sh"
+        uri="https://bitbucket.org/synerty/synerty-peek/raw/master/scripts/linux/deploy_release_linux.sh"
         wget $uri
 
 ----
@@ -143,8 +144,9 @@ The script will deploy to :file:`/home/peek/`.
 
 ::
 
-        dist="/home/peek/Downloads/peek_platform_linux_#.#.#.tar.bz2"
-        bash deploy_platform_linux.sh $dist
+        platformArchive="/home/peek/Downloads/peek_platform_linux_#.#.#.tar.bz2"
+        pluginsArchive="/home/peek/Downloads/peek_plugins_linux_#.#.#.tar.bz2"
+        bash deploy_release_linux.sh $platformArchive $pluginsArchive
 
 ----
 
@@ -174,13 +176,13 @@ Download the platform deploy script.
 .. note:: This is the only step in this section that requires the internet.
     If you don't have internet access you may try this command, be sure to update the
     "servername" to the server ip address:
-    :code:`scp Downloads/deploy_platform_macos.sh peek@servername:/Users/peek/deploy_platform_macos.sh`
+    :code:`scp Downloads/deploy_release_macos.sh peek@servername:/Users/peek/deploy_release_macos.sh`
 
 
 ::
 
-        file="deploy_platform_macos.sh"
-        uri="https://bitbucket.org/synerty/synerty-peek/raw/master/scripts/macos/$file"
+        file="deploy_release_macos.sh"
+        uri="https://bitbucket.org/synerty/synerty-peek/raw/master/scripts/macos/$deployScript"
         curl -O $uri
 
 
@@ -195,8 +197,9 @@ The script will deploy to :file:`/Users/peek/`.
 
 ::
 
-        dist="/Users/peek/Downloads/peek_platform_macos_#.#.#.tar.bz2"
-        bash $file $dist
+        platformArchive="/Users/peek/Downloads/peek_platform_macos_#.#.#.tar.bz2"
+        pluginsArchive="/Users/peek/Downloads/peek_plugins_macos_#.#.#.tar.bz2"
+        bash $deployScript $platformArchive $pluginsArchive
 
 
 ----

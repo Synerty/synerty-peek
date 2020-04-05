@@ -1,12 +1,16 @@
-param([String]$releaseZip)
+param([String]$platformZip, [String]$pluginsZip)
 
 # Make PowerShell stop if it has errors
 $ErrorActionPreference = "Stop"
 
 $7zExe="C:\Program Files\7-Zip\7z.exe";
 
-if ([string]::IsNullOrEmpty($releaseZip) -or [string]::IsNullOrWhitespace($releaseZip)) {
-    Write-Error "Pass the path of the release to install to this script";
+if ([string]::IsNullOrEmpty($platformZip) -or [string]::IsNullOrWhitespace($platformZip)) {
+    Write-Error "Pass the path of the platform release to this script";
+}
+
+if ([string]::IsNullOrEmpty($pluginsZip) -or [string]::IsNullOrWhitespace($pluginsZip)) {
+    Write-Error "Pass the path of the plugins release to this script";
 }
 
 
@@ -24,26 +28,41 @@ If (Test-Path $releaseDir){
 }
 
 # ------------------------------------------------------------------------------
-# Extract the release to a interim directory
+# Extract the platform to a interim directory
 
 # Create our new release dir
 New-Item $releaseDir -ItemType directory;
 
 # Decompress the release
-Write-Host "Extracting release to $releaseDir";
+Write-Host "Extracting platform to $releaseDir";
 
 if (Test-Path $7zExe) {
     Write-Host "7z is present, this will be faster";
-    Invoke-Expression "&`"$7zExe`" x -y -r `"$releaseZip`" -o`"$releaseDir`"";
+    Invoke-Expression "&`"$7zExe`" x -y -r `"$platformZip`" -o`"$releaseDir`"";
 
 } else {
     Write-Host "Using standard windows zip handler, this will be slow";
     Add-Type -Assembly System.IO.Compression.FileSystem;
-    [System.IO.Compression.ZipFile]::ExtractToDirectory($releaseZip, $releaseDir);
+    [System.IO.Compression.ZipFile]::ExtractToDirectory($platformZip, $releaseDir);
 }
 
 # ------------------------------------------------------------------------------
-# Create teh virtual environment
+# Extract the plugins to a interim directory
+
+Write-Host "Extracting plugins to $releaseDir";
+
+if (Test-Path $7zExe) {
+    Write-Host "7z is present, this will be faster";
+    Invoke-Expression "&`"$7zExe`" x -y -r `"$pluginsZip`" -o`"$releaseDir`"";
+
+} else {
+    Write-Host "Using standard windows zip handler, this will be slow";
+    Add-Type -Assembly System.IO.Compression.FileSystem;
+    [System.IO.Compression.ZipFile]::ExtractToDirectory($pluginsZip, $releaseDir);
+}
+
+# ------------------------------------------------------------------------------
+# Create the virtual environment
 
 # Get the release name from the package
 $peekPkgName = Get-ChildItem "$releaseDir\py" |
@@ -75,7 +94,25 @@ if ( -Not $foundPipPath.StartsWith($venvDir)) {
 # Install the python packages
 
 # install the py wheels from the release
+Write-Host "Installing python platform"
 pip install --no-index --no-cache --find-links "$releaseDir\py" synerty-peek Shapely pymssql
+
+# ------------------------------------------------------------------------------
+# Install the python plugins
+
+# install the py wheels from the release
+Write-Host "Installing python plugins"
+Push-Location "$releaseDir/peek_plugins_win_${peekPkgVer}"
+
+
+# What we'd like to do is something like this
+# # pip install --no-index --no-cache --find-links=. peek-plugin*.gz
+# but we'll settle for this
+(Get-Childitem peek-plugin*.gz -Name).ForEach({
+    pip install --no-index --no-cache --find-links=. $_
+})
+
+Pop-Location
 
 # ------------------------------------------------------------------------------
 # Install node
