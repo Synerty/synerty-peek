@@ -90,7 +90,7 @@ On Linux this can be done with ::
 Clear Redis and RabbitMQ Queues
 ```````````````````````````````
 
-Run the following commands to clear any queues :
+Run the following commands to clear any queues ::
 
     # Purge any outstanding results from the redis task result store
     sudo redis-cli flushall
