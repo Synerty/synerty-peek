@@ -23,6 +23,7 @@ Create following file and parent directory:
 
 :Windows: :file:`C:\\Users\\peek\\peek-server.home\\config.json`
 :Linux: :file:`/home/peek/peek-server.home/config.json`
+:Mac:   :file:`/Users/peek/peek-server.home/config.json`
 
 .. tip:: Run the service, it will create some of it's config before failing
             to connect to the db.
@@ -44,8 +45,8 @@ Select the right :code:`connectUrl` for your database, ensure you update :code:`
         {
             "plugin": {
                 "enabled": [
-                    "peek_plugin_noop",
-                    "peek_plugin_etc"
+                    "peek_plugin_inbox",
+                    "peek_plugin_tutorial"
                 ]
             },
             "sqlalchemy": {
@@ -65,6 +66,7 @@ Create following file and parent directory:
 
 :Windows: :file:`C:\\Users\\peek\\peek-client.home\\config.json`
 :Linux: :file:`/home/peek/peek-client.home/config.json`
+:Mac:   :file:`/Users/peek/peek-server.home/config.json`
 
 .. tip:: Run the service, it will create some of it's config,
             it might raise errors though.
@@ -83,8 +85,8 @@ Populate the file :file:`config.json` with the
             },
             "plugin": {
                 "enabled": [
-                    "peek_plugin_noop",
-                    "peek_plugin_etc"
+                    "peek_plugin_inbox",
+                    "peek_plugin_tutorial"
                 ]
             }
         }
@@ -102,6 +104,7 @@ Create following file and parent directory:
 
 :Windows: :file:`C:\\Users\\peek\\peek-agent.home\\config.json`
 :Linux: :file:`/home/peek/peek-agent.home/config.json`
+:Mac:   :file:`/Users/peek/peek-server.home/config.json`
 
 .. tip:: Run the service, it will create some of it's config,
             it might raise errors though.
@@ -116,8 +119,8 @@ Populate the file :file:`config.json` with the
         {
             "plugin": {
                 "enabled": [
-                    "peek_plugin_noop",
-                    "peek_plugin_etc"
+                    "peek_plugin_inbox",
+                    "peek_plugin_tutorial"
                 ]
             }
         }
