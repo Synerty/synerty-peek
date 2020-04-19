@@ -22,7 +22,8 @@ synerty-peek
 peek-core-email
 peek-core-device
 peek-core-user
-peek-core-search"
+peek-core-search
+peek-abstract-chunked-index"
 
 
 # Dynamicall list plugins
