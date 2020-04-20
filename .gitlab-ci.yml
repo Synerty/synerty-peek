@@ -24,11 +24,12 @@ git_clone_platform:
         expire_in: 1 day
     image: nexus.synerty.com:5000/peek-linux
     only:
+        - web
         - triggers
         - merge_requests
         - manual
     script:
-        - ./scripts/gitlab/git_clone.sh platform ${GIT_CLONE_PATH}/cloned_platform_repos ${GIT_USER} ${GIT_PASSWORD}
+        - ./scripts/gitlab/git_clone.sh platform ${GIT_CLONE_PATH}/cloned_platform_repos ${GIT_USER} ${GIT_PASSWORD} ${CI_COMMIT_REF_NAME} ${CI_PROJECT_NAMESPACE}
     stage: fetch
     tags:
         - linux
@@ -41,11 +42,12 @@ git_clone_plugins:
         expire_in: 1 day
     image: nexus.synerty.com:5000/peek-linux
     only:
+        - web
         - triggers
         - merge_requests
         - manual
     script:
-        - ./scripts/gitlab/git_clone.sh plugins ${GIT_CLONE_PATH}/cloned_plugin_repos ${GIT_USER} ${GIT_PASSWORD}
+        - ./scripts/gitlab/git_clone.sh plugins ${GIT_CLONE_PATH}/cloned_plugin_repos ${GIT_USER} ${GIT_PASSWORD} ${CI_COMMIT_REF_NAME} ${CI_PROJECT_NAMESPACE}
     stage: fetch
     tags:
         - linux
@@ -54,6 +56,7 @@ unit_tests:
     allow_failure: false
     image: nexus.synerty.com:5000/peek-linux
     only:
+        - web
         - triggers
         - merge_requests
     script:
@@ -66,6 +69,7 @@ sonar_platform:
     allow_failure: false
     image: nexus.synerty.com:5000/peek-linux
     only:
+        - web
         - triggers
         - merge_requests
     stage: test
@@ -83,6 +87,7 @@ sonar_plugins:
     allow_failure: false
     image: nexus.synerty.com:5000/peek-linux
     only:
+        - web
         - triggers
         - merge_requests
     stage: test
@@ -104,6 +109,7 @@ publish_platform:
         expire_in: 1 day
     image: nexus.synerty.com:5000/peek-linux
     only:
+        - web
         - triggers
     stage: publish
     script:
@@ -123,6 +129,7 @@ publish_plugins:
         expire_in: 1 day
     image: nexus.synerty.com:5000/peek-linux
     only:
+        - web
         - triggers
     stage: publish
     script:
@@ -142,6 +149,7 @@ package_platform_linux:
         expire_in: 1 day
     image: nexus.synerty.com:5000/peek-linux
     only:
+        - web
         - triggers
     stage: package
     script:
@@ -169,6 +177,7 @@ package_plugin_linux:
         expire_in: 1 day
     image: nexus.synerty.com:5000/peek-linux
     only:
+        - web
         - triggers
     stage: package
     script:
@@ -190,6 +199,7 @@ archive_release:
         expire_in: 1 day
     image: nexus.synerty.com:5000/peek-linux
     only:
+        - web
         - triggers
     stage: archive
     script:
@@ -207,6 +217,7 @@ upload_to_nexus:
     allow_failure: false
     image: nexus.synerty.com:5000/peek-linux
     only:
+        - web
         - triggers
     script:
         - curl -v -u ${NEXUS_USER}:${NEXUS_PASSWORD} --upload-file $GIT_CLONE_PATH/${PEEK_RELEASE_LINUX}.tar http://${NEXUS_URL}/repository/synerty-packages/
@@ -226,6 +237,7 @@ upload_to_attune:
         name: PEEK-RELEASE
     image: nexus.synerty.com:5000/peek-linux
     only:
+        - web
         - triggers
         - manual
     script:
