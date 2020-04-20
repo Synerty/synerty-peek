@@ -28,7 +28,7 @@ The frontends are the Admin, Mobile and Desktop services.
         *   A Web app, using @angular/cli
 
 The platform code for combining the files for the frontends is at:
-`<https://bitbucket.org/synerty/peek-platform/src/master/peek_platform/frontend/>`_
+`<https://bitbucket.org/synerty/peek-platform/src/master/peek_platform/build_frontend/>`_
 
 Combining Files
 ---------------
