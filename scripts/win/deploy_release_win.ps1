@@ -95,7 +95,18 @@ if ( -Not $foundPipPath.StartsWith($venvDir)) {
 
 # install the py wheels from the release
 Write-Host "Installing python platform"
-pip install --no-index --no-cache --find-links "$releaseDir\py" synerty-peek Shapely pymssql
+Push-Location "$releaseDir\py"
+
+pip install --no-index --no-cache --find-links=. Shapely pymssql
+
+# What we'd like to do is something like this
+# # pip install --no-index --no-cache --find-links=. synerty_peek*.whl
+# but we'll settle for this
+(Get-Childitem synerty_peek*.whl -Name).ForEach({
+    pip install --no-index --no-cache --find-links=. $_
+})
+
+Pop-Location
 
 # ------------------------------------------------------------------------------
 # Install the python plugins
@@ -108,7 +119,7 @@ Push-Location "$releaseDir/peek_plugins_win_${peekPkgVer}"
 # What we'd like to do is something like this
 # # pip install --no-index --no-cache --find-links=. peek-plugin*.gz
 # but we'll settle for this
-(Get-Childitem peek-plugin*.gz -Name).ForEach({
+(Get-Childitem peek_plugin*.whl -Name).ForEach({
     pip install --no-index --no-cache --find-links=. $_
 })
 
