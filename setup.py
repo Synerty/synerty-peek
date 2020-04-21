@@ -13,7 +13,7 @@ if os.path.isdir(egg_info):
 if os.path.isfile('MANIFEST'):
     os.remove('MANIFEST')
 
-requirements = [
+platformPackages = [
     "peek-plugin-base",
     "peek-platform",
     "peek-agent",
@@ -31,6 +31,12 @@ requirements = [
     "peek-core-user",
     "peek-core-search"
 ]
+
+abstractPackages = [
+    "peek-abstract-chunked-index"
+]
+
+requirements = platformPackages + abstractPackages
 
 # Force the dependencies to be the same branch
 reqVer = '.'.join(package_version.split('.')[0:2]) + ".*"
