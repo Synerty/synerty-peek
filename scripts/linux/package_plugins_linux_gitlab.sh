@@ -19,8 +19,14 @@ DIR_TO_TAR="peek_plugins_linux_${VER}"
 cd ${DST_PATH}
 mkdir ${DIR_TO_TAR} && cd ${DIR_TO_TAR}
 
+# Copy over the plugins
+cp ${SRC_PATH}/*.gz .
+
 # Create the plugins release
-pip wheel --no-cache --find-links=. --find-links=${SRC_PLATFORM_PATH} ${SRC_PATH}/*.gz
+pip wheel --no-cache --find-links=. --find-links=${SRC_PLATFORM_PATH} *.gz
+
+# Delete all the wheels created for the plugins
+rm -f peek-plugin*.gz
 
 # Delete all the platform plugins that have been brought in
 ls peek_*whl synerty_peek*whl | grep -v peek_plugin | xargs rm -f
