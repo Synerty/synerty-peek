@@ -75,7 +75,9 @@ export PATH="$venvDir/bin:$PATH"
 
 echo "Installing python platform"
 # install the py wheels from the release
-pip install --no-index --no-cache --find-links "$releaseDir/py" synerty-peek
+pushd "$releaseDir/py"
+pip install --no-index --no-cache --find-links=. synerty_peek*.whl
+popd
 
 # ------------------------------------------------------------------------------
 # Install the python plugins
@@ -83,7 +85,7 @@ pip install --no-index --no-cache --find-links "$releaseDir/py" synerty-peek
 # install the py wheels from the release
 echo "Installing python plugins"
 pushd "$releaseDir/peek_plugins_macos_${peekPkgVer}"
-pip install --no-index --no-cache --find-links=. peek-plugin*.gz
+pip install --no-index --no-cache --find-links=. peek_plugin*.whl
 popd
 
 # ------------------------------------------------------------------------------
