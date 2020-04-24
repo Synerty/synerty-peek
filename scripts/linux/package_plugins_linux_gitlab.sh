@@ -30,6 +30,7 @@ rm -f peek-plugin*.gz
 
 # Delete all the platform plugins that have been brought in
 ls peek_*whl synerty_peek*whl | grep -v peek_plugin | xargs rm -f
+rm peek_plugin_base*whl
 
 # CD one directory back so we can tar the directory
 cd ..
