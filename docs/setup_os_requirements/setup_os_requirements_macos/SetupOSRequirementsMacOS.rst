@@ -52,7 +52,7 @@ talk to the MSSQL SQLServer database.
 Installation Guide
 ------------------
 
-Follow the remaining section in this document to prepare your macOS operating system 
+Follow the remaining section in this document to prepare your macOS operating system
 to run the Peek Platform.
 
 The instructions on this page don't install the peek platform, that's done later.
@@ -84,9 +84,9 @@ Close safari preferences.
 Create Peek Platform OS User
 ----------------------------
 
-Alternatively to creating a :code:`peek` user, if you are developing with peek you 
-might want to Symlink the :code:`/Users/*developerAccount*` to :code:`/Users/peek`.  
-If doing this run: :code:`sudo ln -s /Users/*developerAccount*/ /Users/peek` then 
+Alternatively to creating a :code:`peek` user, if you are developing with peek you
+might want to Symlink the :code:`/Users/*developerAccount*` to :code:`/Users/peek`.
+If doing this run: :code:`sudo ln -s /Users/*developerAccount*/ /Users/peek` then
 skip to the next step :ref:`installing_xcode`.
 
 Create a user account for :code:`peek` with admin rights. ::
@@ -127,7 +127,7 @@ Run Terminal
 
 ----
 
-Apple's Command Line Developer Tools can be installed on recent OS versions by 
+Apple's Command Line Developer Tools can be installed on recent OS versions by
 running this command in the Terminal: ::
 
         xcode-select --install
@@ -196,87 +196,6 @@ Install the dev libs that the python packages will need to compile ::
 
         brew install openssl@1.1 zlib openldap
 
-
-Install PostGreSQL
-------------------
-
-Install the relational database we use on macOS.
-
-In terminal run: ::
-
-        brew install postgresql
-
-
-----
-
-Start postgresql and create start at login launchd service: ::
-
-        brew services start postgresql
-
-
-----
-
-Allow the peek OS user to login to the database as user peek with no password ::
-
-        F=/usr/local/var/postgres/pg_hba.conf
-        cat | sudo tee $F <<EOF
-        # TYPE  DATABASE        USER            ADDRESS                 METHOD
-        local   all             postgres                                peer
-        local   all             peek                                    trust
-
-        # "local" is for Unix domain socket connections only
-        local   all             all                                     peer
-        # IPv4 local connections:
-        host    all             all             127.0.0.1/32            md5
-        # IPv6 local connections:
-        host    all             all             ::1/128                 md5
-        EOF
-
-
-----
-
-Create Postgres user ::
-
-        createuser -d -r -s peek
-
-
-----
-
-Create the database ::
-
-        createdb -O peek peek
-
-
-----
-
-Set the PostGreSQL peek users password ::
-
-        psql -d postgres -U peek <<EOF
-        \password
-        \q
-        EOF
-
-        # Set the password as "PASSWORD" for development machines
-        # Set it to a secure password from https://xkpasswd.net/s/ for production
-
-
-----
-
-Cleanup traces of the password ::
-
-        [ ! -e ~/.psql_history ] || rm ~/.psql_history
-
-
-----
-
-Finally, Download pgAdmin4 - A graphically PostGreSQL databast administration tool.
-
-Download the latest version of pgAdmin4 for macOS from the following link
-
-https://www.pgadmin.org/download/pgadmin-4-macos/
-
-
-
 Install Python 3.6
 ------------------
 
@@ -316,7 +235,7 @@ Configure the build ::
         export CPPFLAGS="-I/usr/local/opt/openssl/include -I/usr/local/opt/zlib/include"
         export PKG_CONFIG_PATH="/usr/local/opt/openssl/lib/pkgconfig:/usr/local/opt/zlib/lib/pkgconfig"
 
-        ./configure --prefix=/Users/peek/cpython-${PEEK_PY_VER}/ --enable-optimizations
+        ./configure --prefix=/Users/peek/cpython-${PEEK_PY_VER}/ --enable-optimizations --enable-shared
 
 ----
 
@@ -389,6 +308,89 @@ The Wheel package is required for building platform and plugin releases ::
 
         pip install wheel
 
+
+Install PostGreSQL along with plpython3u extension
+--------------------------------------------------
+
+Download the file postgres.rb and install postgresql ::
+
+        cd ~
+        wget "https://bitbucket.org/synerty/synerty-peek/src/master/scripts/macos/postgres.rb"
+        brew install --verbose --build-from-source ./postgresql.rb
+        rm postgresql.rb
+
+
+----
+
+Start postgresql and create start at login launchd service: ::
+
+        brew services start postgresql
+
+
+----
+
+Allow the peek OS user to login to the database as user peek with no password ::
+
+        F=/usr/local/var/postgres/pg_hba.conf
+        cat | sudo tee $F <<EOF
+        # TYPE  DATABASE        USER            ADDRESS                 METHOD
+        local   all             postgres                                peer
+        local   all             peek                                    trust
+
+        # "local" is for Unix domain socket connections only
+        local   all             all                                     peer
+        # IPv4 local connections:
+        host    all             all             127.0.0.1/32            md5
+        # IPv6 local connections:
+        host    all             all             ::1/128                 md5
+        EOF
+
+
+----
+
+Create Postgres user ::
+
+        createuser -d -r -s peek
+
+
+----
+
+Create the database ::
+
+        createdb -O peek peek
+
+
+----
+
+Set the PostGreSQL peek users password ::
+
+        psql -d postgres -U peek <<EOF
+        \password
+        \q
+        EOF
+
+        # Set the password as "PASSWORD" for development machines
+        # Set it to a secure password from https://xkpasswd.net/s/ for production
+
+
+----
+
+Create extension ::
+
+        psql -h localhost -U peek peek -c "CREATE EXTENSION plpython3u"
+
+Cleanup traces of the password ::
+
+        [ ! -e ~/.psql_history ] || rm ~/.psql_history
+
+
+----
+
+Finally, Download pgAdmin4 - A graphically PostGreSQL databast administration tool.
+
+Download the latest version of pgAdmin4 for macOS from the following link
+
+https://www.pgadmin.org/download/pgadmin-4-macos/
 
 Install Worker Dependencies
 ---------------------------
