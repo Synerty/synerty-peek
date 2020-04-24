@@ -27,7 +27,7 @@ Below is a list of all the required software:
 
 *   Python 3.6.x
 
-*   Postgres 10.4.x
+*   Postgres 12.x
 
 Suggested Software
 ``````````````````
@@ -588,14 +588,14 @@ Add the latest PostGreSQL repository ::
 
 Install PostGresQL ::
 
-        sudo apt-get install -y postgresql-10-postgis-2.4 postgresql-10
+        sudo apt-get install -y postgresql-12-postgis-2.4 postgresql-12 postgresql-plpython3-12
         sudo apt-get clean
 
 ----
 
 Allow the peek OS user to login to the database as user peek with no password ::
 
-        F=/etc/postgresql/10/main/pg_hba.conf
+        F=/etc/postgresql/12/main/pg_hba.conf
         if ! sudo grep -q 'peek' $F; then
             echo "host  peek    peek    127.0.0.1/32    trust" | sudo tee $F -a
         fi
@@ -630,6 +630,12 @@ Create the database ::
 
 ----
 
+Create extension ::
+
+        psql -h localhost -U peek peek -c "CREATE EXTENSION plpython3u"
+
+----
+
 Cleanup traces of the password ::
 
         [ ! -e ~/.psql_history ] || rm ~/.psql_history
@@ -656,7 +662,7 @@ Insert : ::
         # Setup the variables for PYTHON
         export PEEK_PY_VER="3.6.8"
         export PATH="/home/peek/cpython-${PEEK_PY_VER}/bin:$PATH"
-		
+
         # Set the variables for the platform release
         # These are updated by the deploy script
         export PEEK_ENV=""

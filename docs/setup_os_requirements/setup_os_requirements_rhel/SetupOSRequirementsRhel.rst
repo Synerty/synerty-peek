@@ -27,7 +27,7 @@ Below is a list of all the required software:
 
 *   Python 3.6.x
 
-*   Postgres 12
+*   Postgres 12.x
 
 Suggested Software
 ``````````````````
