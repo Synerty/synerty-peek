@@ -33,7 +33,7 @@ Below is a list of all the required software:
 
 *   Python 3.6.x
 
-*   Postgres 10.3
+*   Postgres 12
 
 
 Optional Software
@@ -378,6 +378,8 @@ Set the PostGreSQL peek users password ::
 Create extension ::
 
         psql -h localhost -U peek peek -c "CREATE EXTENSION plpython3u"
+
+----
 
 Cleanup traces of the password ::
 
