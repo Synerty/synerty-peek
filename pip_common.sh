@@ -18,6 +18,7 @@ peek-admin
 peek-doc-admin
 peek-doc-dev
 peek-server
+peek-storage
 synerty-peek
 peek-core-email
 peek-core-device
