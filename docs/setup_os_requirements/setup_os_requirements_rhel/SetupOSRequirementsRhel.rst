@@ -27,7 +27,7 @@ Below is a list of all the required software:
 
 *   Python 3.6.x
 
-*   Postgres 10.4.x
+*   Postgres 12
 
 Suggested Software
 ``````````````````
@@ -358,6 +358,13 @@ Removing IPv6 Localhost
 Run the following command to ensure that localhost does not resolve to ::1
 as this effects the PostGreSQL connection. ::
 
+    F=/etc/sysctl.conf
+    cat | sudo tee $F <<EOF
+    # Disable IPv6
+    net.ipv6.conf.all.disable_ipv6 = 1
+    net.ipv6.conf.default.disable_ipv6 = 1
+    EOF
+    sudo sysctl -p
     sudo sed -i '/::1/d' /etc/hosts
 
 
@@ -465,7 +472,7 @@ Cleanup the downloaded packages: ::
 Installing VMWare Tools (Optional)
 ----------------------------------
 
-This section installs VMWare tools. The compiler tools have been installed from the section 
+This section installs VMWare tools. The compiler tools have been installed from the section
 above.
 
 ----
@@ -504,7 +511,7 @@ Reboot the virtual machine: ::
     sudo shutdown -r now
 
 
-.. note:: Keep in mind, that if the static IP is not set, the IP address of the VM may 
+.. note:: Keep in mind, that if the static IP is not set, the IP address of the VM may
     change, causing issues when reconnecting with SSH.
 
 
@@ -539,33 +546,33 @@ This is PostGreSQL 10.
 Setup the PostGreSQL repository:
  ::
 
-    PKG="https://download.postgresql.org/pub/repos/yum/10/redhat/rhel-7-x86_64/pgdg-redhat10-10-2.noarch.rpm"
+    PKG="https://download.postgresql.org/pub/repos/yum/reporpms/EL-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm"
     sudo yum install -y $PKG
 
 ----
 
 Install PostGreSQL: ::
 
-    PKG="postgresql10"
-    PKG="$PKG postgresql10-server"
-    PKG="$PKG postgresql10-contrib"
-    PKG="$PKG postgresql10-devel"
-    PKG="$PKG postgresql10-libs"
+    PKG="postgresql12"
+    PKG="$PKG postgresql12-server"
+    PKG="$PKG postgresql12-contrib"
+    PKG="$PKG postgresql12-devel"
+    PKG="$PKG postgresql12-plpython3"
     sudo yum install -y $PKG
 
 ----
 
 Create the PostGreSQL cluster and configure it to auto start: ::
 
-    sudo /usr/pgsql-10/bin/postgresql-10-setup initdb
-    sudo systemctl enable postgresql-10
-    sudo systemctl start postgresql-10
+    sudo /usr/pgsql-12/bin/postgresql-12-setup initdb
+    sudo systemctl enable postgresql-12
+    sudo systemctl start postgresql-12
 
 ----
 
 Allow the peek OS user to login to the database as user peek with no password ::
 
-    F="/var/lib/pgsql/10/data/pg_hba.conf"
+    F="/var/lib/pgsql/12/data/pg_hba.conf"
     if ! sudo grep -q 'peek' $F; then
         echo "host    peek    peek    127.0.0.1/32    trust" | sudo tee $F -a
         sudo sed -i 's,127.0.0.1/32            ident,127.0.0.1/32            md5,g' $F
@@ -602,6 +609,12 @@ Create the database: ::
 
 ----
 
+Create extension ::
+
+        psql -h localhost -U peek peek -c "CREATE EXTENSION plpython3u"
+
+----
+
 Cleanup traces of the password: ::
 
     [ ! -e ~/.psql_history ] || rm ~/.psql_history
@@ -611,7 +624,7 @@ Cleanup traces of the password: ::
 Compile and Install Python 3.6
 ------------------------------
 
-The Peek Platform runs on Python. These instructions download, compile and install the 
+The Peek Platform runs on Python. These instructions download, compile and install the
 latest version of Python.
 
 ----
@@ -712,7 +725,7 @@ Upgrade pip: ::
 
 ----
 
-synerty-peek is deployed into python virtual environments. Install the virtualenv 
+synerty-peek is deployed into python virtual environments. Install the virtualenv
 python package: ::
 
     pip install virtualenv
@@ -737,7 +750,7 @@ Install redis: ::
 
     # redis dependencies
     PKG="${ATOMICORP_SITE}/jemalloc-3.6.0-1.el7.art.x86_64.rpm"
-    
+
     # redis
     PKG="$PKG ${ATOMICORP_SITE}/redis-3.0.7-4.el7.art.x86_64.rpm"
 
@@ -804,7 +817,7 @@ Increase the size of the redis client queue ::
 Install Oracle Client (Optional)
 --------------------------------
 
-The oracle libraries are optional. Install them where the agent runs if you are 
+The oracle libraries are optional. Install them where the agent runs if you are
 going to interface with an oracle database.
 
 ----
