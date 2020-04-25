@@ -621,6 +621,15 @@ Set the PostGreSQL peek users password ::
         # Set the password as "PASSWORD" for development machines
         # Set it to a secure password from https://xkpasswd.net/s/ for production
 
+----
+
+Add "peek" user to "postgres" user group: ::
+
+    # Login as root
+    su -
+    chmod g+rx ~peek
+    usermod -G peek postgres
+    exit
 
 ----
 
