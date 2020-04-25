@@ -625,11 +625,8 @@ Set the PostGreSQL peek users password ::
 
 Add "peek" user to "postgres" user group: ::
 
-        # Login as root
-        su -
-        chmod g+rx ~peek
-        usermod -G peek postgres
-        exit
+        sudo chmod g+rx ~peek
+        sudo usermod -G peek postgres
 
 ----
 

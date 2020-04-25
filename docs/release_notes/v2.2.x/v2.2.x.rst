@@ -1,0 +1,160 @@
+.. _release_notes_v2.2.x:
+
+====================
+v2.2.x Release Notes
+====================
+
+Platform Changes
+----------------
+
+Nil
+
+Plugin Changes
+--------------
+
+Nil
+
+Deployment Changes
+------------------
+
+Linux Deployment
+````````````````
+
+- Upgrade Postgresql-10 to Postgresql-12
+- Installing PlPython3u Postgresql extension
+
+
+macOS Deployment
+````````````````
+
+- Upgrade Postgresql-10 to Postgresql-12
+- Installing PlPython3u Postgresql extension
+
+iOS Deployment
+``````````````
+
+.. note:: Peek v2.0.x does not have support for iOS, this will be updated in a figure release.
+    We're going to Ionics Capacitor framework to create a full hybrid app.
+
+
+Windows Deployment
+``````````````````
+
+Nil.
+
+.. note:: The windows deployment will change to use Windows Subsystem for Linux in
+            a future release.
+
+Migration Steps
+----------------
+
+Follow the migration steps to complete the upgrade of Postgresql-10 to Postgresql-12.
+
+Stop Peek
+`````````
+
+Start the migration tasks with Peek stopped.
+
+On Linux this can be done with ::
+
+
+    # Stop Peek
+    sudo true
+    sudo systemctl stop peek_agent
+    sudo systemctl stop peek_client
+    sudo systemctl stop peek_worker
+    sudo systemctl stop peek_server
+
+Upgrade to Postgresl-12
+```````````````````````
+
+Install Postgresql 12 ::
+
+    yum install -y https://download.postgresql.org/pub/repos/yum/reporpms/EL-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm
+    yum install -y postgresql12
+    yum install -y postgresql12-server
+    yum install -y postgresql12-contrib
+    yum install -y postgresql12-devel
+    yum install -y postgresql12-plpython3
+    # Make sure the existing server software is still there
+    yum install postgresql10-server
+    # Vaccum the DB so it's smaller
+    systemctl start postgresql-10
+
+Ensure the services are stopped ::
+
+    sudo -u peek time echo "VACUUM FULL FREEZE;" | psql
+    sudo systemctl stop postgresql-10 || true
+    sudo systemctl stop postgresql-12 || true
+
+Initialise the DB and perform migration ::
+
+    sudo /usr/pgsql-12/bin/postgresql-12-setup initdb
+
+    # Migrate old cluster
+    sudo su - postgres
+    export PGDATAOLD=/var/lib/pgsql/10/data
+    export PGDATANEW=/var/lib/pgsql/12/data
+    export PGBINOLD=/usr/pgsql-10/bin
+    export PGBINNEW=/usr/pgsql-12/bin
+    cd /var/lib/pgsql
+    ${PGBINNEW}/pg_upgrade
+    exit
+
+Grant permissions ::
+
+    sudo chmod g+rx ~peek
+    sudo usermod -G peek postgres
+
+Perform cleanup ::
+
+    sudo yum remove postgresql10*
+    # Ensure the pg_hba is setup
+    F="/var/lib/pgsql/12/data/pg_hba.conf"
+    if ! sudo grep -q 'peek' $F; then
+       echo "host    peek    peek    127.0.0.1/32    trust" | sudo tee $F -a
+       sudo sed -i 's,127.0.0.1/32            ident,127.0.0.1/32            md5,g' $F
+    fi
+
+Enable and start postgresql 12 ::
+
+    sudo systemctl enable postgresql-12
+    sudo systemctl start postgresql-12
+    sudo su - postgres
+    time /var/lib/pgsql/analyze_new_cluster.sh
+    time /var/lib/pgsql/delete_old_cluster.sh
+    exit
+
+Create extension ::
+
+    psql -U peek peek -c "CREATE EXTENSION plpython3u"
+
+Restart Peek
+````````````
+
+Restart all Peek services ::
+
+    sudo true
+    sudo systemctl start peek_server
+    sudo systemctl start peek_worker
+    sudo systemctl start peek_agent
+    sudo systemctl start peek_client
+
+v2.2.0 Issues Log
+-----------------
+
+Bug
+```
+
+*    TODO
+
+Improvement
+``````````
+
+*    TODO
+
+
+New Feature
+```````````
+
+*    Nil

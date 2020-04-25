@@ -1,7 +1,7 @@
-.. _upgrade_to_v1.2.x:
+.. _release_notes_v1.2.x:
 
 =====================
-v1.2.x Upgrade Notes
+v1.2.x Release Notes
 =====================
 
 Changes
