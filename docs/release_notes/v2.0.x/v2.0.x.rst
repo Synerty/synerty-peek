@@ -1,7 +1,7 @@
-.. _upgrade_to_v2.0.x:
+.. _release_notes_v2.0.x:
 
 ====================
-v2.0.x Upgrade Notes
+v2.0.x Release Notes
 ====================
 
 Platform Changes

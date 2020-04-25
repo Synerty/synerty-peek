@@ -1,7 +1,7 @@
-.. _upgrade_to_v0_6_0:
+.. _release_notes_v0_6_0:
 
 ====================
-v0.6.0 Upgrade Notes
+v0.6.0 Release Notes
 ====================
 
 The following modifications are required to upgrade plugins to run on the v0.6.0 version

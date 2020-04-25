@@ -1,7 +1,7 @@
-.. _upgrade_to_v0_10_0:
+.. _release_notes_v0_10_0:
 
 =====================
-v0.10.0 Upgrade Notes
+v0.10.0 Release Notes
 =====================
 
 Changes

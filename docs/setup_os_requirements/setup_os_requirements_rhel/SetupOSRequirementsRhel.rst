@@ -586,7 +586,6 @@ Create the peek SQL user: ::
     createuser -d -r -s peek
     exit # exit postgres user
 
-
 ----
 
 Set the PostGreSQL peek users password: ::
@@ -599,6 +598,12 @@ Set the PostGreSQL peek users password: ::
     # Set the password as "PASSWORD" for development machines
     # Set it to a secure password from https://xkpasswd.net/s/ for production
 
+----
+
+Add "peek" user to "postgres" user group: ::
+
+    sudo chmod g+rx ~peek
+    sudo usermod -G peek postgres    
 
 ----
 
@@ -611,7 +616,7 @@ Create the database: ::
 
 Create extension ::
 
-        psql -h localhost -U peek peek -c "CREATE EXTENSION plpython3u"
+    psql -h localhost -U peek peek -c "CREATE EXTENSION plpython3u"
 
 ----
 
