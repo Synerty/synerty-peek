@@ -135,6 +135,8 @@ publish_plugins:
         - linux
 
 package_platform_linux:
+    dependencies:
+        - publish_platform
     allow_failure: false
     artifacts:
         paths:
@@ -162,6 +164,9 @@ package_platform_linux:
         - linux
 
 package_plugin_linux:
+    dependencies:
+        - publish_platform
+        - publish_plugins
     allow_failure: false
     artifacts:
         paths:
@@ -178,11 +183,13 @@ package_plugin_linux:
         - export PIP_INDEX_URL=http://${NEXUS_USER}:${NEXUS_PASSWORD}@${NEXUS_URL}/repository/pypi-all/simple
         - export PIP_TRUSTED_HOST=${NEXUS_URL}
         - ./scripts/linux/package_plugins_linux_gitlab.sh ${PKG_TAG_VERSION:-0.0.0+b${CI_PIPELINE_ID}} ${GIT_CLONE_PATH}/plugin_packages ${GIT_CLONE_PATH}/platform_packages ${GIT_CLONE_PATH}/${PKG_PLUGIN_LINUX}
-#        - rm -rf ${GIT_CLONE_PATH}/plugin_packages
     tags:
         - linux
 
 archive_release:
+    dependencies:
+        - package_plugin_linux
+        - package_platform_linux
     allow_failure: false
     artifacts:
         paths:
@@ -204,6 +211,8 @@ archive_release:
         - linux
 
 upload_to_nexus:
+    dependencies:
+        - archive_release
     allow_failure: false
     image: nexus.synerty.com:5000/peek-linux
     only:
@@ -216,6 +225,8 @@ upload_to_nexus:
         - linux
 
 upload_to_attune:
+    dependencies:
+        - archive_release
     allow_failure: false
     before_script:
         - eval $(ssh-agent -s)
