@@ -143,6 +143,7 @@ publish_plugins:
 
 package_platform_linux:
     dependencies:
+        - git_clone_platform
         - publish_platform
     allow_failure: false
     artifacts:
