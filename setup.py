@@ -34,7 +34,7 @@ platformPackages = [
 ]
 
 abstractPackages = [
-    "peek-abstract-chunked-index"
+    "peek-abstract-chunked-index",
     "peek-abstract-chunked-data-loader"
 ]
 
