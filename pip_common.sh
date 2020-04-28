@@ -24,7 +24,8 @@ peek-core-email
 peek-core-device
 peek-core-user
 peek-core-search
-peek-abstract-chunked-index"
+peek-abstract-chunked-index
+peek-abstract-chunked-data-loader"
 
 
 # Dynamicall list plugins
