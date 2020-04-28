@@ -35,6 +35,7 @@ platformPackages = [
 
 abstractPackages = [
     "peek-abstract-chunked-index"
+    "peek-abstract-chunked-data-loader"
 ]
 
 requirements = platformPackages + abstractPackages
