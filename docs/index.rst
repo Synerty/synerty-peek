@@ -16,7 +16,7 @@ Peek Platform Documentation
     troubleshooting/IndexTroubleshooting
     util/IndexUtil
     api/IndexAPI
-    upgrade_notes/IndexUpgrade
+    release_notes/IndexUpgrade
 
 
 Indices and tables
