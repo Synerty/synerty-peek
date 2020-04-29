@@ -44,10 +44,10 @@ and allows the real implementation to be hidden in the :code:`_private` package.
 In this example, we're going to expose an API for the Server service in
 the :code:`peek_plugin_tutorial` plugin.
 
-We'll then get the API for the :code:`peek_plugin_active_task` plugin and create
+We'll then get the API for the :code:`peek_plugin_inbox` plugin and create
 a task.
 
-.. image:: LearnPythonPluginApi_ActiveTaskExample.png
+.. image:: LearnPythonPluginApi_InboxTaskExample.png
 
 Setup Server API
 ----------------
@@ -112,7 +112,7 @@ be detailed docstrings. It doesn't contain any implementation.
 ----
 
 Create the file
-:file:`peek_plugin_tutorial/server/TutorialApi.py`
+:file:`peek_plugin_tutorial/server/TutorialApiABC.py`
 and populate it with the following contents.
 
 ::
@@ -231,7 +231,7 @@ The API is now accessible from other plugins.
 Use Server API
 --------------
 
-In this section we'll get a reference to the Active Task API and then create a task on
+In this section we'll get a reference to the Peek Plugin Inbox API and then create a task on
 the mobile UI.
 
 .. note:: In order to use this example, you will need to have the
@@ -242,16 +242,16 @@ the mobile UI.
     :command:`pip install peek-core-user`.
 
 .. note:: In order to use this example, you will need to have the
-    :code:`peek_plugin_active_task` plugin installed and enabled in
+    :code:`peek_plugin_inbox` plugin installed and enabled in
     both the Client and Server services, via their config.json files.
 
-    The active task plugin is public, it can be installed with
-    :command:`pip install peek-plugin-active-task`.
+    The peek inbox plugin is public, it can be installed with
+    :command:`pip install peek_plugin_inbox`.
 
 Add File :file:`ExampleUseTaskApi.py`
 `````````````````````````````````````
 
-File :file:`ExampleUseTaskApi.py` contains the code that uses the Active Tasks API.
+File :file:`ExampleUseTaskApi.py` contains the code that uses the Peek Inbox Tasks API.
 
 ----
 
@@ -269,7 +269,7 @@ Replace the :code:`"userId"` with your user id.
         from twisted.internet import reactor
         from twisted.internet.defer import inlineCallbacks
 
-        from peek_plugin_active_task.server.ActiveTaskApiABC import ActiveTaskApiABC, NewTask
+        from peek_plugin_inbox.server.InboxApiABC import InboxApiABC, NewTask
         from peek_plugin_tutorial._private.server.controller.MainController import MainController
         from peek_plugin_tutorial._private.PluginNames import tutorialPluginName
 
@@ -277,9 +277,9 @@ Replace the :code:`"userId"` with your user id.
 
 
         class ExampleUseTaskApi:
-            def __init__(self, mainController: MainController, activeTaskApi: ActiveTaskApiABC):
+            def __init__(self, mainController: MainController, inboxApi: InboxApiABC):
                 self._mainController = mainController
-                self._activeTaskApi = activeTaskApi
+                self._inboxApi = inboxApi
 
             def start(self):
                 reactor.callLater(1, self.sendTask)
@@ -301,8 +301,8 @@ Replace the :code:`"userId"` with your user id.
                                               | NewTask.NOTIFY_BY_EMAIL
                 )
 
-                # Now send the task via the active tasks API
-                yield self._activeTaskApi.addTask(newTask)
+                # Now send the task via the inbox tasks API
+                yield self._inboxApi.addTask(newTask)
 
                 logger.debug("Task Sent")
 
@@ -321,21 +321,19 @@ Edit the file :file:`peek_plugin_tutorial/_private/server/ServerEntryHook.py`:
 
 #.  Add this import at the top of the file with the other imports: ::
 
-        from peek_plugin_active_task.server.ActiveTaskApiABC import ActiveTaskApiABC
+        from peek_plugin_inbox.server.InboxApiABC import InboxApiABC
         from .ExampleUseTaskApi import ExampleUseTaskApi
 
 
 #.  Add this line just before the :code:`logger.debug("Started")` line at the end
     of the :code:`start()` method: ::
 
-        # Get a reference for the Active Task
-        activeTaskApi = self.platform.getOtherPluginApi("peek_plugin_active_task")
-        assert isinstance(activeTaskApi, ActiveTaskApiABC), "Wrong activeTaskApi"
-
-
+        # Get a reference for the Inbox Task
+        inboxApi = self.platform.getOtherPluginApi("peek_plugin_inbox")
+        assert isinstance(inboxApi, InboxApiABC), "Wrong inboxApi"
         # Initialise the example code that will send the test task
         self._loadedObjects.append(
-                ExampleUseTaskApi(mainController, activeTaskApi).start()
+                ExampleUseTaskApi(mainController, inboxApi).start()
         )
 
 
