@@ -349,7 +349,7 @@ and populate it with the following contents.
                     )
 
                     # Create the vortex message
-                    return Payload(filt, tuples=tasks).toVortexMsg()
+                    return Payload(filt, tuples=tasks).makePayloadEnvelope().toVortexMsg()
 
                 finally:
 
