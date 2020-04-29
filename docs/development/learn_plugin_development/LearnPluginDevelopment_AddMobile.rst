@@ -210,13 +210,13 @@ tutorial plugins app icon.
 
 ----
 
-Create directory :file:`peek_plugin_tutorial/_private/mobile-assets`
+Create directory :file:`peek_plugin_tutorial/_private/mobile-assets` and :file:`peek_plugin_tutorial/_private/desktop-assets`
 
 ----
 
 Download this plugin app icon
 `TutorialExampleIcon.png <http://synerty-peek.readthedocs.io/en/latest/_images/TutorialExampleIcon.png>`_
-to :file:`peek_plugin_tutorial/_private/mobile-assets/icon.png`
+to :file:`peek_plugin_tutorial/_private/mobile-assets/icon.png` and :file `peek_plugin_tutorial/_private/desktop-assets/icon.png`
 
 
 Edit File :file:`plugin_package.json`
@@ -225,13 +225,14 @@ Edit File :file:`plugin_package.json`
 Finally, Edit the file :file:`peek_plugin_tutorial/plugin_package.json` to tell the
 platform that we want to use the mobile service:
 
-#.  Add **"mobile"** to the requiresServices section so it looks like ::
+#.  Add **"mobile"** and **desktop** to the requiresServices section so it looks like ::
 
         "requiresServices": [
-            "mobile"
+            "mobile",
+            "desktop"
         ]
 
-#.  Add the **mobile** section after **requiresServices** section: ::
+#.  Add the **mobile** and **desktop** section after **requiresServices** section: ::
 
         "mobile": {
             "showHomeLink": true,
@@ -239,7 +240,15 @@ platform that we want to use the mobile service:
             "appModule": "tutorial.module#TutorialModule",
             "assetDir": "_private/mobile-assets",
             "icon": "/assets/peek_plugin_tutorial/icon.png"
+        },
+         "desktop": {
+            "appDir": "_private/desktop-app",
+            "appModule": "tutorial.module#TutorialModule",
+            "assetDir": "_private/desktop-assets",
+            "icon": "/assets/peek_plugin_tutorial/icon.png",
+            "showHomeLink": true,
         }
+
 
 #.  Ensure your JSON is still valid (Your IDE may help here)
 
@@ -249,13 +258,23 @@ Here is an example ::
             ...
             "requiresServices": [
                 ...
-                "mobile"
+                "mobile",
+                "desktop"
             ],
             ...
             "mobile": {
                 "showHomeLink": true,
                 "appDir": "_private/mobile-app",
-                "appModule": "tutorial.module#TutorialModule"
+                "appModule": "tutorial.module#TutorialModule",
+                "assetDir": "_private/mobile-assets",
+                "icon": "/assets/peek_plugin_tutorial/icon.png"
+            },
+             "desktop": {
+                "appDir": "_private/desktop-app",
+                "appModule": "tutorial.module#TutorialModule",
+                "assetDir": "_private/desktop-assets",
+                "icon": "/assets/peek_plugin_tutorial/icon.png",
+                "showHomeLink": true,
             }
         }
 
