@@ -31,6 +31,7 @@ Setup Pycharm IDE
     #.  Project -> Project Structure
 
         #.  peek-mobile -> build-ns -> Excluded (as per the image below)
+        #.  peek-mobile -> build-web -> Excluded
         #.  peek-desktop -> build-web -> Excluded
         #.  peek-admin -> build-web -> Excluded
 
@@ -38,14 +39,14 @@ Setup Pycharm IDE
 
     #.  Languages & Frameworks -> Node.js and NPM
 
-        #.  Node interpreter -> ~/node-v7.1.0/bin/node
+        #.  Node interpreter -> ~/node-v10.20.0/bin/node
         #.  Remove other node interpreters
 
         .. image:: settings_nodejs_and_npm.png
 
     #.  Languages & Frameworks -> TypesScript
 
-        #.  Node interpreter -> ~/node-v7.1.0/bin/node
+        #.  Node interpreter -> ~/node-v10.20.0/bin/node
         #.  Enable TypeScript Compiler -> Checked
         #.  Set options manually -> Checked
         #.  Command line options -> --target es5 --experimentalDecorators --lib es6,dom --sourcemap --emitDecoratorMetadata
@@ -53,19 +54,11 @@ Setup Pycharm IDE
 
         .. image:: settings_typescript.png
 
-    #.  Languages & Frameworks -> Typescript -> TSLint
-
-        #.  Select "Enable"
-        #.  Node interpreter -> ~/node-v7.1.0/bin/node
-        #.  TSLint Package -> ~/node-v7.1.0/lib/node_modules/tslint
-
-        .. image:: settings_tslint.png
-
 Configure your developing software to use the virtual environment you wish to use
 
 Here is an example of the setting in PyCharm:
 
-.. image:: PycharmProjectInterpreter.jpg
+.. image:: PycharmProjectInterpreter.png
 
 ----
 
