@@ -303,7 +303,7 @@ Edit the file :file:`peek_plugin_tutorial/_private/client/ClientEntryHook.py`
 
 #.  Add the following import up the top of the file ::
 
-        from peek_core_device._private.storage.DeclarativeBase import loadStorageTuples
+        from peek_plugin_tutorial._private.storage.DeclarativeBase import loadStorageTuples
 
 #.  Add the following method from the **load(self):** method ::
 
@@ -314,7 +314,7 @@ Edit the file :file:`peek_plugin_tutorial/_private/client/ClientEntryHook.py`
 When you're finished, You should have a file like this: ::
 
         # Added imports, step 1
-        from peek_core_device._private.storage.DeclarativeBase import loadStorageTuples
+        from peek_plugin_tutorial._private.storage.DeclarativeBase import loadStorageTuples
 
         ...
 

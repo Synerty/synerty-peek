@@ -28,23 +28,23 @@ Commands: ::
 Add File :file:`WorkerEntryHook.py`
 -----------------------------------
 
-Create the file :file:`peek_plugin_tutorial/_private/worker/PluginWorkerEntryHook.py`
+Create the file :file:`peek_plugin_tutorial/_private/worker/EntryHook.py`
 and populate it with the following contents.
 
 ::
 
         import logging
-        from peek_plugin_base.worker.PluginWorkerEntryHookABC import PluginWorkerEntryHookABC
+        from peek_plugin_base.worker.WorkerEntryHookABC import WorkerEntryHookABC
         from peek_plugin_tutorial._private.worker.tasks import RandomNumber
 
         logger = logging.getLogger(__name__)
 
 
-        class PluginWorkerEntryHook(PluginWorkerEntryHookABC):
+        class WorkerEntryHook(PluginWorkerEntryHookABC):
             def __init__(self, *args, **kwargs):
                 """" Constructor """
                 # Call the base classes constructor
-                PluginWorkerEntryHookABC.__init__(self, *args, **kwargs)
+                WorkerEntryHookABC.__init__(self, *args, **kwargs)
 
                 #: Loaded Objects, This is a list of all objects created when we start
                 self._loadedObjects = []
@@ -102,7 +102,7 @@ Create an empty package file in the tasks directory,
 
 Commands: ::
 
-        mkdir peek_plugin_tutorial/_private/worker/tasks
+        mkdir -p peek_plugin_tutorial/_private/worker/tasks
         touch peek_plugin_tutorial/_private/worker/tasks/__init__.py
 
 
@@ -125,7 +125,7 @@ for the given positive number
 
         @DeferrableTask
         @celeryApp.task(bind=True)
-        def pickRandomNumber(self, item) -> int:
+        def pickRandomNumber(self, item: int) -> int:
             """
             Returns random integer between 1 to 1000
             """
@@ -229,6 +229,8 @@ You can now run the peek worker, you should see your plugin load. ::
 Push work from server to worker service
 ---------------------------------------
 
+.. note:: Ensure :file:`rabbitmq` and :file:`redis` services are running
+
 Create :file:`peek_plugin_tutorial/_private/server/controller/RandomNumberWorkerController.py` with below content:
 
 ::
@@ -245,9 +247,8 @@ Create :file:`peek_plugin_tutorial/_private/server/controller/RandomNumberWorker
 
 
         class RandomNumberWorkerController:
-
-            """ Random Number Generator
-
+            """
+                Random Number Generator
                 Generates random number on worker periodically
             """
 
@@ -274,13 +275,11 @@ Create :file:`peek_plugin_tutorial/_private/server/controller/RandomNumberWorker
             def shutdown(self):
                 self.stop()
 
-            @inlineCallbacks
             def _poll(self):
                 # Send the tasks to the peek worker
                 start = randint(1, 1000)
                 d = self._sendToWorker(start)
                 d.addErrback(vortexLogFailure, logger)
-                yield
 
             @inlineCallbacks
             def _sendToWorker(self, item):
@@ -294,7 +293,6 @@ Create :file:`peek_plugin_tutorial/_private/server/controller/RandomNumberWorker
                     logger.debug("Time Taken = %s, Random Number: %s" % (datetime.now(pytz.utc) - startTime, randomNumber))
                 except Exception as e:
                     logger.debug(" RandomNumber task failed : %s", str(e))
-                    return
 
 Edit :file:`peek_plugin_tutorial/_private/server/ServerEntryHook.py`:
 
@@ -302,6 +300,10 @@ Edit :file:`peek_plugin_tutorial/_private/server/ServerEntryHook.py`:
 
         from peek_plugin_base.server.PluginServerWorkerEntryHookABC import PluginServerWorkerEntryHookABC
         from peek_plugin_tutorial._private.server.controller.RandomNumberWorkerController import RandomNumberWorkerController
+
+#. Add :file:`PluginServerStorageEntryHookABC` to list of inherited class: ::
+
+        class ServerEntryHook(PluginServerWorkerEntryHookABC, ...):
 
 
 #. Add this line just before the :code:`logger.debug("Started")` line at the end of the :code:`start()` method: ::

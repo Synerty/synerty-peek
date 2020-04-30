@@ -281,22 +281,21 @@ Edit the file :file:`plugin_package.json` to include reference to **plugin-modul
 
         {
             "admin": {
-                "showHomeLink": true,
-                "appDir": "_private/admin-app",
-                "appModule": "tutorial.module#TutorialModule",
+                ...
                 "moduleDir": "plugin-module"
             },
             "mobile": {
-                "showHomeLink": true,
-                "appDir": "_private/mobile-app",
-                "appModule": "tutorial.module#TutorialModule",
-                "assetDir": "_private/mobile-assets",
-                "icon": "/assets/peek_plugin_tutorial/icon.png",
+                ...
                 "moduleDir": "plugin-module"
-            }
+            },
+            "desktop": {
+                ...
+                "moduleDir": "plugin-module"
+            },
             ...
 
         }
+
 
 Add File :file:`TutorialTuple.ts`
 `````````````````````````````````

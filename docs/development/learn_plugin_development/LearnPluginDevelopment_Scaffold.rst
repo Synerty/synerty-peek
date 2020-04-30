@@ -105,7 +105,7 @@ Create the :file:`peek_plugin_tutorial` Package. Commands: ::
 
 Add the version string to the :file:`peek_plugin_tutorial` package. ::
 
-        echo "__version__ = '0.0.1'" > peek_plugin_tutorial/__init__.py
+        echo "__version__ = '0.0.0'" > peek_plugin_tutorial/__init__.py
 
 
 .. note:: This version is automatically updated by the :command:`publish.sh` script.
@@ -202,6 +202,19 @@ Modify the options near the top. We've modified the following:
         # Leave blank not to publish
         # Or select one of the index servers defined in ~/.pypirc
         PYPI_PUBLISH=""
+
+----
+
+Create :file:`publish.settings.sh` with the following content: ::
+
+        #!/usr/bin/env bash
+
+        PY_PACKAGE="tutorial"
+        PYPI_PUBLISH="0"
+
+        VER_FILES_TO_COMMIT=""
+
+        VER_FILES=""
 
 ----
 
