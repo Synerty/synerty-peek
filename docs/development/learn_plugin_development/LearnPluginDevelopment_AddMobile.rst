@@ -6,7 +6,7 @@ Add Mobile Service
 
 The mobile service is for the users. It's the interface designed for mobile devices.
 
-The Mobile service is known as the "frontend" in web terminology.
+The Mobile service is part of the "frontend" in web terminology.
 The backend for the Mobile service is the Client service.
 
 The Peek Mobile Service has two builds, a
@@ -26,7 +26,7 @@ Mobile File Structure
 Add Directory :file:`mobile-app`
 ````````````````````````````````
 
-The :file:`mobile-app` directory will contain the plugins the mobile Angular application.
+The :file:`mobile-app` directory will contain the plugins the mobile Angular application requires.
 
 Angular "Lazy Loads" this part of the plugin, meaning it only loads it when the user
 navigates to the page, and unloads it when it's finished.
@@ -164,7 +164,7 @@ and populate it with the following contents.
         import {Routes} from "@angular/router";
 
         // Import a small abstraction library to switch between nativescript and web
-        import {PeekModuleFactory} from "@synerty/peek-mobile-util/index.web";
+        import {PeekModuleFactory} from "@synerty/peek-util-web";
 
         // Import the default route component
         import {TutorialComponent} from "./tutorial.component";
@@ -210,13 +210,13 @@ tutorial plugins app icon.
 
 ----
 
-Create directory :file:`peek_plugin_tutorial/_private/mobile-assets` and :file:`peek_plugin_tutorial/_private/desktop-assets`
+Create directory :file:`peek_plugin_tutorial/_private/mobile-assets`
 
 ----
 
 Download this plugin app icon
 `TutorialExampleIcon.png <http://synerty-peek.readthedocs.io/en/latest/_images/TutorialExampleIcon.png>`_
-to :file:`peek_plugin_tutorial/_private/mobile-assets/icon.png` and :file `peek_plugin_tutorial/_private/desktop-assets/icon.png`
+to :file:`peek_plugin_tutorial/_private/mobile-assets/icon.png`
 
 
 Edit File :file:`plugin_package.json`
@@ -225,14 +225,13 @@ Edit File :file:`plugin_package.json`
 Finally, Edit the file :file:`peek_plugin_tutorial/plugin_package.json` to tell the
 platform that we want to use the mobile service:
 
-#.  Add **"mobile"** and **desktop** to the requiresServices section so it looks like ::
+#.  Add **"mobile"** to the requiresServices section so it looks like ::
 
         "requiresServices": [
-            "mobile",
-            "desktop"
+            "mobile"
         ]
 
-#.  Add the **mobile** and **desktop** section after **requiresServices** section: ::
+#.  Add the **mobile** section after **requiresServices** section: ::
 
         "mobile": {
             "showHomeLink": true,
@@ -240,13 +239,6 @@ platform that we want to use the mobile service:
             "appModule": "tutorial.module#TutorialModule",
             "assetDir": "_private/mobile-assets",
             "icon": "/assets/peek_plugin_tutorial/icon.png"
-        },
-         "desktop": {
-            "appDir": "_private/desktop-app",
-            "appModule": "tutorial.module#TutorialModule",
-            "assetDir": "_private/desktop-assets",
-            "icon": "/assets/peek_plugin_tutorial/icon.png",
-            "showHomeLink": true,
         }
 
 
@@ -258,8 +250,7 @@ Here is an example ::
             ...
             "requiresServices": [
                 ...
-                "mobile",
-                "desktop"
+                "mobile"
             ],
             ...
             "mobile": {
@@ -268,13 +259,6 @@ Here is an example ::
                 "appModule": "tutorial.module#TutorialModule",
                 "assetDir": "_private/mobile-assets",
                 "icon": "/assets/peek_plugin_tutorial/icon.png"
-            },
-             "desktop": {
-                "appDir": "_private/desktop-app",
-                "appModule": "tutorial.module#TutorialModule",
-                "assetDir": "_private/desktop-assets",
-                "icon": "/assets/peek_plugin_tutorial/icon.png",
-                "showHomeLink": true,
             }
         }
 
@@ -389,7 +373,7 @@ Run the peek client, The NativeScript will be offline with out it. ::
 
         peek@peek:~$ run_peek_client
         ...
-        INFO txhttputil.site.SiteUtil:Peek Client is alive and listening on http://10.211.55.14:8010
+        INFO txhttputil.site.SiteUtil:Peek Field Site is alive and listening on http://0.0.0.0:8000
         ...
 
 tns run android
