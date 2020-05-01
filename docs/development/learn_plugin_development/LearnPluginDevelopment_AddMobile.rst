@@ -6,7 +6,7 @@ Add Mobile Service
 
 The mobile service is for the users. It's the interface designed for mobile devices.
 
-The Mobile service is part of the "frontend" in web terminology.
+The Mobile service is known as the "frontend" in web terminology.
 The backend for the Mobile service is the Client service.
 
 The Peek Mobile Service has two builds, a
@@ -54,7 +54,7 @@ For more information about Angular directives, See:
 
 ----
 
-Create the file 
+Create the file
 :file:`peek_plugin_tutorial/_private/mobile-app/tutorial.component.mweb.html`
 and populate it with the following contents.
 

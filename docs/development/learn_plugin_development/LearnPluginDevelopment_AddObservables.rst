@@ -713,6 +713,24 @@ Edit :file:`peek_plugin_tutorial/_private/mobile-app/tutorial.module.ts`:
                 StringIntComponent
                 ], ...
 
+#.  Add the following to the :code:`Routes` section: ::
+
+            {
+                    path: 'stringint',
+                    component: StringIntComponent
+            }
+
+    so it looks like below: ::
+
+            export const pluginRoutes: Routes = [
+                ...
+                {
+                    path: 'stringint',
+                    component: StringIntComponent
+                }
+                ...
+            ]
+
 ----
 
 At this point Mobile is all setup, we just need to add some navigation buttons.

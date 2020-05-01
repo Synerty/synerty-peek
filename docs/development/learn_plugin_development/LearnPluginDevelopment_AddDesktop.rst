@@ -4,12 +4,7 @@
 Add Desktop Service
 ===================
 
-The desktop service is similar to mobile service. It's the interface designed for desktop web browsers.
-
-The Desktop service is also part of the "frontend" in web terminology.
-The backend for the Desktop service is the Client service.
-
-The Peek Desktop Service has a `web build <https://angular.io/docs/ts/latest/>`_.
+The desktop service is similar to mobile service. This document is a stripped version of :ref:`learn_plugin_development_add_mobile`.
 
 Desktop File Structure
 ----------------------
@@ -17,16 +12,15 @@ Desktop File Structure
 Add Directory :file:`desktop-app`
 `````````````````````````````````
 
-The :file:`desktop-app` directory will contain the plugins the desktop Angular application requires.
+Commands: ::
 
-Create directory :file:`peek_plugin_tutorial/_private/desktop-app`
+        mkdir -p peek_plugin_tutorial/_private/desktop-app
+
 
 Add File :file:`tutorial.component.dweb.html`
 `````````````````````````````````````````````
 
-The :file:`tutorial.component.dweb.html` file is the web app HTML **view** for
-the Angular component :file:`tutorial.component.ts`. Create the file
-:file:`peek_plugin_tutorial/_private/desktop-app/tutorial.component.dweb.html` and populate it with the following contents:
+Create the :file:`peek_plugin_tutorial/_private/desktop-app/tutorial.component.dweb.html` with the following contents:
 
 ::
 
@@ -39,13 +33,7 @@ the Angular component :file:`tutorial.component.ts`. Create the file
 Add File :file:`tutorial.component.ts`
 ``````````````````````````````````````
 
-The :file:`tutorial.component.ts` is the Angular Component for the desktop page.
-It's loaded by the default route defined in :file:`tutorial.module.ts`.
-
-----
-
-Create the file :file:`peek_plugin_tutorial/_private/desktop-app/tutorial.component.ts`
-and populate it with the following contents.
+Create the file :file:`peek_plugin_tutorial/_private/desktop-app/tutorial.component.ts` and populate it with the following contents.
 
 ::
 

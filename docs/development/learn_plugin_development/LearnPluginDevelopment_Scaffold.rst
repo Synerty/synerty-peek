@@ -70,6 +70,23 @@ Create :file:`.gitignore`, and populate it with the following ::
         docs/api_autoapi
 
 
+Add :file:`.editorconfig'
+`````````````````````````
+
+Create the file :file:`.editorconfig`, with the following content: ::
+
+        # https://editorconfig.org/
+
+        root = true
+
+        [*]
+        indent_style = space
+        indent_size = 4
+        insert_final_newline = true
+        trim_trailing_whitespace = true
+        end_of_line = lf
+        charset = utf-8
+
 
 Add Package :file:`peek_plugin_tutorial`
 ````````````````````````````````````````
@@ -209,7 +226,7 @@ Create :file:`publish.settings.sh` with the following content: ::
 
         #!/usr/bin/env bash
 
-        PY_PACKAGE="tutorial"
+        PY_PACKAGE="peek_plugin_tutorial"
         PYPI_PUBLISH="0"
 
         VER_FILES_TO_COMMIT=""
@@ -323,6 +340,7 @@ contents: ::
         tutorialTuplePrefix = "peek_plugin_tutorial."
         tutorialObservableName = "peek_plugin_tutorial"
         tutorialActionProcessorName = "peek_plugin_tutorial"
+        tutorialTupleOfflineServiceName = "peek_plugin_tutorial"
 
 
 Add Directory :file:`plugin-module/_private`

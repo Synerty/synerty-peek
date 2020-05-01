@@ -264,6 +264,7 @@ Replace the :code:`"userId"` with your user id.
 ::
 
         import logging
+        import pytz
         from datetime import datetime
 
         from twisted.internet import reactor
@@ -290,7 +291,7 @@ Replace the :code:`"userId"` with your user id.
                 # First, create the task
                 newTask = NewTask(
                     pluginName=tutorialPluginName,
-                    uniqueId=str(datetime.utcnow()),
+                    uniqueId=str(datetime.now(pytz.utc)),
                     userId="userId",  # <----- Set to your user id
                     title="A task from tutorial plugin",
                     description="Tutorials task description",

@@ -411,7 +411,7 @@ and populate it with the following contents.
             __tablename__ = 'StringIntTuple'
 
             id = Column(Integer, primary_key=True, autoincrement=True)
-            string1 = Column(String(50))
+            string1 = Column(String())
             int1 = Column(Integer)
 
 
