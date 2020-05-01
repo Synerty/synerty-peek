@@ -349,9 +349,10 @@ and populate it with the following contents.
                     )
 
                     # Create the vortex message
-                    return Payload(filt, tuples=tasks).toVortexMsg()
+                    return Payload(filt, tuples=tasks).makePayloadEnvelope().toVortexMsg()
 
                 finally:
+                    session.close()
 
 
 Edit File :file:`TupleDataObservable.py`
@@ -443,7 +444,7 @@ TO ::
         def makeStringIntTableHandler(tupleObservable, dbSessionCreator):
 
 
-In the :code:`` method, insert this line just before the return :code:`return handler` ::
+In the :code:`makeStringIntTableHandler` method, insert this line just before the :code:`return handler` ::
 
         handler.addExtension(StringIntTuple, __ExtUpdateObservable(tupleObservable))
 
@@ -711,6 +712,24 @@ Edit :file:`peek_plugin_tutorial/_private/mobile-app/tutorial.module.ts`:
             declarations: [...,
                 StringIntComponent
                 ], ...
+
+#.  Add the following to the :code:`Routes` section: ::
+
+            {
+                    path: 'stringint',
+                    component: StringIntComponent
+            }
+
+    so it looks like below: ::
+
+            export const pluginRoutes: Routes = [
+                ...
+                {
+                    path: 'stringint',
+                    component: StringIntComponent
+                }
+                ...
+            ]
 
 ----
 

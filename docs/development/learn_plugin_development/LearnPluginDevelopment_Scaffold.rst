@@ -70,6 +70,23 @@ Create :file:`.gitignore`, and populate it with the following ::
         docs/api_autoapi
 
 
+Add :file:`.editorconfig'
+`````````````````````````
+
+Create the file :file:`.editorconfig`, with the following content: ::
+
+        # https://editorconfig.org/
+
+        root = true
+
+        [*]
+        indent_style = space
+        indent_size = 4
+        insert_final_newline = true
+        trim_trailing_whitespace = true
+        end_of_line = lf
+        charset = utf-8
+
 
 Add Package :file:`peek_plugin_tutorial`
 ````````````````````````````````````````
@@ -105,7 +122,7 @@ Create the :file:`peek_plugin_tutorial` Package. Commands: ::
 
 Add the version string to the :file:`peek_plugin_tutorial` package. ::
 
-        echo "__version__ = '0.0.1'" > peek_plugin_tutorial/__init__.py
+        echo "__version__ = '0.0.0'" > peek_plugin_tutorial/__init__.py
 
 
 .. note:: This version is automatically updated by the :command:`publish.sh` script.
@@ -163,7 +180,7 @@ values:
         author_email = 'contact@synerty.com'
         py_package_name = "peek_plugin_tutorial"
         pip_package_name = py_package_name.replace('_', '-')
-        package_version = '0.0.1'
+        package_version = '0.0.0'
         description = 'Peek Plugin Tutorial - My first enhancement.'
 
         download_url = 'https://bitbucket.org/synerty/%s/get/%s.zip'
@@ -202,6 +219,19 @@ Modify the options near the top. We've modified the following:
         # Leave blank not to publish
         # Or select one of the index servers defined in ~/.pypirc
         PYPI_PUBLISH=""
+
+----
+
+Create :file:`publish.settings.sh` with the following content: ::
+
+        #!/usr/bin/env bash
+
+        PY_PACKAGE="peek_plugin_tutorial"
+        PYPI_PUBLISH="0"
+
+        VER_FILES_TO_COMMIT=""
+
+        VER_FILES=""
 
 ----
 
@@ -310,6 +340,7 @@ contents: ::
         tutorialTuplePrefix = "peek_plugin_tutorial."
         tutorialObservableName = "peek_plugin_tutorial"
         tutorialActionProcessorName = "peek_plugin_tutorial"
+        tutorialTupleOfflineServiceName = "peek_plugin_tutorial"
 
 
 Add Directory :file:`plugin-module/_private`

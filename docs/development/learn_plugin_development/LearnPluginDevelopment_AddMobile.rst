@@ -26,7 +26,7 @@ Mobile File Structure
 Add Directory :file:`mobile-app`
 ````````````````````````````````
 
-The :file:`mobile-app` directory will contain the plugins the mobile Angular application.
+The :file:`mobile-app` directory will contain the plugins the mobile Angular application requires.
 
 Angular "Lazy Loads" this part of the plugin, meaning it only loads it when the user
 navigates to the page, and unloads it when it's finished.
@@ -54,7 +54,7 @@ For more information about Angular directives, See:
 
 ----
 
-Create the file 
+Create the file
 :file:`peek_plugin_tutorial/_private/mobile-app/tutorial.component.mweb.html`
 and populate it with the following contents.
 
@@ -164,7 +164,7 @@ and populate it with the following contents.
         import {Routes} from "@angular/router";
 
         // Import a small abstraction library to switch between nativescript and web
-        import {PeekModuleFactory} from "@synerty/peek-mobile-util/index.web";
+        import {PeekModuleFactory} from "@synerty/peek-util-web";
 
         // Import the default route component
         import {TutorialComponent} from "./tutorial.component";
@@ -241,6 +241,7 @@ platform that we want to use the mobile service:
             "icon": "/assets/peek_plugin_tutorial/icon.png"
         }
 
+
 #.  Ensure your JSON is still valid (Your IDE may help here)
 
 Here is an example ::
@@ -255,7 +256,9 @@ Here is an example ::
             "mobile": {
                 "showHomeLink": true,
                 "appDir": "_private/mobile-app",
-                "appModule": "tutorial.module#TutorialModule"
+                "appModule": "tutorial.module#TutorialModule",
+                "assetDir": "_private/mobile-assets",
+                "icon": "/assets/peek_plugin_tutorial/icon.png"
             }
         }
 
@@ -370,7 +373,7 @@ Run the peek client, The NativeScript will be offline with out it. ::
 
         peek@peek:~$ run_peek_client
         ...
-        INFO txhttputil.site.SiteUtil:Peek Client is alive and listening on http://10.211.55.14:8010
+        INFO txhttputil.site.SiteUtil:Peek Field Site is alive and listening on http://0.0.0.0:8000
         ...
 
 tns run android

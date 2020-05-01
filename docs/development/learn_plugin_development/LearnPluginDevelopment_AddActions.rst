@@ -135,7 +135,7 @@ The :file:`AddIntValueActionTuple.py` defines a python action tuple.
 
 ----
 
-Create the file 
+Create the file
 :file:`peek_plugin_tutorial/_private/tuples/AddIntValueActionTuple.py`
 and populate it with the following contents.
 
@@ -146,11 +146,11 @@ and populate it with the following contents.
 
         from peek_plugin_tutorial._private.PluginNames import tutorialTuplePrefix
 
-        
+
         @addTupleType
         class AddIntValueActionTuple(TupleActionABC):
             __tupleType__ = tutorialTuplePrefix + "AddIntValueActionTuple"
-        
+
             stringIntId = TupleField()
             offset = TupleField()
 
@@ -173,13 +173,13 @@ with contents ::
 
         import {addTupleType, Tuple, TupleActionABC} from "@synerty/vortexjs";
         import {tutorialTuplePrefix} from "../PluginNames";
-        
+
         @addTupleType
         export class StringCapToggleActionTuple extends TupleActionABC {
-            public static readonly tupleName = tutorialTuplePrefix + "StringCapToggleActionTuple";
-        
+            static readonly tupleName = tutorialTuplePrefix + "StringCapToggleActionTuple";
+
             stringIntId: number;
-        
+
             constructor() {
                 super(StringCapToggleActionTuple.tupleName)
             }
@@ -201,14 +201,14 @@ with contents ::
 
         import {addTupleType, Tuple, TupleActionABC} from "@synerty/vortexjs";
         import {tutorialTuplePrefix} from "../PluginNames";
-        
+
         @addTupleType
         export class AddIntValueActionTuple extends TupleActionABC {
             public static readonly tupleName = tutorialTuplePrefix + "AddIntValueActionTuple";
-        
+
             stringIntId: number;
             offset: number;
-        
+
             constructor() {
                 super(AddIntValueActionTuple.tupleName)
             }
@@ -270,7 +270,7 @@ and populate it with the following contents.
         import logging
 
         from twisted.internet.defer import Deferred
-        from txhttputil.util.DeferUtil import deferToThreadWrap
+        from vortex.DeferUtil import deferToThreadWrapWithLogger
 
         from vortex.TupleSelector import TupleSelector
         from vortex.TupleAction import TupleActionABC
@@ -302,7 +302,7 @@ and populate it with the following contents.
 
                 raise NotImplementedError(tupleAction.tupleName())
 
-            @deferToThreadWrap
+            @deferToThreadWrapWithLogger(logger)
             def _processCapToggleString(self, action: StringCapToggleActionTuple):
                 try:
                     # Perform update using SQLALchemy
@@ -334,7 +334,7 @@ and populate it with the following contents.
                     # Always close the session after we create it
                     session.close()
 
-            @deferToThreadWrap
+            @deferToThreadWrapWithLogger(logger)
             def _processAddIntValue(self, action: AddIntValueActionTuple):
                 try:
                     # Perform update using SQLALchemy

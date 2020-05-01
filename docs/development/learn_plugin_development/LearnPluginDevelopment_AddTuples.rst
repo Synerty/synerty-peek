@@ -273,6 +273,30 @@ with command ::
 
 .. _learn_plugin_development_add_tuples_tutorial_tuple_ts:
 
+Edit File :file:`plugin_package.json`
+`````````````````````````````````````
+
+Edit the file :file:`plugin_package.json` to include reference to **plugin-module** inside the block **mobile** and
+**admin**. Your file should look similar to the below: ::
+
+        {
+            "admin": {
+                ...
+                "moduleDir": "plugin-module"
+            },
+            "mobile": {
+                ...
+                "moduleDir": "plugin-module"
+            },
+            "desktop": {
+                ...
+                "moduleDir": "plugin-module"
+            },
+            ...
+
+        }
+
+
 Add File :file:`TutorialTuple.ts`
 `````````````````````````````````
 

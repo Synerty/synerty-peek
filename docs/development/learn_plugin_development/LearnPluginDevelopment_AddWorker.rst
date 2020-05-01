@@ -4,7 +4,11 @@
 Add Worker Service
 ==================
 
-This document is a stripped version of :ref:`learn_plugin_development_add_server`.
+Outline
+-------
+
+In this document, we setup the Worker service and submit a job from the Server service. The Server service will send a random
+number to worker and, the worker inverts the number and sends it back.
 
 Add Package :file:`_private/worker`
 -----------------------------------
@@ -12,7 +16,7 @@ Add Package :file:`_private/worker`
 
 Create directory :file:`peek_plugin_tutorial/_private/worker`
 
-Create an empty package file in the worker directory,
+Create an empty package file in the worker directory:
 :file:`peek_plugin_tutorial/_private/worker/__init__.py`
 
 Commands: ::
@@ -24,14 +28,14 @@ Commands: ::
 Add File :file:`WorkerEntryHook.py`
 -----------------------------------
 
-Create the file :file:`peek_plugin_tutorial/_private/worker/WorkerEntryHook.py`
+Create the file :file:`peek_plugin_tutorial/_private/worker/EntryHook.py`
 and populate it with the following contents.
 
 ::
 
         import logging
-
-        from peek_plugin_base.worker.PluginWorkerEntryHookABC import PluginWorkerEntryHookABC
+        from peek_plugin_base.worker.WorkerEntryHookABC import WorkerEntryHookABC
+        from peek_plugin_tutorial._private.worker.tasks import RandomNumber
 
         logger = logging.getLogger(__name__)
 
@@ -40,7 +44,7 @@ and populate it with the following contents.
             def __init__(self, *args, **kwargs):
                 """" Constructor """
                 # Call the base classes constructor
-                PluginWorkerEntryHookABC.__init__(self, *args, **kwargs)
+                WorkerEntryHookABC.__init__(self, *args, **kwargs)
 
                 #: Loaded Objects, This is a list of all objects created when we start
                 self._loadedObjects = []
@@ -83,6 +87,50 @@ and populate it with the following contents.
 
                 """
                 logger.debug("Unloaded")
+
+            @property
+            def celeryAppIncludes(self):
+                return [RandomNumber.__name__]
+
+Add Package :file:`_private/worker/tasks`
+-----------------------------------------
+
+Create directory :file:`_private/worker/tasks`
+
+Create an empty package file in the tasks directory,
+:file:`peek_plugin_tutorial/_private/worker/tasks/__init__.py`
+
+Commands: ::
+
+        mkdir -p peek_plugin_tutorial/_private/worker/tasks
+        touch peek_plugin_tutorial/_private/worker/tasks/__init__.py
+
+
+Add File :file:`RandomNumber.py`
+--------------------------------
+
+Create the file :file:`peek_plugin_tutorial/_private/worker/tasks/RandomNumber.py`
+and populate it with the following contents. This worker returns the negative number
+for the given positive number
+
+::
+
+        import logging
+        from random import randint
+        from txcelery.defer import DeferrableTask
+        from peek_plugin_base.worker.CeleryApp import celeryApp
+
+        logger = logging.getLogger(__name__)
+
+
+        @DeferrableTask
+        @celeryApp.task(bind=True)
+        def pickRandomNumber(self, item: int) -> int:
+            """
+            Returns random integer between 1 to 1000
+            """
+            return int(item) * -1
+
 
 
 Edit :file:`peek_plugin_tutorial/__init__.py`
@@ -176,3 +224,100 @@ You can now run the peek worker, you should see your plugin load. ::
         DEBUG peek_plugin_tutorial._private.worker.WorkerEntryHook:Started
         ...
 
+
+
+Push work from server to worker service
+---------------------------------------
+
+.. note:: Ensure :file:`rabbitmq` and :file:`redis` services are running
+
+Create :file:`peek_plugin_tutorial/_private/server/controller/RandomNumberWorkerController.py` with below content:
+
+::
+
+        import logging
+        from twisted.internet import task, reactor, defer
+        from twisted.internet.defer import inlineCallbacks
+        from vortex.DeferUtil import deferToThreadWrapWithLogger, vortexLogFailure
+        from datetime import datetime
+        from random import randint
+        import pytz
+
+        logger = logging.getLogger(__name__)
+
+
+        class RandomNumberWorkerController:
+            """
+                Random Number Generator
+                Generates random number on worker periodically
+            """
+
+            PERIOD = 5
+            TASK_TIMEOUT = 60.0
+
+            def __init__(self):
+                self._pollLoopingCall = task.LoopingCall(self._poll)
+
+            def start(self):
+                d = self._pollLoopingCall.start(self.PERIOD, now=False)
+                d.addCallbacks(self._timerCallback, self._timerErrback)
+
+            def _timerErrback(self, failure):
+                vortexLogFailure(failure, logger)
+
+            def _timerCallback(self, _):
+                logger.info("Time executed successfully")
+
+            def stop(self):
+                if self._pollLoopingCall.running:
+                    self._pollLoopingCall.stop()
+
+            def shutdown(self):
+                self.stop()
+
+            @inlineCallbacks
+            def _poll(self):
+                # Send the tasks to the peek worker
+                start = randint(1, 1000)
+                try:
+                    result = yield self._sendToWorker(start)
+                catch Exception as e:
+                    logger.exception(e)
+
+            @inlineCallbacks
+            def _sendToWorker(self, item):
+                from peek_plugin_tutorial._private.worker.tasks.RandomNumber import pickRandomNumber
+                startTime = datetime.now(pytz.utc)
+
+                try:
+                    d = pickRandomNumber.delay(item)
+                    d.addTimeout(self.TASK_TIMEOUT, reactor)
+                    randomNumber = yield d
+                    logger.debug("Time Taken = %s, Random Number: %s" % (datetime.now(pytz.utc) - startTime, randomNumber))
+                except Exception as e:
+                    logger.debug(" RandomNumber task failed : %s", str(e))
+
+Edit :file:`peek_plugin_tutorial/_private/server/ServerEntryHook.py`:
+
+#. Add the following imports at the top of the file with the other imports: ::
+
+        from peek_plugin_base.server.PluginServerWorkerEntryHookABC import PluginServerWorkerEntryHookABC
+        from peek_plugin_tutorial._private.server.controller.RandomNumberWorkerController import RandomNumberWorkerController
+
+#. Add :file:`PluginServerStorageEntryHookABC` to list of inherited class: ::
+
+        class ServerEntryHook(PluginServerWorkerEntryHookABC, ...):
+
+
+#. Add this line just before the :code:`logger.debug("Started")` line at the end of the :code:`start()` method: ::
+
+        randomNumberController = RandomNumberWorkerController()
+        self._loadedObjects.append(randomNumberController)
+        randomNumberController.start()
+
+Run :file:`run_peek_server`
+---------------------------
+
+You can now run the peek server, you should see output like below, showing the :
+
+.. image:: PeekWorkerOutput.png

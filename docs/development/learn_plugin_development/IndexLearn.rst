@@ -18,6 +18,7 @@ Learn Plugin Development
     LearnPluginDevelopment_AddStorage
     LearnPluginDevelopment_AddAdmin
     LearnPluginDevelopment_AddMobile
+    LearnPluginDevelopment_AddDesktop
     LearnPluginDevelopment_AddTuples
     LearnPluginDevelopment_AddTupleLoader
     LearnPluginDevelopment_AddOfflineStorage
