@@ -284,7 +284,7 @@ contents: ::
         "plugin": {
             "title": "Tutorial Plugin",
             "packageName": "peek_plugin_tutorial",
-            "version": "0.0.11",
+            "version": "0.0.0",
             "buildNumber": "#PLUGIN_BUILD#",
             "buildDate": "#BUILD_DATE#",
             "creator": "Synerty Pty Ltd",

@@ -50,9 +50,6 @@ function updateFileVers {
     for file in ${VER_FILES}
     do
         if [ -f ${file} ]; then
-            sed -i "s/^__version__.*/__version__ = \'${VER}\'/g" ${file}
-            sed -i "s/###PEEKVER###/${VER}/g" ${file}
-            sed -i "s/111.111.111/${VER}/g" ${file}
             sed -i "s/0.0.0/${VER}/g" ${file}
         fi
     done
@@ -95,14 +92,6 @@ if [ $HAS_GIT ]; then
       echo "Pushing ${PIP_PACKAGE} to BitBucket"
       git push
       git push --tags
-    fi
-
-    if [ ${GITHUB_PUSH} == "1" -a ${DEVBUILD} -eq 0 ]
-    then
-        echo "Pushing ${PIP_PACKAGE} to GitHub"
-        git remote remove github 2> /dev/null || true
-        git remote add github git@github.com:Synerty/${PIP_PACKAGE}.git
-        git push -f github master || true
     fi
 
 fi
