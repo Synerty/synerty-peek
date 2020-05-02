@@ -9,12 +9,56 @@ variables:
     PEEK_RELEASE_LINUX: peek_release_${PKG_TAG_VERSION:-0.0.0+b${CI_PIPELINE_ID}}_linux
 
 stages:
-    - fetch
     - test
+    - fetch
     - publish
     - package
     - archive
     - upload
+
+
+
+unit_tests_linux:
+    allow_failure: false
+    image: nexus.synerty.com:5000/peek-linux
+    only:
+        - pushes
+        - web
+        - triggers
+        - merge_requests
+    script:
+        - export PIP_INDEX=http://${NEXUS_USER}:${NEXUS_PASSWORD}@${NEXUS_URL}/repository/pypi-all/pypi
+        - export PIP_INDEX_URL=http://${NEXUS_USER}:${NEXUS_PASSWORD}@${NEXUS_URL}/repository/pypi-all/simple
+        - export PIP_TRUSTED_HOST=${NEXUS_URL}
+        - pip install subunitreporter junitxml
+        - python setup.py develop
+        - trial --reporter=subunit `find vortex/ -name "*Test.py"` | subunit-1to2 | subunit2junitxml -o report.xml 1> /dev/null
+    stage: test
+    artifacts:
+        reports:
+            junit: report.xml
+    tags:
+        - linux
+
+
+sonar:
+    allow_failure: false
+    image: nexus.synerty.com:5000/peek-linux
+    only:
+        - pushes
+        - web
+        - triggers
+        - merge_requests
+    stage: test
+    script:
+        - echo "Run sonar-scanner"
+        - source $NVM_DIR/nvm.sh
+        - nvm use $LATEST_NODE_VERSION
+        - export NODE_PATH=`npm root -g`
+        - npm install -g typescript@3.7.5
+        - sonar-scanner
+    tags:
+        - linux
 
 git_clone_platform:
     allow_failure: false
@@ -49,55 +93,6 @@ git_clone_plugins:
     script:
         - ./scripts/gitlab/git_clone.sh plugins ${GIT_CLONE_PATH}/cloned_plugin_repos ${GIT_USER} ${GIT_PASSWORD} ${CI_COMMIT_REF_NAME} ${CI_PROJECT_NAMESPACE}
     stage: fetch
-    tags:
-        - linux
-
-unit_tests:
-    allow_failure: false
-    image: nexus.synerty.com:5000/peek-linux
-    only:
-        - web
-        - triggers
-        - merge_requests
-    script:
-        - echo "Run unit tests"
-    stage: test
-    tags:
-        - linux
-
-sonar_platform:
-    allow_failure: false
-    image: nexus.synerty.com:5000/peek-linux
-    only:
-        - web
-        - triggers
-        - merge_requests
-    stage: test
-    script:
-        - echo "Run sonar-scanner"
-        - source $NVM_DIR/nvm.sh
-        - nvm use $LATEST_NODE_VERSION
-        - export NODE_PATH=`npm root -g`
-        - npm install -g typescript@3.7.5
-        - ./scripts/gitlab/sonar_push.sh platform ${GIT_CLONE_PATH}/cloned_platform_repos
-    tags:
-        - linux
-
-sonar_plugins:
-    allow_failure: false
-    image: nexus.synerty.com:5000/peek-linux
-    only:
-        - web
-        - triggers
-        - merge_requests
-    stage: test
-    script:
-        - echo "Run sonar-scanner"
-        - source $NVM_DIR/nvm.sh
-        - nvm use $LATEST_NODE_VERSION
-        - export NODE_PATH=`npm root -g`
-        - npm install -g typescript@3.7.5
-        - ./scripts/gitlab/sonar_push.sh plugins ${GIT_CLONE_PATH}/cloned_plugin_repos
     tags:
         - linux
 
@@ -137,7 +132,6 @@ publish_plugins:
         - ./publish_plugins.sh ${PKG_TAG_VERSION:-0.0.0+b${CI_PIPELINE_ID}} ${GIT_CLONE_PATH}/cloned_plugin_repos
         - mkdir -p ${GIT_CLONE_PATH}/plugin_packages
         - mv ${GIT_CLONE_PATH}/cloned_plugin_repos/*/dist/*.tar.gz ${GIT_CLONE_PATH}/plugin_packages
-#        - rm -rf ${GIT_CLONE_PATH}/cloned_plugin_repos
     tags:
         - linux
 
