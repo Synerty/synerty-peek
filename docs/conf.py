@@ -22,7 +22,7 @@
 # sys.path.insert(0, os.path.abspath('.'))
 from sphinx.ext.apidoc import create_modules_toc_file, recurse_tree
 
-__project__ = 'Synerty Peek'
+__project__ = 'SynertyPeek'
 __copyright__ = '2016, Synerty'
 __author__ = 'Synerty'
 __version__ = '2.1.7'
@@ -159,7 +159,7 @@ man_pages = [
 #  dir menu entry, description, category)
 texinfo_documents = [
     (master_doc, __project__, __project__+' Documentation',
-     author, __project__, 'Pluggable platform for Python.',
+     author, __project__, 'Enterprise Extensible Python Platform.',
      'Miscellaneous'),
 ]
 

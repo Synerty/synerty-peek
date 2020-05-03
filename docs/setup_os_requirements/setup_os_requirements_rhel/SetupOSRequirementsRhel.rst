@@ -600,23 +600,9 @@ Set the PostGreSQL peek users password: ::
 
 ----
 
-Add "peek" user to "postgres" user group: ::
-
-    sudo chmod g+rx ~peek
-    sudo usermod -G peek postgres    
-
-----
-
 Create the database: ::
 
     createdb -O peek peek
-
-
-----
-
-Create extension ::
-
-    psql -h localhost -U peek peek -c "CREATE EXTENSION plpython3u"
 
 ----
 
@@ -624,6 +610,20 @@ Cleanup traces of the password: ::
 
     [ ! -e ~/.psql_history ] || rm ~/.psql_history
 
+
+Grant PostGreSQL Peek Permissions
+`````````````````````````````````
+The PostGreSQL server now runs parts of peeks python code inside
+the postgres/postmaster processes. To do this the postgres user
+needs access to peeks home directory where the peek software is
+installed.
+
+---
+
+Grant permissions ::
+
+    sudo chmod g+rx ~peek
+    sudo usermod -G peek postgres
 
 
 Compile and Install Python 3.6

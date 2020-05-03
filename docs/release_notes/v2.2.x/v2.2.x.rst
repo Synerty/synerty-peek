@@ -7,15 +7,40 @@ v2.2.x Release Notes
 Platform Changes
 ----------------
 
-Nil
+#.  PostGreSQL upgrade from v10 to v12
+
+#.  The peek platform now requires the posgresql-plpython3 package installed.
+    (See Migration Steps)
+
+#.  A new peek service has been added "peek-storage". This currently doesn't run as its
+    own process but it will in the future.
 
 Plugin Changes
 --------------
 
-Nil
+There has been no functional changes to Peek in this release.
+There are a lot of performance improvements in this release of peek, the following
+plugins have changed quite significantly.
+
+*   peek-plugin-diagram
+
+*   peek-core-search
+
+*   peek-core-docdb
+
+*   peek-plugin-graphdb
+
+*   peek-plugin-livedb
+
+*   peek-plugin-index-blueprint
 
 Deployment Changes
 ------------------
+
+Windows Deployment
+``````````````````
+
+.. note:: This release is not supported on Windows.
 
 Linux Deployment
 ````````````````
@@ -23,12 +48,16 @@ Linux Deployment
 - Upgrade Postgresql-10 to Postgresql-12
 - Installing PlPython3u Postgresql extension
 
+As this is the typical production install, there are migration notes below.
 
 macOS Deployment
 ````````````````
 
 - Upgrade Postgresql-10 to Postgresql-12
 - Installing PlPython3u Postgresql extension
+
+See the :ref:`setup_os_requirements_macos` documentation for the updates, the following
+sections need to be completed again. "Install PostGreSQL" and "Install Python 3.6".
 
 iOS Deployment
 ``````````````
@@ -46,52 +75,95 @@ Nil.
             a future release.
 
 Migration Steps
-----------------
+---------------
 
-Follow the migration steps to complete the upgrade of Postgresql-10 to Postgresql-12.
+Redhat 7.5+
+```````````
+
+Follow the migration steps to complete the upgrade of Postgresql-10 to Postgresql-12
+and install the plpython3 package.
 
 Stop Peek
-`````````
+"""""""""
 
 Start the migration tasks with Peek stopped.
 
-On Linux this can be done with ::
+----
 
+Stop peek with the following commands ::
 
-    # Stop Peek
     sudo true
     sudo systemctl stop peek_agent
     sudo systemctl stop peek_client
     sudo systemctl stop peek_worker
     sudo systemctl stop peek_server
 
-Upgrade to Postgresl-12
-```````````````````````
+Upgrade to PostGreSQL-12
+""""""""""""""""""""""""
 
-Install Postgresql 12 ::
+Install PostGreSQL 12 ::
 
-    sudo yum install -y https://download.postgresql.org/pub/repos/yum/reporpms/EL-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm
-    sudo yum install -y postgresql12
-    sudo yum install -y postgresql12-server
-    sudo yum install -y postgresql12-contrib
-    sudo yum install -y postgresql12-devel
-    sudo yum install -y postgresql12-plpython3
-    # Make sure the existing server software is still there
+    URL="https://download.postgresql.org/pub/repos/yum"
+    URL=$URL/reporpms/EL-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm"
+    sudo yum install -y $URL
+
+    PKG="postgresql12"
+    PKG="$PKG postgresql12-server"
+    PKG="$PKG postgresql12-contrib"
+    PKG="$PKG postgresql12-devel"
+    PKG="$PKG postgresql12-plpython3"
+    sudo yum install -y $PKG
+
+Alternatively, the RPMs can be downloaded from here and manually installed.
+
+`https://download.postgresql.org/pub/repos/yum/12/redhat/rhel-7.7-x86_64/postgresql12-contrib-12.2-2PGDG.rhel7.x86_64.rpm`_
+
+`https://download.postgresql.org/pub/repos/yum/12/redhat/rhel-7.7-x86_64/postgresql12-libs-12.2-2PGDG.rhel7.x86_64.rpm`_
+
+`https://download.postgresql.org/pub/repos/yum/12/redhat/rhel-7.7-x86_64/postgresql12-plpython3-12.2-2PGDG.rhel7.x86_64.rpm`_
+
+`https://download.postgresql.org/pub/repos/yum/12/redhat/rhel-7.7-x86_64/postgresql12-devel-12.2-2PGDG.rhel7.x86_64.rpm`_
+
+`https://download.postgresql.org/pub/repos/yum/12/redhat/rhel-7.7-x86_64/postgresql12-server-12.2-2PGDG.rhel7.x86_64.rpm`_
+
+`https://download.postgresql.org/pub/repos/yum/12/redhat/rhel-7.7-x86_64/postgresql12-12.2-2PGDG.rhel7.x86_64.rpm`_
+
+These can then be installed with ::
+
+    cd where_you_put_the_rpms
+    yum install -u *.rpm
+
+----
+
+The existing postgresql10 server needs to be present, if it's not reinstall it with the
+following command ::
+
     sudo yum install postgresql10-server
-    # Vaccum the DB so it's smaller
+
+----
+
+Vacuum the DB so it's smaller for the migration ::
+
     sudo systemctl start postgresql-10
+    sudo -u peek time echo "VACUUM FULL FREEZE;" | psql
+
+----
 
 Ensure the services are stopped ::
 
-    sudo -u peek time echo "VACUUM FULL FREEZE;" | psql
     sudo systemctl stop postgresql-10 || true
     sudo systemctl stop postgresql-12 || true
 
-Initialise the DB and perform migration ::
+----
+
+Initialise the new v12 cluster ::
 
     sudo /usr/pgsql-12/bin/postgresql-12-setup initdb
 
-    # Migrate old cluster
+----
+
+Migrate old cluster to the new cluster ::
+
     sudo su - postgres
     export PGDATAOLD=/var/lib/pgsql/10/data
     export PGDATANEW=/var/lib/pgsql/12/data
@@ -101,36 +173,60 @@ Initialise the DB and perform migration ::
     ${PGBINNEW}/pg_upgrade
     exit
 
-Grant permissions ::
+----
 
-    sudo chmod g+rx ~peek
-    sudo usermod -G peek postgres
-
-Perform cleanup ::
+Remove the v10 software ::
 
     sudo yum remove postgresql10*
-    # Ensure the pg_hba is setup
+
+----
+
+Ensure the pg_hba is setup ::
+
     F="/var/lib/pgsql/12/data/pg_hba.conf"
     if ! sudo grep -q 'peek' $F; then
        echo "host    peek    peek    127.0.0.1/32    trust" | sudo tee $F -a
        sudo sed -i 's,127.0.0.1/32            ident,127.0.0.1/32            md5,g' $F
     fi
 
+----
+
 Enable and start postgresql 12 ::
 
     sudo systemctl enable postgresql-12
     sudo systemctl start postgresql-12
-    sudo su - postgres
-    time /var/lib/pgsql/analyze_new_cluster.sh
-    time /var/lib/pgsql/delete_old_cluster.sh
-    exit
 
-Create extension ::
+----
 
-    psql -U peek peek -c "CREATE EXTENSION plpython3u"
+Analyse the new cluster, the migration doesn't bring across planning statistics. ::
+
+    sudo su - postgres -c time /var/lib/pgsql/analyze_new_cluster.sh
+
+----
+
+Delete the old cluster ::
+
+    sudo su - postgres -c time /var/lib/pgsql/delete_old_cluster.sh
+
+
+Grant PostGreSQL Peek Permissions
+"""""""""""""""""""""""""""""""""
+
+The PostGreSQL server now runs parts of peeks python code inside
+the postgres/postmaster processes. To do this the postgres user
+needs access to peeks home directory where the peek software is
+installed.
+
+----
+
+Grant permissions ::
+
+    sudo chmod g+rx ~peek
+    sudo usermod -G peek postgres
+
 
 Restart Peek
-````````````
+""""""""""""
 
 Restart all Peek services ::
 
@@ -146,15 +242,96 @@ v2.2.0 Issues Log
 Bug
 ```
 
-*    TODO
+*    [PEEK-541] - SequenceGeneratorLimitExceeded "DispCompilerQueue_id_seq" (2147483647)
 
-Improvement
-``````````
+*    [PEEK-550] - Peek LiveDB updates accumulate in memory and crashes
 
-*    TODO
+*    [PEEK-552] - Python base64.py bug causes memory leak
 
+*    [PEEK-555] - Peek server doesn't shutdown while celery is waiting for a task result
+
+*    [PEEK-556] - Queue processors chew a lot of CPU when it's paused for duplicates
+
+*    [PEEK-557] - Queue Compilers skip some queue items and never compile them
+
+*    [PEEK-560] - Chunked Indexes are slow because they use the ORM to query and send to client
+
+*    [PEEK-571] - Implement Agent Sequential Loading
+
+*    [PEEK-572] - Agent loaders fail to requeue failed items
+
+*    [PEEK-578] - PoF Event - Loader fails to load if DB isn't initialised
+
+*    [PEEK-588] - VortexPayloadProtocol has concurrent calls to _processData
+
+*    [PEEK-593] - ujson crashes peek when decoding doubles from realtime loader
+
+*    [PEEK-595] - Redis connection interruptions cause memory leak
+
+*    [PEEK-567] - VortexPY - Add PushProducer to VortexServerConnection
+
+*    [PEEK-568] - VortexPY - Add support for sendVortexMsg priority
 
 New Feature
 ```````````
 
-*    Nil
+*    [PEEK-179] - Storage Service
+
+Improvement
+```````````
+
+*    [PEEK-531] - Add config.json settings for max XXX per child settings
+
+*    [PEEK-377] - Add config.json settings for sending service logs to syslog
+
+*    [PEEK-581] - Add config.json settings for logs kept and log size
+
+*    [PEEK-527] - Add config.json settings for memory debug dumping
+
+*    [PEEK-554] - Add config.json settings for twisted celery max connection times
+
+*    [PEEK-553] - Upgrade Twisted to latest version (remove pin from <19.0.0)
+
+*    [PEEK-559] - Refactor queue compilers and client handlers to use
+     Abstract Chunked Index
+
+*    [PEEK-561] - Platform - Restart services without the unbuffered flag (performance)
+
+*    [PEEK-590] - Create peek_abstract_chunked_data_loader plugin
+
+*    [PEEK-574] - Refactor queue compiler client CacheController to inherit
+     Abstract Chunked Index
+
+*    [PEEK-575] - Update LiveDB Realtime value loader to use the plpython3u Tuple
+     load methods
+
+*    [PEEK-576] - Update the Abstract Chunk Index client loader to use plython3u
+     Tuple load methods
+
+*    [PEEK-577] - Update the Abstract Chunked Index Queue controllers to use
+     plpython3u to load their blocks.
+
+*    [PEEK-563] - Add plpython3u support to PostGreSQL to documentation
+
+*    [PEEK-583] - Peek Storage - Create runPyInPg method to run any function
+     in PostGreSQL
+
+*    [PEEK-586] - Add TcpVortex memory leak unit tests to VortexPY
+
+*    [PEEK-596] - User Plugin : Add option for accepting invalid LDAP SSL certificate
+
+*    [PEEK-599] - PoF Realtime Loader - Add settings for background polling in admin UI
+
+CI/CD Tasks
+```````````
+
+In this release, Synerty has rebuilt our CI/CD build servers to use gitlab and gitlab
+pipelines.
+
+*    [PEEK-538] - Make pipeline builds work with merge commits.
+
+*    [PEEK-539] - Tutorial Documentation and Example plugin: Peek Versioning
+     inconsistency
+
+*    [PEEK-566] - Branch builds of a peek-release now checkout all plugins on the same
+     branch.

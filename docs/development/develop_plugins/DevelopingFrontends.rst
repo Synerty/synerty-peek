@@ -249,11 +249,11 @@ Running the command :code:`tns device` will list active virtual devices and conn
 
         Connected devices & emulators
         Searching for devices...
-        ┌───┬─────────────────────┬──────────┬──────────────────────────────────────────┬──────────┬───────────┐
+
         │ # │ Device Name         │ Platform │ Device Identifier                        │ Type     │ Status    │
         │ 1 │ Synerty 008 iPad    │ iOS      │ a8f83ceb9ddd5d0df25d618a5a4c6d9bf7a6f5f9 │ Device   │ Connected │
         │ 2 │ iPad Pro (9.7 inch) │ iOS      │ 57AF4696-FB0A-4E42-94EB-37C38164AAB6     │ Emulator │ Connected │
-        └───┴─────────────────────┴──────────┴──────────────────────────────────────────┴──────────┴───────────┘
+
 
 
 tns development build command builds the project for the selected target platform and produces an application

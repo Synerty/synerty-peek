@@ -139,7 +139,7 @@ Bug
 *    [PEEK-531] - Add settings for max XXX per child settings
 
 Improvement
-``````````
+```````````
 
 *    [PEEK-532] - Update deploy_platform_xxxx.sh/ps1 to deploy_release_xxxx.sh/ps
      and include installing the plugins
