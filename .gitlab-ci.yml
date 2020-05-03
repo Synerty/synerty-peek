@@ -9,7 +9,7 @@ variables:
     PEEK_RELEASE_LINUX: peek_release_${PKG_TAG_VERSION:-0.0.0+b${CI_PIPELINE_ID}}_linux
 
 stages:
-    - test
+    - docs
     - fetch
     - publish
     - package
@@ -17,48 +17,49 @@ stages:
     - upload
 
 
-
-unit_tests_linux:
+build_html_docs:
+    artifacts:
+        paths:
+            - synerty-peek-html
+        expire_in: 1 day
     allow_failure: false
-    image: nexus.synerty.com:5000/peek-linux
+    image: nexus.synerty.com:5000/peek-linux-docs
     only:
         - pushes
-        - web
-        - triggers
         - merge_requests
     script:
         - export PIP_INDEX=http://${NEXUS_USER}:${NEXUS_PASSWORD}@${NEXUS_URL}/repository/pypi-all/pypi
         - export PIP_INDEX_URL=http://${NEXUS_USER}:${NEXUS_PASSWORD}@${NEXUS_URL}/repository/pypi-all/simple
         - export PIP_TRUSTED_HOST=${NEXUS_URL}
-        - pip install subunitreporter junitxml
-        - python setup.py develop
-        - trial --reporter=subunit `find vortex/ -name "*Test.py"` | subunit-1to2 | subunit2junitxml -o report.xml 1> /dev/null
-    stage: test
-    artifacts:
-        reports:
-            junit: report.xml
+        - pip install -r docs/rtfd_requirements.txt
+        - (cd docs && bash build_html_docs.sh)
+        - mv docs/doc_dist synerty-peek-html
+    stage: docs
     tags:
         - linux
 
-
-sonar:
+build_latex_docs:
+    artifacts:
+        paths:
+            - synerty-peek.pdf
+        expire_in: 1 day
     allow_failure: false
-    image: nexus.synerty.com:5000/peek-linux
+    image: nexus.synerty.com:5000/peek-linux-docs
     only:
         - pushes
-        - web
-        - triggers
         - merge_requests
-    stage: test
     script:
-        - echo "Run sonar-scanner"
-        - source $NVM_DIR/nvm.sh
-        - nvm use $LATEST_NODE_VERSION
-        - export NODE_PATH=`npm root -g`
-        - npm install -g typescript@3.7.5
-        - sonar-scanner
+        - export PIP_INDEX=http://${NEXUS_USER}:${NEXUS_PASSWORD}@${NEXUS_URL}/repository/pypi-all/pypi
+        - export PIP_INDEX_URL=http://${NEXUS_USER}:${NEXUS_PASSWORD}@${NEXUS_URL}/repository/pypi-all/simple
+        - export PIP_TRUSTED_HOST=${NEXUS_URL}
+        - pip install -r docs/rtfd_requirements.txt
+        - (cd docs && bash build_latex_docs.sh)
+        - (cd docs/doc_dist_latex && pdflatex "SynertyPeek.tex")
+        - mv docs/doc_dist_latex/SynertyPeek.pdf synerty-peek.pdf
+    stage: docs
     tags:
         - linux
+
 
 git_clone_platform:
     allow_failure: false
@@ -70,8 +71,6 @@ git_clone_platform:
     only:
         - web
         - triggers
-        - merge_requests
-        - manual
     script:
         - ./scripts/gitlab/git_clone.sh platform ${GIT_CLONE_PATH}/cloned_platform_repos ${GIT_USER} ${GIT_PASSWORD} ${CI_COMMIT_REF_NAME} ${CI_PROJECT_NAMESPACE}
     stage: fetch
@@ -88,8 +87,6 @@ git_clone_plugins:
     only:
         - web
         - triggers
-        - merge_requests
-        - manual
     script:
         - ./scripts/gitlab/git_clone.sh plugins ${GIT_CLONE_PATH}/cloned_plugin_repos ${GIT_USER} ${GIT_PASSWORD} ${CI_COMMIT_REF_NAME} ${CI_PROJECT_NAMESPACE}
     stage: fetch
@@ -245,7 +242,6 @@ upload_to_attune:
     only:
         - web
         - triggers
-        - manual
     script:
         - scp $GIT_CLONE_PATH/peek_release_${PKG_TAG_VERSION:-0.0.0+b${CI_PIPELINE_ID}}_linux.tar ${DEPLOY_ATTUNE_USER}@${DEPLOY_ATTUNE_HOST}:gitlab_upload.tar
     stage: upload

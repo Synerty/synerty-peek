@@ -356,59 +356,75 @@ It's folder structure looks like this :
     *   :file:`peek_plugin_noop` (The plugin root, this is the python package)
 
         *   :file:`_private` (All protected code lives in here)
-
-            *   :file:`admin-app`   (The admin web based user interface)
-
-            *   :file:`admin-assets`   (Static assets for the admin web UI)
-
-            *   :file:`agent` (The code that runs on the agent service)
-
-            *   :file:`alembic` (Database schema versioning scripts)
-
-            *   :file:`client`  (The code that runs on the client service)
-
-            *   :file:`desktop-app`   (The user interface that runs on the desktop/web)
-
-            *   :file:`desktop-assets`    (Images for the desktop/web)
-
-            *   :file:`mobile-app`   (The user interface that runs on the mobile/web devices)
-
-            *   :file:`mobile-assets`    (Images for the mobile/web UI)
-
-            *   :file:`server`  (The code that runs on the server service)
-
-            *   :file:`storage`     (SQLAlchemy ORM classes for db access, used by server,worker)
-
-            *   :file:`tuples`  (Private data structures)
-
-            *   :file:`worker`  (The parallel processing  Celery tasks that are run on the worker)
+            See subfolders below.
 
         *   :file:`plugin-modules`   (Exposed API, index.ts will expose public declarations.
             Plugins can structure the subfolders however they like, this dir is available
             from node_modules/@peek/peek_plugin_noop)
+            See subfolders below.
+---
 
-            *   :file:`desktop`   (Exposed API, index.ts exposes desktop only declarations)
+An example contents of the :file:`_private` is described below.
 
-            *   :file:`mobile`   (Exposed API, index.ts exposes mobile only declarations)
+*   :file:`_private` (All protected code lives in here)
 
-            *   :file:`admin`   (Exposed API, index.ts exposes admin only declarations)
+    *   :file:`admin-app`   (The admin web based user interface)
 
-            *   :file:`_private`   (Code only used by this plugin)
+    *   :file:`admin-assets`   (Static assets for the admin web UI)
 
-                *   :file:`desktop`   (Private desktop declarations)
+    *   :file:`agent` (The code that runs on the agent service)
 
-                *   :file:`mobile`   (Private mobile declarations)
+    *   :file:`alembic` (Database schema versioning scripts)
 
-                *   :file:`admin`   (Private admin declarations)
+    *   :file:`client`  (The code that runs on the client service)
 
-        *   :file:`agent`  (Exposed API, plugins on the agent service use this)
+    *   :file:`desktop-app`   (The user interface that runs on the desktop/web)
 
-        *   :file:`client`  (Exposed API, plugins on the client service use this)
+    *   :file:`desktop-assets`    (Images for the desktop/web)
 
-        *   :file:`server`  (Exposed API, plugins on the server service use this)
+    *   :file:`mobile-app`   (The user interface that runs on the mobile/web devices)
 
-        *   :file:`tuples`  (Exposed Tuples, Tuples on any service use these data structures)
+    *   :file:`mobile-assets`    (Images for the mobile/web UI)
 
+    *   :file:`server`  (The code that runs on the server service)
+
+    *   :file:`storage`     (SQLAlchemy ORM classes for db access, used by server,worker)
+
+    *   :file:`tuples`  (Private data structures)
+
+    *   :file:`worker`  (The parallel processing  Celery tasks that are run on the worker)
+
+---
+
+An example contents of the :file:`plugin-modules` is described below.
+
+*   :file:`plugin-modules`   (Exposed API, index.ts will expose public declarations.
+    Plugins can structure the subfolders however they like, this dir is available
+    from node_modules/@peek/peek_plugin_noop)
+
+    *   :file:`desktop`   (Exposed API, index.ts exposes desktop only declarations)
+
+    *   :file:`mobile`   (Exposed API, index.ts exposes mobile only declarations)
+
+    *   :file:`admin`   (Exposed API, index.ts exposes admin only declarations)
+
+    *   :file:`_private`   (Code only used by this plugin)
+
+        *   :file:`desktop`   (Private desktop declarations)
+
+        *   :file:`mobile`   (Private mobile declarations)
+
+        *   :file:`admin`   (Private admin declarations)
+
+*   :file:`agent`  (Exposed API, plugins on the agent service use this)
+
+*   :file:`client`  (Exposed API, plugins on the client service use this)
+
+*   :file:`server`  (Exposed API, plugins on the server service use this)
+
+*   :file:`tuples`  (Exposed Tuples, Tuples on any service use these data structures)
+
+---
 
 .. note:: Random Fact : Did you know that python can't import packages with hypons in them?
 

@@ -309,10 +309,18 @@ The Wheel package is required for building platform and plugin releases ::
         pip install wheel
 
 
-Install PostGreSQL along with plpython3u extension
---------------------------------------------------
+Install PostGreSQL
+------------------
 
-Download the file postgres.rb and install postgresql ::
+Peek requires the PostGreSQL extension plpython3u. To install this extension, Peek has a
+modifed homebrew file that will include the build of this extension.
+
+----
+
+The following step will download peeks homebrew PostGreSQL install file and run
+it with brew.
+
+Execute the following ::
 
         cd ~
         wget "https://bitbucket.org/synerty/synerty-peek/src/master/scripts/macos/postgres.rb"
@@ -372,13 +380,6 @@ Set the PostGreSQL peek users password ::
         # Set the password as "PASSWORD" for development machines
         # Set it to a secure password from https://xkpasswd.net/s/ for production
 
-
-----
-
-Create extension ::
-
-        psql -h localhost -U peek peek -c "CREATE EXTENSION plpython3u"
-
 ----
 
 Cleanup traces of the password ::
@@ -388,7 +389,7 @@ Cleanup traces of the password ::
 
 ----
 
-Finally, Download pgAdmin4 - A graphically PostGreSQL databast administration tool.
+Finally, Download pgAdmin4 - A graphically PostGreSQL database administration tool.
 
 Download the latest version of pgAdmin4 for macOS from the following link
 

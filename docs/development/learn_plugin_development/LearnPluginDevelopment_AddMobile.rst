@@ -418,10 +418,10 @@ start the standard android emulator. ::
 
         peek@peek:~/project/peek-mobile/peek_mobile/build-ns$ tns device list
         iTunes is not available for this operating system. You will not be able to work with connected iOS devices.
-        ┌───┬─────────────┬──────────┬───────────────────┬──────────┬───────────┐
+
         │ # │ Device Name │ Platform │ Device Identifier │ Type     │ Status    │
         │ 1 │ vbox86p     │ Android  │ emulator-5554     │ Emulator │ Connected │
-        └───┴─────────────┴──────────┴───────────────────┴──────────┴───────────┘
+
 
 ----
 
