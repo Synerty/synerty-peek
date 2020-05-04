@@ -236,6 +236,11 @@ Restart all Peek services ::
     sudo systemctl start peek_agent
     sudo systemctl start peek_client
 
+v2.2.1 Issues Log
+-----------------
+
+This release was required to resolve a tag and publish release issue PEEK-539
+
 v2.2.0 Issues Log
 -----------------
 
