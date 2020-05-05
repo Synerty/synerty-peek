@@ -25,384 +25,106 @@ These are a few of the conundrums around the complexity of software documentatio
 Fortunately there are some fantastic tools around to solve these issues, and you're
 reading the result of those tools right now.
 
-Document Generator
-------------------
+.. note:: Sphinx is a tool that makes it easy to create intelligent and beautiful documentation.
 
-Sphinx is a tool that makes it easy to create intelligent and beautiful documentation.
 
-The following sections go on to guide the reader to setup Sphinx Document Generator.
+Documentation File Structure
+----------------------------
+
+The peek-plugin is structured in such a way that the plugin developer can create documentation for 3 different group of audiences:
+
+- Admins
+- Users
+- Developers
+
+
+:file:`Admins` Documentation
+----------------------------
+
+#. Create directory :file:`peek_plugin_tutorial/doc-admin`: ::
+
+    mkdir -p peek_plugin_tutorial/doc-admin
+
+#. Create the file :file:`index.rst`: within the direcotory :file:`peek_plugin_tutorial/doc-admin` with following content: ::
+
+        ==============
+        Administration
+        ==============
+
+        The Peek-Plugin-Tutorial plugin performs the following:
+
+        -   Point 1
+
+        -   Point 2
+
+#. Update the file :file:`plugin_package.json`
+
+Edit the file :file:`peek_plugin_tutorial/plugin_package.json`:
+
+- Add "doc-admin" to the requiredServices section so it looks like: ::
+
+    "requiresServices": [
+        "doc-admin"
+    ]
+
+- Add the "doc-admin" section after requiresServices section: ::
+
+    "doc-admin": {
+        "docDir": "doc-admin",
+        "docRst": "index.rst"
+    }
+
+- Ensure your JSON is still valid (Your IDE may help here)
+
+Here is an example: ::
+
+    {
+        "plugin": {
+            ...
+        },
+        "requiresServices": [
+            "doc-admin"
+        ],
+        "doc-admin": {
+            "docDir": "doc-admin",
+            "docRst": "index.rst"
+        }
+    }
+
+
+Debug Admin Documentation
+-------------------------
+
+Navigate to :file:`peek_doc_admin` and run the following command: ::
+
+    cd /Users/peek/synerty-peek-<version>/lib/python3.6/peek_doc_admin
+    bash watch_docs.sh
+
+.. note:: :file:`version` is the Peek version that is deployed. For example: 2.1.7
 
 .. important:: Windows users must use **bash** and run the commands from the plugin
     root directory.
 
-Documentation Configuration
----------------------------
+Check File :file:`~/peek-server.home/config.json`
+-------------------------------------------------
 
-The build configuration file has already been setup by Synerty.
+#.  Ensure **frontend.docBuildEnabled** is set to **true**, with no quotes
+#.  Ensure **frontend.docBuildPrepareEnabled** is set to **true**, with no quotes
 
-Create Directories :file:`docs`
-```````````````````````````````
+Example: ::
 
-The :file:`docs` folder will contain all of the files used to build the documentation.
-Make sure you add everything in this directory to git.
+        {
+            ...
+            "frontend": {
+                ...
+                "docBuildEnabled": true,
+                "docBuildPrepareEnabled": true
+            },
+            ...
+        }
 
-The :file:`dist` folder will contain all of the generated documentation.  These files
-should not be in git as they are reproducible, see
-:ref:`learn_plugin_development_add_docs_build_documentation`
 
-Create directories :file:`docs` and :file:`dist`, run the following command:
-
-::
-
-        mkdir -p docs
-
-
-Download file :file:`docs/conf.py`
-``````````````````````````````````
-
-The :file:`conf.py` file contains the configuration required to build the documentation.
-
-Synerty has created a version of this file that automatically generates the api doc
-RST files.
-
-----
-
-Download :file:`conf.py` from
-`synerty-peek/docs/conf.py <https://bitbucket.org/synerty/synerty-peek/raw/master/docs/conf.py>`_
-to :file:`docs/conf.py`.
-
-----
-
-Modify these values: ::
-
-        __project__ = 'Synerty Peek'
-        __copyright__ = '2016, Synerty'
-        __author__ = 'Synerty'
-        __version__ = '#.#.#'
-
-----
-
-At the very end of :file:`conf.py` file, you will see imports and calls to
-:code:`createApiDocs(peek_plugin_xxx.__file__)` method.
-
-If your plugin will have a python API, then update these two lines to import your plugin,
-and generate API documentation for it.
-
-From: ::
-
-        import peek_plugin_base
-        createApiDocs(peek_plugin_base.__file__)
-
-
-Example To: ::
-
-        try:
-            import peek_plugin_tutorial
-
-        except ImportError:
-            # Otherwise, add the plugin root dir to the import path, for read the docs.
-            sys.path.append(os.path.dirname(os.path.dirname(__file__)))
-            import peek_plugin_tutorial
-
-        createApiDocs(peek_plugin_tutorial.__file__)
-
-
-Otherwise, comment it out.
-
-Required Files
---------------
-
-.. note:: All instructions in this document are relative to the plugin root directory
-            (the one with hyphens), not the plugin python package
-            (the one with underscores).
-
-Add Directory :file:`_static`
-`````````````````````````````
-
-The :file:`_static` is required for the doc build.
-
-----
-
-Create the directory with this command: ::
-
-    mkdir docs/_static
-
-
-Add File :file:`.gitkeep`
-`````````````````````````
-
-The :file:`docs/_static/.gitkeep` ensures that the _static directory will exist in git.
-
-----
-
-Create file :file:`docs/_static/.gitkeep` with no contents.
-
-Create it with this command: ::
-
-    touch docs/_static/.gitkeep
-
-
-Add Directory :file:`overview`
-``````````````````````````````
-
-The :file:`overview` will contain the the :file:`overview.rst` file and all images
-that it uses. For now, there are none.
-
-----
-
-Create the directory with this command: ::
-
-    mkdir docs/overview
-
-
-Add File :file:`overview.rst`
-`````````````````````````````
-
-The :file:`docs/overview/overview.rst` Should contain a basic overview of the plugin.
-
-----
-
-Create file :file:`docs/overview/overview.rst` and populate it with the following
-contents: ::
-
-
-        ========
-        Overview
-        ========
-
-        Plugin Objective
-        ----------------
-
-        The goal of this plugin is to ...
-
-
-        Plugin Uses
-        -----------
-
-        Possible uses for this plugin are ...
-
-
-        How It Works
-        ------------
-
-        This plugin achieves it's functionality by ...
-
-
-
-Add Directory :file:`api`
-`````````````````````````
-
-The :file:`api` will contain the the :file:`index_api.rst` file and all images
-that it uses. For now, there are none.
-
-----
-
-Create the directory with this command: ::
-
-    mkdir docs/api
-
-
-Add File :file:`index_api.rst`
-``````````````````````````````
-
-The :file:`index_api.rst` contains links to any information useful to other
-develeopers wanting to leverage this plugin
-
-----
-
-Create file :file:`docs/api/index_api.rst` and populate it with the following
-contents: ::
-
-
-
-        .. _api_reference:
-
-        =============
-        API Reference
-        =============
-
-        .. toctree::
-            :maxdepth: 2
-            :caption: Contents:
-
-            ../api_autodoc/peek_plugin_tutorial/peek_plugin_tutorial
-
-
-
-Add file :file:`index.rst`
-``````````````````````````
-
-The :file:`index.rst` file will add relations between the single files that the
-documentation is made of, as well as tables of contents.
-See :ref:`learn_plugin_development_add_docs_toctree`
-
-.. note:: Add more files to plugin table of contents by addding them after
-            :code:`overview/overview`
-
-----
-
-Create :file:`index.rst`, and populate it with the following:
-
-::
-
-        ==================================
-        {insert plugin name} Documentation
-        ==================================
-
-        .. toctree::
-            :maxdepth: 3
-            :caption: Contents:
-
-            overview/overview
-            api/index_api
-
-        Indices and tables
-        ==================
-
-        * :ref:`genindex`
-        * :ref:`modindex`
-        * :ref:`search`
-
-
-
-
-
-Add file :file:`rtfd_requirements.txt`
-``````````````````````````````````````
-
-The :file:`rtfd_requirements.txt` is required for building docs on `<readthedocs.org>`_
-
-----
-
-Create :file:`docs/rtfd_requirements.txt`, and populate it with the following:
-
-::
-
-        pytmpdir
-        peek_plugin_base
-
-
-
-Build or Debug
-``````````````
-
-You have created all the configuration files for the documentation generator, let’s
-make a first build of the docs.
-
-You can either
-:ref:`learn_plugin_development_add_docs_build_documentation`
-or
-:ref:`learn_plugin_development_add_docs_debug_documentation`
-
-.. _learn_plugin_development_add_docs_build_documentation:
-
-Build Documentation
--------------------
-
-This section will build the documentation locally as HTML files.
-From there the developer can copy it somewhere else, etc.
-
-.. note:: If this is **NOT** the first build of the documentation or you have previously
-    run the
-    :ref:`learn_plugin_development_add_docs_debug_documentation`, you will need to cleanup
-    the old :file:`dist` files.  Run the command
-    :code:`rm -rf dist/*`
-
-Sphinx-build
-````````````
-
-A build is started with the sphinx-build program, called like this:
-
-::
-
-        [ -d dist ] && rm -rf dist
-        mkdir -p dist/docs
-        sphinx-build -b html docs/ dist/docs/
-
-.. note:: The -b option selects a builder; in this example Sphinx will build HTML files.
-
-A successful build should look like this:
-
-::
-
-        peek@DESKTOP-U08T8NG MINGW64 ~/peek-plugin-tutorial (master)
-        $ sphinx-build -b html docs/ dist/docs/
-        Running Sphinx v1.5.3
-        making output directory...
-        loading pickled environment... not yet created
-        building [mo]: targets for 0 po files that are out of date
-        building [html]: targets for 3 source files that are out of date
-        updating environment: 3 added, 0 changed, 0 removed
-        reading sources... [100%] module
-        looking for now-outdated files... none found
-        pickling environment... done
-        checking consistency... done
-        preparing documents... done
-        writing output... [100%] module
-        generating indices... genindex py-modindex
-        highlighting module code... [100%] peek_plugin_tutorial
-        writing additional pages... search
-        copying static files... done
-        copying extra files... done
-        dumping search index in English (code: en) ... done
-        dumping object inventory... done
-        build succeeded.
-
-
-Open :file:`dist/docs/index.html`
-`````````````````````````````````
-
-The generated documentation files are in the :file:`dist/docs` folder.
-
-Open :file:`dist/docs/index.html` in a web browser to view the generated documentation.
-
-.. _learn_plugin_development_add_docs_debug_documentation:
-
-Debug Documentation
--------------------
-
-Synerty has written a shell script that runs a sphinx auto build utility.
-It builds the documentation when a file is modified.
-
-.. note:: If this is **NOT** the first debugging of the documentation or you have
-    previously run the
-    :ref:`learn_plugin_development_add_docs_debug_documentation`, you will need to cleanup
-    the old :file:`dist` files.  Run the command
-    :code:`rm -rf dist/*`
-
-Download File :file:`watch-docs.sh`
-```````````````````````````````````
-
-The :file:`watch-docs.sh` script runs an auto building / auto refreshing web server that
-is fantastic for quick local documentation development.
-
-----
-
-Download :file:`watch-docs.sh` from
-`synerty-peek/docs/watch-docs.sh <https://bitbucket.org/synerty/synerty-peek/raw/master/docs/watch-docs.sh>`_
-to :file:`docs/watch-docs.sh`
-
-----
-
-Edit :file:`docs/watch-docs.sh` to update the plugin package name.
-
-Change the line: ::
-
-        ARGS="$ARGS --watch `modPath 'peek_plugin_base'`"
-
-to: ::
-
-        ARGS="$ARGS --watch `modPath 'peek_plugin_tutorial'`"
-
-
-Run :file:`watch-docs.sh`
-`````````````````````````
-
-::
-
-        cd docs/
-        ./watch-docs.sh
-
+.. note:: While writing documentation for **doc-user**, please update the file :file:`~/peek-client.home/config.json` with the above flags.
 
 ----
 
@@ -415,12 +137,15 @@ In a web browser, go to the following url:
 ----
 
 The :file:`watch-docs.sh` shell script will rebuild the documentation when it see a change
-in the :file:`docs` folder.
+in the :file:`docs-admin` folder.
 
 .. note:: The :file:`watch-docs.sh` shell script won't always build a change in the
     toctree while running.  If you update the toctree or modify headings it is good
     practice to stop :file:`watch-docs.sh`, run :code:`rm -rf dist/*` and restart
     :file:`watch-docs.sh`.
+
+.. important:: In order to build documentation for **user** add **"doc-user"** in place of **"doc-admin"** in the above steps, and navigate to **peek_doc_user** instead of **peek_doc_admin** to run the watch-docs.sh Similarly, for **developer** add **"doc-dev"** in place of **"doc-admin"** in the above steps and navigate to **peek_doc_dev** instead of **peek_doc_admin** to run the watch-docs.sh
+
 
 Publish Documentation on readthedocs
 ------------------------------------
@@ -428,93 +153,13 @@ Publish Documentation on readthedocs
 `Read the Docs <https://readthedocs.org>`_ hosts documentation, making your documentation
 fully searchable and easy to find.  Your documentation can be imported from versioning
 control such as Git.  Read the Docs support webhooks to build the documentation after
-the latest code commit.
+the latest code commit. So all you got to do is submit your code changes through git versioning.
 
-Create an account on `Read the Docs <https://readthedocs.org>`_
-
-Add a Project to Read the Docs
-``````````````````````````````
-
-View "My Projects"
-
-.. image:: LearnAddDocs_readthedocs-MyProjects.jpg
-
-#.  Go to the users drop down at the top right and select "My Projects"
-
-----
-
-Import Projects
-
-.. image:: LearnAddDocs_readthedocs-ImportProjects.jpg
-
-#.  Select "Import a Project"
-
-----
-
-Import Manually
-
-.. image:: LearnAddDocs_readthedocs-ImportManually.jpg
-
-#.  Select "Import Manually"
-
-----
-
-Project Details
-
-.. image:: LearnAddDocs_readthedocs-ProjectDetails.jpg
-
-#.  Enter the name of the project
-
-#.  Enter your git repository location
-
-#.  Select "Next"
-
-----
-
-Project
-
-.. image:: LearnAddDocs_readthedocs-Project.jpg
-
-#.  Go to the "Admin" page
-
-----
-
-Advanced Settings
-
-.. image:: LearnAddDocs_readthedocs-Settings.jpg
-
-#.  Enter the location of the requirements files
-
-#.  Enter the location of the sphinx configuration file
-
-#.  Uncheck the "Enable PDF Build"
-
-#.  Uncheck the "Enable EPUB Build"
-
-#.  Select the Python interpreter 3.+
-
-Troubleshooting readthedocs
-```````````````````````````
-
-Build the Documentation
-
-.. image:: LearnAddDocs_readthedocs-Builds.jpg
-
-#.  Force a Documentation build by selecting "Build Version"
-
-#.  View the recent build log
-
-----
-
-Investigate the build log:
-
-.. image:: LearnAddDocs_readthedocs-BuildLog.jpg
-
-
-.. _learn_plugin_development_add_docs_sections:
+Formatting the document
+-----------------------
 
 Sections
---------
+````````
 
 Sections are created by underlining (and optionally overlining) the section title with a
 punctuation character, at least as long as the text and a blank line before and after.
