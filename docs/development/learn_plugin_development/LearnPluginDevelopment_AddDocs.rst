@@ -25,27 +25,32 @@ These are a few of the conundrums around the complexity of software documentatio
 Fortunately there are some fantastic tools around to solve these issues, and you're
 reading the result of those tools right now.
 
-.. note:: Sphinx is a tool that makes it easy to create intelligent and beautiful documentation.
+Sphinx is a tool that makes it easy to create intelligent and beautiful
+documentation.
 
 
 Documentation File Structure
 ----------------------------
 
-The peek-plugin is structured in such a way that the plugin developer can create documentation for 3 different group of audiences:
+The peek-plugin is structured in such a way that the plugin developer can create
+documentation for 3 different audiences:
 
-- Admins
+- Administrators
 - Users
 - Developers
 
 
-:file:`Admins` Documentation
-----------------------------
+Add Admin Documentation
+-----------------------
 
-#. Create directory :file:`peek_plugin_tutorial/doc-admin`: ::
+Create directory :file:`peek_plugin_tutorial/doc-admin`: ::
 
     mkdir -p peek_plugin_tutorial/doc-admin
 
-#. Create the file :file:`index.rst`: within the direcotory :file:`peek_plugin_tutorial/doc-admin` with following content: ::
+----
+
+Create the file :file:`index.rst`: within the directory
+:file:`peek_plugin_tutorial/doc-admin` with following content: ::
 
         ==============
         Administration
@@ -57,24 +62,26 @@ The peek-plugin is structured in such a way that the plugin developer can create
 
         -   Point 2
 
-#. Update the file :file:`plugin_package.json`
+----
 
 Edit the file :file:`peek_plugin_tutorial/plugin_package.json`:
 
-- Add "doc-admin" to the requiredServices section so it looks like: ::
+Add "doc-admin" to the :code:`requiredServices` section so it looks like: ::
 
     "requiresServices": [
+        ...
         "doc-admin"
+        ...
     ]
 
-- Add the "doc-admin" section after requiresServices section: ::
+Add the "doc-admin" section after requiresServices section: ::
 
     "doc-admin": {
         "docDir": "doc-admin",
         "docRst": "index.rst"
     }
 
-- Ensure your JSON is still valid (Your IDE may help here)
+Ensure your JSON is still valid (Your IDE may help here)
 
 Here is an example: ::
 
@@ -83,7 +90,9 @@ Here is an example: ::
             ...
         },
         "requiresServices": [
+            ...
             "doc-admin"
+            ...
         ],
         "doc-admin": {
             "docDir": "doc-admin",
@@ -92,24 +101,104 @@ Here is an example: ::
     }
 
 
-Debug Admin Documentation
--------------------------
 
-Navigate to :file:`peek_doc_admin` and run the following command: ::
+Add User Documentation
+----------------------
 
-    cd /Users/peek/synerty-peek-<version>/lib/python3.6/peek_doc_admin
-    bash watch_docs.sh
+.. note:: These steps are almost identical to the Admin documentation.
 
-.. note:: :file:`version` is the Peek version that is deployed. For example: 2.1.7
+Create directory :file:`peek_plugin_tutorial/doc-user`: ::
 
-.. important:: Windows users must use **bash** and run the commands from the plugin
-    root directory.
+    mkdir -p peek_plugin_tutorial/doc-user
 
-Check File :file:`~/peek-server.home/config.json`
--------------------------------------------------
+----
 
-#.  Ensure **frontend.docBuildEnabled** is set to **true**, with no quotes
-#.  Ensure **frontend.docBuildPrepareEnabled** is set to **true**, with no quotes
+Create the file :file:`index.rst`: within the directory
+:file:`peek_plugin_tutorial/doc-user` with following content: ::
+
+        ==========
+        User Guide
+        ==========
+
+        This plugin can be used by clicking on the menu icon, etc.
+
+----
+
+Edit the file :file:`peek_plugin_tutorial/plugin_package.json`:
+
+Add "doc-user" to the :code:`requiredServices` section so it looks like: ::
+
+    "requiresServices": [
+        ...
+        "doc-user"
+        ...
+    ]
+
+Add the "doc-user" section after requiresServices section: ::
+
+    "doc-user": {
+        "docDir": "doc-user",
+        "docRst": "index.rst"
+    }
+
+
+
+Add Developer Documentation
+---------------------------
+
+.. note:: These steps are almost identical to the Admin documentation.
+
+Create directory :file:`peek_plugin_tutorial/doc-dev`: ::
+
+    mkdir -p peek_plugin_tutorial/doc-dev
+
+----
+
+Create the file :file:`index.rst`: within the directory
+:file:`peek_plugin_tutorial/doc-dev` with following content: ::
+
+        =========
+        Developer
+        =========
+
+        This plugins architecture is as follows <insert images, etc>
+
+----
+
+Edit the file :file:`peek_plugin_tutorial/plugin_package.json`:
+
+Add "doc-dev" to the :code:`requiredServices` section so it looks like: ::
+
+    "requiresServices": [
+        ...
+        "doc-dev"
+        ...
+    ]
+
+Add the "doc-dev" section after requiresServices section: ::
+
+    "doc-dev": {
+        "docDir": "doc-dev",
+        "docRst": "index.rst",
+        "hasApi": false
+    }
+
+If your plugin has a public python API, then ensure :code:`hasApi` above is set to
+:code:`true`.
+
+
+Check Peek Server Config
+------------------------
+
+The **peek-server** service builds the **admin** and **dev** documentation.
+
+----
+
+Edit the :file:`~/peek-server.home/config.json` and ensure the following options are set.
+
+-  Ensure :code:`frontend.docBuildEnabled` is set to :code:`true`, with no quotes
+
+-  Ensure :code:`frontend.docBuildPrepareEnabled` is set to :code:`true`, with no quotes
 
 Example: ::
 
@@ -124,39 +213,109 @@ Example: ::
         }
 
 
-.. note:: While writing documentation for **doc-user**, please update the file :file:`~/peek-client.home/config.json` with the above flags.
+
+Check Peek Client Config
+------------------------
+
+The **peek-client** service builds the **user** documentation.
 
 ----
 
-In a web browser, go to the following url:
+Edit the :file:`~/peek-client.home/config.json` and ensure the following options are set.
 
-::
+-  Ensure :code:`frontend.docBuildEnabled` is set to :code:`true`, with no quotes
 
-        http://localhost:8020
+-  Ensure :code:`frontend.docBuildPrepareEnabled` is set to :code:`true`, with no quotes
+
+Example: ::
+
+        {
+            ...
+            "frontend": {
+                ...
+                "docBuildEnabled": true,
+                "docBuildPrepareEnabled": true
+            },
+            ...
+        }
+
+
+Viewing Documentation
+---------------------
+
+The documentation from each peek plugin is loaded into three projects
+by peek-server (Admin, Development) and
+peek-client (User).
+
+The documentation packages are as follows
+
+:Administration: peek_doc_admin:
+
+:Development: peek_doc_dev
+
+:User: peek_doc_user
 
 ----
 
-The :file:`watch-docs.sh` shell script will rebuild the documentation when it see a change
-in the :file:`docs-admin` folder.
+To view the documentation, you can run :file:`watch_docs.sh`. This will generate the
+documentation, serve it with a web server and live refresh a web page when a browser
+is connected to it.
+
+----
+
+Locate the relevant python project. These instructions will demonstrate with the "Admin"
+documentation.
+
+Run the following to find the location of :code:`peek_doc_admin` ::
+
+    python - <<EOF
+    import peek_doc_admin
+    print(peek_doc_admin.__file__)
+    EOF
+
+This will return the following, which you can get the location of :code:`peek_doc_admin`
+from. ::
+
+    peek@peek ~ % python - <<EOF
+    import peek_doc_admin
+    print(peek_doc_admin.__file__)
+    EOF
+
+    /Users/peek/dev-peek/peek-doc-admin/peek_doc_admin/__init__.py
+
+----
+
+Navigate to :code:`peek_doc_admin` from the step above and run the following command: ::
+
+    cd /Users/peek/dev-peek/peek-doc-admin/peek_doc_admin
+    bash watch_docs.sh
+
+----
+
+In your browser, connect to the docs web server that :command:`watch_docs.sh` displays
+at the end of its start. ::
+
+    [I 200505 20:51:48 server:296] Serving on http://0.0.0.0:8020
+
+----
 
 .. note:: The :file:`watch-docs.sh` shell script won't always build a change in the
     toctree while running.  If you update the toctree or modify headings it is good
     practice to stop :file:`watch-docs.sh`, run :code:`rm -rf dist/*` and restart
     :file:`watch-docs.sh`.
 
-.. important:: In order to build documentation for **user** add **"doc-user"** in place of **"doc-admin"** in the above steps, and navigate to **peek_doc_user** instead of **peek_doc_admin** to run the watch-docs.sh Similarly, for **developer** add **"doc-dev"** in place of **"doc-admin"** in the above steps and navigate to **peek_doc_dev** instead of **peek_doc_admin** to run the watch-docs.sh
+.. note:: :file:`version` is the Peek version that is deployed. For example: 2.1.7
+
+.. important:: Windows users must use **bash** and run the commands from the plugin
+    root directory.
 
 
-Publish Documentation on readthedocs
-------------------------------------
+reStructuredText Cheat Sheet
+----------------------------
 
-`Read the Docs <https://readthedocs.org>`_ hosts documentation, making your documentation
-fully searchable and easy to find.  Your documentation can be imported from versioning
-control such as Git.  Read the Docs support webhooks to build the documentation after
-the latest code commit. So all you got to do is submit your code changes through git versioning.
+The following tips should help you get started writing reStructuredText
 
-Formatting the document
------------------------
+.. _learn_plugin_development_add_docs_sections:
 
 Sections
 ````````
@@ -167,10 +326,10 @@ punctuation character, at least as long as the text and a blank line before and 
 These section titles and headings will be used to create the contents when the
 documentation is built.
 
-.. note:: - The Page Title can be seen at the top of this page,
+.. note:: The Page Title can be seen at the top of this page,
         :ref:`learn_plugin_development_add_docs`.
 
-    - Header 1 can be seen at the top of this section,
+        Header 1 can be seen at the top of this section,
         :ref:`learn_plugin_development_add_docs_sections`.
 
 Header 2
@@ -245,7 +404,7 @@ indicate a “variable” part, for example:
 
 ::
 
-        :file:`learn_plugin_development/LearnPluginDevelopment_AddDocs.rst`
+       :file:`learn_plugin_development/LearnPluginDevelopment_AddDocs.rst`
 
 
 Reference Links
@@ -427,7 +586,7 @@ Here is an example:
 Docstring Format
 ````````````````
 
-This extension :file:`sphinx.ext.atuodoc`, can import the modules you are documenting,
+This extension :file:`sphinx.ext.autodoc`, can import the modules you are documenting,
 and pull in documentation from docstrings in a semi-automatic way.
 
 .. warning:: autodoc imports the modules to be documented. If any modules have side
@@ -492,7 +651,8 @@ Below is an abstract from file
                 The API returned matches the platform service.
 
                 :param pluginName: The name of the plugin to retrieve the API for
-                :return: An instance of the other plugins API for this Peek Platform Service.
+                :return: An instance of the other plugins API for this Peek Platform
+                         Service.
 
                 """
 
