@@ -53,7 +53,7 @@ Nil
 iOS Deployment
 ``````````````
 
-.. note:: Peek v2.0.x does not have support for iOS, this will be updated in a figure release.
+.. note:: Peek v2.0.x does not have support for iOS, this will be updated in a future release.
     We're going to Ionics Capacitor framework to create a full hybrid app.
 
 

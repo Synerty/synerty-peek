@@ -62,7 +62,7 @@ sections need to be completed again. "Install PostGreSQL" and "Install Python 3.
 iOS Deployment
 ``````````````
 
-.. note:: Peek v2.0.x does not have support for iOS, this will be updated in a figure release.
+.. note:: Peek v2.0.x does not have support for iOS, this will be updated in a future release.
     We're going to Ionics Capacitor framework to create a full hybrid app.
 
 
@@ -284,6 +284,9 @@ New Feature
 
 Improvement
 ```````````
+
+*    [PEEK-589] - Add code to queue compiler to periodically vacuum the queue,
+     index and encoded data tables.
 
 *    [PEEK-531] - Add config.json settings for max XXX per child settings
 
