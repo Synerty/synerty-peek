@@ -1,12 +1,15 @@
+include:
+    - local: '.gitlab-release-branch.yml'
+
 variables:
+    RELEASE_VER: ${PKG_TAG_VERSION}
     GIT_CLONE_PATH: $CI_BUILDS_DIR/peek
     PEEK_NODE_VERSION: v7.1.0
-    LATEST_NODE_VERSION: v12.16.1
-    NVM_DIR: /usr/local/nvm
     BUILD: build
     PKG_PLUGIN_LINUX: tmp_pkg_plugin_linux
     PKG_PLATFORM_LINUX: tmp_pkg_platform_linux
-    PEEK_RELEASE_LINUX: peek_release_${PKG_TAG_VERSION:-0.0.0+b${CI_PIPELINE_ID}}_linux
+    NON_RELEASE_VER: 0.0.0+b${CI_PIPELINE_ID}
+    PINNED_DEPS_PY_FILE_LINUX: ./gitlab/${RELEASE_BRANCH}/linux/pinned-deps-py
 
 stages:
     - docs
@@ -67,12 +70,14 @@ git_clone_platform:
         paths:
             - ${GIT_CLONE_PATH}/cloned_platform_repos
         expire_in: 1 day
-    image: nexus.synerty.com:5000/peek-linux
+    image: nexus.synerty.com:5000/peek-linux:${RELEASE_BRANCH}
     only:
         - web
         - triggers
     script:
-        - ./scripts/gitlab/git_clone.sh platform ${GIT_CLONE_PATH}/cloned_platform_repos ${GIT_USER} ${GIT_PASSWORD} ${CI_COMMIT_REF_NAME} ${CI_PROJECT_NAMESPACE}
+        - ./gitlab/scripts/git_clone.sh platform ${GIT_CLONE_PATH}/cloned_platform_repos
+            ${GIT_USER} ${GIT_PASSWORD}
+            ${CI_COMMIT_REF_NAME} ${CI_PROJECT_NAMESPACE} ${RELEASE_BRANCH}
     stage: fetch
     tags:
         - linux
@@ -83,12 +88,14 @@ git_clone_plugins:
         paths:
             - ${GIT_CLONE_PATH}/cloned_plugin_repos
         expire_in: 1 day
-    image: nexus.synerty.com:5000/peek-linux
+    image: nexus.synerty.com:5000/peek-linux:${RELEASE_BRANCH}
     only:
         - web
         - triggers
     script:
-        - ./scripts/gitlab/git_clone.sh plugins ${GIT_CLONE_PATH}/cloned_plugin_repos ${GIT_USER} ${GIT_PASSWORD} ${CI_COMMIT_REF_NAME} ${CI_PROJECT_NAMESPACE}
+        - ./gitlab/scripts/git_clone.sh plugins ${GIT_CLONE_PATH}/cloned_plugin_repos
+            ${GIT_USER} ${GIT_PASSWORD}
+            ${CI_COMMIT_REF_NAME} ${CI_PROJECT_NAMESPACE} ${RELEASE_BRANCH}
     stage: fetch
     tags:
         - linux
@@ -99,14 +106,14 @@ publish_platform:
         paths:
             - ${GIT_CLONE_PATH}/platform_packages
         expire_in: 1 day
-    image: nexus.synerty.com:5000/peek-linux
+    image: nexus.synerty.com:5000/peek-linux:${RELEASE_BRANCH}
     only:
         - web
         - triggers
     stage: publish
     script:
         - export GITHUB_PUSH=0
-        - ./publish_platform.sh ${PKG_TAG_VERSION:-0.0.0+b${CI_PIPELINE_ID}} ${GIT_CLONE_PATH}/cloned_platform_repos
+        - ./publish_platform.sh ${RELEASE_VER:-${NON_RELEASE_VER}} ${GIT_CLONE_PATH}/cloned_platform_repos
         - mkdir -p ${GIT_CLONE_PATH}/platform_packages
         - mv ${GIT_CLONE_PATH}/cloned_platform_repos/*/dist/*.tar.gz ${GIT_CLONE_PATH}/platform_packages
     tags:
@@ -119,14 +126,14 @@ publish_plugins:
         paths:
             - ${GIT_CLONE_PATH}/plugin_packages
         expire_in: 1 day
-    image: nexus.synerty.com:5000/peek-linux
+    image: nexus.synerty.com:5000/peek-linux:${RELEASE_BRANCH}
     only:
         - web
         - triggers
     stage: publish
     script:
         - export GITHUB_PUSH=0
-        - ./publish_plugins.sh ${PKG_TAG_VERSION:-0.0.0+b${CI_PIPELINE_ID}} ${GIT_CLONE_PATH}/cloned_plugin_repos
+        - ./publish_plugins.sh ${RELEASE_VER:-${NON_RELEASE_VER}} ${GIT_CLONE_PATH}/cloned_plugin_repos
         - mkdir -p ${GIT_CLONE_PATH}/plugin_packages
         - mv ${GIT_CLONE_PATH}/cloned_plugin_repos/*/dist/*.tar.gz ${GIT_CLONE_PATH}/plugin_packages
     tags:
@@ -141,7 +148,7 @@ package_platform_linux:
         paths:
             - ${GIT_CLONE_PATH}/${PKG_PLATFORM_LINUX}
         expire_in: 1 day
-    image: nexus.synerty.com:5000/peek-linux
+    image: nexus.synerty.com:5000/peek-linux:${RELEASE_BRANCH}
     only:
         - web
         - triggers
@@ -157,7 +164,11 @@ package_platform_linux:
         - export NPM_CONFIG_AUTH=`echo "${NEXUS_USER}:${NEXUS_PASSWORD}" | openssl base64`
         - export NG_CLI_ANALYTICS=ci
         - mkdir -p ${GIT_CLONE_PATH}/${PKG_PLATFORM_LINUX}
-        - ./scripts/linux/package_platform_linux_gitlab.sh ${PKG_TAG_VERSION:-0.0.0+b${CI_PIPELINE_ID}} ${GIT_CLONE_PATH}/cloned_platform_repos ${GIT_CLONE_PATH}/platform_packages ${GIT_CLONE_PATH}/${PKG_PLATFORM_LINUX}
+        - ./scripts/linux/package_platform_linux_gitlab.sh ${RELEASE_VER:-${NON_RELEASE_VER}}
+            ${GIT_CLONE_PATH}/cloned_platform_repos
+            ${GIT_CLONE_PATH}/platform_packages
+            ${GIT_CLONE_PATH}/${PKG_PLATFORM_LINUX}
+            ${PINNED_DEPS_PY_FILE_LINUX}
         - rm -rf ${GIT_CLONE_PATH}/platform_packages
         - rm -rf ${GIT_CLONE_PATH}/cloned_platform_repos
     tags:
@@ -172,7 +183,7 @@ package_plugin_linux:
         paths:
             - ${GIT_CLONE_PATH}/${PKG_PLUGIN_LINUX}/
         expire_in: 1 day
-    image: nexus.synerty.com:5000/peek-linux
+    image: nexus.synerty.com:5000/peek-linux:${RELEASE_BRANCH}
     only:
         - web
         - triggers
@@ -183,7 +194,9 @@ package_plugin_linux:
         - export PIP_INDEX=http://${NEXUS_USER}:${NEXUS_PASSWORD}@${NEXUS_URL}/repository/pypi-all/pypi
         - export PIP_INDEX_URL=http://${NEXUS_USER}:${NEXUS_PASSWORD}@${NEXUS_URL}/repository/pypi-all/simple
         - export PIP_TRUSTED_HOST=${NEXUS_URL}
-        - ./scripts/linux/package_plugins_linux_gitlab.sh ${PKG_TAG_VERSION:-0.0.0+b${CI_PIPELINE_ID}} ${GIT_CLONE_PATH}/plugin_packages ${GIT_CLONE_PATH}/platform_packages ${GIT_CLONE_PATH}/${PKG_PLUGIN_LINUX}
+        - ./scripts/linux/package_plugins_linux_gitlab.sh ${RELEASE_VER:-${NON_RELEASE_VER}}
+            ${GIT_CLONE_PATH}/plugin_packages ${GIT_CLONE_PATH}/platform_packages
+            ${GIT_CLONE_PATH}/${PKG_PLUGIN_LINUX} ${PINNED_DEPS_PY_FILE_LINUX}
     tags:
         - linux
 
@@ -194,21 +207,26 @@ archive_release:
     allow_failure: false
     artifacts:
         paths:
-            - ${GIT_CLONE_PATH}/peek_release_${PKG_TAG_VERSION:-0.0.0+b${CI_PIPELINE_ID}}_linux.tar
+            - ${GIT_CLONE_PATH}/peek_release_${RELEASE_VER:-${NON_RELEASE_VER}}_linux.tar
         expire_in: 1 day
-    image: nexus.synerty.com:5000/peek-linux
+    image: nexus.synerty.com:5000/peek-linux:${RELEASE_BRANCH}
     only:
         - web
         - triggers
     stage: archive
     script:
         - mkdir -p ~/.config/pip
-        - mkdir -p ${GIT_CLONE_PATH}/peek_release_${PKG_TAG_VERSION:-0.0.0+b${CI_PIPELINE_ID}}_linux
-        - cp ./scripts/linux/deploy_release_linux.sh ${GIT_CLONE_PATH}/peek_release_${PKG_TAG_VERSION:-0.0.0+b${CI_PIPELINE_ID}}_linux
-        - mv $GIT_CLONE_PATH/${PKG_PLATFORM_LINUX}/peek_platform_linux_${PKG_TAG_VERSION:-0.0.0+b${CI_PIPELINE_ID}}.tar.bz2 ${GIT_CLONE_PATH}/peek_release_${PKG_TAG_VERSION:-0.0.0+b${CI_PIPELINE_ID}}_linux
-        - mv $GIT_CLONE_PATH/${PKG_PLUGIN_LINUX}/peek_plugins_linux_${PKG_TAG_VERSION:-0.0.0+b${CI_PIPELINE_ID}}.tar.bz2 ${GIT_CLONE_PATH}/peek_release_${PKG_TAG_VERSION:-0.0.0+b${CI_PIPELINE_ID}}_linux
-        - cd ${GIT_CLONE_PATH} && tar cvf peek_release_${PKG_TAG_VERSION:-0.0.0+b${CI_PIPELINE_ID}}_linux.tar peek_release_${PKG_TAG_VERSION:-0.0.0+b${CI_PIPELINE_ID}}_linux
-        - rm -rf ${GIT_CLONE_PATH}/peek_release_${PKG_TAG_VERSION:-0.0.0+b${CI_PIPELINE_ID}}_linux
+        - mkdir -p ${GIT_CLONE_PATH}/peek_release_${RELEASE_VER:-${NON_RELEASE_VER}}_linux
+        - cp ./scripts/linux/deploy_release_linux.sh
+            ${GIT_CLONE_PATH}/peek_release_${RELEASE_VER:-${NON_RELEASE_VER}}_linux
+        - mv $GIT_CLONE_PATH/${PKG_PLATFORM_LINUX}/peek_platform_linux_${RELEASE_VER:-${NON_RELEASE_VER}}.tar.bz2
+            ${GIT_CLONE_PATH}/peek_release_${RELEASE_VER:-${NON_RELEASE_VER}}_linux
+        - mv $GIT_CLONE_PATH/${PKG_PLUGIN_LINUX}/peek_plugins_linux_${RELEASE_VER:-${NON_RELEASE_VER}}.tar.bz2
+            ${GIT_CLONE_PATH}/peek_release_${RELEASE_VER:-${NON_RELEASE_VER}}_linux
+        - cd ${GIT_CLONE_PATH}
+            && tar cvf peek_release_${RELEASE_VER:-${NON_RELEASE_VER}}_linux.tar
+            peek_release_${RELEASE_VER:-${NON_RELEASE_VER}}_linux
+        - rm -rf ${GIT_CLONE_PATH}/peek_release_${RELEASE_VER:-${NON_RELEASE_VER}}_linux
     tags:
         - linux
 
@@ -216,12 +234,14 @@ upload_to_nexus:
     dependencies:
         - archive_release
     allow_failure: false
-    image: nexus.synerty.com:5000/peek-linux
+    image: nexus.synerty.com:5000/peek-linux:${RELEASE_BRANCH}
     only:
         - web
         - triggers
     script:
-        - curl -v -u ${NEXUS_USER}:${NEXUS_PASSWORD} --upload-file $GIT_CLONE_PATH/peek_release_${PKG_TAG_VERSION:-0.0.0+b${CI_PIPELINE_ID}}_linux.tar http://${NEXUS_URL}/repository/synerty-packages/
+        - curl -v -u ${NEXUS_USER}:${NEXUS_PASSWORD}
+            --upload-file $GIT_CLONE_PATH/peek_release_${RELEASE_VER:-${NON_RELEASE_VER}}_linux.tar
+            http://${NEXUS_URL}/repository/synerty-packages/
 
     stage: upload
     tags:
@@ -238,12 +258,13 @@ upload_to_attune:
         - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
     environment:
         name: PEEK-RELEASE
-    image: nexus.synerty.com:5000/peek-linux
+    image: nexus.synerty.com:5000/peek-linux:${RELEASE_BRANCH}
     only:
         - web
         - triggers
     script:
-        - scp $GIT_CLONE_PATH/peek_release_${PKG_TAG_VERSION:-0.0.0+b${CI_PIPELINE_ID}}_linux.tar ${DEPLOY_ATTUNE_USER}@${DEPLOY_ATTUNE_HOST}:gitlab_upload.tar
+        - scp $GIT_CLONE_PATH/peek_release_${RELEASE_VER:-${NON_RELEASE_VER}}_linux.tar
+            ${DEPLOY_ATTUNE_USER}@${DEPLOY_ATTUNE_HOST}:gitlab_upload.tar
     stage: upload
     tags:
         - linux
