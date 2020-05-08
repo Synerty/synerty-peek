@@ -7,15 +7,15 @@ set -o errexit
 
 wantedVer=${1-}
 wantedVer=${wantedVer/v/}
-platformReposDir=${2}
-platformPackagesDir=${3}
-pinnedDepsPyFile=${4}
 
-if [ -n ${wantedVer} ]; then
+if [ -n "${wantedVer}" ]; then
     echo "Requested version is $wantedVer"
 fi
 
+platformReposDir=${2}
+platformPackagesDir=${3}
 startDir=${4:-`pwd`}
+pinnedDepsPyFile=${5}
 
 baseDir="$startDir/peek_platform_linux"
 
