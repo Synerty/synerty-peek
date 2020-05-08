@@ -11,7 +11,7 @@ VER=${1}
 SRC_PATH="${2:-..}"
 SRC_PLATFORM_PATH="${3:-..}"
 DST_PATH="${4:-/tmp/plugin}"
-pinnedDepsPyFile=${5:-}
+pinnedDepsPyFile="${5:-nofile}"
 
 
 DIR_TO_TAR="peek_plugins_linux_${VER}"
@@ -25,7 +25,10 @@ cp ${SRC_PATH}/*.gz .
 
 pipWheelArgs="--no-cache --find-links=. --find-links=${SRC_PLATFORM_PATH}"
 if [ -f "${pinnedDepsPyFile}" ]; then
+    echo "Using requirements file : ${pinnedDepsPyFile}"
     pipWheelArgs="-r ${pinnedDepsPyFile} $pipWheelArgs"
+else
+    echo "Requirements file is missing : ${pinnedDepsPyFile}"
 fi
 
 # Create the plugins release

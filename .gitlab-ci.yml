@@ -9,7 +9,7 @@ variables:
     PKG_PLUGIN_LINUX: tmp_pkg_plugin_linux
     PKG_PLATFORM_LINUX: tmp_pkg_platform_linux
     NON_RELEASE_VER: 0.0.0+b${CI_PIPELINE_ID}
-    PINNED_DEPS_PY_FILE_LINUX: ./gitlab/${RELEASE_BRANCH}/linux/pinned-deps-py
+    PINNED_DEPS_PY_FILE_LINUX: ${CI_PROJECT_DIR}/gitlab/${RELEASE_BRANCH}/linux/pinned-deps-py
 
 stages:
     - docs
