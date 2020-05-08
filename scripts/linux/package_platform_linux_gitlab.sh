@@ -31,7 +31,10 @@ cd $baseDir/py
 
 pipWheelArgs=" --no-cache --find-links=${platformPackagesDir}"
 if [ -f "${pinnedDepsPyFile}" ]; then
+    echo "Using requirements file : ${pinnedDepsPyFile}"
     pipWheelArgs="-r ${pinnedDepsPyFile} $pipWheelArgs"
+else
+    echo "Requirements file is missing : ${pinnedDepsPyFile}"
 fi
 
 echo "Downloading and creating wheels"

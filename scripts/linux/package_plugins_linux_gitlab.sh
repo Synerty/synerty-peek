@@ -25,7 +25,10 @@ cp ${SRC_PATH}/*.gz .
 
 pipWheelArgs="--no-cache --find-links=. --find-links=${SRC_PLATFORM_PATH}"
 if [ -f "${pinnedDepsPyFile}" ]; then
+    echo "Using requirements file : ${pinnedDepsPyFile}"
     pipWheelArgs="-r ${pinnedDepsPyFile} $pipWheelArgs"
+else
+    echo "Requirements file is missing : ${pinnedDepsPyFile}"
 fi
 
 # Create the plugins release
