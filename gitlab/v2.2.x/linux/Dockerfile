@@ -48,7 +48,7 @@ RUN pip install twine
 # -----------------------------------------------------------------------------
 # Install the CI dependencies for the builds
 
-RUN apt install -y jq git
+RUN apt install -y jq git curl
 
 RUN git config --global user.name "GitLab CI"
 RUN git config --global user.email "gitlab-ci@synerty.com"
