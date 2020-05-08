@@ -9,6 +9,7 @@ wantedVer=${1-}
 wantedVer=${wantedVer/v/}
 platformReposDir=${2}
 platformPackagesDir=${3}
+pinnedDepsPyFile=${4}
 
 if [ -n ${wantedVer} ]; then
     echo "Requested version is $wantedVer"
@@ -28,11 +29,16 @@ baseDir="$startDir/peek_platform_linux"
 mkdir -p $baseDir/py
 cd $baseDir/py
 
+pipWheelArgs=" --no-cache --find-links=${platformPackagesDir}"
+if [ -f "${pinnedDepsPyFile}" ]; then
+    pipWheelArgs="-r ${pinnedDepsPyFile} $pipWheelArgs"
+fi
+
 echo "Downloading and creating wheels"
-if [ -n ${wantedVer} ]; then
-    pip wheel --no-cache synerty-peek==${wantedVer} --find-links=${platformPackagesDir}
+if [ -n "${wantedVer}" ]; then
+    pip wheel synerty-peek==${wantedVer} $pipWheelArgs
 else
-    pip wheel --no-cache synerty-peek --find-links=${platformPackagesDir}
+    pip wheel synerty-peek $pipWheelArgs
 fi
 
 # Make sure we've downloaded the right version

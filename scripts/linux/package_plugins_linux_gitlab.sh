@@ -11,6 +11,7 @@ VER=${1}
 SRC_PATH="${2:-..}"
 SRC_PLATFORM_PATH="${3:-..}"
 DST_PATH="${4:-/tmp/plugin}"
+pinnedDepsPyFile=${5:-}
 
 
 DIR_TO_TAR="peek_plugins_linux_${VER}"
@@ -22,8 +23,13 @@ mkdir ${DIR_TO_TAR} && cd ${DIR_TO_TAR}
 # Copy over the plugins
 cp ${SRC_PATH}/*.gz .
 
+pipWheelArgs="--no-cache --find-links=. --find-links=${SRC_PLATFORM_PATH}"
+if [ -f "${pinnedDepsPyFile}" ]; then
+    pipWheelArgs="-r ${pinnedDepsPyFile} $pipWheelArgs"
+fi
+
 # Create the plugins release
-pip wheel --no-cache --find-links=. --find-links=${SRC_PLATFORM_PATH} *.gz
+pip wheel ${pipWheelArgs} *.gz
 
 # Delete all the wheels created for the plugins
 rm -f peek-plugin*.gz

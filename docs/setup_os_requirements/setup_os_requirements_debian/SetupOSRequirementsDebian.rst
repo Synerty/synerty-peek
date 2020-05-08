@@ -461,8 +461,7 @@ Install the C Compiler package, used for compiling python or VMWare tools, etc: 
 
 Install some utility packages: ::
 
-        PKG="rsync"
-        PKG="$PKG unzip"
+        PKG="rsync unzip wget"
 
         sudo apt-get install -y $PKG
 
@@ -488,7 +487,7 @@ Install C libraries that some python packages link to when they install: ::
 Install C libraries required for LDAP:
  ::
 
-        PKG="openldap-dev"
+        PKG="libsasl2-dev libldap-common libldap2-dev"
 
         sudo apt-get install -y $PKG
 

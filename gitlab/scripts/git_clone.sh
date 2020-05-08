@@ -16,6 +16,7 @@ USER=${3}
 PASSWORD=${4}
 CI_COMMIT_REF_NAME=${5}
 CI_PROJECT_NAMESPACE=${6}
+RELEASE_BRANCH=${7}
 
 echo "Cloning all the repositories at ${SRC_PATH}"
 
@@ -37,8 +38,14 @@ for repo in ${PACKAGES}; do
     if git fetch origin "${CI_COMMIT_REF_NAME}"; then
         echo "${repo}: Checking out ${CI_COMMIT_REF_NAME}"
         git checkout "${CI_COMMIT_REF_NAME}"
+
+    elif git fetch origin "${RELEASE_BRANCH}"; then
+        echo "${repo}: Checking out ${RELEASE_BRANCH}"
+        git checkout "${RELEASE_BRANCH}"
     else
-        echo "${repo}: Failed to switch to ${CI_COMMIT_REF_NAME} using master instead"
+        echo "${repo}: Failed to switch to ${CI_COMMIT_REF_NAME}" >&2
+        echo "${repo}: Failed to switch to ${RELEASE_BRANCH}" >&2
+        echo "${repo}: Using master instead" >&2
     fi
     popd
 done
