@@ -236,6 +236,14 @@ Restart all Peek services ::
     sudo systemctl start peek_agent
     sudo systemctl start peek_client
 
+v2.2.2 Issues Log
+-----------------
+
+Bug
+```
+
+*    [PEEK-602] - PoF Diagram Loader - Agent no longer reloads all pages on restart.
+
 v2.2.1 Issues Log
 -----------------
 
