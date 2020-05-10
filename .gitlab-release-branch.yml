@@ -1,2 +1,2 @@
 variables:
-    RELEASE_BRANCH: master
+    RELEASE_BRANCH: v2.3.x
