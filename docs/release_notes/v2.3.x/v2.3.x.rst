@@ -1,0 +1,102 @@
+.. _release_notes_v2.3.x:
+
+====================
+v2.3.x Release Notes
+====================
+
+Platform Changes
+----------------
+
+Nil
+
+Plugin Changes
+--------------
+
+The following plugins have code changes on the v2.3.x release branch
+
+*   peek-plugin-diagram
+
+*   peek-plugin-pof-diagram-loader
+
+Deployment Changes
+------------------
+
+Windows Deployment
+``````````````````
+
+.. note:: This release is not supported on Windows.
+
+Linux Deployment
+````````````````
+
+Nil
+
+macOS Deployment
+````````````````
+
+Nil
+
+iOS Deployment
+``````````````
+
+.. note:: Peek v2.0.x does not have support for iOS, this will be updated in a future release.
+    We're going to Ionics Capacitor framework to create a full hybrid app.
+
+
+Windows Deployment
+``````````````````
+
+Nil.
+
+.. note:: The windows deployment will change to use Windows Subsystem for Linux in
+            a future release.
+
+Migration Steps
+---------------
+
+peek-plugin-pof-diagram-loader
+``````````````````````````````
+
+In PEEK-526, the "Layer Profile Name" has been renamed to
+"Environment Name" in the plugin settings.
+
+The migration steps for this change are as follows:
+
+* Login to Peek Admin,
+
+* Go to plugin "PowerOn ADMS Diagram Loader"
+
+* Go to the "Edit App Server Settings" tab.
+
+* Update "Environment Name" to a value
+  from "ENMAC"."ENVIRONMENT_LIST"."ENVIRONMENT_NAME"
+  that you wish the diagram to load with.
+
+* Click Save
+
+* Restart the peek agent. ::
+
+    sudo systemctl restart peek_agent
+
+
+v2.3.0 Issues Log
+-----------------
+
+Bug
+```
+
+*    [PEEK-602] - PoF Diagram Loader - Agent no longer reloads all pages on restart.
+
+New Feature
+```````````
+
+*    [PEEK-526] - Implement support for loading in PowerOn ADMS "Poke Points".
+     These are hotspots that jump the user to another location on the diagram
+     when clicked.
+
+CI/CD Tasks
+```````````
+
+*    [PEEK-601] - Setup Peek release builds to pin Docker and Python dependencies
+     for the life of that release branch. (EG v2.2.7 will have the exact same python
+     dependency packages, Twisted, SQLAlchemy, VortexPY, etc as v2.2.0)
