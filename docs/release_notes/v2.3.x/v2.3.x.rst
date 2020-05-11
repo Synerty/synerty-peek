@@ -74,6 +74,13 @@ The migration steps for this change are as follows:
 
 * Click Save
 
+* Run the following as peek on the peek server to force a reload of the data: ::
+
+    psql <<EOF
+    UPDATE pl_pof_diagram_loader."PageLoadState"
+    SET "lastDisplayHash"='reloadme';
+    EOF
+
 * Restart the peek agent. ::
 
     sudo systemctl restart peek_agent
