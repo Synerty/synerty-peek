@@ -47,8 +47,8 @@ reqVer = '.'.join(package_version.split('.')[0:2]) + ".*"
 requirements = ["%s==%s,>=%s" % (pkg, reqVer, package_version) for pkg in requirements]
 
 doc_requirements = [
-    "Sphinx",
-    "Sphinx_rtd_theme",
+    "sphinx",
+    "sphinx-rtd-theme",
     "sphinx-autobuild",
     "pytmpdir"
 ]
