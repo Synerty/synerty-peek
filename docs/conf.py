@@ -25,7 +25,7 @@ from sphinx.ext.apidoc import create_modules_toc_file, recurse_tree
 __project__ = 'SynertyPeek'
 __copyright__ = '2016, Synerty'
 __author__ = 'Synerty'
-__version__ = '2.2.1'
+__version__ = '2.3.1'
 
 import sphinx_rtd_theme
 
