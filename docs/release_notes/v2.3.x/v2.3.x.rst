@@ -86,6 +86,17 @@ The migration steps for this change are as follows:
     sudo systemctl restart peek_agent
 
 
+v2.3.1 Issues Log
+-----------------
+
+Bug
+```
+
+*    [PEEK-526] - Loading Poke Points was buggy, loaded two disps with the same
+     action and didn't gracefully handle multiple poke points to the same
+     viewport from the same page.
+
+
 v2.3.0 Issues Log
 -----------------
 
