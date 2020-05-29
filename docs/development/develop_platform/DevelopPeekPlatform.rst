@@ -96,18 +96,18 @@ Use this script to insert individual peek modules.  Update {gitAccount} and
 
         REPO="{repository}"
 
-        if [ ! -d ~peek/peek-dev ]; then
-            mkdir ~peek/peek-dev
-            cd ~peek/peek-dev/
+        if [ ! -d ~/peek-dev ]; then
+            mkdir ~/peek-dev
+            cd ~/peek-dev/
             git clone https://bitbucket.org/synerty/$REPO.git
-            cd ~peek/peek-mobile/$REPO
+            cd ~/peek-mobile/$REPO
             git config --unset core.symlink
             git config --add core.symlink true
         else
             echo "ALERT: `pwd` directory already exists.  Please investigate then retry."
         fi
 
-        cd ~peek/peek-dev/
+        cd ~/peek-dev/
         ls -l
 
 Use this script to clone all repositories.  Update {gitAccount} in the script below: ::
@@ -123,20 +123,20 @@ Use this script to clone all repositories.  Update {gitAccount} in the script be
         REPOS="$REPOS peek-admin"
         REPOS="$REPOS peek-worker"
 
-        if [ ! -d ~peek/peek-dev ]; then
-        mkdir ~peek/peek-dev
-        cd ~peek/peek-dev/
+        if [ ! -d ~/peek-dev ]; then
+        mkdir ~/peek-dev
+        cd ~/peek-dev/
         for REPO in ${REPOS[*]}
         do
             echo $REPO
             git clone https://bitbucket.org/synerty/$REPO.git
-            cd ~peek/peek-dev/$REPO
+            cd ~/peek-dev/$REPO
             git config --unset core.symlink
             git config --add core.symlink true
-            cd ~peek/peek-dev/
+            cd ~/peek-dev/
         done
         else
-            cd ~peek/peek-dev/
+            cd ~/peek-dev/
             echo "ALERT: `pwd` directory already exists.  Please investigate then retry."
         fi
         ls -l
@@ -151,13 +151,13 @@ Install Front End Modules
 Remove the old npm modules files and re-install for both client and server front and
 packages.  Run the following commands: ::
 
-        cd ~peek/peek-dev/peek-mobile/peek_mobile/build-web
+        cd ~/peek-dev/peek-mobile/peek_mobile/build-web
         [ -d node_modules ] && rm -rf node_modules
         npm install
-        cd ~peek/peek-dev/peek-mobile/peek_mobile/build-ns
+        cd ~/peek-dev/peek-mobile/peek_mobile/build-ns
         [ -d node_modules ] && rm -rf node_modules
         npm install
-        cd ~peek/peek-dev/peek-admin/peek_admin/build-web
+        cd ~/peek-dev/peek-admin/peek_admin/build-web
         [ -d node_modules ] && rm -rf node_modules
         npm install
 
@@ -168,7 +168,7 @@ These steps link the projects under site-packages and installs their dependencie
 
 For synerty-peek, run the following commands: ::
 
-        cd ~peek/peek-dev/synerty-peek
+        cd ~/peek-dev/synerty-peek
         ./pip_uninstall_and_develop.sh
 
 For repositories and plugins, run from their directory ::
@@ -185,9 +185,9 @@ compiler.
 
 Run the following commands: ::
 
-        cd ~peek/peek-dev/peek-mobile/peek_mobile/build-web
+        cd ~/peek-dev/peek-mobile/peek_mobile/build-web
         ng build
-        cd ~peek/peek-dev/peek-admin/peek_admin/build-web
+        cd ~/peek-dev/peek-admin/peek_admin/build-web
         ng build
 
 
