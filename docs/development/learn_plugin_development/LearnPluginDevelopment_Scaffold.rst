@@ -70,7 +70,7 @@ Create :file:`.gitignore`, and populate it with the following ::
         docs/api_autoapi
 
 
-Add :file:`.editorconfig'
+Add :file:`.editorconfig`
 `````````````````````````
 
 Create the file :file:`.editorconfig`, with the following content: ::

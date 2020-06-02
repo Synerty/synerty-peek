@@ -136,13 +136,6 @@ Take note to answer Y and Y at the end to ensure the services are installed
 
 :ref:`deploy_peek_platform_win`
 
-----
-
-Deploy the plugins.
-
-:ref:`deploy_peek_plugins`
-
-
 Enable New Plugins
 ------------------
 

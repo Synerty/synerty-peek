@@ -362,6 +362,7 @@ It's folder structure looks like this :
             Plugins can structure the subfolders however they like, this dir is available
             from node_modules/@peek/peek_plugin_noop)
             See subfolders below.
+
 ---
 
 An example contents of the :file:`_private` is described below.

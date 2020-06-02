@@ -7,7 +7,7 @@ v2.2.x Release Notes
 Platform Changes
 ----------------
 
-#.  PostGreSQL upgrade from v10 to v12
+#.  PostgreSQL upgrade from v10 to v12
 
 #.  The peek platform now requires the posgresql-plpython3 package installed.
     (See Migration Steps)
@@ -57,7 +57,7 @@ macOS Deployment
 - Installing PlPython3u Postgresql extension
 
 See the :ref:`setup_os_requirements_macos` documentation for the updates, the following
-sections need to be completed again. "Install PostGreSQL" and "Install Python 3.6".
+sections need to be completed again. "Install PostgreSQL" and "Install Python 3.6".
 
 iOS Deployment
 ``````````````
@@ -98,10 +98,10 @@ Stop peek with the following commands ::
     sudo systemctl stop peek_worker
     sudo systemctl stop peek_server
 
-Upgrade to PostGreSQL-12
+Upgrade to PostgreSQL-12
 """"""""""""""""""""""""
 
-Install PostGreSQL 12 ::
+Install PostgreSQL 12 ::
 
     URL="https://download.postgresql.org/pub/repos/yum"
     URL=$URL/reporpms/EL-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm"
@@ -116,17 +116,17 @@ Install PostGreSQL 12 ::
 
 Alternatively, the RPMs can be downloaded from here and manually installed.
 
-`https://download.postgresql.org/pub/repos/yum/12/redhat/rhel-7.7-x86_64/postgresql12-contrib-12.2-2PGDG.rhel7.x86_64.rpm`_
+`<https://download.postgresql.org/pub/repos/yum/12/redhat/rhel-7.7-x86_64/postgresql12-contrib-12.2-2PGDG.rhel7.x86_64.rpm>`_
 
-`https://download.postgresql.org/pub/repos/yum/12/redhat/rhel-7.7-x86_64/postgresql12-libs-12.2-2PGDG.rhel7.x86_64.rpm`_
+`<https://download.postgresql.org/pub/repos/yum/12/redhat/rhel-7.7-x86_64/postgresql12-libs-12.2-2PGDG.rhel7.x86_64.rpm>`_
 
-`https://download.postgresql.org/pub/repos/yum/12/redhat/rhel-7.7-x86_64/postgresql12-plpython3-12.2-2PGDG.rhel7.x86_64.rpm`_
+`<https://download.postgresql.org/pub/repos/yum/12/redhat/rhel-7.7-x86_64/postgresql12-plpython3-12.2-2PGDG.rhel7.x86_64.rpm>`_
 
-`https://download.postgresql.org/pub/repos/yum/12/redhat/rhel-7.7-x86_64/postgresql12-devel-12.2-2PGDG.rhel7.x86_64.rpm`_
+`<https://download.postgresql.org/pub/repos/yum/12/redhat/rhel-7.7-x86_64/postgresql12-devel-12.2-2PGDG.rhel7.x86_64.rpm>`_
 
-`https://download.postgresql.org/pub/repos/yum/12/redhat/rhel-7.7-x86_64/postgresql12-server-12.2-2PGDG.rhel7.x86_64.rpm`_
+`<https://download.postgresql.org/pub/repos/yum/12/redhat/rhel-7.7-x86_64/postgresql12-server-12.2-2PGDG.rhel7.x86_64.rpm>`_
 
-`https://download.postgresql.org/pub/repos/yum/12/redhat/rhel-7.7-x86_64/postgresql12-12.2-2PGDG.rhel7.x86_64.rpm`_
+`<https://download.postgresql.org/pub/repos/yum/12/redhat/rhel-7.7-x86_64/postgresql12-12.2-2PGDG.rhel7.x86_64.rpm>`_
 
 These can then be installed with ::
 
@@ -209,10 +209,10 @@ Delete the old cluster ::
     sudo su - postgres -c time /var/lib/pgsql/delete_old_cluster.sh
 
 
-Grant PostGreSQL Peek Permissions
+Grant PostgreSQL Peek Permissions
 """""""""""""""""""""""""""""""""
 
-The PostGreSQL server now runs parts of peeks python code inside
+The PostgreSQL server now runs parts of peeks python code inside
 the postgres/postmaster processes. To do this the postgres user
 needs access to peeks home directory where the peek software is
 installed.
@@ -327,10 +327,10 @@ Improvement
 *    [PEEK-577] - Update the Abstract Chunked Index Queue controllers to use
      plpython3u to load their blocks.
 
-*    [PEEK-563] - Add plpython3u support to PostGreSQL to documentation
+*    [PEEK-563] - Add plpython3u support to PostgreSQL to documentation
 
 *    [PEEK-583] - Peek Storage - Create runPyInPg method to run any function
-     in PostGreSQL
+     in PostgreSQL
 
 *    [PEEK-586] - Add TcpVortex memory leak unit tests to VortexPY
 

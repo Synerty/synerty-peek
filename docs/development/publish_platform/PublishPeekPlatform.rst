@@ -17,7 +17,7 @@ Change root directory of synerty-peek, example:
 
 ::
 
-        cd ~peek/peek-dev/synerty-peek/
+        cd ~peek/dev-peek/synerty-peek/
 
 
 ----
@@ -62,7 +62,7 @@ Change root directory of synerty-peek, example:
 
 ::
 
-        cd ~peek/peek-dev/synerty-peek/
+        cd ~peek/dev-peek/synerty-peek/
 
 
 ----

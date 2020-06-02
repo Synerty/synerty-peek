@@ -1,13 +1,13 @@
 .. _win_postgres_backup_restore:
 
 
-Backup and Restore PostGreSQL DB
+Backup and Restore PostgreSQL DB
 ````````````````````````````````
 
 Backup
 ~~~~~~
 
-This section describes how to backup the PostGreSQL database for Peek on a windows
+This section describes how to backup the PostgreSQL database for Peek on a windows
 server.
 
 ----
@@ -101,7 +101,7 @@ name extension from :file:`.sql` to :file:`.dmp`.
 Restore
 ~~~~~~~
 
-This section describes how to restore the PostGreSQL database for Peek on a windows
+This section describes how to restore the PostgreSQL database for Peek on a windows
 server.
 
 .. warning:: This procedure deletes the existing Peek database.
@@ -155,7 +155,7 @@ You won't see any errors or feedback when this succeeds.
 To restore a Plain SQL backup (created with :code:`-F p` and extension :file:`.sql`)
 use this section.
 
-Restore the PostGreSQL database. This will create the schema and load the data.
+Restore the PostgreSQL database. This will create the schema and load the data.
 
 ::
 
@@ -165,7 +165,7 @@ Restore the PostGreSQL database. This will create the schema and load the data.
 OR, To restore a Custom backup (created with :code:`-F c` and extension :file:`.dmp`)
 use this section.
 
-Restore the PostGreSQL database. This will create the schema and load the data.
+Restore the PostgreSQL database. This will create the schema and load the data.
 
 ::
 

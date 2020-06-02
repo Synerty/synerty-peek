@@ -64,8 +64,7 @@ Here is an example of the setting in PyCharm:
 
 Restart the services that use the plugin
 
-.. NOTE:: The plugins that aren't being developed should be installed as per
-    :ref:`deploy_peek_plugins`
+.. NOTE:: The plugins that aren't being developed should be installed with pip.
 
 ----
 
