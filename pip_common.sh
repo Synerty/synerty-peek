@@ -54,6 +54,7 @@ peek-plugin-inbox
 peek-plugin-chat
 peek-plugin-livedb
 peek-plugin-graphdb
+peek-plugin-eventdb
 peek-plugin-docdb
 peek-plugin-docdb-generic-menu
 peek-plugin-diagram
@@ -78,6 +79,7 @@ peek-plugin-pof-gis-location-loader
 peek-plugin-pof-user-loader
 peek-plugin-pof-email-nar
 peek-plugin-pof-email-incidents
+peek-plugin-pon-event-loader
 peek-plugin-diagram-zepben-menu
 peek-plugin-diagram-trace
 peek-plugin-diagram-positioner"
