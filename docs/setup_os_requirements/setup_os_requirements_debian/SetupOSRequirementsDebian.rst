@@ -565,17 +565,17 @@ Reboot the virtual machine. ::
 Keep in mind, that if the static IP is not set, the IP address of the VM may change,
 causing issues when reconnecting with SSH.
 
+.. _debian_install_postgresql:
 
-
-Install PostGreSQL
+Install PostgreSQL
 ------------------
 
 Install the relational database Peek stores its data in.
-This is PostGreSQL 10.
+This is PostgreSQL 10.
 
 .. note:: Run the commands in this step as the :code:`peek` user.
 
-Add the latest PostGreSQL repository ::
+Add the latest PostgreSQL repository ::
 
         F=/etc/apt/sources.list.d/postgresql.list
         echo "deb http://apt.postgresql.org/pub/repos/apt/ stretch-pgdg main" | sudo tee $F
@@ -590,6 +590,49 @@ Install PostGresQL ::
         sudo apt-get install -y postgresql-12-postgis-2.4 postgresql-12 postgresql-plpython3-12
         sudo apt-get clean
 
+
+Install PostgreSQL Timescale
+````````````````````````````
+
+Next install timescale, this provides support for storing large amounts of historical
+data.
+
+`www.timescale.com <https://www.timescale.com>`_
+
+----
+
+Setup the repository. ::
+
+         # Add our repository
+         VAL="deb https://packagecloud.io/timescale/timescaledb/debian/ `lsb_release -c -s` main"
+         sudo sh -c "echo ${VAL} > /etc/apt/sources.list.d/timescaledb.list"
+         wget --quiet -O - https://packagecloud.io/timescale/timescaledb/gpgkey | sudo apt-key add -
+
+----
+
+Install the packages ::
+
+        # Install any updates to the operating system
+        # You may want to skip this step if you don't want to upgrade
+        sudo apt-get update
+
+        # Now install appropriate package for PG version
+        sudo apt-get install timescaledb-postgresql-12
+
+----
+
+Tune the :file:`postgresql.conf` ::
+
+        PGVER=12
+        FILE="/var/lib/pgsql/${PGVER}/data/postgresql.conf"
+        sudo timescaledb-tune -quiet -yes -conf-path ${FILE} -pg-version ${PGVER}
+
+
+Finish PostgreSQL Setup
+````````````````````````
+
+Finish configuring and starting PostgreSQL.
+
 ----
 
 Allow the peek OS user to login to the database as user peek with no password ::
@@ -598,6 +641,14 @@ Allow the peek OS user to login to the database as user peek with no password ::
         if ! sudo grep -q 'peek' $F; then
             echo "host  peek    peek    127.0.0.1/32    trust" | sudo tee $F -a
         fi
+
+----
+
+Create the PostgreSQL cluster and configure it to auto start: ::
+
+        sudo /usr/pgsql-12/bin/postgresql-12-setup initdb
+        sudo systemctl enable postgresql-12
+        sudo systemctl start postgresql-12
 
 ----
 
@@ -610,7 +661,7 @@ Create the peek SQL user ::
 
 ----
 
-Set the PostGreSQL peek users password ::
+Set the PostgreSQL peek users password ::
 
         psql -d postgres -U peek <<EOF
         \password
@@ -626,6 +677,13 @@ Create the database ::
 
         createdb -O peek peek
 
+.. note:: If you already have a database, you may now need to upgrade the timescale
+          extension. ::
+
+                psql peek <<EOF
+                ALTER EXTENSION timescaledb UPDATE;
+                EOF
+
 ----
 
 Cleanup traces of the password ::
@@ -633,11 +691,10 @@ Cleanup traces of the password ::
         [ ! -e ~/.psql_history ] || rm ~/.psql_history
 
 
-
-
-Grant PostGreSQL Peek Permissions
+Grant PostgreSQL Peek Permissions
 `````````````````````````````````
-The PostGreSQL server now runs parts of peeks python code inside
+
+The PostgreSQL server now runs parts of peeks python code inside
 the postgres/postmaster processes. To do this the postgres user
 needs access to peeks home directory where the peek software is
 installed.
@@ -646,8 +703,8 @@ installed.
 
 Grant permissions ::
 
-    sudo chmod g+rx ~peek
-    sudo usermod -G peek postgres
+        sudo chmod g+rx ~peek
+        sudo usermod -G peek postgres
 
 Compile and Install Python 3.6
 ------------------------------
@@ -678,7 +735,6 @@ Insert : ::
 ----
 
 .. warning:: Restart your terminal you get the new environment.
-
 
 ----
 

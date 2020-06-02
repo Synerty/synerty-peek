@@ -62,10 +62,10 @@ to run the Peek Platform.
 
 The instructions on this page don't install the peek platform, that's done later.
 
-Install Red Hat Linux Server 7.6 OS
+Install Red Hat Linux Server 7.7 OS
 -----------------------------------
 
-This section installs the Red Hat Linux Server 7.6 64bit operating system.
+This section installs the Red Hat Linux Server 7.7 64bit operating system.
 
 Create VM
 `````````
@@ -79,9 +79,9 @@ Create a new virtual machine with the following specifications
 Install OS
 ``````````
 
-Download the RHEL ISO **Red Hat Enterprise Linux 7.6 Binary DVD** from:
+Download the RHEL ISO **Red Hat Enterprise Linux 7.7 Binary DVD** from:
 
-`Download RHEL <https://access.redhat.com/downloads/content/69/ver=/rhel---7/7.6/x86_64/product-software>`_
+`Download RHEL <https://access.redhat.com/downloads/content/69/ver=/rhel---7/7.7/x86_64/product-software>`_
 
 ----
 
@@ -95,9 +95,9 @@ Mount the ISO in the virtual machine and start the virtual machine.
 Staring Off
 ~~~~~~~~~~~
 
-At the **Red Hat Enterprise Linux 7.6 installer boot menu** screen, select: ::
+At the **Red Hat Enterprise Linux 7.7 installer boot menu** screen, select: ::
 
-    Install Red Hat Enterprise Linux 7.6
+    Install Red Hat Enterprise Linux 7.7
 
 ----
 
@@ -295,8 +295,8 @@ The OS installation is now complete.
 Login as Peek
 -------------
 
-Login to the RHEL VM as the :code:`peek` user, either via SSH, or the graphical desktop if it's
-installed.
+Login to the RHEL VM as the :code:`peek` user, either via SSH, or the graphical desktop
+if it's installed.
 
 .. important:: All steps after this point assume you're logged in as the peek user.
 
@@ -322,8 +322,7 @@ Replace MY_RHN_USERNAME with your redhat network username. ::
 
 ----
 
-List the subscriptions, and select a pool.
- ::
+List the subscriptions, and select a pool. ::
 
     sudo subscription-manager list --available | grep Pool
 
@@ -336,8 +335,7 @@ Replace POOL_ID_FROM_ABOVE_COMMAND with the Pool ID from the last command.  ::
 
 ----
 
-Test the subscription with a yum update, this will apply the latest updates.
- ::
+Test the subscription with a yum update, this will apply the latest updates. ::
 
     sudo yum update -y
 
@@ -356,7 +354,7 @@ Removing IPv6 Localhost
 -----------------------
 
 Run the following command to ensure that localhost does not resolve to ::1
-as this effects the PostGreSQL connection. ::
+as this effects the PostgreSQL connection. ::
 
     F=/etc/sysctl.conf
     cat | sudo tee $F <<EOF
@@ -413,8 +411,7 @@ Install the Python build dependencies: ::
 
 ----
 
-Install C libraries that some python packages link to when they install:
- ::
+Install C libraries that some python packages link to when they install. ::
 
         # For the cryptography package
         PKG="libffi-devel"
@@ -423,8 +420,7 @@ Install C libraries that some python packages link to when they install:
 
 ----
 
-Install C libraries required for LDAP:
- ::
+Install C libraries required for LDAP. ::
 
         PKG="openldap-devel"
 
@@ -533,25 +529,26 @@ Allow Peek through the firewall and port forward to the non-privileged port ::
     sudo firewall-cmd --runtime-to-permanent
 
 
-Install PostGreSQL
+.. _rhel_install_postgresql:
+
+Install PostgreSQL
 ------------------
 
 Install the relational database Peek stores its data in.
-This is PostGreSQL 10.
+This is PostgreSQL 10.
 
 .. note:: Run the commands in this step as the `peek` user.
 
 ----
 
-Setup the PostGreSQL repository:
- ::
+Setup the PostgreSQL repository: ::
 
     PKG="https://download.postgresql.org/pub/repos/yum/reporpms/EL-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm"
     sudo yum install -y $PKG
 
 ----
 
-Install PostGreSQL: ::
+Install PostgreSQL: ::
 
     PKG="postgresql12"
     PKG="$PKG postgresql12-server"
@@ -560,13 +557,58 @@ Install PostGreSQL: ::
     PKG="$PKG postgresql12-plpython3"
     sudo yum install -y $PKG
 
+
+Install PostgreSQL Timescale
+````````````````````````````
+
+Next install timescale, this provides support for storing large amounts of historical
+data.
+
+`www.timescale.com <https://www.timescale.com>`_
+
 ----
 
-Create the PostGreSQL cluster and configure it to auto start: ::
+Setup the repository. ::
 
-    sudo /usr/pgsql-12/bin/postgresql-12-setup initdb
-    sudo systemctl enable postgresql-12
-    sudo systemctl start postgresql-12
+        # Add our repo
+        sudo tee /etc/yum.repos.d/timescale_timescaledb.repo <<EOL
+        [timescale_timescaledb]
+        name=timescale_timescaledb
+        baseurl=https://packagecloud.io/timescale/timescaledb/el/7/\$basearch
+        repo_gpgcheck=1
+        gpgcheck=0
+        enabled=1
+        gpgkey=https://packagecloud.io/timescale/timescaledb/gpgkey
+        sslverify=1
+        sslcacert=/etc/pki/tls/certs/ca-bundle.crt
+        metadata_expire=300
+        EOL
+
+
+----
+
+Install the packages ::
+
+        # Install any updates to the operating system
+        # You may want to skip this step if you don't want to upgrade
+        sudo yum update -y
+
+        # Now install appropriate package for PG version
+        sudo yum install -y timescaledb-postgresql-12
+
+----
+
+Tune the :file:`postgresql.conf` ::
+
+        PGVER=12
+        FILE="/var/lib/pgsql/${PGVER}/data/postgresql.conf"
+        sudo timescaledb-tune -quiet -yes -conf-path ${FILE} -pg-version ${PGVER}
+
+
+Finish PostgreSQL Setup
+````````````````````````
+
+Finish configuring and starting PostgreSQL.
 
 ----
 
@@ -580,6 +622,14 @@ Allow the peek OS user to login to the database as user peek with no password ::
 
 ----
 
+Create the PostgreSQL cluster and configure it to auto start: ::
+
+    sudo /usr/pgsql-12/bin/postgresql-12-setup initdb
+    sudo systemctl enable postgresql-12
+    sudo systemctl start postgresql-12
+
+----
+
 Create the peek SQL user: ::
 
     sudo su - postgres
@@ -588,7 +638,7 @@ Create the peek SQL user: ::
 
 ----
 
-Set the PostGreSQL peek users password: ::
+Set the PostgreSQL peek users password: ::
 
     psql -d postgres -U peek <<EOF
     \password
@@ -604,6 +654,13 @@ Create the database: ::
 
     createdb -O peek peek
 
+.. note:: If you already have a database, you may now need to upgrade the timescale
+          extension. ::
+
+                psql peek <<EOF
+                ALTER EXTENSION timescaledb UPDATE;
+                EOF
+
 ----
 
 Cleanup traces of the password: ::
@@ -611,14 +668,14 @@ Cleanup traces of the password: ::
     [ ! -e ~/.psql_history ] || rm ~/.psql_history
 
 
-Grant PostGreSQL Peek Permissions
+Grant PostgreSQL Peek Permissions
 `````````````````````````````````
-The PostGreSQL server now runs parts of peeks python code inside
+The PostgreSQL server now runs parts of peeks python code inside
 the postgres/postmaster processes. To do this the postgres user
 needs access to peeks home directory where the peek software is
 installed.
 
----
+----
 
 Grant permissions ::
 

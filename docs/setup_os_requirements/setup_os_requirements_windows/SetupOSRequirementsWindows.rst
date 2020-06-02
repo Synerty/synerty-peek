@@ -9,6 +9,9 @@ The Peek platform is designed to run on Linux, however, it is compatible with wi
 Please read through all of the documentation before commencing the installation
 procedure.
 
+TODO: Upgrade to PostgreSQL 12
+TODO: Add timescale support
+
 Installation Objective
 ----------------------
 
@@ -120,6 +123,7 @@ Install using the ISO
 
 :Download: `<https://www.microsoft.com/en-US/download/details.aspx?id=48146>`_
 
+.. _setup_msys_git:
 
 Setup Msys Git
 --------------
@@ -157,12 +161,12 @@ git command.
 Install PostgresSQL
 -------------------
 
-Peek requires PostGreSQL as it's persistent, relational data store.
+Peek requires PostgreSQL as it's persistent, relational data store.
 
 :Download: `<https://www.enterprisedb.com/downloads/postgres-postgresql-downloads#windows>`_
 :From: `<https://www.postgresql.org>`_
 
-.. note:: Ensure you download the 64bit version or PostGreSQL
+.. note:: Ensure you download the 64bit version or PostgreSQL
             or the Peek windows service dependencies
             will not recognise it ("postgresql-10" vs "postgresql-x64-10")
 
