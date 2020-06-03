@@ -484,8 +484,7 @@ Install C libraries that some python packages link to when they install: ::
 
 ----
 
-Install C libraries required for LDAP:
- ::
+Install C libraries required for LDAP: ::
 
         PKG="libsasl2-dev libldap-common libldap2-dev"
 

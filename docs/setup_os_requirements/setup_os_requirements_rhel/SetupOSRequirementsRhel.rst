@@ -431,24 +431,23 @@ Install C libraries required for LDAP. ::
 Install C libraries that database access python packages link to when they install:
 
 .. warning:: These packages are not from the Redhat Network.
- ::
+     ::
 
-        FEDORA_PACKAGES="https://dl.fedoraproject.org/pub/epel/7/x86_64/Packages"
+            FEDORA_PACKAGES="https://dl.fedoraproject.org/pub/epel/7/x86_64/Packages"
 
-        # For Shapely and GEOAlchemy
-        PKG="${FEDORA_PACKAGES}/g/geos-3.4.2-2.el7.x86_64.rpm"
-        PKG="$PKG ${FEDORA_PACKAGES}/g/geos-devel-3.4.2-2.el7.x86_64.rpm"
+            # For Shapely and GEOAlchemy
+            PKG="${FEDORA_PACKAGES}/g/geos-3.4.2-2.el7.x86_64.rpm"
+            PKG="$PKG ${FEDORA_PACKAGES}/g/geos-devel-3.4.2-2.el7.x86_64.rpm"
 
-        # For the SQLite python connector
-        PKG="$PKG ${FEDORA_PACKAGES}/l/libsqlite3x-20071018-20.el7.x86_64.rpm"
-        PKG="$PKG ${FEDORA_PACKAGES}/l/libsqlite3x-devel-20071018-20.el7.x86_64.rpm"
+            # For the SQLite python connector
+            PKG="$PKG ${FEDORA_PACKAGES}/l/libsqlite3x-20071018-20.el7.x86_64.rpm"
+            PKG="$PKG ${FEDORA_PACKAGES}/l/libsqlite3x-devel-20071018-20.el7.x86_64.rpm"
 
-        sudo yum install -y $PKG
+            sudo yum install -y $PKG
 
 ----
 
-Install C libraries that the oracle client requires:
- ::
+Install C libraries that the oracle client requires: ::
 
         # For LXML and the Oracle client
         PKG="libxml2 libxml2-devel"
@@ -691,8 +690,7 @@ latest version of Python.
 
 ----
 
-Edit `~/.bashrc` and append the following to the end of the file.
- ::
+Edit `~/.bashrc` and append the following to the end of the file. ::
 
     ##### SET THE PEEK ENVIRONMENT #####
     # Setup the variables for PYTHON
@@ -958,8 +956,7 @@ Install FreeTDS: ::
 
 ----
 
-Create file :file:`freetds.conf` in :code:`~/freetds` and populate with the following:
- ::
+Create file :file:`freetds.conf` in :code:`~/freetds` and populate with the following: ::
 
     mkdir ~/freetds
     cat > ~/freetds/freetds.conf <<EOF
