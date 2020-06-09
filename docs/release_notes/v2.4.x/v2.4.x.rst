@@ -141,14 +141,61 @@ v2.4.0 Issues Log
 Bug
 ```
 
+*   [PEEK-455] - Peek Platform - Using overlay directories causes frontend to
+    always rebuild
 
+*   [PEEK-510] - Starting an edit of a branch should re-position the diagram.
+
+*   [PEEK-621] - Diagram - Polygons fill outside of boxes with dynamics,
+    (when it's over 100%)
+
+*   [PEEK-622] - PoF GraphDB Loader: 'NoneType' object has no attribute
+    'updateInProgressDate'
+
+*   [PEEK-630] - DMS Diagram - Font alignments for middle and right don't work
+
+*   [PEEK-631] - DMS Diagram - Bold Helvetica doesn't render correctly
+
+*   [PEEK-634] - Peek DMS Diagram - Layer Min/Max Display Ranges Overlap
 
 New Feature
 ```````````
 
+*   [PEEK-522] - Develop Alarms and Events viewer
 
+Task
+````
+
+*   [PEEK-623] - Release v2.4.0, including release notes
+
+Improvement
+```````````
+
+*   [PEEK-608] - Prevent peek from loading the same plugin twice.
+
+*   [PEEK-609] - PoF Equipment Loader - Filter components added to search based
+    on component id
+
+*   [PEEK-610] - Search - Update tokenizing to allow partial keyword support
+
+*   [PEEK-612] - Add platform support for Timescale PostGreSQL
+
+*   [PEEK-614] - Add adaptor/patching for running worker tasks in plpython
+
+*   [PEEK-615] - Abstract Index - Run deduplicate SQL before fetching more blocks.
+
+*   [PEEK-626] - Storage - runPyInPg use tuples instead of plain json for args and returns
+
+*   [PEEK-627] - Vortex - Add support for TupleSelectorUpdateMapper in TupleDataObservable
+
+*   [PEEK-629] - txhttputil - Add support for url args in HttpResourceProxy
 
 
 CI/CD Tasks
 ```````````
 
+*   [PEEK-605] - Gitlab - error: The 'sphinx' distribution was not found and is
+    required by sphinx-rtd-theme, peek-doc-dev
+
+*   [PEEK-606] - Gitlab - Unit tests can't find non open source peek plugins
+    (peek-plugin-pof-*)
