@@ -86,6 +86,35 @@ The migration steps for this change are as follows:
     sudo systemctl restart peek_agent
 
 
+v2.3.3 Issues Log
+-----------------
+
+Bug
+```
+
+*    [PEEK-455] - Peek Platform - Using overlay directories causes frontend to always
+     rebuild
+
+*    [PEEK-501] - Lines and circles are imported from PowerOn with width=0.
+     These lines were displayed with an unscaled 1pt line.
+
+*    [PEEK-505] - Branches are listed twice
+
+*    [PEEK-607] - Queue Compilers get held up too much by fetching duplicates.
+
+Improvement
+```````````
+
+*    [PEEK-608] - Prevent peek from loading the same plugin twice.
+
+*    [PEEK-614] - Add adaptor/patching for running worker tasks in plpython
+
+
+v2.3.2 Issues Log
+-----------------
+
+This was an internal release.
+
 v2.3.1 Issues Log
 -----------------
 

@@ -5,8 +5,7 @@ Setup Plugin for Development
 ============================
 
 Plugins need to be installed as python packages for the Peek Platform to run them.
-This is typically done with a command similar to :command:`pip install peek-plugin-noop`
-in the :ref:`deploy_peek_plugins`.
+This is typically done with a command similar to :command:`pip install peek-plugin-noop`.
 
 Python packages can be installed in "development" mode, where your code being developed
 is only linked into the python environment.

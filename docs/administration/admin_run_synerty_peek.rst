@@ -92,4 +92,4 @@ Whats Next
 ``````````
 
 Now that the platform is running, See the next section,
-:ref:`admin_updating_plugin_settings`
+:ref:`admin_update_plugin_settings`

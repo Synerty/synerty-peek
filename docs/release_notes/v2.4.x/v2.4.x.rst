@@ -1,0 +1,154 @@
+.. _release_notes_v2.4.x:
+
+====================
+v2.4.x Release Notes
+====================
+
+Platform Changes
+----------------
+
+VortexPY and VortexJS have been updated to allow datetimes in TupleSelector classes.
+
+The platform now requires the "timescale" PostgreSQL extension.
+
+Major Plugin Changes
+--------------------
+
+The following plugins have been developed for the v2.4.x+ Peek releases.
+
+*   **peek-plugin-eventdb** (Open Source)
+    This plugin stores current and historical alarms and events.
+
+*   **peek-plugin-pon-event-loader** (Proprietary)
+    This plugin loads historical and current alarms and events from the PowerOn ADMS.
+
+*   **peek-core-search** (Open Source)
+    The search feature of Peek has been updated to support faster partial
+    keyword searches.
+
+*   **peek-plugin-pof-equipment-loader** (Proprietary)
+    The Equipment Loader plugin now has a list of COMPONENT_CLASSes that determines which
+    equipment will be loaded into the search for indexing.
+
+Deployment Changes
+------------------
+
+Windows Deployment
+``````````````````
+
+.. note:: This release is not supported on Windows.
+
+Linux Deployment
+````````````````
+
+Reinstall PostgreSQL as per the updated instructions to include support for timescale.
+
+Debian: :ref:`debian_install_postgresql`
+
+Redhat: :ref:`rhel_install_postgresql`
+
+macOS Deployment
+````````````````
+
+Reinstall PostgreSQL as per the updated instructions to include support for timescale.
+
+MacOS: :ref:`macos_install_postgresql`
+
+iOS Deployment
+``````````````
+
+.. note:: Peek v2.0.x does not have support for iOS, this will be updated in a future release.
+    We're going to Ionics Capacitor framework to create a full hybrid app.
+
+
+Windows Deployment
+``````````````````
+
+Nil.
+
+.. note:: The windows deployment will change to use Windows Subsystem for Linux in
+            a future release.
+
+Migration Steps
+---------------
+
+Perform the following migration steps, and then restart the Peek services.
+
+peek-core-search
+````````````````
+
+This update requires reloading all of the search data. Run the following to truncate
+the search data. ::
+
+        psql <<EOF
+        -- Clear out and reload all the Search data
+
+        TRUNCATE TABLE core_search."EncodedSearchIndexChunk" CASCADE;
+        TRUNCATE TABLE core_search."SearchIndex" CASCADE;
+        TRUNCATE TABLE core_search."SearchIndexCompilerQueue" CASCADE;
+
+        TRUNCATE TABLE core_search."EncodedSearchObjectChunk" CASCADE;
+        TRUNCATE TABLE core_search."SearchObject" CASCADE;
+        TRUNCATE TABLE core_search."SearchObjectCompilerQueue" CASCADE;
+
+        EOF
+
+
+peek-plugin-pof-equipment-loader
+````````````````````````````````
+
+The equipment loader will need to reload the search data, force an update with the
+following SQL. ::
+
+        psql <<EOF
+        UPDATE pl_pof_equipment_loader."ChunkLoadState"
+        SET "lastSearchHash" = 'reloadme';
+        EOF
+
+
+peek-plugin-pof-switching-loader
+````````````````````````````````
+
+The equipment loader will need to reload the search data, force an update with the
+following SQL. ::
+
+        psql <<EOF
+        UPDATE pl_pof_switching_loader."ChunkLoadState"
+        SET "lastSearchHash" = 'reloadme';
+        EOF
+
+
+peek-plugin-eventdb
+```````````````````
+
+Enable this plugin all Peek services :file:`config.json`, in the enabled plugins.
+This must be after the DocDB plugin. ::
+
+    peek-plugin-eventdb
+
+peek-plugin-pon-event-loader
+````````````````````````````
+
+Enable this plugin all Peek services :file:`config.json`, in the enabled plugins.
+This must be after the EventDB plugin. ::
+
+    peek-plugin-pon-event-loader
+
+
+v2.4.0 Issues Log
+-----------------
+
+Bug
+```
+
+
+
+New Feature
+```````````
+
+
+
+
+CI/CD Tasks
+```````````
+

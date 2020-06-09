@@ -28,7 +28,7 @@ Dependency Bump
 Peek dependencies are upgrade as follows:
 
 #.  Python 3.6.5
-#.  PostGreSQL 10.4
+#.  PostgreSQL 10.4
 #.  MsysGit - Install setttings change
 
 Windows Services
@@ -45,7 +45,7 @@ instructions to upgrade all the dependencies.
 
 ----
 
-First, backup the PostGreSQL :code:`peek` database.
+First, backup the PostgreSQL :code:`peek` database.
 
 ----
 
@@ -57,12 +57,12 @@ delete C:\\Users\\peek\\synerty-peek*
 
 #. Uninstall Python
 #. Uninstall "Git version"
-#. Uninstall PostGreSQL
+#. Uninstall PostgreSQL
 
 
 ----
 
-Delete the old PostGreSQL database data directory.
+Delete the old PostgreSQL database data directory.
 
 delete C:\\Program Files\\PostgreSQL
 
@@ -74,7 +74,7 @@ Reinstall the software again based on these instructions:
 
 #.  Install Python
 #.  Install Msys Git
-#.  Install PostGreSQL
+#.  Install PostgreSQL
 
 :ref:`setup_os_requirements_windows`
 
@@ -103,9 +103,4 @@ These steps grant "Login as Service" to the ".\peek" user
 #.  Enter the password twice and hit OK
 #.  A dialog box will appear saying that the Peek users has been granted the right.
 
-----
-
-Deploy the plugins.
-
-:ref:`deploy_peek_plugins`
 

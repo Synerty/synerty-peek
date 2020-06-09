@@ -122,8 +122,8 @@ Diagram Positioner
 
 The old peek_plugin_gis_dms_positioner plugin has been resurected.
 This plugin now uses the DocDB popups, shows locate on actions
- using the coord-set names, and is smart enough to not show
- locate actions for the current coord-set.
+using the coord-set names, and is smart enough to not show
+locate actions for the current coord-set.
 
 This replaces the old method of just using the result sof peek-core-search.
 

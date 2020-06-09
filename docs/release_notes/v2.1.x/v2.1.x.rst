@@ -17,7 +17,7 @@ properly, however investigations showed that the result keys are being cleaned u
 in Redis. We're not sure what the fix is, Hence the passive language of this paragraph.
 
 What we have done is improved the txCelery-Py located at
-    `https://github.com/Synerty/txcelery-py3/commits/master`_ :
+    `<https://github.com/Synerty/txcelery-py3/commits/master>`_ :
 
 *  Task create and result capture are performed in the same thread.
 

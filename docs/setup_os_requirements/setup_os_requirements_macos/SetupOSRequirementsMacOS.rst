@@ -289,10 +289,9 @@ Upgrade pip: ::
 The following packages are required to package/deploy the macOS release.
 
 .. note:: This is required for the pymysql setup.py
+         ::
 
- ::
-
-    pip install Cython
+            pip install Cython
 
 ----
 
@@ -308,25 +307,99 @@ The Wheel package is required for building platform and plugin releases ::
 
         pip install wheel
 
+.. _macos_install_postgresql:
 
-Install PostGreSQL
+Install PostgreSQL
 ------------------
 
-Peek requires the PostGreSQL extension plpython3u. To install this extension, Peek has a
-modifed homebrew file that will include the build of this extension.
+Peek requires the PostgreSQL extension plpython3u. This section will install
+PostgreSQL from homebrew with the extensions Peek needs.
+
+.. note:: If you have an old version of PostgreSQL installed with brew,
+          you will need to first upgrade that installation.
 
 ----
 
-The following step will download peeks homebrew PostGreSQL install file and run
-it with brew.
+Reset and date the homebrew-core configuration ::
 
-Execute the following ::
+        echo "First reset any edits we have"
+        (cd /usr/local/Homebrew/Library/Taps/homebrew/homebrew-core/Formula && git reset --hard)
 
-        cd ~
-        wget "https://bitbucket.org/synerty/synerty-peek/src/master/scripts/macos/postgres.rb"
-        brew install --verbose --build-from-source ./postgresql.rb
-        rm postgresql.rb
+        echo "Update Brew"
+        brew update
 
+----
+
+Create the patch script ::
+
+        echo "Create a file to edit the postgresql.rb file"
+        cat <<'EOF' > addplpy.sh
+        #!/bin/bash
+
+        if grep -q 'with-python' $1; then
+            echo "Exiting, the changes are already there"
+            exit 0
+        fi
+
+        sed '/ENV.prepend "CPPFLAGS"/r'<(
+            echo '    ENV.prepend "PATH", "/Users/peek/cpython-3.6.8/bin:"'
+            echo '    ENV.prepend "PYTHONPATH", "/Users/peek/cpython-3.6.8"'
+        ) -i -- $1
+
+        sed '/--with-perl/r'<(
+            echo '      --with-python'
+        ) -i -- $1
+
+        echo "Patching complete"
+
+        EOF
+
+        chmod +x addplpy.sh
+
+----
+
+Patch the postgresql brew file ::
+
+        echo "Patch the postgresql file."
+        export HOMEBREW_EDITOR=`pwd`/addplpy.sh
+        brew edit postgresql
+
+        echo "Cleanup"
+        unset HOMEBREW_EDITOR
+        rm addplpy.sh
+
+----
+
+Tap the keg for timescale ::
+
+        echo "Tap the timescale keg"
+        brew tap timescale/tap
+
+----
+
+Uninstall the old software if it exists ::
+
+        echo "Uninstall PostgreSQL if it exists."
+        brew uninstall postgresql || true
+        brew uninstall timescaledb || true
+
+----
+
+Install timescale and PostgreSQL ::
+
+        echo "Install timescale"
+        brew install --build-from-source postgresql
+        brew install timescaledb
+
+----
+
+Finish setting up timescale ::
+
+        echo "Tune the postgresql.conf"
+        timescaledb-tune --quiet --yes
+
+        echo "Move it into place"
+        timescaledb_move.sh
 
 ----
 
@@ -367,10 +440,17 @@ Create the database ::
 
         createdb -O peek peek
 
+.. note:: If you already have a database, you may now need to upgrade the timescale
+          extension. ::
+
+                psql peek <<EOF
+                ALTER EXTENSION timescaledb UPDATE;
+                EOF
+
 
 ----
 
-Set the PostGreSQL peek users password ::
+Set the PostgreSQL peek users password ::
 
         psql -d postgres -U peek <<EOF
         \password
@@ -389,7 +469,7 @@ Cleanup traces of the password ::
 
 ----
 
-Finally, Download pgAdmin4 - A graphically PostGreSQL database administration tool.
+Finally, Download pgAdmin4 - A graphically PostgreSQL database administration tool.
 
 Download the latest version of pgAdmin4 for macOS from the following link
 
