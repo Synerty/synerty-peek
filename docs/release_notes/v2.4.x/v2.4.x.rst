@@ -135,6 +135,24 @@ This must be after the EventDB plugin. ::
     peek-plugin-pon-event-loader
 
 
+v2.4.1 Issues Log
+-----------------
+
+Bug
+```
+
+*   [PEEK-635] - Core Search - Add support for searching for two letter words.
+
+*   [PEEK-636] - Plugin EventDB - TupleSelectors arn't supporting datetimes,
+                 this was caused by a missing merge in peek-desktop.
+
+*   [PEEK-637] - EventDB PoN Loader - Finalise property loading, and set to load once.
+
+Task
+````
+
+*   [PEEK-638] - Release v2.4.1
+
 v2.4.0 Issues Log
 -----------------
 
