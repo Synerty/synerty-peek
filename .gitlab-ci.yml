@@ -26,7 +26,7 @@ build_html_docs:
             - synerty-peek-html
         expire_in: 1 day
     allow_failure: false
-    image: nexus.synerty.com:5000/peek-linux-docs
+    image: nexus.synerty.com:5000/peek-linux-doc:${RELEASE_BRANCH}
     only:
         - pushes
         - merge_requests
@@ -47,7 +47,7 @@ build_latex_docs:
             - synerty-peek.pdf
         expire_in: 1 day
     allow_failure: false
-    image: nexus.synerty.com:5000/peek-linux-docs
+    image: nexus.synerty.com:5000/peek-linux-doc:${RELEASE_BRANCH}
     only:
         - pushes
         - merge_requests
@@ -70,7 +70,7 @@ git_clone_platform:
         paths:
             - ${GIT_CLONE_PATH}/cloned_platform_repos
         expire_in: 1 day
-    image: nexus.synerty.com:5000/peek-linux:${RELEASE_BRANCH}
+    image: nexus.synerty.com:5000/peek-linux-build:${RELEASE_BRANCH}
     only:
         - web
         - triggers
@@ -88,7 +88,7 @@ git_clone_plugins:
         paths:
             - ${GIT_CLONE_PATH}/cloned_plugin_repos
         expire_in: 1 day
-    image: nexus.synerty.com:5000/peek-linux:${RELEASE_BRANCH}
+    image: nexus.synerty.com:5000/peek-linux-build:${RELEASE_BRANCH}
     only:
         - web
         - triggers
@@ -106,7 +106,7 @@ publish_platform:
         paths:
             - ${GIT_CLONE_PATH}/platform_packages
         expire_in: 1 day
-    image: nexus.synerty.com:5000/peek-linux:${RELEASE_BRANCH}
+    image: nexus.synerty.com:5000/peek-linux-build:${RELEASE_BRANCH}
     only:
         - web
         - triggers
@@ -126,7 +126,7 @@ publish_plugins:
         paths:
             - ${GIT_CLONE_PATH}/plugin_packages
         expire_in: 1 day
-    image: nexus.synerty.com:5000/peek-linux:${RELEASE_BRANCH}
+    image: nexus.synerty.com:5000/peek-linux-build:${RELEASE_BRANCH}
     only:
         - web
         - triggers
@@ -148,7 +148,7 @@ package_platform_linux:
         paths:
             - ${GIT_CLONE_PATH}/${PKG_PLATFORM_LINUX}
         expire_in: 1 day
-    image: nexus.synerty.com:5000/peek-linux:${RELEASE_BRANCH}
+    image: nexus.synerty.com:5000/peek-linux-build:${RELEASE_BRANCH}
     only:
         - web
         - triggers
@@ -183,7 +183,7 @@ package_plugin_linux:
         paths:
             - ${GIT_CLONE_PATH}/${PKG_PLUGIN_LINUX}/
         expire_in: 1 day
-    image: nexus.synerty.com:5000/peek-linux:${RELEASE_BRANCH}
+    image: nexus.synerty.com:5000/peek-linux-build:${RELEASE_BRANCH}
     only:
         - web
         - triggers
@@ -209,7 +209,7 @@ archive_release:
         paths:
             - ${GIT_CLONE_PATH}/peek_release_${RELEASE_VER:-${NON_RELEASE_VER}}_linux.tar
         expire_in: 1 day
-    image: nexus.synerty.com:5000/peek-linux:${RELEASE_BRANCH}
+    image: nexus.synerty.com:5000/peek-linux-build:${RELEASE_BRANCH}
     only:
         - web
         - triggers
@@ -234,7 +234,7 @@ upload_to_nexus:
     dependencies:
         - archive_release
     allow_failure: false
-    image: nexus.synerty.com:5000/peek-linux:${RELEASE_BRANCH}
+    image: nexus.synerty.com:5000/peek-linux-build:${RELEASE_BRANCH}
     only:
         - web
         - triggers
@@ -258,7 +258,7 @@ upload_to_attune:
         - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
     environment:
         name: PEEK-RELEASE
-    image: nexus.synerty.com:5000/peek-linux:${RELEASE_BRANCH}
+    image: nexus.synerty.com:5000/peek-linux-build:${RELEASE_BRANCH}
     only:
         - web
         - triggers
