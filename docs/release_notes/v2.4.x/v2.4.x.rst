@@ -135,6 +135,28 @@ This must be after the EventDB plugin. ::
     peek-plugin-pon-event-loader
 
 
+v2.4.2 Issues Log
+-----------------
+
+Bug
+```
+
+*   [PEEK-643] - EventDB - Event date times are loaded without timezone
+
+*   [PEEK-645] - Event WebView Loader - Fixed last loaded date timezone
+
+Task
+````
+
+*   [PEEK-646] - Release v2.4.2
+
+
+CI/CD Tasks
+```````````
+
+*   [PEEK-644] - Gitlab - Update Gitlab sonar Docker tag
+
+
 v2.4.1 Issues Log
 -----------------
 
