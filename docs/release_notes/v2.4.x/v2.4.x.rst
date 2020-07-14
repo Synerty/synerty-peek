@@ -135,6 +135,22 @@ This must be after the EventDB plugin. ::
     peek-plugin-pon-event-loader
 
 
+v2.4.3 Issues Log
+-----------------
+
+Bug
+```
+
+*   [PEEK-649] - Alarms/Events - ShowOnPopup won't disable from admin property editor
+
+Task
+````
+
+*   [PEEK-648] - Alarms/Events - Include Component Alias in Alarm Data
+
+*   [PEEK-650] - Alarms/Events - Added switch for "Alarms Only" next to "Live" switch
+
+
 v2.4.2 Issues Log
 -----------------
 
