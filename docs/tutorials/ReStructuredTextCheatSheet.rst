@@ -1,8 +1,8 @@
 .. _restructured_text_cheat_sheet:
 
-=============
+============================
 ReStructuredText Cheat Sheet
-=============
+============================
 
 The following tips should help you get started writing reStructuredText
 
@@ -198,11 +198,11 @@ Images
 The filename given must either be relative to the source file, or absolute which means
 that they are relative to the top source directory.
 
-.. image:: synerty_logo_400x800.png
+.. image:: peek_plugin_tutorial/synerty_logo_400x800.png
 
 ::
 
-        .. image:: synerty_logo_400x800.png
+        .. image:: peek_plugin_tutorial/synerty_logo_400x800.png
 
 
 Admonitions

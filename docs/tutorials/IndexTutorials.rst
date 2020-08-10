@@ -1,8 +1,8 @@
 .. _tutorials:
 
-=============
+=========
 Tutorials
-=============
+=========
 
 This document set provides tutorial documentation for the Peek Platform.
 

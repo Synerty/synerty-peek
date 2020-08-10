@@ -16,7 +16,6 @@ Peek Development
     package_platform/PackagePeekPlatform
     setup_pycharm/SetupPycharm
     setup_vs_code/SetupVSCode
-    learn_plugin_development/IndexLearn
 
 What Next?
 ----------
