@@ -1,8 +1,8 @@
 
-.. _learn_plugin_development:
+.. _peek_plugin_tutorial:
 
 ========================
-Learn Plugin Development
+Peek Plugin Tutorial
 ========================
 
 .. toctree::
@@ -29,3 +29,4 @@ Learn Plugin Development
     LearnPluginDevelopment_AddPluginTypeScriptApi
     LearnPluginDevelopment_UsePluginApis
     LearnPluginDevelopment_AddWorker
+    LearnPluginDevelopment_Challenges

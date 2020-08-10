@@ -8,6 +8,7 @@ Peek Platform Documentation
 
     guide
     overview/Overview
+    tutorials/IndexTutorials
     setup_os_requirements/IndexSetupOSRequirements
     deploy_release/DeployPeekRelease
     administration/administration
