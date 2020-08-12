@@ -135,6 +135,15 @@ This must be after the EventDB plugin. ::
     peek-plugin-pon-event-loader
 
 
+v2.4.5 Issues Log
+-----------------
+
+Bug
+```
+
+*   [PEEK-650] - Alarm/Event - Admin, Office and Field angular compiles
+
+
 v2.4.4 Issues Log
 -----------------
 
