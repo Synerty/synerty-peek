@@ -105,7 +105,7 @@ else
 # Download node, npm, @angular/cli, typescript and tslint
 
 Set-Location "$baseDir";
-$nodeVer = "10.16.0";
+$nodeVer = "12.18.3";
 
 # Download the file
 $nodeUrl = "https://nodejs.org/dist/v$nodeVer/node-v$nodeVer-win-x64.zip";
@@ -139,7 +139,7 @@ $env:Path = "$baseDir\node;$env:Path";
 
 # Install the required NPM packages
 npm cache clean --force
-npm -g install @angular/cli@~^8.1.2 typescript@~3.4.5 tslint
+npm -g install @angular/cli@^9.1.2 typescript@3.7.5 tslint
 
 
 # ------------------------------------------------------------------------------

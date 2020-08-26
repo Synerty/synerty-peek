@@ -64,7 +64,7 @@ fi
 nodeDir="$baseDir/node"
 
 cd $baseDir
-nodeVer="10.16.0"
+nodeVer="12.18.3"
 
 # Download the file
 nodeFile="node-v${nodeVer}-linux-x64.tar.xz"
@@ -84,7 +84,7 @@ PATH="$nodeDir/bin:$PATH"
 
 # Install the required NPM packages
 npm cache clean --force
-npm -g install @angular/cli@^8.1.2 typescript@3.4.5 tslint
+npm -g install @angular/cli@^9.1.2 typescript@3.7.5 tslint
 
 # ------------------------------------------------------------------------------
 # This function downloads the node modules and prepares them for the release
