@@ -164,7 +164,7 @@ and populate it with the following contents.
         import {Routes} from "@angular/router";
 
         // Import a small abstraction library to switch between nativescript and web
-        import {PeekModuleFactory} from "@synerty/peek-util-web";
+        import { PeekModuleFactory } from "@synerty/peek-plugin-base-js"
 
         // Import the default route component
         import {TutorialComponent} from "./tutorial.component";
