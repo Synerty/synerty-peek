@@ -135,6 +135,31 @@ This must be after the EventDB plugin. ::
     peek-plugin-pon-event-loader
 
 
+v2.4.5 Issues Log
+-----------------
+
+Bug
+```
+
+*   [PEEK-650] - Alarm/Event - Admin, Office and Field angular compiles
+
+
+v2.4.4 Issues Log
+-----------------
+
+Bug
+```
+
+*   [PEEK-597] - Diagram: Deleted grids are not removed from browser cache,
+                 Deleted PowerOn pages / overlays are not removed from the diagram
+
+*   [PEEK-604] - Diagram flashes when PowerOn updates pages
+
+*   [PEEK-650] - Alarm/Event - Bugfixedm Add switch for "Alarms Only" switch
+
+*   [PEEK-653] - Alarms/Events - Alarm Zone default property values are wrong.
+                 They now load from the correct lookup.
+
 v2.4.3 Issues Log
 -----------------
 
