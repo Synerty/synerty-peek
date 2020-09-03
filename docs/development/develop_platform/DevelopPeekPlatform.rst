@@ -10,14 +10,12 @@ high priority.
 
 Synerty uses PyCharm as its choice of IDE and Git management tool.
 
-GitLab to manage and share your Git repositories
+GitLab to manage and share your Git repositories: https://gitlab.synerty.com
 
-:URL: `<https://gitlab.synerty.com>`_
-
-.. note::   The reader needs be familiar with, or will become familar with the following:
+.. note::   The reader needs be familiar with, or will become familiar with the following:
 
             *   `GIT <https://git-scm.com>`_
-            *   `Python3.6+ <https://www.python.org>`_
+            *   `Python 3.6+ <https://www.python.org>`_
             *   `Python Twisted <http://twistedmatrix.com>`_
             *   HTML
             *   SCSS
@@ -54,10 +52,10 @@ Software Installation and Configuration
 On a Windows machine the follow commands will be run using the bash shell, see
 :ref:`setup_msys_git`.
 
-synerty-peek Repositories
+Synerty Peek Repositories
 `````````````````````````
 
-:Synerty's Repositories: `<https://gitlab.synerty.com/peek>`_
+`Synerty's Repositories: <https://gitlab.synerty.com/peek>`_
 
 *  synerty-peek
 
