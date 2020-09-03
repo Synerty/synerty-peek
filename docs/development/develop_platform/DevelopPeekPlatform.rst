@@ -8,30 +8,23 @@ Develop Peek Platform
 Most development will be for the plugins, not platform, so these instructions are not
 high priority.
 
-Synerty recommends the Atlassian suite of developer tools.
+Synerty uses PyCharm as its choice of IDE and Git management tool.
 
-Bitbucket to manage and share your Git repositories
+GitLab to manage and share your Git repositories
 
-:URL: `<https://www.bitbucket.org>`_
-
-SourceTree to visually manage and interact with your Git repositories
-
-:URL: `<https://www.sourcetreeapp.com>`_
-
-Bitbucket can be integrated with Jira (issue management) and Bamboo (continuous
-integration).
+:URL: `<https://gitlab.synerty.com>`_
 
 .. note::   The reader needs be familiar with, or will become familar with the following:
 
             *   `GIT <https://git-scm.com>`_
-            *   `Python3.5+ <https://www.python.org>`_
+            *   `Python3.6+ <https://www.python.org>`_
             *   `Python Twisted <http://twistedmatrix.com>`_
             *   HTML
-            *   CSS
-            *   `Bootstrap3 <http://getbootstrap.com>`_
+            *   SCSS
+            *   `Ant Design <https://ng.ant.design/>`_
             *   `TypeScript <https://www.typescriptlang.org>`_
             *   `Angular <https://angular.io>`_ (Angular2+, not AngularJS aka Angular1)
-            *   `NativeScript <https://www.nativescript.org>`_
+            *   `CapacitorJS <https://capacitorjs.com/>`_
 
 
 .. note:: This a cross platform development guide, all commands are writen for bash.
@@ -64,11 +57,13 @@ On a Windows machine the follow commands will be run using the bash shell, see
 synerty-peek Repositories
 `````````````````````````
 
-:Synerty's Repositories: `<https://bitbucket.org/account/user/synerty/projects/PEEK>`_
+:Synerty's Repositories: `<https://gitlab.synerty.com/peek>`_
 
 *  synerty-peek
 
 *  peek-plugin-base
+
+*  peek-plugin-base-js
 
 *  peek-agent
 
@@ -84,66 +79,158 @@ synerty-peek Repositories
 
 *  peek-worker
 
-Clone Peek Repositories
+Fork Peek Repositories
 ```````````````````````
 
-Checkout repositories all in the same folder
+Create a GitLab group using your hyphenated full name as the namespace, i.e.
 
-https://bitbucket.org/synerty/synerty-peek.git
+https://gitlab.synerty.com/john-smith
 
-Use this script to insert individual peek modules.  Update {gitAccount} and
-{repository} in the script below: ::
+Create a GitLab subgroup under your namespace named peek, i.e.
 
-        REPO="{repository}"
+https://gitlab.synerty.com/john-smith/peek
 
-        if [ ! -d ~peek/dev-peek ]; then
-            mkdir ~peek/dev-peek
-            cd ~peek/dev-peek/
-            git clone https://bitbucket.org/synerty/$REPO.git
-            cd ~peek/peek-mobile/$REPO
-            git config --unset core.symlink
-            git config --add core.symlink true
-        else
-            echo "ALERT: `pwd` directory already exists.  Please investigate then retry."
-        fi
+Create a GitLab subgroup under your namespace named peek-util, i.e.
 
-        cd ~peek/dev-peek/
-        ls -l
+https://gitlab.synerty.com/john-smith/peek-util
 
-Use this script to clone all repositories.  Update {gitAccount} in the script below: ::
+Create a GitLab access token with a 24 hour expiry :
 
+https://gitlab.synerty.com/profile/personal_access_tokens
 
-        REPOS="synerty-peek"
-        REPOS="$REPOS peek-plugin-base"
-        REPOS="$REPOS peek-agent"
-        REPOS="$REPOS peek-client"
-        REPOS="$REPOS peek-mobile"
-        REPOS="$REPOS peek-platform"
-        REPOS="$REPOS peek-server"
-        REPOS="$REPOS peek-admin"
-        REPOS="$REPOS peek-worker"
+Fork all repositories from https://gitlab.synerty.com/peek to your namespace/peek subgroup: ::
 
-        if [ ! -d ~peek/dev-peek ]; then
-        mkdir ~peek/dev-peek
-        cd ~peek/dev-peek/
-        for REPO in ${REPOS[*]}
+        export ACCESS_TOKEN="" # https://gitlab.synerty.com/profile/personal_access_tokens
+        export GROUP_ID="2" # https://gitlab.synerty.com/peek
+        export YOUR_SUBGROUP_ID="" # Your namespace/peek subgroup id to fork to
+
+        function loadProjectIds() {
+            curl --location --request GET "https://gitlab.synerty.com/api/v4/groups/${GROUP_ID}/projects?per_page=100" \
+                --header 'Content-Type: application/json' \
+                --header "Authorization: Bearer ${ACCESS_TOKEN}" \
+                --header 'Content-Type: application/json' \
+                --data-raw '' | jq '.[] .id'
+        }
+
+        for REPO_ID in `loadProjectIds`
         do
-            echo $REPO
-            git clone https://bitbucket.org/synerty/$REPO.git
-            cd ~peek/dev-peek/$REPO
-            git config --unset core.symlink
-            git config --add core.symlink true
-            cd ~peek/dev-peek/
+            curl --location --request POST "https://gitlab.synerty.com/api/v4/projects/${REPO_ID}/fork" \
+            --header 'Content-Type: application/json' \
+            --header "Authorization: Bearer ${ACCESS_TOKEN}" \
+            --data-raw '{"id":"${ID}","namespace":${YOUR_SUBGROUP_ID}}'
         done
-        else
-            cd ~peek/dev-peek/
-            echo "ALERT: `pwd` directory already exists.  Please investigate then retry."
+
+Fork all repositories from https://gitlab.synerty.com/peek-util to your namespace/peek-util subgroup: ::
+
+        export ACCESS_TOKEN="" # https://gitlab.synerty.com/profile/personal_access_tokens
+        export GROUP_ID="26" # https://gitlab.synerty.com/peek-util
+        export YOUR_SUBGROUP_ID="" # Your namespace/peek-util subgroup id to fork to
+
+        function loadProjectIds() {
+            curl --location --request GET "https://gitlab.synerty.com/api/v4/groups/${GROUP_ID}/projects?per_page=100" \
+                --header 'Content-Type: application/json' \
+                --header "Authorization: Bearer ${ACCESS_TOKEN}" \
+                --header 'Content-Type: application/json' \
+                --data-raw '' | jq '.[] .id'
+        }
+
+        for REPO_ID in `loadProjectIds`
+        do
+            curl --location --request POST "https://gitlab.synerty.com/api/v4/projects/${REPO_ID}/fork" \
+            --header 'Content-Type: application/json' \
+            --header "Authorization: Bearer ${ACCESS_TOKEN}" \
+            --data-raw '{"id":"${ID}","namespace":${YOUR_SUBGROUP_ID}}'
+        done
+
+Clone all of the projects in your namespace/peek subgroup to ~/peek/dev-peek/: ::
+
+        export ACCESS_TOKEN="" # https://gitlab.synerty.com/profile/personal_access_tokens
+        export YOUR_NAMESPACE="" # Your GitLab namespace group, i.e. "john-smith"
+        export YOUR_SUBGROUP_ID="" # Your GitLab namespace/peek subgroup id
+        export DIR="~/peek/dev-peek"
+
+        function loadProjectIds() {
+            curl --location --request GET "https://gitlab.synerty.com/api/v4/groups/${YOUR_SUBGROUP_ID}/projects?per_page=100" \
+                --header 'Content-Type: application/json' \
+                --header "Authorization: Bearer ${ACCESS_TOKEN}" \
+                --header 'Content-Type: application/json' \
+                --data-raw '' | jq '.[] .name'
+        }
+
+        if [ ! -d ${DIR} ]; then
+            mkdir ${DIR}
+            cd $DIR
+            for REPO_NAME in `loadProjectIds`
+            do
+                NAME="${REPO_NAME%\"}"
+                NAME="${NAME#\"}"
+                URL=https://gitlab.synerty.com/$YOUR_NAMESPACE/$NAME.git
+                echo $URL
+                git clone $URL
+            done
         fi
-        ls -l
+
+Clone all of the projects in your namespace/peek-util subgroup to ~/peek/dev-peek-util/: ::
+
+        export ACCESS_TOKEN="" # https://gitlab.synerty.com/profile/personal_access_tokens
+        export YOUR_NAMESPACE="" # Your GitLab namespace group, i.e. "john-smith"
+        export YOUR_SUBGROUP_ID="" # Your GitLab namespace/peek subgroup id
+        export DIR="~/peek/dev-peek-util"
+
+        function loadProjectIds() {
+            curl --location --request GET "https://gitlab.synerty.com/api/v4/groups/${YOUR_SUBGROUP_ID}/projects?per_page=100" \
+                --header 'Content-Type: application/json' \
+                --header "Authorization: Bearer ${ACCESS_TOKEN}" \
+                --header 'Content-Type: application/json' \
+                --data-raw '' | jq '.[] .name'
+        }
+
+        if [ ! -d ${DIR} ]; then
+            mkdir ${DIR}
+            cd $DIR
+            for REPO_NAME in `loadProjectIds`
+            do
+                NAME="${REPO_NAME%\"}"
+                NAME="${NAME#\"}"
+                URL=https://gitlab.synerty.com/$YOUR_NAMESPACE/$NAME.git
+                echo $URL
+                git clone $URL
+            done
+        fi
 
 .. NOTE:: core.symlink:  If false, symbolic links are checked out as small plain files
     that contain the link text.  The default is true, except *git-clone* or *git-init*
     will probe and set core.symlinks false if appropriate when the repository is created.
+
+Setup Cloned Repositories For Development
+`````````````````````````````````````````
+Run setup.py in all of the repositories located in ~/peek/dev-peek/: ::
+
+        set -e
+
+        cd ~/peek/dev-peek
+        for DIR in */; do
+            cd "$DIR"
+            NAME=${PWD##*/}
+            echo "$NAME"
+            pip uninstall -y "$NAME"
+            python setup.py develop
+            cd ..
+        done
+
+Run setup.py in all of the repositories located in ~/peek/dev-peek-util/: ::
+
+        set -e
+
+        cd ~/peek/dev-peek-util
+        for DIR in */; do
+            cd "$DIR"
+            NAME=${PWD##*/}
+            echo "$NAME"
+            pip uninstall -y "$NAME"
+            python setup.py develop
+            cd ..
+        done
 
 Install Front End Modules
 `````````````````````````
@@ -151,49 +238,66 @@ Install Front End Modules
 Remove the old npm modules files and re-install for both client and server front and
 packages.  Run the following commands: ::
 
-        cd ~peek/dev-peek/peek-mobile/peek_mobile/build-web
+        cd ~/peek/dev-peek/peek-mobile/peek_mobile/build-web
         [ -d node_modules ] && rm -rf node_modules
-        npm install
-        cd ~peek/dev-peek/peek-mobile/peek_mobile/build-ns
+        npm i
+        cd ~/peek/dev-peek/peek-desktop/peek_desktop/build-web
         [ -d node_modules ] && rm -rf node_modules
-        npm install
-        cd ~peek/dev-peek/peek-admin/peek_admin/build-web
+        npm i
+        cd ~/peek/dev-peek/peek-admin/peek_admin/build-web
         [ -d node_modules ] && rm -rf node_modules
-        npm install
+        npm i
 
-Install synerty-peek Dependencies
-`````````````````````````````````
+Configure Peek Client And Server Settings
+`````````````````````````````````````````
 
-These steps link the projects under site-packages and installs their dependencies.
+Open the config file located at ~/peek/peek-client.home/config.json
 
-For synerty-peek, run the following commands: ::
+Set the property frontend.docBuildEnabled to false.
 
-        cd ~peek/dev-peek/synerty-peek
-        ./pip_uninstall_and_develop.sh
+Set the property frontend.webBuildEnabled to false.
 
-For repositories and plugins, run from their directory ::
+Open the config file located at ~/peek/peek-server.home/config.json
 
-            python setup.py develop
+Set the property frontend.docBuildEnabled to false.
 
-Compile Front End Packages
-``````````````````````````
+Set the property frontend.webBuildEnabled to false.
 
-Symlink the tsconfig.json and node_modules file and directory in the parent directory
-of peek-mobile, peek-admin and the plugins. These steps are run in the directory
-where the projects are checked out from. These are required for the frontend typescript
-compiler.
+Set the property httpServer.admin.recovery_user.username to "recovery".
 
-Run the following commands: ::
+Set the property httpServer.admin.recovery_user.password to "synerty".
 
-        cd ~peek/dev-peek/peek-mobile/peek_mobile/build-web
-        ng build
-        cd ~peek/dev-peek/peek-admin/peek_admin/build-web
-        ng build
+Compile Front End Packages For Development
+``````````````````````````````````````````
 
+Run the following commands in separate terminal sessions: ::
 
-Develop
-```````
-You are ready to develop synerty-peek services
+        # Terminal 1
+        cd ~/peek/dev-peek/peek-mobile/peek_mobile/build-web
+        ng build --watch
+
+        # Terminal 2
+        cd ~/peek/dev-peek/peek-admin/peek_admin/build-web
+        ng build --watch
+
+        # Terminal 3
+        cd ~/peek/dev-peek/peek-desktop/peek_desktop/build-web
+        ng build --watch
+
+        # Terminal 4
+        run_peek_server
+
+        # Terminal 5
+        run_peek_client
+
+Viewing Peek Services In The Browser
+````````````````````````````````````
+
+Peek Mobile:    http://localhost:8000
+
+Peek Desktop:   http://localhost:8002
+
+Peek Admin:     http://localhost:8010
 
 What Next?
 ----------
