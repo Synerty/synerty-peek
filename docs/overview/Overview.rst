@@ -141,7 +141,7 @@ allowing it to work offline.
 In web developers terminology, the Mobile service is called the frontend, and
 the Client service is called the backend.
 
-The Mobile service codes structure allows Angualar components to be reused to drive both
+The Mobile service codes structure allows Angular components to be reused to drive both
 nativescript and web based interfaces. For example :
 
 *   **my-component.ns.html**    (View for Nativescipt XML)
@@ -159,7 +159,7 @@ Electron + Angular for Native desktop apps and Angular for the web app.
 
 The Desktop service has a different user interface, designed for desktop use.
 
-The Desktop service codes structure allows Angualar components to be reused to drive both
+The Desktop service codes structure allows Angular components to be reused to drive both
 electron and web based interfaces. For example :
 
 *   **my-component.tron.html**    (View for Nativescipt XML)
@@ -216,7 +216,7 @@ The Peek Admin service is an Angular web app.
 Plugins
 -------
 
-The Peek Platform doesn't do much by it's self. It starts, makes all it's connections,
+The Peek Platform doesn't do much by itself. It starts, makes all it's connections,
 initialises databases and then just waits.
 
 The magic happens in the plugins, plugins provide useful functionality to Peek.
@@ -427,5 +427,5 @@ An example contents of the :file:`plugin-modules` is described below.
 
 ---
 
-.. note:: Random Fact : Did you know that python can't import packages with hypons in them?
+.. note:: Random Fact : Did you know that python can't import packages with hyphens in them?
 

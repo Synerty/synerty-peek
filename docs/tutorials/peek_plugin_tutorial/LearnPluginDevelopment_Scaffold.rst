@@ -18,8 +18,8 @@ Create Directory :file:`peek-plugin-tutorial`
 `````````````````````````````````````````````
 
 :file:`peek-plugin-tutorial` is the name of the project directory, it could be anything.
-For consistency, we name it the same as the plugin with hypons instead of underscores,
-Python can't import directories with hypons, so there will be no confusion there.
+For consistency, we name it the same as the plugin with hyphens instead of underscores,
+Python can't import directories with hyphens, so there will be no confusion there.
 
 This directory will contain our plugin package, documentation, build scripts, README,
 license, etc. These won't be included when the python package is built and deployed.

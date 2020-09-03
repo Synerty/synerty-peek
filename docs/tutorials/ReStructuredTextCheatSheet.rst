@@ -338,7 +338,7 @@ Below is an abstract from file
             def getOtherPluginApi(self, pluginName:str) -> Optional[object]:
                 """ Get Other Plugin Api
 
-                Asks the plugin for it's api object and return it to this plugin.
+                Asks the plugin for its api object and return it to this plugin.
                 The API returned matches the platform service.
 
                 :param pluginName: The name of the plugin to retrieve the API for
