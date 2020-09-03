@@ -138,7 +138,7 @@ The :command:`peekServerEntryHook()` method returns the Class that the server sh
 create to initialise and start the plugin.
 
 As far as the Peek Platform is concerned, the plugin can be structured how ever it likes
-internally, as long as it defines these methods in it's root python package.
+internally, as long as it defines these methods in its root python package.
 
 ----
 

@@ -307,7 +307,7 @@ Tuple Selectors have two attributes :
 The :file:`StringIntTupleProvider.py` loads data from the database, converts it to a
 VortexMsg and returns it.
 
-A VortexMsg is a :code:`bytes` python type. it's a serialised and compressed payload.
+A VortexMsg is a :code:`bytes` python type. It's a serialised and compressed payload.
 A Payload is the Vortex transport container.
 
 ----
@@ -512,7 +512,7 @@ TO: ::
 
 ----
 
-The tuple data observable will now notifyDeviceInfo it's observers when an admin updates the
+The tuple data observable will now notifyDeviceInfo its observers when an admin updates the
 StringInt data.
 
 .. _learn_plugin_development_add_observable_add_mobile_view:

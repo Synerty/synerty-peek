@@ -94,7 +94,7 @@ and populate it with the following contents.
                 """ Make Handlers
 
                 In this method we start all the RPC handlers
-                start() returns an instance of it's self so we can simply yield the result
+                start() returns an instance of itself so we can simply yield the result
                 of the start method.
 
                 """
@@ -383,7 +383,7 @@ and populate it with the following contents.
                 """ Make Handlers
 
                 In this method we start all the RPC handlers
-                start() returns an instance of it's self so we can simply yield the result
+                start() returns an instance of itself so we can simply yield the result
                 of the start method.
 
                 """

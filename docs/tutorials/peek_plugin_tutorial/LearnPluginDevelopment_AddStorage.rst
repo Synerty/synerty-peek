@@ -7,7 +7,7 @@ Add Storage Service
 The storage service is conceptually a little different to other services in the Peek
 Platform.
 
-Peek Storage connects to a database server, provides each plugin it's own schema, and
+Peek Storage connects to a database server, provides each plugin its own schema, and
 provides much of the boilerplate code required to make this work.
 
 Only two Peek Services are able to access the database, these are the Worker and Server
@@ -121,7 +121,7 @@ Command: ::
 Add File :file:`env.py`
 ```````````````````````
 
-The :file:`env.py` is loaded by Alembic to get it's configuration and environment.
+The :file:`env.py` is loaded by Alembic to get its configuration and environment.
 
 Notice that that :command:`loadStorageTuples()` is called? Alembic needs the table
 classes loaded to create the version control scripts.
@@ -347,7 +347,7 @@ Add File :file:`alembic.ini`
 ````````````````````````````
 
 The :file:`alembic.ini` file is the first file Alembic laods, it tells Alembic
-how to connect to the database and where it's "alembic" directory is.
+how to connect to the database and where its "alembic" directory is.
 
 ----
 
