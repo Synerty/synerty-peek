@@ -66,7 +66,7 @@ Create following file and parent directory:
 
 :Windows: :file:`C:\\Users\\peek\\peek-client.home\\config.json`
 :Linux: :file:`/home/peek/peek-client.home/config.json`
-:Mac:   :file:`/Users/peek/peek-server.home/config.json`
+:Mac:   :file:`/Users/peek/peek-client.home/config.json`
 
 .. tip:: Run the service, it will create some of it's config,
             it might raise errors though.
@@ -104,7 +104,7 @@ Create following file and parent directory:
 
 :Windows: :file:`C:\\Users\\peek\\peek-agent.home\\config.json`
 :Linux: :file:`/home/peek/peek-agent.home/config.json`
-:Mac:   :file:`/Users/peek/peek-server.home/config.json`
+:Mac:   :file:`/Users/peek/peek-agent.home/config.json`
 
 .. tip:: Run the service, it will create some of it's config,
             it might raise errors though.
@@ -125,3 +125,40 @@ Populate the file :file:`config.json` with the
             }
         }
 
+Peek Client & Server SSL
+````````````````````````
+
+This section sets up SSL for the peek client and server services.
+
+----
+
+Combine the required SSL certificates and keys into a single PEM file
+named :file:`peek-ssl-bundle.pem`.
+
+----
+
+Place a copy of this PEM file into the server directory:
+
+:Windows: :file:`C:\\Users\\peek\\peek-server.server\\peek-ssl-bundle.pem`
+:Linux: :file:`/home/peek/peek-server.home/peek-ssl-bundle.pem`
+:Mac:   :file:`/Users/peek/peek-server.home/peek-ssl-bundle.pem`
+
+----
+
+Restart the Peek server service.
+
+----
+
+Place a copy of this PEM file into the client directory:
+
+:Windows: :file:`C:\\Users\\peek\\peek-client.server\\peek-ssl-bundle.pem`
+:Linux: :file:`/home/peek/peek-client.home/peek-ssl-bundle.pem`
+:Mac:   :file:`/Users/peek/peek-client.home/peek-ssl-bundle.pem`
+
+----
+
+Restart the Peek client service.
+
+----
+
+The Peek server and client should now be using SSL.
