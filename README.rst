@@ -66,15 +66,15 @@ The Peek Platform is integrated with some fantastic technologies, here is a run 
     *   Bootstrap3
     *   Angular2+, Angular CLI
     *   Typescript
-    *   FontAwesome
+    *   Ant Design
     *   Web Sockets with HTTP Fallback
 
 *   A native mobile app, using:
 
-    *   Nativescript2+
+    *   CapacitorJS
     *   Angular2+
     *   Typescript
-    *   FontAwesome
+    *   Ant Design
     *   Web Sockets
 
 *   Persistent Storage, using:
@@ -109,7 +109,7 @@ Current Browser Support
 *   Desktop
 
     *   Chrome
-    *   IE 11 and above
+    *   IE 13
     *   Microsoft Edge
     *   Safari on Mac
 
