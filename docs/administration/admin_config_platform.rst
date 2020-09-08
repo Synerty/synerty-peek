@@ -135,6 +135,23 @@ This section sets up SSL for the peek client and server services.
 Combine the required SSL certificates and keys into a single PEM file
 named :file:`peek-ssl-bundle.pem`.
 
+For example, this can be done on Linux by concatenating the Key, Cert and CA files. ::
+
+    cat key.pem cert.pem ca.pem > bundle.pem
+
+.. note:: The file names will vary, but the file contents will start with lines like the following ::
+
+    ==> CA cert <==
+    -----BEGIN CERTIFICATE-----
+    
+    ==> Cert <==
+    -----BEGIN CERTIFICATE-----
+    
+    ==> Key <==
+    -----BEGIN RSA PRIVATE KEY-----
+
+
+
 ----
 
 Place a copy of this PEM file into the server directory:
