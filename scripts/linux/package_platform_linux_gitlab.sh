@@ -17,11 +17,6 @@ platformPackagesDir=${3}
 startDir=${4:-`pwd`}
 pinnedDepsPyFile=${5}
 
-echo "${platformReposDir}"
-echo "${platformPackagesDir}"
-echo "${startDir}"
-echo "${pinnedDepsPyFile}"
-
 baseDir="$startDir/peek_platform_linux"
 
 [ -d $baseDir ] && rm -rf $baseDir
