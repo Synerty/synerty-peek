@@ -47,6 +47,8 @@ for repo in ${PACKAGES}; do
         echo "${repo}: Failed to switch to ${RELEASE_BRANCH}" >&2
         echo "${repo}: Using master instead" >&2
     fi
+    # Print the current git commit
+    git rev-parse --verify HEAD
     popd
 done
 
