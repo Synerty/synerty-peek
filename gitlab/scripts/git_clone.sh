@@ -49,6 +49,7 @@ for repo in ${PACKAGES}; do
     fi
     # Print the current git commit
     git rev-parse --verify HEAD
+    echo "${RELEASE_BRANCH}"
     popd
 done
 
