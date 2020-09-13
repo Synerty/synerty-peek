@@ -279,4 +279,4 @@ CI/CD Tasks
     required by sphinx-rtd-theme, peek-doc-dev
 
 *   [PEEK-606] - Gitlab - Unit tests can't find non open source peek plugins
-    (peek-plugin-pof-*)
+    (peek-plugin-pof-\*)
