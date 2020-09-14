@@ -637,9 +637,8 @@ and populate it with the following contents.
         import {Component} from "@angular/core";
         import {Router} from "@angular/router";
         import {StringIntTuple, tutorialBaseUrl} from "@peek/peek_plugin_tutorial/_private";
-
+        import { NgLifeCycleEvents } from "@synerty/peek-plugin-base-js"
         import {
-            ComponentLifecycleEventEmitter,
             TupleDataObserverService,
             TupleSelector
         } from "@synerty/vortexjs";
@@ -649,7 +648,7 @@ and populate it with the following contents.
             templateUrl: 'string-int.component.mweb.html',
             moduleId: module.id
         })
-        export class StringIntComponent extends ComponentLifecycleEventEmitter {
+        export class StringIntComponent extends NgLifeCycleEvents {
 
             stringInts: Array<StringIntTuple> = [];
 
@@ -671,7 +670,7 @@ and populate it with the following contents.
                     });
 
                 // unsubscribe when this component is destroyed
-                // This is a feature of ComponentLifecycleEventEmitter
+                // This is a feature of NgLifeCycleEvents
                 this.onDestroyEvent.subscribe(() => sup.unsubscribe());
 
             }

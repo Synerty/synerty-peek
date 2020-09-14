@@ -299,7 +299,7 @@ The :file:`edit.component.ts` is the Angular Component for the new edit page.
 
 In this component:
 
-#.  We inherit from ComponentLifecycleEventEmitter, this provides a little automatic
+#.  We inherit from NgLifeCycleEvents, this provides a little automatic
     unsubscription magic for VortexJS
 
 #.  We define the filt, this is a dict that is used by payloads to describe where
@@ -320,11 +320,10 @@ and populate it with the following contents.
 ::
 
         import {Component, OnInit} from "@angular/core";
-        import { BalloonMsgService } from "@synerty/peek-plugin-base-js"
+        import { BalloonMsgService, NgLifeCycleEvents } from "@synerty/peek-plugin-base-js"
         import {
             extend,
             VortexService,
-            ComponentLifecycleEventEmitter,
             TupleLoader
         } from "@synerty/vortexjs";
         import {StringIntTuple,
@@ -336,7 +335,7 @@ and populate it with the following contents.
             selector: 'pl-tutorial-edit-string-int',
             templateUrl: './edit.component.html'
         })
-        export class EditStringIntComponent extends ComponentLifecycleEventEmitter {
+        export class EditStringIntComponent extends NgLifeCycleEvents {
             // This must match the dict defined in the admin_backend handler
             private readonly filt = {
                 "key": "admin.Edit.StringIntTuple"
@@ -638,9 +637,8 @@ and populate it with the following contents.
 ::
 
         import {Component} from "@angular/core";
-        import { BalloonMsgService } from "@synerty/peek-plugin-base-js"
+        import { BalloonMsgService, NgLifeCycleEvents } from "@synerty/peek-plugin-base-js"
         import {
-            ComponentLifecycleEventEmitter,
             extend,
             TupleLoader,
             VortexService
@@ -652,7 +650,7 @@ and populate it with the following contents.
             selector: 'pl-tutorial-edit-setting',
             templateUrl: './edit.component.html'
         })
-        export class EditSettingComponent extends ComponentLifecycleEventEmitter {
+        export class EditSettingComponent extends NgLifeCycleEvents {
             // This must match the dict defined in the admin_backend handler
             private readonly filt = {
                 "key": "admin.Edit.SettingProperty"
