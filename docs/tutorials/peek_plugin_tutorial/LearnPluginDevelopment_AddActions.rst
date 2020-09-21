@@ -494,7 +494,7 @@ Edit the file
         // Import the names we need for the
         import {
             tutorialActionProcessorName
-        } from "@peek/peek_plugin_tutorial/_private";
+        } from "@_peek/peek_plugin_tutorial/_private";
 
 
 #.  After the imports, add this function ::
@@ -526,7 +526,7 @@ It should look similar to the following: ::
 
         import {
             tutorialActionProcessorName
-        } from "@peek/peek_plugin_tutorial/_private";
+        } from "@_peek/peek_plugin_tutorial/_private";
 
         ...
 
@@ -582,7 +582,7 @@ edit the file
         import {
             AddIntValueActionTuple,
             StringCapToggleActionTuple
-        } from "@peek/peek_plugin_tutorial/_private";
+        } from "@_peek/peek_plugin_tutorial/_private";
 
 
 #.  Add :code:`private actionService: TupleActionPushService` to the constructor
@@ -649,7 +649,7 @@ It should look similar to the following:
         import {
             AddIntValueActionTuple,
             StringCapToggleActionTuple
-        } from "@peek/peek_plugin_tutorial/_private";
+        } from "@_peek/peek_plugin_tutorial/_private";
 
         ...
 

@@ -358,14 +358,14 @@ The :file:`plugin-module` directory will contain any code that needs to be eithe
 *   Shared with other modules.
 
 
-This directory is sync'd to :file:`node_modules/@peek/peek_plugin_tutorial` on mobile,
+This directory is sync'd to :file:`node_modules/@_peek/peek_plugin_tutorial` on mobile,
 admin and desktop services.
 
 Developers can use some :file:`index.ts` magic to abstract the layout of their
 directories.
 An exmaple of importing declaration is as follows: ::
 
-        import {tutorialFilt} from "@peek/peek_plugin_tutorial/_private";
+        import {tutorialFilt} from "@_peek/peek_plugin_tutorial/_private";
 
 
 ----
@@ -380,7 +380,7 @@ Add File :file:`package.json`
 `````````````````````````````
 
 The :file:`package.json` file is required to keep NPM from winging, since this
-directory is linked in under :file:`node_modules/@peek`
+directory is linked in under :file:`node_modules/@_peek`
 
 ----
 
@@ -389,7 +389,7 @@ Create file
 with contents ::
 
         {
-          "name": "@peek/peek_plugin_tutorial",
+          "name": "@_peek/peek_plugin_tutorial",
           "version": "0.0.0"
         }
 
@@ -422,9 +422,9 @@ Add File :file:`_private/index.ts`
 The :file:`_private/index.ts` file defines exports from other files in _private.
 
 This lets the code
-:code:`import tutorialFilt from "@peek/peek_plugin_tutorial/_private";`
+:code:`import tutorialFilt from "@_peek/peek_plugin_tutorial/_private";`
 work instead of
-:code:`import tutorialFilt from "@peek/peek_plugin_tutorial/_private/PluginNames";`.
+:code:`import tutorialFilt from "@_peek/peek_plugin_tutorial/_private/PluginNames";`.
 
 It seems trival a this point, but it becomes more usefull as the TypeScript code grows.
 
