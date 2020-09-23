@@ -30,10 +30,9 @@ Setup Pycharm IDE
 
     #.  Project -> Project Structure
 
-        #.  peek-mobile -> build-ns -> Excluded (as per the image below)
-        #.  peek-mobile -> build-web -> Excluded
-        #.  peek-desktop -> build-web -> Excluded
-        #.  peek-admin -> build-web -> Excluded
+        #.  peek-mobile -> Excluded
+        #.  peek-desktop -> Excluded
+        #.  peek-admin -> Excluded
 
         .. image:: PyCharmSettingsProjectStructureExclude.jpg
 

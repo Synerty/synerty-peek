@@ -4,10 +4,9 @@ set -o nounset
 set -o errexit
 
 frontendDirs="
-../peek-mobile/peek_mobile/build-web
-../peek-desktop/peek_desktop/build-web
-../peek-admin/peek_admin/build-web
-../peek-mobile/peek_mobile/build-ns
+../peek-mobile/peek_mobile
+../peek-desktop/peek_desktop
+../peek-admin/peek_admin
 "
 
 

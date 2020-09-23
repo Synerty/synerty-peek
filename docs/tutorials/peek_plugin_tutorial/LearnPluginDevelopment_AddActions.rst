@@ -739,52 +739,6 @@ and populate it with the following contents:
             </table>
         </div>
 
-
-Edit File :file:`string-int.component.ns.html`
-``````````````````````````````````````````````
-
-Edit the NativeScript XML view file, :file:`string-int.component.ns.html` and insert
-buttons that will change initiate the created tuple actions.
-
-----
-
-Edit the file
-:file:`peek_plugin_tutorial/_private/mobile-app/string-int/string-int.component.ns.html`
-and populate it with the following contents.
-
-::
-
-        <StackLayout class="p-20">
-            <Button text="Back to Main" (tap)="mainClicked()"></Button>
-
-            <GridLayout columns="4*, 1*" rows="auto" width="*">
-                <Label class="h3" col="0" text="String"></Label>
-                <Label class="h3" col="1" text="Int"></Label>
-            </GridLayout>
-
-            <ListView [items]="stringInts">
-                <template let-item="item" let-i="index" let-odd="odd" let-even="even">
-                    <StackLayout [class.odd]="odd" [class.even]="even">
-                        <GridLayout columns="4*, 1*" rows="auto" width="*">
-                            <!-- String -->
-                            <Label class="h3 peek-field-data-text" row="0" col="0"
-                                   textWrap="true"
-                                   [text]="item.string1"></Label>
-
-                            <!-- Int -->
-                            <Label class="h3 peek-field-data-text" row="0" col="1"
-                                   [text]="item.int1"></Label>
-
-                        </GridLayout>
-                        <Button text="Toggle Caps" (tap)="toggleUpperClicked(item)"></Button>
-                        <Button text="Increment Int" (tap)="incrementClicked(item)"></Button>
-                        <Button text="Decrement Int" (tap)="decrementClicked(item)"></Button>
-                    </StackLayout>
-                </template>
-            </ListView>
-        </StackLayout>
-
-
 Testing
 -------
 

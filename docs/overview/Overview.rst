@@ -141,10 +141,9 @@ allowing it to work offline.
 In web developers terminology, the Mobile service is called the frontend, and
 the Client service is called the backend.
 
-The Mobile service codes structure allows Angular components to be reused to drive both
-nativescript and web based interfaces. For example :
+The Mobile service codes structure allows Angular components to be reused to drive web based interfaces.
+For example:
 
-*   **my-component.ns.html**    (View for Nativescipt XML)
 *   **my-component.ts**    (Angular component, written in Typescript)
 *   **my-component.web.html**   (View for Browser HTML)
 

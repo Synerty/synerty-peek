@@ -239,60 +239,12 @@ To run the packages start scripts run: ::
 
 Auto refreshes, deletes the dist that ng build creates, and the proxy settings for file resources and http vortex.
 
-
-build-ns
-````````
-
-Running the command :code:`tns device` will list active virtual devices and connected physical devices ::
-
-        $ tns device
-
-        Connected devices & emulators
-        Searching for devices...
-
-        │ # │ Device Name         │ Platform │ Device Identifier                        │ Type     │ Status    │
-        │ 1 │ Synerty 008 iPad    │ iOS      │ a8f83ceb9ddd5d0df25d618a5a4c6d9bf7a6f5f9 │ Device   │ Connected │
-        │ 2 │ iPad Pro (9.7 inch) │ iOS      │ 57AF4696-FB0A-4E42-94EB-37C38164AAB6     │ Emulator │ Connected │
-
-
-
-tns development build command builds the project for the selected target platform and produces an application
-package or an emulator package: ::
-
-        tns build <Platform>
-
-
-tns development run command runs your project on a connected device or in the native emulator, if configured: ::
-
-        tns run <Platform>
-
-
- or: ::
-
-        tns run <Device ID>
-
-
 Developing on iOS Devices
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Before Peek can be deployed the signing certificate must be transfered to the device using Xcode.
 
 To develop with iOS you'll need a developer account on https://developer.apple.com
-
-Build the iOS Platform directory :code:`tns build ios` then open the :file:`build-ns/platform/ios` directory with Xcode.
-
-.. image:: XcodeSigningCertificate.jpg
-
-#.  Select the :file:`buildns` project
-
-#.  Select the Apple Developer Team
-
-#.  Select the connected physical device
-
-#.  Deploy Peek to the device
-
-After following this procedure you can then use :code:`tns` to deploy Peek as the certificate will remain on the device.
-
 
 Troubleshooting
 ---------------

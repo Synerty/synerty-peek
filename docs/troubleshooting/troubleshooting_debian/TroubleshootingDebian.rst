@@ -32,7 +32,7 @@ OSError: inotify instance limit reached
 ```````````````````````````````````````
 
 This is caused when developing peek. The Peek Platform watches the files in each plugin
-and then copies them the the UI build directories as they change, EG build-ns, build-web.
+and then copies them the the UI build directories as they change, EG build-web.
 
 There are quite a few files to monitor and the limits are nice and conservative on Linux
 by default

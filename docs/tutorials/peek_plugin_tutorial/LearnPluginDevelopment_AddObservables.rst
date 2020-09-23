@@ -574,49 +574,6 @@ and populate it with the following contents.
             </table>
         </div>
 
-
-Add File :file:`string-int.component.ns.html`
-`````````````````````````````````````````````
-
-The :file:`string-int.component.ns.html` file is the NativeScript **view** for
-the Angular component :file:`string-int.component.ts`.
-
-----
-
-Create the file
-:file:`peek_plugin_tutorial/_private/mobile-app/string-int/string-int.component.ns.html`
-and populate it with the following contents.
-
-::
-
-        <StackLayout class="p-20" >
-            <Button text="Back to Main" (tap)="mainClicked()"></Button>
-
-            <GridLayout columns="4*, 1*" rows="auto" width="*">
-                <Label class="h3" col="0" text="String"></Label>
-                <Label class="h3" col="1" text="Int"></Label>
-            </GridLayout>
-
-            <ListView [items]="stringInts">
-                <template let-item="item" let-i="index" let-odd="odd" let-even="even">
-                    <StackLayout [class.odd]="odd" [class.even]="even" >
-                        <GridLayout columns="4*, 1*" rows="auto" width="*">
-                            <!-- String -->
-                            <Label class="h3 peek-field-data-text" row="0" col="0"
-                                   textWrap="true"
-                                   [text]="item.string1"></Label>
-
-                            <!-- Int -->
-                            <Label class="h3 peek-field-data-text" row="0" col="1"
-                                   [text]="item.int1"></Label>
-
-                        </GridLayout>
-                    </StackLayout>
-                </template>
-            </ListView>
-        </StackLayout>
-
-
 Add File :file:`string-int.component.ts`
 ````````````````````````````````````````
 
@@ -753,21 +710,6 @@ Insert the following just before the last closing :code:`</div>` tag: ::
         <Button class="btn btn-default"
                 [routerLink]="['/peek_plugin_tutorial/stringint']">My Jobs >
         </Button>
-
-
-Edit File :file:`tutorial.component.ns.html`
-````````````````````````````````````````````
-
-Edit the  NativeScript XML view file, :file:`tutorial.component.ns.html` and insert a
-button that will change Angular Routes to our new component.
-
-----
-
-Edit file :file:`peek_plugin_tutorial/_private/mobile-app/tutorial.component.ns.html`,
-Insert the following just before the closing :code:`</StackLayout>` tag: ::
-
-        <Button text="String Ints"
-                [nsRouterLink]="['/peek_plugin_tutorial/stringint']"></Button>
 
 Testing
 -------
