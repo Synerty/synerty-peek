@@ -102,9 +102,9 @@ rsync -a $releaseDir/node/* ${venvDir}
 sp="$venvDir/lib/python3.6/site-packages"
 
 # Move the node_modules into place
-mv $releaseDir/mobile-build-web/node_modules $sp/peek_mobile/build-web
-mv $releaseDir/desktop-build-web/node_modules $sp/peek_desktop/build-web
-mv $releaseDir/admin-build-web/node_modules $sp/peek_admin/build-web
+mv $releaseDir/mobile-build-web/node_modules $sp/peek_mobile
+mv $releaseDir/desktop-build-web/node_modules $sp/peek_desktop
+mv $releaseDir/admin-build-web/node_modules $sp/peek_admin
 
 # ------------------------------------------------------------------------------
 # Show complete message

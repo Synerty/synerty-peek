@@ -136,7 +136,7 @@ files.
 
 ::
 
-    cp -r synerty-peek-1.3.4/lib/python3.6/site-packages/peek_desktop/build-web/src/peek_plugin_pof_diagram peek-client.home/frontendSrcOverlayDir/
+    cp -r synerty-peek-1.3.4/lib/python3.6/site-packages/peek_desktop/src/peek_plugin_pof_diagram peek-client.home/frontendSrcOverlayDir/
 
 #2 Remove the files not being updated (we’re updating pofDiagram.component.web.html)
 

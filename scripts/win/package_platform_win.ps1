@@ -177,7 +177,7 @@ foreach ($element in $nodePackages)
 
     # Get the variables for this package
     $nmDir = $element.Get_Item("dir");
-    $packageJsonBaseUrl = $element.Get_Item("packageJsonBaseUrl") + "$peekUiPkgVer/$packageName/build-web";
+    $packageJsonBaseUrl = $element.Get_Item("packageJsonBaseUrl") + "$peekUiPkgVer/$packageName";
     $packageJsonUrl = $packageJsonBaseUrl + "/package.json";
     $packageLockJsonUrl = $packageJsonBaseUrl + "/package-lock.json";
 

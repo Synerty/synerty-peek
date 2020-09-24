@@ -236,13 +236,13 @@ Install Front End Modules
 Remove the old npm modules files and re-install for both client and server front and
 packages.  Run the following commands: ::
 
-        cd ~/peek/dev-peek/peek-mobile/peek_mobile/build-web
+        cd ~/peek/dev-peek/peek-mobile/peek_mobile
         [ -d node_modules ] && rm -rf node_modules
         npm i
-        cd ~/peek/dev-peek/peek-desktop/peek_desktop/build-web
+        cd ~/peek/dev-peek/peek-desktop/peek_desktop
         [ -d node_modules ] && rm -rf node_modules
         npm i
-        cd ~/peek/dev-peek/peek-admin/peek_admin/build-web
+        cd ~/peek/dev-peek/peek-admin/peek_admin
         [ -d node_modules ] && rm -rf node_modules
         npm i
 
@@ -271,15 +271,15 @@ Compile Front End Packages For Development
 Run the following commands in separate terminal sessions: ::
 
         # Terminal 1
-        cd ~/peek/dev-peek/peek-mobile/peek_mobile/build-web
+        cd ~/peek/dev-peek/peek-mobile/peek_mobile
         ng build --watch
 
         # Terminal 2
-        cd ~/peek/dev-peek/peek-admin/peek_admin/build-web
+        cd ~/peek/dev-peek/peek-admin/peek_admin
         ng build --watch
 
         # Terminal 3
-        cd ~/peek/dev-peek/peek-desktop/peek_desktop/build-web
+        cd ~/peek/dev-peek/peek-desktop/peek_desktop
         ng build --watch
 
         # Terminal 4

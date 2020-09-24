@@ -117,17 +117,17 @@ function downloadNodeModules {
 
 # MOBILE node modules
 mobileBuildWebDIR="$baseDir/mobile-build-web"
-mobileJsonUrl="${platformReposDir}/peek-mobile/peek_mobile/build-web"
+mobileJsonUrl="${platformReposDir}/peek-mobile/peek_mobile"
 downloadNodeModules $mobileBuildWebDIR $mobileJsonUrl
 
 # DESKTOP node modules
 desktopBuildWebDIR="$baseDir/desktop-build-web"
-desktopJsonUrl="${platformReposDir}/peek-desktop/peek_desktop/build-web"
+desktopJsonUrl="${platformReposDir}/peek-desktop/peek_desktop"
 downloadNodeModules $desktopBuildWebDIR $desktopJsonUrl
 
 # ADMIN node modules
 adminBuildWebDIR="$baseDir/admin-build-web"
-adminJsonUrl="${platformReposDir}/peek-admin/peek_admin/build-web"
+adminJsonUrl="${platformReposDir}/peek-admin/peek_admin"
 downloadNodeModules $adminBuildWebDIR $adminJsonUrl
 
 # ------------------------------------------------------------------------------
