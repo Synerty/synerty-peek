@@ -1,10 +1,10 @@
 .. _setup_os_requirements_macos:
 
 ===========================
-Setup OS Requirements MacOS
+Setup OS Requirements macOS
 ===========================
 
-This section describes how to perform the setup for MacOS (previously OSX).
+This section describes how to perform the setup for macOS (previously OSX).
 
 Please read through all of the documentation before commencing the installation procedure.
 
@@ -39,7 +39,7 @@ Below is a list of all the required software:
 Optional Software
 `````````````````
 
-- Oracle 12c Client
+- Oracle Client
 
 Installing Oracle Libraries is required if you intend on installing the peek agent.
 Instruction for installing the Oracle Libraries are in the Online Installation Guide.
@@ -56,6 +56,28 @@ Follow the remaining section in this document to prepare your macOS operating sy
 to run the Peek Platform.
 
 The instructions on this page don't install the peek platform, that's done later.
+
+Set Terminal shell to Bash
+--------------------------
+
+Press :code:`Command + Space` to bring up preferences.
+
+----
+
+Type “terminal”
+
+----
+
+Run the following command and enter the password when prompted
+
+----
+
+code::
+
+    chsh -s /bin/bash
+
+This will change your chosen shell from zsh to Bash.
+
 
 Safari Open Safe Files
 ----------------------
@@ -130,7 +152,7 @@ Run Terminal
 Apple's Command Line Developer Tools can be installed on recent OS versions by
 running this command in the Terminal: ::
 
-        xcode-select --install
+        sudo xcode-select -r
 
 
 ----
@@ -567,17 +589,15 @@ Make the directory where the oracle client will live ::
 
 ----
 
-Download the following from oracle.
+Download the following from `oracle <http://www.oracle.com/technetwork/topics/intel-macsoft-096467.html>`_.
 
 The version used in these instructions is :code:`18.1.0.0.0`.
 
-.. note:: Oracle version 18.1 is not available for macOS.
-
 #.  Download the "Basic Package" from
-    http://www.oracle.com/technetwork/topics/intel-macsoft-096467.html
+    https://download.oracle.com/otn_software/mac/instantclient/instantclient-basic-macos.zip
 
 #.  Download the "SDK Package" from
-    http://www.oracle.com/technetwork/topics/intel-macsoft-096467.html
+    https://download.oracle.com/otn_software/mac/instantclient/instantclient-sdk-macos.zip
 
 Copy these files to :file:`~/oracle` on the peek server.
 
@@ -624,11 +644,17 @@ which depends on FreeTDS.
 
 .. note:: FreeTDS 1.x doesn't work, so be sure to install @0.91
 
-Install FreeTDS via Homebrew: ::
+FreeTDS 0.91 can be selected and downloaded at this address:
+https://www.freetds.org/files/stable/
 
-        brew install freetds@0.91
-        brew link --force freetds@0.91
+Once you have downloaded FreeTDS version 0.91, extract it and open a terminal inside of the
+extracted folder. Then run the following commands::
 
+    ./configure
+    make
+    make install
+
+This should install version 0.91.
 
 ----
 
