@@ -152,7 +152,7 @@ Run Terminal
 Apple's Command Line Developer Tools can be installed on recent OS versions by
 running this command in the Terminal: ::
 
-        xcode-select --install
+        sudo xcode-select -r
 
 
 ----
