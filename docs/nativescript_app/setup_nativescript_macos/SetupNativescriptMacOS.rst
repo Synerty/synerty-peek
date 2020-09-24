@@ -34,6 +34,7 @@ Required Software
 
 Below is a list of all the required software:
 
+*   OpenJDK
 *   nativescript NPM package
 
 
@@ -153,6 +154,13 @@ Select 'ok' and confirm the install
 
 Close Android Studio
 
+
+Install an Oracle JDK
+---------------------
+
+Download the macOS disk image:
+
+https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
 
 Nativescript Package
 --------------------

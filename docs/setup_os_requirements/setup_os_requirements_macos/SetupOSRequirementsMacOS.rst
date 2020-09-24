@@ -27,8 +27,6 @@ Below is a list of all the required software:
 
 *   Xcode (from the app store)
 
-*   Oracle JDK
-
 *   Homebrew
 
 *   Python 3.6.x
@@ -154,27 +152,6 @@ running this command in the Terminal: ::
 
         sudo xcode-select -r
 
-
-----
-
-A popup will appear, select 'Install' then 'Agree' to the license.
-
-----
-
-Agree to the Xcode license in Terminal run: ::
-
-        sudo xcodebuild -license
-
-
-Type :code:`q`, type :code:`agree` and hit 'Enter'
-
-
-Install an Oracle JDK
----------------------
-
-Download the macOS disk image:
-
-http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
 
 .. JJC Is this only required for nativescript development?
 
