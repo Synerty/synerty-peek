@@ -9,6 +9,7 @@ Release Notes
     :maxdepth: 1
     :caption: Contents:
 
+    v2.5.x/v2.5.x
     v2.4.x/v2.4.x
     v2.3.x/v2.3.x
     v2.2.x/v2.2.x
