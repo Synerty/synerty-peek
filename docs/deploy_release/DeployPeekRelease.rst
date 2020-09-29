@@ -182,7 +182,7 @@ Download the platform deploy script.
 ::
 
         file="deploy_release_macos.sh"
-        uri="https://bitbucket.org/synerty/synerty-peek/raw/master/scripts/macos/$deployScript"
+        uri="https://bitbucket.org/synerty/synerty-peek/raw/master/scripts/macos/$file"
         curl -O $uri
 
 
