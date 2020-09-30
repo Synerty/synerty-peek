@@ -140,12 +140,12 @@ Fork all repositories from https://gitlab.synerty.com/peek-util to your namespac
             --data-raw '{"id":"${ID}","namespace":${YOUR_SUBGROUP_ID}}'
         done
 
-Clone all of the projects in your namespace/peek subgroup to /Users/peek/dev-peek/: ::
+Clone all of the projects in your namespace/peek subgroup to ~/dev-peek/: ::
 
         export ACCESS_TOKEN="" # https://gitlab.synerty.com/profile/personal_access_tokens
         export YOUR_NAMESPACE="" # Your GitLab namespace group, i.e. "john-smith"
         export YOUR_SUBGROUP_ID="" # Your GitLab namespace/peek subgroup id
-        export DIR="/Users/peek/dev-peek"
+        export DIR="~/dev-peek"
 
         function loadProjectIds() {
             curl --location --request GET "https://gitlab.synerty.com/api/v4/groups/${YOUR_SUBGROUP_ID}/projects?per_page=100" \
@@ -168,12 +168,12 @@ Clone all of the projects in your namespace/peek subgroup to /Users/peek/dev-pee
             done
         fi
 
-Clone all of the projects in your namespace/peek-util subgroup to /Users/peek/dev-peek-util/: ::
+Clone all of the projects in your namespace/peek-util subgroup to ~/dev-peek-util/: ::
 
         export ACCESS_TOKEN="" # https://gitlab.synerty.com/profile/personal_access_tokens
         export YOUR_NAMESPACE="" # Your GitLab namespace group, i.e. "john-smith"
         export YOUR_SUBGROUP_ID="" # Your GitLab namespace/peek subgroup id
-        export DIR="/Users/peek/dev-peek-util"
+        export DIR="~/dev-peek-util"
 
         function loadProjectIds() {
             curl --location --request GET "https://gitlab.synerty.com/api/v4/groups/${YOUR_SUBGROUP_ID}/projects?per_page=100" \
@@ -202,11 +202,11 @@ Clone all of the projects in your namespace/peek-util subgroup to /Users/peek/de
 
 Setup Cloned Repositories For Development
 `````````````````````````````````````````
-Run setup.py in all of the repositories located in /Users/peek/dev-peek/: ::
+Run setup.py in all of the repositories located in ~/dev-peek/: ::
 
         set -e
 
-        cd /Users/peek/dev-peek
+        cd ~/dev-peek
         for DIR in */; do
             cd "$DIR"
             NAME=${PWD##*/}
@@ -216,11 +216,11 @@ Run setup.py in all of the repositories located in /Users/peek/dev-peek/: ::
             cd ..
         done
 
-Run setup.py in all of the repositories located in /Users/peek/dev-peek-util/: ::
+Run setup.py in all of the repositories located in ~/dev-peek-util/: ::
 
         set -e
 
-        cd /Users/peek/dev-peek-util
+        cd ~/dev-peek-util
         for DIR in */; do
             cd "$DIR"
             NAME=${PWD##*/}
@@ -236,13 +236,13 @@ Install Front End Modules
 Remove the old npm modules files and re-install for both client and server front and
 packages.  Run the following commands: ::
 
-        cd /Users/peek/dev-peek/peek-mobile/peek_mobile
+        cd ~/dev-peek/peek-mobile/peek_mobile
         [ -d node_modules ] && rm -rf node_modules
         npm i
-        cd /Users/peek/dev-peek/peek-desktop/peek_desktop
+        cd ~/dev-peek/peek-desktop/peek_desktop
         [ -d node_modules ] && rm -rf node_modules
         npm i
-        cd /Users/peek/dev-peek/peek-admin/peek_admin
+        cd ~/dev-peek/peek-admin/peek_admin
         [ -d node_modules ] && rm -rf node_modules
         npm i
 
@@ -271,15 +271,15 @@ Compile Front End Packages For Development
 Run the following commands in separate terminal sessions: ::
 
         # Terminal 1
-        cd /Users/peek/dev-peek/peek-mobile/peek_mobile
+        cd ~/dev-peek/peek-mobile/peek_mobile
         ng build --watch
 
         # Terminal 2
-        cd /Users/peek/dev-peek/peek-admin/peek_admin
+        cd ~/dev-peek/peek-admin/peek_admin
         ng build --watch
 
         # Terminal 3
-        cd /Users/peek/dev-peek/peek-desktop/peek_desktop
+        cd ~/dev-peek/peek-desktop/peek_desktop
         ng build --watch
 
         # Terminal 4
