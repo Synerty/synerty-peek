@@ -1,11 +1,11 @@
 .. _setup_nativescript_macos:
 
 ========================
-Setup Nativescript MacOS
+Setup Capacitor MacOS
 ========================
 
 The Peek platform is designed to run on Linux, however, it is compatible with macOS.
-Please read through all of the documentation before commencing the installation
+Please read through all of the documentation before commencing with the installation
 procedure.
 
 Installation Objective
@@ -23,8 +23,6 @@ This install procedure requires software installed by the prerequisites steps.
 Optional  Software
 ``````````````````
 
-*   Android Studio
-
 *   VirtualBox
 
 *   Geny Motion
@@ -34,9 +32,9 @@ Required Software
 
 Below is a list of all the required software:
 
-*   nativescript NPM package
+*   Android Studio
 
-
+*   Xcode
 
 Installation Guide
 ------------------
