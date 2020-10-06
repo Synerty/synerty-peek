@@ -152,6 +152,18 @@ running this command in the Terminal: ::
 
         sudo xcode-select -r
 
+----
+
+A popup will appear, select 'Install' then 'Agree' to the license.
+
+----
+
+Agree to the Xcode license in Terminal run: ::
+
+        sudo xcodebuild -license
+
+
+Type :code:`q`, type :code:`agree` and hit 'Enter'
 
 .. JJC Is this only required for nativescript development?
 
