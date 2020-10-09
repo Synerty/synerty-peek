@@ -328,7 +328,7 @@ and populate it with the following contents.
         } from "@synerty/vortexjs";
         import {StringIntTuple,
             tutorialFilt
-        } from "@_peek/peek_plugin_tutorial/_private";
+        } from "@peek/peek_plugin_tutorial/_private";
 
 
         @Component({
@@ -643,7 +643,7 @@ and populate it with the following contents.
             TupleLoader,
             VortexService
         } from "@synerty/vortexjs";
-        import {SettingPropertyTuple, tutorialFilt} from "@_peek/peek_plugin_tutorial/_private";
+        import {SettingPropertyTuple, tutorialFilt} from "@peek/peek_plugin_tutorial/_private";
 
 
         @Component({

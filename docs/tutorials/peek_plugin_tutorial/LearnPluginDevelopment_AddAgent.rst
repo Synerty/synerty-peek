@@ -172,7 +172,7 @@ It should somthing like this: ::
 
 You can now run the peek agent, you should see your plugin load. ::
 
-        peek@peek:~$ run_peek_agent
+        peek@_peek:~$ run_peek_agent
         ...
         DEBUG peek_plugin_tutorial._private.agent.AgentEntryHook:Loaded
         DEBUG peek_plugin_tutorial._private.agent.AgentEntryHook:Started

@@ -218,7 +218,7 @@ It should somthing like this: ::
 
 You can now run the peek worker, you should see your plugin load. ::
 
-        peek@peek:~$ run_peek_worker
+        peek@_peek:~$ run_peek_worker
         ...
         DEBUG peek_plugin_tutorial._private.worker.WorkerEntryHook:Loaded
         DEBUG peek_plugin_tutorial._private.worker.WorkerEntryHook:Started

@@ -172,7 +172,7 @@ It should something like this: ::
 
 You can now run the peek client, you should see your plugin load. ::
 
-        peek@peek:~$ run_peek_client
+        peek@_peek:~$ run_peek_client
         ...
         DEBUG peek_plugin_tutorial._private.client.ClientEntryHook:Loaded
         DEBUG peek_plugin_tutorial._private.client.ClientEntryHook:Started

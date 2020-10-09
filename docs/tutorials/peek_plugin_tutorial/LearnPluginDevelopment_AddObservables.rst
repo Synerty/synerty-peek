@@ -221,7 +221,7 @@ Edit the file
         import {
                 tutorialObservableName,
                 tutorialFilt
-        } from "@_peek/peek_plugin_tutorial/_private";
+        } from "@peek/peek_plugin_tutorial/_private";
 
 
 #.  After the imports, add this function ::
@@ -256,7 +256,7 @@ It should look similar to the following:
         import {
             tutorialObservableName,
             tutorialFilt
-        } from "@_peek/peek_plugin_tutorial/_private";
+        } from "@peek/peek_plugin_tutorial/_private";
 
         ...
 
@@ -593,7 +593,7 @@ and populate it with the following contents.
 
         import {Component} from "@angular/core";
         import {Router} from "@angular/router";
-        import {StringIntTuple, tutorialBaseUrl} from "@_peek/peek_plugin_tutorial/_private";
+        import {StringIntTuple, tutorialBaseUrl} from "@peek/peek_plugin_tutorial/_private";
         import { NgLifeCycleEvents } from "@synerty/peek-plugin-base-js"
         import {
             TupleDataObserverService,

@@ -40,7 +40,7 @@ Edit the file
         // Import the names we need for the
         import {
             tutorialTupleOfflineServiceName
-        } from "@_peek/peek_plugin_tutorial/_private";
+        } from "@peek/peek_plugin_tutorial/_private";
 
 
 #.  After the imports, add this function ::
@@ -71,7 +71,7 @@ It should look similar to the following:
         } from "@synerty/vortexjs";
         import {
             tutorialTupleOfflineServiceName
-        } from "@_peek/peek_plugin_tutorial/_private";
+        } from "@peek/peek_plugin_tutorial/_private";
 
         ...
 

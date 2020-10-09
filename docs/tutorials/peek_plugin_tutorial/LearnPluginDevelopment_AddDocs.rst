@@ -276,7 +276,7 @@ Run the following to find the location of :code:`peek_doc_admin` ::
 This will return the following, which you can get the location of :code:`peek_doc_admin`
 from. ::
 
-    peek@peek ~ % python - <<EOF
+    peek@_peek ~ % python - <<EOF
     import peek_doc_admin
     print(peek_doc_admin.__file__)
     EOF

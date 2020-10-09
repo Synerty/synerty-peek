@@ -261,7 +261,7 @@ written in TypeScript.
 
 Our exampled tuple will be importable with: ::
 
-        import {TutorialTuple} from "@_peek/peek_plugin_tutorial";
+        import {TutorialTuple} from "@peek/peek_plugin_tutorial";
 
 ----
 

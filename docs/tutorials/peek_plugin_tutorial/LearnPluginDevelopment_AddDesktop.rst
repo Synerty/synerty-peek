@@ -168,7 +168,7 @@ Run :file:`run_peek_client`
 
 Run the peek client, The NativeScript will be offline with out it. ::
 
-        peek@peek:~$ run_peek_client
+        peek@_peek:~$ run_peek_client
         ...
         INFO txhttputil.site.SiteUtil:Peek Office Site is alive and listening on http://0.0.0.0:8002
         ...

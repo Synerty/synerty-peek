@@ -231,7 +231,7 @@ Run :file:`run_peek_server`
 
 You can now run the peek server, you should see your plugin load. ::
 
-        peek@peek:~$ run_peek_server
+        peek@_peek:~$ run_peek_server
         ...
         INFO peek_platform.frontend.WebBuilder:Rebuilding frontend distribution
         ...

@@ -359,7 +359,7 @@ It's folder structure looks like this :
 
         *   :file:`plugin-modules`   (Exposed API, index.ts will expose public declarations.
             Plugins can structure the subfolders however they like, this dir is available
-            from node_modules/@_peek/peek_plugin_noop)
+            from node_modules/@peek/peek_plugin_noop)
             See subfolders below.
 
 ---
@@ -400,7 +400,7 @@ An example contents of the :file:`plugin-modules` is described below.
 
 *   :file:`plugin-modules`   (Exposed API, index.ts will expose public declarations.
     Plugins can structure the subfolders however they like, this dir is available
-    from node_modules/@_peek/peek_plugin_noop)
+    from node_modules/@peek/peek_plugin_noop)
 
     *   :file:`desktop`   (Exposed API, index.ts exposes desktop only declarations)
 

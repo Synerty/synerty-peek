@@ -456,7 +456,7 @@ classes.
 
     it should look like ::
 
-        peek@peek:~/project/peek-plugin-tutorial/peek_plugin_tutorial/_private$ alembic revision --autogenerate -m "Added StringInt Table"
+        peek@_peek:~/project/peek-plugin-tutorial/peek_plugin_tutorial/_private$ alembic revision --autogenerate -m "Added StringInt Table"
         LOAD TABLES
         19-Mar-2017 20:59:42 INFO alembic.runtime.migration:Context impl PostgresqlImpl.
         19-Mar-2017 20:59:42 INFO alembic.runtime.migration:Will assume transactional DDL.
@@ -489,7 +489,7 @@ with the following command: ::
 
 You should see output similar to: ::
 
-        peek@peek MINGW64 ~/peek-plugin-tutorial/peek_plugin_tutorial/_private
+        peek@_peek MINGW64 ~/peek-plugin-tutorial/peek_plugin_tutorial/_private
         $ alembic upgrade head
         21-Mar-2017 02:06:27 INFO alembic.runtime.migration:Context impl PostgresqlImpl.
         21-Mar-2017 02:06:27 INFO alembic.runtime.migration:Will assume transactional DDL.

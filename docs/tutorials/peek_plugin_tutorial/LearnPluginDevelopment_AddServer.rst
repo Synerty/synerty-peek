@@ -236,7 +236,7 @@ It should something like this: ::
 
 You can now run the peek server, you should see your plugin load. ::
 
-        peek@peek:~$ run_peek_server
+        peek@_peek:~$ run_peek_server
         ...
         DEBUG peek_plugin_tutorial._private.server.ServerEntryHook:Loaded
         DEBUG peek_plugin_tutorial._private.server.ServerEntryHook:Started
