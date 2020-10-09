@@ -234,13 +234,6 @@ Example, run this for each python package/plugin you're developing. ::
         python setup.py develop
 
 
-----
-
-Install the :command:`tns` command line tools again: ::
-
-        npm -g install nativescript
-
-
 What Next?
 ----------
 

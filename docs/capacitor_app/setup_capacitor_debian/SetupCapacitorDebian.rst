@@ -1,8 +1,8 @@
-.. _setup_capacitor_macos:
+.. _setup_capacitor_debian:
 
-=====================
-Setup Capacitor MacOS
-=====================
+======================
+Setup Capacitor Debian
+======================
 
 **TODO**
 

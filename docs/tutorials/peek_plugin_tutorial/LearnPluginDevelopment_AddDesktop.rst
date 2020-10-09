@@ -63,7 +63,6 @@ and populate it with the following contents.
         import {NgModule} from "@angular/core";
         import {Routes} from "@angular/router";
 
-        // Import a small abstraction library to switch between nativescript and web
         import { PeekModuleFactory } from "@synerty/peek-plugin-base-js"
 
         // Import the default route component
@@ -166,7 +165,7 @@ Here is an example ::
 Run :file:`run_peek_client`
 ```````````````````````````
 
-Run the peek client, The NativeScript will be offline with out it. ::
+Run the peek client ::
 
         peek@_peek:~$ run_peek_client
         ...

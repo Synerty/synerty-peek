@@ -577,10 +577,8 @@ and populate it with the following contents.
 Add File :file:`string-int.component.ts`
 ````````````````````````````````````````
 
-The :file:`string-int.component.ts` is the Angular Component that drives both
-Web and NativeScript views
-
-This will be another route within the Tutorial plugin.
+The :file:`string-int.component.ts` is the Angular Component that
+will be another route within the Tutorial plugin.
 
 
 ----
@@ -697,10 +695,6 @@ Edit File :file:`tutorial.component.mweb.html`
 
 Edit the  web HTML view file, :file:`tutorial.component.mweb.html` and insert a
 button that will change Angular Routes to our new component.
-
-.. tip::It's better to make the button call a method on the component that changes
-        the route, this ensures both NativeScript and Web views will route to the
-        same place.
 
 ----
 

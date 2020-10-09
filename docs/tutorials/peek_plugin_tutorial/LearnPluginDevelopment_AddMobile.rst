@@ -9,9 +9,7 @@ The mobile service is for the users. It's the interface designed for mobile devi
 The Mobile service is known as the "frontend" in web terminology.
 The backend for the Mobile service is the Client service.
 
-The Peek Mobile Service has two builds, a
-`NativeScript <https://docs.nativescript.org/angular/start/introduction.html>`_ build
-and a `web build <https://angular.io/docs/ts/latest/>`_.
+The Peek Mobile Service is built with an Angular `web build <https://angular.io/docs/ts/latest/>`_.
 
 In this document, we'll add the start of both the mobile and web builds for the plugin.
 
@@ -72,7 +70,7 @@ Add File :file:`tutorial.component.ts`
 The :file:`tutorial.component.ts` is the Angular Component for the mobile page.
 It's loaded by the default route defined in :file:`tutorial.module.ts`.
 
-.. note::   The one Angular component drives both the NativeScript and Web app views.
+.. note::   The one Angular component drives both the Capacitor and Web app views.
             More on this later.
 
 ----
@@ -120,7 +118,6 @@ and populate it with the following contents.
         import {NgModule} from "@angular/core";
         import {Routes} from "@angular/router";
 
-        // Import a small abstraction library to switch between nativescript and web
         import { PeekModuleFactory } from "@synerty/peek-plugin-base-js"
 
         // Import the default route component

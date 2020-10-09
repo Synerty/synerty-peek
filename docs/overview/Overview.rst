@@ -129,7 +129,7 @@ Mobile Service
 .. image:: MobileService.png
 
 The mobile service provides two user interfaces, a native mobile app backed by
-Telerik Nativescript + Angular, and an Angular web app.
+Capacitor + Angular, and an Angular web app.
 
 VortexJS provides data serialisation and transport to the Peek Client service via
 a websockets or HTTP connection.
@@ -319,15 +319,14 @@ environment. This is the standard setup for single server environments.
 .. image:: RunningPluginsOnClient.png
 
 There are three plugins that require the mobile service. The mobile service is a python
-package that contains the build skeletins for the nativescript and web apps.
+package that contains the build skeletons for the web app.
 
 The client service combines (copies) the files required from each of the plugins into the
-build environments, and then compiles the web app. (The Nativescript app is compiled
-manually by developers)
+build environments, and then compiles the web app.
 
 The client and server services
-prepare and compile the desktop, mobile and admin services, as these are all HTML,
-Typescript and Nativescript.
+prepare and compile the desktop, mobile and admin services, as these are all HTML, SCSS and
+Typescript.
 
 The desktop, mobile and admin interfaces need the client and server python services to
 run, so this compile arrangement makes sense.

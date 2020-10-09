@@ -23,11 +23,11 @@ integration).
             *   `Python3.5+ <https://www.python.org>`_
             *   `Python Twisted <http://twistedmatrix.com>`_
             *   HTML
-            *   CSS
-            *   `Bootstrap3 <http://getbootstrap.com>`_
+            *   SCSS
+            *   `Ant Design <https://ant.design/>`_
             *   `TypeScript <https://www.typescriptlang.org>`_
             *   `Angular <https://angular.io>`_ (Angular2+, not AngularJS aka Angular1)
-            *   `NativeScript <https://www.nativescript.org>`_
+            *   `Capacitor <https://capacitorjs.com/>`_
 
 
 .. note:: This a cross platform development guide, all commands are writen for bash.

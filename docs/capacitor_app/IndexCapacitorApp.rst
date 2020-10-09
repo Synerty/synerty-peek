@@ -1,8 +1,8 @@
 .. _capacitor_app:
 
-================
-NativeScript App
-================
+=============
+Capacitor App
+=============
 
 .. toctree::
     :maxdepth: 1

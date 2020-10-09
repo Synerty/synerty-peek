@@ -19,7 +19,6 @@ The frontends are the Admin, Mobile and Desktop services.
 
 *   Mobile builds:
 
-        *   A NativeScript app, using NativeScript
         *   A Web app, using @angular/cli
 
 *   Desktop builds:
@@ -48,22 +47,14 @@ Don't rewrite the file if it hasn't changed. This causes problems with developme
 tools incorrectly detecting file changes.
 
 **Allow on the fly modifications.**
-Instead of using Trickery with :file:`tsconfig.json` and special NPM packages that
-switch between NativeScript and Web dependencies, Peek rewrites parts of the
-frontend code on the fly. For example this method rewrites Web files to work with the
-NativeScript frontend.
-Here is an example,
-`NativescriptBuilder.py <https://bitbucket.org/synerty/peek-platform/src/e6ad75ecc18d38981aefc02f4739f7e5ecb23ee3/peek_platform/frontend/NativescriptBuilder.py?at=master&fileviewer=file-view-default#NativescriptBuilder.py-159>`_.
+Peek rewrites parts of the frontend code on the fly.
 
 **Angular Ahead of Time Compilation**. The final nail in the symlink approach was
-Angular AoT Compilation support. With the new file copy approach, Peek does away
-with on the fly switching of NativeScript VS Angular dependencies.
+Angular AoT Compilation support.
 
 **Plugins in node_modules**. Plugins in the frontends can leverage each other.
 For example, other plugins can leverage services from :code:`peek_core_user` for user
-authentication. To do this, Peek copies files into node_modules. However, nativescript
-doesn't recompile these files during live sync, so Peek also compiles them and copies them
-to the platforms directory.
+authentication. To do this, Peek copies files into node_modules.
 
 **End user customisation.**
 The ability for the end user to overwrite files with out having to fork plugins, etc.
@@ -86,9 +77,9 @@ The file copy process, AKA "prepare" or "Combine", is fairly simple:
 
     #.  etc
 
-#.  Compile plugin code copied to node_modules for NativeScript
+#.  Compile plugin code copied to node_modules.
 
-#.  Copy required files to the platform directory for NativeScript.
+#.  Copy required files to the platform directory.
 
 At this point the build directories are prepared and ready to run.
 
@@ -102,15 +93,14 @@ this to change text, update icons, branding, etc.
 
 .. note::
 
-    The following directory overlay is for build-web, for NativeScript use the :file:`~/peek-server.home/frontendNodeModuleOverlayDir`
-    or :file:`~/peek-client.home/frontendNodeModuleOverlayDir`.
+    The following directory overlay is for the web app directory.
 
 Peek reads files from either the :file:`~/peek-server.home/frontendSrcOverlayDir`
 or :file:`~/peek-client.home/frontendSrcOverlayDir` directories and overlays them
 on top of the build directories.
 
 This provides end users with the ability to
-alter any part of the Electron, Web or NativeScript frontends by copying a file
+alter any part of the Electron, Web or Capacitor frontends by copying a file
 into the customisation directory and then altering it.
 
 This is a use at their own risk feature.
@@ -168,15 +158,15 @@ files.
 Live Updating for Development
 -----------------------------
 
-Both **NativeScript** and **Angular CLI** have development tools that provide live
+Both **Capacitor** and **Angular CLI** have development tools that provide live
 sync + refresh support.
 
 Meaning, you can alter your code, save, and the tools will recompile, and update the apps.
-Angular CLI will update the code for the web page and reload it, NativeScript will
-compile the TypeScript, redeploy the javascript to the native app and reload the
-NativeScript.
+Angular CLI will update the code for the web page and reload it, Capacitor will
+copy the generated bundles to the iOS and Android directories to be used in
+xcode and Android Studio.
 
-Peeks frontend preparation code creates maps of where files should be copied from and to,
+Peek's frontend preparation code creates maps of where files should be copied from and to,
 then monitors all the source directories, and incrementally updates files as the
 developer works. This includes performing any on the fly changes to the files that are
 required.
@@ -213,13 +203,7 @@ Now when you run: ::
         # Start Angular CLI live dev server
         npm start
 
-Or ::
-
-        # Start NativeScript live sync
-        tns run <Platform>
-
-
-The NativeScript and Web apps will automatically update as the developer changes things.
+The web apps will automatically update as the developer changes things.
 
 
 build-web

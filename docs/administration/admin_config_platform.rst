@@ -75,14 +75,10 @@ Create following file and parent directory:
 
 Populate the file :file:`config.json` with the
     *   Enabled plugins
-    *   Disable NativeScript preparing
 
 ::
 
         {
-            "frontend": {
-                "nativescriptBuildPrepareEnabled": false
-            },
             "plugin": {
                 "enabled": [
                     "peek_plugin_inbox",
@@ -90,8 +86,6 @@ Populate the file :file:`config.json` with the
                 ]
             }
         }
-
-
 
 Peek Agent
 ``````````

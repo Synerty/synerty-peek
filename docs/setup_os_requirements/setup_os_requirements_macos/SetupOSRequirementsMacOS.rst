@@ -176,8 +176,6 @@ Download the macOS disk image:
 
 http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
 
-.. JJC Is this only required for nativescript development?
-
 Install Homebrew
 ----------------
 

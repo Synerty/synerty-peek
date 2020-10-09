@@ -12,7 +12,7 @@ Peek Platform Documentation
     setup_os_requirements/IndexSetupOSRequirements
     deploy_release/DeployPeekRelease
     administration/administration
-    nativescript_app/IndexNativeScriptApp
+    capacitor_app/IndexCapacitorApp
     development/IndexPeekDevelopment
     troubleshooting/IndexTroubleshooting
     util/IndexUtil
