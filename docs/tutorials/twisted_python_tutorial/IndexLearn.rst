@@ -11,6 +11,7 @@ Twisted Python Tutorial
 
     introduction_to_twisted/IndexTwisted.rst
     understanding_deferreds/IndexDeferred.rst
+    twisted_challenges/IndexChallenges.rst
     understanding_vortexpy/IndexVortexPy.rst
 
 
