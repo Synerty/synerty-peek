@@ -1,0 +1,117 @@
+.. _release_notes_v2.5.x:
+
+====================
+v2.5.x Release Notes
+====================
+
+Platform Changes
+----------------
+
+The peek-client and peek-server now support a PEM bundle file for SSL.
+
+The peek desktop, admin & mobile web-apps have been upgraded to use Angular 9.
+
+The following Synerty projects have been deprecated:
+
+    *   ng2-balloon-msg, ng2-balloon-msg-web, ng2-balloon-msg-ns
+
+    *   peek-theme, peek-mobile-theme-test
+
+    *   peek-util, peek-util-web, peek-util-ns
+
+    *   font-awesome
+
+    *   nativescript-peek-update
+
+Major Plugin Changes
+--------------------
+
+The following plugins have been developed for the v2.5.x+ Peek releases.
+
+*   **peek-plugin-base-js** (Open Source)
+    This plugin contains shared code that all Peek projects can access and utilise.
+    The following Synerty projects have been merged into this plugin:
+
+    *   ng2-balloon-msg, ng2-balloon-msg-web
+
+    *   peek-theme
+
+    *   peek-util, peek-util-web
+
+Deployment Changes
+------------------
+
+Windows Deployment
+``````````````````
+
+.. note:: This release is not supported on Windows.
+
+Linux Deployment
+````````````````
+
+Nil
+
+macOS Deployment
+````````````````
+
+Nil
+
+iOS Deployment
+``````````````
+
+.. note:: Peek v2.5.x does not have support for iOS, this will be updated in the v3.0.x release.
+    We're going to use Ionics Capacitor framework to create a full hybrid app.
+
+Android Deployment
+``````````````````
+
+.. note:: Peek v2.5.x does not have support for Android, this will be updated in the v3.0.x release.
+    We're going to use Ionics Capacitor framework to create a full hybrid app.
+
+Migration Steps
+---------------
+
+In PEEK-660, the peek-client and peek-server projects now accept a PEM bundle file to serve SSL.
+Follow the steps in the link below to set this up.
+
+`Peek Client & Server SSL <https://synerty-peek.readthedocs.io/en/latest/administration/admin_config_platform.html#peek-client-server-ssl>`_
+
+
+v2.5.0 Issues Log
+-----------------
+
+Bug
+```
+
+*   [PEEK-504] - Toggle feeder colours - breakers go black
+
+*   [PEEK-618] - synerty-peek pip_uninstall_and_develop.sh
+
+*   [PEEK-663] - NorthPower - Peek, Equipment popup pops up off the screen.
+
+*   [PEEK-664] - synerty-peek, fix typo "hypons"
+
+*   [PEEK-670] - Fix Balloon messages not appearing
+
+*   [PEEK-672] - Fix safari issue with Ant Design tabs disappearing
+
+*   [PEEK-667] - AUTH - Add a workaround for Peek-Admin on Safari with Angular9
+
+New Feature
+```````````
+
+*   [PEEK-660] - txHttpUtil Peek doesn't serve SSL certificates correctly
+
+Task
+````
+
+*   [PEEK-668] - Create Peek Release v2.5.0
+
+Improvement
+```````````
+
+*   [PEEK-632] - Upgrade peek UI ng-zorro v9
+
+*   [PEEK-639] - @angular, ng-zorro, ng-zorro-mobile Upgrade 8.1 to 9.1
+
+*   [PEEK-264] - Ensure route.params is unsubscribed.
