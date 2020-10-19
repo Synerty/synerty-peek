@@ -342,7 +342,7 @@ Tap the keg for postgresSQL v12.x and timescale ::
 Uninstall the old software if it exists ::
 
         echo "Uninstall PostgreSQL if it exists."
-        brew uninstall postgresql@12 || true
+        brew uninstall postgresql || true
         brew uninstall timescaledb || true
 
 ----
@@ -352,7 +352,7 @@ Uninstall the old software if it exists ::
 Install timescale and PostgreSQL ::
 
         echo "Install timescale"
-        brew install louis-lu/tap/postgresql@12
+        brew install louis-lu/tap/postgresql
         brew install timescaledb
 
 ----
@@ -369,7 +369,7 @@ Finish setting up timescale ::
 
 Start postgresql and create start at login launchd service: ::
 
-        brew services start postgresql@12
+        brew services start postgresql
 
 
 ----
