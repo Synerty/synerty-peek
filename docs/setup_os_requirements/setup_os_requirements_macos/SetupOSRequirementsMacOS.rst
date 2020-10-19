@@ -330,12 +330,11 @@ PostgreSQL from homebrew with the extensions Peek needs.
 ----
 
 
-.. TODO: change git username
 
 Tap the keg for postgresSQL v12.x and timescale ::
 
         echo "Tap the synerty keg"
-        brew tap louis-lu/tap git@gitlab.synerty.com:louis.lu/homebrew-tap.git
+        brew tap peek-util/tap git@gitlab.synerty.com:peek-util/homebrew-tap.git
 
 ----
 
@@ -347,12 +346,10 @@ Uninstall the old software if it exists ::
 
 ----
 
-.. TODO: change git username
-
 Install timescale and PostgreSQL ::
 
         echo "Install timescale"
-        brew install louis-lu/tap/postgresql
+        brew install peek-util/tap/postgresql
         brew install timescaledb
 
 ----
