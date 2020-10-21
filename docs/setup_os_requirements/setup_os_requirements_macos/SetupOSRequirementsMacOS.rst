@@ -329,60 +329,12 @@ PostgreSQL from homebrew with the extensions Peek needs.
 
 ----
 
-Reset and date the homebrew-core configuration ::
 
-        echo "First reset any edits we have"
-        (cd /usr/local/Homebrew/Library/Taps/homebrew/homebrew-core/Formula && git reset --hard)
 
-        echo "Update Brew"
-        brew update
+Tap the keg for postgresSQL v12.x and timescale ::
 
-----
-
-Create the patch script ::
-
-        echo "Create a file to edit the postgresql.rb file"
-        cat <<'EOF' > addplpy.sh
-        #!/bin/bash
-
-        if grep -q 'with-python' $1; then
-            echo "Exiting, the changes are already there"
-            exit 0
-        fi
-
-        sed '/ENV.prepend "CPPFLAGS"/r'<(
-            echo '    ENV.prepend "PATH", "/Users/peek/cpython-3.6.8/bin:"'
-            echo '    ENV.prepend "PYTHONPATH", "/Users/peek/cpython-3.6.8"'
-        ) -i -- $1
-
-        sed '/--with-perl/r'<(
-            echo '      --with-python'
-        ) -i -- $1
-
-        echo "Patching complete"
-
-        EOF
-
-        chmod +x addplpy.sh
-
-----
-
-Patch the postgresql brew file ::
-
-        echo "Patch the postgresql file."
-        export HOMEBREW_EDITOR=`pwd`/addplpy.sh
-        brew edit postgresql
-
-        echo "Cleanup"
-        unset HOMEBREW_EDITOR
-        rm addplpy.sh
-
-----
-
-Tap the keg for timescale ::
-
-        echo "Tap the timescale keg"
-        brew tap timescale/tap
+        echo "Tap the synerty keg"
+        brew tap peek-util/tap git@gitlab.synerty.com:peek-util/homebrew-tap.git
 
 ----
 
@@ -397,7 +349,7 @@ Uninstall the old software if it exists ::
 Install timescale and PostgreSQL ::
 
         echo "Install timescale"
-        brew install --build-from-source postgresql
+        brew install peek-util/tap/postgresql
         brew install timescaledb
 
 ----
