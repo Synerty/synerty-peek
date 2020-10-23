@@ -22,8 +22,8 @@ simply **cancel** the attempt and try again with a different server.
 How to use it
 -------------
 
-Add it to the Deferred
-,,,,,,,,,,,,,,,,,,,,,,
+Example
+,,,,,,,
 
 To add a Timeout to a Deferred, simply call :code:`addTimeout()` on the Deferred
 object.
