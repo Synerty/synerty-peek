@@ -39,7 +39,7 @@ How do I start it?
 
 You can start the Twisted reactor by calling::
 
- reactor.run()
+    reactor.run()
 
 Before this point it will still exist, but will not act.
 

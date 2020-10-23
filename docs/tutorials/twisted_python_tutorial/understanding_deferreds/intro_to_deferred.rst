@@ -23,17 +23,17 @@ Examine the following **synchronous** code block::
     import time
 
 
-    def print_me(value):
+    def printMe(value):
         print(value)
 
 
-    def wait_five(name) -> str:
+    def waitFive(name) -> str:
         value = name + " took 5 seconds"
         time.sleep(5)
         return value
 
 
-    def wait_ten(name) -> str:
+    def waitTen(name) -> str:
         value = name + " took 10 seconds"
         time.sleep(10)
         return value
@@ -42,15 +42,15 @@ Examine the following **synchronous** code block::
     print("Starting: ")
 
     # Define two variables that will take a while to resolve
-    slow = wait_ten("'slow'")
-    fast = wait_five("'fast'")
+    slow = waitTen("'slow'")
+    fast = waitFive("'fast'")
 
-    print_me(slow)
-    print_me(fast)
+    printMe(slow)
+    printMe(fast)
 
 This represents a standard, synchronous situation. "slow" is assigned the value
-returned by wait_ten() and then "fast" is assigned the value returned by
-wait_five(). Things always happen after the previous thing finishes and in total,
+returned by waitTen() and then "fast" is assigned the value returned by
+waitFive(). Things always happen after the previous thing finishes and in total,
 the program takes 15 seconds to complete. The vast majority of that time is spent
 waiting.
 
@@ -63,18 +63,18 @@ Now, open your IDE and insert the following **asynchronous** code block::
     from twisted.internet import reactor, defer
 
 
-    def print_me(value):
+    def printMe(value):
         print(value)
         return True
 
 
-    def wait_five(name) -> defer.Deferred:
+    def waitFive(name) -> defer.Deferred:
         value = defer.Deferred()
         reactor.callLater(5, value.callback, name + " took 5 seconds")
         return value
 
 
-    def wait_ten(name) -> defer.Deferred:
+    def waitTen(name) -> defer.Deferred:
         value = defer.Deferred()
         reactor.callLater(10, value.callback, name + " took 10 seconds")
         return value
@@ -82,16 +82,16 @@ Now, open your IDE and insert the following **asynchronous** code block::
     print("Starting: ")
 
     # Define two variables that will take a while to resolve
-    slow = wait_ten("'slow'")
-    fast = wait_five("'fast'")
+    slow = waitTen("'slow'")
+    fast = waitFive("'fast'")
 
     # Show that they are being Deferred
     print("slow is: ", slow)
     print("fast is: ", fast)
 
     # Give them callbacks
-    slow.addCallback(print_me)
-    fast.addCallback(print_me)
+    slow.addCallback(printMe)
+    fast.addCallback(printMe)
 
     reactor.run()
 
@@ -125,7 +125,7 @@ Take a look at one of the wait functions.
 
 ::
 
-    def wait_ten() -> defer.Deferred:
+    def waitTen() -> defer.Deferred:
         value = defer.Deferred()
         reactor.callLater(10, value.callback, "I took 10 seconds")
         return value
@@ -142,21 +142,21 @@ is made, value is returned and assigned to "slow".
 
 ::
 
-    slow = wait_ten()
-    fast = wait_five()
+    slow = waitTen()
+    fast = waitFive()
 
     ...
 
 ::
 
-    slow.addCallback(print_me)
-    fast.addCallback(print_me)
+    slow.addCallback(printMe)
+    fast.addCallback(printMe)
 
 Because "slow" is immediately assigned a value, we are able to move forward and
-assign "fast", to the output of wait_five(), which returns a Deferred in exactly
+assign "fast", to the output of waitFive(), which returns a Deferred in exactly
 the same way, only after 5 seconsd instead of 10.
 
 5 and 10 seconds later respectively, the reactor calls the Deffered's callback(any)
 function, passing each of them a string and triggering their waiting callbacks, which
-in this case are both "print_me()". Because "fast" finished first, it was printed
+in this case are both "printMe()". Because "fast" finished first, it was printed
 first, and "slow", although it was started first, was printed after.

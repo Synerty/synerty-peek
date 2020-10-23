@@ -64,6 +64,11 @@ Callbacks and errbacks are always created in pairs
   :width: 600
   :alt: callback-flowchart
 
+.. note::
+    Calling :code:`addCallbacks()` *explicitly* adds both a :code:`callback` **and** an
+    :code:`errback`, whereas :code:`addCallback()` or :code:`addErrback()` will
+    only *explicitly* add one **or** the other.
+
 In this diagram, the Deferred, :code:`d` was given a callback via the function
 :code:`Deferred.addCallback`, and the function it called back (:code:`cbA`) added an
 errback via the function :code:`Deferred.addErrback`.
