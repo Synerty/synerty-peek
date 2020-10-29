@@ -139,9 +139,9 @@ Move-Item $releaseDir\node\* $venvDir\Scripts -Force
 $sp="$venvDir\Lib\site-packages";
 
 # Move the node_modules into place
-Move-Item $releaseDir\mobile-build-web\node_modules $sp\peek_mobile -Force
-Move-Item $releaseDir\desktop-build-web\node_modules $sp\peek_desktop -Force
-Move-Item $releaseDir\admin-build-web\node_modules $sp\peek_admin -Force
+Move-Item $releaseDir\mobile-build-web\node_modules $sp\peek_field_app -Force
+Move-Item $releaseDir\desktop-build-web\node_modules $sp\peek_office_app -Force
+Move-Item $releaseDir\admin-build-web\node_modules $sp\peek_admin_app -Force
 
 # ------------------------------------------------------------------------------
 # Show complete message
@@ -248,7 +248,7 @@ switch ($result) {
         $pass = Read-Host 'What is the peek windows users password?'
 
         # Define the list of services to manage
-        $services = @('peek_worker', 'peek_agent', 'peek_client', 'peek_server', 'peek_restarter');
+        $services = @('peek_worker_service', 'peek_agent_service', 'peek_office_service', 'peek_logic_service', 'peek_restarter');
 
         foreach ($service in $services)
         {

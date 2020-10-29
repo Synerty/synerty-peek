@@ -4,9 +4,9 @@ set -o nounset
 set -o errexit
 
 frontendDirs="
-../peek-mobile/peek_mobile
-../peek-desktop/peek_desktop
-../peek-admin/peek_admin
+../peek-field-app/peek_field_app
+../peek-office-app/peek_office_app
+../peek-admin-app/peek_admin_app
 "
 
 

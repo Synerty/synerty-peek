@@ -439,7 +439,7 @@ https://www.pgadmin.org/download/pgadmin-4-macos/
 Install Worker Dependencies
 ---------------------------
 
-Install the parallel processing queue we use for the peek-worker tasks.
+Install the parallel processing queue we use for the peek-worker-service tasks.
 
 
 Redis

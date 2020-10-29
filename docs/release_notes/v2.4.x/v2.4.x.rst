@@ -19,14 +19,14 @@ The following plugins have been developed for the v2.4.x+ Peek releases.
 *   **peek-plugin-eventdb** (Open Source)
     This plugin stores current and historical alarms and events.
 
-*   **peek-plugin-pon-event-loader** (Proprietary)
-    This plugin loads historical and current alarms and events from the PowerOn ADMS.
+*   **peek-plugin-enmac-event-loader** (Proprietary)
+    This plugin loads historical and current alarms and events from the ENMAC.
 
 *   **peek-core-search** (Open Source)
     The search feature of Peek has been updated to support faster partial
     keyword searches.
 
-*   **peek-plugin-pof-equipment-loader** (Proprietary)
+*   **peek-plugin-enmac-equipment-loader** (Proprietary)
     The Equipment Loader plugin now has a list of COMPONENT_CLASSes that determines which
     equipment will be loaded into the search for indexing.
 
@@ -94,7 +94,7 @@ the search data. ::
         EOF
 
 
-peek-plugin-pof-equipment-loader
+peek-plugin-enmac-equipment-loader
 ````````````````````````````````
 
 The equipment loader will need to reload the search data, force an update with the
@@ -106,7 +106,7 @@ following SQL. ::
         EOF
 
 
-peek-plugin-pof-switching-loader
+peek-plugin-enmac-switching-loader
 ````````````````````````````````
 
 The equipment loader will need to reload the search data, force an update with the
@@ -126,13 +126,13 @@ This must be after the DocDB plugin. ::
 
     peek-plugin-eventdb
 
-peek-plugin-pon-event-loader
+peek-plugin-enmac-event-loader
 ````````````````````````````
 
 Enable this plugin all Peek services :file:`config.json`, in the enabled plugins.
 This must be after the EventDB plugin. ::
 
-    peek-plugin-pon-event-loader
+    peek-plugin-enmac-event-loader
 
 
 v2.4.5 Issues Log
@@ -207,7 +207,7 @@ Bug
 *   [PEEK-635] - Core Search - Add support for searching for two letter words.
 
 *   [PEEK-636] - Plugin EventDB - TupleSelectors arn't supporting datetimes,
-                 this was caused by a missing merge in peek-desktop.
+                 this was caused by a missing merge in peek-office-app.
 
 *   [PEEK-637] - EventDB PoN Loader - Finalise property loading, and set to load once.
 
@@ -279,4 +279,4 @@ CI/CD Tasks
     required by sphinx-rtd-theme, peek-doc-dev
 
 *   [PEEK-606] - Gitlab - Unit tests can't find non open source peek plugins
-    (peek-plugin-pof-\*)
+    (peek-plugin-enmac-\*)

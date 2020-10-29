@@ -124,7 +124,7 @@ Update the peek config.json files.
 
 #. Edit each of C:\Users\peek\peek-XXXX.home\config.json
 #. Add :code:`peek_plugin_branch` to the start
-#. Add :code:`peek_plugin_pof_email_nar` at the end
+#. Add :code:`peek_plugin_enmac_email_nar` at the end
 
 ----
 
@@ -134,6 +134,6 @@ Start up the Peek Server service, it will rebuild the admin site.
 
 Restart all Peek services.
 
-For windows, restart the :code:`peek-server` service then
+For windows, restart the :code:`peek-logic-service` service then
 start the :code:`peek-restarter` service,
 the agent, worker and client will now start.

@@ -19,7 +19,7 @@ The toVortexMsg/fromVortexMsg methods on the Payload class have been renamed to
 toEncodedPayload/fromEncodedPayload respectivly.
 
 This change was made to improve performance, in some instances the Payload.tuples didn't
-need to be deserialised/reserialised, for example when passing through the peek_client
+need to be deserialised/reserialised, for example when passing through the peek_office_service
 service, or being cached in the browsers/mobile devices.
 
 Dependency Bump

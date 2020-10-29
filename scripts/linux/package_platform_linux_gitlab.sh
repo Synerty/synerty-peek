@@ -117,17 +117,17 @@ function downloadNodeModules {
 
 # MOBILE node modules
 mobileBuildWebDIR="$baseDir/mobile-build-web"
-mobileJsonUrl="${platformReposDir}/peek-mobile/peek_mobile"
+mobileJsonUrl="${platformReposDir}/peek-field-app/peek_field_app"
 downloadNodeModules $mobileBuildWebDIR $mobileJsonUrl
 
 # DESKTOP node modules
 desktopBuildWebDIR="$baseDir/desktop-build-web"
-desktopJsonUrl="${platformReposDir}/peek-desktop/peek_desktop"
+desktopJsonUrl="${platformReposDir}/peek-office-app/peek_office_app"
 downloadNodeModules $desktopBuildWebDIR $desktopJsonUrl
 
 # ADMIN node modules
 adminBuildWebDIR="$baseDir/admin-build-web"
-adminJsonUrl="${platformReposDir}/peek-admin/peek_admin"
+adminJsonUrl="${platformReposDir}/peek-admin-app/peek_admin_app"
 downloadNodeModules $adminBuildWebDIR $adminJsonUrl
 
 # ------------------------------------------------------------------------------
@@ -135,7 +135,7 @@ downloadNodeModules $adminBuildWebDIR $adminJsonUrl
 
 mkdir $baseDir/init && pushd $baseDir/init
 
-for s in peek_server peek_worker peek_agent peek_client
+for s in peek_logic_service peek_worker_service peek_agent_service peek_office_service
 do
     cp ${platformReposDir}/synerty-peek/scripts/linux/init/${s}.service ${s}.service
 done

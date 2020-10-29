@@ -49,7 +49,7 @@ to run it, running the platform will run the plugin.
 
 See the Setup IDE procedures to run the platform and debug plugins under those.
 
-If a platform service, (:command:`run_peek_server` for example) is run under the IDEs
+If a platform service, (:command:`run_peek_logic_service` for example) is run under the IDEs
 debugger, it will also debug the plugins the platform loads.
 
 Run the platform services from bash with the following commands: ::
@@ -58,15 +58,15 @@ Run the platform services from bash with the following commands: ::
         which python
 
         # Run the peek server
-        run_peek_server
+        run_peek_logic_service
 
         # Run the peek client
-        run_peek_client
+        run_peek_office_service
 
         # Run the peek agent
-        run_peek_agent
+        run_peek_agent_service
 
         # Run the peek worker
-        run_peek_worker
+        run_peek_worker_service
 
 

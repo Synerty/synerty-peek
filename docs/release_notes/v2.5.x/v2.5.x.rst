@@ -7,7 +7,7 @@ v2.5.x Release Notes
 Platform Changes
 ----------------
 
-The peek-client and peek-server now support a PEM bundle file for SSL.
+The peek-office-service and peek-logic-service now support a PEM bundle file for SSL.
 
 The peek desktop, admin & mobile web-apps have been upgraded to use Angular 9.
 
@@ -15,7 +15,7 @@ The following Synerty projects have been deprecated:
 
     *   ng2-balloon-msg, ng2-balloon-msg-web, ng2-balloon-msg-ns
 
-    *   peek-theme, peek-mobile-theme-test
+    *   peek-theme, peek-field-app-theme-test
 
     *   peek-util, peek-util-web, peek-util-ns
 
@@ -71,10 +71,10 @@ Android Deployment
 Migration Steps
 ---------------
 
-In PEEK-660, the peek-client and peek-server projects now accept a PEM bundle file to serve SSL.
+In PEEK-660, the peek-office-service and peek-logic-service projects now accept a PEM bundle file to serve SSL.
 Follow the steps in the link below to set this up.
 
-`Peek Client & Server SSL <https://synerty-peek.readthedocs.io/en/latest/administration/admin_config_platform.html#peek-client-server-ssl>`_
+`Peek Client & Server SSL <https://synerty-peek.readthedocs.io/en/latest/administration/admin_config_platform.html#peek-office-service-server-ssl>`_
 
 
 v2.5.0 Issues Log

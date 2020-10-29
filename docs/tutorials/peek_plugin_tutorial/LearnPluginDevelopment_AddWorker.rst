@@ -188,7 +188,7 @@ Running on the Worker Service
 -----------------------------
 
 
-Edit :file:`~/peek-worker.home/config.json`:
+Edit :file:`~/peek-worker-service.home/config.json`:
 
 #.  Ensure **logging.level** is set to **"DEBUG"**
 #.  Add **"peek_plugin_tutorial"** to the **plugin.enabled** array
@@ -218,7 +218,7 @@ It should somthing like this: ::
 
 You can now run the peek worker, you should see your plugin load. ::
 
-        peek@_peek:~$ run_peek_worker
+        peek@_peek:~$ run_peek_worker_service
         ...
         DEBUG peek_plugin_tutorial._private.worker.WorkerEntryHook:Loaded
         DEBUG peek_plugin_tutorial._private.worker.WorkerEntryHook:Started
@@ -315,7 +315,7 @@ Edit :file:`peek_plugin_tutorial/_private/server/ServerEntryHook.py`:
         self._loadedObjects.append(randomNumberController)
         randomNumberController.start()
 
-Run :file:`run_peek_server`
+Run :file:`run_peek_logic_service`
 ---------------------------
 
 You can now run the peek server, you should see output like below, showing the :

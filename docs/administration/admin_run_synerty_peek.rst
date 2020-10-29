@@ -21,18 +21,18 @@ Make sure that the right environment is activated. Run the following commands.
 PowerShell ::
 
         (Get-Command python).source
-        (Get-Command run_peek_server).source
+        (Get-Command run_peek_logic_service).source
 
 Or Bash ::
 
         which python
-        which run_peek_server
+        which run_peek_logic_service
 
 ----
 
 Confirm that the output contains the release you wish to use.
 
-run_peek_server
+run_peek_logic_service
 ```````````````
 
 This section runs the peek server service of the platform and opens the admin page.
@@ -41,7 +41,7 @@ This section runs the peek server service of the platform and opens the admin pa
 
 Run the following in bash, cmd or powershell ::
 
-        run_peek_server
+        run_peek_logic_service
 
 
 ----
@@ -54,7 +54,7 @@ This is the administration page for the peek platform, otherwise known as the
 "Admin" service.
 
 
-run_peek_client
+run_peek_office_service
 ```````````````
 
 This section runs the peek client service, this serves the desktop and mobile web apps
@@ -64,7 +64,7 @@ and provides data to all desktop and mobile native apps
 
 Run the following in bash, cmd or powershell ::
 
-        run_peek_client
+        run_peek_office_service
 
 
 ----
@@ -76,7 +76,7 @@ Open the following URL in a browser, Chrome is recommended.
 This is the mobile web app for the peek platform.
 
 
-run_peek_agent
+run_peek_agent_service
 ``````````````
 
 The Agent is used to connect to external systems, this section runs the agent service.
@@ -85,7 +85,7 @@ The Agent is used to connect to external systems, this section runs the agent se
 
 Run the following in bash, cmd or powershell ::
 
-        run_peek_agent
+        run_peek_agent_service
 
 
 Whats Next

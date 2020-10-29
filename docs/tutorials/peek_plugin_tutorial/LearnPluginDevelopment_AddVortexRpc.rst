@@ -512,13 +512,13 @@ The server will now call the RPC method on the agent when it starts.
 Testing
 -------
 
-#.  Open a command window and run: :code:`run_peek_server`
+#.  Open a command window and run: :code:`run_peek_logic_service`
 
-#.  Open a command window and run: :code:`run_peek_agent`
+#.  Open a command window and run: :code:`run_peek_agent_service`
 
 #.  Examine the logs of both command windows
 
-:code:`run_peek_server` log example:
+:code:`run_peek_logic_service` log example:
 
 ::
 
@@ -534,7 +534,7 @@ Testing
         19-Apr-2017 09:24:42 DEBUG peek_plugin_tutorial._private.server.controller.MainController:Agent said : Agent RPC Example Completed
 
 
-:code:`run_peek_agent` log example:
+:code:`run_peek_agent_service` log example:
 
 ::
 

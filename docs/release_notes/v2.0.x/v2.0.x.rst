@@ -13,7 +13,7 @@ Platform Backend
 
 The Peek Admin UI now requires a login.
 
-The admin login recovery password can be found in :file:`~/peek-server.home/config.json`.
+The admin login recovery password can be found in :file:`~/peek-logic-service.home/config.json`.
  Under the path httpServer.admin.user.
 
 ----
@@ -176,10 +176,10 @@ On Linux this can be done with ::
 
     # Stop Peek
     sudo true
-    sudo systemctl stop peek_agent
-    sudo systemctl stop peek_client
-    sudo systemctl stop peek_worker
-    sudo systemctl stop peek_server
+    sudo systemctl stop peek_agent_service
+    sudo systemctl stop peek_office_service
+    sudo systemctl stop peek_worker_service
+    sudo systemctl stop peek_logic_service
 
 
 Redis Conf Update
@@ -220,7 +220,7 @@ Update the peek config.json files.
 
 #. Add :code:`peek_plugin_diagram_positioner` just after :code:`peek_plugin_diagram_trace`
 
-#. Add :code:`peek_plugin_pof_switching_loader` just after :code:`peek_plugin_pof_equipment_loader`
+#. Add :code:`peek_plugin_enmac_switching_loader` just after :code:`peek_plugin_enmac_equipment_loader`
 
 #. Rename :code:`peek_plugin_diagram_generic_menu`
     to :code:`peek_plugin_docdb_generic_menu`
@@ -280,16 +280,16 @@ Start up the Peek Server manually, it will:
 
  *  Migrate the database
 
-Open a shell or command prompt and run :code:`run_peek_server`
+Open a shell or command prompt and run :code:`run_peek_logic_service`
 
 ----
 
 Once the Peek Server has finished loading :
 
-#.  Load up the peek-admin screen at http://<peek-server>:port.
+#.  Load up the peek-admin-app screen at http://<peek-logic-service>:port.
 
 #.  Click the "Login" button, this will cause the server to write a recovery
-    user to the :file:`peek-server.home/config.json` file with a random password.
+    user to the :file:`peek-logic-service.home/config.json` file with a random password.
 
 #.  Use this recovery username and password to login to the Peek Admin UI.
 
@@ -302,7 +302,7 @@ Restart Peek
 
 Restart all Peek services.
 
-For windows, restart the :code:`peek-server` service then
+For windows, restart the :code:`peek-logic-service` service then
 start the :code:`peek-restarter` service,
 the agent, worker and client will now start.
 
@@ -499,7 +499,7 @@ Bug
 
 *    [PEEK-336] - Core-User - Restrict Users to a particular AD group
 
-*    [PEEK-347] - GraphDB - Running peek_server causes massive memory leak.
+*    [PEEK-347] - GraphDB - Running peek_logic_service causes massive memory leak.
 
 *    [PEEK-348] - Diagram - Add tooltips to view toolbar
 

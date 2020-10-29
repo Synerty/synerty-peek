@@ -162,12 +162,12 @@ Here is an example ::
             }
         }
 
-Run :file:`run_peek_client`
+Run :file:`run_peek_office_service`
 ```````````````````````````
 
 Run the peek client ::
 
-        peek@_peek:~$ run_peek_client
+        peek@_peek:~$ run_peek_office_service
         ...
         INFO txhttputil.site.SiteUtil:Peek Office Site is alive and listening on http://0.0.0.0:8002
         ...
@@ -175,4 +175,4 @@ Run the peek client ::
 
 Now bring up a web browser and navigate to
 `http://localhost:8002 <http://localhost:8002>`_ or the IP mentioned in the output of
-:command:`run_peek_client`.
+:command:`run_peek_office_service`.

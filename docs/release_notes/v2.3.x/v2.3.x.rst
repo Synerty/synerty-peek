@@ -16,7 +16,7 @@ The following plugins have code changes on the v2.3.x release branch
 
 *   peek-plugin-diagram
 
-*   peek-plugin-pof-diagram-loader
+*   peek-plugin-enmac-diagram-loader
 
 Deployment Changes
 ------------------
@@ -54,7 +54,7 @@ Nil.
 Migration Steps
 ---------------
 
-peek-plugin-pof-diagram-loader
+peek-plugin-enmac-diagram-loader
 ``````````````````````````````
 
 In PEEK-526, the "Layer Profile Name" has been renamed to
@@ -64,7 +64,7 @@ The migration steps for this change are as follows:
 
 * Login to Peek Admin,
 
-* Go to plugin "PowerOn ADMS Diagram Loader"
+* Go to plugin "ENMAC Diagram Loader"
 
 * Go to the "Edit App Server Settings" tab.
 
@@ -83,7 +83,7 @@ The migration steps for this change are as follows:
 
 * Restart the peek agent. ::
 
-    sudo systemctl restart peek_agent
+    sudo systemctl restart peek_agent_service
 
 
 v2.3.3 Issues Log
@@ -137,7 +137,7 @@ Bug
 New Feature
 ```````````
 
-*    [PEEK-526] - Implement support for loading in PowerOn ADMS "Poke Points".
+*    [PEEK-526] - Implement support for loading in ENMAC "Poke Points".
      These are hotspots that jump the user to another location on the diagram
      when clicked.
 

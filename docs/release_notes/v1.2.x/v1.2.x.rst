@@ -75,7 +75,7 @@ RHEL7 and Debian9. This chane allows the scripts to work on both Linux distribut
 For upgrading from pre v1.2.x, you need to disable and remove the old init scripts on
 Debian. ::
 
-    for service in peek_server peek_worker peek_agent peek_client
+    for service in peek_logic_service peek_worker_service peek_agent_service peek_office_service
     do
         service ${service} stop
         update-rc.d ${service} disable
@@ -107,8 +107,8 @@ Update the peek config.json files.
 
 #. Edit each of C:\Users\peek\peek-XXXX.home\config.json
 #. Add :code:`peek_plugin_graphdb` after :code:`peek_plugin_livedb`
-#. Add :code:`peek_plugin_pof_graphdb_loader`
-   after :code:`peek_plugin_pof_diagram_loader`
+#. Add :code:`peek_plugin_enmac_graphdb_loader`
+   after :code:`peek_plugin_enmac_diagram_loader`
 
 ----
 
@@ -131,6 +131,6 @@ The agent needs to be restarted if it was already running.
 
 Restart all Peek services.
 
-For windows, restart the :code:`peek-server` service then
+For windows, restart the :code:`peek-logic-service` service then
 start the :code:`peek-restarter` service,
 the agent, worker and client will now start.

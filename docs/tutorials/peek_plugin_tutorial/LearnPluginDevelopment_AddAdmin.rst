@@ -198,15 +198,15 @@ The Peek Server service provides the web service that serves the admin angular
 application.
 
 The Peek Server service takes care of combining all the plugin files into the build
-directories in the peek_admin package. We will need to restart Peek Server for it to
+directories in the peek_admin_app package. We will need to restart Peek Server for it to
 include our plugin in the admin UI.
 
 See :ref:`developing_with_the_frontends` for more details.
 
-Check File :file:`~/peek-server.home/config.json`
+Check File :file:`~/peek-logic-service.home/config.json`
 `````````````````````````````````````````````````
 
-Check the :file:`~/peek-server.home/config.json` file:
+Check the :file:`~/peek-logic-service.home/config.json` file:
 
 #.  Ensure **frontend.webBuildEnabled** is set to **true**, with no quotes
 #.  Ensure **frontend.webBuildPrepareEnabled** is set to **true**, with no quotes
@@ -226,12 +226,12 @@ Example: ::
         }
 
 
-Run :file:`run_peek_server`
+Run :file:`run_peek_logic_service`
 ```````````````````````````
 
 You can now run the peek server, you should see your plugin load. ::
 
-        peek@_peek:~$ run_peek_server
+        peek@_peek:~$ run_peek_logic_service
         ...
         INFO peek_platform.frontend.WebBuilder:Rebuilding frontend distribution
         ...
@@ -242,7 +242,7 @@ You can now run the peek server, you should see your plugin load. ::
 
 Now bring up a web browser and navigate to
 `http://localhost:8010 <http://localhost:8010>`_ or the IP mentioned in the output of
-:command:`run_peek_server`.
+:command:`run_peek_logic_service`.
 
 If you see this, then congratulations, you've just enabled your plugin to use the
 Peek Platform, Admin Service.

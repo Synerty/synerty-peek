@@ -7,21 +7,21 @@ v0.6.0 Release Notes
 The following modifications are required to upgrade plugins to run on the v0.6.0 version
 of the platform
 
-NPM : peek-mobile-util
+NPM : peek-field-app-util
 ----------------------
 
-The :code:`peek-mobile-util` npm packages has been renamed to :code:`peek-util`.
+The :code:`peek-field-app-util` npm packages has been renamed to :code:`peek-util`.
 
 Run the following to help with the upgrade
 ::
 
-    find ./ -name "*.ts" -not -name "node_modules" -exec sed -i 's/peek-mobile-util/peek-util/g' {} \;
+    find ./ -name "*.ts" -not -name "node_modules" -exec sed -i 's/peek-field-app-util/peek-util/g' {} \;
 
 
 ----
 
 
-The :code:`peek-mobile-util/index.nativescript` typescript index file has been renamed
+The :code:`peek-field-app-util/index.nativescript` typescript index file has been renamed
 to :code:`peek-util/index.ns`
 
 Run the following to help with the upgrade

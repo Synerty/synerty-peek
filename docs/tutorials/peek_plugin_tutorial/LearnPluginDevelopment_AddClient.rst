@@ -140,7 +140,7 @@ The plugin should now be ready for the client to load.
 Running on the Client Service
 -----------------------------
 
-Edit :file:`~/peek-client.home/config.json`:
+Edit :file:`~/peek-office-service.home/config.json`:
 
 #.  Ensure **logging.level** is set to **"DEBUG"**
 #.  Add **"peek_plugin_tutorial"** to the **plugin.enabled** array
@@ -172,7 +172,7 @@ It should something like this: ::
 
 You can now run the peek client, you should see your plugin load. ::
 
-        peek@_peek:~$ run_peek_client
+        peek@_peek:~$ run_peek_office_service
         ...
         DEBUG peek_plugin_tutorial._private.client.ClientEntryHook:Loaded
         DEBUG peek_plugin_tutorial._private.client.ClientEntryHook:Started

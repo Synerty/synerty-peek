@@ -557,7 +557,7 @@ Add the following import up the top of the file:
 
 ::
 
-    from peek_plugin_pof_events._private.storage.Setting import globalSetting, PROPERTY1
+    from peek_plugin_enmac_events._private.storage.Setting import globalSetting, PROPERTY1
 
 
 ----

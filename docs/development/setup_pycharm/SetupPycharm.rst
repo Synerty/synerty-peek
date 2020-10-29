@@ -23,16 +23,16 @@ Setup Pycharm IDE
     #. Project -> Project Dependencies
 
         #.  peek_platform depends on -> plugin_base
-        #.  peek_server depends on -> peek_platform, peek_admin
-        #.  peek_client depends on -> peek_platform, peek_mobile
-        #.  peek_agent depends on -> peek_platform
-        #.  peek_worker depends on -> peek_platform
+        #.  peek_logic_service depends on -> peek_platform, peek_admin_app
+        #.  peek_office_service depends on -> peek_platform, peek_field_app
+        #.  peek_agent_service depends on -> peek_platform
+        #.  peek_worker_service depends on -> peek_platform
 
     #.  Project -> Project Structure
 
-        #.  peek-mobile -> Excluded
-        #.  peek-desktop -> Excluded
-        #.  peek-admin -> Excluded
+        #.  peek-field-app -> Excluded
+        #.  peek-office-app -> Excluded
+        #.  peek-admin-app -> Excluded
 
         .. image:: PyCharmSettingsProjectStructureExclude.jpg
 

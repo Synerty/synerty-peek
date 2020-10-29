@@ -12,7 +12,7 @@ Platform Changes
 #.  The peek platform now requires the posgresql-plpython3 package installed.
     (See Migration Steps)
 
-#.  A new peek service has been added "peek-storage". This currently doesn't run as its
+#.  A new peek service has been added "peek-storage-service". This currently doesn't run as its
     own process but it will in the future.
 
 Plugin Changes
@@ -93,10 +93,10 @@ Start the migration tasks with Peek stopped.
 Stop peek with the following commands ::
 
     sudo true
-    sudo systemctl stop peek_agent
-    sudo systemctl stop peek_client
-    sudo systemctl stop peek_worker
-    sudo systemctl stop peek_server
+    sudo systemctl stop peek_agent_service
+    sudo systemctl stop peek_office_service
+    sudo systemctl stop peek_worker_service
+    sudo systemctl stop peek_logic_service
 
 Upgrade to PostgreSQL-12
 """"""""""""""""""""""""
@@ -231,10 +231,10 @@ Restart Peek
 Restart all Peek services ::
 
     sudo true
-    sudo systemctl start peek_server
-    sudo systemctl start peek_worker
-    sudo systemctl start peek_agent
-    sudo systemctl start peek_client
+    sudo systemctl start peek_logic_service
+    sudo systemctl start peek_worker_service
+    sudo systemctl start peek_agent_service
+    sudo systemctl start peek_office_service
 
 v2.2.2 Issues Log
 -----------------

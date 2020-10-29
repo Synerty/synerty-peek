@@ -200,7 +200,7 @@ The plugin should now be ready for the server to load.
 Running on the Server Service
 -----------------------------
 
-File :file:`~/peek-server.home/config.json` is the configuration file for the Server
+File :file:`~/peek-logic-service.home/config.json` is the configuration file for the Server
 service.
 
 .. note:: This file is created in :ref:`administer_peek_platform`.  Running the Server
@@ -208,7 +208,7 @@ service.
 
 ----
 
-Edit :file:`~/peek-server.home/config.json`:
+Edit :file:`~/peek-logic-service.home/config.json`:
 
 #.  Ensure **logging.level** is set to **"DEBUG"**
 #.  Add **"peek_plugin_tutorial"** to the **plugin.enabled** array
@@ -236,7 +236,7 @@ It should something like this: ::
 
 You can now run the peek server, you should see your plugin load. ::
 
-        peek@_peek:~$ run_peek_server
+        peek@_peek:~$ run_peek_logic_service
         ...
         DEBUG peek_plugin_tutorial._private.server.ServerEntryHook:Loaded
         DEBUG peek_plugin_tutorial._private.server.ServerEntryHook:Started

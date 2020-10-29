@@ -116,9 +116,9 @@ cp -pr $releaseDir/node/* ${venvDir}
 sp="$venvDir/lib/python3.6/site-packages"
 
 # Move the node_modules into place
-mv $releaseDir/mobile-build-web/node_modules $sp/peek_mobile
-mv $releaseDir/desktop-build-web/node_modules $sp/peek_desktop
-mv $releaseDir/admin-build-web/node_modules $sp/peek_admin
+mv $releaseDir/mobile-build-web/node_modules $sp/peek_field_app
+mv $releaseDir/desktop-build-web/node_modules $sp/peek_office_app
+mv $releaseDir/admin-build-web/node_modules $sp/peek_admin_app
 
 # ------------------------------------------------------------------------------
 # Install the util scripts
@@ -180,7 +180,7 @@ fi
 
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
-    for s in peek_server peek_worker peek_client peek_agent
+    for s in peek_logic_service peek_worker_service peek_office_service peek_agent_service
     do
         FILE="${s}.service"
         TO="/lib/systemd/system/"

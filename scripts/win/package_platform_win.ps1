@@ -149,19 +149,19 @@ npm -g install @angular/cli@^9.1.2 typescript@3.8.3 tslint
 # Define the node packages we want to download
 $nodePackages = @(
 @{
-    "package" = "peek_mobile";
+    "package" = "peek_field_app";
     "dir" = "$baseDir\mobile-build-web";
-    "packageJsonBaseUrl" = "https://bitbucket.org/synerty/peek-mobile/raw/"
+    "packageJsonBaseUrl" = "https://bitbucket.org/synerty/peek-field-app/raw/"
 },
 @{
-    "package" = "peek_desktop";
+    "package" = "peek_office_app";
     "dir" = "$baseDir\desktop-build-web";
-    "packageJsonBaseUrl" = "https://bitbucket.org/synerty/peek-desktop/raw/"
+    "packageJsonBaseUrl" = "https://bitbucket.org/synerty/peek-office-app/raw/"
 },
 @{
-    "package" = "peek_admin";
+    "package" = "peek_admin_app";
     "dir" = "$baseDir\admin-build-web";
-    "packageJsonBaseUrl" = "https://bitbucket.org/synerty/peek-admin/raw/"
+    "packageJsonBaseUrl" = "https://bitbucket.org/synerty/peek-admin-app/raw/"
 }
 );
 

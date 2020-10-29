@@ -95,8 +95,8 @@ this to change text, update icons, branding, etc.
 
     The following directory overlay is for the web app directory.
 
-Peek reads files from either the :file:`~/peek-server.home/frontendSrcOverlayDir`
-or :file:`~/peek-client.home/frontendSrcOverlayDir` directories and overlays them
+Peek reads files from either the :file:`~/peek-logic-service.home/frontendSrcOverlayDir`
+or :file:`~/peek-office-service.home/frontendSrcOverlayDir` directories and overlays them
 on top of the build directories.
 
 This provides end users with the ability to
@@ -114,8 +114,8 @@ files.
             ...
             "frontend": {
                 ...
-                "frontendSrcOverlayDir": "/home/peek/peek-client.home/frontendSrcOverlayDir",
-                "frontendNodeModuleOverlayDir": "/home/peek/peek-client.home/frontendNodeModuleOverlayDir",
+                "frontendSrcOverlayDir": "/home/peek/peek-office-service.home/frontendSrcOverlayDir",
+                "frontendNodeModuleOverlayDir": "/home/peek/peek-office-service.home/frontendNodeModuleOverlayDir",
             },
             ...
         }
@@ -126,13 +126,13 @@ files.
 
 ::
 
-    cp -r synerty-peek-1.3.4/lib/python3.6/site-packages/peek_desktop/src/peek_plugin_pof_diagram peek-client.home/frontendSrcOverlayDir/
+    cp -r synerty-peek-1.3.4/lib/python3.6/site-packages/peek_office_app/src/peek_plugin_enmac_diagram peek-office-service.home/frontendSrcOverlayDir/
 
 #2 Remove the files not being updated (we’re updating pofDiagram.component.web.html)
 
 ::
 
-    cd peek-client.home/frontendSrcOverlayDir/peek_plugin_pof_diagram/
+    cd peek-office-service.home/frontendSrcOverlayDir/peek_plugin_enmac_diagram/
     rm -rf coord-set/ show-diagram/ *.ts
 
 #3 Edit the file and restart Peek
@@ -146,13 +146,13 @@ files.
 
 ::
 
-    http://peekserver:8002/peek_plugin_pof_diagram
+    http://peekserver:8002/peek_plugin_enmac_diagram
 
 # 5 Undo the changes
 
 ::
 
-    rm -rf ~/peek-client.home/frontendSrcOverlayDir/peek_plugin_pof_diagram
+    rm -rf ~/peek-office-service.home/frontendSrcOverlayDir/peek_plugin_enmac_diagram
     restart_peek.sh
 
 Live Updating for Development
@@ -172,7 +172,7 @@ developer works. This includes performing any on the fly changes to the files th
 required.
 
 To enable file syncing, in file(s)
-:file:`~/peek-server.home/config.json` or :file:`~/peek-client.home/config.json`
+:file:`~/peek-logic-service.home/config.json` or :file:`~/peek-office-service.home/config.json`
 set :code:`frontend.syncFilesForDebugEnabled` to :code:`true` and restart the appropriate service.
 
 You may also want to disable the web building. This isn't required for the Angular CLI

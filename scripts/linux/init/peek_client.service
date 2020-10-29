@@ -6,7 +6,7 @@ After=syslog.target network.target remote-fs.target nss-lookup.target
 [Service]
 Type=simple
 User=peek
-ExecStart=#PEEK_DIR#/run_peek_client
+ExecStart=#PEEK_DIR#/run_peek_office_service
 
 [Install]
 WantedBy=multi-user.target

@@ -142,10 +142,10 @@ Enable New Plugins
 Update the peek config.json files.
 
 #. Edit each of C:\Users\peek\peek-XXXX.home\config.json
-#. Add :code:`peek_plugin_docdb` after :code:`peek_plugin_livedb`
+#. Add :code:`peek_core_docdb` after :code:`peek_plugin_livedb`
 #. Add :code:`peek_core_search` after :code:`peek_plugin_livedb`
-#. Add :code:`peek_plugin_pof_equipment_loader`
-   after :code:`peek_plugin_pof_diagram_loader`
+#. Add :code:`peek_plugin_enmac_equipment_loader`
+   after :code:`peek_plugin_enmac_diagram_loader`
 
 ----
 
@@ -165,6 +165,6 @@ The agent needs to be restarted if it was already running.
 
 Restart all Peek services.
 
-For windows, restart the :code:`peek-server` service then
+For windows, restart the :code:`peek-logic-service` service then
 start the :code:`peek-restarter` service,
 the agent, worker and client will now start.

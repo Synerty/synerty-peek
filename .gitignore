@@ -96,10 +96,10 @@ ENV/
 .ropeproject
 MANIFEST
 
-#peek_agent
-#peek_client
+#peek_agent_service
+#peek_office_service
 #peek_platform
-#peek_server
-#peek_worker
+#peek_logic_service
+#peek_worker_service
 .DS_Store
 .scannerwork/

@@ -140,7 +140,7 @@ The plugin should now be ready for the agent to load.
 Running on the Agent Service
 ----------------------------
 
-Edit :file:`~/peek-agent.home/config.json`:
+Edit :file:`~/peek-agent-service.home/config.json`:
 
 #.  Ensure **logging.level** is set to **"DEBUG"**
 #.  Add **"peek_plugin_tutorial"** to the **plugin.enabled** array
@@ -172,7 +172,7 @@ It should somthing like this: ::
 
 You can now run the peek agent, you should see your plugin load. ::
 
-        peek@_peek:~$ run_peek_agent
+        peek@_peek:~$ run_peek_agent_service
         ...
         DEBUG peek_plugin_tutorial._private.agent.AgentEntryHook:Loaded
         DEBUG peek_plugin_tutorial._private.agent.AgentEntryHook:Started

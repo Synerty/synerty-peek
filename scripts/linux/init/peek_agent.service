@@ -6,7 +6,7 @@ After=syslog.target network.target remote-fs.target nss-lookup.target
 [Service]
 Type=simple
 User=peek
-ExecStart=#PEEK_DIR#/run_peek_agent
+ExecStart=#PEEK_DIR#/run_peek_agent_service
 Environment="LD_LIBRARY_PATH=#ORACLE_HOME#"
 Environment="ORACLE_HOME=#ORACLE_HOME#"
 

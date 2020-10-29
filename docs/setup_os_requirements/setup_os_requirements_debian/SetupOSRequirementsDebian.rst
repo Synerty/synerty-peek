@@ -824,7 +824,7 @@ The Wheel package is required for building platform and plugin releases ::
 Install Worker Dependencies
 ---------------------------
 
-Install the parallel processing queue we use for the peek-worker tasks.
+Install the parallel processing queue we use for the peek-worker-service tasks.
 
 .. note:: Run the commands in this step as the :code:`peek` user.
 

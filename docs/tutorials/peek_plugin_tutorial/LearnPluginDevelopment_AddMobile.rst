@@ -223,15 +223,15 @@ The Peek Client service provides the web service that serves the mobile angular
 web app.
 
 The Peek Client service takes care of combining all the plugin files into the build
-directories in the peek_mobile package. We will need to restart Peek Client for it to
+directories in the peek_field_app package. We will need to restart Peek Client for it to
 include our plugin in the mobile UI.
 
 See :ref:`developing_with_the_frontends` for more details.
 
-Check File :file:`~/peek-client.home/config.json`
+Check File :file:`~/peek-office-service.home/config.json`
 `````````````````````````````````````````````````
 
-Check the :file:`~/peek-client.home/config.json` file:
+Check the :file:`~/peek-office-service.home/config.json` file:
 
 #.  Ensure **frontend.webBuildEnabled** is set to **true**, with no quotes
 #.  Ensure **frontend.webBuildPrepareEnabled** is set to **true**, with no quotes
@@ -252,12 +252,12 @@ Example: ::
 
 
 
-Run :file:`run_peek_client`
+Run :file:`run_peek_office_service`
 ```````````````````````````
 
 You can now run the peek client, you should see your plugin load. ::
 
-        peek@_peek:~$ run_peek_client
+        peek@_peek:~$ run_peek_office_service
         ...
         INFO peek_platform.frontend.WebBuilder:Rebuilding frontend distribution
         ...
@@ -268,7 +268,7 @@ You can now run the peek client, you should see your plugin load. ::
 
 Now bring up a web browser and navigate to
 `http://localhost:8000 <http://localhost:8000>`_ or the IP mentioned in the output of
-:command:`run_peek_client`.
+:command:`run_peek_office_service`.
 
 If you see this, then congratulations, you've just enabled your plugin to use the
 Peek Platform, Mobile Service Web App.

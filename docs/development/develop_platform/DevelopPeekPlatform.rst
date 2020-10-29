@@ -63,19 +63,19 @@ Synerty Peek Repositories
 
 *  peek-plugin-base-js
 
-*  peek-agent
+*  peek-agent-service
 
-*  peek-client
+*  peek-office-service
 
-*  peek-mobile
+*  peek-field-app
 
 *  peek-platform
 
-*  peek-server
+*  peek-logic-service
 
-*  peek-admin
+*  peek-admin-app
 
-*  peek-worker
+*  peek-worker-service
 
 Fork Peek Repositories
 ```````````````````````
@@ -236,26 +236,26 @@ Install Front End Modules
 Remove the old npm modules files and re-install for both client and server front and
 packages.  Run the following commands: ::
 
-        cd ~/dev-peek/peek-mobile/peek_mobile
+        cd ~/dev-peek/peek-field-app/peek_field_app
         [ -d node_modules ] && rm -rf node_modules
         npm i
-        cd ~/dev-peek/peek-desktop/peek_desktop
+        cd ~/dev-peek/peek-office-app/peek_office_app
         [ -d node_modules ] && rm -rf node_modules
         npm i
-        cd ~/dev-peek/peek-admin/peek_admin
+        cd ~/dev-peek/peek-admin-app/peek_admin_app
         [ -d node_modules ] && rm -rf node_modules
         npm i
 
 Configure Peek Client And Server Settings
 `````````````````````````````````````````
 
-Open the config file located at ~/peek/peek-client.home/config.json
+Open the config file located at ~/peek/peek-office-service.home/config.json
 
 Set the property frontend.docBuildEnabled to false.
 
 Set the property frontend.webBuildEnabled to false.
 
-Open the config file located at ~/peek/peek-server.home/config.json
+Open the config file located at ~/peek/peek-logic-service.home/config.json
 
 Set the property frontend.docBuildEnabled to false.
 
@@ -271,22 +271,22 @@ Compile Front End Packages For Development
 Run the following commands in separate terminal sessions: ::
 
         # Terminal 1
-        cd ~/dev-peek/peek-mobile/peek_mobile
+        cd ~/dev-peek/peek-field-app/peek_field_app
         ng build --watch
 
         # Terminal 2
-        cd ~/dev-peek/peek-admin/peek_admin
+        cd ~/dev-peek/peek-admin-app/peek_admin_app
         ng build --watch
 
         # Terminal 3
-        cd ~/dev-peek/peek-desktop/peek_desktop
+        cd ~/dev-peek/peek-office-app/peek_office_app
         ng build --watch
 
         # Terminal 4
-        run_peek_server
+        run_peek_logic_service
 
         # Terminal 5
-        run_peek_client
+        run_peek_office_service
 
 Viewing Peek Services In The Browser
 ````````````````````````````````````

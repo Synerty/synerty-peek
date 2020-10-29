@@ -21,9 +21,9 @@ This section sets up the config files for the **server** service.
 
 Create following file and parent directory:
 
-:Windows: :file:`C:\\Users\\peek\\peek-server.home\\config.json`
-:Linux: :file:`/home/peek/peek-server.home/config.json`
-:Mac:   :file:`/Users/peek/peek-server.home/config.json`
+:Windows: :file:`C:\\Users\\peek\\peek-logic-service.home\\config.json`
+:Linux: :file:`/home/peek/peek-logic-service.home/config.json`
+:Mac:   :file:`/Users/peek/peek-logic-service.home/config.json`
 
 .. tip:: Run the service, it will create some of it's config before failing
             to connect to the db.
@@ -64,9 +64,9 @@ This section sets up the config files for the **client** service.
 
 Create following file and parent directory:
 
-:Windows: :file:`C:\\Users\\peek\\peek-client.home\\config.json`
-:Linux: :file:`/home/peek/peek-client.home/config.json`
-:Mac:   :file:`/Users/peek/peek-client.home/config.json`
+:Windows: :file:`C:\\Users\\peek\\peek-office-service.home\\config.json`
+:Linux: :file:`/home/peek/peek-office-service.home/config.json`
+:Mac:   :file:`/Users/peek/peek-office-service.home/config.json`
 
 .. tip:: Run the service, it will create some of it's config,
             it might raise errors though.
@@ -96,9 +96,9 @@ This section sets up the config files for the **agent** service.
 
 Create following file and parent directory:
 
-:Windows: :file:`C:\\Users\\peek\\peek-agent.home\\config.json`
-:Linux: :file:`/home/peek/peek-agent.home/config.json`
-:Mac:   :file:`/Users/peek/peek-agent.home/config.json`
+:Windows: :file:`C:\\Users\\peek\\peek-agent-service.home\\config.json`
+:Linux: :file:`/home/peek/peek-agent-service.home/config.json`
+:Mac:   :file:`/Users/peek/peek-agent-service.home/config.json`
 
 .. tip:: Run the service, it will create some of it's config,
             it might raise errors though.
@@ -150,9 +150,9 @@ For example, this can be done on Linux by concatenating the Key, Cert and CA fil
 
 Place a copy of this PEM file into the server directory:
 
-:Windows: :file:`C:\\Users\\peek\\peek-server.server\\peek-ssl-bundle.pem`
-:Linux: :file:`/home/peek/peek-server.home/peek-ssl-bundle.pem`
-:Mac:   :file:`/Users/peek/peek-server.home/peek-ssl-bundle.pem`
+:Windows: :file:`C:\\Users\\peek\\peek-logic-service.server\\peek-ssl-bundle.pem`
+:Linux: :file:`/home/peek/peek-logic-service.home/peek-ssl-bundle.pem`
+:Mac:   :file:`/Users/peek/peek-logic-service.home/peek-ssl-bundle.pem`
 
 ----
 
@@ -162,9 +162,9 @@ Restart the Peek server service.
 
 Place a copy of this PEM file into the client directory:
 
-:Windows: :file:`C:\\Users\\peek\\peek-client.server\\peek-ssl-bundle.pem`
-:Linux: :file:`/home/peek/peek-client.home/peek-ssl-bundle.pem`
-:Mac:   :file:`/Users/peek/peek-client.home/peek-ssl-bundle.pem`
+:Windows: :file:`C:\\Users\\peek\\peek-office-service.server\\peek-ssl-bundle.pem`
+:Linux: :file:`/home/peek/peek-office-service.home/peek-ssl-bundle.pem`
+:Mac:   :file:`/Users/peek/peek-office-service.home/peek-ssl-bundle.pem`
 
 ----
 

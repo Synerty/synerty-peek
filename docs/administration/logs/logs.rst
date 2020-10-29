@@ -10,13 +10,13 @@ The Peek Platform has several serices, each one of these services has their own 
 
 The logs are written to the :code:`peek` users home directory,
 for example, the Peek Server services logfile is located at
-:file:`/home/peek/peek-server.log`.
+:file:`/home/peek/peek-logic-service.log`.
 
 The logs are rotated when they reach 20mb, maintaining the last two old log files.
 
 The log level for each service can be configured in the serivices :file:`config.json`
 located in the services config directory
-for example :file:`/home/peek/peek-server.home/config.json`.
+for example :file:`/home/peek/peek-logic-service.home/config.json`.
 
 Change the log level with this setting: ::
 

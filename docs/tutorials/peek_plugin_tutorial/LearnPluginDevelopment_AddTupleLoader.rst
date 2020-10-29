@@ -120,7 +120,7 @@ The method should now look similar to this ::
 Test Python Services
 --------------------
 
-The backend changes are complete, please run :command:`run_peek_server` to ensure that
+The backend changes are complete, please run :command:`run_peek_logic_service` to ensure that
 there are no problems here.
 
 StringInt Server Service
