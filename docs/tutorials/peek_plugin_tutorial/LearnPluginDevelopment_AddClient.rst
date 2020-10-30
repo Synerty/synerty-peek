@@ -109,12 +109,15 @@ Edit the file :file:`peek_plugin_tutorial/plugin_package.json` :
 #.  Add **"client"** to the requiresServices section so it looks like ::
 
         "requiresServices": [
-            "client"
+            "field",
+            "office",
         ]
 
 #.  Add the **client** section after **requiresServices** section: ::
 
-        "client": {
+        "field": {
+        },
+        "office: {
         }
 
 #.  Ensure your JSON is still valid (Your IDE may help here)
@@ -126,9 +129,12 @@ Here is an example ::
                 ...
             },
             "requiresServices": [
-                "client"
+                "field",
+                "office",
             ],
-            "client": {
+            "field": {
+            },
+            "office": {
             }
         }
 

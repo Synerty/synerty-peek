@@ -123,20 +123,20 @@ Edit File :file:`plugin_package.json`
 Finally, Edit the file :file:`peek_plugin_tutorial/plugin_package.json` to tell the
 platform that we want to use the desktop service:
 
-#.  Add **desktop** to the requiresServices section so it looks like ::
+#.  Add **office** to the requiresServices section so it looks like ::
 
         "requiresServices": [
-            "desktop"
+            "office"
         ]
 
 
-#.  Add the **desktop** section after **requiresServices** section: ::
+#.  Add the **office** section after **requiresServices** section: ::
 
 
-         "desktop": {
-            "appDir": "_private/desktop-app",
+         "office": {
+            "appDir": "_private/office-app",
             "appModule": "tutorial.module#TutorialModule",
-            "assetDir": "_private/desktop-assets",
+            "assetDir": "_private/office-assets",
             "icon": "/assets/peek_plugin_tutorial/icon.png",
             "showHomeLink": true,
         }
@@ -150,13 +150,13 @@ Here is an example ::
             ...
             "requiresServices": [
                 ...
-                "desktop"
+                "office"
             ],
             ...
-             "desktop": {
-                "appDir": "_private/desktop-app",
+             "office": {
+                "appDir": "_private/office-app",
                 "appModule": "tutorial.module#TutorialModule",
-                "assetDir": "_private/desktop-assets",
+                "assetDir": "_private/office-assets",
                 "icon": "/assets/peek_plugin_tutorial/icon.png",
                 "showHomeLink": true,
             }

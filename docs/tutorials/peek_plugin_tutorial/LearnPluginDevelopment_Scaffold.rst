@@ -295,10 +295,10 @@ contents: ::
         "admin": {
             "moduleDir": "plugin-module"
         },
-        "mobile": {
+        "field": {
             "moduleDir": "plugin-module"
         },
-        "desktop": {
+        "office": {
             "moduleDir": "plugin-module"
         }
     }

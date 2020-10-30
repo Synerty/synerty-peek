@@ -179,19 +179,19 @@ Edit File :file:`plugin_package.json`
 Finally, Edit the file :file:`peek_plugin_tutorial/plugin_package.json` to tell the
 platform that we want to use the mobile service:
 
-#.  Add **"mobile"** to the requiresServices section so it looks like ::
+#.  Add **"field"** to the requiresServices section so it looks like ::
 
         "requiresServices": [
             "mobile"
         ]
 
-#.  Add the **mobile** section after **requiresServices** section: ::
+#.  Add the **field** section after **requiresServices** section: ::
 
-        "mobile": {
+        "field": {
             "showHomeLink": true,
-            "appDir": "_private/mobile-app",
+            "appDir": "_private/field-app",
             "appModule": "tutorial.module#TutorialModule",
-            "assetDir": "_private/mobile-assets",
+            "assetDir": "_private/field-assets",
             "icon": "/assets/peek_plugin_tutorial/icon.png"
         }
 
@@ -204,14 +204,14 @@ Here is an example ::
             ...
             "requiresServices": [
                 ...
-                "mobile"
+                "field"
             ],
             ...
-            "mobile": {
+            "field": {
                 "showHomeLink": true,
-                "appDir": "_private/mobile-app",
+                "appDir": "_private/field-app",
                 "appModule": "tutorial.module#TutorialModule",
-                "assetDir": "_private/mobile-assets",
+                "assetDir": "_private/field-assets",
                 "icon": "/assets/peek_plugin_tutorial/icon.png"
             }
         }
@@ -219,7 +219,7 @@ Here is an example ::
 Running the Mobile Web App
 --------------------------
 
-The Peek Client service provides the web service that serves the mobile angular
+The Peek Client service provides the web service that serves the field angular
 web app.
 
 The Peek Client service takes care of combining all the plugin files into the build

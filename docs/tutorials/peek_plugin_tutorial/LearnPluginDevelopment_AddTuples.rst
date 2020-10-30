@@ -284,11 +284,11 @@ Edit the file :file:`plugin_package.json` to include reference to **plugin-modul
                 ...
                 "moduleDir": "plugin-module"
             },
-            "mobile": {
+            "field": {
                 ...
                 "moduleDir": "plugin-module"
             },
-            "desktop": {
+            "office": {
                 ...
                 "moduleDir": "plugin-module"
             },
