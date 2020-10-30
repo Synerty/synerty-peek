@@ -15,10 +15,10 @@ The new GraphDB plugin provides a connectivity model with trace configs and trac
 The GraphDB has offline support allowing tracing to be run offline in the native mobile
 app.
 
-PoF Connectivity Model Loader
+ENMAC Connectivity Model Loader
 `````````````````````````````
 
-The PoF Connectivity Model loader plugin extracts the connectivity model and the trace
+The ENMAC Connectivity Model loader plugin extracts the connectivity model and the trace
 configuration from GEs PowerOn Fusion / PowerOn Advantage, the model and trace configs
 are loaded into the GraphDB.
 
@@ -118,7 +118,7 @@ Start up the Peek Server service, it will rebuild the admin site.
 
 Connect to the admin site at http://localhost:8010
 
-go to Plugins -> PoF Connectivity Model Loader
+go to Plugins -> ENMAC Connectivity Model Loader
 
 Select the "Edit App Server Settings" tab, enter the details and save.
 

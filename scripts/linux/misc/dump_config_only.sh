@@ -65,25 +65,25 @@ ARGS=${ARGS}' --exclude-table-data pl_graphdb."ItemKeyIndexCompilerQueue" '
 ARGS=${ARGS}' --exclude-table-data pl_graphdb."ItemKeyIndexEncodedChunk" '
 
 # Clear out the user loader state
-ARGS=${ARGS}' --exclude-table-data pl_pof_user_loader."LoadState" '
+ARGS=${ARGS}' --exclude-table-data pl_enmac_user_loader."LoadState" '
 
 # Clear out the equipment loader state
-ARGS=${ARGS}' --exclude-table-data pl_pof_equipment_loader."ChunkLoadState" '
+ARGS=${ARGS}' --exclude-table-data pl_enmac_equipment_loader."ChunkLoadState" '
 
 # Clear out the work package loader state
-ARGS=${ARGS}' --exclude-table-data pl_pof_switching_loader."ChunkLoadState" '
+ARGS=${ARGS}' --exclude-table-data pl_enmac_switching_loader."ChunkLoadState" '
 
 # Remove the diagram load states from the GIS loader
 ARGS=${ARGS}' --exclude-table-data pl_gis_diagram_loader."DxfLoadState" '
 
 # Remove the diagram states from the GIS location loader
-ARGS=${ARGS}' --exclude-table-data pl_pof_gis_location_loader."ChunkLoadState" '
+ARGS=${ARGS}' --exclude-table-data pl_enmac_gis_location_loader."ChunkLoadState" '
 
 # Remove the DMS diagram load states from the loader
-ARGS=${ARGS}' --exclude-table-data pl_pof_diagram_loader."PageLoadState" '
+ARGS=${ARGS}' --exclude-table-data pl_enmac_diagram_loader."PageLoadState" '
 
 # NOTE, Leave the LiveDB load states, This will reduce the load time.
-ARGS=${ARGS}' --exclude-table-data pl_pof_graphdb_loader."GraphSegmentLoadState" '
+ARGS=${ARGS}' --exclude-table-data pl_enmac_graphdb_loader."GraphSegmentLoadState" '
 
 
 pg_dump  -h 127.0.0.1 -U peek -d peek -F p ${ARGS} | bzip2  > peek_backup.sql.bz2

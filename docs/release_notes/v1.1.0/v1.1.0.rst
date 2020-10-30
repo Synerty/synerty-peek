@@ -155,7 +155,7 @@ Start up the Peek Server service, it will rebuild the admin site.
 
 Connect to the admin site at http://localhost:8010
 
-go to Plugins -> PoF Equipment Detail Loader
+go to Plugins -> ENMAC Equipment Detail Loader
 
 Select the "Edit App Server Settings" tab, enter the details and save.
 

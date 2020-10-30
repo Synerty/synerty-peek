@@ -77,13 +77,13 @@ the data is reloaded when the destination peek starts.
     --exclude-table-data 'pl_graphdb.\"ItemKeyIndex\"' `
     --exclude-table-data 'pl_graphdb.\"ItemKeyIndexCompilerQueue\"' `
     --exclude-table-data 'pl_graphdb.\"ItemKeyIndexEncodedChunk\"' `
-    --exclude-table-data 'pl_pof_user_loader.\"LoadState\"' `
+    --exclude-table-data 'pl_enmac_user_loader.\"LoadState\"' `
     --exclude-table-data 'pl_gis_diagram_loader.\"DxfLoadState\"' `
-    --exclude-table-data 'pl_pof_gis_location_loader.\"ChunkLoadState\"' `
-    --exclude-table-data 'pl_pof_diagram_loader.\"PageLoadState\"' `
-    --exclude-table-data 'pl_pof_graphdb_loader.\"GraphSegmentLoadState\"' `
-    --exclude-table-data 'pl_pof_switching_loader.\"ChunkLoadState\"' `
-    --exclude-table-data 'pl_pof_equipment_loader.\"ChunkLoadState\"'
+    --exclude-table-data 'pl_enmac_gis_location_loader.\"ChunkLoadState\"' `
+    --exclude-table-data 'pl_enmac_diagram_loader.\"PageLoadState\"' `
+    --exclude-table-data 'pl_enmac_graphdb_loader.\"GraphSegmentLoadState\"' `
+    --exclude-table-data 'pl_enmac_switching_loader.\"ChunkLoadState\"' `
+    --exclude-table-data 'pl_enmac_equipment_loader.\"ChunkLoadState\"'
 
 
 OR, This will create a more binary backup format, suitable for restoring onto an existing

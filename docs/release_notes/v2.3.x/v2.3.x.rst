@@ -77,7 +77,7 @@ The migration steps for this change are as follows:
 * Run the following as peek on the peek server to force a reload of the data: ::
 
     psql <<EOF
-    UPDATE pl_pof_diagram_loader."PageLoadState"
+    UPDATE pl_enmac_diagram_loader."PageLoadState"
     SET "lastDisplayHash"='reloadme';
     EOF
 
@@ -132,7 +132,7 @@ v2.3.0 Issues Log
 Bug
 ```
 
-*    [PEEK-602] - PoF Diagram Loader - Agent no longer reloads all pages on restart.
+*    [PEEK-602] - ENMAC Diagram Loader - Agent no longer reloads all pages on restart.
 
 New Feature
 ```````````

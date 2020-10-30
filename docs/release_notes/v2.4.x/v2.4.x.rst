@@ -101,7 +101,7 @@ The equipment loader will need to reload the search data, force an update with t
 following SQL. ::
 
         psql <<EOF
-        UPDATE pl_pof_equipment_loader."ChunkLoadState"
+        UPDATE pl_enmac_equipment_loader."ChunkLoadState"
         SET "lastSearchHash" = 'reloadme';
         EOF
 
@@ -113,7 +113,7 @@ The equipment loader will need to reload the search data, force an update with t
 following SQL. ::
 
         psql <<EOF
-        UPDATE pl_pof_switching_loader."ChunkLoadState"
+        UPDATE pl_enmac_switching_loader."ChunkLoadState"
         SET "lastSearchHash" = 'reloadme';
         EOF
 
@@ -230,7 +230,7 @@ Bug
 *   [PEEK-621] - Diagram - Polygons fill outside of boxes with dynamics,
     (when it's over 100%)
 
-*   [PEEK-622] - PoF GraphDB Loader: 'NoneType' object has no attribute
+*   [PEEK-622] - ENMAC GraphDB Loader: 'NoneType' object has no attribute
     'updateInProgressDate'
 
 *   [PEEK-630] - DMS Diagram - Font alignments for middle and right don't work
@@ -254,7 +254,7 @@ Improvement
 
 *   [PEEK-608] - Prevent peek from loading the same plugin twice.
 
-*   [PEEK-609] - PoF Equipment Loader - Filter components added to search based
+*   [PEEK-609] - ENMAC Equipment Loader - Filter components added to search based
     on component id
 
 *   [PEEK-610] - Search - Update tokenizing to allow partial keyword support

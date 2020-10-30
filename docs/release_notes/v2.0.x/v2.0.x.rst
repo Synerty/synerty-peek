@@ -248,15 +248,15 @@ Run the following SQL, for each applicable plugin that you have installed. ::
         -- DocDB Plugin
         DROP SCHEMA pl_docdb CASCADE;
 
-        -- PoF Equipment Loader
-        TRUNCATE TABLE pl_pof_equipment_loader."ChunkLoadState";
+        -- ENMAC Equipment Loader
+        TRUNCATE TABLE pl_enmac_equipment_loader."ChunkLoadState";
 
-        -- PoF Diagram Loader
-        DELETE FROM pl_pof_diagram_loader."PageLoadState"
+        -- ENMAC Diagram Loader
+        DELETE FROM pl_enmac_diagram_loader."PageLoadState"
         WHERE "scope" = 'normal';
 
-        -- PoF Pof GIS Location loader
-        TRUNCATE TABLE pl_pof_gis_location_loader."ChunkLoadState";
+        -- ENMAC Pof GIS Location loader
+        TRUNCATE TABLE pl_enmac_gis_location_loader."ChunkLoadState";
 
         -- GraphDB
         TRUNCATE TABLE pl_graphdb."GraphDbChunkQueue";
@@ -267,8 +267,8 @@ Run the following SQL, for each applicable plugin that you have installed. ::
         TRUNCATE TABLE pl_graphdb."ItemKeyIndexEncodedChunk";
         TRUNCATE TABLE pl_graphdb."ItemKeyIndex";
 
-        -- PoF GraphDB Loader
-        TRUNCATE TABLE pl_pof_graphdb_loader."GraphSegmentLoadState";
+        -- ENMAC GraphDB Loader
+        TRUNCATE TABLE pl_enmac_graphdb_loader."GraphSegmentLoadState";
 
         EOF
 
@@ -368,7 +368,7 @@ Improvement
 Bug
 ```
 
-*    [PEEK-434] - PoF Diagram Loader - float() argument must be a string or a number, not 'NoneType'
+*    [PEEK-434] - ENMAC Diagram Loader - float() argument must be a string or a number, not 'NoneType'
 
 *    [PEEK-435] - Core Search - ujson.loads(objectPropsById[str(objectId)]) : Expected String or Unicode
 
@@ -405,7 +405,7 @@ Bug
 
 *    [PEEK-417] - Core Search - "key" is not apart of the search object properties in the results
 
-*    [PEEK-418] - PoF Equipment Loader - District Zone field to import
+*    [PEEK-418] - ENMAC Equipment Loader - District Zone field to import
 
 *    [PEEK-420] - DocDB Generic Menu - Add a condition to show the menu or not, use substitutions from the Doc
 
@@ -417,9 +417,9 @@ Bug
 
 *    [PEEK-424] - DocDB - Admin doc test screen seems not to work.
 
-*    [PEEK-425] - PoF Diagram Loader - Feeder colours does not work
+*    [PEEK-425] - ENMAC Diagram Loader - Feeder colours does not work
 
-*    [PEEK-426] - Plugins have "PoF" in their names in the admin screen
+*    [PEEK-426] - Plugins have "ENMAC" in their names in the admin screen
 
 *    [PEEK-428] - "View Job" has not icon
 
@@ -429,14 +429,14 @@ Bug
 
 *    [PEEK-431] - DocDB imports None/'' values
 
-*    [PEEK-432] - PoF Diagram Loader - Deleting pages fails
+*    [PEEK-432] - ENMAC Diagram Loader - Deleting pages fails
 
 *    [PEEK-433] - Core User - Logic for not filling out an OU or a CN is buggy
 
 Improvement
 ```````````
 
-*    [PEEK-427] - Create PoF Switching Job Loader
+*    [PEEK-427] - Create ENMAC Switching Job Loader
 
 v2.0.1 Issues Log
 -----------------
@@ -479,11 +479,11 @@ Bug
 
 *    [PEEK-299] - Pointer Cursor on Select World screen
 
-*    [PEEK-301] - Core Search / Diagram / PoF Diagram Loader - show on other world panel should use descriptions
+*    [PEEK-301] - Core Search / Diagram / ENMAC Diagram Loader - show on other world panel should use descriptions
 
 *    [PEEK-305] - Core Search - Hide panel after select show link
 
-*    [PEEK-306] - Core Search / Diagram / PoF Diagram Loader - hide show on link for current world
+*    [PEEK-306] - Core Search / Diagram / ENMAC Diagram Loader - hide show on link for current world
 
 *    [PEEK-308] - Core Search - Cleanup search results display
 

@@ -230,31 +230,31 @@ Improvement
 Bug
 ```
 
-*    [PEEK-320] - PoF Graph DB Loader - Loader continually reimports trace configs
+*    [PEEK-320] - ENMAC Graph DB Loader - Loader continually reimports trace configs
 
 *    [PEEK-457] - Core User / Device - User login sticks on login screen
 
 *    [PEEK-462] - Core Login - login screen hangs after selecting the login button
 
-*    [PEEK-463] - PoF Switching - program details not shown sequentially
+*    [PEEK-463] - ENMAC Switching - program details not shown sequentially
 
 *    [PEEK-464] - Diagram Edit - Deleting existing display items doesn't work
 
 *    [PEEK-465] - Diagram Edit - Creating text doesn't popup shape properties
 
-*    [PEEK-468] - PoF SOAP - SOAP isn't compatible with PowerOn Advantage
+*    [PEEK-468] - ENMAC SOAP - SOAP isn't compatible with PowerOn Advantage
 
 *    [PEEK-469] - Field Switching - Field confirm for WEB doesn't work
             - Time date is out of range
 
-*    [PEEK-470] - PoF SOAP - Datetimes now seem to be double localised
+*    [PEEK-470] - ENMAC SOAP - Datetimes now seem to be double localised
 
 *    [PEEK-473] - All Loaders - Workers failing all their retries can
             end up with queue items in limbo
 
 *    [PEEK-474] - Diagram - Locating on key only (no coord set), will fail
 
-*    [PEEK-475] - PoF Equipment Loader - Loader no longer loads conductors
+*    [PEEK-475] - ENMAC Equipment Loader - Loader no longer loads conductors
 
 *    [PEEK-476] - Worker - Fix retry issues with redis connections
 

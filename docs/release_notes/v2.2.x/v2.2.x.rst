@@ -242,7 +242,7 @@ v2.2.2 Issues Log
 Bug
 ```
 
-*    [PEEK-602] - PoF Diagram Loader - Agent no longer reloads all pages on restart.
+*    [PEEK-602] - ENMAC Diagram Loader - Agent no longer reloads all pages on restart.
 
 v2.2.1 Issues Log
 -----------------
@@ -273,7 +273,7 @@ Bug
 
 *    [PEEK-572] - Agent loaders fail to requeue failed items
 
-*    [PEEK-578] - PoF Event - Loader fails to load if DB isn't initialised
+*    [PEEK-578] - ENMAC Event - Loader fails to load if DB isn't initialised
 
 *    [PEEK-588] - VortexPayloadProtocol has concurrent calls to _processData
 
@@ -336,7 +336,7 @@ Improvement
 
 *    [PEEK-596] - User Plugin : Add option for accepting invalid LDAP SSL certificate
 
-*    [PEEK-599] - PoF Realtime Loader - Add settings for background polling in admin UI
+*    [PEEK-599] - ENMAC Realtime Loader - Add settings for background polling in admin UI
 
 CI/CD Tasks
 ```````````
