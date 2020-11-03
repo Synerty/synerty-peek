@@ -1,12 +1,12 @@
 
 [Unit]
-Description=Peek Server
+Description=Peek Field Service
 After=syslog.target network.target remote-fs.target nss-lookup.target
 
 [Service]
 Type=simple
 User=peek
-ExecStart=#PEEK_DIR#/run_peek_logic_service
+ExecStart=#PEEK_DIR#/run_peek_field_service
 
 [Install]
 WantedBy=multi-user.target

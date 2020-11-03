@@ -1,6 +1,6 @@
 
 [Unit]
-Description=Peek Client
+Description=Peek Office Service
 After=syslog.target network.target remote-fs.target nss-lookup.target
 
 [Service]
