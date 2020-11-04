@@ -30,7 +30,8 @@ platformPackages = [
     "peek-core-email",
     "peek-core-device",
     "peek-core-user",
-    "peek-core-search"
+    "peek-core-search",
+    "peek-core-docdb"
 ]
 
 abstractPackages = [
