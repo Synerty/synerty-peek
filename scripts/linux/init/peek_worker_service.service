@@ -7,6 +7,8 @@ After=syslog.target network.target remote-fs.target nss-lookup.target
 Type=simple
 User=peek
 ExecStart=#PEEK_DIR#/run_peek_worker_service
+Restart=on-failure
+RestartSec=5s
 
 [Install]
 WantedBy=multi-user.target
