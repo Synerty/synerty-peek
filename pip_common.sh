@@ -24,6 +24,7 @@ peek-core-email
 peek-core-device
 peek-core-user
 peek-core-search
+peek-core-docdb
 peek-abstract-chunked-index
 peek-abstract-chunked-data-loader"
 
