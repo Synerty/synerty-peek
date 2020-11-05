@@ -56,7 +56,6 @@ peek-plugin-chat
 peek-plugin-livedb
 peek-plugin-graphdb
 peek-plugin-eventdb
-peek-core-docdb
 peek-plugin-docdb-generic-menu
 peek-plugin-diagram
 peek-plugin-enmac-sql
