@@ -9,6 +9,8 @@ User=peek
 ExecStart=#PEEK_DIR#/run_peek_agent_service
 Environment="LD_LIBRARY_PATH=#ORACLE_HOME#"
 Environment="ORACLE_HOME=#ORACLE_HOME#"
+Restart=on-failure
+RestartSec=5s
 
 [Install]
 WantedBy=multi-user.target
