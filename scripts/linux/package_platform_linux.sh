@@ -129,7 +129,7 @@ downloadNodeModules $adminBuildWebDIR $adminJsonUrl
 
 mkdir $baseDir/init && pushd $baseDir/init
 
-for s in peek_logic_service peek_worker_service peek_agent_service peek_office_service
+for s in peek_logic_service peek_worker_service peek_agent_service peek_office_service peek_field_service
 do
     wget -nv https://bitbucket.org/synerty/synerty-peek/raw/${peekPkgVer}/scripts/linux/init/${s}.service
 done
