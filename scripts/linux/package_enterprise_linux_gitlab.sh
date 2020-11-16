@@ -14,7 +14,7 @@ DST_PATH="${4:-/tmp/plugin}"
 pinnedDepsPyFile="${5:-nofile}"
 
 
-DIR_TO_TAR="peek_plugins_linux_${VER}"
+DIR_TO_TAR="peek_enterprise_plugins_linux_${VER}"
 
 # create and change to the directory we'll zip
 cd ${DST_PATH}

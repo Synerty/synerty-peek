@@ -2,12 +2,14 @@
 
 source ./pip_common.sh
 
-if [ "${1}" = 'platform' ]; then
-    PACKAGES=${PLATFORM_PKGS}
-elif [ "${1}" = 'plugins' ]; then
-    PACKAGES=${PLUGIN_PKGS}
+if [ "${1}" = 'community' ]; then
+    PACKAGE_GRP="community"
+    PACKAGES=${COMMUNITY_PKGS}
+elif [ "${1}" = 'enterprise' ]; then
+    PACKAGE_GRP="enterprise"
+    PACKAGES=${ENTERPRISE_PKGS}
 else
-    echo "Arg1 is not 'plugins' or 'platform' " >&2
+    echo "Arg1 is not 'community' or 'enterprise' " >&2
     exit 1
 fi
 
@@ -18,6 +20,9 @@ CI_COMMIT_REF_NAME=${5}
 CI_PROJECT_NAMESPACE=${6}
 RELEASE_BRANCH=${7}
 
+# we're on gitlab 12.9 there's no $CI_PROJECT_ROOT_NAMESPACE as in 13.3 or later
+CI_PROJECT_ROOT_NAMESPACE=${CI_PROJECT_NAMESPACE%/*}
+
 echo "Cloning all the repositories at ${SRC_PATH}"
 
 mkdir -p  ${SRC_PATH} && cd ${SRC_PATH}
@@ -25,8 +30,15 @@ mkdir -p  ${SRC_PATH} && cd ${SRC_PATH}
 # Clone the repos
 for repo in ${PACKAGES}; do
     rm -fR ${repo}
+
+    if [ "${CI_PROJECT_ROOT_NAMESPACE}" = 'peek' ]; then
+        pathTo=peek/${PACKAGE_GRP}
+    else
+        pathTo=${CI_PROJECT_ROOT_NAMESPACE}/${PACKAGE_GRP}
+    fi
+
     # Shallow? --depth 5
-    git clone https://${USER}:${PASSWORD}@gitlab.synerty.com/${CI_PROJECT_NAMESPACE}/${repo}.git &
+    git clone https://${USER}:${PASSWORD}@gitlab.synerty.com/${pathTo}/${repo}.git &
 done
 
 # Wait for background jobs to finish

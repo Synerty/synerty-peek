@@ -6,8 +6,8 @@ variables:
     GIT_CLONE_PATH: $CI_BUILDS_DIR/peek
     PEEK_NODE_VERSION: v7.1.0
     BUILD: build
-    PKG_PLUGIN_LINUX: tmp_pkg_plugin_linux
-    PKG_PLATFORM_LINUX: tmp_pkg_platform_linux
+    PKG_ENTERPRISE_LINUX: tmp_pkg_enterprise_linux
+    PKG_COMMUNITY_LINUX: tmp_pkg_community_linux
     NON_RELEASE_VER: 0.0.0+b${CI_PIPELINE_ID}
     PINNED_DEPS_PY_FILE_LINUX: ${CI_PROJECT_DIR}/gitlab/${RELEASE_BRANCH}/linux/pinned-deps-py
 
@@ -64,47 +64,47 @@ build_latex_docs:
         - linux
 
 
-git_clone_platform:
+git_clone_community:
     allow_failure: false
     artifacts:
         paths:
-            - ${GIT_CLONE_PATH}/cloned_platform_repos
+            - ${GIT_CLONE_PATH}/cloned_community_repos
         expire_in: 1 day
     image: nexus.synerty.com:5000/peek-linux-build:${RELEASE_BRANCH}
     only:
         - web
         - triggers
     script:
-        - ./gitlab/scripts/git_clone.sh platform ${GIT_CLONE_PATH}/cloned_platform_repos
+        - ./gitlab/scripts/git_clone.sh community ${GIT_CLONE_PATH}/cloned_community_repos
             ${GIT_USER} ${GIT_PASSWORD}
             ${CI_COMMIT_REF_NAME} ${CI_PROJECT_NAMESPACE} ${RELEASE_BRANCH}
     stage: fetch
     tags:
         - linux
 
-git_clone_plugins:
+git_clone_enterprise:
     allow_failure: false
     artifacts:
         paths:
-            - ${GIT_CLONE_PATH}/cloned_plugin_repos
+            - ${GIT_CLONE_PATH}/cloned_enterprise_repos
         expire_in: 1 day
     image: nexus.synerty.com:5000/peek-linux-build:${RELEASE_BRANCH}
     only:
         - web
         - triggers
     script:
-        - ./gitlab/scripts/git_clone.sh plugins ${GIT_CLONE_PATH}/cloned_plugin_repos
+        - ./gitlab/scripts/git_clone.sh enterprise ${GIT_CLONE_PATH}/cloned_enterprise_repos
             ${GIT_USER} ${GIT_PASSWORD}
             ${CI_COMMIT_REF_NAME} ${CI_PROJECT_NAMESPACE} ${RELEASE_BRANCH}
     stage: fetch
     tags:
         - linux
 
-publish_platform:
+publish_community:
     allow_failure: false
     artifacts:
         paths:
-            - ${GIT_CLONE_PATH}/platform_packages
+            - ${GIT_CLONE_PATH}/community_packages
         expire_in: 1 day
     image: nexus.synerty.com:5000/peek-linux-build:${RELEASE_BRANCH}
     only:
@@ -113,18 +113,18 @@ publish_platform:
     stage: publish
     script:
         - export GITHUB_PUSH=0
-        - ./publish_platform.sh ${RELEASE_VER:-${NON_RELEASE_VER}} ${GIT_CLONE_PATH}/cloned_platform_repos
-        - mkdir -p ${GIT_CLONE_PATH}/platform_packages
-        - mv ${GIT_CLONE_PATH}/cloned_platform_repos/*/dist/*.tar.gz ${GIT_CLONE_PATH}/platform_packages
+        - ./publish_community.sh ${RELEASE_VER:-${NON_RELEASE_VER}} ${GIT_CLONE_PATH}/cloned_community_repos
+        - mkdir -p ${GIT_CLONE_PATH}/community_packages
+        - mv ${GIT_CLONE_PATH}/cloned_community_repos/*/dist/*.tar.gz ${GIT_CLONE_PATH}/community_packages
     tags:
         - linux
 
 
-publish_plugins:
+publish_enterprise:
     allow_failure: false
     artifacts:
         paths:
-            - ${GIT_CLONE_PATH}/plugin_packages
+            - ${GIT_CLONE_PATH}/enterprise_packages
         expire_in: 1 day
     image: nexus.synerty.com:5000/peek-linux-build:${RELEASE_BRANCH}
     only:
@@ -133,20 +133,20 @@ publish_plugins:
     stage: publish
     script:
         - export GITHUB_PUSH=0
-        - ./publish_plugins.sh ${RELEASE_VER:-${NON_RELEASE_VER}} ${GIT_CLONE_PATH}/cloned_plugin_repos
-        - mkdir -p ${GIT_CLONE_PATH}/plugin_packages
-        - mv ${GIT_CLONE_PATH}/cloned_plugin_repos/*/dist/*.tar.gz ${GIT_CLONE_PATH}/plugin_packages
+        - ./publish_enterprise.sh ${RELEASE_VER:-${NON_RELEASE_VER}} ${GIT_CLONE_PATH}/cloned_enterprise_repos
+        - mkdir -p ${GIT_CLONE_PATH}/enterprise_packages
+        - mv ${GIT_CLONE_PATH}/cloned_enterprise_repos/*/dist/*.tar.gz ${GIT_CLONE_PATH}/enterprise_packages
     tags:
         - linux
 
-package_platform_linux:
+package_community_linux:
     dependencies:
-        - git_clone_platform
-        - publish_platform
+        - git_clone_community
+        - publish_community
     allow_failure: false
     artifacts:
         paths:
-            - ${GIT_CLONE_PATH}/${PKG_PLATFORM_LINUX}
+            - ${GIT_CLONE_PATH}/${PKG_COMMUNITY_LINUX}
         expire_in: 1 day
     image: nexus.synerty.com:5000/peek-linux-build:${RELEASE_BRANCH}
     only:
@@ -163,25 +163,25 @@ package_platform_linux:
         - export NPM_CONFIG_REGISTRY="http://${NEXUS_URL}/repository/npm-all/"
         - export NPM_CONFIG_AUTH=`echo "${NEXUS_USER}:${NEXUS_PASSWORD}" | openssl base64`
         - export NG_CLI_ANALYTICS=ci
-        - mkdir -p ${GIT_CLONE_PATH}/${PKG_PLATFORM_LINUX}
-        - ./scripts/linux/package_platform_linux_gitlab.sh ${RELEASE_VER:-${NON_RELEASE_VER}}
-            ${GIT_CLONE_PATH}/cloned_platform_repos
-            ${GIT_CLONE_PATH}/platform_packages
-            ${GIT_CLONE_PATH}/${PKG_PLATFORM_LINUX}
+        - mkdir -p ${GIT_CLONE_PATH}/${PKG_COMMUNITY_LINUX}
+        - ./scripts/linux/package_community_linux_gitlab.sh ${RELEASE_VER:-${NON_RELEASE_VER}}
+            ${GIT_CLONE_PATH}/cloned_community_repos
+            ${GIT_CLONE_PATH}/community_packages
+            ${GIT_CLONE_PATH}/${PKG_COMMUNITY_LINUX}
             ${PINNED_DEPS_PY_FILE_LINUX}
-        - rm -rf ${GIT_CLONE_PATH}/platform_packages
-        - rm -rf ${GIT_CLONE_PATH}/cloned_platform_repos
+        - rm -rf ${GIT_CLONE_PATH}/community_packages
+        - rm -rf ${GIT_CLONE_PATH}/cloned_community_repos
     tags:
         - linux
 
-package_plugin_linux:
+package_enterprise_linux:
     dependencies:
-        - publish_platform
-        - publish_plugins
+        - publish_community
+        - publish_enterprise
     allow_failure: false
     artifacts:
         paths:
-            - ${GIT_CLONE_PATH}/${PKG_PLUGIN_LINUX}/
+            - ${GIT_CLONE_PATH}/${PKG_ENTERPRISE_LINUX}/
         expire_in: 1 day
     image: nexus.synerty.com:5000/peek-linux-build:${RELEASE_BRANCH}
     only:
@@ -190,20 +190,20 @@ package_plugin_linux:
     stage: package
     script:
         - mkdir -p ~/.config/pip
-        - mkdir -p ${GIT_CLONE_PATH}/${PKG_PLUGIN_LINUX}
+        - mkdir -p ${GIT_CLONE_PATH}/${PKG_ENTERPRISE_LINUX}
         - export PIP_INDEX=http://${NEXUS_USER}:${NEXUS_PASSWORD}@${NEXUS_URL}/repository/pypi-all/pypi
         - export PIP_INDEX_URL=http://${NEXUS_USER}:${NEXUS_PASSWORD}@${NEXUS_URL}/repository/pypi-all/simple
         - export PIP_TRUSTED_HOST=${NEXUS_URL}
-        - ./scripts/linux/package_plugins_linux_gitlab.sh ${RELEASE_VER:-${NON_RELEASE_VER}}
-            ${GIT_CLONE_PATH}/plugin_packages ${GIT_CLONE_PATH}/platform_packages
-            ${GIT_CLONE_PATH}/${PKG_PLUGIN_LINUX} ${PINNED_DEPS_PY_FILE_LINUX}
+        - ./scripts/linux/package_enterprise_linux_gitlab.sh ${RELEASE_VER:-${NON_RELEASE_VER}}
+            ${GIT_CLONE_PATH}/enterprise_packages ${GIT_CLONE_PATH}/community_packages
+            ${GIT_CLONE_PATH}/${PKG_ENTERPRISE_LINUX} ${PINNED_DEPS_PY_FILE_LINUX}
     tags:
         - linux
 
 archive_release:
     dependencies:
-        - package_plugin_linux
-        - package_platform_linux
+        - package_enterprise_linux
+        - package_community_linux
     allow_failure: false
     artifacts:
         paths:
@@ -219,9 +219,9 @@ archive_release:
         - mkdir -p ${GIT_CLONE_PATH}/peek_release_${RELEASE_VER:-${NON_RELEASE_VER}}_linux
         - cp ./scripts/linux/deploy_release_linux.sh
             ${GIT_CLONE_PATH}/peek_release_${RELEASE_VER:-${NON_RELEASE_VER}}_linux
-        - mv $GIT_CLONE_PATH/${PKG_PLATFORM_LINUX}/peek_platform_linux_${RELEASE_VER:-${NON_RELEASE_VER}}.tar.bz2
+        - mv $GIT_CLONE_PATH/${PKG_COMMUNITY_LINUX}/peek_community_linux_${RELEASE_VER:-${NON_RELEASE_VER}}.tar.bz2
             ${GIT_CLONE_PATH}/peek_release_${RELEASE_VER:-${NON_RELEASE_VER}}_linux
-        - mv $GIT_CLONE_PATH/${PKG_PLUGIN_LINUX}/peek_plugins_linux_${RELEASE_VER:-${NON_RELEASE_VER}}.tar.bz2
+        - mv $GIT_CLONE_PATH/${PKG_ENTERPRISE_LINUX}/peek_enterprise_plugins_linux_${RELEASE_VER:-${NON_RELEASE_VER}}.tar.bz2
             ${GIT_CLONE_PATH}/peek_release_${RELEASE_VER:-${NON_RELEASE_VER}}_linux
         - cd ${GIT_CLONE_PATH}
             && tar cvf peek_release_${RELEASE_VER:-${NON_RELEASE_VER}}_linux.tar

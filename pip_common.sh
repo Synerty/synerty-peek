@@ -5,29 +5,46 @@ set -o errexit
 # set -x
 
 # Also update setup.py
-export PLATFORM_PKGS="
-peek-plugin-base
-peek-platform
-peek-agent-service
-peek-office-app
-peek-worker-service
-peek-field-app
-peek-office-service
-peek-doc-user
+export COMMUNITY_PKGS="
+peek-abstract-chunked-data-loader
+peek-abstract-chunked-index
 peek-admin-app
+peek-agent-service
+peek-core-device
+peek-core-docdb
+peek-core-email
+peek-core-search
+peek-core-user
 peek-doc-admin
 peek-doc-dev
+peek-doc-user
+peek-field-app
 peek-logic-service
+peek-office-app
+peek-office-service
+peek-platform
+peek-plugin-base
+peek-plugin-branch
+peek-plugin-chat
+peek-plugin-data-dms
+peek-plugin-diagram
+peek-plugin-diagram-positioner
+peek-plugin-diagram-trace
+peek-plugin-diagram-zepben-menu
+peek-plugin-docdb-generic-menu
+peek-plugin-eventdb
+peek-plugin-gis-diagram
+peek-plugin-gis-diagram-loader
+peek-plugin-graphdb
+peek-plugin-inbox
+peek-plugin-index-blueprint
+peek-plugin-livedb
+peek-plugin-noop
+peek-plugin-tutorial
 peek-storage-service
+peek-worker-service
 synerty-peek
-peek-core-email
-peek-core-device
-peek-core-user
-peek-core-search
-peek-core-docdb
-peek-abstract-chunked-index
-peek-abstract-chunked-data-loader"
-
+"
 
 # Dynamicall list plugins
 
@@ -37,54 +54,37 @@ peek-abstract-chunked-data-loader"
 
 ## Plugins are siblings to this project
 #if ls -d $here/peek-plugin-* 2> /dev/null 2>&1; then
-#    export PLUGIN_PKGS=`ls -d $here/peek-plugin-* | grep -v peek-plugin-base`
+#    export ENTERPRISE_PKGS=`ls -d $here/peek-plugin-* | grep -v peek-plugin-base`
 #else
 #    echo "There are no plugins at $here"
-#    export PLUGIN_PKGS=""
+#    export ENTERPRISE_PKGS=""
 #fi
 
 # Ignore all that, define the ones JJC wants for Orion
 
-export PLUGIN_PKGS="
-peek-plugin-noop
-peek-plugin-tutorial
-peek-plugin-index-blueprint
-peek-plugin-data-dms
-peek-plugin-branch
-peek-plugin-inbox
-peek-plugin-chat
-peek-plugin-livedb
-peek-plugin-graphdb
-peek-plugin-eventdb
-peek-plugin-docdb-generic-menu
-peek-plugin-diagram
-peek-plugin-enmac-sql
-peek-plugin-enmac-soap
+export ENTERPRISE_PKGS="
 peek-plugin-enmac-chat
-peek-plugin-enmac-switching
-peek-plugin-enmac-field-switching
-peek-plugin-enmac-field-incidents
-peek-plugin-enmac-field-assessments
-peek-plugin-enmac-field-online
-peek-plugin-enmac-event
-peek-plugin-gis-diagram
 peek-plugin-enmac-diagram
 peek-plugin-enmac-diagram-loader
-peek-plugin-enmac-equipment-loader
-peek-plugin-enmac-switching-loader
-peek-plugin-enmac-livedb-loader
-peek-plugin-enmac-graphdb-loader
-peek-plugin-gis-diagram-loader
-peek-plugin-enmac-gis-location-loader
-peek-plugin-enmac-user-loader
-peek-plugin-enmac-email-nar
 peek-plugin-enmac-email-incidents
+peek-plugin-enmac-email-nar
+peek-plugin-enmac-equipment-loader
+peek-plugin-enmac-event
 peek-plugin-enmac-event-loader
-peek-plugin-diagram-zepben-menu
-peek-plugin-diagram-trace
-peek-plugin-diagram-positioner"
-
-## DEPREICATED PLUGIN_PKGS
+peek-plugin-enmac-field-assessments
+peek-plugin-enmac-field-incidents
+peek-plugin-enmac-field-online
+peek-plugin-enmac-field-switching
+peek-plugin-enmac-gis-location-loader
+peek-plugin-enmac-graphdb-loader
+peek-plugin-enmac-livedb-loader
+peek-plugin-enmac-soap
+peek-plugin-enmac-sql
+peek-plugin-enmac-switching
+peek-plugin-enmac-switching-loader
+peek-plugin-enmac-user-loader
+"
+## DEPREICATED ENTERPRISE_PKGS
 # peek-plugin-gis-dms-positioner
 
 export bold=$(tput bold)

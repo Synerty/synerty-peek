@@ -33,7 +33,7 @@ fi
 # -------------------------------------
 echo "CHECKING for package existance"
 EXIT=""
-for plugin in $PLUGIN_PKGS; do
+for plugin in $ENTERPRISE_PKGS; do
     if [ ! -d "${SRC_PATH}/$plugin" ]; then
         echo "${bold}${plugin}${normal} : $plugin does not exist" >&2
         EXIT="Y"
@@ -45,7 +45,7 @@ echo
 # -------------------------------------
 echo "CHECKING for uncommitted changes"
 EXIT=""
-for plugin in $PLUGIN_PKGS; do
+for plugin in $ENTERPRISE_PKGS; do
     if [ -n "$(cd ${SRC_PATH}/$plugin && git status --porcelain)" ]; then
         echo "${bold}${plugin}${normal} : has uncomitted changes, make sure all changes are comitted" >&2
         EXIT="Y"
@@ -57,7 +57,7 @@ echo
 # -------------------------------------
 echo "CHECKING for existing tag"
 EXIT=""
-for plugin in $PLUGIN_PKGS; do
+for plugin in $ENTERPRISE_PKGS; do
     if (cd ${SRC_PATH}/$plugin && git tag | grep -q "^${VER}$"); then
         echo "${bold}${plugin}${normal} : has an existing git tag for version ${VER}." >&2
         EXIT="Y"
@@ -68,7 +68,7 @@ echo
 
 # -------------------------------------
 echo "CHECKING for for successful build"
-for plugin in $PLUGIN_PKGS; do
+for plugin in $ENTERPRISE_PKGS; do
     if ! (cd ${SRC_PATH}/$plugin && python setup.py sdist --format=gztar); then
         echo "${bold}${plugin}${normal} : failed to build." >&2
         exit 1
@@ -78,7 +78,7 @@ echo
 
 # -------------------------------------
 echo "Building packages"
-for plugin in $PLUGIN_PKGS; do
+for plugin in $ENTERPRISE_PKGS; do
     if ! (cd ${SRC_PATH}/$plugin && bash publish.sh ${VER} "" ); then
         echo "${bold}${plugin}${normal} : failed to run publish." >&2
         exit 1

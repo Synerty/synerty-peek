@@ -17,16 +17,16 @@ else
 fi
 
 
-platformZip="${1}"
-pluginsZip="${2}"
+communityZip="${1}"
+enterpriseZip="${2}"
 
-if ! [ -f $platformZip ]; then
-    echo "Platform release doesn't exist : $platformZip"
+if ! [ -f $communityZip ]; then
+    echo "community release doesn't exist : $communityZip"
     exit 1
 fi
 
-if ! [ -f $pluginsZip ]; then
-    echo "Plugins release doesn't exist : $pluginsZip"
+if ! [ -f $enterpriseZip ]; then
+    echo "Enterprise release doesn't exist : $enterpriseZip"
     exit 1
 fi
 
@@ -36,7 +36,7 @@ fi
 # Get the current location
 startDir=`pwd`
 
-releaseDir=`echo ~/peek_platform_linux`
+releaseDir=`echo ~/peek_community_linux`
 
 # Delete the existing dist dir if it exists
 if [ -d ${releaseDir} ]; then
@@ -45,20 +45,20 @@ if [ -d ${releaseDir} ]; then
 fi
 
 # ------------------------------------------------------------------------------
-# Extract the platform to a interim directory
+# Extract the community to an interim directory
 
 # Create the new release dir
 mkdir -p ${releaseDir}
 
 # Decompress the release
-echo "Extracting platform to $releaseDir"
-tar xjf ${platformZip} -C ${releaseDir}
+echo "Extracting community to $releaseDir"
+tar xjf ${communityZip} -C ${releaseDir}
 
 # ------------------------------------------------------------------------------
 # Extract the release to a interim directory
 
 echo "Extracting plugins to $releaseDir"
-tar xjf ${pluginsZip} -C ${releaseDir}
+tar xjf ${enterpriseZip} -C ${releaseDir}
 
 # ------------------------------------------------------------------------------
 # Create the virtual environment
@@ -88,18 +88,18 @@ export PATH="$venvDir/bin:$PATH"
 # Install the python packages
 
 # install the py wheels from the release
-echo "Installing python platform"
+echo "Installing python community"
 pushd "$releaseDir/py"
 pip install --no-index --no-cache --find-links=. synerty_peek*.whl
 popd
 
 # ------------------------------------------------------------------------------
-# Install the python plugins
+# Install the enterprise python plugins
 
 # install the py wheels from the release
-echo "Installing python plugins"
-pushd "$releaseDir/peek_plugins_linux_${peekPkgVer}"
-pip install --no-index --no-cache --find-links=. peek_plugin*.whl
+echo "Installing enterprise python plugins"
+pushd "$releaseDir/peek_enterprise_plugins_linux_${peekPkgVer}"
+pip install --no-index --no-cache --find-links=. peek_enterprise*.whl
 popd
 
 # ------------------------------------------------------------------------------

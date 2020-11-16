@@ -17,7 +17,7 @@ platformPackagesDir=${3}
 startDir=${4:-`pwd`}
 pinnedDepsPyFile=${5}
 
-baseDir="$startDir/peek_platform_linux"
+baseDir="$startDir/peek_community_linux"
 
 [ -d $baseDir ] && rm -rf $baseDir
 
