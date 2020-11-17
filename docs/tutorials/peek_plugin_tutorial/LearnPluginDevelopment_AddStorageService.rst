@@ -1,4 +1,4 @@
-.. _learn_plugin_development_add_storage:
+.. _learn_plugin_development_add_storage_service:
 
 ===================
 Add Storage Service
@@ -7,32 +7,32 @@ Add Storage Service
 The storage service is conceptually a little different to other services in the Peek
 Platform.
 
-Peek Storage connects to a database server, provides each plugin its own schema, and
+Peek Storage Service connects to a database server, provides each plugin its own schema, and
 provides much of the boilerplate code required to make this work.
 
-Only two Peek Services are able to access the database, these are the Worker and Server
-services.
+Only two Peek Services are able to access the database, these are the Peek Worker and Logic
+Services.
 
-The Storage schema upgrades are managed by the Server service.
+The Storage Service schema upgrades are managed by the Peek Logic Service.
 
-.. note:: The Server service must be enabled to use the Storage service.
+.. note:: The Logic Service must be enabled to use the Storage Service.
 
-Storage File Structure
-----------------------
+Storage Service File Structure
+------------------------------
 
-Add Package :file:`_private/storage`
-````````````````````````````````````
+Add Package :file:`_private/storage-service`
+````````````````````````````````````````````
 
-Package :file:`_private/storage` will contain the database ORM
+Package :file:`_private/storage-service` will contain the database ORM
 classes. These define the schema for the database and are used for data manipulation and
 retrieval.
 
 ----
 
-Create the :file:`peek_plugin_tutorial._private/storage` Package. Commands: ::
+Create the :file:`peek_plugin_tutorial._private/storage-service` Package. Commands: ::
 
-        mkdir -p peek_plugin_tutorial/_private/storage
-        touch peek_plugin_tutorial/_private/storage/__init__.py
+        mkdir -p peek_plugin_tutorial/_private/storage-service
+        touch peek_plugin_tutorial/_private/storage-service/__init__.py
 
 
 Add File :file:`DeclarativeBase.py`
@@ -52,7 +52,7 @@ All the table classes in the plugin will be loaded in this method.
 
 ----
 
-Create a file :file:`peek_plugin_tutorial/_private/storage/DeclarativeBase.py`
+Create a file :file:`peek_plugin_tutorial/_private/storage-service/DeclarativeBase.py`
 and populate it with the following contents:
 
 ::
@@ -69,8 +69,8 @@ and populate it with the following contents:
         def loadStorageTuples():
             """ Load Storage Tables
 
-            This method should be called from the "load()" method of the agent, server, worker
-            and client entry hook classes.
+            This method should be called from the "load()" method of the agent service, logic service,
+            worker service, field service and office service entry hook classes.
 
             This will register the ORM classes as tuples, allowing them to be serialised and
             deserialized by the vortex.
@@ -133,9 +133,9 @@ the following contents:
 
 ::
 
-        from peek_plugin_base.storage.AlembicEnvBase import AlembicEnvBase
+        from peek_plugin_base.storage-service.AlembicEnvBase import AlembicEnvBase
 
-        from peek_plugin_tutorial._private.storage import DeclarativeBase
+        from peek_plugin_tutorial._private.storage-service import DeclarativeBase
 
         DeclarativeBase.loadStorageTuples()
 
@@ -198,15 +198,15 @@ see :ref:`About plugin_package.json <package_json_explaination>`.
 
 Edit the file :file:`peek_plugin_tutorial/plugin_package.json` :
 
-#.  Add **"storage"** to the requiresServices section so it looks like ::
+#.  Add **"storage-service"** to the requiresServices section so it looks like ::
 
         "requiresServices": [
-            "storage"
+            "storage-service"
         ]
 
-#.  Add the **storage** section after **requiresServices** section: ::
+#.  Add the **storage-service** section after **requiresServices** section: ::
 
-        "storage": {
+        "storage-service": {
             "alembicDir": "_private/alembic"
         }
 
@@ -218,38 +218,38 @@ Here is an example ::
             ...
             "requiresServices": [
                 ...
-                "storage"
+                "storage-service"
             ],
             ...
-            "storage": {
+            "storage-service": {
             }
         }
 
 
-Edit File :file:`ServerEntryHook.py`
+Edit File :file:`LogicServiceEntryHook.py`
 ````````````````````````````````````
 
-The :file:`ServerEntryHook.py` file needs to be updated to do the following:
+The :file:`LogicServiceEntryHook.py` file needs to be updated to do the following:
 
-*   Implement the :command:`PluginServerStorageEntryHookABC` abstract base class.
+*   Implement the :command:`PluginLogicStorageEntryHookABC` abstract base class.
     Including implementing :command:`dbMetadata` property.
 
-*   Ensure that the storage Tables are loaded on plugin load.
+*   Ensure that the storage-service Tables are loaded on plugin load.
 
 ----
 
-Edit the file :file:`peek_plugin_tutorial/_private/server/ServerEntryHook.py`
+Edit the file :file:`peek_plugin_tutorial/_private/logic-service/LogicServiceEntryHook.py`
 
 #.  Add the following import up the top of the file ::
 
-        from peek_plugin_tutorial._private.storage import DeclarativeBase
-        from peek_plugin_tutorial._private.storage.DeclarativeBase import loadStorageTuples
-        from peek_plugin_base.server.PluginServerStorageEntryHookABC import PluginServerStorageEntryHookABC
+        from peek_plugin_tutorial._private.storage-service import DeclarativeBase
+        from peek_plugin_tutorial._private.storage-service.DeclarativeBase import loadStorageTuples
+        from peek_plugin_base.logic-service.PluginLogicStorageEntryHookABC import PluginLogicStorageEntryHookABC
 
-#.  Add **PluginServerStorageEntryHookABC** to the list of classes **"ServerEntryHook"**
+#.  Add **PluginLogicStorageEntryHookABC** to the list of classes **"LogicServiceEntryHook"**
     inherits ::
 
-        class ServerEntryHook(PluginServerEntryHookABC, PluginServerStorageEntryHookABC):
+        class LogicServiceEntryHook(PluginLogicServiceEntryHookABC, PluginLogicStorageEntryHookABC):
 
 #.  Add the following method from the **load(self):** method ::
 
@@ -266,14 +266,14 @@ Edit the file :file:`peek_plugin_tutorial/_private/server/ServerEntryHook.py`
 When you're finished, You should have a file like this: ::
 
         # Added imports, step 1
-        from peek_plugin_tutorial._private.storage import DeclarativeBase
-        from peek_plugin_tutorial._private.storage.DeclarativeBase import loadStorageTuples
-        from peek_plugin_base.server.PluginServerStorageEntryHookABC import \
-            PluginServerStorageEntryHookABC
+        from peek_plugin_tutorial._private.storage-service import DeclarativeBase
+        from peek_plugin_tutorial._private.storage-service.DeclarativeBase import loadStorageTuples
+        from peek_plugin_base.logic-service.PluginLogicStorageEntryHookABC import \
+            PluginLogicStorageEntryHookABC
 
 
         # Added inherited class, step2
-        class ServerEntryHook(PluginServerEntryHookABC, PluginServerStorageEntryHookABC):
+        class LogicServiceEntryHook(PluginLogicServiceEntryHookABC, PluginLogicStorageEntryHookABC):
 
 
             def load(self) -> None:
@@ -286,20 +286,20 @@ When you're finished, You should have a file like this: ::
             def dbMetadata(self):
                 return DeclarativeBase.metadata
 
-.. _learn_plugin_development_add_storage_edit_client_entry_hook:
+.. _learn_plugin_development_add_storage_edit_field_entry_hook:
 
-Edit File :file:`ClientEntryHook.py`
-````````````````````````````````````
+Edit File :file:`FieldServiceEntryHook.py`
+``````````````````````````````````````````
 
-This step applies if you're plugin is using the Client service.
+This step applies if you're plugin is using the Field Service service.
 
-The :file:`ClientEntryHook.py` file needs to be updated to do the following:
+The :file:`FieldServiceEntryHook.py` file needs to be updated to do the following:
 
-*   Ensure that the storage Tables are loaded on plugin load.
+*   Ensure that the storage service Tables are loaded on plugin load.
 
 ----
 
-Edit the file :file:`peek_plugin_tutorial/_private/client/ClientEntryHook.py`
+Edit the file :file:`peek_plugin_tutorial/_private/field-service/FieldServiceEntryHook.py`
 
 #.  Add the following import up the top of the file ::
 
@@ -324,23 +324,61 @@ When you're finished, You should have a file like this: ::
                 logger.debug("Loaded")
 
 
-Edit File :file:`AgentEntryHook.py`
+.. _learn_plugin_development_add_storage_edit_office_entry_hook:
+
+Edit File :file:`OfficeServiceEntryHook.py`
+``````````````````````````````````````````
+
+This step applies if you're plugin is using the Office Service.
+
+The :file:`OfficeServiceEntryHook.py` file needs to be updated to do the following:
+
+*   Ensure that the storage service Tables are loaded on plugin load.
+
+----
+
+Edit the file :file:`peek_plugin_tutorial/_private/office-service/OfficeServiceHook.py`
+
+#.  Add the following import up the top of the file ::
+
+        from peek_plugin_tutorial._private.storage.DeclarativeBase import loadStorageTuples
+
+#.  Add the following method from the **load(self):** method ::
+
+        def load(self) -> None:
+            loadStorageTuples() # <-- Add this line
+            logger.debug("Loaded")
+
+When you're finished, You should have a file like this: ::
+
+        # Added imports, step 1
+        from peek_plugin_tutorial._private.storage.DeclarativeBase import loadStorageTuples
+
+        ...
+
+            def load(self) -> None:
+                # Added call to loadStorageTables, step 2
+                loadStorageTuples()
+                logger.debug("Loaded")
+
+
+Edit File :file:`AgentServiceEntryHook.py`
 ```````````````````````````````````
 
-This step applies if you're plugin is using the Agent service.
+This step applies if you're plugin is using the Agent Service.
 
-Edit file :file:`peek_plugin_tutorial/_private/agent/AgentEntryHook.py` file,
+Edit file :file:`peek_plugin_tutorial/_private/agent-service/AgentServiceEntryHook.py` file,
 apply the same edits from step
-:ref:`learn_plugin_development_add_storage_edit_client_entry_hook`.
+:ref:`learn_plugin_development_add_storage_edit_field_entry_hook`.
 
-Edit File :file:`WorkerEntryHook.py`
-````````````````````````````````````
+Edit File :file:`WorkerServiceEntryHook.py`
+```````````````````````````````````````````
 
 This step applies if you're plugin is using the Worker service.
 
-Edit file :file:`peek_plugin_tutorial/_private/worker/WorkerEntryHook.py` file,
+Edit file :file:`peek_plugin_tutorial/_private/worker-service/WorkerServiceEntryHook.py` file,
 apply the same edits from step
-:ref:`learn_plugin_development_add_storage_edit_client_entry_hook`.
+:ref:`learn_plugin_development_add_storage_edit_field_entry_hook`.
 
 
 Add File :file:`alembic.ini`
@@ -368,7 +406,7 @@ the following contents, make sure to update the **sqlalchemy.url** line.
 
 ----
 
-Finally, run the peek server, it should load with out error.
+Finally, run the peek logic service, it should load with out error.
 
 The hard parts done, adding the tables is much easier.
 
@@ -391,7 +429,7 @@ Most of this is straight from the
 
 ----
 
-Create the file :file:`peek_plugin_tutorial/_private/storage/StringIntTuple.py`
+Create the file :file:`peek_plugin_tutorial/_private/storage-service/StringIntTuple.py`
 and populate it with the following contents.
 
 
@@ -402,7 +440,7 @@ and populate it with the following contents.
         from vortex.Tuple import Tuple, addTupleType
 
         from peek_plugin_tutorial._private.PluginNames import tutorialTuplePrefix
-        from peek_plugin_tutorial._private.storage.DeclarativeBase import DeclarativeBase
+        from peek_plugin_tutorial._private.storage-service.DeclarativeBase import DeclarativeBase
 
 
         @addTupleType
@@ -511,7 +549,7 @@ to :ref:`learn_plugin_development_add_storage_add_string_int_table`.
 Add File :file:`Setting.py`
 ```````````````````````````
 
-Download the :file:`Setting.py` file to :file:`peek_plugin_tutorial/_private/storage`
+Download the :file:`Setting.py` file to :file:`peek_plugin_tutorial/_private/storage-service`
 from `<https://bitbucket.org/synerty/peek-plugin-noop/raw/master/peek_plugin_noop/_private/storage/Setting.py>`_
 
 ----
@@ -551,13 +589,13 @@ Here is some example code for using the settings table.
 
 ----
 
-Edit the file :file:`peek_plugin_tutorial/_private/server/ServerEntryHook.py`
+Edit the file :file:`peek_plugin_tutorial/_private/logic-service/LogicServiceEntryHook.py`
 
 Add the following import up the top of the file:
 
 ::
 
-    from peek_plugin_enmac_events._private.storage.Setting import globalSetting, PROPERTY1
+    from peek_plugin_enmac_events._private.storage-service.Setting import globalSetting, PROPERTY1
 
 
 ----

@@ -97,7 +97,7 @@ The following instructions are required to grant the ".\peek" user permissions t
 services (Grant "Login as Service").
 
 #.  Run "services.msc"
-#.  Find the peek server service
+#.  Find the peek logic service
 #.  Open the properties of the service
 #.  Goto the LogOn tab
 #.  Enter the password twice and hit OK

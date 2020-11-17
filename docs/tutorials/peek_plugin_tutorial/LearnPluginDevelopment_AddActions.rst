@@ -29,11 +29,11 @@ The Observable then ensures that all users watching the data are updated immedia
 Keeping all users working with the latest data as TupleActions processed.
 
 This helps avoid issues,
-such as one users update overwriting another users update.
+such as one user's update overwriting another user's update.
 These issues you will get if you're using the VortexJS TupleLoader for many users.
 
 There are two Angular services that provide support for pushing Tuple Actions to the
-Client service.
+Field service.
 
 #.  :code:`TupleActionPushService`, for online only actions.
 
@@ -42,31 +42,31 @@ Client service.
 
 Both these services have the same functional interface, :code:`pushAction()`.
 
-.. image:: LearnAction_DataFlow.png
+.. image:: LearnAction-DataFlow.png
 
-On the Server service, the :code:`TupleActionProcessorProxy` class receives
+On the Logic service, the :code:`TupleActionProcessorProxy` class receives
 all the TupleActions, delegates
 processing to a :code:`TupleActionProcessorDelegateABC` class. A delegate can be
 registered to handle just one type of action, and/or a default delegate can be
 registered to catch all.
 
 Like the Observable, there is a :code:`TupleActionProcessorProxy` needed in the
-Client service that passes actions onto the Server service for processing.
+field service that passes actions onto the Logic service for processing.
 
-Unlike the Observable, the TupleAction Client proxy passes every action onto the
-Server service, waits for a response from the Server service then sends that back to
-the Mobile or Desktop device.
+Unlike the Observable, the TupleAction Field or Office proxy passes every action onto the
+Logic service, waits for a response from the Logic service then sends that back to
+the Field or Office device.
 
 Actions require responses. Callers of the :code:`TupleActionPushService` will receive a
 promise which resolve regardless of if the push timed out or failed.
 
 In the case of :code:`TupleActionPushOfflineService`, a promise is returned and resolved
-on success of the commit to the database in the Desktop/Mobile device.
+on success of the commit to the database in the Field/Office device.
 
 The :code:`TupleActionPushOfflineService` will continually retry until it receives
-either a success or failure response from the Client service.
+either a success or failure response from the Field service.
 
-.. note:: The Mobile/Desktop devices don't and can't talk directly to the Server service.
+.. note:: The Field/Office devices don't and can't talk directly to the Logic service.
 
 
 .. image:: LearnAction_Response.png
@@ -90,13 +90,13 @@ In this document, our plugin will provide the following actions to the user:
 #.  Increase or decrease an Int
 #.  Toggle capitals of a string
 
-The action will be processed by the Server which will update the table created in
+The action will be processed by the Logic Service which will update the table created in
 :ref:`learn_plugin_development_add_storage_add_string_int_table`.
 
 This is the order:
 
 #.  Add the Action scaffolding for the project.
-#.  Add the Server side Action Processor
+#.  Add the Logic side Action Processor
 #.  Alter the Observable tutorial UI to incorporate buttons and send the actions.
 
 Add Python Tuples
@@ -230,8 +230,8 @@ Append the lines: ::
         export {AddIntValueActionTuple} from "./tuples/AddIntValueActionTuple";
 
 
-Server Service Setup
---------------------
+Logic Service Setup
+-------------------
 
 Add Package :file:`controller`
 ``````````````````````````````
@@ -244,11 +244,11 @@ the plugin, like a brain controlling limbs.
 
 ----
 
-Create the :file:`peek_plugin_tutorial/_private/server/controller` package, with
+Create the :file:`peek_plugin_tutorial/_private/logic-service/controller` package, with
 the commands ::
 
-        mkdir peek_plugin_tutorial/_private/server/controller
-        touch peek_plugin_tutorial/_private/server/controller/__init__.py
+        mkdir peek_plugin_tutorial/_private/logic-service/controller
+        touch peek_plugin_tutorial/_private/logic-service/controller/__init__.py
 
 
 Add File :file:`MainController.py`
@@ -262,7 +262,7 @@ In this example we have everything in MainController.
 ----
 
 Create the file
-:file:`peek_plugin_tutorial/_private/server/controller/MainController.py`
+:file:`peek_plugin_tutorial/_private/logic-service/controller/MainController.py`
 and populate it with the following contents.
 
 ::
@@ -366,7 +366,7 @@ plugin and calls the relevant :code:`TupleActionProcessorDelegateABC`.
 ----
 
 Create the file
-:file:`peek_plugin_tutorial/_private/server/TupleActionProcessor.py`
+:file:`peek_plugin_tutorial/_private/logic-service/TupleActionProcessor.py`
 and populate it with the following contents.
 
 ::
@@ -386,15 +386,15 @@ and populate it with the following contents.
             return processor
 
 
-Edit File :file:`ServerEntryHook.py`
-````````````````````````````````````
+Edit File :file:`LogicServiceEntryHook.py`
+``````````````````````````````````````````
 
-We need to update :file:`ServerEntryHook.py`, it will initialise the
+We need to update :file:`LogicServiceEntryHook.py`, it will initialise the
  :code:`MainController` and :code:`TupleActionProcessor` objects.
 
 ----
 
-Edit the file :file:`peek_plugin_tutorial/_private/server/ServerEntryHook.py`:
+Edit the file :file:`peek_plugin_tutorial/_private/logic-service/LogicServicEntryHook.py`:
 
 #.  Add these imports at the top of the file with the other imports: ::
 
@@ -414,22 +414,22 @@ Edit the file :file:`peek_plugin_tutorial/_private/server/ServerEntryHook.py`:
 
 ----
 
-The Action Processor for the Server service is setup now.
+The Action Processor for the Logic Service service is setup now.
 
-Client Service Setup
---------------------
+Field Service Setup
+-------------------
 
 Add File :file:`DeviceTupleProcessorActionProxy.py`
 ```````````````````````````````````````````````````
 
-The :file:`DeviceTupleProcessorActionProxy.py` creates the Tuple Action Processoe Proxy.
+The :file:`DeviceTupleProcessorActionProxy.py` creates the Tuple Action Processor Proxy.
 This class is responsible for proxying action tuple data between the devices
-and the Server.
+and the Logic Service.
 
 ----
 
 Create the file
-:file:`peek_plugin_tutorial/_private/client/DeviceTupleProcessorActionProxy.py`
+:file:`peek_plugin_tutorial/_private/field-service/DeviceTupleProcessorActionProxy.py`
 and populate it with the following contents.
 
 ::
@@ -447,15 +447,15 @@ and populate it with the following contents.
                         additionalFilt=tutorialFilt)
 
 
-Edit File :file:`ClientEntryHook.py`
+Edit File :file:`FieldServiceEntryHook.py`
 ````````````````````````````````````
 
-We need to update :file:`ClientEntryHook.py`, it will initialise the tuple action proxy
+We need to update :file:`FieldServiceEntryHook.py`, it will initialise the tuple action proxy
 object when the Plugin is started.
 
 ----
 
-Edit the file :file:`peek_plugin_tutorial/_private/client/ClientEntryHook.py`:
+Edit the file :file:`peek_plugin_tutorial/_private/field-service/FieldServiceEntryHook.py`:
 
 #.  Add this import at the top of the file with the other imports: ::
 
@@ -466,10 +466,62 @@ Edit the file :file:`peek_plugin_tutorial/_private/client/ClientEntryHook.py`:
         self._loadedObjects.append(makeTupleActionProcessorProxy())
 
 
-Mobile Service Setup
---------------------
 
-Now we need to edit the Angular module in the mobile-app and add the providers:
+Office Service Setup
+-------------------
+
+Add File :file:`DeviceTupleProcessorActionProxy.py`
+```````````````````````````````````````````````````
+
+The :file:`DeviceTupleProcessorActionProxy.py` creates the Tuple Action Processor Proxy.
+This class is responsible for proxying action tuple data between the devices
+and the Logic Service.
+
+----
+
+Create the file
+:file:`peek_plugin_tutorial/_private/office-service/DeviceTupleProcessorActionProxy.py`
+and populate it with the following contents.
+
+::
+
+        from peek_plugin_base.PeekVortexUtil import peekServerName
+        from peek_plugin_tutorial._private.PluginNames import tutorialFilt
+        from peek_plugin_tutorial._private.PluginNames import tutorialActionProcessorName
+        from vortex.handler.TupleActionProcessorProxy import TupleActionProcessorProxy
+
+
+        def makeTupleActionProcessorProxy():
+            return TupleActionProcessorProxy(
+                        tupleActionProcessorName=tutorialActionProcessorName,
+                        proxyToVortexName=peekServerName,
+                        additionalFilt=tutorialFilt)
+
+
+Edit File :file:`OfficeServiceEntryHook.py`
+````````````````````````````````````
+
+We need to update :file:`OfficeServiceEntryHook.py`, it will initialise the tuple action proxy
+object when the Plugin is started.
+
+----
+
+Edit the file :file:`peek_plugin_tutorial/_private/office-service/FieldServiceEntryHook.py`:
+
+#.  Add this import at the top of the file with the other imports: ::
+
+        from .DeviceTupleProcessorActionProxy import makeTupleActionProcessorProxy
+
+#.  Add this line after the docstring in the :code:`start()` method: ::
+
+        self._loadedObjects.append(makeTupleActionProcessorProxy())
+
+
+
+Field App Setup
+---------------
+
+Now we need to edit the Angular module in the field-app and add the providers:
 
 Edit File :file:`tutorial.module.ts`
 ````````````````````````````````````
@@ -480,7 +532,7 @@ add the provider entry for the TupleAction service.
 ----
 
 Edit the file
-:file:`peek_plugin_tutorial/_private/mobile-app/tutorial.module.ts`:
+:file:`peek_plugin_tutorial/_private/field-app/tutorial.module.ts`:
 
 #.  Add the following imports: ::
 
@@ -571,7 +623,7 @@ frontend.
 ----
 
 edit the file
-:file:`peek_plugin_tutorial/_private/mobile-app/string-int/string-int.component.ts`
+:file:`peek_plugin_tutorial/_private/field-app/string-int/string-int.component.ts`
 
 #.  Add the following imports:
 
@@ -703,7 +755,7 @@ that will change initiate the created tuple actions.
 ----
 
 Edit the file
-:file:`peek_plugin_tutorial/_private/mobile-app/string-int/string-int.component.mweb.html`
+:file:`peek_plugin_tutorial/_private/field-app/string-int/string-int.component.mweb.html`
 and populate it with the following contents:
 
 ::
@@ -742,7 +794,7 @@ and populate it with the following contents:
 Testing
 -------
 
-#.  Open mobile Peek web app
+#.  Open Peek Field web app
 
 #.  Tap the Tutorial app icon
 
@@ -753,7 +805,7 @@ Testing
 #.  Select the "Toggle Caps" button
 
 #.  If successful an alert will appear stating "success".  If you receive an error, go
-    back through the "Add Actions" instructions.  Restart the server service and retry
+    back through the "Add Actions" instructions.  Restart the logic service and retry
     step five
 
 #.  You will see the data update instantly
@@ -770,13 +822,13 @@ the offline observable is a drop in replacement.
 
 When using the offline observable, it will:
 
-#.  Queue a request to observe the data, sending it to the client
+#.  Queue a request to observe the data, sending it to the field service
 
-#.  Query the SQL db in the browser/mobile device, and return the data for the observer.
+#.  Query the SQL db in the browser/field device, and return the data for the observer.
     This provides instant data for the user.
 
-When new data is sent to the the observer (Mobile/Desktop service)
-from the observable (Client service), the offline observer does two things:
+When new data is sent to the the observer (Field/Office service)
+from the observable (Field Service), the offline observer does two things:
 
 #.  Notifies the subscribers like normal
 
@@ -794,7 +846,7 @@ Switching to use the offline observer requires two edits to
 ----
 
 Edit file
-:file:`peek_plugin_tutorial/_private/mobile-app/string-int/string-int.component.ts`.
+:file:`peek_plugin_tutorial/_private/field-app/string-int/string-int.component.ts`.
 
 Add the import for the TupleDataOfflineObserverService:
 
@@ -816,5 +868,5 @@ To ::
 ----
 
 That's it. Now the String Int data will load on the device, even when the Vortex between
-the device and the Client service is offline.
+the device and the field service is offline.
 

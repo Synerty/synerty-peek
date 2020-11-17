@@ -1,48 +1,48 @@
-.. _learn_plugin_development_add_agent:
+.. _learn_plugin_development_add_office_service:
 
-=================
-Add Agent Service
-=================
+==================
+Add Office Service
+==================
 
-This document is a stripped version of :ref:`learn_plugin_development_add_server`.
+This document is a stripped version of :ref:`learn_plugin_development_add_logic_service`.
 
-Agent File Structure
---------------------
+Office Service File Structure
+-----------------------------
 
-Add Package :file:`_private/agent`
-``````````````````````````````````
+Add Package :file:`_private/office-service`
+````````````````````````````````````````
 
-Create directory :file:`peek_plugin_tutorial/_private/agent`
+Create directory :file:`peek_plugin_tutorial/_private/office-service`
 
-Create an empty package file in the agent directory,
-:file:`peek_plugin_tutorial/_private/agent/__init__.py`
+Create an empty package file in the office-service directory,
+:file:`peek_plugin_tutorial/_private/office-service/__init__.py`
 
 Commands: ::
 
-        mkdir peek_plugin_tutorial/_private/agent
-        touch peek_plugin_tutorial/_private/agent/__init__.py
+        mkdir peek_plugin_tutorial/_private/office-service
+        touch peek_plugin_tutorial/_private/office-service/__init__.py
 
 
-Add File :file:`AgentEntryHook.py`
-``````````````````````````````````
+Add File :file:`OfficeServiceEntryHook.py`
+```````````````````````````````````
 
-Create the file :file:`peek_plugin_tutorial/_private/agent/AgentEntryHook.py`
+Create the file :file:`peek_plugin_tutorial/_private/office-service/OfficeServiceEntryHook.py`
 and populate it with the following contents.
 
 ::
 
         import logging
 
-        from peek_plugin_base.agent.PluginAgentEntryHookABC import PluginAgentEntryHookABC
+        from peek_plugin_base.office-service.PluginOfficeServiceEntryHookABC import PluginOfficeServiceEntryHookABC
 
         logger = logging.getLogger(__name__)
 
 
-        class AgentEntryHook(PluginAgentEntryHookABC):
+        class OfficeServiceEntryHook(PluginOfficeServiceEntryHookABC):
             def __init__(self, *args, **kwargs):
                 """" Constructor """
                 # Call the base classes constructor
-                PluginAgentEntryHookABC.__init__(self, *args, **kwargs)
+                PluginOfficeServiceEntryHookABC.__init__(self, *args, **kwargs)
 
                 #: Loaded Objects, This is a list of all objects created when we start
                 self._loadedObjects = []
@@ -92,13 +92,13 @@ Edit :file:`peek_plugin_tutorial/__init__.py`
 
 Edit the file :file:`peek_plugin_tutorial/__init__.py`, and add the following: ::
 
-        from peek_plugin_base.agent.PluginAgentEntryHookABC import PluginAgentEntryHookABC
+        from peek_plugin_base.office-service.PluginOfficeServiceEntryHookABC import PluginOfficeServiceEntryHookABC
         from typing import Type
 
 
-        def peekAgentEntryHook() -> Type[PluginAgentEntryHookABC]:
-            from ._private.agent.AgentEntryHook import AgentEntryHook
-            return AgentEntryHook
+        def peekOfficeServiceEntryHook() -> Type[PluginOfficeServiceEntryHookABC]:
+            from ._private.office-service.OfficeServiceEntryHook import OfficeServiceEntryHook
+            return OfficeServiceEntryHook
 
 
 Edit :file:`plugin_package.json`
@@ -106,15 +106,15 @@ Edit :file:`plugin_package.json`
 
 Edit the file :file:`peek_plugin_tutorial/plugin_package.json` :
 
-#.  Add **"agent"** to the requiresServices section so it looks like ::
+#.  Add **"office-service"** to the requiresServices section so it looks like ::
 
         "requiresServices": [
-            "agent"
+            "office-service",
         ]
 
-#.  Add the **agent** section after **requiresServices** section: ::
+#.  Add the **office-service** section after **requiresServices** section: ::
 
-        "agent": {
+        "office-service": {
         }
 
 #.  Ensure your JSON is still valid (Your IDE may help here)
@@ -126,28 +126,28 @@ Here is an example ::
                 ...
             },
             "requiresServices": [
-                "agent"
+                "office-service",
             ],
-            "agent": {
+            "office-service": {
             }
         }
 
 
 ----
 
-The plugin should now be ready for the agent to load.
+The plugin should now be ready for the office to load.
 
-Running on the Agent Service
-----------------------------
+Running on the Office Service
+-----------------------------
 
-Edit :file:`~/peek-agent-service.home/config.json`:
+Edit :file:`~/peek-office-service.home/config.json`:
 
 #.  Ensure **logging.level** is set to **"DEBUG"**
 #.  Add **"peek_plugin_tutorial"** to the **plugin.enabled** array
 
 .. note:: It would be helpful if this is the only plugin enabled at this point.
 
-It should somthing like this: ::
+It should something like this: ::
 
         {
             ...
@@ -165,16 +165,16 @@ It should somthing like this: ::
         }
 
 
-.. note:: This file is created in :ref:`administer_peek_platform`.  Running the Agent
+.. note:: This file is created in :ref:`administer_peek_platform`.  Running the Office
     Service will also create the file.
 
 ----
 
-You can now run the peek agent, you should see your plugin load. ::
+You can now run the peek office, you should see your plugin load. ::
 
-        peek@_peek:~$ run_peek_agent_service
+        peek@_peek:~$ run_peek_office_service
         ...
-        DEBUG peek_plugin_tutorial._private.agent.AgentEntryHook:Loaded
-        DEBUG peek_plugin_tutorial._private.agent.AgentEntryHook:Started
+        DEBUG peek_plugin_tutorial._private.office.OfficeEntryHook:Loaded
+        DEBUG peek_plugin_tutorial._private.office.OfficeEntryHook:Started
         ...
 

@@ -1,30 +1,30 @@
-.. _learn_plugin_development_add_mobile:
+.. _learn_plugin_development_add_field_app:
 
-==================
-Add Mobile Service
-==================
+=============
+Add Field App
+=============
 
-The mobile service is for the users. It's the interface designed for mobile devices.
+The field app service is for the users. It's the interface designed for mobile devices.
 
-The Mobile service is known as the "frontend" in web terminology.
-The backend for the Mobile service is the Client service.
+The field app service is known as the "frontend" in web terminology.
+The backend for the field app is the field service.
 
-The Peek Mobile Service is built with an Angular `web build <https://angular.io/docs/ts/latest/>`_.
+The Peek Field Service is built with an Angular `web build <https://angular.io/docs/ts/latest/>`_.
 
-In this document, we'll add the start of both the mobile and web builds for the plugin.
+In this document, we'll add the start of both the field and office builds for the plugin.
 
 We only scratch the surface of using Angular, that`s outside the scope of this guide.
 
 See :ref:`developing_with_the_frontends` to learn more about how Peek
 pieces together the frontend code from the various plugins.
 
-Mobile File Structure
----------------------
+Field App File Structure
+------------------------
 
-Add Directory :file:`mobile-app`
-````````````````````````````````
+Add Directory :file:`field-app`
+```````````````````````````````
 
-The :file:`mobile-app` directory will contain the plugins the mobile Angular application requires.
+The :file:`field-app` directory will contain the plugins the field Angular application requires.
 
 Angular "Lazy Loads" this part of the plugin, meaning it only loads it when the user
 navigates to the page, and unloads it when it's finished.
@@ -34,7 +34,7 @@ interface should be lazy loaded.
 
 ----
 
-Create directory :file:`peek_plugin_tutorial/_private/mobile-app`
+Create directory :file:`peek_plugin_tutorial/_private/field-app`
 
 Add File :file:`tutorial.component.mweb.html`
 `````````````````````````````````````````````
@@ -53,7 +53,7 @@ For more information about Angular directives, See:
 ----
 
 Create the file
-:file:`peek_plugin_tutorial/_private/mobile-app/tutorial.component.mweb.html`
+:file:`peek_plugin_tutorial/_private/field-app/tutorial.component.mweb.html`
 and populate it with the following contents.
 
 ::
@@ -61,13 +61,13 @@ and populate it with the following contents.
         <div class="container">
             <h1 class="text-center">Tutorial Plugin</h1>
             <p>Angular2 Lazy Loaded Module</p>
-            <p>This is the root of the mobile app for the Tutorial plugin</p>
+            <p>This is the root of the field app for the Tutorial plugin</p>
         </div>
 
 Add File :file:`tutorial.component.ts`
 ``````````````````````````````````````
 
-The :file:`tutorial.component.ts` is the Angular Component for the mobile page.
+The :file:`tutorial.component.ts` is the Angular Component for the field app page.
 It's loaded by the default route defined in :file:`tutorial.module.ts`.
 
 .. note::   The one Angular component drives both the Capacitor and Web app views.
@@ -75,7 +75,7 @@ It's loaded by the default route defined in :file:`tutorial.module.ts`.
 
 ----
 
-Create the file :file:`peek_plugin_tutorial/_private/mobile-app/tutorial.component.ts`
+Create the file :file:`peek_plugin_tutorial/_private/field-app/tutorial.component.ts`
 and populate it with the following contents.
 
 ::
@@ -109,7 +109,7 @@ This is standard Angular.
 
 ----
 
-Create the file :file:`peek_plugin_tutorial/_private/mobile-app/tutorial.module.ts`
+Create the file :file:`peek_plugin_tutorial/_private/field-app/tutorial.module.ts`
 and populate it with the following contents.
 
 ::
@@ -156,7 +156,7 @@ and populate it with the following contents.
 Download Icon :file:`icon.png`
 ``````````````````````````````
 
-The Peek mobile interface has a home screen with apps on it, this icon will be the
+The Peek field interface has a home screen with apps on it, this icon will be the
 tutorial plugins app icon.
 
 .. image:: TutorialExampleIcon.png
@@ -164,30 +164,30 @@ tutorial plugins app icon.
 
 ----
 
-Create directory :file:`peek_plugin_tutorial/_private/mobile-assets`
+Create directory :file:`peek_plugin_tutorial/_private/field-app-assets`
 
 ----
 
 Download this plugin app icon
 `TutorialExampleIcon.png <http://synerty-peek.readthedocs.io/en/latest/_images/TutorialExampleIcon.png>`_
-to :file:`peek_plugin_tutorial/_private/mobile-assets/icon.png`
+to :file:`peek_plugin_tutorial/_private/field-app-assets/icon.png`
 
 
 Edit File :file:`plugin_package.json`
 `````````````````````````````````````
 
 Finally, Edit the file :file:`peek_plugin_tutorial/plugin_package.json` to tell the
-platform that we want to use the mobile service:
+platform that we want to use the field service:
 
-#.  Add **"field"** to the requiresServices section so it looks like ::
+#.  Add **"field-app"** to the requiresServices section so it looks like ::
 
         "requiresServices": [
-            "mobile"
+            "field-app"
         ]
 
-#.  Add the **field** section after **requiresServices** section: ::
+#.  Add the **field-app** section after **requiresServices** section: ::
 
-        "field": {
+        "field-app": {
             "showHomeLink": true,
             "appDir": "_private/field-app",
             "appModule": "tutorial.module#TutorialModule",
@@ -204,7 +204,7 @@ Here is an example ::
             ...
             "requiresServices": [
                 ...
-                "field"
+                "field-app"
             ],
             ...
             "field": {
@@ -216,22 +216,22 @@ Here is an example ::
             }
         }
 
-Running the Mobile Web App
---------------------------
+Running the Field Web App
+-------------------------
 
-The Peek Client service provides the web service that serves the field angular
+The Peek Field Service provides the web service that serves the field angular
 web app.
 
-The Peek Client service takes care of combining all the plugin files into the build
-directories in the peek_field_app package. We will need to restart Peek Client for it to
-include our plugin in the mobile UI.
+The Peek Field Service takes care of combining all the plugin files into the build
+directories in the peek_field_app package. We will need to restart Peek Field Service for it to
+include our plugin in the Field App UI.
 
 See :ref:`developing_with_the_frontends` for more details.
 
-Check File :file:`~/peek-office-service.home/config.json`
-`````````````````````````````````````````````````
+Check File :file:`~/peek-field-service.home/config.json`
+````````````````````````````````````````````````````````
 
-Check the :file:`~/peek-office-service.home/config.json` file:
+Check the :file:`~/peek-field-service.home/config.json` file:
 
 #.  Ensure **frontend.webBuildEnabled** is set to **true**, with no quotes
 #.  Ensure **frontend.webBuildPrepareEnabled** is set to **true**, with no quotes
@@ -253,31 +253,31 @@ Example: ::
 
 
 Run :file:`run_peek_office_service`
-```````````````````````````
+```````````````````````````````````
 
-You can now run the peek client, you should see your plugin load. ::
+You can now run the peek office service, you should see your plugin load. ::
 
         peek@_peek:~$ run_peek_office_service
         ...
         INFO peek_platform.frontend.WebBuilder:Rebuilding frontend distribution
         ...
-        INFO txhttputil.site.SiteUtil:Peek Client is alive and listening on http://10.211.55.14:8000
+        INFO txhttputil.site.SiteUtil:Peek Office App is alive and listening on http://10.211.55.14:8000
         ...
 
 ----
 
 Now bring up a web browser and navigate to
 `http://localhost:8000 <http://localhost:8000>`_ or the IP mentioned in the output of
-:command:`run_peek_office_service`.
+:command:`run_peek_field_service`.
 
 If you see this, then congratulations, you've just enabled your plugin to use the
-Peek Platform, Mobile Service Web App.
+Peek Platform, Field Service Web App.
 
-.. image:: LearnAddMobileWebHomeScreen.png
+.. image:: LearnAddFieldWebHomeScreen.png
 
 ----
 
 Click on the Tutorial app, you should then see your plugins default route component.
 
-.. image:: LearnAddMobileWebPluginScreen.png
+.. image:: LearnAddFieldWebPluginScreen.png
 

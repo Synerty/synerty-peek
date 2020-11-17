@@ -12,7 +12,7 @@ settings from the tables created in
 :ref:`learn_plugin_development_add_storage_add_string_int_table` and tuples created in
 :ref:`learn_plugin_development_add_tuples`.
 
-The Admin and Server services talk to each other via a Vortex, this is the name
+The Admin and Logic services talk to each other via a Vortex, this is the name
 given to the transport layer of VortexJS and VortexPY.
 
 A plugin developer could choose to use standard HTTP requests with JSON, however,
@@ -20,7 +20,7 @@ the Vortex maintains a persistent connection unless it's shutdown.
 
 .. image:: LearnAddTupleLoader_PluginOverview.png
 
-This document modifies both the server and admin parts of the plugin.
+This document modifies both the logic and admin parts of the plugin.
 
 Advantages
 ``````````
@@ -31,8 +31,8 @@ Disadvantages
 
 #.  Not suitable for multiple users.
 
-Server Service Scaffold
------------------------
+Peek Logic Service Scaffold
+---------------------------
 
 This section sets up the non specific files needed when we add the Tuple Load Handlers.
 
@@ -44,11 +44,11 @@ data sources to the Admin web app.
 
 ----
 
-Create the :file:`peek_plugin_tutorial/_private/server/admin_backend` package, with
+Create the :file:`peek_plugin_tutorial/_private/logic-service/admin_backend` package, with
 the commands ::
 
-        mkdir peek_plugin_tutorial/_private/server/admin_backend
-        touch peek_plugin_tutorial/_private/server/admin_backend/__init__.py
+        mkdir peek_plugin_tutorial/_private/logic-service/admin_backend
+        touch peek_plugin_tutorial/_private/logic-service/admin_backend/__init__.py
 
 
 Edit File :file:`admin_backend/__init__.py`
@@ -64,7 +64,7 @@ We can yield more items after the first one, the calling will get an iterable re
 
 ----
 
-Edit file :file:`peek_plugin_tutorial/_private/server/admin_backend/__init__.py`
+Edit file :file:`peek_plugin_tutorial/_private/logic-service/admin_backend/__init__.py`
 Add the following:
 
 ::
@@ -74,11 +74,11 @@ Add the following:
             pass
 
 
-Edit File :file:`ServerEntryHook.py`
+Edit File :file:`LogicServiceEntryHook.py`
 ````````````````````````````````````
 
-Now, we need to create and destroy our :code:`admin_backend` handlers when the Server
-service starts the plugin.
+Now, we need to create and destroy our :code:`admin_backend` handlers when the Logic
+Service starts the plugin.
 
 If you look at :code:`self._loadedObjects`, you'll see that the :code:`stop()` method
 shuts down all objects we add to this array. So adding to this array serves two purposes
@@ -91,7 +91,7 @@ shuts down all objects we add to this array. So adding to this array serves two 
 
 ----
 
-Edit file :file:`peek_plugin_tutorial/_private/server/ServerEntryHook.py` :
+Edit file :file:`peek_plugin_tutorial/_private/logic-service/LogicServiceEntryHook.py` :
 
 #.  Add this import up the top of the file ::
 
@@ -123,8 +123,8 @@ Test Python Services
 The backend changes are complete, please run :command:`run_peek_logic_service` to ensure that
 there are no problems here.
 
-StringInt Server Service
-------------------------
+StringInt Logic Service
+-----------------------
 
 Add the handler that will listen to the StringInt tuple loader.
 
@@ -134,7 +134,7 @@ Add File :file:`StringIntTableHandler.py`
 The :file:`StringIntTableHandler.py` listens for payload from the Admin service (frontend)
 These payloads are delivered by the vortex.
 
-When the :code:`OrmCrudHandler` class in the Server services
+When the :code:`OrmCrudHandler` class in the Logic services
 receives the payloads from the :code:`TupleLoader` in the Admin frontend,
 it creates, reads, updates or deletes (CRUD) data in the the database.
 
@@ -194,7 +194,7 @@ We can yield more items after the first one, the calling will get an iterable re
 
 ----
 
-Edit file :file:`peek_plugin_tutorial/_private/server/admin_backend/__init__.py`
+Edit file :file:`peek_plugin_tutorial/_private/logic-service/admin_backend/__init__.py`
 
 #. Add the following python import to the top fo the file ::
 
@@ -454,13 +454,13 @@ Edit the :file:`peek_plugin_tutorial/_private/admin-app/tutorial.module.ts`:
 Test StringInt Tuple Loader
 ---------------------------
 
-Restart the Server service, so that it rebuilds the Admin Angular Web app.
+Restart the Logic Service, so that it rebuilds the Admin Angular Web app.
 
 Navigate your browser to the admin page, select plugins, and then select the
 "Edit String Int" tab.
 
-Settings Server Service
------------------------
+Settings Logic Service
+----------------------
 
 Add the handler that will listen to the StringInt tuple loader.
 
@@ -517,7 +517,7 @@ this will start them when the plugin loads.
 
 ----
 
-Edit file :file:`peek_plugin_tutorial/_private/server/admin_backend/__init__.py`
+Edit file :file:`peek_plugin_tutorial/_private/logic-service/admin_backend/__init__.py`
 
 #. Add the following python import to the top fo the file ::
 
@@ -735,7 +735,7 @@ Edit the :file:`peek_plugin_tutorial/_private/admin-app/tutorial.module.ts`:
 Test Settings Tuple Loader
 --------------------------
 
-Restart the Server service, so that it rebuilds the Admin Angular Web app.
+Restart the Logic Service, so that it rebuilds the Admin Angular Web app.
 
 Navigate your browser to the admin page, select plugins, and then select the
 "Edit Settings" tab.

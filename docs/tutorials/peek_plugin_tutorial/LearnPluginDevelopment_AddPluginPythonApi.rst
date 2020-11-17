@@ -23,9 +23,9 @@ Same Service APIs Only
 
 Plugins can only use the APIs of other plugins on the same service.
 
-For example, the code from :code:`peek_plugin_one` that runs on the Server service
+For example, the code from :code:`peek_plugin_one` that runs on the Peek Logic Service
 can only use the API published by the code in :code:`peek_plugin_two` that runs on the
-Server service.
+Logic service.
 
 What are APIs
 -------------
@@ -41,18 +41,18 @@ directly on it.
 The ABC (Abstract Base Class) is purely for documentation purposes,
 and allows the real implementation to be hidden in the :code:`_private` package.
 
-In this example, we're going to expose an API for the Server service in
+In this example, we're going to expose an API for the Logic service in
 the :code:`peek_plugin_tutorial` plugin.
 
 We'll then get the API for the :code:`peek_plugin_inbox` plugin and create
 a task.
 
-.. image:: LearnPythonPluginApi_InboxTaskExample.png
+.. image:: LearnAddPluginPythonApi_AdminDashboardPluginActiveTaskDiagram.png
 
-Setup Server API
-----------------
+Setup Logic API
+---------------
 
-In this section, we define an API on the Peek Server service for the
+In this section, we define an API on the Peek Logic Service for the
 :code:`peek_plugin_tutorial` plugin.
 
 Add File :file:`DoSomethingTuple.py`
@@ -85,22 +85,22 @@ and populate it with the following contents.
 
 
 
-Add Package :file:`server`
-``````````````````````````
+Add Package :file:`logic-service`
+`````````````````````````````````
 
 Have you ever wondered why everything so far has been under the :file:`_private` package?
 It's about to make more sense.
 
-The :file:`peek_plugin_tutorial.server` python package will contain the
+The :file:`peek_plugin_tutorial.logic-service` python package will contain the
 exposed API abstract classes.
 
 ----
 
-Create the :file:`peek_plugin_tutorial/server` package, with
+Create the :file:`peek_plugin_tutorial/logic-service` package, with
 the commands ::
 
-        mkdir peek_plugin_tutorial/server
-        touch peek_plugin_tutorial/server/__init__.py
+        mkdir peek_plugin_tutorial/logic-service
+        touch peek_plugin_tutorial/logic-service/__init__.py
 
 
 Add File :file:`TutorialApiABC.py`
@@ -112,7 +112,7 @@ be detailed docstrings. It doesn't contain any implementation.
 ----
 
 Create the file
-:file:`peek_plugin_tutorial/server/TutorialApiABC.py`
+:file:`peek_plugin_tutorial/logic-service/TutorialApiABC.py`
 and populate it with the following contents.
 
 ::
@@ -145,13 +145,13 @@ will be passed to other APIs when they ask for it.
 ----
 
 Create the file
-:file:`peek_plugin_tutorial/_private/server/TutorialApi.py`
+:file:`peek_plugin_tutorial/_private/logic-service/TutorialApi.py`
 and populate it with the following contents.
 
 ::
 
-        from peek_plugin_tutorial._private.server.controller.MainController import MainController
-        from peek_plugin_tutorial.server.TutorialApiABC import TutorialApiABC
+        from peek_plugin_tutorial._private.logic-service.controller.MainController import MainController
+        from peek_plugin_tutorial.logic-service.TutorialApiABC import TutorialApiABC
         from peek_plugin_tutorial.tuples.DoSomethingTuple import DoSomethingTuple
 
 
@@ -178,14 +178,14 @@ and populate it with the following contents.
                 pass
 
 
-Edit File :file:`ServerEntryHook.py`
-````````````````````````````````````
+Edit File :file:`LogicServiceEntryHook.py`
+``````````````````````````````````````````
 
-We need to update :file:`ServerEntryHook.py`, to initialise the API object.
+We need to update :file:`LogicServiceEntryHook.py`, to initialise the API object.
 
 ----
 
-Edit the file :file:`peek_plugin_tutorial/_private/server/ServerEntryHook.py`:
+Edit the file :file:`peek_plugin_tutorial/_private/logic-service/LogicServiceEntryHook.py`:
 
 #.  Add this import at the top of the file with the other imports: ::
 
@@ -211,12 +211,12 @@ Edit the file :file:`peek_plugin_tutorial/_private/server/ServerEntryHook.py`:
         self._api = None
 
 
-#.  Add this method to end of the :code:`ServerEntryHook` class: ::
+#.  Add this method to end of the :code:`LogicServiceEntryHook` class: ::
 
 
         @property
-        def publishedServerApi(self) -> object:
-            """ Published Server API
+        def publishedLogicServiceApi(self) -> object:
+            """ Published Logic Service API
 
             :return  class that implements the API that can be used by other Plugins on this
             platform service.
@@ -228,22 +228,22 @@ Edit the file :file:`peek_plugin_tutorial/_private/server/ServerEntryHook.py`:
 
 The API is now accessible from other plugins.
 
-Use Server API
---------------
+Use Logic Service API
+---------------------
 
 In this section we'll get a reference to the Peek Plugin Inbox API and then create a task on
-the mobile UI.
+the Field or Office UI.
 
 .. note:: In order to use this example, you will need to have the
     :code:`peek_core_user` plugin installed and enabled in
-    both the Client and Server services, via their config.json files.
+    the Field, Office, and Logic services, via their config.json files.
 
     The user plugin is public, it can be installed with
     :command:`pip install peek-core-user`.
 
 .. note:: In order to use this example, you will need to have the
     :code:`peek_plugin_inbox` plugin installed and enabled in
-    both the Client and Server services, via their config.json files.
+    the Field, Office, and Logic services, via their config.json files.
 
     The peek inbox plugin is public, it can be installed with
     :command:`pip install peek_plugin_inbox`.
@@ -256,7 +256,7 @@ File :file:`ExampleUseTaskApi.py` contains the code that uses the Peek Inbox Tas
 ----
 
 Create the file
-:file:`peek_plugin_tutorial/_private/server/ExampleUseTaskApi.py`
+:file:`peek_plugin_tutorial/_private/logic-service/ExampleUseTaskApi.py`
 and populate it with the following contents.
 
 Replace the :code:`"userId"` with your user id.
@@ -270,8 +270,8 @@ Replace the :code:`"userId"` with your user id.
         from twisted.internet import reactor
         from twisted.internet.defer import inlineCallbacks
 
-        from peek_plugin_inbox.server.InboxApiABC import InboxApiABC, NewTask
-        from peek_plugin_tutorial._private.server.controller.MainController import MainController
+        from peek_plugin_inbox.logic-service.InboxApiABC import InboxApiABC, NewTask
+        from peek_plugin_tutorial._private.logic service.controller.MainController import MainController
         from peek_plugin_tutorial._private.PluginNames import tutorialPluginName
 
         logger = logging.getLogger(__name__)
@@ -311,18 +311,18 @@ Replace the :code:`"userId"` with your user id.
                 pass
 
 
-Edit File :file:`ServerEntryHook.py`
-````````````````````````````````````
+Edit File :file:`LogicServiceEntryHook.py`
+``````````````````````````````````````````
 
-We need to update :file:`ServerEntryHook.py`, to initialise the example code
+We need to update :file:`LogicServiceEntryHook.py`, to initialise the example code
 
 ----
 
-Edit the file :file:`peek_plugin_tutorial/_private/server/ServerEntryHook.py`:
+Edit the file :file:`peek_plugin_tutorial/_private/logic-service/LogicServiceEntryHook.py`:
 
 #.  Add this import at the top of the file with the other imports: ::
 
-        from peek_plugin_inbox.server.InboxApiABC import InboxApiABC
+        from peek_plugin_inbox.logic-service.InboxApiABC import InboxApiABC
         from .ExampleUseTaskApi import ExampleUseTaskApi
 
 
@@ -341,7 +341,7 @@ Edit the file :file:`peek_plugin_tutorial/_private/server/ServerEntryHook.py`:
 Testing
 -------
 
-#.  Open mobile Peek web app
+#.  Open Peek Field web app
 
 #.  Tap Task icon located in the top right corner
 

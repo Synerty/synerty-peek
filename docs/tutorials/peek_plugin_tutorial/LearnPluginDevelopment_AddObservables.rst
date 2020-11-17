@@ -7,21 +7,21 @@ Add Observables
 Outline
 -------
 
-In this document, we setup the Tuple Observable from VortexJS. The Mobile and Desktop
+In this document, we setup the Tuple Observable from VortexJS. The Field and Office
 services use this to request and receive data updates from the Service service.
 
-We'll use the term "devices" interchangeably with Mobile/Desktop.
+We'll use the term "devices" interchangeably with Field/Office.
 
 This is a one directional data flow once the initial request has been made, the
-Server will send updates to the Mobile/Desktop with out the Mobile/Desktop services
+Server will send updates to the Field/Office with out the Field/Office services
 polling for it.
 
-In the example setup, the Client proxies Observable requests/responses
-between the Server and Mobile/Desktop devices. The Proxy on the Client is aware
-of all the Mobile/Desktop devices that want to observe the data, the Server only knows
-that the Client is observing the data.
+In the example setup, the Field/Office Services proxy Observable requests/responses
+between the Logic Service and Field/Office devices. The Proxy on the Field/Office service is aware
+of all the Field/Office App devices that want to observe the data, the Logic Service only knows
+that the Field/Office Service is observing the data.
 
-.. note:: The Mobile/Desktop devices don't and can't talk directly to the Server service.
+.. note:: The Field/Office devices don't and can't talk directly to the Logic Service.
 
 The :code:`TupleDataObservableHandler` class provides the "observable" functionality,
 It receives request for data by being sent a :code:`TupleSelector`. The TupleSelector
@@ -50,9 +50,9 @@ web app.
 This is the order:
 
 #.  Add the Observable scaffolding for the project.
-#.  Add the Server side Tuple Provider
+#.  Add the Logic Service side Tuple Provider
 #.  Tell the Admin TupleLoader to notifyDeviceInfo the Observable when it makes updates.
-#.  Add a new Mobile Angular component to observe and display the data.
+#.  Add a new Angular component to observe and display the data.
 
 Server Service Setup
 --------------------
@@ -113,15 +113,15 @@ and populate it with the following contents.
             return tupleObservable
 
 
-Edit File :file:`ServerEntryHook.py`
-````````````````````````````````````
+Edit File :file:`LogicServiceEntryHook.py`
+``````````````````````````````````````````
 
-We need to update :file:`ServerEntryHook.py`, it will initialise the observable object
+We need to update :file:`LogicServiceEntryHook.py`, it will initialise the observable object
 when the Plugin is started.
 
 ----
 
-Edit the file :file:`peek_plugin_tutorial/_private/server/ServerEntryHook.py`:
+Edit the file :file:`peek_plugin_tutorial/_private/logic-service/LogicServiceEntryHook.py`:
 
 #.  Add this import at the top of the file with the other imports: ::
 
@@ -135,26 +135,26 @@ Edit the file :file:`peek_plugin_tutorial/_private/server/ServerEntryHook.py`:
 
 ----
 
-The observable for the Server service is setup now. We'll add a TupleProvider later.
+The observable for the Logic Service is setup now. We'll add a TupleProvider later.
 
-Client Service Setup
---------------------
+Field Service Setup
+-------------------
 
 Add File :file:`DeviceTupleDataObservableProxy.py`
 ``````````````````````````````````````````````````
 
 The :file:`DeviceTupleDataObservableProxy.py` creates the Observable Proxy.
-This class is responsible for proxying obserable data between the devices and the Server.
+This class is responsible for proxying observable data between the devices and the Logic Service.
 
-It reduces the load on the server, providing the ability to create more Client services
-to scale Peek out for more users, or speed up responsiveness for remote locations.
+It reduces the load on the logic service, providing the ability to create more client (Field/Office, for example)
+services to scale Peek out for more users, or speed up responsiveness for remote locations.
 
 TupleProviders know how to get the Tuples.
 
 ----
 
 Create the file
-:file:`peek_plugin_tutorial/_private/client/DeviceTupleDataObservableProxy.py`
+:file:`peek_plugin_tutorial/_private/field-service/DeviceTupleDataObservableProxy.py`
 and populate it with the following contents.
 
 ::
@@ -172,15 +172,16 @@ and populate it with the following contents.
 
 
 
-Edit File :file:`ClientEntryHook.py`
-````````````````````````````````````
 
-We need to update :file:`ClientEntryHook.py`, it will initialise the observable proxy
+Edit File :file:`FieldServiceEntryHook.py`
+``````````````````````````````````````````
+
+We need to update :file:`FieldServiceEntryHook.py`, it will initialise the observable proxy
 object when the Plugin is started.
 
 ----
 
-Edit the file :file:`peek_plugin_tutorial/_private/client/ClientEntryHook.py`:
+Edit the file :file:`peek_plugin_tutorial/_private/field-service/FieldServiceEntryHook.py`:
 
 #.  Add this import at the top of the file with the other imports: ::
 
@@ -191,10 +192,10 @@ Edit the file :file:`peek_plugin_tutorial/_private/client/ClientEntryHook.py`:
         self._loadedObjects.append(makeDeviceTupleDataObservableProxy())
 
 
-Mobile Service Setup
---------------------
+Field App Setup
+---------------
 
-Now we need to edit the Angular module in the mobile-app and add the providers:
+Now we need to edit the Angular module in the field-app and add the providers:
 
 
 Edit File :file:`tutorial.module.ts`
@@ -206,7 +207,7 @@ add the provider entry for the Observer service.
 ----
 
 Edit the file
-:file:`peek_plugin_tutorial/_private/mobile-app/tutorial.module.ts`:
+:file:`peek_plugin_tutorial/_private/-app/tutorial.module.ts`:
 
 #.  Add the following imports: ::
 
@@ -383,7 +384,7 @@ Admin Update Notify
 This section notifies the observable when an admin updates a StringIntTuple via the Admin
 service/UI.
 
-This setup of the admin editing data, and having it change on Mobile/Desktop devices
+This setup of the admin editing data, and having it change on Field/Office devices
 won't be the only way the observable is notified, however, it is a good setup for admin
 configurable items in dropdown lists, etc.
 
@@ -515,12 +516,12 @@ TO: ::
 The tuple data observable will now notifyDeviceInfo its observers when an admin updates the
 StringInt data.
 
-.. _learn_plugin_development_add_observable_add_mobile_view:
+.. _learn_plugin_development_add_observable_add_field_view:
 
-Add Mobile View
+Add Field View
 ---------------
 
-Finally, lets add a new component to the mobile screen.
+Finally, lets add a new component to the Field screen.
 
 
 
@@ -533,10 +534,10 @@ stringInt page.
 ----
 
 Create the diretory
-:file:`peek_plugin_tutorial/_private/mobile-app/string-int`
+:file:`peek_plugin_tutorial/_private/field-app/string-int`
 with the command: ::
 
-        mkdir peek_plugin_tutorial/_private/mobile-app/string-int
+        mkdir peek_plugin_tutorial/_private/field-app/string-int
 
 
 Add File :file:`string-int.component.mweb.html`
@@ -550,7 +551,7 @@ This is standard HTML with Angular directives.
 ----
 
 Create the file
-:file:`peek_plugin_tutorial/_private/mobile-app/string-int/string-int.component.mweb.html`
+:file:`peek_plugin_tutorial/_private/field-app/string-int/string-int.component.mweb.html`
 and populate it with the following contents.
 
 ::
@@ -584,7 +585,7 @@ will be another route within the Tutorial plugin.
 ----
 
 Create the file
-:file:`peek_plugin_tutorial/_private/mobile-app/string-int/string-int.component.ts`
+:file:`peek_plugin_tutorial/_private/field-app/string-int/string-int.component.ts`
 and populate it with the following contents.
 
 ::
@@ -646,7 +647,7 @@ and add the route to it.
 
 ----
 
-Edit :file:`peek_plugin_tutorial/_private/mobile-app/tutorial.module.ts`:
+Edit :file:`peek_plugin_tutorial/_private/field-app/tutorial.module.ts`:
 
 
 #.  Add the :code:`StringIntComponent` import with the imports at the top of the file: ::
@@ -687,7 +688,7 @@ Edit :file:`peek_plugin_tutorial/_private/mobile-app/tutorial.module.ts`:
 
 ----
 
-At this point Mobile is all setup, we just need to add some navigation buttons.
+At this point field is all setup, we just need to add some navigation buttons.
 
 
 Edit File :file:`tutorial.component.mweb.html`
@@ -698,7 +699,7 @@ button that will change Angular Routes to our new component.
 
 ----
 
-Edit file :file:`peek_plugin_tutorial/_private/mobile-app/tutorial.component.mweb.html`,
+Edit file :file:`peek_plugin_tutorial/_private/field-app/tutorial.component.mweb.html`,
 Insert the following just before the last closing :code:`</div>` tag: ::
 
         <Button class="btn btn-default"
@@ -708,7 +709,7 @@ Insert the following just before the last closing :code:`</div>` tag: ::
 Testing
 -------
 
-#.  Open mobile Peek web app
+#.  Open field Peek web app
 #.  Tap the Tutorial app icon
 #.  tap the "String Ints" button
 
@@ -716,7 +717,7 @@ Testing
 
 #.  Update the data from the Admin service UI
 
-#.  The data on the mobile all will immediately change.
+#.  The data on the field app will immediately change.
 
 
 
@@ -730,13 +731,13 @@ the offline observable is a dropin replacement.
 
 When using the offline observable, it will:
 
-#.  Queue a request to observe the data, sending it to the client
+#.  Queue a request to observe the data, sending it to the field service
 
 #.  Query the SQL db in the browser/mobile device, and return the data for the observer.
     This provides instant data for the user.
 
-When new data is sent to the the observer (Mobile/Desktop service)
-from the observable (Client service), the offline observer does two things:
+When new data is sent to the the observer (Field/Office service)
+from the observable (Field service), the offline observer does two things:
 
 #.  Notifies the subscribers like normal
 
@@ -755,7 +756,7 @@ Switching to use the offline observer requires two edits to
 ----
 
 Edit file
-:file:`peek_plugin_tutorial/_private/mobile-app/string-int/string-int.component.ts`.
+:file:`peek_plugin_tutorial/_private/field-app/string-int/string-int.component.ts`.
 
 Add the import for the TupleDataOfflineObserverService: ::
 
@@ -775,7 +776,7 @@ To ::
 ----
 
 That's it. Now the String Int data will load on the device, even when the Vortex between
-the device and the Client service is offline.
+the device and the field service is offline.
 
 
 Add More Observables
@@ -792,9 +793,9 @@ or :ref:`learn_plugin_development_add_tuples_tutorial_tuple_py`
 Add the TypeScript tuples,
 :ref:`learn_plugin_development_add_tuples_tutorial_tuple_ts`.
 
-Add a Server service tuple provider,
+Add a Logic service tuple provider,
 :ref:`learn_plugin_development_add_observable_add_tuple_provider`
 
-Then, add the Mobile, Desktop or Admin side, add the views and Angular component,
-:ref:`learn_plugin_development_add_observable_add_mobile_view`.
+Then, add the Field, Office or Admin side, add the views and Angular component,
+:ref:`learn_plugin_development_add_observable_add_field_view`.
 

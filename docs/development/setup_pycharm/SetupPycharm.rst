@@ -67,7 +67,7 @@ Restart the services that use the plugin
 
 ----
 
-This is an example of running the server service in debug mode using **PyCharm**
+This is an example of running the peek logic service in debug mode using **PyCharm**
 
 Under the drop down "Run" then "Edit Configurations..."
 

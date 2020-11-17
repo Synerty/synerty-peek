@@ -1,48 +1,48 @@
-.. _learn_plugin_development_add_client:
+.. _learn_plugin_development_add_field_service:
 
 ==================
-Add Client Service
+Add Field Service
 ==================
 
-This document is a stripped version of :ref:`learn_plugin_development_add_server`.
+This document is a stripped version of :ref:`learn_plugin_development_add_logic_service`.
 
-Client File Structure
----------------------
+Field Service File Structure
+-----------------------------
 
-Add Package :file:`_private/client`
-```````````````````````````````````
+Add Package :file:`_private/field-service`
+````````````````````````````````````````
 
-Create directory :file:`peek_plugin_tutorial/_private/client`
+Create directory :file:`peek_plugin_tutorial/_private/field-service`
 
-Create an empty package file in the client directory,
-:file:`peek_plugin_tutorial/_private/client/__init__.py`
+Create an empty package file in the field-service directory,
+:file:`peek_plugin_tutorial/_private/field-service/__init__.py`
 
 Commands: ::
 
-        mkdir peek_plugin_tutorial/_private/client
-        touch peek_plugin_tutorial/_private/client/__init__.py
+        mkdir peek_plugin_tutorial/_private/field-service
+        touch peek_plugin_tutorial/_private/field-service/__init__.py
 
 
-Add File :file:`ClientEntryHook.py`
+Add File :file:`FieldServiceEntryHook.py`
 ```````````````````````````````````
 
-Create the file :file:`peek_plugin_tutorial/_private/client/ClientEntryHook.py`
+Create the file :file:`peek_plugin_tutorial/_private/field-service/FieldServiceEntryHook.py`
 and populate it with the following contents.
 
 ::
 
         import logging
 
-        from peek_plugin_base.client.PluginClientEntryHookABC import PluginClientEntryHookABC
+        from peek_plugin_base.field-service.PluginFieldServiceEntryHookABC import PluginFieldServiceEntryHookABC
 
         logger = logging.getLogger(__name__)
 
 
-        class ClientEntryHook(PluginClientEntryHookABC):
+        class FieldServiceEntryHook(PluginFieldServiceEntryHookABC):
             def __init__(self, *args, **kwargs):
                 """" Constructor """
                 # Call the base classes constructor
-                PluginClientEntryHookABC.__init__(self, *args, **kwargs)
+                PluginFieldServiceEntryHookABC.__init__(self, *args, **kwargs)
 
                 #: Loaded Objects, This is a list of all objects created when we start
                 self._loadedObjects = []
@@ -92,13 +92,13 @@ Edit :file:`peek_plugin_tutorial/__init__.py`
 
 Edit the file :file:`peek_plugin_tutorial/__init__.py`, and add the following: ::
 
-        from peek_plugin_base.client.PluginClientEntryHookABC import PluginClientEntryHookABC
+        from peek_plugin_base.field-service.PluginFieldServiceEntryHookABC import PluginFieldServiceEntryHookABC
         from typing import Type
 
 
-        def peekClientEntryHook() -> Type[PluginClientEntryHookABC]:
-            from ._private.client.ClientEntryHook import ClientEntryHook
-            return ClientEntryHook
+        def peekFieldServiceEntryHook() -> Type[PluginFieldServiceEntryHookABC]:
+            from ._private.field-service.FieldServiceEntryHook import FieldServiceEntryHook
+            return FieldServiceEntryHook
 
 
 Edit :file:`plugin_package.json`
@@ -106,19 +106,16 @@ Edit :file:`plugin_package.json`
 
 Edit the file :file:`peek_plugin_tutorial/plugin_package.json` :
 
-#.  Add **"client"** to the requiresServices section so it looks like ::
+#.  Add **"field-service"** to the requiresServices section so it looks like ::
 
         "requiresServices": [
-            "field",
-            "office",
+            "field-service",
         ]
 
-#.  Add the **client** section after **requiresServices** section: ::
+#.  Add the **field-service** section after **requiresServices** section: ::
 
-        "field": {
+        "field-service": {
         },
-        "office: {
-        }
 
 #.  Ensure your JSON is still valid (Your IDE may help here)
 
@@ -129,24 +126,21 @@ Here is an example ::
                 ...
             },
             "requiresServices": [
-                "field",
-                "office",
+                "field-service",
             ],
-            "field": {
+            "field-service": {
             },
-            "office": {
-            }
         }
 
 
 ----
 
-The plugin should now be ready for the client to load.
+The plugin should now be ready for the field to load.
 
-Running on the Client Service
+Running on the Field Service
 -----------------------------
 
-Edit :file:`~/peek-office-service.home/config.json`:
+Edit :file:`~/peek-field-service.home/config.json`:
 
 #.  Ensure **logging.level** is set to **"DEBUG"**
 #.  Add **"peek_plugin_tutorial"** to the **plugin.enabled** array
@@ -171,16 +165,16 @@ It should something like this: ::
         }
 
 
-.. note:: This file is created in :ref:`administer_peek_platform`.  Running the Client
+.. note:: This file is created in :ref:`administer_peek_platform`.  Running the Field
     Service will also create the file.
 
 ----
 
-You can now run the peek client, you should see your plugin load. ::
+You can now run the peek field, you should see your plugin load. ::
 
-        peek@_peek:~$ run_peek_office_service
+        peek@_peek:~$ run_peek_field_service
         ...
-        DEBUG peek_plugin_tutorial._private.client.ClientEntryHook:Loaded
-        DEBUG peek_plugin_tutorial._private.client.ClientEntryHook:Started
+        DEBUG peek_plugin_tutorial._private.field.FieldEntryHook:Loaded
+        DEBUG peek_plugin_tutorial._private.field.FieldEntryHook:Started
         ...
 

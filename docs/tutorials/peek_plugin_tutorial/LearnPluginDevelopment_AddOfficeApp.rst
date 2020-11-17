@@ -1,39 +1,40 @@
-.. _learn_plugin_development_add_desktop:
+.. _learn_plugin_development_add_office_app:
 
-===================
-Add Desktop Service
-===================
+==============
+Add Office App
+==============
 
-The desktop service is similar to mobile service. This document is a stripped version of :ref:`learn_plugin_development_add_mobile`.
+The office app is similar to the field app. This document is a stripped version of
+:ref:`learn_plugin_development_add_field_app`.
 
-Desktop File Structure
-----------------------
+Office File Structure
+---------------------
 
-Add Directory :file:`desktop-app`
-`````````````````````````````````
+Add Directory :file:`office-app`
+````````````````````````````````
 
 Commands: ::
 
-        mkdir -p peek_plugin_tutorial/_private/desktop-app
+        mkdir -p peek_plugin_tutorial/_private/office-app
 
 
 Add File :file:`tutorial.component.dweb.html`
 `````````````````````````````````````````````
 
-Create the :file:`peek_plugin_tutorial/_private/desktop-app/tutorial.component.dweb.html` with the following contents:
+Create the :file:`peek_plugin_tutorial/_private/office-app/tutorial.component.dweb.html` with the following contents:
 
 ::
 
         <div class="container">
             <h1 class="text-center">Tutorial Plugin</h1>
             <p>Angular2 Lazy Loaded Module</p>
-            <p>This is the root of the desktop app for the Tutorial plugin</p>
+            <p>This is the root of the office app for the Tutorial plugin</p>
         </div>
 
 Add File :file:`tutorial.component.ts`
 ``````````````````````````````````````
 
-Create the file :file:`peek_plugin_tutorial/_private/desktop-app/tutorial.component.ts` and populate it with the following contents.
+Create the file :file:`peek_plugin_tutorial/_private/office-app/tutorial.component.ts` and populate it with the following contents.
 
 ::
 
@@ -54,7 +55,7 @@ Create the file :file:`peek_plugin_tutorial/_private/desktop-app/tutorial.compon
 
 ----
 
-Create the file :file:`peek_plugin_tutorial/_private/desktop-app/tutorial.module.ts`
+Create the file :file:`peek_plugin_tutorial/_private/office-app/tutorial.module.ts`
 and populate it with the following contents.
 
 ::
@@ -109,31 +110,31 @@ tutorial plugins app icon.
 
 ----
 
-Create directory :file:`peek_plugin_tutorial/_private/desktop-assets`
+Create directory :file:`peek_plugin_tutorial/_private/office-assets`
 
 ----
 
 Download this plugin app icon
 `TutorialExampleIcon.png <http://synerty-peek.readthedocs.io/en/latest/_images/TutorialExampleIcon.png>`_
-to :file:`peek_plugin_tutorial/_private/desktop-assets/icon.png`
+to :file:`peek_plugin_tutorial/_private/office-assets/icon.png`
 
 Edit File :file:`plugin_package.json`
 `````````````````````````````````````
 
 Finally, Edit the file :file:`peek_plugin_tutorial/plugin_package.json` to tell the
-platform that we want to use the desktop service:
+platform that we want to use the office service:
 
-#.  Add **office** to the requiresServices section so it looks like ::
+#.  Add **office-app** to the requiresServices section so it looks like ::
 
         "requiresServices": [
-            "office"
+            "office-app"
         ]
 
 
 #.  Add the **office** section after **requiresServices** section: ::
 
 
-         "office": {
+         "office-app": {
             "appDir": "_private/office-app",
             "appModule": "tutorial.module#TutorialModule",
             "assetDir": "_private/office-assets",
@@ -165,7 +166,7 @@ Here is an example ::
 Run :file:`run_peek_office_service`
 ```````````````````````````
 
-Run the peek client ::
+Run the peek office service ::
 
         peek@_peek:~$ run_peek_office_service
         ...

@@ -33,7 +33,7 @@ Or Bash ::
 Confirm that the output contains the release you wish to use.
 
 run_peek_logic_service
-```````````````
+``````````````````````
 
 This section runs the peek server service of the platform and opens the admin page.
 
@@ -55,7 +55,7 @@ This is the administration page for the peek platform, otherwise known as the
 
 
 run_peek_office_service
-```````````````
+```````````````````````
 
 This section runs the peek client service, this serves the desktop and mobile web apps
 and provides data to all desktop and mobile native apps
@@ -77,7 +77,7 @@ This is the mobile web app for the peek platform.
 
 
 run_peek_agent_service
-``````````````
+``````````````````````
 
 The Agent is used to connect to external systems, this section runs the agent service.
 

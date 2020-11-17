@@ -28,7 +28,7 @@ setup.py is: ::
 Configure Peek Services
 ```````````````````````
 
-The python peek services, **worker**, **agent**, **client** and **server** need to have
+The python peek services, **worker**, **agent**, **field**,  **office**, and **logic** need to have
 the plugin enabled in their :file:`~/peek-{service}/config.json`.
 
 For example: ::
@@ -57,11 +57,14 @@ Run the platform services from bash with the following commands: ::
         # Check to ensure we're using the right python
         which python
 
-        # Run the peek server
+        # Run the peek logic service
         run_peek_logic_service
 
-        # Run the peek client
+        # Run the peek office service
         run_peek_office_service
+
+        # Run the peek field service
+        run_peek_field_service
 
         # Run the peek agent
         run_peek_agent_service

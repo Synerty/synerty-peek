@@ -1,57 +1,57 @@
-.. _learn_plugin_development_add_server:
+.. _learn_plugin_development_add_logic_service:
 
-==================
-Add Server Service
-==================
+======================
+Add Peek Logic Service
+======================
 
-This section adds the basic files require for the plugin to run on the servers service.
+This section adds the basic files require for the plugin to run on the peek logic service.
 Create the following files and directories.
 
-.. note:: Setting up skeleton files for the client, worker and agent services,
-            is identical to the server, generally replace "Server" with the appropriate
+.. note:: Setting up skeleton files for the field, office, worker and agent services,
+            is identical to the logic service, generally replace "logic-service" with the appropriate
             service name.
 
 The platform loads the plugins python package, and then calls the appropriate
-**peek{Server}EntryHook()** method on it, if it exists.
+**peek{logic-service}EntryHook()** method on it, if it exists.
 
 The object returned must implement the right interfaces, the platform then calls methods
 on this object to load, start, stop, unload, etc the plugin.
 
-Server File Structure
----------------------
+Logic Service File Structure
+----------------------------
 
-Add Package :file:`_private/server`
-```````````````````````````````````
+Add Package :file:`_private/logic-service`
+``````````````````````````````````````````
 
-This step creates the :file:`_private/server`
+This step creates the :file:`_private/logic-service`
 `python package <https://docs.python.org/3.5/tutorial/modules.html#packages>`_.
 
 This package will contain the majority of the plugins code that will run on the
-Server service. Files in this package can be imported with ::
+logic service. Files in this package can be imported with ::
 
         # Example
-        # To import peek_plugin_tutorial/_private/server/File.py
-        from peek_plugin_tutorial._private.server import File
+        # To import peek_plugin_tutorial/_private/logic-service/File.py
+        from peek_plugin_tutorial._private.logic-service import File
 
 ----
 
-Create directory :file:`peek_plugin_tutorial/_private/server`
+Create directory :file:`peek_plugin_tutorial/_private/logic-service`
 
-Create an empty package file in the server directory,
-:file:`peek_plugin_tutorial/_private/server/__init__.py`
+Create an empty package file in the logic-service directory,
+:file:`peek_plugin_tutorial/_private/logic-service/__init__.py`
 
 Commands: ::
 
-        mkdir peek_plugin_tutorial/_private/server
-        touch peek_plugin_tutorial/_private/server/__init__.py
+        mkdir peek_plugin_tutorial/_private/logic-service
+        touch peek_plugin_tutorial/_private/logic-service/__init__.py
 
-.. _learn_plugin_development_add_server_add_file_ServerEntryHook:
+.. _learn_plugin_development_add_logic_service_add_file_LogicServiceEntryHook:
 
-Add File :file:`ServerEntryHook.py`
-```````````````````````````````````
+Add File :file:`LogicServiceEntryHook.py`
+`````````````````````````````````````````
 
-This file/class is the entry point for the plugin on the Server service.
-When the server service starts this plugin, it will call the :command:`load()` then the
+This file/class is the entry point for the plugin on the peek logic service.
+When the peek logic service starts this plugin, it will call the :command:`load()` then the
 :command:`start()` methods.
 
 Any initialisation and loading that the plugin needs to do to run should
@@ -63,23 +63,23 @@ be placed in :command:`load()` and :command:`start()` methods.
 
 ----
 
-Create the file :file:`peek_plugin_tutorial/_private/server/ServerEntryHook.py`
+Create the file :file:`peek_plugin_tutorial/_private/logic-service/LogicServiceEntryHook.py`
 and populate it with the following contents.
 
 ::
 
         import logging
 
-        from peek_plugin_base.server.PluginServerEntryHookABC import PluginServerEntryHookABC
+        from peek_plugin_base.logic-service.PluginLogicServiceEntryHookABC import PluginLogicServiceEntryHookABC
 
         logger = logging.getLogger(__name__)
 
 
-        class ServerEntryHook(PluginServerEntryHookABC):
+        class LogicServiceEntryHook(PluginLogicServiceEntryHookABC):
             def __init__(self, *args, **kwargs):
                 """" Constructor """
                 # Call the base classes constructor
-                PluginServerEntryHookABC.__init__(self, *args, **kwargs)
+                PluginLogicServiceEntryHookABC.__init__(self, *args, **kwargs)
 
                 #: Loaded Objects, This is a list of all objects created when we start
                 self._loadedObjects = []
@@ -131,10 +131,10 @@ and populate it with the following contents.
 Edit :file:`peek_plugin_tutorial/__init__.py`
 `````````````````````````````````````````````
 
-When the Server service loads the plugin, it first calls the
-:command:`peekServerEntryHook()` method from the :command:`peek_plugin_tutorial` package.
+When the peek logic service loads the plugin, it first calls the
+:command:`peekLogicServiceEntryHook()` method from the :command:`peek_plugin_tutorial` package.
 
-The :command:`peekServerEntryHook()` method returns the Class that the server should
+The :command:`peekLogicServiceEntryHook()` method returns the Class that the peek logic service should
 create to initialise and start the plugin.
 
 As far as the Peek Platform is concerned, the plugin can be structured how ever it likes
@@ -144,35 +144,35 @@ internally, as long as it defines these methods in its root python package.
 
 Edit the file :file:`peek_plugin_tutorial/__init__.py`, and add the following: ::
 
-        from peek_plugin_base.server.PluginServerEntryHookABC import PluginServerEntryHookABC
+        from peek_plugin_base.logic-service.PluginLogicServiceEntryHookABC import PluginLogicServiceEntryHookABC
         from typing import Type
 
 
-        def peekServerEntryHook() -> Type[PluginServerEntryHookABC]:
-            from ._private.server.ServerEntryHook import ServerEntryHook
-            return ServerEntryHook
+        def peekLogicServiceEntryHook() -> Type[PluginLogicServiceEntryHookABC]:
+            from ._private.logic-service.LogicServiceEntryHook import LogicServiceEntryHook
+            return LogicServiceEntryHook
 
 
 Edit :file:`plugin_package.json`
 ````````````````````````````````
 
 These updates to the :file:`plugin_package.json` tell the Peek Platform that we require
-the "server" service to run, and additional configuration options we have for that
+the "logic-service" service to run, and additional configuration options we have for that
 service.
 
 ----
 
 Edit the file :file:`peek_plugin_tutorial/plugin_package.json` :
 
-#.  Add **"server"** to the requiresServices section so it looks like ::
+#.  Add **"logic-service"** to the requiresServices section so it looks like ::
 
         "requiresServices": [
-            "server"
+            "logic-service"
         ]
 
-#.  Add the **server** section after **requiresServices** section: ::
+#.  Add the **logic-service** section after **requiresServices** section: ::
 
-        "server": {
+        "logic-service": {
         }
 
 #.  Ensure your JSON is still valid (Your IDE may help here)
@@ -184,9 +184,9 @@ Here is an example ::
                 ...
             },
             "requiresServices": [
-                "server"
+                "logic-service"
             ],
-            "server": {
+            "logic-service": {
             },
             ...
 
@@ -195,15 +195,15 @@ Here is an example ::
 
 ----
 
-The plugin should now be ready for the server to load.
+The plugin should now be ready for the logic service to load.
 
-Running on the Server Service
------------------------------
+Running on the Peek Logic Service
+---------------------------------
 
-File :file:`~/peek-logic-service.home/config.json` is the configuration file for the Server
+File :file:`~/peek-logic-service.home/config.json` is the configuration file for the peek logic
 service.
 
-.. note:: This file is created in :ref:`administer_peek_platform`.  Running the Server
+.. note:: This file is created in :ref:`administer_peek_platform`.  Running the Peek Logic
     Service will also create the file.
 
 ----
@@ -234,10 +234,10 @@ It should something like this: ::
 
 ----
 
-You can now run the peek server, you should see your plugin load. ::
+You can now run the peek logic service, you should see your plugin load. ::
 
         peek@_peek:~$ run_peek_logic_service
         ...
-        DEBUG peek_plugin_tutorial._private.server.ServerEntryHook:Loaded
-        DEBUG peek_plugin_tutorial._private.server.ServerEntryHook:Started
+        DEBUG peek_plugin_tutorial._private.logic-service.LogicServiceEntryHook:Loaded
+        DEBUG peek_plugin_tutorial._private.logic-service.LogicServiceEntryHook:Started
         ...

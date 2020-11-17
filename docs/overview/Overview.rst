@@ -1,14 +1,14 @@
-.. _overview:
+x.. _overview:
 
 ========
 Overview
 ========
 
 Peek Platforms primary goal is to manage, run and provide services to, hundreds of
-small units of code. We call these units of code, plugins.
+small units of code. We call these units of code plugins.
 
-These plugins build upon each others functionality to provide highly maintainable,
-testable and enterprise grade environment.
+These plugins build upon each others functionality to provide a highly maintainable,
+testable, and enterprise grade environment.
 
 Plugins can publish APIs for other plugins to use, and one plugin can run across all
 services in the platform if it chooses.
@@ -32,12 +32,12 @@ Peek supports distribution across multiple servers and network segregation.
 
 For example, if you want to provide a means of integrating with external, less secure
 systems, you can place a "Peek Agent Service" in a DMZ to interface with the less secure
-networks. The Peek Agent will talk upstream to the Peek Server.
+networks. The Peek Agent will talk upstream to the Peek Logic Service.
 
 The following diagram describes the architecture of the platform and the services
 it provides.
 
-.. image:: PlatformArchitecture.png
+.. image:: WholePlatformArchitecture.png
 
 Services
 --------
@@ -49,7 +49,7 @@ work for someone".
 Each service is it's own entity which plugins can choose to run code on.
 
 The exception is the "storage" service. The database can be accessed from the worker
-and server services. The database upgrade scripts are run from the "server" service.
+and logic services. The database upgrade scripts are run from the "logic" service.
 You could consider the database server to be the storage service.
 
 Each service has it's logical place with in the architecture. (See the architecture
@@ -62,22 +62,23 @@ The services are as follows:
     :header: "Service", "Language", "Description"
     :widths: auto
 
-    "server", "python", "The center of the Peek Platform, ideal for central logic."
-    "storage", "python", "This refers to support for persisting and retrieving database data."
-    "client", "python", "The client service handles requests from 'desktop' and 'mobile'."
-    "agent", "python", "The agent is a satellite service, integrating with external systems."
-    "worker", "python", "The worker service provides parallel processing for computational intensive tasks"
-    "admin", "typescript", "A web based admin interface for the peek platform"
-    "mobile", "typescript", "The user interface for mobile devices."
-    "desktop", "typescript", "The user interface for desktops"
+    "logic service", "python", "The center of the Peek Platform, ideal for central logic."
+    "storage service", "python", "This refers to support for persisting and retrieving database data."
+    "field service", "python", "The field service handles field requests from 'field app'."
+    "office service", "python", "The office service handles office requests from 'office app'."
+    "agent service", "python", "The agent is a satellite service, integrating with external systems."
+    "worker service", "python", "The worker service provides parallel processing for computational intensive tasks"
+    "admin app", "typescript", "A web based admin interface for the peek platform"
+    "field app", "typescript", "The user interface for web and native apps on mobile devices."
+    "office app", "typescript", "The user interface for desktops"
 
 .. note:: Where we refer to "Angular" this means Angular version 2+. Angular1 is known
             as "AngularJS"
 
-Server Service
-``````````````
+Peek Logic Service
+``````````````````
 
-The Peek Server Service is the central / main / core server in the peek architecture.
+The Peek Logic Service is the central / main / core service in the peek architecture.
 This is the ideal place for plugins to integrate with each other.
 
 All other python services talk directly to this service, and only this service.
@@ -93,80 +94,106 @@ from low level database API access to working with the database using a high lev
 Database schema versioning is handled by Alembic, allowing plugins to automatically
 update their database schemas, or patch data as required.
 
-The database access is available on the Peek Worker and Peek Server services.
+The database access is available on the Peek Worker and Peek Logic services.
 
 
-Client Service
-``````````````
+Field Service
+`````````````
 
-The Client service was introduced to handle all requests from desktop, mobile and web
-apps. Reducing the load on the Peek Server.
+The Field service was introduced to handle all requests from native and web Field
+Apps. Reducing the load on the Logic Service.
 
-Multiple Client services can connect to one Server service, improving the maximum number
+Multiple Field services can connect to one Logic service, improving the maximum number
 of simultaneous users the platform can handle.
 
-The Peek Client server handles all the live data, and serves all the resources to
-the Peek Desktop and Peek Mobile services.
+The Peek Field service handles all the live data, and serves all the resources to
+the Peek Field App.
 
 The live data is serialised payloads, transferred over HTTP or Websockets. This is the
 VortexJS library at work.
 
-The Client service buffers observable data from the server. The client will ask the server
-for data once, and then notifyDeviceInfo multiple users connected to the Client service when the
+The Field service buffers observable data from the Logic service. The Field service will ask the Logic service
+for data once, and then notifyDeviceInfo multiple users connected to the Field service when the
 data arrives. However, Plugins can implement their own logic for this if required.
 
-The Client serves all HTTP resources to the Desktop web apps and Mobile web apps,
+The Field serves all HTTP resources to the native and web Field Apps,
 this includes HTML, CSS, Javascript, images and other assets.
 
-The following diagram gives an overview of the clients communications.
+The following diagram gives an overview of the Field Service communications.
 
-.. image:: ClientService.png
+.. image:: FieldService.png
 
 
-Mobile Service
-``````````````
+Field App
+`````````
 
-.. image:: MobileService.png
+.. image:: FieldApp.png
 
-The mobile service provides two user interfaces, a native mobile app backed by
+The Field App provides two user interfaces, a native mobile app backed by
 Capacitor + Angular, and an Angular web app.
 
-VortexJS provides data serialisation and transport to the Peek Client service via
+VortexJS provides data serialisation and transport to the Peek Field service via
 a websockets or HTTP connection.
 
 VortexJS provides a method for sending actions to, and observing data from the
-Peek Client service. Actions and observer data can be cached in the web/native app,
+Peek Field service. Actions and observer data can be cached in the web/native app,
 allowing it to work offline.
 
-In web developers terminology, the Mobile service is called the frontend, and
-the Client service is called the backend.
+In web developers terminology, the Field App service is called the frontend, and
+the Field service is called the backend.
 
-The Mobile service codes structure allows Angular components to be reused to drive web based interfaces.
+The Field service codes structure allows Angular components to be reused to drive web based interfaces.
 For example:
 
 *   **my-component.ts**    (Angular component, written in Typescript)
 *   **my-component.web.html**   (View for Browser HTML)
 
 
-Desktop Service
-```````````````
+Office Service
+``````````````
 
-.. image:: DesktopService.png
+The Office service was introduced to handle requests from native and web Office
+Apps. Reducing the load on the Logic Service.
 
-The Peek Desktop service is almost identical to the Mobile service, using
-Electron + Angular for Native desktop apps and Angular for the web app.
+Multiple Office services can connect to one Logic service, improving the maximum number
+of simultaneous users the platform can handle.
 
-The Desktop service has a different user interface, designed for desktop use.
+The Peek Office service handles all the live data, and serves all the resources to
+the Peek Office App.
 
-The Desktop service codes structure allows Angular components to be reused to drive both
+The live data is serialised payloads, transferred over HTTP or Websockets. This is the
+VortexJS library at work.
+
+The Office service buffers observable data from the Logic service. The Office service will ask the Logic service
+for data once, and then notifyDeviceInfo multiple users connected to the Office service when the
+data arrives. However, Plugins can implement their own logic for this if required.
+
+The Field serves all HTTP resources to the native and web Office Apps,
+this includes HTML, CSS, Javascript, images and other assets.
+
+The following diagram gives an overview of the Office Service communications.
+
+.. image:: OfficeService.png
+
+Office App
+``````````
+
+.. image:: OfficeApp.png
+
+The Peek Office app is almost identical to the Field app, using
+Electron + Angular for Native office apps and Angular for the web app.
+
+The Office service has a different user interface, designed for desktop use.
+
+The Office service code structure allows Angular components to be reused to drive both
 electron and web based interfaces. For example :
 
 *   **my-component.tron.html**    (View for Nativescipt XML)
 *   **my-component.ts**    (Angular component, written in Typescript)
 *   **my-component.web.html**   (View for Browser HTML)
 
-Plugins can be structured to reuse code and Angular components between the Mobile
-and Desktop services if they choose.
+Plugins can be structured to reuse code and Angular components between the Field
+and Office services if they choose.
 
 Worker Service
 ``````````````
@@ -176,13 +203,13 @@ Celery project.
 
 The Worker service is ideal for computationally or IO expensive operations.
 
-The Peek Server queues tasks for the Worker service to process via a rabbitmq messaging
+The Peek Logic Service queues tasks for the Worker service to process via a rabbitmq messaging
 queue, the tasks are performed and the results are returned to the Peek Service via redis.
 
 Tasks are run in forks, meaning there is one task per an operating system process, which
 achives better performance.
 
-Multiple Peek Worker services can connect to one Peek Server service.
+Multiple Peek Worker services can connect to one Peek Logic Service.
 
 Agent Service
 `````````````
@@ -190,10 +217,10 @@ The Peek Agent service provides support for integrations with external system.
 
 The Agent allows Peek to connect to other systems. There is nothing special about the
 agent implementation, it's primary purpose is to separate external system integrations
-from the Peek Server service.
+from the Peek Logic service.
 
 Peek Agent can be placed in other networks, allowing greater separation and security from
-Peek Server.
+Peek Logic.
 
 Here are some example use cases :
 
@@ -202,12 +229,12 @@ Here are some example use cases :
 *   Providing HTTP REST interfaces
 *   Interfacing with other systems via SSH.
 
-Admin Service
-`````````````
-The Peek Admin service is the Peek Administrators user interface, providing administration
+Admin App
+`````````
+The Peek Admin app is the Peek Administrator user interface, providing administration
 for plugins and the platform.
 
-The Peek Admin service is almost identical to the Desktop service, however it only has
+The Peek Admin App is almost identical to the Field and Office Apps, however it only has
 the web app.
 
 The Peek Admin service is an Angular web app.
@@ -242,14 +269,15 @@ Plugins can integrate with other plugins in the following services:
     :widths: auto
 
 
-    "server", "YES"
-    "storage", "no"
-    "client", "YES"
-    "agent", "YES"
-    "worker", "no"
-    "admin", "YES"
-    "mobile", "YES"
-    "desktop", "YES"
+    "logic service", "YES"
+    "storage service", "no"
+    "field service", "YES"
+    "office service", "YES"
+    "agent service", "YES"
+    "worker service", "no"
+    "admin app", "YES"
+    "field app", "YES"
+    "office app", "YES"
 
 
 You could create other "User Plugins" with the same exposed plugin API for different
@@ -261,10 +289,10 @@ The next diagram provides an example of how plugins can integrate to each other.
 
 Here are some things of interest :
 
-*   The SOAP plugin is implemented to talk specifically to system1. It handles the burdon
+*   The SOAP plugin is implemented to talk specifically to system 1. It handles the burden
     of implementing the system 1 SOAP interface.
 
-*   The SOAP, User and Active Task plugins provide APIs on the server service that can
+*   The SOAP, User and Active Task plugins provide APIs on the logic service that can
     be multiple feature plugins.
 
 *   A feature plugin is just a name we've given to the plugin that provides features to
@@ -282,8 +310,8 @@ service.
 There are multiple entry hooks with in the plugin, one for each peek service
 the plugin chooses to run on.
 
-Each service will start a piece of the plugin, for example : Part of the plugin may run
-on the server service, and part of the plugin may run on the agent service.
+Each service will start a piece of the plugin, for example: Part of the plugin may run
+on the logic service, and part of the plugin may run on the agent service.
 
 Here are some plugin examples, indicating the services each platform has been designed to
 run on. Here are some things of interest :
@@ -291,47 +319,47 @@ run on. Here are some things of interest :
 *   The User and Active Task plugins don't require the agent or worker services, so they
     don't have implementation for them.
 
-*   All plugins have implementation for the server service, this is an ideal place for
+*   All plugins have implementation for the logic service, this is an ideal place for
     plugins to integrate with each other.
 
 .. image:: PluginArchitecture.png
 
 
-This diagram illustrates how the plugins will run on the server service.
+This diagram illustrates how the plugins will run on the logic service.
 
-Each plugins python package is fully installed in the server services environment.
-Plugins have entry points for the server service.
-The server calls this server entry hook when it loads each plugin.
+Each plugins python package is fully installed in the logic services environment.
+Plugins have entry points for the logic service.
+The logic service calls this logic service entry hook when it loads each plugin.
 
-.. image:: PluginsRunningOnServer.png
+.. image:: PluginsRunningOnLogicService.png
 
 There are only two plugins that require the agent service, so the agent will only load
 these two. Again, the whole plugin is installed in the agents python environment.
 
-.. image:: PluginsRunningOnAgent.png
+.. image:: PluginsRunningOnAgentService.png
 
-There are three plugins that require the client service, so the client will only load
-these three. Again, the whole plugin is installed in the clients python environment.
+There are three plugins that require the Office Service, so the Office service will only load
+these three. Again, the whole plugin is installed in the Office Service python environment.
 
-The client, agent, worker and server services can and run from the one python
-environment. This is the standard setup for single server environments.
+The field, office, agent, worker and logic services can and run from the one python
+environment. This is the standard setup for single-server environments.
 
-.. image:: RunningPluginsOnClient.png
+.. image:: PluginsRunningOnFieldService.png
 
-There are three plugins that require the mobile service. The mobile service is a python
+There are three plugins that require the Field App. The Field App is a python
 package that contains the build skeletons for the web app.
 
-The client service combines (copies) the files required from each of the plugins into the
+The Field App combines (copies) the files required from each of the plugins into the
 build environments, and then compiles the web app.
 
-The client and server services
-prepare and compile the desktop, mobile and admin services, as these are all HTML, SCSS and
+The Field and Logic services
+prepare and compile the Field and Admin apps, as these are all HTML, SCSS and
 Typescript.
 
-The desktop, mobile and admin interfaces need the client and server python services to
+The office/field, and admin interfaces need the office/field, and logic python services to
 run, so this compile arrangement makes sense.
 
-.. image:: PluginsRunningOnMobile.png
+.. image:: PluginsRunningOnFieldApp.png
 
 .. _overview_noop_plugin_example:
 
@@ -371,27 +399,29 @@ An example contents of the :file:`_private` is described below.
 
     *   :file:`admin-assets`   (Static assets for the admin web UI)
 
-    *   :file:`agent` (The code that runs on the agent service)
+    *   :file:`agent-service` (The code that runs on the agent service)
 
     *   :file:`alembic` (Database schema versioning scripts)
 
-    *   :file:`client`  (The code that runs on the client service)
+    *   :file:`field-service`  (The code that runs on the field service)
 
-    *   :file:`desktop-app`   (The user interface that runs on the desktop/web)
+    *   :file:`office-service`  (The code that runs on the office service)
 
-    *   :file:`desktop-assets`    (Images for the desktop/web)
+    *   :file:`office-app`   (The office user interface that runs natively and on the mobile/web devices)
 
-    *   :file:`mobile-app`   (The user interface that runs on the mobile/web devices)
+    *   :file:`office-assets`    (Images for the desktop/web)
 
-    *   :file:`mobile-assets`    (Images for the mobile/web UI)
+    *   :file:`field-app`   (The field user interface that runs natively and on the mobile/web devices)
 
-    *   :file:`server`  (The code that runs on the server service)
+    *   :file:`field-assets`    (Images for the mobile/web UI)
 
-    *   :file:`storage`     (SQLAlchemy ORM classes for db access, used by server,worker)
+    *   :file:`logic-service`  (The code that runs on the logic service)
+
+    *   :file:`storage-service     (SQLAlchemy ORM classes for db access, used by logic and worker)
 
     *   :file:`tuples`  (Private data structures)
 
-    *   :file:`worker`  (The parallel processing  Celery tasks that are run on the worker)
+    *   :file:`worker-service`  (The parallel processing  Celery tasks that are run on the worker)
 
 ---
 
@@ -401,25 +431,27 @@ An example contents of the :file:`plugin-modules` is described below.
     Plugins can structure the subfolders however they like, this dir is available
     from node_modules/@peek/peek_plugin_noop)
 
-    *   :file:`desktop`   (Exposed API, index.ts exposes desktop only declarations)
+    *   :file:`office-app`   (Exposed API, index.ts exposes office only declarations)
 
-    *   :file:`mobile`   (Exposed API, index.ts exposes mobile only declarations)
+    *   :file:`field-app`   (Exposed API, index.ts exposes field only declarations)
 
-    *   :file:`admin`   (Exposed API, index.ts exposes admin only declarations)
+    *   :file:`admin-app`   (Exposed API, index.ts exposes admin only declarations)
 
     *   :file:`_private`   (Code only used by this plugin)
 
-        *   :file:`desktop`   (Private desktop declarations)
+        *   :file:`office-app`   (Private office declarations)
 
-        *   :file:`mobile`   (Private mobile declarations)
+        *   :file:`field-app`   (Private field declarations)
 
-        *   :file:`admin`   (Private admin declarations)
+        *   :file:`admin-app`   (Private admin declarations)
 
-*   :file:`agent`  (Exposed API, plugins on the agent service use this)
+*   :file:`agent-app`  (Exposed API, plugins on the agent service use this)
 
-*   :file:`client`  (Exposed API, plugins on the client service use this)
+*   :file:`field-service`  (Exposed API, plugins on the field service use this)
 
-*   :file:`server`  (Exposed API, plugins on the server service use this)
+*   :file:`office-service`  (Exposed API, plugins on the office service use this)
+
+*   :file:`logic-service`  (Exposed API, plugins on the logic service use this)
 
 *   :file:`tuples`  (Exposed Tuples, Tuples on any service use these data structures)
 

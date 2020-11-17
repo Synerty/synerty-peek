@@ -187,8 +187,8 @@ If your plugin has a public python API, then ensure :code:`hasApi` above is set 
 :code:`true`.
 
 
-Check Peek Server Config
-------------------------
+Check Peek Logic Service Config
+-------------------------------
 
 The **peek-logic-service** service builds the **admin** and **dev** documentation.
 
@@ -213,9 +213,35 @@ Example: ::
         }
 
 
+Check Peek Fielf Service Config
+--------------------------------
 
-Check Peek Client Config
-------------------------
+The **peek-field-service** service builds the **user** documentation.
+
+----
+
+Edit the :file:`~/peek-field-service.home/config.json` and ensure the following options are set.
+
+-  Ensure :code:`frontend.docBuildEnabled` is set to :code:`true`, with no quotes
+
+-  Ensure :code:`frontend.docBuildPrepareEnabled` is set to :code:`true`, with no quotes
+
+Example: ::
+
+        {
+            ...
+            "frontend": {
+                ...
+                "docBuildEnabled": true,
+                "docBuildPrepareEnabled": true
+            },
+            ...
+        }
+
+
+
+Check Peek Office Service Config
+--------------------------------
 
 The **peek-office-service** service builds the **user** documentation.
 
