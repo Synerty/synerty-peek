@@ -65,7 +65,7 @@ This section sets up the config files for the peek **field** service.
 Create following file and parent directory:
 
 :Windows: :file:`C:\\Users\\peek\\peek-field-service.home\\config.json`
-:Linux: :file:`/home/peek/peek-field-field.home/config.json`
+:Linux: :file:`/home/peek/peek-field-service.home/config.json`
 :Mac:   :file:`/Users/peek/peek-field-service.home/config.json`
 
 .. tip:: Run the service, it will create some of it's config,
