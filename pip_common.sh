@@ -30,7 +30,6 @@ peek-plugin-data-dms
 peek-plugin-diagram
 peek-plugin-diagram-positioner
 peek-plugin-diagram-trace
-peek-plugin-diagram-zepben-menu
 peek-plugin-docdb-generic-menu
 peek-plugin-eventdb
 peek-plugin-gis-diagram
@@ -63,6 +62,7 @@ synerty-peek
 # Ignore all that, define the ones JJC wants for Orion
 
 export ENTERPRISE_PKGS="
+peek-plugin-diagram-zepben-menu
 peek-plugin-enmac-chat
 peek-plugin-enmac-diagram
 peek-plugin-enmac-diagram-loader
