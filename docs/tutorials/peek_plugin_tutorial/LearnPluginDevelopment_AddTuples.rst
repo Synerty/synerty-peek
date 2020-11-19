@@ -169,9 +169,9 @@ Add the following: ::
 
 
 
-.. _learn_plugin_development_add_tuples_edit_logic_service_entry_hook:
+.. _learn_plugin_development_add_tuples_edit_logic_entry_hook:
 
-Edit File :file:`LogicServiceEntryHook.py`
+Edit File :file:`LogicEntryHook.py`
 ``````````````````````````````````````````
 
 Now, we need to load all our Tuples when the plugin is loaded, for every service.
@@ -179,7 +179,7 @@ To do this, we call the methods we've added to the :code:`tuple` packages above.
 
 ----
 
-Edit file :file:`peek_plugin_tutorial/_private/logic-service/LogicServiceEntryHook.py` :
+Edit file :file:`peek_plugin_tutorial/_private/logic/LogicEntryHook.py` :
 
 #.  Add this import up the top of the file ::
 
@@ -206,7 +206,7 @@ The method should now look similar to this ::
     The above steps haven't been completed properly and there is a problem with the
     tuple loading in the peek services.
 
-Edit File :file:`FieldServiceEntryHook.py`
+Edit File :file:`FieldEntryHook.py`
 ``````````````````````````````````````````
 
 This step applies if you're plugin is using the Field Service.
@@ -214,11 +214,11 @@ This step applies if you're plugin is using the Field Service.
 .. note:: This service was add earlier in this tutorial, see
     :ref:`learn_plugin_development_add_field_service`
 
-Edit file :file:`peek_plugin_tutorial/_private/field-service/FieldServiceEntryHook.py` file,
+Edit file :file:`peek_plugin_tutorial/_private/field/FieldEntryHook.py` file,
 apply the same edits from step
-:ref:`learn_plugin_development_add_tuples_edit_logic_service_entry_hook`.
+:ref:`learn_plugin_development_add_tuples_edit_logic_entry_hook`.
 
-Edit File :file:`OfficeServiceEntryHook.py`
+Edit File :file:`OfficeEntryHook.py`
 ```````````````````````````````````````````
 
 This step applies if you're plugin is using the Field Service.
@@ -226,9 +226,9 @@ This step applies if you're plugin is using the Field Service.
 .. note:: This service was add earlier in this tutorial, see
     :ref:`learn_plugin_development_add_office_service`
 
-Edit file :file:`peek_plugin_tutorial/_private/office-service/OfficeServiceEntryHook.py` file,
+Edit file :file:`peek_plugin_tutorial/_private/office/OfficeEntryHook.py` file,
 apply the same edits from step
-:ref:`learn_plugin_development_add_tuples_edit_logic_service_entry_hook`.
+:ref:`learn_plugin_development_add_tuples_edit_logic_entry_hook`.
 
 Edit File :file:`AgentEntryHook.py`
 ```````````````````````````````````
@@ -240,9 +240,9 @@ This step applies if you're plugin is using the Agent service.
 
 Edit file :file:`peek_plugin_tutorial/_private/agent/AgentEntryHook.py` file,
 apply the same edits from step
-:ref:`learn_plugin_development_add_tuples_edit_logic_service_entry_hook`.
+:ref:`learn_plugin_development_add_tuples_edit_logic_entry_hook`.
 
-Edit File :file:`WorkerServiceEntryHook.py`
+Edit File :file:`WorkerEntryHook.py`
 ```````````````````````````````````````````
 
 This step applies if you're plugin is using the Worker service.
@@ -250,9 +250,9 @@ This step applies if you're plugin is using the Worker service.
 .. note:: This service is added in this tutorial, see
     :ref:`learn_plugin_development_add_worker`
 
-Edit file :file:`peek_plugin_tutorial/_private/worker-service/WorkerServiceEntryHook.py` file,
+Edit file :file:`peek_plugin_tutorial/_private/worker/WorkerEntryHook.py` file,
 apply the same edits from step
-:ref:`learn_plugin_development_add_tuples_edit_logic_service_entry_hook`.
+:ref:`learn_plugin_development_add_tuples_edit_logic_entry_hook`.
 
 Test Python Services
 --------------------

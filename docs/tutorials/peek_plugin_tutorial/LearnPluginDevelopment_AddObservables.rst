@@ -8,7 +8,7 @@ Outline
 -------
 
 In this document, we setup the Tuple Observable from VortexJS. The Field and Office
-services use this to request and receive data updates from the Service service.
+services use this to request and receive data updates from the Logic service.
 
 We'll use the term "devices" interchangeably with Field/Office.
 
@@ -113,15 +113,15 @@ and populate it with the following contents.
             return tupleObservable
 
 
-Edit File :file:`LogicServiceEntryHook.py`
+Edit File :file:`LogicEntryHook.py`
 ``````````````````````````````````````````
 
-We need to update :file:`LogicServiceEntryHook.py`, it will initialise the observable object
+We need to update :file:`LogicEntryHook.py`, it will initialise the observable object
 when the Plugin is started.
 
 ----
 
-Edit the file :file:`peek_plugin_tutorial/_private/logic-service/LogicServiceEntryHook.py`:
+Edit the file :file:`peek_plugin_tutorial/_private/logic/LogicEntryHook.py`:
 
 #.  Add this import at the top of the file with the other imports: ::
 
@@ -154,7 +154,7 @@ TupleProviders know how to get the Tuples.
 ----
 
 Create the file
-:file:`peek_plugin_tutorial/_private/field-service/DeviceTupleDataObservableProxy.py`
+:file:`peek_plugin_tutorial/_private/field/DeviceTupleDataObservableProxy.py`
 and populate it with the following contents.
 
 ::
@@ -173,15 +173,15 @@ and populate it with the following contents.
 
 
 
-Edit File :file:`FieldServiceEntryHook.py`
+Edit File :file:`FieldEntryHook.py`
 ``````````````````````````````````````````
 
-We need to update :file:`FieldServiceEntryHook.py`, it will initialise the observable proxy
+We need to update :file:`FieldEntryHook.py`, it will initialise the observable proxy
 object when the Plugin is started.
 
 ----
 
-Edit the file :file:`peek_plugin_tutorial/_private/field-service/FieldServiceEntryHook.py`:
+Edit the file :file:`peek_plugin_tutorial/_private/field/FieldEntryHook.py`:
 
 #.  Add this import at the top of the file with the other imports: ::
 

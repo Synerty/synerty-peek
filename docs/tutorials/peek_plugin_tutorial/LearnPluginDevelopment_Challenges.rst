@@ -25,8 +25,8 @@ The output should resemble this:
 
 ::
 
-    10-Aug-2020 10:08:44 DEBUG peek_plugin_tutorial._private.logic-service.LogicServiceEntryHook:2020-08-10 10:08:44.223694
-    10-Aug-2020 10:08:44 DEBUG peek_plugin_tutorial._private.logic-service.LogicServiceEntryHook:Started
+    10-Aug-2020 10:08:44 DEBUG peek_plugin_tutorial._private.logic.LogicEntryHook:2020-08-10 10:08:44.223694
+    10-Aug-2020 10:08:44 DEBUG peek_plugin_tutorial._private.logic.LogicEntryHook:Started
 
 ----
 

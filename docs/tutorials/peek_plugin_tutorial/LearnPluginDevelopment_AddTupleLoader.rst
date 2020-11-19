@@ -44,11 +44,11 @@ data sources to the Admin web app.
 
 ----
 
-Create the :file:`peek_plugin_tutorial/_private/logic-service/admin_backend` package, with
+Create the :file:`peek_plugin_tutorial/_private/logic/admin_backend` package, with
 the commands ::
 
-        mkdir peek_plugin_tutorial/_private/logic-service/admin_backend
-        touch peek_plugin_tutorial/_private/logic-service/admin_backend/__init__.py
+        mkdir peek_plugin_tutorial/_private/logic/admin_backend
+        touch peek_plugin_tutorial/_private/logic/admin_backend/__init__.py
 
 
 Edit File :file:`admin_backend/__init__.py`
@@ -64,7 +64,7 @@ We can yield more items after the first one, the calling will get an iterable re
 
 ----
 
-Edit file :file:`peek_plugin_tutorial/_private/logic-service/admin_backend/__init__.py`
+Edit file :file:`peek_plugin_tutorial/_private/logic/admin_backend/__init__.py`
 Add the following:
 
 ::
@@ -74,7 +74,7 @@ Add the following:
             pass
 
 
-Edit File :file:`LogicServiceEntryHook.py`
+Edit File :file:`LogicEntryHook.py`
 ````````````````````````````````````
 
 Now, we need to create and destroy our :code:`admin_backend` handlers when the Logic
@@ -91,7 +91,7 @@ shuts down all objects we add to this array. So adding to this array serves two 
 
 ----
 
-Edit file :file:`peek_plugin_tutorial/_private/logic-service/LogicServiceEntryHook.py` :
+Edit file :file:`peek_plugin_tutorial/_private/logic/LogicEntryHook.py` :
 
 #.  Add this import up the top of the file ::
 
@@ -194,7 +194,7 @@ We can yield more items after the first one, the calling will get an iterable re
 
 ----
 
-Edit file :file:`peek_plugin_tutorial/_private/logic-service/admin_backend/__init__.py`
+Edit file :file:`peek_plugin_tutorial/_private/logic/admin_backend/__init__.py`
 
 #. Add the following python import to the top fo the file ::
 
@@ -517,7 +517,7 @@ this will start them when the plugin loads.
 
 ----
 
-Edit file :file:`peek_plugin_tutorial/_private/logic-service/admin_backend/__init__.py`
+Edit file :file:`peek_plugin_tutorial/_private/logic/admin_backend/__init__.py`
 
 #. Add the following python import to the top fo the file ::
 

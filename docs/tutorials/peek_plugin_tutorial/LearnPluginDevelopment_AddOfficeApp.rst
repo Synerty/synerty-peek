@@ -140,8 +140,7 @@ platform that we want to use the office service:
             "assetDir": "_private/office-assets",
             "icon": "/assets/peek_plugin_tutorial/icon.png",
             "showHomeLink": true,
-        }
-
+         }
 
 #.  Ensure your JSON is still valid (Your IDE may help here)
 
@@ -164,7 +163,7 @@ Here is an example ::
         }
 
 Run :file:`run_peek_office_service`
-```````````````````````````
+```````````````````````````````````
 
 Run the peek office service ::
 

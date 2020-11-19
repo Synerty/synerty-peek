@@ -41,7 +41,7 @@ only accept calls from the agent.
 The RPC example could be much simpler, the intention is to show more of a good design
 verses the bare minimum RPC example.
 
-.. image:: LearnRPC_AgentServiceToLogicService.png
+.. image:: LearnRPC_AgentToLogicService.png
 
 Add Package :file:`agent_handlers`
 ``````````````````````````````````
@@ -51,11 +51,11 @@ data to send via the observable.
 
 ----
 
-Create the :file:`peek_plugin_tutorial/_private/logic-service/agent_handlers` package, with
+Create the :file:`peek_plugin_tutorial/_private/logic/agent_handlers` package, with
 the commands ::
 
-        mkdir peek_plugin_tutorial/_private/logic-service/agent_handlers
-        touch peek_plugin_tutorial/_private/logic-service/agent_handlers/__init__.py
+        mkdir peek_plugin_tutorial/_private/logic/agent_handlers
+        touch peek_plugin_tutorial/_private/logic/agent_handlers/__init__.py
 
 
 Add File :file:`RpcForAgent.py`
@@ -69,7 +69,7 @@ multiple files if the require RPC methods grow too large.
 ----
 
 Create the file
-:file:`peek_plugin_tutorial/_private/logic-service/agent_handlers/RpcForAgent.py`
+:file:`peek_plugin_tutorial/_private/logic/agent_handlers/RpcForAgent.py`
 and populate it with the following contents.
 
 ::
@@ -78,7 +78,7 @@ and populate it with the following contents.
 
         from peek_plugin_base.PeekVortexUtil import peekServerName, peekAgentName
         from peek_plugin_tutorial._private.PluginNames import tutorialFilt
-        from peek_plugin_tutorial._private.logic-service.controller.MainController import MainController
+        from peek_plugin_tutorial._private.logic.controller.MainController import MainController
         from peek_plugin_tutorial._private.storage.StringIntTuple import StringIntTuple
         from vortex.rpc.RPC import vortexRPC
 
@@ -167,7 +167,7 @@ RpcForAgent will call.
 
 ----
 
-Edit the file :file:`peek_plugin_tutorial/_private/logic-service/controller/MainController.py`:
+Edit the file :file:`peek_plugin_tutorial/_private/logic/controller/MainController.py`:
 
 #.  Add this line to the bottom of the file, inside the class definition: ::
 
@@ -176,14 +176,14 @@ Edit the file :file:`peek_plugin_tutorial/_private/logic-service/controller/Main
             logger.debug("Agent said : %s", updateStr)
 
 
-Edit File :file:`LogicServiceEntryHook.py`
+Edit File :file:`LogicEntryHook.py`
 ``````````````````````````````````````````
 
-We need to update :file:`LogicServiceEntryHook.py`, to initialise the RpcForAgent.
+We need to update :file:`LogicEntryHook.py`, to initialise the RpcForAgent.
 
 ----
 
-Edit the file :file:`peek_plugin_tutorial/_private/logic-service/LogicServiceEntryHook.py`:
+Edit the file :file:`peek_plugin_tutorial/_private/logic/LogicEntryHook.py`:
 
 #.  Add this import at the top of the file with the other imports: ::
 
@@ -207,10 +207,10 @@ Agent Calling Logic Service RPC
 This section implements the code in the agent that will call the RPC methods
 that the logic service has defined.
 
-Add File :file:`AgentToLogicServiceRpcCallExample.py`
+Add File :file:`AgentToLogicRpcCallExample.py`
 `````````````````````````````````````````````````````
 
-File :file:`AgentToLogicServiceRpcCallExample.py` defines the methods the agent will
+File :file:`AgentToLogicRpcCallExample.py` defines the methods the agent will
 call via RPC.
 
 In this example we have just one file, however it it will be good practice to have
@@ -219,7 +219,7 @@ multiple files if the require RPC methods grow too large.
 ----
 
 Create the file
-:file:`peek_plugin_tutorial/_private/agent/AgentToLogicServiceRpcCallExample.py`
+:file:`peek_plugin_tutorial/_private/agent/AgentToLogicRpcCallExample.py`
 and populate it with the following contents.
 
 ::
@@ -229,13 +229,13 @@ and populate it with the following contents.
         from twisted.internet import reactor
         from twisted.internet.defer import inlineCallbacks
 
-        from peek_plugin_tutorial._private.logic-service.agent_handlers.RpcForAgent import RpcForAgent
+        from peek_plugin_tutorial._private.logic.agent_handlers.RpcForAgent import RpcForAgent
         from peek_plugin_tutorial._private.storage.StringIntTuple import StringIntTuple
 
         logger = logging.getLogger(__name__)
 
 
-        class AgentToLogicServiceRpcCallExample:
+        class AgentToLogicRpcCallExample:
             def start(self):
                 # kickoff the example
                 # Tell the reactor to start it in 5 seconds, we shouldn't do things like
@@ -318,7 +318,7 @@ Edit File :file:`AgentEntryHook.py`
 ```````````````````````````````````
 
 We need to update :file:`AgentEntryHook.py`, to initialise the
-AgentToLogicServiceRpcCallExample.
+AgentToLogicRpcCallExample.
 
 ----
 
@@ -326,14 +326,14 @@ Edit the file :file:`peek_plugin_tutorial/_private/agent/AgentEntryHook.py`:
 
 #.  Add this import at the top of the file with the other imports: ::
 
-        from .AgentToLogicServiceRpcCallExample import AgentToLogicServiceRpcCallExample
+        from .AgentToLogicRpcCallExample import AgentToLogicRpcCallExample
 
 
 #.  Add this line just before the :code:`logger.debug("Started")` line at the end
     of the :code:`start()` method: ::
 
-        # Initialise and start the AgentToLogicServiceRpcCallExample
-        self._loadedObjects.append(AgentToLogicServiceRpcCallExample().start())
+        # Initialise and start the AgentToLogicRpcCallExample
+        self._loadedObjects.append(AgentToLogicRpcCallExample().start())
 
 
 ----
@@ -353,15 +353,15 @@ Some example use cases would be:
 
 .. image:: LearnRPC_LogicServiceToAgentService.png
 
-Add File :file:`RpcForLogicService.py`
+Add File :file:`RpcForLogic.py`
 ``````````````````````````````````````
 
-File :file:`RpcForLogicService.py` defines the methods the logic service will call via RPC.
+File :file:`RpcForLogic.py` defines the methods the logic service will call via RPC.
 
 ----
 
 Create the file
-:file:`peek_plugin_tutorial/_private/agent/RpcForLogicService.py`
+:file:`peek_plugin_tutorial/_private/agent/RpcForLogic.py`
 and populate it with the following contents.
 
 ::
@@ -375,7 +375,7 @@ and populate it with the following contents.
         logger = logging.getLogger(__name__)
 
 
-        class RpcForLogicService:
+        class RpcForLogic:
             def __init__(self):
                 pass
 
@@ -410,7 +410,7 @@ and populate it with the following contents.
 Edit File :file:`AgentEntryHook.py`
 ```````````````````````````````````
 
-We need to update :file:`AgentEntryHook.py`, to initialise the RpcForLogicService.
+We need to update :file:`AgentEntryHook.py`, to initialise the RpcForLogic.
 
 ----
 
@@ -418,14 +418,14 @@ Edit the file :file:`peek_plugin_tutorial/_private/agent/AgentEntryHook.py`:
 
 #.  Add this import at the top of the file with the other imports: ::
 
-        from .RpcForLogicService import RpcForLogicService
+        from .RpcForLogic import RpcForLogic
 
 
 #.  Add this line just before the :code:`logger.debug("Started")` line at the end
     of the :code:`start()` method: ::
 
         # Initialise and start the RPC for Logic Service
-        self._loadedObjects.extend(RpcForLogicService().makeHandlers())
+        self._loadedObjects.extend(RpcForLogic().makeHandlers())
 
 
 ----
@@ -439,17 +439,17 @@ This section implements the code in the logic service that will call the RPC met
 that the agent has defined.
 
 
-Add File :file:`LogicServiceToAgentRpcCallExample.py`
-`````````````````````````````````````````````````````
+Add File :file:`LogicToAgentRpcCallExample.py`
+``````````````````````````````````````````````
 
-File :file:`LogicServiceToAgentRpcCallExample.py` defines the methods the logic service
+File :file:`LogicToAgentRpcCallExample.py` defines the methods the logic service
 will call via RPC.
 
 
 ----
 
 Create the file
-:file:`peek_plugin_tutorial/_private/logic-service/LogicServiceToAgentRpcCallExample.py`
+:file:`peek_plugin_tutorial/_private/logic/LogicToAgentRpcCallExample.py`
 and populate it with the following contents.
 
 ::
@@ -459,12 +459,12 @@ and populate it with the following contents.
         from twisted.internet import reactor
         from twisted.internet.defer import inlineCallbacks
 
-        from peek_plugin_tutorial._private.agent.RpcForLogicService import RpcForLogicService
+        from peek_plugin_tutorial._private.agent.RpcForLogic import RpcForLogic
 
         logger = logging.getLogger(__name__)
 
 
-        class LogicServiceToAgentRpcCallExample:
+        class LogicToAgentRpcCallExample:
             def start(self):
                 # kickoff the example
                 # Tell the reactor to start it in 20 seconds, we shouldn't do things like
@@ -476,33 +476,33 @@ and populate it with the following contents.
             @inlineCallbacks
             def run(self):
                 # Call the agents RPC method
-                result = yield RpcForLogicService.subInts(7, kwval1=5)
+                result = yield RpcForLogic.subInts(7, kwval1=5)
                 logger.debug("seedInt result = %s (Should be 2)", result)
 
             def shutdown(self):
                 pass
 
 
-Edit File :file:`LogicServiceEntryHook.py`
-``````````````````````````````````````````
+Edit File :file:`LogicEntryHook.py`
+```````````````````````````````````
 
-We need to update :file:`LogicServiceEntryHook.py`, to initialise the
-LogicServiceToAgentRpcCallExample.
+We need to update :file:`LogicEntryHook.py`, to initialise the
+LogicToAgentRpcCallExample.
 
 ----
 
-Edit the file :file:`peek_plugin_tutorial/_private/logic-service/LogicServiceEntryHook.py`:
+Edit the file :file:`peek_plugin_tutorial/_private/logic/LogicEntryHook.py`:
 
 #.  Add this import at the top of the file with the other imports: ::
 
-        from .LogicServiceToAgentRpcCallExample import LogicServiceToAgentRpcCallExample
+        from .LogicToAgentRpcCallExample import LogicToAgentRpcCallExample
 
 
 #.  Add this line just before the :code:`logger.debug("Started")` line at the end
     of the :code:`start()` method: ::
 
         # Initialise and start the RPC for Logic Service
-        self._loadedObjects.append(LogicServiceToAgentRpcCallExample().start())
+        self._loadedObjects.append(LogicToAgentRpcCallExample().start())
 
 
 ----
@@ -522,43 +522,43 @@ Testing
 
 ::
 
-        19-Apr-2017 09:24:42 DEBUG vortex.rpc.RPC:Received RPC call for peek_plugin_tutorial._private.logic-service.agent_handlers.RpcForAgent.RpcForAgent.updateStatus
-        19-Apr-2017 09:24:42 DEBUG peek_plugin_tutorial._private.logic-service.controller.MainController:Agent said : Agent RPC Example Started
-        19-Apr-2017 09:24:42 DEBUG vortex.rpc.RPC:Received RPC call for peek_plugin_tutorial._private.logic-service.agent_handlers.RpcForAgent.RpcForAgent.addInts
-        19-Apr-2017 09:24:42 DEBUG vortex.rpc.RPC:Received RPC call for peek_plugin_tutorial._private.logic-service.agent_handlers.RpcForAgent.RpcForAgent.addInts
-        19-Apr-2017 09:24:42 DEBUG vortex.rpc.RPC:Received RPC call for peek_plugin_tutorial._private.logic-service.agent_handlers.RpcForAgent.RpcForAgent.addInts
-        19-Apr-2017 09:24:42 DEBUG vortex.rpc.RPC:Received RPC call for peek_plugin_tutorial._private.logic-service.agent_handlers.RpcForAgent.RpcForAgent.addInts
-        19-Apr-2017 09:24:42 DEBUG vortex.rpc.RPC:Received RPC call for peek_plugin_tutorial._private.logic-service.agent_handlers.RpcForAgent.RpcForAgent.addInts
-        19-Apr-2017 09:24:42 DEBUG vortex.rpc.RPC:Received RPC call for peek_plugin_tutorial._private.logic-service.agent_handlers.RpcForAgent.RpcForAgent.addStringInt
-        19-Apr-2017 09:24:42 DEBUG vortex.rpc.RPC:Received RPC call for peek_plugin_tutorial._private.logic-service.agent_handlers.RpcForAgent.RpcForAgent.updateStatus
-        19-Apr-2017 09:24:42 DEBUG peek_plugin_tutorial._private.logic-service.controller.MainController:Agent said : Agent RPC Example Completed
+        19-Apr-2017 09:24:42 DEBUG vortex.rpc.RPC:Received RPC call for peek_plugin_tutorial._private.logic.agent_handlers.RpcForAgent.RpcForAgent.updateStatus
+        19-Apr-2017 09:24:42 DEBUG peek_plugin_tutorial._private.logic.controller.MainController:Agent said : Agent RPC Example Started
+        19-Apr-2017 09:24:42 DEBUG vortex.rpc.RPC:Received RPC call for peek_plugin_tutorial._private.logic.agent_handlers.RpcForAgent.RpcForAgent.addInts
+        19-Apr-2017 09:24:42 DEBUG vortex.rpc.RPC:Received RPC call for peek_plugin_tutorial._private.logic.agent_handlers.RpcForAgent.RpcForAgent.addInts
+        19-Apr-2017 09:24:42 DEBUG vortex.rpc.RPC:Received RPC call for peek_plugin_tutorial._private.logic.agent_handlers.RpcForAgent.RpcForAgent.addInts
+        19-Apr-2017 09:24:42 DEBUG vortex.rpc.RPC:Received RPC call for peek_plugin_tutorial._private.logic.agent_handlers.RpcForAgent.RpcForAgent.addInts
+        19-Apr-2017 09:24:42 DEBUG vortex.rpc.RPC:Received RPC call for peek_plugin_tutorial._private.logic.agent_handlers.RpcForAgent.RpcForAgent.addInts
+        19-Apr-2017 09:24:42 DEBUG vortex.rpc.RPC:Received RPC call for peek_plugin_tutorial._private.logic.agent_handlers.RpcForAgent.RpcForAgent.addStringInt
+        19-Apr-2017 09:24:42 DEBUG vortex.rpc.RPC:Received RPC call for peek_plugin_tutorial._private.logic.agent_handlers.RpcForAgent.RpcForAgent.updateStatus
+        19-Apr-2017 09:24:42 DEBUG peek_plugin_tutorial._private.logic.controller.MainController:Agent said : Agent RPC Example Completed
 
 
 :code:`run_peek_agent_service` log example:
 
 ::
 
-        19-Apr-2017 09:24:42 DEBUG vortex.rpc.RPC:Calling RPC for peek_plugin_tutorial._private.logic-service.agent_handlers.RpcForAgent.RpcForAgent.updateStatus
-        19-Apr-2017 09:24:42 DEBUG vortex.rpc.RPC:Received RPC result for peek_plugin_tutorial._private.logic-service.agent_handlers.RpcForAgent.RpcForAgent.updateStatus
-        19-Apr-2017 09:24:42 DEBUG peek_plugin_tutorial._private.agent.AgentToLogicServiceRpcCallExample:seedInt = 5
-        19-Apr-2017 09:24:42 DEBUG vortex.rpc.RPC:Calling RPC for peek_plugin_tutorial._private.logic-service.agent_handlers.RpcForAgent.RpcForAgent.addInts
-        19-Apr-2017 09:24:42 DEBUG vortex.rpc.RPC:Received RPC result for peek_plugin_tutorial._private.logic-service.agent_handlers.RpcForAgent.RpcForAgent.addInts
-        19-Apr-2017 09:24:42 DEBUG peek_plugin_tutorial._private.agent.AgentToLogicServiceRpcCallExample:seedInt = 12
-        19-Apr-2017 09:24:42 DEBUG vortex.rpc.RPC:Calling RPC for peek_plugin_tutorial._private.logic-service.agent_handlers.RpcForAgent.RpcForAgent.addInts
-        19-Apr-2017 09:24:42 DEBUG vortex.rpc.RPC:Received RPC result for peek_plugin_tutorial._private.logic-service.agent_handlers.RpcForAgent.RpcForAgent.addInts
-        19-Apr-2017 09:24:42 DEBUG peek_plugin_tutorial._private.agent.AgentToLogicServiceRpcCallExample:seedInt = 19
-        19-Apr-2017 09:24:42 DEBUG vortex.rpc.RPC:Calling RPC for peek_plugin_tutorial._private.logic-service.agent_handlers.RpcForAgent.RpcForAgent.addInts
-        19-Apr-2017 09:24:42 DEBUG vortex.rpc.RPC:Received RPC result for peek_plugin_tutorial._private.logic-service.agent_handlers.RpcForAgent.RpcForAgent.addInts
-        19-Apr-2017 09:24:42 DEBUG peek_plugin_tutorial._private.agent.AgentToLogicServiceRpcCallExample:seedInt = 26
-        19-Apr-2017 09:24:42 DEBUG vortex.rpc.RPC:Calling RPC for peek_plugin_tutorial._private.logic-service.agent_handlers.RpcForAgent.RpcForAgent.addInts
-        19-Apr-2017 09:24:42 DEBUG vortex.rpc.RPC:Received RPC result for peek_plugin_tutorial._private.logic-service.agent_handlers.RpcForAgent.RpcForAgent.addInts
-        19-Apr-2017 09:24:42 DEBUG peek_plugin_tutorial._private.agent.AgentToLogicServiceRpcCallExample:seedInt = 33
-        19-Apr-2017 09:24:42 DEBUG vortex.rpc.RPC:Calling RPC for peek_plugin_tutorial._private.logic-service.agent_handlers.RpcForAgent.RpcForAgent.addInts
-        19-Apr-2017 09:24:42 DEBUG vortex.rpc.RPC:Received RPC result for peek_plugin_tutorial._private.logic-service.agent_handlers.RpcForAgent.RpcForAgent.addInts
-        19-Apr-2017 09:24:42 DEBUG peek_plugin_tutorial._private.agent.AgentToLogicServiceRpcCallExample:seedInt = 40
-        19-Apr-2017 09:24:42 DEBUG vortex.rpc.RPC:Calling RPC for peek_plugin_tutorial._private.logic-service.agent_handlers.RpcForAgent.RpcForAgent.addStringInt
-        19-Apr-2017 09:24:42 DEBUG peek_plugin_tutorial._private.agent.AgentToLogicServiceRpcCallExample:runWithInlineCallback finished
-        19-Apr-2017 09:24:42 DEBUG vortex.rpc.RPC:Received RPC result for peek_plugin_tutorial._private.logic-service.agent_handlers.RpcForAgent.RpcForAgent.addStringInt
-        19-Apr-2017 09:24:42 DEBUG vortex.rpc.RPC:Calling RPC for peek_plugin_tutorial._private.logic-service.agent_handlers.RpcForAgent.RpcForAgent.updateStatus
-        19-Apr-2017 09:24:42 DEBUG vortex.rpc.RPC:Received RPC result for peek_plugin_tutorial._private.logic-service.agent_handlers.RpcForAgent.RpcForAgent.updateStatus
+        19-Apr-2017 09:24:42 DEBUG vortex.rpc.RPC:Calling RPC for peek_plugin_tutorial._private.logic.agent_handlers.RpcForAgent.RpcForAgent.updateStatus
+        19-Apr-2017 09:24:42 DEBUG vortex.rpc.RPC:Received RPC result for peek_plugin_tutorial._private.logic.agent_handlers.RpcForAgent.RpcForAgent.updateStatus
+        19-Apr-2017 09:24:42 DEBUG peek_plugin_tutorial._private.agent.AgentToLogicRpcCallExample:seedInt = 5
+        19-Apr-2017 09:24:42 DEBUG vortex.rpc.RPC:Calling RPC for peek_plugin_tutorial._private.logic.agent_handlers.RpcForAgent.RpcForAgent.addInts
+        19-Apr-2017 09:24:42 DEBUG vortex.rpc.RPC:Received RPC result for peek_plugin_tutorial._private.logic.agent_handlers.RpcForAgent.RpcForAgent.addInts
+        19-Apr-2017 09:24:42 DEBUG peek_plugin_tutorial._private.agent.AgentToLogicRpcCallExample:seedInt = 12
+        19-Apr-2017 09:24:42 DEBUG vortex.rpc.RPC:Calling RPC for peek_plugin_tutorial._private.logic.agent_handlers.RpcForAgent.RpcForAgent.addInts
+        19-Apr-2017 09:24:42 DEBUG vortex.rpc.RPC:Received RPC result for peek_plugin_tutorial._private.logic.agent_handlers.RpcForAgent.RpcForAgent.addInts
+        19-Apr-2017 09:24:42 DEBUG peek_plugin_tutorial._private.agent.AgentToLogicRpcCallExample:seedInt = 19
+        19-Apr-2017 09:24:42 DEBUG vortex.rpc.RPC:Calling RPC for peek_plugin_tutorial._private.logic.agent_handlers.RpcForAgent.RpcForAgent.addInts
+        19-Apr-2017 09:24:42 DEBUG vortex.rpc.RPC:Received RPC result for peek_plugin_tutorial._private.logic.agent_handlers.RpcForAgent.RpcForAgent.addInts
+        19-Apr-2017 09:24:42 DEBUG peek_plugin_tutorial._private.agent.AgentToLogicRpcCallExample:seedInt = 26
+        19-Apr-2017 09:24:42 DEBUG vortex.rpc.RPC:Calling RPC for peek_plugin_tutorial._private.logic.agent_handlers.RpcForAgent.RpcForAgent.addInts
+        19-Apr-2017 09:24:42 DEBUG vortex.rpc.RPC:Received RPC result for peek_plugin_tutorial._private.logic.agent_handlers.RpcForAgent.RpcForAgent.addInts
+        19-Apr-2017 09:24:42 DEBUG peek_plugin_tutorial._private.agent.AgentToLogicRpcCallExample:seedInt = 33
+        19-Apr-2017 09:24:42 DEBUG vortex.rpc.RPC:Calling RPC for peek_plugin_tutorial._private.logic.agent_handlers.RpcForAgent.RpcForAgent.addInts
+        19-Apr-2017 09:24:42 DEBUG vortex.rpc.RPC:Received RPC result for peek_plugin_tutorial._private.logic.agent_handlers.RpcForAgent.RpcForAgent.addInts
+        19-Apr-2017 09:24:42 DEBUG peek_plugin_tutorial._private.agent.AgentToLogicRpcCallExample:seedInt = 40
+        19-Apr-2017 09:24:42 DEBUG vortex.rpc.RPC:Calling RPC for peek_plugin_tutorial._private.logic.agent_handlers.RpcForAgent.RpcForAgent.addStringInt
+        19-Apr-2017 09:24:42 DEBUG peek_plugin_tutorial._private.agent.AgentToLogicRpcCallExample:runWithInlineCallback finished
+        19-Apr-2017 09:24:42 DEBUG vortex.rpc.RPC:Received RPC result for peek_plugin_tutorial._private.logic.agent_handlers.RpcForAgent.RpcForAgent.addStringInt
+        19-Apr-2017 09:24:42 DEBUG vortex.rpc.RPC:Calling RPC for peek_plugin_tutorial._private.logic.agent_handlers.RpcForAgent.RpcForAgent.updateStatus
+        19-Apr-2017 09:24:42 DEBUG vortex.rpc.RPC:Received RPC result for peek_plugin_tutorial._private.logic.agent_handlers.RpcForAgent.RpcForAgent.updateStatus
 

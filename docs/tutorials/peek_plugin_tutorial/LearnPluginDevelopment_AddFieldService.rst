@@ -9,40 +9,40 @@ This document is a stripped version of :ref:`learn_plugin_development_add_logic_
 Field Service File Structure
 -----------------------------
 
-Add Package :file:`_private/field-service`
-````````````````````````````````````````
+Add Package :file:`_private/field`
+``````````````````````````````````
 
-Create directory :file:`peek_plugin_tutorial/_private/field-service`
+Create directory :file:`peek_plugin_tutorial/_private/field`
 
-Create an empty package file in the field-service directory,
-:file:`peek_plugin_tutorial/_private/field-service/__init__.py`
+Create an empty package file in the field directory,
+:file:`peek_plugin_tutorial/_private/field/__init__.py`
 
 Commands: ::
 
-        mkdir peek_plugin_tutorial/_private/field-service
-        touch peek_plugin_tutorial/_private/field-service/__init__.py
+        mkdir peek_plugin_tutorial/_private/field
+        touch peek_plugin_tutorial/_private/field/__init__.py
 
 
-Add File :file:`FieldServiceEntryHook.py`
+Add File :file:`FieldEntryHook.py`
 ```````````````````````````````````
 
-Create the file :file:`peek_plugin_tutorial/_private/field-service/FieldServiceEntryHook.py`
+Create the file :file:`peek_plugin_tutorial/_private/field/FieldEntryHook.py`
 and populate it with the following contents.
 
 ::
 
         import logging
 
-        from peek_plugin_base.field-service.PluginFieldServiceEntryHookABC import PluginFieldServiceEntryHookABC
+        from peek_plugin_base.field.PluginFieldEntryHookABC import PluginFieldEntryHookABC
 
         logger = logging.getLogger(__name__)
 
 
-        class FieldServiceEntryHook(PluginFieldServiceEntryHookABC):
+        class FieldEntryHook(PluginFieldEntryHookABC):
             def __init__(self, *args, **kwargs):
                 """" Constructor """
                 # Call the base classes constructor
-                PluginFieldServiceEntryHookABC.__init__(self, *args, **kwargs)
+                PluginFieldEntryHookABC.__init__(self, *args, **kwargs)
 
                 #: Loaded Objects, This is a list of all objects created when we start
                 self._loadedObjects = []
@@ -92,13 +92,13 @@ Edit :file:`peek_plugin_tutorial/__init__.py`
 
 Edit the file :file:`peek_plugin_tutorial/__init__.py`, and add the following: ::
 
-        from peek_plugin_base.field-service.PluginFieldServiceEntryHookABC import PluginFieldServiceEntryHookABC
+        from peek_plugin_base.field.PluginFieldEntryHookABC import PluginFieldEntryHookABC
         from typing import Type
 
 
-        def peekFieldServiceEntryHook() -> Type[PluginFieldServiceEntryHookABC]:
-            from ._private.field-service.FieldServiceEntryHook import FieldServiceEntryHook
-            return FieldServiceEntryHook
+        def peekFieldEntryHook() -> Type[PluginFieldEntryHookABC]:
+            from ._private.field.FieldEntryHook import FieldEntryHook
+            return FieldEntryHook
 
 
 Edit :file:`plugin_package.json`
@@ -106,15 +106,15 @@ Edit :file:`plugin_package.json`
 
 Edit the file :file:`peek_plugin_tutorial/plugin_package.json` :
 
-#.  Add **"field-service"** to the requiresServices section so it looks like ::
+#.  Add **"field"** to the requiresServices section so it looks like ::
 
         "requiresServices": [
-            "field-service",
+            "field",
         ]
 
-#.  Add the **field-service** section after **requiresServices** section: ::
+#.  Add the **field** section after **requiresServices** section: ::
 
-        "field-service": {
+        "field": {
         },
 
 #.  Ensure your JSON is still valid (Your IDE may help here)
@@ -126,9 +126,9 @@ Here is an example ::
                 ...
             },
             "requiresServices": [
-                "field-service",
+                "field",
             ],
-            "field-service": {
+            "field": {
             },
         }
 
@@ -140,7 +140,7 @@ The plugin should now be ready for the field to load.
 Running on the Field Service
 -----------------------------
 
-Edit :file:`~/peek-field-service.home/config.json`:
+Edit :file:`~/peek-field.home/config.json`:
 
 #.  Ensure **logging.level** is set to **"DEBUG"**
 #.  Add **"peek_plugin_tutorial"** to the **plugin.enabled** array

@@ -244,11 +244,11 @@ the plugin, like a brain controlling limbs.
 
 ----
 
-Create the :file:`peek_plugin_tutorial/_private/logic-service/controller` package, with
+Create the :file:`peek_plugin_tutorial/_private/logic/controller` package, with
 the commands ::
 
-        mkdir peek_plugin_tutorial/_private/logic-service/controller
-        touch peek_plugin_tutorial/_private/logic-service/controller/__init__.py
+        mkdir peek_plugin_tutorial/_private/logic/controller
+        touch peek_plugin_tutorial/_private/logic/controller/__init__.py
 
 
 Add File :file:`MainController.py`
@@ -262,7 +262,7 @@ In this example we have everything in MainController.
 ----
 
 Create the file
-:file:`peek_plugin_tutorial/_private/logic-service/controller/MainController.py`
+:file:`peek_plugin_tutorial/_private/logic/controller/MainController.py`
 and populate it with the following contents.
 
 ::
@@ -366,7 +366,7 @@ plugin and calls the relevant :code:`TupleActionProcessorDelegateABC`.
 ----
 
 Create the file
-:file:`peek_plugin_tutorial/_private/logic-service/TupleActionProcessor.py`
+:file:`peek_plugin_tutorial/_private/logic/TupleActionProcessor.py`
 and populate it with the following contents.
 
 ::
@@ -386,15 +386,15 @@ and populate it with the following contents.
             return processor
 
 
-Edit File :file:`LogicServiceEntryHook.py`
-``````````````````````````````````````````
+Edit File :file:`LogicEntryHook.py`
+```````````````````````````````````
 
-We need to update :file:`LogicServiceEntryHook.py`, it will initialise the
+We need to update :file:`LogicEntryHook.py`, it will initialise the
  :code:`MainController` and :code:`TupleActionProcessor` objects.
 
 ----
 
-Edit the file :file:`peek_plugin_tutorial/_private/logic-service/LogicServicEntryHook.py`:
+Edit the file :file:`peek_plugin_tutorial/_private/logic/LogicEntryHook.py`:
 
 #.  Add these imports at the top of the file with the other imports: ::
 
@@ -429,7 +429,7 @@ and the Logic Service.
 ----
 
 Create the file
-:file:`peek_plugin_tutorial/_private/field-service/DeviceTupleProcessorActionProxy.py`
+:file:`peek_plugin_tutorial/_private/field/DeviceTupleProcessorActionProxy.py`
 and populate it with the following contents.
 
 ::
@@ -447,15 +447,15 @@ and populate it with the following contents.
                         additionalFilt=tutorialFilt)
 
 
-Edit File :file:`FieldServiceEntryHook.py`
-````````````````````````````````````
+Edit File :file:`FieldEntryHook.py`
+```````````````````````````````````
 
-We need to update :file:`FieldServiceEntryHook.py`, it will initialise the tuple action proxy
+We need to update :file:`FieldEntryHook.py`, it will initialise the tuple action proxy
 object when the Plugin is started.
 
 ----
 
-Edit the file :file:`peek_plugin_tutorial/_private/field-service/FieldServiceEntryHook.py`:
+Edit the file :file:`peek_plugin_tutorial/_private/field/FieldEntryHook.py`:
 
 #.  Add this import at the top of the file with the other imports: ::
 
@@ -480,7 +480,7 @@ and the Logic Service.
 ----
 
 Create the file
-:file:`peek_plugin_tutorial/_private/office-service/DeviceTupleProcessorActionProxy.py`
+:file:`peek_plugin_tutorial/_private/office/DeviceTupleProcessorActionProxy.py`
 and populate it with the following contents.
 
 ::
@@ -498,15 +498,15 @@ and populate it with the following contents.
                         additionalFilt=tutorialFilt)
 
 
-Edit File :file:`OfficeServiceEntryHook.py`
+Edit File :file:`OfficeEntryHook.py`
 ````````````````````````````````````
 
-We need to update :file:`OfficeServiceEntryHook.py`, it will initialise the tuple action proxy
+We need to update :file:`OfficeEntryHook.py`, it will initialise the tuple action proxy
 object when the Plugin is started.
 
 ----
 
-Edit the file :file:`peek_plugin_tutorial/_private/office-service/FieldServiceEntryHook.py`:
+Edit the file :file:`peek_plugin_tutorial/_private/office/OfficeEntryHook.py`:
 
 #.  Add this import at the top of the file with the other imports: ::
 

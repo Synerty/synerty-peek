@@ -231,7 +231,7 @@ Push work from logic to worker service
 
 .. note:: Ensure :file:`rabbitmq` and :file:`redis` services are running
 
-Create :file:`peek_plugin_tutorial/_private/logic-service/controller/RandomNumberWorkerController.py` with below content:
+Create :file:`peek_plugin_tutorial/_private/logic/controller/RandomNumberWorkerController.py` with below content:
 
 ::
 
@@ -297,16 +297,16 @@ Create :file:`peek_plugin_tutorial/_private/logic-service/controller/RandomNumbe
                 except Exception as e:
                     logger.debug(" RandomNumber task failed : %s", str(e))
 
-Edit :file:`peek_plugin_tutorial/_private/logic-service/LogicServiceEntryHook.py`:
+Edit :file:`peek_plugin_tutorial/_private/logic/LogicEntryHook.py`:
 
 #. Add the following imports at the top of the file with the other imports: ::
 
-        from peek_plugin_base.logic-service.PluginLogicServiceWorkerEntryHookABC import PluginLogicServiceWorkerEntryHookABC
-        from peek_plugin_tutorial._private.logic-service.controller.RandomNumberWorkerController import RandomNumberWorkerController
+        from peek_plugin_base.logic.PluginLogicWorkerEntryHookABC import PluginLogicWorkerEntryHookABC
+        from peek_plugin_tutorial._private.logic.controller.RandomNumberWorkerController import RandomNumberWorkerController
 
-#. Add :file:`PluginLogicServiceWorkerEntryHookABC` to list of inherited class: ::
+#. Add :file:`PluginLogicWorkerEntryHookABC` to list of inherited class: ::
 
-        class LogicServiceWorkerEntryHook(PluginLogicServiceWorkerEntryHookABC, ...):
+        class LogicWorkerEntryHook(PluginLogicWorkerEntryHookABC, ...):
 
 
 #. Add this line just before the :code:`logger.debug("Started")` line at the end of the :code:`start()` method: ::

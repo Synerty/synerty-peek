@@ -9,40 +9,40 @@ This document is a stripped version of :ref:`learn_plugin_development_add_logic_
 Office Service File Structure
 -----------------------------
 
-Add Package :file:`_private/office-service`
-````````````````````````````````````````
+Add Package :file:`_private/office`
+```````````````````````````````````
 
-Create directory :file:`peek_plugin_tutorial/_private/office-service`
+Create directory :file:`peek_plugin_tutorial/_private/office`
 
-Create an empty package file in the office-service directory,
-:file:`peek_plugin_tutorial/_private/office-service/__init__.py`
+Create an empty package file in the office directory,
+:file:`peek_plugin_tutorial/_private/office/__init__.py`
 
 Commands: ::
 
-        mkdir peek_plugin_tutorial/_private/office-service
-        touch peek_plugin_tutorial/_private/office-service/__init__.py
+        mkdir peek_plugin_tutorial/_private/office
+        touch peek_plugin_tutorial/_private/office/__init__.py
 
 
-Add File :file:`OfficeServiceEntryHook.py`
+Add File :file:`OfficeEntryHook.py`
 ```````````````````````````````````
 
-Create the file :file:`peek_plugin_tutorial/_private/office-service/OfficeServiceEntryHook.py`
+Create the file :file:`peek_plugin_tutorial/_private/office/OfficeEntryHook.py`
 and populate it with the following contents.
 
 ::
 
         import logging
 
-        from peek_plugin_base.office-service.PluginOfficeServiceEntryHookABC import PluginOfficeServiceEntryHookABC
+        from peek_plugin_base.office.PluginOfficeEntryHookABC import PluginOfficeEntryHookABC
 
         logger = logging.getLogger(__name__)
 
 
-        class OfficeServiceEntryHook(PluginOfficeServiceEntryHookABC):
+        class OfficeEntryHook(PluginOfficeEntryHookABC):
             def __init__(self, *args, **kwargs):
                 """" Constructor """
                 # Call the base classes constructor
-                PluginOfficeServiceEntryHookABC.__init__(self, *args, **kwargs)
+                PluginOfficeEntryHookABC.__init__(self, *args, **kwargs)
 
                 #: Loaded Objects, This is a list of all objects created when we start
                 self._loadedObjects = []
@@ -92,13 +92,13 @@ Edit :file:`peek_plugin_tutorial/__init__.py`
 
 Edit the file :file:`peek_plugin_tutorial/__init__.py`, and add the following: ::
 
-        from peek_plugin_base.office-service.PluginOfficeServiceEntryHookABC import PluginOfficeServiceEntryHookABC
+        from peek_plugin_base.office.PluginOfficeEntryHookABC import PluginOfficeEntryHookABC
         from typing import Type
 
 
-        def peekOfficeServiceEntryHook() -> Type[PluginOfficeServiceEntryHookABC]:
-            from ._private.office-service.OfficeServiceEntryHook import OfficeServiceEntryHook
-            return OfficeServiceEntryHook
+        def peekOfficeEntryHook() -> Type[PluginOfficeEntryHookABC]:
+            from ._private.office.OfficeEntryHook import OfficeEntryHook
+            return OfficeEntryHook
 
 
 Edit :file:`plugin_package.json`
@@ -106,15 +106,15 @@ Edit :file:`plugin_package.json`
 
 Edit the file :file:`peek_plugin_tutorial/plugin_package.json` :
 
-#.  Add **"office-service"** to the requiresServices section so it looks like ::
+#.  Add **"office"** to the requiresServices section so it looks like ::
 
         "requiresServices": [
-            "office-service",
+            "office",
         ]
 
-#.  Add the **office-service** section after **requiresServices** section: ::
+#.  Add the **office** section after **requiresServices** section: ::
 
-        "office-service": {
+        "office": {
         }
 
 #.  Ensure your JSON is still valid (Your IDE may help here)
@@ -126,9 +126,9 @@ Here is an example ::
                 ...
             },
             "requiresServices": [
-                "office-service",
+                "office",
             ],
-            "office-service": {
+            "office": {
             }
         }
 
@@ -140,7 +140,7 @@ The plugin should now be ready for the office to load.
 Running on the Office Service
 -----------------------------
 
-Edit :file:`~/peek-office-service.home/config.json`:
+Edit :file:`~/peek-office.home/config.json`:
 
 #.  Ensure **logging.level** is set to **"DEBUG"**
 #.  Add **"peek_plugin_tutorial"** to the **plugin.enabled** array

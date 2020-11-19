@@ -85,22 +85,22 @@ and populate it with the following contents.
 
 
 
-Add Package :file:`logic-service`
+Add Package :file:`logic`
 `````````````````````````````````
 
 Have you ever wondered why everything so far has been under the :file:`_private` package?
 It's about to make more sense.
 
-The :file:`peek_plugin_tutorial.logic-service` python package will contain the
+The :file:`peek_plugin_tutorial.logic` python package will contain the
 exposed API abstract classes.
 
 ----
 
-Create the :file:`peek_plugin_tutorial/logic-service` package, with
+Create the :file:`peek_plugin_tutorial/logic` package, with
 the commands ::
 
-        mkdir peek_plugin_tutorial/logic-service
-        touch peek_plugin_tutorial/logic-service/__init__.py
+        mkdir peek_plugin_tutorial/logic
+        touch peek_plugin_tutorial/logic/__init__.py
 
 
 Add File :file:`TutorialApiABC.py`
@@ -112,7 +112,7 @@ be detailed docstrings. It doesn't contain any implementation.
 ----
 
 Create the file
-:file:`peek_plugin_tutorial/logic-service/TutorialApiABC.py`
+:file:`peek_plugin_tutorial/logic/TutorialApiABC.py`
 and populate it with the following contents.
 
 ::
@@ -139,19 +139,19 @@ and populate it with the following contents.
 Add File :file:`TutorialApi.py`
 ```````````````````````````````
 
-File :file:`TutorialApi.py` is the implementation of the API. An insance of this class
+File :file:`TutorialApi.py` is the implementation of the API. An instance of this class
 will be passed to other APIs when they ask for it.
 
 ----
 
 Create the file
-:file:`peek_plugin_tutorial/_private/logic-service/TutorialApi.py`
+:file:`peek_plugin_tutorial/_private/logic/TutorialApi.py`
 and populate it with the following contents.
 
 ::
 
-        from peek_plugin_tutorial._private.logic-service.controller.MainController import MainController
-        from peek_plugin_tutorial.logic-service.TutorialApiABC import TutorialApiABC
+        from peek_plugin_tutorial._private.logic.controller.MainController import MainController
+        from peek_plugin_tutorial.logic.TutorialApiABC import TutorialApiABC
         from peek_plugin_tutorial.tuples.DoSomethingTuple import DoSomethingTuple
 
 
@@ -178,14 +178,14 @@ and populate it with the following contents.
                 pass
 
 
-Edit File :file:`LogicServiceEntryHook.py`
+Edit File :file:`LogicEntryHook.py`
 ``````````````````````````````````````````
 
-We need to update :file:`LogicServiceEntryHook.py`, to initialise the API object.
+We need to update :file:`LogicEntryHook.py`, to initialise the API object.
 
 ----
 
-Edit the file :file:`peek_plugin_tutorial/_private/logic-service/LogicServiceEntryHook.py`:
+Edit the file :file:`peek_plugin_tutorial/_private/logic/LogicEntryHook.py`:
 
 #.  Add this import at the top of the file with the other imports: ::
 
@@ -211,11 +211,11 @@ Edit the file :file:`peek_plugin_tutorial/_private/logic-service/LogicServiceEnt
         self._api = None
 
 
-#.  Add this method to end of the :code:`LogicServiceEntryHook` class: ::
+#.  Add this method to end of the :code:`LogicEntryHook` class: ::
 
 
         @property
-        def publishedLogicServiceApi(self) -> object:
+        def publishedLogicApi(self) -> object:
             """ Published Logic Service API
 
             :return  class that implements the API that can be used by other Plugins on this
@@ -256,7 +256,7 @@ File :file:`ExampleUseTaskApi.py` contains the code that uses the Peek Inbox Tas
 ----
 
 Create the file
-:file:`peek_plugin_tutorial/_private/logic-service/ExampleUseTaskApi.py`
+:file:`peek_plugin_tutorial/_private/logic/ExampleUseTaskApi.py`
 and populate it with the following contents.
 
 Replace the :code:`"userId"` with your user id.
@@ -270,7 +270,7 @@ Replace the :code:`"userId"` with your user id.
         from twisted.internet import reactor
         from twisted.internet.defer import inlineCallbacks
 
-        from peek_plugin_inbox.logic-service.InboxApiABC import InboxApiABC, NewTask
+        from peek_plugin_inbox.logic.InboxApiABC import InboxApiABC, NewTask
         from peek_plugin_tutorial._private.logic service.controller.MainController import MainController
         from peek_plugin_tutorial._private.PluginNames import tutorialPluginName
 
@@ -311,18 +311,18 @@ Replace the :code:`"userId"` with your user id.
                 pass
 
 
-Edit File :file:`LogicServiceEntryHook.py`
+Edit File :file:`LogicEntryHook.py`
 ``````````````````````````````````````````
 
-We need to update :file:`LogicServiceEntryHook.py`, to initialise the example code
+We need to update :file:`LogicEntryHook.py`, to initialise the example code
 
 ----
 
-Edit the file :file:`peek_plugin_tutorial/_private/logic-service/LogicServiceEntryHook.py`:
+Edit the file :file:`peek_plugin_tutorial/_private/logic/LogicEntryHook.py`:
 
 #.  Add this import at the top of the file with the other imports: ::
 
-        from peek_plugin_inbox.logic-service.InboxApiABC import InboxApiABC
+        from peek_plugin_inbox.logic.InboxApiABC import InboxApiABC
         from .ExampleUseTaskApi import ExampleUseTaskApi
 
 

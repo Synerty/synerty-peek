@@ -4,12 +4,12 @@
 Add Field App
 =============
 
-The field app service is for the users. It's the interface designed for mobile devices.
+The field app is for the users. It's the interface designed for mobile devices.
 
-The field app service is known as the "frontend" in web terminology.
+The field app is known as the "frontend" in web terminology.
 The backend for the field app is the field service.
 
-The Peek Field Service is built with an Angular `web build <https://angular.io/docs/ts/latest/>`_.
+The Peek field app is built with an Angular `web build <https://angular.io/docs/ts/latest/>`_.
 
 In this document, we'll add the start of both the field and office builds for the plugin.
 
@@ -228,10 +228,10 @@ include our plugin in the Field App UI.
 
 See :ref:`developing_with_the_frontends` for more details.
 
-Check File :file:`~/peek-field-service.home/config.json`
+Check File :file:`~/peek-field.home/config.json`
 ````````````````````````````````````````````````````````
 
-Check the :file:`~/peek-field-service.home/config.json` file:
+Check the :file:`~/peek-field.home/config.json` file:
 
 #.  Ensure **frontend.webBuildEnabled** is set to **true**, with no quotes
 #.  Ensure **frontend.webBuildPrepareEnabled** is set to **true**, with no quotes

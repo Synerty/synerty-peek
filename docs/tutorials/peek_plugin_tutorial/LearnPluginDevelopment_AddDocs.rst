@@ -190,11 +190,11 @@ If your plugin has a public python API, then ensure :code:`hasApi` above is set 
 Check Peek Logic Service Config
 -------------------------------
 
-The **peek-logic-service** service builds the **admin** and **dev** documentation.
+The **logic** service builds the **admin** and **dev** documentation.
 
 ----
 
-Edit the :file:`~/peek-logic-service.home/config.json` and ensure the following options are set.
+Edit the :file:`~/peek-logic.home/config.json` and ensure the following options are set.
 
 -  Ensure :code:`frontend.docBuildEnabled` is set to :code:`true`, with no quotes
 
@@ -213,14 +213,14 @@ Example: ::
         }
 
 
-Check Peek Fielf Service Config
+Check Peek Field Service Config
 --------------------------------
 
-The **peek-field-service** service builds the **user** documentation.
+The **field** service builds the **user** documentation.
 
 ----
 
-Edit the :file:`~/peek-field-service.home/config.json` and ensure the following options are set.
+Edit the :file:`~/peek-field.home/config.json` and ensure the following options are set.
 
 -  Ensure :code:`frontend.docBuildEnabled` is set to :code:`true`, with no quotes
 
@@ -243,11 +243,11 @@ Example: ::
 Check Peek Office Service Config
 --------------------------------
 
-The **peek-office-service** service builds the **user** documentation.
+The **office** service builds the **user** documentation.
 
 ----
 
-Edit the :file:`~/peek-office-service.home/config.json` and ensure the following options are set.
+Edit the :file:`~/peek-office.home/config.json` and ensure the following options are set.
 
 -  Ensure :code:`frontend.docBuildEnabled` is set to :code:`true`, with no quotes
 
@@ -270,8 +270,8 @@ Viewing Documentation
 ---------------------
 
 The documentation from each peek plugin is loaded into three projects
-by peek-logic-service (Admin, Development) and
-peek-office-service (User).
+by peek-logic (Admin, Development) and
+peek-office (User).
 
 The documentation packages are as follows
 
