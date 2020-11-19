@@ -41,7 +41,7 @@ only accept calls from the agent.
 The RPC example could be much simpler, the intention is to show more of a good design
 verses the bare minimum RPC example.
 
-.. image:: LearnRPC_AgentToLogicService.png
+.. image:: LearnRPC_AgentToLogic.png
 
 Add Package :file:`agent_handlers`
 ``````````````````````````````````
@@ -351,7 +351,7 @@ Some example use cases would be:
 *   Agent to connect to remote server via SSH and pull back some data
 *   Agent to push an update to a corporate system via HTTP
 
-.. image:: LearnRPC_LogicServiceToAgentService.png
+.. image:: LearnRPC_LogicToAgent.png
 
 Add File :file:`RpcForLogic.py`
 ``````````````````````````````````````
