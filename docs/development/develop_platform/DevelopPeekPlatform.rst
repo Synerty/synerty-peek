@@ -246,8 +246,8 @@ packages.  Run the following commands: ::
         [ -d node_modules ] && rm -rf node_modules
         npm i
 
-Configure Peek Field, Office, And Logic Service Settings
-````````````````````````````````````````````````````````
+Configure Peek Field, Office, Logic Service Settings
+````````````````````````````````````````````````````
 
 Open the config file located at ~/peek/peek-field-service.home/config.json
 

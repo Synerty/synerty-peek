@@ -709,7 +709,7 @@ Insert the following just before the last closing :code:`</div>` tag: ::
 Testing
 -------
 
-#.  Open field Peek web app
+#.  Open the field web app
 #.  Tap the Tutorial app icon
 #.  tap the "String Ints" button
 

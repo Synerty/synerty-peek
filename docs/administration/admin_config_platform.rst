@@ -152,8 +152,8 @@ Populate the file :file:`config.json` with the
             }
         }
 
-Peek Field, Office & Logic Service SSL
-``````````````````````````````````````
+Peek Field, Office, Logic Service SSL
+`````````````````````````````````````
 
 This section sets up SSL for the peek field, office and logic services.
 

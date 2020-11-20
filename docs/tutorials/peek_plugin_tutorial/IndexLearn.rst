@@ -13,13 +13,11 @@ Peek Plugin Tutorial
     LearnPluginDevelopment_Scaffold
     LearnPluginDevelopment_AddDocs
     LearnPluginDevelopment_AddLogicService
-    LearnPluginDevelopment_AddFieldService
-    LearnPluginDevelopment_AddOfficeService
     LearnPluginDevelopment_AddAgentService
     LearnPluginDevelopment_AddStorageService
     LearnPluginDevelopment_AddAdminApp
-    LearnPluginDevelopment_AddFieldApp
-    LearnPluginDevelopment_AddOfficeApp
+    LearnPluginDevelopment_AddField
+    LearnPluginDevelopment_AddOffice
     LearnPluginDevelopment_AddTuples
     LearnPluginDevelopment_AddTupleLoader
     LearnPluginDevelopment_AddOfflineStorage

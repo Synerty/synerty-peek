@@ -194,11 +194,11 @@ Here is an example ::
 Running on the Admin App Service
 --------------------------------
 
-The Peek Logic Service provides the web service that serves the admin angular
+The Logic Service provides the web service that serves the admin angular
 application.
 
-The Peek Logic Service takes care of combining all the plugin files into the build
-directories in the peek_admin_app package. We will need to restart Peek Logic Service for it to
+The Logic Service takes care of combining all the plugin files into the build
+directories in the peek_admin_app package. We will need to restart Logic Service for it to
 include our plugin in the admin UI.
 
 See :ref:`developing_with_the_frontends` for more details.

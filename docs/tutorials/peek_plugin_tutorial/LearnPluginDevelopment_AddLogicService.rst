@@ -1,8 +1,8 @@
 .. _learn_plugin_development_add_logic_service:
 
-======================
-Add Peek Logic Service
-======================
+=================
+Add Logic Service
+=================
 
 This section adds the basic files require for the plugin to run on the peek logic service.
 Create the following files and directories.
@@ -197,13 +197,13 @@ Here is an example ::
 
 The plugin should now be ready for the logic service to load.
 
-Running on the Peek Logic Service
----------------------------------
+Running on the Logic Service
+----------------------------
 
 File :file:`~/peek-logic.home/config.json` is the configuration file for the peek logic
 service.
 
-.. note:: This file is created in :ref:`administer_peek_platform`.  Running the Peek Logic
+.. note:: This file is created in :ref:`administer_peek_platform`.  Running the Logic
     Service will also create the file.
 
 ----

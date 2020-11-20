@@ -794,7 +794,7 @@ and populate it with the following contents:
 Testing
 -------
 
-#.  Open Peek Field web app
+#.  Open Field web app
 
 #.  Tap the Tutorial app icon
 

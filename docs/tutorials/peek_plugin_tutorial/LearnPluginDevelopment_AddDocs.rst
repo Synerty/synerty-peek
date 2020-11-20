@@ -187,8 +187,8 @@ If your plugin has a public python API, then ensure :code:`hasApi` above is set 
 :code:`true`.
 
 
-Check Peek Logic Service Config
--------------------------------
+Check Logic Service Config
+--------------------------
 
 The **logic** service builds the **admin** and **dev** documentation.
 
@@ -213,8 +213,8 @@ Example: ::
         }
 
 
-Check Peek Field Service Config
---------------------------------
+Check Field Service Config
+--------------------------
 
 The **field** service builds the **user** documentation.
 
@@ -240,8 +240,8 @@ Example: ::
 
 
 
-Check Peek Office Service Config
---------------------------------
+CheckOffice Service Config
+--------------------------
 
 The **office** service builds the **user** documentation.
 

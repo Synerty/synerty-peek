@@ -10,10 +10,10 @@ Platform.
 Peek Storage Service connects to a database server, provides each plugin its own schema, and
 provides much of the boilerplate code required to make this work.
 
-Only two Peek Services are able to access the database, these are the Peek Worker and Logic
+Only two Peek Services are able to access the database, these are the Worker and Logic
 Services.
 
-The Storage Service schema upgrades are managed by the Peek Logic Service.
+The Storage Service schema upgrades are managed by the Logic Service.
 
 .. note:: The Logic Service must be enabled to use the Storage Service.
 

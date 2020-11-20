@@ -23,7 +23,7 @@ Same Service APIs Only
 
 Plugins can only use the APIs of other plugins on the same service.
 
-For example, the code from :code:`peek_plugin_one` that runs on the Peek Logic Service
+For example, the code from :code:`peek_plugin_one` that runs on the Logic Service
 can only use the API published by the code in :code:`peek_plugin_two` that runs on the
 Logic service.
 
@@ -52,7 +52,7 @@ a task.
 Setup Logic API
 ---------------
 
-In this section, we define an API on the Peek Logic Service for the
+In this section, we define an API on the Logic Service for the
 :code:`peek_plugin_tutorial` plugin.
 
 Add File :file:`DoSomethingTuple.py`
@@ -341,7 +341,7 @@ Edit the file :file:`peek_plugin_tutorial/_private/logic/LogicEntryHook.py`:
 Testing
 -------
 
-#.  Open Peek Field web app
+#.  Open Field web app
 
 #.  Tap Task icon located in the top right corner
 

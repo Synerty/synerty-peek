@@ -31,8 +31,8 @@ Disadvantages
 
 #.  Not suitable for multiple users.
 
-Peek Logic Service Scaffold
----------------------------
+Logic Service Scaffold
+----------------------
 
 This section sets up the non specific files needed when we add the Tuple Load Handlers.
 
