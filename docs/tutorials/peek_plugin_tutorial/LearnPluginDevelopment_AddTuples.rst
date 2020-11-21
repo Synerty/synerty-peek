@@ -243,7 +243,6 @@ apply the same edits from step
 :ref:`learn_plugin_development_add_tuples_edit_logic_entry_hook`.
 
 Edit File :file:`WorkerEntryHook.py`
-```````````````````````````````````````````
 
 This step applies if you're plugin is using the Worker service.
 
