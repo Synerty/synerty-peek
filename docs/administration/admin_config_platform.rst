@@ -8,14 +8,14 @@ Update config.json files. This tells the peek platform services how to connect t
 other, connect to the database, which plugins to load, etc.
 
 .. note:: Running the services of Peek will automatically create and fill out
-    the missing parts of config.json files with defaults.  So we can start with just what
+    the missing parts of config.json files with defaults. So we can start with just what
     we want to fill out.
 
 
-Peek Server
-```````````
+Peek Logic Service
+``````````````````
 
-This section sets up the config files for the **server** service.
+This section sets up the config files for the peek **logic** service.
 
 ----
 
@@ -55,10 +55,42 @@ Select the right :code:`connectUrl` for your database, ensure you update :code:`
         }
 
 
-Peek Client
-```````````
+Peek Field Service
+``````````````````
 
-This section sets up the config files for the **client** service.
+This section sets up the config files for the peek **field** service.
+
+----
+
+Create following file and parent directory:
+
+:Windows: :file:`C:\\Users\\peek\\peek-field-service.home\\config.json`
+:Linux: :file:`/home/peek/peek-field-service.home/config.json`
+:Mac:   :file:`/Users/peek/peek-field-service.home/config.json`
+
+.. tip:: Run the service, it will create some of it's config,
+            it might raise errors though.
+
+----
+
+Populate the file :file:`config.json` with the
+    *   Enabled plugins
+
+::
+
+        {
+            "plugin": {
+                "enabled": [
+                    "peek_plugin_inbox",
+                    "peek_plugin_tutorial"
+                ]
+            }
+        }
+
+Peek Office Service
+```````````````````
+
+This section sets up the config files for the peek **office** service.
 
 ----
 
@@ -87,10 +119,11 @@ Populate the file :file:`config.json` with the
             }
         }
 
-Peek Agent
-``````````
 
-This section sets up the config files for the **agent** service.
+Peek Agent Service
+``````````````````
+
+This section sets up the config files for the peek **agent** service.
 
 ----
 
@@ -119,10 +152,10 @@ Populate the file :file:`config.json` with the
             }
         }
 
-Peek Client & Server SSL
-````````````````````````
+Peek Field, Office, Logic Service SSL
+`````````````````````````````````````
 
-This section sets up SSL for the peek client and server services.
+This section sets up SSL for the peek field, office and logic services.
 
 ----
 
@@ -137,10 +170,10 @@ For example, this can be done on Linux by concatenating the Key, Cert and CA fil
 
     ==> CA cert <==
     -----BEGIN CERTIFICATE-----
-    
+
     ==> Cert <==
     -----BEGIN CERTIFICATE-----
-    
+
     ==> Key <==
     -----BEGIN RSA PRIVATE KEY-----
 
@@ -160,7 +193,16 @@ Restart the Peek server service.
 
 ----
 
-Place a copy of this PEM file into the client directory:
+
+Place a copy of this PEM file into the field directory:
+
+:Windows: :file:`C:\\Users\\peek\\peek-field-service.server\\peek-ssl-bundle.pem`
+:Linux: :file:`/home/peek/peek-field-service.home/peek-ssl-bundle.pem`
+:Mac:   :file:`/Users/peek/peek-field-service.home/peek-ssl-bundle.pem`
+
+----
+
+Place a copy of this PEM file into the office directory:
 
 :Windows: :file:`C:\\Users\\peek\\peek-office-service.server\\peek-ssl-bundle.pem`
 :Linux: :file:`/home/peek/peek-office-service.home/peek-ssl-bundle.pem`
@@ -168,8 +210,8 @@ Place a copy of this PEM file into the client directory:
 
 ----
 
-Restart the Peek client service.
+Restart the Peek field and office services.
 
 ----
 
-The Peek server and client should now be using SSL.
+The Peek logic service, field service, and office service should now be using SSL.

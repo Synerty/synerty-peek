@@ -17,12 +17,12 @@ What are it's purposes:
 #.  We can add additional methods to the Tuple classes that
     would not otherwise be available, EG :code:`t1.formattedStringInt()`
 
-#.  Defining Tuples simplifies sending data between services via the vortex,
+#.  Defining Tuples simplifies sending data between serv ices via the vortex,
     If a Tuple object is sent on one end, it will be a Tuple object
     when it's deserailised on the other end.
 
 .. important::  It's important to import all the tuples when the plugin is loaded
-                on each Peek python service (worker, client, server and agent).
+                on each Peek python service (worker, field, office, logic and agent).
 
                 The plugin loading code will throw errors if one of our Tuples is
                 imported first by another plugin and not by us.
@@ -64,7 +64,7 @@ This is serialisable by the Vortex.
 
 ----
 
-Create the file 
+Create the file
 :file:`peek_plugin_tutorial/_private/tuples/TutorialTuple.py`
 and populate it with the following contents.
 
@@ -169,17 +169,17 @@ Add the following: ::
 
 
 
-.. _learn_plugin_development_add_tuples_edit_server_entry_hook:
+.. _learn_plugin_development_add_tuples_edit_logic_entry_hook:
 
-Edit File :file:`ServerEntryHook.py`
-````````````````````````````````````
+Edit File :file:`LogicEntryHook.py`
+``````````````````````````````````````````
 
 Now, we need to load all our Tuples when the plugin is loaded, for every service.
 To do this, we call the methods we've added to the :code:`tuple` packages above.
 
 ----
 
-Edit file :file:`peek_plugin_tutorial/_private/server/ServerEntryHook.py` :
+Edit file :file:`peek_plugin_tutorial/_private/logic/LogicEntryHook.py` :
 
 #.  Add this import up the top of the file ::
 
@@ -206,17 +206,29 @@ The method should now look similar to this ::
     The above steps haven't been completed properly and there is a problem with the
     tuple loading in the peek services.
 
-Edit File :file:`ClientEntryHook.py`
-````````````````````````````````````
+Edit File :file:`FieldEntryHook.py`
+``````````````````````````````````````````
 
-This step applies if you're plugin is using the Client service.
+This step applies if you're plugin is using the Field Service.
 
 .. note:: This service was add earlier in this tutorial, see
-    :ref:`learn_plugin_development_add_client`
+    :ref:`learn_plugin_development_add_field_service`
 
-Edit file :file:`peek_plugin_tutorial/_private/client/ClientEntryHook.py` file,
+Edit file :file:`peek_plugin_tutorial/_private/field/FieldEntryHook.py` file,
 apply the same edits from step
-:ref:`learn_plugin_development_add_tuples_edit_server_entry_hook`.
+:ref:`learn_plugin_development_add_tuples_edit_logic_entry_hook`.
+
+Edit File :file:`OfficeEntryHook.py`
+```````````````````````````````````````````
+
+This step applies if you're plugin is using the Field Service.
+
+.. note:: This service was add earlier in this tutorial, see
+    :ref:`learn_plugin_development_add_office_service`
+
+Edit file :file:`peek_plugin_tutorial/_private/office/OfficeEntryHook.py` file,
+apply the same edits from step
+:ref:`learn_plugin_development_add_tuples_edit_logic_entry_hook`.
 
 Edit File :file:`AgentEntryHook.py`
 ```````````````````````````````````
@@ -228,10 +240,9 @@ This step applies if you're plugin is using the Agent service.
 
 Edit file :file:`peek_plugin_tutorial/_private/agent/AgentEntryHook.py` file,
 apply the same edits from step
-:ref:`learn_plugin_development_add_tuples_edit_server_entry_hook`.
+:ref:`learn_plugin_development_add_tuples_edit_logic_entry_hook`.
 
 Edit File :file:`WorkerEntryHook.py`
-````````````````````````````````````
 
 This step applies if you're plugin is using the Worker service.
 
@@ -240,7 +251,7 @@ This step applies if you're plugin is using the Worker service.
 
 Edit file :file:`peek_plugin_tutorial/_private/worker/WorkerEntryHook.py` file,
 apply the same edits from step
-:ref:`learn_plugin_development_add_tuples_edit_server_entry_hook`.
+:ref:`learn_plugin_development_add_tuples_edit_logic_entry_hook`.
 
 Test Python Services
 --------------------
@@ -276,7 +287,7 @@ with command ::
 Edit File :file:`plugin_package.json`
 `````````````````````````````````````
 
-Edit the file :file:`plugin_package.json` to include reference to **plugin-module** inside the block **mobile** and
+Edit the file :file:`plugin_package.json` to include reference to **plugin-module** inside the block **field** and
 **admin**. Your file should look similar to the below: ::
 
         {

@@ -1,12 +1,12 @@
-.. _learn_plugin_development_add_admin:
+.. _learn_plugin_development_add_admin_app:
 
-=================
-Add Admin Service
-=================
+=============
+Add Admin App
+=============
 
-The admin service is the admin user interface.
+The admin app is the admin user interface.
 This is known as the "frontend" in web terminology.
-The backend for the Admin service is the Server service.
+The backend for the peek admin app is the peek logic service.
 
 In this section we'll add the root admin page for the plugin.
 
@@ -15,8 +15,8 @@ We only scratch the surface of using Angular, that`s outside the scope of this g
 See :ref:`developing_with_the_frontends` to learn more about how Peek
 pieces together the frontend code from the various plugins.
 
-Admin File Structure
---------------------
+Admin App File Structure
+------------------------
 
 Add Directory :file:`admin-app`
 ```````````````````````````````
@@ -154,17 +154,17 @@ Edit File :file:`plugin_package.json`
 `````````````````````````````````````
 
 Finally, Edit the file :file:`peek_plugin_tutorial/plugin_package.json` to tell the
-platform that we want to use the admin service:
+platform that we want to use the admin-app service:
 
-#.  Add **"admin"** to the requiresServices section so it looks like ::
+#.  Add **"admin-app"** to the requiresServices section so it looks like ::
 
         "requiresServices": [
-            "admin"
+            "admin-app"
         ]
 
-#.  Add the **admin** section after **requiresServices** section: ::
+#.  Add the **admin-app** section after **requiresServices** section: ::
 
-        "admin": {
+        "admin-app": {
             "showHomeLink": true,
             "appDir": "_private/admin-app",
             "appModule": "tutorial.module#TutorialModule"
@@ -178,10 +178,10 @@ Here is an example ::
             ...
             "requiresServices": [
                 ...
-                "admin"
+                "admin-app"
             ],
             ...
-            "admin": {
+            "admin-app": {
                 ...
 
                 "showHomeLink": true,
@@ -191,22 +191,22 @@ Here is an example ::
         }
 
 
-Running on the Admin Service
-----------------------------
+Running on the Admin App Service
+--------------------------------
 
-The Peek Server service provides the web service that serves the admin angular
+The Logic Service provides the web service that serves the admin angular
 application.
 
-The Peek Server service takes care of combining all the plugin files into the build
-directories in the peek_admin_app package. We will need to restart Peek Server for it to
+The Logic Service takes care of combining all the plugin files into the build
+directories in the peek_admin_app package. We will need to restart Logic Service for it to
 include our plugin in the admin UI.
 
 See :ref:`developing_with_the_frontends` for more details.
 
-Check File :file:`~/peek-logic-service.home/config.json`
-`````````````````````````````````````````````````
+Check File :file:`~/peek-logic.home/config.json`
+````````````````````````````````````````````````
 
-Check the :file:`~/peek-logic-service.home/config.json` file:
+Check the :file:`~/peek-logic.home/config.json` file:
 
 #.  Ensure **frontend.webBuildEnabled** is set to **true**, with no quotes
 #.  Ensure **frontend.webBuildPrepareEnabled** is set to **true**, with no quotes
@@ -227,9 +227,9 @@ Example: ::
 
 
 Run :file:`run_peek_logic_service`
-```````````````````````````
+``````````````````````````````````
 
-You can now run the peek server, you should see your plugin load. ::
+You can now run the peek logic service, you should see your plugin load. ::
 
         peek@_peek:~$ run_peek_logic_service
         ...
@@ -245,7 +245,7 @@ Now bring up a web browser and navigate to
 :command:`run_peek_logic_service`.
 
 If you see this, then congratulations, you've just enabled your plugin to use the
-Peek Platform, Admin Service.
+Peek Platform, Admin App Service.
 
 .. image:: PeekAdminSuccess.png
 

@@ -17,11 +17,11 @@ The frontends are the Admin, Mobile and Desktop services.
 
         *   Only a Web app, using @angular/cli
 
-*   Mobile builds:
+*   Field builds:
 
         *   A Web app, using @angular/cli
 
-*   Desktop builds:
+*   Office builds:
 
         *   An Electron app.
         *   A Web app, using @angular/cli
@@ -32,15 +32,15 @@ The platform code for combining the files for the frontends is at:
 Combining Files
 ---------------
 
-The Server and Client services prepare the build directories for all the frontends.
+The Logic, Office, and Field services prepare the build directories for all the frontends.
 
 Peek originally used symbolic links to integrate the plugins,
 this approach become harder and harder to manage with
 both cross platform support and increasing complexity of the plugin integrations with
 the frontend.
 
-Peek now uses a file copy approach, that is handled by the Client and Server services.
-There were many things to consider when implementing this code, consideration include:
+Peek now uses a file copy approach, that is handled by the Logic, Office, and Field services.
+There were many things to consider when implementing this code, considerations include:
 
 **Incremental file updates.**
 Don't rewrite the file if it hasn't changed. This causes problems with development
@@ -105,7 +105,7 @@ into the customisation directory and then altering it.
 
 This is a use at their own risk feature.
 
-The following property is present in the Peek Server and Peek Client :file:`config.json`
+The following property is present in the Peek Logic, Office, and Field :file:`*-service.home/config.json`
 files.
 
 ::
@@ -176,7 +176,7 @@ To enable file syncing, in file(s)
 set :code:`frontend.syncFilesForDebugEnabled` to :code:`true` and restart the appropriate service.
 
 You may also want to disable the web building. This isn't required for the Angular CLI
-development server and it slows down Server and Client restarts.
+development server and it slows down Peek Logic, Office, and Field restarts.
 Set :code:`frontend.webBuildEnabled` to :code:`false`.
 
 
@@ -237,7 +237,7 @@ Troubleshooting
 OSError: inotify instance limit reached
 ```````````````````````````````````````
 
-If you receive an error when starting the server or client on Linux, stating
+If you receive an error when starting the Peek Logic, Office, and Field services on Linux, stating
 :code:`OSError: inotify instance limit reached`, running the following command may
 solve the issue. ::
 

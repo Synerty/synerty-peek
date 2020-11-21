@@ -187,14 +187,40 @@ If your plugin has a public python API, then ensure :code:`hasApi` above is set 
 :code:`true`.
 
 
-Check Peek Server Config
-------------------------
+Check Logic Service Config
+--------------------------
 
-The **peek-logic-service** service builds the **admin** and **dev** documentation.
+The **logic** service builds the **admin** and **dev** documentation.
 
 ----
 
-Edit the :file:`~/peek-logic-service.home/config.json` and ensure the following options are set.
+Edit the :file:`~/peek-logic.home/config.json` and ensure the following options are set.
+
+-  Ensure :code:`frontend.docBuildEnabled` is set to :code:`true`, with no quotes
+
+-  Ensure :code:`frontend.docBuildPrepareEnabled` is set to :code:`true`, with no quotes
+
+Example: ::
+
+        {
+            ...
+            "frontend": {
+                ...
+                "docBuildEnabled": true,
+                "docBuildPrepareEnabled": true
+            },
+            ...
+        }
+
+
+Check Field Service Config
+--------------------------
+
+The **field** service builds the **user** documentation.
+
+----
+
+Edit the :file:`~/peek-field.home/config.json` and ensure the following options are set.
 
 -  Ensure :code:`frontend.docBuildEnabled` is set to :code:`true`, with no quotes
 
@@ -214,14 +240,14 @@ Example: ::
 
 
 
-Check Peek Client Config
-------------------------
+CheckOffice Service Config
+--------------------------
 
-The **peek-office-service** service builds the **user** documentation.
+The **office** service builds the **user** documentation.
 
 ----
 
-Edit the :file:`~/peek-office-service.home/config.json` and ensure the following options are set.
+Edit the :file:`~/peek-office.home/config.json` and ensure the following options are set.
 
 -  Ensure :code:`frontend.docBuildEnabled` is set to :code:`true`, with no quotes
 
@@ -244,8 +270,8 @@ Viewing Documentation
 ---------------------
 
 The documentation from each peek plugin is loaded into three projects
-by peek-logic-service (Admin, Development) and
-peek-office-service (User).
+by peek-logic (Admin, Development) and
+peek-office (User).
 
 The documentation packages are as follows
 

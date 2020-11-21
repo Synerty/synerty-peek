@@ -12,13 +12,12 @@ Peek Plugin Tutorial
     LearnPluginDevelopment_FirstSteps
     LearnPluginDevelopment_Scaffold
     LearnPluginDevelopment_AddDocs
-    LearnPluginDevelopment_AddServer
-    LearnPluginDevelopment_AddClient
-    LearnPluginDevelopment_AddAgent
-    LearnPluginDevelopment_AddStorage
-    LearnPluginDevelopment_AddAdmin
-    LearnPluginDevelopment_AddMobile
-    LearnPluginDevelopment_AddDesktop
+    LearnPluginDevelopment_AddLogicService
+    LearnPluginDevelopment_AddAgentService
+    LearnPluginDevelopment_AddStorageService
+    LearnPluginDevelopment_AddAdminApp
+    LearnPluginDevelopment_AddField
+    LearnPluginDevelopment_AddOffice
     LearnPluginDevelopment_AddTuples
     LearnPluginDevelopment_AddTupleLoader
     LearnPluginDevelopment_AddOfflineStorage
@@ -28,5 +27,5 @@ Peek Plugin Tutorial
     LearnPluginDevelopment_AddPluginPythonApi
     LearnPluginDevelopment_AddPluginTypeScriptApi
     LearnPluginDevelopment_UsePluginApis
-    LearnPluginDevelopment_AddWorker
+    LearnPluginDevelopment_AddWorkerService
     LearnPluginDevelopment_Challenges

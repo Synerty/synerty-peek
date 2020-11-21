@@ -13,7 +13,7 @@ This challenge will test your knowledge of lifecycle methods within Peek service
 
 Tasks:
 
-- Log the current time when the peek server is in its `start` lifecycle.
+- Log the current time when the peek logic service is in its `start` lifecycle.
 
 The following module will be required:
 
@@ -25,8 +25,8 @@ The output should resemble this:
 
 ::
 
-    10-Aug-2020 10:08:44 DEBUG peek_plugin_tutorial._private.server.ServerEntryHook:2020-08-10 10:08:44.223694
-    10-Aug-2020 10:08:44 DEBUG peek_plugin_tutorial._private.server.ServerEntryHook:Started
+    10-Aug-2020 10:08:44 DEBUG peek_plugin_tutorial._private.logic.LogicEntryHook:2020-08-10 10:08:44.223694
+    10-Aug-2020 10:08:44 DEBUG peek_plugin_tutorial._private.logic.LogicEntryHook:Started
 
 ----
 
@@ -45,15 +45,15 @@ The output should resemble this:
 
 ----
 
-Challenge #3: Client Tasks
---------------------------
+Challenge #3: Field/Office Tasks
+--------------------------------
 
 This challenge will test your understanding of the various components located
 within the admin Peek site, and how they interact with other Peek services.
 
 Tasks:
 
-- Send a task to the mobile / desktop service from the admin Peek site.
+- Send a task to the field / office service from the admin Peek site.
 
 The output should resemble this:
 
@@ -71,8 +71,8 @@ Tasks:
 
 - Create an action that doubles the current int value displayed in
   the StringIntComponent.
-- Initiate the action via a button click on the mobile service.
-- Display the outcome on the mobile service.
+- Initiate the action via a button click on the field app.
+- Display the outcome on the field app.
 
 The output should resemble this:
 
@@ -84,7 +84,7 @@ Challenge #5: Worker Service
 ----------------------------
 
 This challenge will test your understanding of how the worker service
-and server service communicate with one another.
+and logic service communicate with one another.
 
 Tasks:
 

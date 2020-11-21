@@ -271,7 +271,7 @@ include:
 *   The name
 *   Which services the plugin needs
 *   Additional settings for each service
-*   File locations for the Angular applications (admin, desktop and mobile)
+*   File locations for the Angular applications (admin, office and field)
 *   The path of the icon for the plugin,
 *   ect.
 
@@ -325,7 +325,7 @@ The :file:`PluginNames.py` file defines some constants that are used throughout 
 plugin. More details on where these are used will be later in the documentation.
 
 Since all of the plugin is on the one package, both the part of the plugin running on the
-server and the part of the plugin running on the client can import this file.
+logic service and the part of the plugin running on the field or office apps can import this file.
 
 Guaranteeing that there is no mismatch of names when they send data to each other.
 
@@ -358,8 +358,8 @@ The :file:`plugin-module` directory will contain any code that needs to be eithe
 *   Shared with other modules.
 
 
-This directory is sync'd to :file:`node_modules/@peek/peek_plugin_tutorial` on mobile,
-admin and desktop services.
+This directory is sync'd to :file:`node_modules/@peek/peek_plugin_tutorial` on field,
+admin and office services.
 
 Developers can use some :file:`index.ts` magic to abstract the layout of their
 directories.

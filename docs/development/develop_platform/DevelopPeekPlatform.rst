@@ -233,7 +233,7 @@ Run setup.py in all of the repositories located in ~/dev-peek-util/: ::
 Install Front End Modules
 `````````````````````````
 
-Remove the old npm modules files and re-install for both client and server front and
+Remove the old npm modules files and re-install for field, office and logic service frontend
 packages.  Run the following commands: ::
 
         cd ~/dev-peek/peek-field-app/peek_field_app
@@ -246,8 +246,14 @@ packages.  Run the following commands: ::
         [ -d node_modules ] && rm -rf node_modules
         npm i
 
-Configure Peek Client And Server Settings
-`````````````````````````````````````````
+Configure Peek Field, Office, Logic Service Settings
+````````````````````````````````````````````````````
+
+Open the config file located at ~/peek/peek-field-service.home/config.json
+
+Set the property frontend.docBuildEnabled to false.
+
+Set the property frontend.webBuildEnabled to false.
 
 Open the config file located at ~/peek/peek-office-service.home/config.json
 

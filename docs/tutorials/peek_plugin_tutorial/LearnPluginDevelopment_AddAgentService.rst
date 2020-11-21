@@ -4,10 +4,10 @@
 Add Agent Service
 =================
 
-This document is a stripped version of :ref:`learn_plugin_development_add_server`.
+This document is a stripped version of :ref:`learn_plugin_development_add_logic_service`.
 
-Agent File Structure
---------------------
+Agent Service File Structure
+----------------------------
 
 Add Package :file:`_private/agent`
 ``````````````````````````````````
@@ -135,12 +135,12 @@ Here is an example ::
 
 ----
 
-The plugin should now be ready for the agent to load.
+The plugin should now be ready for the agent service to load.
 
 Running on the Agent Service
 ----------------------------
 
-Edit :file:`~/peek-agent-service.home/config.json`:
+Edit :file:`~/peek-agent.home/config.json`:
 
 #.  Ensure **logging.level** is set to **"DEBUG"**
 #.  Add **"peek_plugin_tutorial"** to the **plugin.enabled** array
@@ -170,7 +170,7 @@ It should somthing like this: ::
 
 ----
 
-You can now run the peek agent, you should see your plugin load. ::
+You can now run the peek agent service, you should see your plugin load. ::
 
         peek@_peek:~$ run_peek_agent_service
         ...

@@ -9,8 +9,8 @@ Overview
 
 This document will describe how to use the APIs between plugins running on the:
 
-*   Mobile
-*   Desktop
+*   Field
+*   Office
 *   and Admin services
 
 These services all run TypeScript + Angular, the integrations are provided by the
