@@ -13,7 +13,6 @@ fi
 
 if ! [ -f $pluginsZip ]; then
     echo "Plugins release doesn't exist : $pluginsZip"
-    exit 1
 fi
 
 # ------------------------------------------------------------------------------
@@ -43,8 +42,10 @@ tar xjf ${platformZip} -C ${releaseDir}
 # ------------------------------------------------------------------------------
 # Extract the plugins to a interim directory
 
-echo "Extracting plugins to $releaseDir"
-tar xjf ${pluginsZip} -C ${releaseDir}
+if [ -f $pluginsZip ]; then
+    echo "Extracting plugins to $releaseDir"
+    tar xjf ${pluginsZip} -C ${releaseDir}
+fi
 
 # ------------------------------------------------------------------------------
 # Create the virtual environment
@@ -55,7 +56,6 @@ peekPkgVer=`cd $releaseDir/py && ls synerty_peek-* | cut -d'-' -f2`
 
 # This variable is the path of the new virtualenv
 venvDir="/Users/peek/synerty-peek-${peekPkgVer}"
-
 
 # Check if this release is already deployed
 # Delete the existing dist dir if it exists
@@ -73,20 +73,25 @@ export PATH="$venvDir/bin:$PATH"
 # ------------------------------------------------------------------------------
 # Install the python packages
 
-echo "Installing python platform"
 # install the py wheels from the release
+echo "Installing python community packages"
 pushd "$releaseDir/py"
-pip install --no-index --no-cache --find-links=. synerty_peek*.whl
+pip install --no-index --no-cache --find-links=. \
+    synerty_peek*.whl \
+    peek_plugin*.whl
 popd
 
 # ------------------------------------------------------------------------------
 # Install the python plugins
 
 # install the py wheels from the release
-echo "Installing python plugins"
-pushd "$releaseDir/peek_plugins_macos_${peekPkgVer}"
-pip install --no-index --no-cache --find-links=. peek_plugin*.whl
-popd
+
+if [ -f $pluginsZip ]; then
+    echo "Installing python enterprise packages"
+    pushd "$releaseDir/peek_enterprise_macos_${peekPkgVer}"
+    pip install --no-index --no-cache --find-links=. peek_plugin*.whl
+    popd
+fi
 
 # ------------------------------------------------------------------------------
 # Install node
@@ -102,9 +107,9 @@ rsync -a $releaseDir/node/* ${venvDir}
 sp="$venvDir/lib/python3.6/site-packages"
 
 # Move the node_modules into place
-mv $releaseDir/mobile-build-web/node_modules $sp/peek_field_app
-mv $releaseDir/desktop-build-web/node_modules $sp/peek_office_app
-mv $releaseDir/admin-build-web/node_modules $sp/peek_admin_app
+mv $releaseDir/field-app/node_modules $sp/peek_field_app
+mv $releaseDir/office-app/node_modules $sp/peek_office_app
+mv $releaseDir/admin-app/node_modules $sp/peek_admin_app
 
 # ------------------------------------------------------------------------------
 # Show complete message

@@ -8,8 +8,11 @@ variables:
     BUILD: build
     PKG_ENTERPRISE_LINUX: tmp_pkg_enterprise_linux
     PKG_COMMUNITY_LINUX: tmp_pkg_community_linux
+    PKG_ENTERPRISE_MACOS: tmp_pkg_enterprise_macos
+    PKG_COMMUNITY_MACOS: tmp_pkg_community_macos
     NON_RELEASE_VER: 0.0.0+b${CI_PIPELINE_ID}
     PINNED_DEPS_PY_FILE_LINUX: ${CI_PROJECT_DIR}/gitlab/${RELEASE_BRANCH}/linux/pinned-deps-py
+    PINNED_DEPS_PY_FILE_MACOS: ${CI_PROJECT_DIR}/gitlab/${RELEASE_BRANCH}/macos/pinned-deps-py
 
 stages:
     - docs
@@ -63,6 +66,8 @@ build_latex_docs:
     tags:
         - linux
 
+# ##########################################################################################
+# # LINUX Builds
 
 git_clone_community:
     allow_failure: false
@@ -221,7 +226,7 @@ archive_release:
             ${GIT_CLONE_PATH}/peek_release_${RELEASE_VER:-${NON_RELEASE_VER}}_linux
         - mv $GIT_CLONE_PATH/${PKG_COMMUNITY_LINUX}/peek_community_linux_${RELEASE_VER:-${NON_RELEASE_VER}}.tar.bz2
             ${GIT_CLONE_PATH}/peek_release_${RELEASE_VER:-${NON_RELEASE_VER}}_linux
-        - mv $GIT_CLONE_PATH/${PKG_ENTERPRISE_LINUX}/peek_enterprise_plugins_linux_${RELEASE_VER:-${NON_RELEASE_VER}}.tar.bz2
+        - mv $GIT_CLONE_PATH/${PKG_ENTERPRISE_LINUX}/peek_enterprise_linux_${RELEASE_VER:-${NON_RELEASE_VER}}.tar.bz2
             ${GIT_CLONE_PATH}/peek_release_${RELEASE_VER:-${NON_RELEASE_VER}}_linux
         - cd ${GIT_CLONE_PATH}
             && tar cvf peek_release_${RELEASE_VER:-${NON_RELEASE_VER}}_linux.tar
@@ -268,4 +273,116 @@ upload_to_attune:
     stage: upload
     tags:
         - linux
+
+##########################################################################################
+
+
+package_community_macos:
+    dependencies:
+        - git_clone_community
+        - publish_community
+    allow_failure: false
+    artifacts:
+        paths:
+            - ${GIT_CLONE_PATH}/${PKG_COMMUNITY_MACOS}
+        expire_in: 1 day
+    only:
+        - web
+        - triggers
+    stage: package
+    script:
+        - echo "registry=http://${NEXUS_URL}/repository/npm-all/" > ~/.npmrc
+        - echo "_auth=$(echo -n "${NEXUS_USER}:${NEXUS_PASSWORD}" | openssl base64)"    >> ~/.npmrc
+        - export NG_CLI_ANALYTICS=ci
+        - export PIP_INDEX=http://${NEXUS_USER}:${NEXUS_PASSWORD}@${NEXUS_URL}/repository/pypi-all/pypi
+        - export PIP_INDEX_URL=http://${NEXUS_USER}:${NEXUS_PASSWORD}@${NEXUS_URL}/repository/pypi-all/simple
+        - export PIP_TRUSTED_HOST=${NEXUS_URL}
+        - export NPM_CONFIG_REGISTRY="http://${NEXUS_URL}/repository/npm-all/"
+        - export NPM_CONFIG_AUTH=`echo "${NEXUS_USER}:${NEXUS_PASSWORD}" | openssl base64`
+        - export NG_CLI_ANALYTICS=ci
+        - mkdir -p ${GIT_CLONE_PATH}/${PKG_COMMUNITY_MACOS}
+        - chmod +x ./scripts/macos/package_community_macos.sh
+        - ./scripts/macos/package_community_macos.sh ${RELEASE_VER:-${NON_RELEASE_VER}}
+            ${GIT_CLONE_PATH}/cloned_community_repos
+            ${GIT_CLONE_PATH}/community_packages
+            ${GIT_CLONE_PATH}/${PKG_COMMUNITY_MACOS}
+            ${PINNED_DEPS_PY_FILE_MACOS}
+        - rm -rf ${GIT_CLONE_PATH}/community_packages
+        - rm -rf ${GIT_CLONE_PATH}/cloned_community_repos
+    tags:
+        - macos
+
+package_enterprise_macos:
+    dependencies:
+        - publish_community
+        - publish_enterprise
+    allow_failure: false
+    artifacts:
+        paths:
+            - ${GIT_CLONE_PATH}/${PKG_ENTERPRISE_MACOS}/
+        expire_in: 1 day
+    only:
+        - web
+        - triggers
+    stage: package
+    script:
+        - mkdir -p ~/.config/pip
+        - mkdir -p ${GIT_CLONE_PATH}/${PKG_ENTERPRISE_MACOS}
+        - export PIP_INDEX=http://${NEXUS_USER}:${NEXUS_PASSWORD}@${NEXUS_URL}/repository/pypi-all/pypi
+        - export PIP_INDEX_URL=http://${NEXUS_USER}:${NEXUS_PASSWORD}@${NEXUS_URL}/repository/pypi-all/simple
+        - export PIP_TRUSTED_HOST=${NEXUS_URL}
+        - chmod +x ./scripts/macos/package_enterprise_macos.sh
+        - ./scripts/macos/package_enterprise_macos.sh ${RELEASE_VER:-${NON_RELEASE_VER}}
+            ${GIT_CLONE_PATH}/enterprise_packages ${GIT_CLONE_PATH}/community_packages
+            ${GIT_CLONE_PATH}/${PKG_ENTERPRISE_MACOS} ${PINNED_DEPS_PY_FILE_MACOS}
+    tags:
+        - macos
+
+archive_release_macos:
+    dependencies:
+        - package_enterprise_macos
+        - package_community_macos
+    allow_failure: false
+    image: nexus.synerty.com:5000/peek-linux-build:${RELEASE_BRANCH}
+    artifacts:
+        paths:
+            - ${GIT_CLONE_PATH}/peek_release_${RELEASE_VER:-${NON_RELEASE_VER}}_macos.tar
+        expire_in: 1 day
+    only:
+        - web
+        - triggers
+    stage: archive
+    script:
+        - mkdir -p ~/.config/pip
+        - mkdir -p ${GIT_CLONE_PATH}/peek_release_${RELEASE_VER:-${NON_RELEASE_VER}}_macos
+        - cp ./scripts/macos/deploy_release_macos.sh
+            ${GIT_CLONE_PATH}/peek_release_${RELEASE_VER:-${NON_RELEASE_VER}}_macos
+        - mv $GIT_CLONE_PATH/${PKG_COMMUNITY_MACOS}/peek_community_macos_${RELEASE_VER:-${NON_RELEASE_VER}}.tar.bz2
+            ${GIT_CLONE_PATH}/peek_release_${RELEASE_VER:-${NON_RELEASE_VER}}_macos
+        - mv $GIT_CLONE_PATH/${PKG_ENTERPRISE_MACOS}/peek_enterprise_macos_${RELEASE_VER:-${NON_RELEASE_VER}}.tar.bz2
+            ${GIT_CLONE_PATH}/peek_release_${RELEASE_VER:-${NON_RELEASE_VER}}_macos
+        - cd ${GIT_CLONE_PATH}
+            && tar cvf peek_release_${RELEASE_VER:-${NON_RELEASE_VER}}_macos.tar
+            peek_release_${RELEASE_VER:-${NON_RELEASE_VER}}_macos
+        - rm -rf ${GIT_CLONE_PATH}/peek_release_${RELEASE_VER:-${NON_RELEASE_VER}}_macos
+    tags:
+        - linux
+
+upload_to_nexus_macos:
+    dependencies:
+        - archive_release_macos
+    allow_failure: false
+    image: nexus.synerty.com:5000/peek-linux-build:${RELEASE_BRANCH}
+    only:
+        - web
+        - triggers
+    script:
+        - curl -v -u ${NEXUS_USER}:${NEXUS_PASSWORD}
+            --upload-file $GIT_CLONE_PATH/peek_release_${RELEASE_VER:-${NON_RELEASE_VER}}_macos.tar
+            http://${NEXUS_URL}/repository/synerty-packages/
+
+    stage: upload
+    tags:
+        - linux
+
 

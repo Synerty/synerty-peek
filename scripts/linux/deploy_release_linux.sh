@@ -27,7 +27,6 @@ fi
 
 if ! [ -f $enterpriseZip ]; then
     echo "Enterprise release doesn't exist : $enterpriseZip"
-    exit 1
 fi
 
 # ------------------------------------------------------------------------------
@@ -57,8 +56,10 @@ tar xjf ${communityZip} -C ${releaseDir}
 # ------------------------------------------------------------------------------
 # Extract the release to a interim directory
 
-echo "Extracting plugins to $releaseDir"
-tar xjf ${enterpriseZip} -C ${releaseDir}
+if [ -f $pluginsZip ]; then
+    echo "Extracting plugins to $releaseDir"
+    tar xjf ${enterpriseZip} -C ${releaseDir}
+fi
 
 # ------------------------------------------------------------------------------
 # Create the virtual environment
@@ -88,19 +89,23 @@ export PATH="$venvDir/bin:$PATH"
 # Install the python packages
 
 # install the py wheels from the release
-echo "Installing python community"
+echo "Installing python community packages"
 pushd "$releaseDir/py"
-pip install --no-index --no-cache --find-links=. synerty_peek*.whl
+pip install --no-index --no-cache --find-links=. \
+    synerty_peek*.whl \
+    peek_plugin*.whl
 popd
 
 # ------------------------------------------------------------------------------
 # Install the enterprise python plugins
 
 # install the py wheels from the release
-echo "Installing enterprise python plugins"
-pushd "$releaseDir/peek_enterprise_plugins_linux_${peekPkgVer}"
-pip install --no-index --no-cache --find-links=. peek_enterprise*.whl
-popd
+if [ -f $pluginsZip ]; then
+    echo "Installing python enterprise packages"
+    pushd "$releaseDir/peek_enterprise_linux_${peekPkgVer}"
+    pip install --no-index --no-cache --find-links=. peek_enterprise*.whl
+    popd
+fi
 
 # ------------------------------------------------------------------------------
 # Install node
@@ -116,9 +121,9 @@ cp -pr $releaseDir/node/* ${venvDir}
 sp="$venvDir/lib/python3.6/site-packages"
 
 # Move the node_modules into place
-mv $releaseDir/mobile-build-web/node_modules $sp/peek_field_app
-mv $releaseDir/desktop-build-web/node_modules $sp/peek_office_app
-mv $releaseDir/admin-build-web/node_modules $sp/peek_admin_app
+mv $releaseDir/field-app/node_modules $sp/peek_field_app
+mv $releaseDir/office-app/node_modules $sp/peek_office_app
+mv $releaseDir/admin-app/node_modules $sp/peek_admin_app
 
 # ------------------------------------------------------------------------------
 # Install the util scripts
