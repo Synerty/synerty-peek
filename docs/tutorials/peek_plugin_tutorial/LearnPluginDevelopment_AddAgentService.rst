@@ -140,7 +140,7 @@ The plugin should now be ready for the agent service to load.
 Running on the Agent Service
 ----------------------------
 
-Edit :file:`~/peek-agent.home/config.json`:
+Edit :file:`~/peek-agent-service.home/config.json`:
 
 #.  Ensure **logging.level** is set to **"DEBUG"**
 #.  Add **"peek_plugin_tutorial"** to the **plugin.enabled** array

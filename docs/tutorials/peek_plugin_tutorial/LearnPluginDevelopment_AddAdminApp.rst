@@ -178,10 +178,10 @@ Here is an example ::
             ...
             "requiresServices": [
                 ...
-                "admin-app"
+                "admin"
             ],
             ...
-            "admin-app": {
+            "admin": {
                 ...
 
                 "showHomeLink": true,
@@ -203,10 +203,10 @@ include our plugin in the admin UI.
 
 See :ref:`developing_with_the_frontends` for more details.
 
-Check File :file:`~/peek-logic.home/config.json`
-````````````````````````````````````````````````
+Check File :file:`~/peek-logic-service.home/config.json`
+````````````````````````````````````````````````````````
 
-Check the :file:`~/peek-logic.home/config.json` file:
+Check the :file:`~/peek-logic-service.home/config.json` file:
 
 #.  Ensure **frontend.webBuildEnabled** is set to **true**, with no quotes
 #.  Ensure **frontend.webBuildPrepareEnabled** is set to **true**, with no quotes

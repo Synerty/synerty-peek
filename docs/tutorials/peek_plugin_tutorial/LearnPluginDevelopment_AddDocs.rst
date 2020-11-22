@@ -194,7 +194,7 @@ The **logic** service builds the **admin** and **dev** documentation.
 
 ----
 
-Edit the :file:`~/peek-logic.home/config.json` and ensure the following options are set.
+Edit the :file:`~/peek-logic-service.home/config.json` and ensure the following options are set.
 
 -  Ensure :code:`frontend.docBuildEnabled` is set to :code:`true`, with no quotes
 
@@ -220,7 +220,7 @@ The **field** service builds the **user** documentation.
 
 ----
 
-Edit the :file:`~/peek-field.home/config.json` and ensure the following options are set.
+Edit the :file:`~/peek-field-service.home/config.json` and ensure the following options are set.
 
 -  Ensure :code:`frontend.docBuildEnabled` is set to :code:`true`, with no quotes
 
@@ -247,7 +247,7 @@ The **office** service builds the **user** documentation.
 
 ----
 
-Edit the :file:`~/peek-office.home/config.json` and ensure the following options are set.
+Edit the :file:`~/peek-office-service.home/config.json` and ensure the following options are set.
 
 -  Ensure :code:`frontend.docBuildEnabled` is set to :code:`true`, with no quotes
 

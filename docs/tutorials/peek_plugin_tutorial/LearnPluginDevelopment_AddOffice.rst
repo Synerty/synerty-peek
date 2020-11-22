@@ -158,7 +158,7 @@ Here is an example ::
             ],
             ...
              "office": {
-                "appDir": "_private/office",
+                "appDir": "_private/office-app",
                 "appModule": "tutorial.module#TutorialModule",
                 "assetDir": "_private/office-assets",
                 "icon": "/assets/peek_plugin_tutorial/icon.png",
@@ -296,7 +296,7 @@ The plugin should now be ready for the office to load.
 Running on the Office Service
 -----------------------------
 
-Edit :file:`~/peek-office.home/config.json`:
+Edit :file:`~/peek-office-service.home/config.json`:
 
 #.  Ensure **logging.level** is set to **"DEBUG"**
 #.  Add **"peek_plugin_tutorial"** to the **plugin.enabled** array

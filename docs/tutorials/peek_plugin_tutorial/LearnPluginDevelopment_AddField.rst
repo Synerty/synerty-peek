@@ -198,7 +198,7 @@ platform that we want to use the field service:
 
         "field": {
             "showHomeLink": true,
-            "appDir": "_private/field",
+            "appDir": "_private/field-app",
             "appModule": "tutorial.module#TutorialModule",
             "assetDir": "_private/field-assets",
             "icon": "/assets/peek_plugin_tutorial/icon.png"
@@ -218,7 +218,7 @@ Here is an example ::
             ...
             "field": {
                 "showHomeLink": true,
-                "appDir": "_private/field",
+                "appDir": "_private/field-app",
                 "appModule": "tutorial.module#TutorialModule",
                 "assetDir": "_private/field-assets",
                 "icon": "/assets/peek_plugin_tutorial/icon.png"
@@ -352,7 +352,7 @@ The plugin should now be ready for the field to load.
 Running on the Field Service
 -----------------------------
 
-Edit :file:`~/peek-field.home/config.json`:
+Edit :file:`~/peek-field-service.home/config.json`:
 
 #.  Ensure **logging.level** is set to **"DEBUG"**
 #.  Add **"peek_plugin_tutorial"** to the **plugin.enabled** array
@@ -381,10 +381,10 @@ It should something like this: ::
     Service will also create the file.
 
 
-Check File :file:`~/peek-field.home/config.json`
+Check File :file:`~/peek-field-service.home/config.json`
 ````````````````````````````````````````````````````````
 
-Check the :file:`~/peek-field.home/config.json` file:
+Check the :file:`~/peek-field-service.home/config.json` file:
 
 #.  Ensure **frontend.webBuildEnabled** is set to **true**, with no quotes
 #.  Ensure **frontend.webBuildPrepareEnabled** is set to **true**, with no quotes
