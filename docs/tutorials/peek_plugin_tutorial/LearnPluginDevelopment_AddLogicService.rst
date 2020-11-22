@@ -200,7 +200,7 @@ The plugin should now be ready for the logic service to load.
 Running on the Logic Service
 ----------------------------
 
-File :file:`~/peek-logic.home/config.json` is the configuration file for the peek logic
+File :file:`~/peek-logic-service.home/config.json` is the configuration file for the peek logic
 service.
 
 .. note:: This file is created in :ref:`administer_peek_platform`.  Running the Logic
@@ -208,7 +208,7 @@ service.
 
 ----
 
-Edit :file:`~/peek-logic.home/config.json`:
+Edit :file:`~/peek-logic-service.home/config.json`:
 
 #.  Ensure **logging.level** is set to **"DEBUG"**
 #.  Add **"peek_plugin_tutorial"** to the **plugin.enabled** array
