@@ -5,6 +5,27 @@ set -o errexit
 # set -x
 
 # Also update setup.py
+export COMMUNITY_PLUGINS="
+peek-plugin-base
+peek-plugin-branch
+peek-plugin-chat
+peek-plugin-data-dms
+peek-plugin-diagram
+peek-plugin-diagram-trace
+peek-plugin-diagram-positioner
+peek-plugin-diagram-zepben-menu
+peek-plugin-docdb-generic-menu
+peek-plugin-eventdb
+peek-plugin-gis-diagram
+peek-plugin-gis-diagram-loader
+peek-plugin-graphdb
+peek-plugin-inbox
+peek-plugin-index-blueprint
+peek-plugin-livedb
+peek-plugin-noop
+peek-plugin-tutorial
+"
+
 export COMMUNITY_PKGS="
 peek-abstract-chunked-data-loader
 peek-abstract-chunked-index
@@ -19,30 +40,15 @@ peek-doc-admin
 peek-doc-dev
 peek-doc-user
 peek-field-app
+peek-field-service
 peek-logic-service
 peek-office-app
 peek-office-service
 peek-platform
-peek-plugin-base
-peek-plugin-branch
-peek-plugin-chat
-peek-plugin-data-dms
-peek-plugin-diagram
-peek-plugin-diagram-positioner
-peek-plugin-diagram-trace
-peek-plugin-docdb-generic-menu
-peek-plugin-eventdb
-peek-plugin-gis-diagram
-peek-plugin-gis-diagram-loader
-peek-plugin-graphdb
-peek-plugin-inbox
-peek-plugin-index-blueprint
-peek-plugin-livedb
-peek-plugin-noop
-peek-plugin-tutorial
 peek-storage-service
 peek-worker-service
 synerty-peek
+${COMMUNITY_PLUGINS}
 "
 
 # Dynamicall list plugins
@@ -62,7 +68,6 @@ synerty-peek
 # Ignore all that, define the ones JJC wants for Orion
 
 export ENTERPRISE_PKGS="
-peek-plugin-diagram-zepben-menu
 peek-plugin-enmac-chat
 peek-plugin-enmac-diagram
 peek-plugin-enmac-diagram-loader
