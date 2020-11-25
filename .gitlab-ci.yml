@@ -169,7 +169,7 @@ package_community_linux:
         - export NPM_CONFIG_AUTH=`echo "${NEXUS_USER}:${NEXUS_PASSWORD}" | openssl base64`
         - export NG_CLI_ANALYTICS=ci
         - mkdir -p ${GIT_CLONE_PATH}/${PKG_COMMUNITY_LINUX}
-        - ./scripts/linux/package_community_linux_gitlab.sh ${RELEASE_VER:-${NON_RELEASE_VER}}
+        - ./scripts/linux/package_linux.sh -r community ${RELEASE_VER:-${NON_RELEASE_VER}}
             ${GIT_CLONE_PATH}/cloned_community_repos
             ${GIT_CLONE_PATH}/community_packages
             ${GIT_CLONE_PATH}/${PKG_COMMUNITY_LINUX}
@@ -199,7 +199,7 @@ package_enterprise_linux:
         - export PIP_INDEX=http://${NEXUS_USER}:${NEXUS_PASSWORD}@${NEXUS_URL}/repository/pypi-all/pypi
         - export PIP_INDEX_URL=http://${NEXUS_USER}:${NEXUS_PASSWORD}@${NEXUS_URL}/repository/pypi-all/simple
         - export PIP_TRUSTED_HOST=${NEXUS_URL}
-        - ./scripts/linux/package_enterprise_linux_gitlab.sh ${RELEASE_VER:-${NON_RELEASE_VER}}
+        - ./scripts/linux/package_linux.sh -r enterprise ${RELEASE_VER:-${NON_RELEASE_VER}}
             ${GIT_CLONE_PATH}/enterprise_packages ${GIT_CLONE_PATH}/community_packages
             ${GIT_CLONE_PATH}/${PKG_ENTERPRISE_LINUX} ${PINNED_DEPS_PY_FILE_LINUX}
     tags:
@@ -301,8 +301,7 @@ package_community_macos:
         - export NPM_CONFIG_AUTH=`echo "${NEXUS_USER}:${NEXUS_PASSWORD}" | openssl base64`
         - export NG_CLI_ANALYTICS=ci
         - mkdir -p ${GIT_CLONE_PATH}/${PKG_COMMUNITY_MACOS}
-        - chmod +x ./scripts/macos/package_community_macos.sh
-        - ./scripts/macos/package_community_macos.sh ${RELEASE_VER:-${NON_RELEASE_VER}}
+        - ./scripts/macos/package_macos.sh -r community ${RELEASE_VER:-${NON_RELEASE_VER}}
             ${GIT_CLONE_PATH}/cloned_community_repos
             ${GIT_CLONE_PATH}/community_packages
             ${GIT_CLONE_PATH}/${PKG_COMMUNITY_MACOS}
@@ -331,8 +330,7 @@ package_enterprise_macos:
         - export PIP_INDEX=http://${NEXUS_USER}:${NEXUS_PASSWORD}@${NEXUS_URL}/repository/pypi-all/pypi
         - export PIP_INDEX_URL=http://${NEXUS_USER}:${NEXUS_PASSWORD}@${NEXUS_URL}/repository/pypi-all/simple
         - export PIP_TRUSTED_HOST=${NEXUS_URL}
-        - chmod +x ./scripts/macos/package_enterprise_macos.sh
-        - ./scripts/macos/package_enterprise_macos.sh ${RELEASE_VER:-${NON_RELEASE_VER}}
+        - ./scripts/macos/package_macos.sh -r enterprise ${RELEASE_VER:-${NON_RELEASE_VER}}
             ${GIT_CLONE_PATH}/enterprise_packages ${GIT_CLONE_PATH}/community_packages
             ${GIT_CLONE_PATH}/${PKG_ENTERPRISE_MACOS} ${PINNED_DEPS_PY_FILE_MACOS}
     tags:

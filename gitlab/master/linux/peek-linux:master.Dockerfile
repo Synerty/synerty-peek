@@ -29,7 +29,6 @@ RUN apt install -y libsasl2-dev libldap-common libldap2-dev
 RUN apt install -y libgeos-dev libgeos-c1v5 libpq-dev libsqlite3-dev
 # Install C libraries that the oracle client requires:
 RUN apt install -y libxml2 libxml2-dev libxslt1.1 libxslt1-dev libaio1 libaio-dev
-
 RUN wget "https://www.python.org/ftp/python/${PEEK_PY_VER}/Python-${PEEK_PY_VER}.tgz"
 RUN tar xzf Python-${PEEK_PY_VER}.tgz
 RUN cd Python-${PEEK_PY_VER} \
@@ -43,3 +42,5 @@ RUN pip install --upgrade pip
 RUN pip install virtualenv
 RUN pip install wheel
 RUN pip install twine
+# Install pbzip2 to accelerate tar compression
+RUN apt install -y pbzip2

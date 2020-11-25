@@ -1,9 +1,28 @@
 #!/bin/bash
 
+HAS_PBZIP2=false
+
+if ! [ -x "$(command -v pbzip2)" ]; then
+    echo 'pbzip2 is not installed, you may experience longer archiving time.'
+    $HAS_PBZIP2=true
+fi
+
+function maybeParallelTarBzip2() {
+    output=$1
+    dirToTar=$2
+
+    if [ $HAS_PBZIP2=true ]; then
+        tar --use-compress-prog=pbzip2 -cf $1 $2
+    else
+        tar cjf $1 $2
+    fi
+}
+
 function packageCICommunity() {
     #!/usr/bin/env bash
 
     source ~/.bashrc
+    source ./pip_common.sh
 
     set -o nounset
     set -o errexit
@@ -27,7 +46,7 @@ function packageCICommunity() {
     # ------------------------------------------------------------------------------
     # Download the peek platform and all it's dependencies
 
-    # Create the dir for the py wheels
+    # Create the dir for the py wheels of Peek platform
     mkdir -p $baseDir/py
     cd $baseDir/py
 
@@ -54,6 +73,29 @@ function packageCICommunity() {
     else
         echo "We've downloaded version ${peekPkgVer}"
     fi
+
+    # Create the dir for the py wheels of Peek community plugins
+    mkdir -p $baseDir/py/plugins
+    cd $baseDir/py/plugins
+
+    # Copy over the community plugins
+    for plugin in ${COMMUNITY_PLUGINS}; do
+        cp ${platformPackagesDir}/${plugin}*.gz .
+    done
+
+    pipWheelArgs="--no-cache --find-links=. --find-links=${platformPackagesDir}"
+    if [ -f "${pinnedDepsPyFile}" ]; then
+        echo "Using requirements file : ${pinnedDepsPyFile}"
+        pipWheelArgs="-r ${pinnedDepsPyFile} $pipWheelArgs"
+    else
+        echo "Requirements file is missing : ${pinnedDepsPyFile}"
+    fi
+
+    # Create the plugins release
+    pip wheel ${pipWheelArgs} *.gz
+
+    # Delete all the wheels created for the plugins
+    rm -f *.gz
 
     # These are installed as a dependency on Linux
     # *     Shapely
@@ -91,20 +133,33 @@ function packageCICommunity() {
     # ------------------------------------------------------------------------------
     # This function downloads the node modules and prepares them for the release
 
-    function downloadNodeModules() {
+    function downloadNodeModules {
         # Get the variables for this package
         nmDir=$1
+
         packageJsonUrl="$2/package.json"
         packageLockJsonUrl="$2/package-lock.json"
+
+        packageJsonDir="$3/package.json"
+        packageLockJsonDir="$3/package-lock.json"
 
         # Create the tmp dir
         mkdir -p "$nmDir/tmp"
         cd "$nmDir/tmp"
 
-        # Download package.json
-        cp "$packageJsonUrl" .
+        if [ -f ${packageJsonDir} ]
+        then
+            # Download package.json
+            cp "$packageJsonDir" .
 
-        cp "$packageLockJsonUrl" .
+            cp "$packageLockJsonDir" .
+        else
+            # Download package.json
+            curl -O "$packageJsonUrl" .
+
+            curl -O "$packageLockJsonUrl" .
+        fi
+
         # run npm install
         npm install
 
@@ -117,20 +172,28 @@ function packageCICommunity() {
         rm -rf tmp
     }
 
-    # MOBILE node modules
-    mobileBuildWebDIR="$baseDir/mobile-build-web"
-    mobileJsonUrl="${platformReposDir}/peek-field-app/peek_field_app"
-    downloadNodeModules $mobileBuildWebDIR $mobileJsonUrl
+    # FIELD node modules
+    mobilePackageVer=`cd $baseDir/py && ls peek_field_app-* | cut -d'-' -f2`
+    mobileBuildWebDIR="$baseDir/field-app"
+    mobileJsonUrl="https://bitbucket.org/synerty/peek-field-app/raw/${mobilePackageVer}/peek_field_app"
+    mobileJsonDir="${platformReposDir}/peek-field-app/peek_field_app"
+    downloadNodeModules $mobileBuildWebDIR $mobileJsonUrl $mobileJsonDir
 
-    # DESKTOP node modules
-    desktopBuildWebDIR="$baseDir/desktop-build-web"
-    desktopJsonUrl="${platformReposDir}/peek-office-app/peek_office_app"
-    downloadNodeModules $desktopBuildWebDIR $desktopJsonUrl
+    # OFFICE node modules
+    desktopPackageVer=`cd $baseDir/py && ls peek_office_app-* | cut -d'-' -f2`
+    desktopBuildWebDIR="$baseDir/office-app"
+    desktopJsonUrl="https://bitbucket.org/synerty/peek-office-app/raw/${desktopPackageVer}/peek_office_app"
+    desktopJsonDir="${platformReposDir}/peek-office-app/peek_office_app"
+    downloadNodeModules $desktopBuildWebDIR $desktopJsonUrl $desktopJsonDir
 
     # ADMIN node modules
-    adminBuildWebDIR="$baseDir/admin-build-web"
-    adminJsonUrl="${platformReposDir}/peek-admin-app/peek_admin_app"
-    downloadNodeModules $adminBuildWebDIR $adminJsonUrl
+    adminPackageVer=`cd $baseDir/py && ls peek_admin_app-* | cut -d'-' -f2`
+    adminBuildWebDIR="$baseDir/admin-app"
+    adminJsonUrl="https://bitbucket.org/synerty/peek-admin-app/raw/${adminPackageVer}/peek_admin_app"
+    adminJsonDir="${platformReposDir}/peek-admin-app/peek_admin_app"
+    downloadNodeModules $adminBuildWebDIR $adminJsonUrl $adminJsonDir
+
+
 
     # ------------------------------------------------------------------------------
     # Copy over the init scripts for this platform
@@ -169,7 +232,7 @@ function packageCICommunity() {
 
     # Create the zip file
     echo "Compressing the release"
-    (cd ${releaseDir} && tar cjf ${releaseZip} *)
+    cd ${releaseDir} && maybeParallelTarBzip2 ${releaseZip} .
 
     # Remove the working dir
     rm -rf ${releaseDir}
@@ -194,7 +257,7 @@ function packageCIEnterprisePlugins() {
     DST_PATH="${4:-/tmp/plugin}"
     pinnedDepsPyFile="${5:-nofile}"
 
-    DIR_TO_TAR="peek_enterprise_plugins_linux_${VER}"
+    DIR_TO_TAR="peek_enterprise_linux_${VER}"
 
     # create and change to the directory we'll zip
     cd ${DST_PATH}
@@ -225,7 +288,7 @@ function packageCIEnterprisePlugins() {
     cd ..
 
     # Tar the directory
-    tar cjf ${DIR_TO_TAR}.tar.bz2 ${DIR_TO_TAR}
+    maybeParallelTarBzip2 ${DIR_TO_TAR}.tar.bz2 ${DIR_TO_TAR}
 
     # Cleanup the directory we made
     rm -rf ${DIR_TO_TAR}
@@ -393,7 +456,7 @@ function packageLinux() {
 
     # Create the zip file
     echo "Compressing the release"
-    (cd ${releaseDir} && tar cjf ${releaseZip} *)
+    cd ${releaseDir} && maybeParallelTarBzip2 ${releaseZip} .
 
     # Remove the working dir
     rm -rf ${releaseDir}
@@ -406,28 +469,29 @@ function packageLinux() {
 
 function printUsageAndExit() {
     echo "Invalid arguments"
-    echo "Usage: $0 -p <linux|gitlab> -r <community|enterprise|ota> [args]"
+    echo "Usage: $0 -r <community|enterprise|ota> [args]"
     exit 1
 }
 
-function PackageOnGitLabCI() {
+function packageOnGitLabCI() {
     if [ "${release}" == "community" ]; then
-         packageCICommunity $*
+        # TODO: check arguments before invoke
+        #  ./scripts/linux/package_linux.sh: line 18: 2: unbound variable
+        #  https://gitlab.synerty.com/louis-lu/peek/community/synerty-peek/-/jobs/14581
+        packageCICommunity $1 $2 $3 $4 $5
     elif [ "${release}" == "enterprise" ]; then
-         packageCIEnterprisePlugins $*
+        # TODO: check arguments before invoke
+        packageCIEnterprisePlugins $1 $2 $3 $4 $5
     else
-        sprintUsageAndExit
+        printUsageAndExit
     fi
 }
 
 # main
 platform=""
 release=""
-while getopts ":r:p:" o; do
+while getopts ":r:" o; do
     case "${o}" in
-    p)
-        platform=${OPTARG}
-        ;;
     r)
         release=${OPTARG}
         ;;
@@ -440,15 +504,15 @@ done
 #After getopts is done, shift all processed options away with
 shift $((OPTIND - 1))
 
-case "${platform}" in
-    gitlab)
-        PackageOnGitLabCI
-        ;;
-    linux|"")
+case "${release}" in
+community | enterprise)
+    packageOnGitLabCI $*
+    ;;
+linux | "")
 
-        packageLinux $*
-        ;;
-    *)
-        printUsageAndExit
-        ;;
+    packageLinux $*
+    ;;
+*)
+    printUsageAndExit
+    ;;
 esac

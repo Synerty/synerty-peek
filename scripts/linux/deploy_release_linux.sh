@@ -56,7 +56,7 @@ tar xjf ${communityZip} -C ${releaseDir}
 # ------------------------------------------------------------------------------
 # Extract the release to a interim directory
 
-if [ -f $pluginsZip ]; then
+if [ -f $enterpriseZip ]; then
     echo "Extracting plugins to $releaseDir"
     tar xjf ${enterpriseZip} -C ${releaseDir}
 fi
@@ -100,10 +100,10 @@ popd
 # Install the enterprise python plugins
 
 # install the py wheels from the release
-if [ -f $pluginsZip ]; then
+if [ -f $enterpriseZip ]; then
     echo "Installing python enterprise packages"
     pushd "$releaseDir/peek_enterprise_linux_${peekPkgVer}"
-    pip install --no-index --no-cache --find-links=. peek_enterprise*.whl
+    pip install --no-index --no-cache --find-links=. peek_*.whl
     popd
 fi
 
