@@ -310,7 +310,7 @@ function packageLinux() {
 
     startDir=$(pwd)
 
-    baseDir="$startDir/peek_plaform_linux"
+    baseDir="$startDir/peek_community_linux"
 
     [ -d $baseDir ] && rm -rf $baseDir
 
@@ -372,52 +372,67 @@ function packageLinux() {
 
     # ------------------------------------------------------------------------------
     # This function downloads the node modules and prepares them for the release
+    function downloadNodeModules {
+            # Get the variables for this package
+            nmDir=$1
 
-    function downloadNodeModules() {
-        # Get the variables for this package
-        nmDir=$1
-        packageJsonUrl="$2/package.json"
-        packageLockJsonUrl="$2/package-lock.json"
+            packageJsonUrl="$2/package.json"
+            packageLockJsonUrl="$2/package-lock.json"
 
-        # Create the tmp dir
-        mkdir -p "$nmDir/tmp"
-        cd "$nmDir/tmp"
+            packageJsonDir="$3/package.json"
+            packageLockJsonDir="$3/package-lock.json"
 
-        # Download package.json
-        wget -nv "$packageJsonUrl"
+            # Create the tmp dir
+            mkdir -p "$nmDir/tmp"
+            cd "$nmDir/tmp"
 
-        # Download package-lock.json
-        wget -nv "$packageLockJsonUrl"
+            if [ -f ${packageJsonDir} ]
+            then
+                # Download package.json
+                cp "$packageJsonDir" .
 
-        # run npm install
-        npm install
+                cp "$packageLockJsonDir" .
+            else
+                # Download package.json
+                curl -O "$packageJsonUrl" .
 
-        # Move to where we want node_modules and delete the tmp dir
-        # some packages create extra files that we don't want
-        cd $nmDir
-        mv tmp/node_modules .
+                curl -O "$packageLockJsonUrl" .
+            fi
 
-        # Cleanup the temp dir
-        rm -rf tmp
-    }
+            # run npm install
+            npm install
 
-    # MOBILE node modules
-    mobilePackageVer=$(cd $baseDir/py && ls peek_field_app-* | cut -d'-' -f2)
-    mobileBuildWebDIR="$baseDir/mobile-build-web"
-    mobileJsonUrl="https://bitbucket.org/synerty/peek-field-app/raw/${mobilePackageVer}/peek_field_app"
-    downloadNodeModules $mobileBuildWebDIR $mobileJsonUrl
+            # Move to where we want node_modules and delete the tmp dir
+            # some packages create extra files that we don't want
+            cd $nmDir
+            mv tmp/node_modules .
 
-    # DESKTOP node modules
-    desktopPackageVer=$(cd $baseDir/py && ls peek_office_app-* | cut -d'-' -f2)
-    desktopBuildWebDIR="$baseDir/desktop-build-web"
-    desktopJsonUrl="https://bitbucket.org/synerty/peek-office-app/raw/${desktopPackageVer}/peek_office_app"
-    downloadNodeModules $desktopBuildWebDIR $desktopJsonUrl
+            # Cleanup the temp dir
+            rm -rf tmp
+        }
 
-    # ADMIN node modules
-    adminPackageVer=$(cd $baseDir/py && ls peek_admin_app-* | cut -d'-' -f2)
-    adminBuildWebDIR="$baseDir/admin-build-web"
-    adminJsonUrl="https://bitbucket.org/synerty/peek-admin-app/raw/${adminPackageVer}/peek_admin_app"
-    downloadNodeModules $adminBuildWebDIR $adminJsonUrl
+        # FIELD node modules
+        mobilePackageVer=`cd $baseDir/py && ls peek_field_app-* | cut -d'-' -f2`
+        mobileBuildWebDIR="$baseDir/field-app"
+        mobileJsonUrl="https://bitbucket.org/synerty/peek-field-app/raw/${mobilePackageVer}/peek_field_app"
+        mobileJsonDir="${platformReposDir}/peek-field-app/peek_field_app"
+        downloadNodeModules $mobileBuildWebDIR $mobileJsonUrl $mobileJsonDir
+
+        # OFFICE node modules
+        desktopPackageVer=`cd $baseDir/py && ls peek_office_app-* | cut -d'-' -f2`
+        desktopBuildWebDIR="$baseDir/office-app"
+        desktopJsonUrl="https://bitbucket.org/synerty/peek-office-app/raw/${desktopPackageVer}/peek_office_app"
+        desktopJsonDir="${platformReposDir}/peek-office-app/peek_office_app"
+        downloadNodeModules $desktopBuildWebDIR $desktopJsonUrl $desktopJsonDir
+
+        # ADMIN node modules
+        adminPackageVer=`cd $baseDir/py && ls peek_admin_app-* | cut -d'-' -f2`
+        adminBuildWebDIR="$baseDir/admin-app"
+        adminJsonUrl="https://bitbucket.org/synerty/peek-admin-app/raw/${adminPackageVer}/peek_admin_app"
+        adminJsonDir="${platformReposDir}/peek-admin-app/peek_admin_app"
+        downloadNodeModules $adminBuildWebDIR $adminJsonUrl $adminJsonDir
+
+
 
     # ------------------------------------------------------------------------------
     # Copy over the init scripts for this platform
