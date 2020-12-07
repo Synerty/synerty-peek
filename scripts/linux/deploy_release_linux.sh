@@ -3,7 +3,6 @@
 set -o nounset
 set -o errexit
 
-
 IS_DEBIAN=0;
 IS_REDHAT=0;
 
@@ -66,7 +65,7 @@ fi
 
 # Get the release name from the package
 echo "Get the release name from the package"
-peekPkgVer=`cd $releaseDir/py && ls synerty_peek-* | cut -d'-' -f2`
+peekPkgVer=`cd $releaseDir/platform && ls synerty_peek-* | cut -d'-' -f2`
 
 # This variable is the path of the new virtualenv
 venvDir="/home/peek/synerty-peek-${peekPkgVer}"
@@ -88,12 +87,16 @@ export PATH="$venvDir/bin:$PATH"
 # ------------------------------------------------------------------------------
 # Install the python packages
 
-# install the py wheels from the release
-echo "Installing python community packages"
-pushd "$releaseDir/py"
-pip install --no-index --no-cache --find-links=. \
-    synerty_peek*.whl \
-    peek_plugin*.whl
+# install the platform wheels from the release
+echo "Installing python community platform packages"
+pushd "$releaseDir/platform"
+pip install --no-index --no-cache --find-links=. synerty_peek*.whl
+popd
+
+# install the plugin wheels from the release
+echo "Installing python community plugin packages"
+pushd "$releaseDir/plugins"
+pip install --no-index --no-cache --find-links=. peek_plugin*.whl
 popd
 
 # ------------------------------------------------------------------------------

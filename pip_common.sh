@@ -6,7 +6,6 @@ set -o errexit
 
 # Also update setup.py
 export COMMUNITY_PLUGINS="
-peek-plugin-base
 peek-plugin-branch
 peek-plugin-chat
 peek-plugin-data-dms
@@ -35,6 +34,7 @@ peek-core-docdb
 peek-core-email
 peek-core-search
 peek-core-user
+peek-core-screen
 peek-doc-admin
 peek-doc-dev
 peek-doc-user
@@ -43,6 +43,7 @@ peek-field-service
 peek-logic-service
 peek-office-app
 peek-office-service
+peek-plugin-base
 peek-platform
 peek-storage-service
 peek-worker-service
