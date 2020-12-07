@@ -1,5 +1,10 @@
 #!/bin/bash
 
+set -o nounset
+set -o errexit
+
+source ./pip_common.sh
+
 HAS_PBZIP2=false
 
 if ! [ -x "$(command -v pbzip2)" ]; then
@@ -18,18 +23,12 @@ function maybeParallelTarBzip2() {
     fi
 }
 
-
 function packageCICommunity() {
-
-    source ~/.bash_profile
-
-    set -o nounset
-    set -o errexit
 
     wantedVer=${1-}
     wantedVer=${wantedVer/v/}
 
-    if [ -n ${wantedVer} ]; then
+    if [ -n "${wantedVer}" ]; then
         echo "Requested version is $wantedVer"
     fi
 
@@ -45,9 +44,9 @@ function packageCICommunity() {
     # ------------------------------------------------------------------------------
     # Download the peek platform and all it's dependencies
 
-    # Create the dir for the py wheels
-    mkdir -p $baseDir/py
-    cd $baseDir/py
+    # Create the dir for the py wheels of Peek platform
+    mkdir -p $baseDir/platform
+    cd $baseDir/platform
 
     pipWheelArgs=" --no-cache --find-links=${platformPackagesDir}"
     if [ -f "${pinnedDepsPyFile}" ]; then
@@ -58,20 +57,44 @@ function packageCICommunity() {
     fi
 
     echo "Downloading and creating wheels"
-    if [ -n ${wantedVer} ]; then
+    if [ -n "${wantedVer}" ]; then
         pip wheel synerty-peek==${wantedVer} $pipWheelArgs
     else
         pip wheel synerty-peek $pipWheelArgs
     fi
 
     # Make sure we've downloaded the right version
-    peekPkgVer=$(cd $baseDir/py && ls synerty_peek-* | cut -d'-' -f2)
+    peekPkgVer=$(cd $baseDir/platform && ls synerty_peek-* | cut -d'-' -f2)
 
     if [ -n "${wantedVer}" -a "${wantedVer}" != "${peekPkgVer}" ]; then
         echo "We've downloaded version ${peekPkgVer}, but you wanted ver ${wantedVer}"
     else
         echo "We've downloaded version ${peekPkgVer}"
     fi
+
+    # ------------------------------------------------------------------------------
+    # Create the dir for the py wheels of Peek community plugins
+    mkdir -p $baseDir/plugins
+    cd $baseDir/plugins
+
+    # Copy over the community plugins
+    for plugin in ${COMMUNITY_PLUGINS}; do
+        cp ${platformPackagesDir}/${plugin}*.gz .
+    done
+
+    pipWheelArgs="--no-cache --find-links=. --find-links=${platformPackagesDir}"
+    if [ -f "${pinnedDepsPyFile}" ]; then
+        echo "Using requirements file : ${pinnedDepsPyFile}"
+        pipWheelArgs="-r ${pinnedDepsPyFile} $pipWheelArgs"
+    else
+        echo "Requirements file is missing : ${pinnedDepsPyFile}"
+    fi
+
+    # Create the plugins release
+    pip wheel ${pipWheelArgs} *.gz
+
+    # Delete all the wheels created for the plugins
+    rm -f *.gz
 
     # These are installed as a dependency on macOS
     # *     Shapely
@@ -148,21 +171,21 @@ function packageCICommunity() {
     }
 
     # FIELD node modules
-    mobilePackageVer=$(cd $baseDir/py && ls peek_field_app-* | cut -d'-' -f2)
+    mobilePackageVer=$(cd $baseDir/platform && ls peek_field_app-* | cut -d'-' -f2)
     mobileBuildWebDIR="$baseDir/field-app"
     mobileJsonUrl="https://bitbucket.org/synerty/peek-field-app/raw/${mobilePackageVer}/peek_field_app"
     mobileJsonDir="${platformReposDir}/peek-field-app/peek_field_app"
     downloadNodeModules $mobileBuildWebDIR $mobileJsonUrl $mobileJsonDir
 
     # OFFICE node modules
-    desktopPackageVer=$(cd $baseDir/py && ls peek_office_app-* | cut -d'-' -f2)
+    desktopPackageVer=$(cd $baseDir/platform && ls peek_office_app-* | cut -d'-' -f2)
     desktopBuildWebDIR="$baseDir/office-app"
     desktopJsonUrl="https://bitbucket.org/synerty/peek-office-app/raw/${desktopPackageVer}/peek_office_app"
     desktopJsonDir="${platformReposDir}/peek-office-app/peek_office_app"
     downloadNodeModules $desktopBuildWebDIR $desktopJsonUrl $desktopJsonDir
 
     # ADMIN node modules
-    adminPackageVer=$(cd $baseDir/py && ls peek_admin_app-* | cut -d'-' -f2)
+    adminPackageVer=$(cd $baseDir/platform && ls peek_admin_app-* | cut -d'-' -f2)
     adminBuildWebDIR="$baseDir/admin-app"
     adminJsonUrl="https://bitbucket.org/synerty/peek-admin-app/raw/${adminPackageVer}/peek_admin_app"
     adminJsonDir="${platformReposDir}/peek-admin-app/peek_admin_app"
@@ -219,13 +242,7 @@ function packageCICommunity() {
 }
 
 function packageCIEnterprisePlugins() {
-    source ~/.bashrc
-
-    set -o nounset
-    set -o errexit
-
-    source ./pip_common.sh
-
+ 
     VER=${1}
     SRC_PATH="${2:-..}"
     SRC_PLATFORM_PATH="${3:-..}"
