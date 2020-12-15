@@ -9,4 +9,4 @@ RUN wget "https://gitlab.synerty.com/peek/synerty-peek/-/raw/${RELEASE_BRANCH}/g
 RUN pip install -r pinned-deps-py
 
 # Install the unit test report converters
-RUN pip install subunitreporter junitxml
+RUN pip install subunitreporter junitxml ddt
