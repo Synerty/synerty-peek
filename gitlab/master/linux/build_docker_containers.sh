@@ -3,22 +3,23 @@
 set errexit
 set nounset
 
-function build_containers() {
-    BRANCH=$1
+IMAGE_NAMES=""
+IMAGE_NAMES="${IMAGE_NAMES} peek-linux:master "
+IMAGE_NAMES="${IMAGE_NAMES} peek-linux-test:master "
+IMAGE_NAMES="${IMAGE_NAMES} peek-linux-build:master "
+IMAGE_NAMES="${IMAGE_NAMES} peek-linux-doc:master "
 
-    for IMAGE_NAME in peek-linux peek-linux-build peek-linux-doc peek-linux-test
-    do
-        IMAGE_NAME="${IMAGE_NAME}:${BRANCH}"
-        echo "Building |${IMAGE_NAME}|"
+for IMAGE_NAME in ${IMAGE_NAMES}; do
+    echo "Building |${IMAGE_NAME}|"
 
-        docker build --no-cache -t ${IMAGE_NAME} -f ${IMAGE_NAME}.Dockerfile .
-        docker tag ${IMAGE_NAME} nexus.synerty.com:5000/${IMAGE_NAME}
-        docker push nexus.synerty.com:5000/${IMAGE_NAME}
+    docker build --no-cache -t ${IMAGE_NAME} -f ${IMAGE_NAME}.Dockerfile .
+    docker tag ${IMAGE_NAME} nexus.synerty.com:5000/${IMAGE_NAME}
+    docker push nexus.synerty.com:5000/${IMAGE_NAME}
 
-    done
+    if [[ ${IMAGE_NAME} == *master ]]
+    then
+        docker tag ${IMAGE_NAME} nexus.synerty.com:5000/${IMAGE_NAME/master/latest}
+        docker push nexus.synerty.com:5000/${IMAGE_NAME/master/latest}
+    fi
 
-}
-
-# No tag == "latest"
-build_containers latest
-build_containers master
+done
