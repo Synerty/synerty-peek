@@ -21,6 +21,7 @@ platformPackages = [
     "peek-core-email",
     "peek-core-search",
     "peek-core-user",
+    "peek-core-screen",
     "peek-doc-admin",
     "peek-doc-dev",
     "peek-doc-user",

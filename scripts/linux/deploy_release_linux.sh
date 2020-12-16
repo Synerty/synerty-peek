@@ -188,7 +188,7 @@ fi
 
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
-    for s in peek_logic_service peek_worker_service peek_office_service peek_agent_service
+    for s in peek_logic peek_worker peek_office peek_field peek_agent
     do
         FILE="${s}.service"
         TO="/lib/systemd/system/"

@@ -77,12 +77,7 @@ function packageCICommunity() {
     mkdir -p $baseDir/plugins
     cd $baseDir/plugins
 
-    # Copy over the community plugins
-    for plugin in ${COMMUNITY_PLUGINS}; do
-        cp ${platformPackagesDir}/${plugin}*.gz .
-    done
-
-    pipWheelArgs="--no-cache --find-links=. --find-links=${platformPackagesDir}"
+    pipWheelArgs="--no-cache --find-links=${platformPackagesDir}"
     if [ -f "${pinnedDepsPyFile}" ]; then
         echo "Using requirements file : ${pinnedDepsPyFile}"
         pipWheelArgs="-r ${pinnedDepsPyFile} $pipWheelArgs"
@@ -91,7 +86,10 @@ function packageCICommunity() {
     fi
 
     # Create the plugins release
-    pip wheel ${pipWheelArgs} *.gz
+    # Copy over the community plugins
+    for plugin in ${COMMUNITY_PLUGINS}; do
+        pip wheel ${pipWheelArgs} ${platformPackagesDir}/${plugin}*.gz
+    done
 
     # Delete all the wheels created for the plugins
     rm -f *.gz
@@ -245,7 +243,7 @@ function packageCIEnterprisePlugins() {
  
     VER=${1}
     SRC_PATH="${2:-..}"
-    SRC_PLATFORM_PATH="${3:-..}"
+    COMMUNITY_PACKAGEs="${3:-..}"
     DST_PATH="${4:-/tmp/plugin}"
     pinnedDepsPyFile="${5:-nofile}"
 
@@ -258,7 +256,7 @@ function packageCIEnterprisePlugins() {
     # Copy over the plugins
     cp ${SRC_PATH}/*.gz .
 
-    pipWheelArgs="--no-cache --find-links=. --find-links=${SRC_PLATFORM_PATH}"
+    pipWheelArgs="--no-cache --find-links=. --find-links=${COMMUNITY_PACKAGEs}"
     if [ -f "${pinnedDepsPyFile}" ]; then
         echo "Using requirements file : ${pinnedDepsPyFile}"
         pipWheelArgs="-r ${pinnedDepsPyFile} $pipWheelArgs"
