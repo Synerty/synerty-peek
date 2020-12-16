@@ -77,12 +77,7 @@ function packageCICommunity() {
     mkdir -p $baseDir/plugins
     cd $baseDir/plugins
 
-    # Copy over the community plugins
-    for plugin in ${COMMUNITY_PLUGINS}; do
-        cp ${platformPackagesDir}/${plugin}*.gz .
-    done
-
-    pipWheelArgs="--no-cache --find-links=. --find-links=${platformPackagesDir}"
+    pipWheelArgs="--no-cache --find-links=${platformPackagesDir}"
     if [ -f "${pinnedDepsPyFile}" ]; then
         echo "Using requirements file : ${pinnedDepsPyFile}"
         pipWheelArgs="-r ${pinnedDepsPyFile} $pipWheelArgs"
@@ -91,7 +86,10 @@ function packageCICommunity() {
     fi
 
     # Create the plugins release
-    pip wheel ${pipWheelArgs} *.gz
+    # Copy over the community plugins
+    for plugin in ${COMMUNITY_PLUGINS}; do
+        pip wheel ${pipWheelArgs} ${platformPackagesDir}/${plugin}*.gz
+    done
 
     # Delete all the wheels created for the plugins
     rm -f *.gz
@@ -199,7 +197,8 @@ function packageCICommunity() {
 
     mkdir $baseDir/init && pushd $baseDir/init
 
-    for s in peek_logic_service peek_worker_service peek_agent_service peek_office_service peek_field_service; do
+    for s in peek_logic peek_worker peek_office peek_field peek_agent
+    do
         cp ${platformReposDir}/synerty-peek/scripts/linux/init/${s}.service ${s}.service
     done
     popd
@@ -246,7 +245,7 @@ function packageCIEnterprisePlugins() {
 
     VER=${1}
     SRC_PATH="${2:-..}"
-    SRC_PLATFORM_PATH="${3:-..}"
+    COMMUNITY_PACKAGEs="${3:-..}"
     DST_PATH="${4:-/tmp/plugin}"
     pinnedDepsPyFile="${5:-nofile}"
 
@@ -259,7 +258,7 @@ function packageCIEnterprisePlugins() {
     # Copy over the plugins
     cp ${SRC_PATH}/*.gz .
 
-    pipWheelArgs="--no-cache --find-links=. --find-links=${SRC_PLATFORM_PATH}"
+    pipWheelArgs="--no-cache --find-links=. --find-links=${COMMUNITY_PACKAGEs}"
     if [ -f "${pinnedDepsPyFile}" ]; then
         echo "Using requirements file : ${pinnedDepsPyFile}"
         pipWheelArgs="-r ${pinnedDepsPyFile} $pipWheelArgs"

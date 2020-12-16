@@ -106,6 +106,8 @@ git_clone_enterprise:
         - linux
 
 publish_community:
+    dependencies:
+        - git_clone_community
     allow_failure: false
     artifacts:
         paths:
@@ -126,6 +128,9 @@ publish_community:
 
 
 publish_enterprise:
+    dependencies:
+        - git_clone_community
+        - git_clone_enterprise
     allow_failure: false
     artifacts:
         paths:
@@ -174,8 +179,6 @@ package_community_linux:
             ${GIT_CLONE_PATH}/community_packages
             ${GIT_CLONE_PATH}/${PKG_COMMUNITY_LINUX}
             ${PINNED_DEPS_PY_FILE_LINUX}
-        - rm -rf ${GIT_CLONE_PATH}/community_packages
-        - rm -rf ${GIT_CLONE_PATH}/cloned_community_repos
     tags:
         - linux
 
@@ -200,8 +203,10 @@ package_enterprise_linux:
         - export PIP_INDEX_URL=http://${NEXUS_USER}:${NEXUS_PASSWORD}@${NEXUS_URL}/repository/pypi-all/simple
         - export PIP_TRUSTED_HOST=${NEXUS_URL}
         - ./scripts/linux/package_linux.sh -r enterprise ${RELEASE_VER:-${NON_RELEASE_VER}}
-            ${GIT_CLONE_PATH}/enterprise_packages ${GIT_CLONE_PATH}/community_packages
-            ${GIT_CLONE_PATH}/${PKG_ENTERPRISE_LINUX} ${PINNED_DEPS_PY_FILE_LINUX}
+            ${GIT_CLONE_PATH}/enterprise_packages
+            ${GIT_CLONE_PATH}/community_packages
+            ${GIT_CLONE_PATH}/${PKG_ENTERPRISE_LINUX}
+            ${PINNED_DEPS_PY_FILE_LINUX}
     tags:
         - linux
 
