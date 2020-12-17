@@ -461,7 +461,7 @@ Install the C Compiler package, used for compiling python or VMWare tools, etc: 
 
 Install some utility packages: ::
 
-        PKG="rsync unzip wget"
+        PKG="rsync unzip wget git"
 
         sudo apt-get install -y $PKG
 

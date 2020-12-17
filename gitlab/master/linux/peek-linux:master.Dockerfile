@@ -17,7 +17,7 @@ RUN apt update
 # Install the C Compiler package, used for compiling python or VMWare tools, etc:
 RUN apt install -y gcc make linux-headers-amd64
 # Install some utility packages:
-RUN apt install -y rsync unzip wget
+RUN apt install -y rsync unzip wget git
 # Install the Python build dependencies:
 RUN apt install -y build-essential m4 ruby texinfo libbz2-dev libcurl4-openssl-dev
 RUN apt install -y libexpat-dev libncurses-dev zlib1g-dev libgmp-dev libssl-dev

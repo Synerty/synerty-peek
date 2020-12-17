@@ -395,6 +395,7 @@ Install rsync: ::
         PKG="rsync"
         PKG="$PKG unzip"
         PKG="$PKG wget"
+        PKG="$PKG git"
         PKG="$PKG bzip2"
 
         sudo yum install -y $PKG
