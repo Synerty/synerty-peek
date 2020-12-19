@@ -16,7 +16,7 @@ for IMAGE_NAME in ${IMAGE_NAMES}; do
     docker tag ${IMAGE_NAME} nexus.synerty.com:5000/${IMAGE_NAME}
     docker push nexus.synerty.com:5000/${IMAGE_NAME}
 
-    if [[ ${IMAGE_NAME} == *master ]]
+    if [[ ${IMAGE_NAME} == *aster ]]
     then
         docker tag ${IMAGE_NAME} nexus.synerty.com:5000/${IMAGE_NAME/master/latest}
         docker push nexus.synerty.com:5000/${IMAGE_NAME/master/latest}
