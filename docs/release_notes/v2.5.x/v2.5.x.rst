@@ -114,7 +114,7 @@ Bug
 *   [PEEK-700] - DMS diagram on-click tooltip missing
 
 Improvement
-```
+```````````
 
 *   [PEEK-709] - Configure Auto-Restart with Systemd
 
