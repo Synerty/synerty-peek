@@ -100,7 +100,6 @@ txhttputil==0.4.1
 txsuds-py3==0.5.9
 txWS-Upgrade==0.10.0
 tzlocal==2.1
-ujson==1.35
 urllib3==1.25.10
 vcversioner==2.16.0.0
 vine==1.3.0
