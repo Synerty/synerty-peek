@@ -76,6 +76,57 @@ Follow the steps in the link below to set this up.
 
 `Peek Client & Server SSL <https://synerty-peek.readthedocs.io/en/latest/administration/admin_config_platform.html#peek-office-service-server-ssl>`_
 
+v2.5.3 Issues Log
+-----------------
+
+Bug
+```
+
+*   [PEEK-680] - Fix login screen redirect for Peek
+
+*   [PEEK-681] - Fix back button for peek-mobile
+
+*   [PEEK-710] - Search results popup only works on one result
+
+*   [PEEK-761] - Peek DMS Diagram - Symbols don't rotate
+
+*   [PEEK-829] - Fix field switching - operation detail page performance issue
+
+*   [PEEK-846] - Fix docdb popup delay issue
+
+*   [PEEK-854] - Remove all uses of ujson due to seg faulting
+
+*   [PEEK-866] - Tooltips didn't show up and search window remain when navigate to diagram location
+
+*   [PEEK-869] - Fix Popup Fade Issue
+
+*   [PEEK-873] - "locate" property item button doesn't function
+
+*   [PEEK-874] - The content of exit message has a typo
+
+
+v2.5.2 Issues Log
+-----------------
+
+Bug
+```
+
+*   [PEEK-700] - DMS diagram on-click tooltip missing
+
+Improvement
+```
+
+*   [PEEK-709] - Configure Auto-Restart with Systemd
+
+v2.5.1 Issues Log
+-----------------
+
+Bug
+```
+
+*   [PEEK-682] - Can't find stylesheet '~@synerty/peek-plugin-base-js/src/styles/ant-design'
+
+*   [PEEK-711] - PEEK_RELEASE gitlab build fails, "requirement sphinx"
 
 v2.5.0 Issues Log
 -----------------
