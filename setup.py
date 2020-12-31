@@ -14,6 +14,7 @@ if os.path.isfile('MANIFEST'):
     os.remove('MANIFEST')
 
 platformPackages = [
+    "peek-admin-doc",
     "peek-admin-app",
     "peek-agent-service",
     "peek-core-device",
@@ -22,12 +23,11 @@ platformPackages = [
     "peek-core-search",
     "peek-core-user",
     "peek-core-screen",
-    "peek-doc-admin",
-    "peek-doc-dev",
-    "peek-doc-user",
+    "peek-field-doc",
     "peek-field-app",
     "peek-field-service",
     "peek-logic-service",
+    "peek-office-doc",
     "peek-office-app",
     "peek-office-service",
     "peek-platform",
