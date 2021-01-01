@@ -45,7 +45,7 @@ Setup Pycharm IDE
 
     #.  Languages & Frameworks -> TypesScript
 
-        #.  Node interpreter -> ~/node-v10.16.0/bin/node
+        #.  Node interpreter -> ~/node-v14.15.3/bin/node
         #.  Enable TypeScript Compiler -> Checked
         #.  Set options manually -> Checked
         #.  Command line options -> --target es5 --experimentalDecorators --lib es6,dom --sourcemap --emitDecoratorMetadata

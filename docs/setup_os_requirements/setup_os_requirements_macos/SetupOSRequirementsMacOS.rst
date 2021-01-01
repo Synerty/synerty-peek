@@ -212,8 +212,8 @@ Edit :file:`~/.bash_profile` and insert the following: ::
 
         ##### SET THE PEEK ENVIRONMENT #####
         # Setup the variables for PYTHON
-        export PEEK_PY_VER="3.6.8"
-        export PATH="/Users/peek/cpython-${PEEK_PY_VER}/bin:$PATH"
+        export PEEK_PY_VER="3.9.1"
+        export PATH="/Users/peek/opt/bin:$PATH"
 
         # Set the variables for the platform release
         # These are updated by the deploy script
@@ -273,17 +273,17 @@ Symlink the python3 commands so they are the only ones picked up by path. ::
 
 Open a new terminal and test that the setup is working ::
 
-        pass="/Users/peek/cpython-3.6.8/bin/python"
+        pass="/Users/peek/opt/bin/python"
         [ "`which python`" == "$pass" ] && echo "Success" || echo "FAILED"
 
-        pass="Python 3.6.8"
+        pass="Python 3.9.1"
         [ "`python --version`" == "$pass" ] && echo "Success" || echo "FAILED"
 
-        pass="/Users/peek/cpython-3.6.8/bin/pip"
+        pass="/Users/peek/opt/bin/pip"
         [ "`which pip`" == "$pass" ] && echo "Success" || echo "FAILED"
 
 
-        pass="pip 18.1 from /Users/peek/cpython-3.6.8/lib/python3.6/site-packages/pip (python 3.6)"
+        pass="pip 18.1 from /Users/peek/opt/lib/python3.9/site-packages/pip (python 3.9)"
         [ "`pip --version`" == "$pass" ] && echo "Success" || echo "FAILED"
 
 

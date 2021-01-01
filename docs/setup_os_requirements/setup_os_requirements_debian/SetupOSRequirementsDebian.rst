@@ -723,7 +723,7 @@ Insert : ::
 
         ##### SET THE PEEK ENVIRONMENT #####
         # Setup the variables for PYTHON
-        export PEEK_PY_VER="3.6.8"
+        export PEEK_PY_VER="3.9.1"
         export PATH="/home/peek/cpython-${PEEK_PY_VER}/bin:$PATH"
 
         # Set the variables for the platform release
