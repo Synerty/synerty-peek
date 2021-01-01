@@ -121,7 +121,7 @@ cp -pr $releaseDir/node/* ${venvDir}
 # Install the frontend node_modules
 
 # Make a var pointing to site-packages
-sp="$venvDir/lib/python3.6/site-packages"
+sp="`echo $venvDir/lib/python*/site-packages`"
 
 # Move the node_modules into place
 mv $releaseDir/field-app/node_modules $sp/peek_field_app
