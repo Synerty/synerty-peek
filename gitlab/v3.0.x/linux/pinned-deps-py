@@ -100,9 +100,9 @@ tqdm==4.54.1
 twine==3.2.0
 Twisted==20.3.0
 txcelery-py3==1.6.3
-txhttputil==0.5.0
+txhttputil==1.0.1
 txsuds-py3==0.5.9
-txWS-Upgrade==0.10.0
+txwebsocket==1.0.0
 typing-extensions==3.7.4.3
 tzlocal==2.1
 ujson==1.35
