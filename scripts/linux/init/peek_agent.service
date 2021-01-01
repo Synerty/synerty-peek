@@ -7,7 +7,7 @@ After=syslog.target network.target remote-fs.target nss-lookup.target
 Type=simple
 User=peek
 ExecStart=#PEEK_DIR#/run_peek_agent_service
-Environment="LD_LIBRARY_PATH=#ORACLE_HOME#":#PEEK_HOME#/opt/lib"
+Environment="LD_LIBRARY_PATH=#ORACLE_HOME#:#PEEK_HOME#/opt/lib"
 Environment="ORACLE_HOME=#ORACLE_HOME#"
 Restart=on-failure
 RestartSec=30s

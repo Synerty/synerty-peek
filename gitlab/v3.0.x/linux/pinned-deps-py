@@ -102,7 +102,7 @@ Twisted==20.3.0
 txcelery-py3==1.6.3
 txhttputil==1.0.2
 txsuds-py3==0.5.9
-txwebsocket==1.0.1
+txwebsocket==1.0.2
 typing-extensions==3.7.4.3
 tzlocal==2.1
 ujson==1.35
