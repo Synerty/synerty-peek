@@ -20,7 +20,7 @@ colorama==0.4.4
 constantly==15.1.0
 coverage==5.3
 cryptography==3.3.1
-cx-Oracle==8.1.0
+cx-Oracle==7.3.0
 Cython==0.29.21
 defusedxml==0.6.0
 distlib==0.3.1
