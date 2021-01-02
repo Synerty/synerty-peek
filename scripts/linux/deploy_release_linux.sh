@@ -121,7 +121,7 @@ cp -pr $releaseDir/node/* ${venvDir}
 # Install the frontend node_modules
 
 # Make a var pointing to site-packages
-sp="$venvDir/lib/python3.6/site-packages"
+sp="`echo $venvDir/lib/python*/site-packages`"
 
 # Move the node_modules into place
 mv $releaseDir/field-app/node_modules $sp/peek_field_app
@@ -198,6 +198,7 @@ then
         sudo chown root:root ${TO}/${FILE}
         sudo sed -i "s,#PEEK_DIR#,$venvDir/bin,g" ${TO}/${FILE}
         sudo sed -i "s,#ORACLE_HOME#,${ORACLE_HOME},g" ${TO}/${FILE}
+        sudo sed -i "s,#PEEK_HOME#,${HOME},g" ${TO}/${FILE}
         sudo systemctl enable $s
         sudo systemctl restart $s
 

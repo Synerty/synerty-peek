@@ -210,7 +210,7 @@ package_enterprise_linux:
     tags:
         - linux
 
-archive_release:
+archive_release_linux:
     dependencies:
         - package_enterprise_linux
         - package_community_linux
@@ -240,44 +240,24 @@ archive_release:
     tags:
         - linux
 
-upload_to_nexus:
+upload_to_nexus_linux:
     dependencies:
-        - archive_release
+        - archive_release_linux
     allow_failure: false
     image: nexus.synerty.com:5000/peek-linux-build:${RELEASE_BRANCH}
-    only:
-        - web
-        - triggers
+    rules:
+        - if: '$PKG_TAG_VERSION == null'
+          when: never
+        - if: '$CI_PIPELINE_SOURCE == "web"'
+        - if: '$CI_PIPELINE_SOURCE == "triggers"'
     script:
         - curl -v -u ${NEXUS_USER}:${NEXUS_PASSWORD}
             --upload-file $GIT_CLONE_PATH/peek_release_${RELEASE_VER:-${NON_RELEASE_VER}}_linux.tar
             http://${NEXUS_URL}/repository/synerty-packages/
-
     stage: upload
     tags:
         - linux
 
-upload_to_attune:
-    dependencies:
-        - archive_release
-    allow_failure: false
-    before_script:
-        - eval $(ssh-agent -s)
-        - ssh-add <(echo "$DEPLOY_ATTUNE_PRIVATE_KEY")
-        - mkdir -p ~/.ssh
-        - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
-    environment:
-        name: PEEK-RELEASE
-    image: nexus.synerty.com:5000/peek-linux-build:${RELEASE_BRANCH}
-    only:
-        - web
-        - triggers
-    script:
-        - scp $GIT_CLONE_PATH/peek_release_${RELEASE_VER:-${NON_RELEASE_VER}}_linux.tar
-            ${DEPLOY_ATTUNE_USER}@${DEPLOY_ATTUNE_HOST}:gitlab_upload.tar
-    stage: upload
-    tags:
-        - linux
 
 ##########################################################################################
 
@@ -376,14 +356,15 @@ upload_to_nexus_macos:
         - archive_release_macos
     allow_failure: false
     image: nexus.synerty.com:5000/peek-linux-build:${RELEASE_BRANCH}
-    only:
-        - web
-        - triggers
+    rules:
+        - if: '$PKG_TAG_VERSION == null'
+          when: never
+        - if: '$CI_PIPELINE_SOURCE == "web"'
+        - if: '$CI_PIPELINE_SOURCE == "triggers"'
     script:
         - curl -v -u ${NEXUS_USER}:${NEXUS_PASSWORD}
             --upload-file $GIT_CLONE_PATH/peek_release_${RELEASE_VER:-${NON_RELEASE_VER}}_macos.tar
             http://${NEXUS_URL}/repository/synerty-packages/
-
     stage: upload
     tags:
         - linux

@@ -7,8 +7,9 @@ After=syslog.target network.target remote-fs.target nss-lookup.target
 Type=simple
 User=peek
 ExecStart=#PEEK_DIR#/run_peek_logic_service
+Environment="LD_LIBRARY_PATH=#PEEK_HOME#/opt/lib"
 Restart=on-failure
-RestartSec=5s
+RestartSec=30s
 
 [Install]
 WantedBy=multi-user.target

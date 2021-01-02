@@ -105,7 +105,7 @@ function packageCICommunity() {
     nodeDir="$baseDir/node"
 
     cd $baseDir
-    nodeVer="12.18.3"
+    nodeVer="14.15.3"
 
     # Download the file
     nodeFile="node-v${nodeVer}-linux-x64.tar.xz"

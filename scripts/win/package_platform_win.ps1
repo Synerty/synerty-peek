@@ -105,7 +105,7 @@ else
 # Download node, npm, @angular/cli, typescript and tslint
 
 Set-Location "$baseDir";
-$nodeVer = "12.18.3";
+$nodeVer = "14.15.3";
 
 # Download the file
 $nodeUrl = "https://nodejs.org/dist/v$nodeVer/node-v$nodeVer-win-x64.zip";
