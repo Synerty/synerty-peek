@@ -6,6 +6,7 @@ set nounset
 IMAGE_NAMES=""
 IMAGE_NAMES="${IMAGE_NAMES} peek-linux:v3.0.x "
 IMAGE_NAMES="${IMAGE_NAMES} peek-linux-test:v3.0.x "
+IMAGE_NAMES="${IMAGE_NAMES} peek-linux-sonar:v3.0.x "
 IMAGE_NAMES="${IMAGE_NAMES} peek-linux-build:v3.0.x "
 IMAGE_NAMES="${IMAGE_NAMES} peek-linux-doc:v3.0.x "
 

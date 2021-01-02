@@ -6,6 +6,7 @@ set nounset
 IMAGE_NAMES=""
 IMAGE_NAMES="${IMAGE_NAMES} peek-linux:master "
 IMAGE_NAMES="${IMAGE_NAMES} peek-linux-test:master "
+IMAGE_NAMES="${IMAGE_NAMES} peek-linux-sonar:master "
 IMAGE_NAMES="${IMAGE_NAMES} peek-linux-build:master "
 IMAGE_NAMES="${IMAGE_NAMES} peek-linux-doc:master "
 
