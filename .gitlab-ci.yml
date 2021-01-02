@@ -245,11 +245,11 @@ upload_to_nexus_linux:
         - archive_release_linux
     allow_failure: false
     image: nexus.synerty.com:5000/peek-linux-build:${RELEASE_BRANCH}
-    only:
-        - web
-        - triggers
-        variables:
-            - $RELEASE_VER
+    rules:
+        - if: '$PKG_TAG_VERSION == null'
+          when: never
+        - if: '$CI_PIPELINE_SOURCE == "web"'
+        - if: '$CI_PIPELINE_SOURCE == "triggers"'
     script:
         - curl -v -u ${NEXUS_USER}:${NEXUS_PASSWORD}
             --upload-file $GIT_CLONE_PATH/peek_release_${RELEASE_VER:-${NON_RELEASE_VER}}_linux.tar
@@ -356,11 +356,11 @@ upload_to_nexus_macos:
         - archive_release_macos
     allow_failure: false
     image: nexus.synerty.com:5000/peek-linux-build:${RELEASE_BRANCH}
-    only:
-        - web
-        - triggers
-        variables:
-            - $RELEASE_VER
+    rules:
+        - if: '$PKG_TAG_VERSION == null'
+          when: never
+        - if: '$CI_PIPELINE_SOURCE == "web"'
+        - if: '$CI_PIPELINE_SOURCE == "triggers"'
     script:
         - curl -v -u ${NEXUS_USER}:${NEXUS_PASSWORD}
             --upload-file $GIT_CLONE_PATH/peek_release_${RELEASE_VER:-${NON_RELEASE_VER}}_macos.tar
