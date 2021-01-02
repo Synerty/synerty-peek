@@ -105,7 +105,7 @@ function packageCICommunity() {
     nodeDir="$baseDir/node"
 
     cd $baseDir
-    nodeVer="12.18.3"
+    nodeVer="14.15.3"
 
     # Download the file
     nodeFile="node-v${nodeVer}-darwin-x64.tar.gz"
@@ -240,7 +240,7 @@ function packageCICommunity() {
 }
 
 function packageCIEnterprisePlugins() {
- 
+
     VER=${1}
     SRC_PATH="${2:-..}"
     COMMUNITY_PACKAGEs="${3:-..}"

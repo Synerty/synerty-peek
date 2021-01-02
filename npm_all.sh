@@ -11,6 +11,7 @@ frontendDirs="
 
 
 for x in $frontendDirs; do
-    (cd $x && npm "$@")
+    (cd $x && npm "$@") &
 done
 
+wait
