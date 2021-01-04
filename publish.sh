@@ -20,8 +20,8 @@ VER="${1:?You must pass a version of the format 0.0.0 as the only argument}"
 
 DEVBUILD=0
 if echo ${VER} | grep -q '[[:alpha:]]'; then
-  echo "This is a DEV build"
-  DEVBUILD=1
+    echo "This is a DEV build"
+    DEVBUILD=1
 fi
 
 if git tag | grep -q "^${VER}$"; then
@@ -36,7 +36,7 @@ source ./publish.settings.sh
 
 PIP_PACKAGE=${PY_PACKAGE//_/-} # Replace _ with -
 
-HAS_GIT=`ls -d .git 2> /dev/null`
+HAS_GIT=$(ls -d .git 2>/dev/null)
 
 #------------------------------------------------------------------------------
 # Set the versions
@@ -46,9 +46,8 @@ VER_FILES="${VER_FILES} setup.py"
 VER_FILES="${VER_FILES} ${PY_PACKAGE}/__init__.py"
 VER_FILES="${VER_FILES} ${PY_PACKAGE}/plugin_package.json"
 
-function updateFileVers {
-    for file in ${VER_FILES}
-    do
+function updateFileVers() {
+    for file in ${VER_FILES}; do
         if [ -f ${file} ]; then
             sed -i "s/^__version__.*/__version__ = \'${VER}\'/g" ${file}
             sed -i "s/0.0.0/${VER}/g" ${file}
@@ -79,7 +78,7 @@ fi
 # Tag and push this release
 if [ $HAS_GIT ]; then
     # We need to commit the config file with the version for Read The Docs
-    if [ -n "${VER_FILES_TO_COMMIT}"  -a ${DEVBUILD} -eq 0  ]; then
+    if [ -n "${VER_FILES_TO_COMMIT}" -a ${DEVBUILD} -eq 0 ]; then
         git add ${VER_FILES_TO_COMMIT}
         git commit -m "Updated conf.py to ${VER}"
     fi
@@ -87,16 +86,15 @@ if [ $HAS_GIT ]; then
     git reset --hard
 
     if [ ${DEVBUILD} -eq 0 ]; then
-      echo "Tagging ${PIP_PACKAGE}"
-      git tag ${VER}
+        echo "Tagging ${PIP_PACKAGE}"
+        git tag ${VER}
 
-      echo "Pushing ${PIP_PACKAGE} to BitBucket"
-      git push
-      git push --tags
+        echo "Pushing ${PIP_PACKAGE} to BitBucket"
+        git push
+        git push --tags
     fi
 
 fi
-
 
 #------------------------------------------------------------------------------
 # All done

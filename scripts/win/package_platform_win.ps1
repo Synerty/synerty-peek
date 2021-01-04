@@ -171,8 +171,8 @@ foreach ($element in $nodePackages)
 
     # Make sure we've downloaded the right version
     $peekPkgName = Get-ChildItem "$baseDir\py" |
-    Where-Object { $_.Name.StartsWith($packageName + "-") } |
-    Select-Object -exp Name;
+        Where-Object { $_.Name.StartsWith($packageName + "-") } |
+        Select-Object -exp Name;
     $peekUiPkgVer = $peekPkgName.Split('-')[1];
 
     # Get the variables for this package

@@ -22,13 +22,12 @@
 # sys.path.insert(0, os.path.abspath('.'))
 from sphinx.ext.apidoc import create_modules_toc_file, recurse_tree
 
-__project__ = 'SynertyPeek'
-__copyright__ = '2016, Synerty'
-__author__ = 'Synerty'
-__version__ = '2.4.2'
+__project__ = "SynertyPeek"
+__copyright__ = "2016, Synerty"
+__author__ = "Synerty"
+__version__ = "2.4.2"
 
 import sphinx_rtd_theme
-
 
 # -- General configuration ------------------------------------------------
 
@@ -39,21 +38,19 @@ import sphinx_rtd_theme
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = ['sphinx.ext.autodoc',
-    'sphinx.ext.viewcode',
-    'sphinx.ext.githubpages']
+extensions = ["sphinx.ext.autodoc", "sphinx.ext.viewcode", "sphinx.ext.githubpages"]
 
 # Add any paths that contain templates here, relative to this directory.
-templates_path = ['_templates']
+templates_path = ["_templates"]
 
 # The suffix(es) of source filenames.
 # You can specify multiple suffix as a list of string:
 #
 # source_suffix = ['.rst', '.md']
-source_suffix = '.rst'
+source_suffix = ".rst"
 
 # The master toctree document.
-master_doc = 'index'
+master_doc = "index"
 
 # General information about the project.
 project = __project__
@@ -78,14 +75,13 @@ language = None
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This patterns also effect to html_static_path and html_extra_path
-exclude_patterns = ['*Test.*', '_build', 'Thumbs.db', '.DS_Store']
+exclude_patterns = ["*Test.*", "_build", "Thumbs.db", ".DS_Store"]
 
 # The name of the Pygments (syntax highlighting) style to use.
-pygments_style = 'sphinx'
+pygments_style = "sphinx"
 
 # If true, `todo` and `todoList` produce output, else they produce nothing.
 todo_include_todos = False
-
 
 # -- Options for HTML output ----------------------------------------------
 
@@ -104,14 +100,12 @@ html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = ['_static']
-
+html_static_path = ["_static"]
 
 # -- Options for HTMLHelp output ------------------------------------------
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = __project__+'doc'
-
+htmlhelp_basename = __project__ + "doc"
 
 # -- Options for LaTeX output ---------------------------------------------
 
@@ -119,15 +113,12 @@ latex_elements = {
     # The paper size ('letterpaper' or 'a4paper').
     #
     # 'papersize': 'letterpaper',
-
     # The font size ('10pt', '11pt' or '12pt').
     #
     # 'pointsize': '10pt',
-
     # Additional stuff for the LaTeX preamble.
     #
     # 'preamble': '',
-
     # Latex figure (float) alignment
     #
     # 'figure_align': 'htbp',
@@ -137,20 +128,20 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, __project__+'.tex', __project__+' Documentation',
-     __author__, 'manual'),
+    (
+        master_doc,
+        __project__ + ".tex",
+        __project__ + " Documentation",
+        __author__,
+        "manual",
+    ),
 ]
-
 
 # -- Options for manual page output ---------------------------------------
 
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
-man_pages = [
-    (master_doc, __project__, __project__+' Documentation',
-     [author], 1)
-]
-
+man_pages = [(master_doc, __project__, __project__ + " Documentation", [author], 1)]
 
 # -- Options for Texinfo output -------------------------------------------
 
@@ -158,12 +149,16 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, __project__, __project__+' Documentation',
-     author, __project__, 'Enterprise Extensible Python Platform.',
-     'Miscellaneous'),
+    (
+        master_doc,
+        __project__,
+        __project__ + " Documentation",
+        author,
+        __project__,
+        "Enterprise Extensible Python Platform.",
+        "Miscellaneous",
+    ),
 ]
-
-
 
 ###############################################################################
 # Begin apidoc hack
@@ -225,29 +220,29 @@ class _Opts:
 
 
 def _listFiles(dir):
-    ignoreFiles = set('.lastHash')
+    ignoreFiles = set(".lastHash")
     paths = []
     for (path, directories, filenames) in os.walk(dir):
 
         for filename in filenames:
             if filename in ignoreFiles:
                 continue
-            paths.append(os.path.join(path[len(dir) + 1:], filename))
+            paths.append(os.path.join(path[len(dir) + 1 :], filename))
 
     return paths
 
 
 def _fileCopier(src, dst):
-    with open(src, 'rb') as f:
+    with open(src, "rb") as f:
         contents = f.read()
 
     # If the contents hasn't change, don't write it
     if os.path.isfile(dst):
-        with open(dst, 'rb') as f:
+        with open(dst, "rb") as f:
             if f.read() == contents:
                 return
 
-    with open(dst, 'wb') as f:
+    with open(dst, "wb") as f:
         f.write(contents)
 
 
@@ -289,38 +284,51 @@ def create_module_file(package, module, opts):
     # write_file(makename(package, module), text, opts)
 
 
-def create_package_file(root, master_package, subroot, py_files, opts, subs,
-                        is_namespace, excludes=[], *args, **kwargs):
+def create_package_file(
+    root,
+    master_package,
+    subroot,
+    py_files,
+    opts,
+    subs,
+    is_namespace,
+    excludes=[],
+    *args,
+    **kwargs
+):
     """Build the text of the file and write the file."""
 
-    text = '.. _%s:\n\n' % makename(master_package, subroot)
+    text = ".. _%s:\n\n" % makename(master_package, subroot)
 
-    text += format_heading(1, '(P) %s' % subroot if subroot else master_package)
+    text += format_heading(1, "(P) %s" % subroot if subroot else master_package)
     text += format_directive(subroot, master_package)
-    text += '\n'
+    text += "\n"
 
     # build a list of directories that are szvpackages (contain an INITPY file)
     subs = [sub for sub in subs if os.path.isfile(os.path.join(root, sub, INITPY))]
     # if there are some package directories, add a TOC for theses subpackages
 
     if subs:
-        text += '.. toctree::\n\n'
+        text += ".. toctree::\n\n"
         for sub in subs:
-            text += '    %s.%s\n' % (makename(master_package, subroot), sub)
-        text += '\n'
+            text += "    %s.%s\n" % (makename(master_package, subroot), sub)
+        text += "\n"
 
-    submods = [os.path.splitext(sub)[0] for sub in py_files
-               if not shall_skip(os.path.join(root, sub), opts) and
-               sub != INITPY]
+    submods = [
+        os.path.splitext(sub)[0]
+        for sub in py_files
+        if not shall_skip(os.path.join(root, sub), opts) and sub != INITPY
+    ]
 
     for submod in submods:
-        text += format_heading(2, '(M) %s' % submod)
+        text += format_heading(2, "(M) %s" % submod)
         text += format_directive(makename(subroot, submod), master_package)
-        text += '\n'
+        text += "\n"
 
-    text += '\n'
+    text += "\n"
 
     write_file(makename(master_package, subroot), text, opts)
+
 
 def is_excluded(root, excludes):
     """Check if the directory is in the exclude list.
@@ -332,7 +340,7 @@ def is_excluded(root, excludes):
     fileName = os.path.basename(root)
     dirName = os.path.dirname(root)
 
-    excludes = ['Test.py', 'setup.py']
+    excludes = ["Test.py", "setup.py"]
 
     for exclude in excludes:
         if fileName.endswith(exclude):
@@ -340,10 +348,12 @@ def is_excluded(root, excludes):
 
     return False
 
+
 # Overwrite the apidoc render methods with ours
 sphinx.ext.apidoc.create_package_file = create_package_file
 sphinx.ext.apidoc.create_module_file = create_module_file
 sphinx.ext.apidoc.is_excluded = is_excluded
+
 
 def createApiDocs(modFileName):
     moduleName = os.path.basename(os.path.dirname(modFileName))
@@ -362,10 +372,8 @@ def createApiDocs(modFileName):
     modules = recurse_tree(rootpath, [], opts)
     create_modules_toc_file(modules, opts)
 
-
     # Incrementally update files
     _syncFiles(tmpDir.path, realDstDir)
-
 
 
 ###############################################################################
@@ -374,9 +382,8 @@ def createApiDocs(modFileName):
 
 # Create APIs with the AutoAPI hack above
 import peek_plugin_base
+
 createApiDocs(peek_plugin_base.__file__)
 
 # import peek_platform
 # createApiDocs(peek_platform.__file__)
-
-

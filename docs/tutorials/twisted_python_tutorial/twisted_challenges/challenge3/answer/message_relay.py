@@ -73,9 +73,12 @@ class RelayMessageQuestions(unittest.TestCase):
         q1()
 
         actual = mockStdout.getvalue()
-        expected = "Person 1 said: Hello{n}Person 2 said: Hello{n}Person 3 took care of [" \
-                   "Failure instance: Traceback: <class 'Exception'>: Person 3 blames!" \
-            .format(n=os.linesep)
+        expected = (
+            "Person 1 said: Hello{n}Person 2 said: Hello{n}Person 3 took care of ["
+            "Failure instance: Traceback: <class 'Exception'>: Person 3 blames!".format(
+                n=os.linesep
+            )
+        )
 
         self.assertTrue(actual.startswith(expected))
 
@@ -85,8 +88,11 @@ class RelayMessageQuestions(unittest.TestCase):
 
         actual = mockStdout.getvalue()
         expectedHead = "Person 3 took care of [Failure instance: Traceback: <class 'Exception'>: Person 3 blames!{n}".format(
-            n=os.linesep)
-        expectedBottom = "Person 1 said: Everything is fine now.{n}".format(n=os.linesep)
+            n=os.linesep
+        )
+        expectedBottom = "Person 1 said: Everything is fine now.{n}".format(
+            n=os.linesep
+        )
 
         self.assertTrue(actual.startswith(expectedHead))
         self.assertTrue(actual.endswith(expectedBottom))

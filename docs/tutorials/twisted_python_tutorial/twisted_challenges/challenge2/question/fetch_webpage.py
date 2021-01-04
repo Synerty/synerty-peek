@@ -47,6 +47,7 @@ def chainedCallInline(url) -> defer.Deferred:
     #
     pass
 
+
 class HTTPClientQuestions(unittest.TestCase):
     url = "https://www.example.com"
     expected = synchronousCall(url)

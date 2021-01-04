@@ -1,4 +1,3 @@
-
 .. _admin_win:
 
 Peek Windows Admin

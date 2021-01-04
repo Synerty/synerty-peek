@@ -3,13 +3,15 @@ param([String]$platformZip, [String]$pluginsZip)
 # Make PowerShell stop if it has errors
 $ErrorActionPreference = "Stop"
 
-$7zExe="C:\Program Files\7-Zip\7z.exe";
+$7zExe = "C:\Program Files\7-Zip\7z.exe";
 
-if ([string]::IsNullOrEmpty($platformZip) -or [string]::IsNullOrWhitespace($platformZip)) {
+if ([string]::IsNullOrEmpty($platformZip) -or [string]::IsNullOrWhitespace($platformZip))
+{
     Write-Error "Pass the path of the platform release to this script";
 }
 
-if ([string]::IsNullOrEmpty($pluginsZip) -or [string]::IsNullOrWhitespace($pluginsZip)) {
+if ([string]::IsNullOrEmpty($pluginsZip) -or [string]::IsNullOrWhitespace($pluginsZip))
+{
     Write-Error "Pass the path of the plugins release to this script";
 }
 
@@ -18,12 +20,13 @@ if ([string]::IsNullOrEmpty($pluginsZip) -or [string]::IsNullOrWhitespace($plugi
 # Initialise variables and paths
 
 # Get the current location
-$startDir=Get-Location
+$startDir = Get-Location
 
-$releaseDir="C:\Users\peek\peek_platform_win";
+$releaseDir = "C:\Users\peek\peek_platform_win";
 
 # Delete the existing dist dir if it exists
-If (Test-Path $releaseDir){
+If (Test-Path $releaseDir)
+{
     Remove-Item $releaseDir -Force -Recurse;
 }
 
@@ -36,11 +39,14 @@ New-Item $releaseDir -ItemType directory;
 # Decompress the release
 Write-Host "Extracting platform to $releaseDir";
 
-if (Test-Path $7zExe) {
+if (Test-Path $7zExe)
+{
     Write-Host "7z is present, this will be faster";
     Invoke-Expression "&`"$7zExe`" x -y -r `"$platformZip`" -o`"$releaseDir`"";
 
-} else {
+}
+else
+{
     Write-Host "Using standard windows zip handler, this will be slow";
     Add-Type -Assembly System.IO.Compression.FileSystem;
     [System.IO.Compression.ZipFile]::ExtractToDirectory($platformZip, $releaseDir);
@@ -51,11 +57,14 @@ if (Test-Path $7zExe) {
 
 Write-Host "Extracting plugins to $releaseDir";
 
-if (Test-Path $7zExe) {
+if (Test-Path $7zExe)
+{
     Write-Host "7z is present, this will be faster";
     Invoke-Expression "&`"$7zExe`" x -y -r `"$pluginsZip`" -o`"$releaseDir`"";
 
-} else {
+}
+else
+{
     Write-Host "Using standard windows zip handler, this will be slow";
     Add-Type -Assembly System.IO.Compression.FileSystem;
     [System.IO.Compression.ZipFile]::ExtractToDirectory($pluginsZip, $releaseDir);
@@ -66,15 +75,16 @@ if (Test-Path $7zExe) {
 
 # Get the release name from the package
 $peekPkgName = Get-ChildItem "$releaseDir\py" |
-                    Where-Object {$_.Name.StartsWith("synerty_peek-")} |
-                    Select-Object -exp Name;
+    Where-Object { $_.Name.StartsWith("synerty_peek-") } |
+    Select-Object -exp Name;
 $peekPkgVer = $peekPkgName.Split('-')[1];
 
 # This variable is the path of the new virtualenv
 $venvDir = "C:\Users\peek\synerty-peek-$peekPkgVer";
 
 # Check if this release is already deployed
-If (Test-Path $venvDir){
+If (Test-Path $venvDir)
+{
     Write-Host "directory already exists : $venvDir";
     Write-Error "This release is already deployed, delete it to re-deploy";
 }
@@ -86,7 +96,8 @@ virtualenv.exe $venvDir;
 $env:Path = "$venvDir\Scripts;$env:Path";
 
 $foundPipPath = (get-command pip).source;
-if ( -Not $foundPipPath.StartsWith($venvDir)) {
+if (-Not $foundPipPath.StartsWith($venvDir))
+{
     Write-Error "Failed to activate Venv $venvDir\Scripts\pip.exe, got $foundPipPath instead";
 }
 
@@ -97,13 +108,13 @@ if ( -Not $foundPipPath.StartsWith($venvDir)) {
 Write-Host "Installing python platform"
 Push-Location "$releaseDir\py"
 
-pip install --no-index --no-cache --find-links=. Shapely pymssql
+pip install --no-index --no-cache --find-links = . Shapely pymssql
 
 # What we'd like to do is something like this
 # # pip install --no-index --no-cache --find-links=. synerty_peek*.whl
 # but we'll settle for this
 (Get-Childitem synerty_peek*.whl -Name).ForEach({
-    pip install --no-index --no-cache --find-links=. $_
+    pip install --no-index --no-cache --find-links = . $_
 })
 
 Pop-Location
@@ -120,7 +131,7 @@ Push-Location "$releaseDir/peek_plugins_win_${peekPkgVer}"
 # # pip install --no-index --no-cache --find-links=. peek-plugin*.gz
 # but we'll settle for this
 (Get-Childitem peek_plugin*.whl -Name).ForEach({
-    pip install --no-index --no-cache --find-links=. $_
+    pip install --no-index --no-cache --find-links = . $_
 })
 
 Pop-Location
@@ -136,7 +147,7 @@ Move-Item $releaseDir\node\* $venvDir\Scripts -Force
 # Install the frontend node_modules
 
 # Make a var pointing to site-packages
-$sp="$venvDir\Lib\site-packages";
+$sp = "$venvDir\Lib\site-packages";
 
 # Move the node_modules into place
 Move-Item $releaseDir\mobile-build-web\node_modules $sp\peek_field_app -Force
@@ -153,26 +164,30 @@ Write-Host " ";
 # ------------------------------------------------------------------------------
 # OPTIONALLY - Update the environment for the user.
 
-if ($PEEK_AUTO_DEPLOY == '1') {
+if ($PEEK_AUTO_DEPLOY = = '1')
+{
     $result = 0
 
-} else {
+}
+else
+{
     # Ask if the user would like to update the PATH environment variables
     $title = "Environment Variables"
     $message = "Do you want to update the system to use the release just installed?"
 
-    $yes = New-Object System.Management.Automation.Host.ChoiceDescription "&Yes", `
-        "I want to update the PATH System Environment Variables."
+    $yes = New-Object System.Management.Automation.Host.ChoiceDescription "&Yes",    `
+           "I want to update the PATH System Environment Variables."
 
-    $no = New-Object System.Management.Automation.Host.ChoiceDescription "&No", `
-        "I do NOT want the PATH System Environment Variables changed."
+    $no = New-Object System.Management.Automation.Host.ChoiceDescription "&No",    `
+           "I do NOT want the PATH System Environment Variables changed."
 
     $options = [System.Management.Automation.Host.ChoiceDescription[]]($yes, $no)
 
     $result = $host.ui.PromptForChoice($title, $message, $options, 0)
 }
 
-switch ($result) {
+switch ($result)
+{
     0 {
         Write-Host "You selected Yes.";
 
@@ -181,22 +196,26 @@ switch ($result) {
         Write-Host "Added PATH variable:" $newPath;
 
         ([Environment]::GetEnvironmentVariable("PATH", "User")).split(';') | foreach-object {
-            if ($_ -notmatch 'synerty-peek') {
+            if ($_ -notmatch 'synerty-peek')
+            {
                 $newPath = $newPath + ';' + $_
             }
-            else {
-                Write-Host "Removed PATH variable:" $_ ;
+            else
+            {
+                Write-Host "Removed PATH variable:" $_;
             }
         }
         [Environment]::SetEnvironmentVariable("PATH", $newPath, "User");
 
         $newPath = "";
         ([Environment]::GetEnvironmentVariable("PATH", "Machine")).split(';') | foreach-object {
-            if ($_ -notmatch 'synerty-peek' -and $_ -notmatch 'Python3') {
+            if ($_ -notmatch 'synerty-peek' -and $_ -notmatch 'Python3')
+            {
                 $newPath = $newPath + ';' + $_
             }
-            else {
-                Write-Host "Removed PATH variable:" $_ ;
+            else
+            {
+                Write-Host "Removed PATH variable:" $_;
             }
         }
         [Environment]::SetEnvironmentVariable("PATH", $newPath, "Machine");
@@ -221,26 +240,30 @@ switch ($result) {
 # ------------------------------------------------------------------------------
 # OPTIONALLY - Reinstall the services
 
-if ($PEEK_AUTO_DEPLOY == '1') {
+if ($PEEK_AUTO_DEPLOY = = '1')
+{
     $result = 0
 
-} else {
+}
+else
+{
     # Ask if the user would like to update the PATH environment variables
     $title = "Windows Services"
     $message = "Do you want to install/update the Peek windows services"
 
-    $yes = New-Object System.Management.Automation.Host.ChoiceDescription "&Yes", `
-        "I want the services setup."
+    $yes = New-Object System.Management.Automation.Host.ChoiceDescription "&Yes",    `
+           "I want the services setup."
 
-    $no = New-Object System.Management.Automation.Host.ChoiceDescription "&No", `
-        "No services for me, this is a dev machine."
+    $no = New-Object System.Management.Automation.Host.ChoiceDescription "&No",    `
+           "No services for me, this is a dev machine."
 
     $options = [System.Management.Automation.Host.ChoiceDescription[]]($yes, $no)
 
     $result = $host.ui.PromptForChoice($title, $message, $options, 0)
 }
 
-switch ($result) {
+switch ($result)
+{
     0 {
         Write-Host "Ok, We're setting up the services.";
 

@@ -96,8 +96,6 @@ peek-plugin-enmac-user-loader
 export bold=$(tput bold)
 export normal=$(tput sgr0)
 
-
-
 # -------------------------------------
 if ! [ -f "setup.py" ]; then
     echo "$0 must be run in the directory where setup.py is" >&2

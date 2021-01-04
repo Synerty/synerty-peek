@@ -1,4 +1,3 @@
-
 .. _admin_configure_synerty_peek:
 
 Configuring Platform :file:`config.json`

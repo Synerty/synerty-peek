@@ -10,13 +10,16 @@ urls = [
     b"https://ftp.gnu.org/gnu/gcc/gcc-8.1.0/gcc-8.1.0.tar.gz",
     b"https://ftp.gnu.org/gnu/gcc/gcc-7.1.0/gcc-7.1.0.tar.gz",
     b"https://ftp.gnu.org/gnu/gcc/gcc-5.4.0/gcc-5.4.0.tar.gz",
-    b"https://ftp.gnu.org/gnu/gcc/gcc-4.8.0/gcc-4.8.0.tar.gz"
+    b"https://ftp.gnu.org/gnu/gcc/gcc-4.8.0/gcc-4.8.0.tar.gz",
 ]
 
 
 def listCallback(results):
     for (isSuccess, response) in results:
-        print(response.request.absoluteURI.decode("utf-8"), f"{round(response.length / 1024 / 1024, 2)} MB")
+        print(
+            response.request.absoluteURI.decode("utf-8"),
+            f"{round(response.length / 1024 / 1024, 2)} MB",
+        )
 
 
 def request_url(url):

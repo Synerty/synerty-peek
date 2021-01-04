@@ -9,7 +9,7 @@ set -o errexit
 #   to LearnPluginDevelopment_AddClient.rst and then strip it down.
 #
 
-function replace {
+function replace() {
     file="$1"
     to="$2"
     To="$3"

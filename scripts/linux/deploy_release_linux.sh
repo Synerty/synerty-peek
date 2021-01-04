@@ -3,18 +3,17 @@
 set -o nounset
 set -o errexit
 
-IS_DEBIAN=0;
-IS_REDHAT=0;
+IS_DEBIAN=0
+IS_REDHAT=0
 
 if [ -f /etc/redhat-release ]; then
-    IS_REDHAT=1;
+    IS_REDHAT=1
 elif [ -f /etc/debian_version ]; then
-    IS_DEBIAN=1;
+    IS_DEBIAN=1
 else
     echo "Unknown OS type" >&2
-    exit 1;
+    exit 1
 fi
-
 
 communityZip="${1}"
 enterpriseZip="${2}"
@@ -32,9 +31,9 @@ fi
 # Initialise variables and paths
 
 # Get the current location
-startDir=`pwd`
+startDir=$(pwd)
 
-releaseDir=`echo ~/peek_community_linux`
+releaseDir=$(echo ~/peek_community_linux)
 
 # Delete the existing dist dir if it exists
 if [ -d ${releaseDir} ]; then
@@ -65,11 +64,10 @@ fi
 
 # Get the release name from the package
 echo "Get the release name from the package"
-peekPkgVer=`cd $releaseDir/platform && ls synerty_peek-* | cut -d'-' -f2`
+peekPkgVer=$(cd $releaseDir/platform && ls synerty_peek-* | cut -d'-' -f2)
 
 # This variable is the path of the new virtualenv
 venvDir="/home/peek/synerty-peek-${peekPkgVer}"
-
 
 # Check if this release is already deployed
 # Delete the existing dist dir if it exists
@@ -121,7 +119,7 @@ cp -pr $releaseDir/node/* ${venvDir}
 # Install the frontend node_modules
 
 # Make a var pointing to site-packages
-sp="`echo $venvDir/lib/python*/site-packages`"
+sp="$(echo $venvDir/lib/python*/site-packages)"
 
 # Move the node_modules into place
 mv $releaseDir/field-app/node_modules $sp/peek_field_app
@@ -150,21 +148,18 @@ q='"'
 d='$'
 
 echo " "
-echo "Run the following to switch to the new releases environment :";
+echo "Run the following to switch to the new releases environment :"
 echo "export PATH=${q}${venvDir}/bin:${d}{PATH}${q}"
 echo " "
 
-
-if [ "${PEEK_AUTO_DEPLOY+x}" == "1" ]
-then
+if [ "${PEEK_AUTO_DEPLOY+x}" == "1" ]; then
     REPLY='Y'
 else
     read -p "Do you want to permanently enable this release? " -n 1 -r
-    echo    # (optional) move to a new line
+    echo # (optional) move to a new line
 fi
 
-if [[ $REPLY =~ ^[Yy]$ ]]
-then
+if [[ $REPLY =~ ^[Yy]$ ]]; then
     sed -i "s,export PEEK_ENV.*,export PEEK_ENV=${q}${venvDir}${q},g" ~/.bashrc
     echo " "
     echo "Done"
@@ -172,24 +167,18 @@ then
     echo "Close and reopen your terminal for the update to take effect"
 fi
 
-
-
 # ------------------------------------------------------------------------------
 # OPTIONALLY - Set the init scripts for auto start
 
-
-if [ "${PEEK_AUTO_DEPLOY+x}" == "1" ]
-then
+if [ "${PEEK_AUTO_DEPLOY+x}" == "1" ]; then
     REPLY='Y'
 else
     read -p "Do you want to update the init scripts to auto start peek? " -n 1 -r
-    echo    # (optional) move to a new line
+    echo # (optional) move to a new line
 fi
 
-if [[ $REPLY =~ ^[Yy]$ ]]
-then
-    for s in peek_logic peek_worker peek_office peek_field peek_agent
-    do
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+    for s in peek_logic peek_worker peek_office peek_field peek_agent; do
         FILE="${s}.service"
         TO="/lib/systemd/system/"
 

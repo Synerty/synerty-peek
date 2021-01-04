@@ -5,7 +5,6 @@
 # 2) Retaining any configuration
 # Peek will reload the missing data when it restarts (allows a few hours)
 
-
 ARGS=""
 
 # Ignore postgres tables
@@ -53,7 +52,6 @@ ARGS=${ARGS}' --exclude-table-data pl_branch."BranchDetail" '
 # NOTE, Leave the LiveDB load states, This will reduce the load time.
 ARGS=${ARGS}' --exclude-table-data pl_livedb."LiveDbItem" '
 
-
 # Remove the GraphDB data, This only takes 10 minutes to reload
 # The graph chunks
 ARGS=${ARGS}' --exclude-table-data pl_graphdb."GraphDbChunkQueue" '
@@ -85,5 +83,4 @@ ARGS=${ARGS}' --exclude-table-data pl_enmac_diagram_loader."PageLoadState" '
 # NOTE, Leave the LiveDB load states, This will reduce the load time.
 ARGS=${ARGS}' --exclude-table-data pl_enmac_graphdb_loader."GraphSegmentLoadState" '
 
-
-pg_dump  -h 127.0.0.1 -U peek -d peek -F p ${ARGS} | bzip2  > peek_backup.sql.bz2
+pg_dump -h 127.0.0.1 -U peek -d peek -F p ${ARGS} | bzip2 >peek_backup.sql.bz2

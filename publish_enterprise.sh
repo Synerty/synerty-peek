@@ -3,16 +3,16 @@
 source ./pip_common.sh
 
 # -------------------------------------
-VER="${VER:-$1}" # If VER is not defined, try arg 1
+VER="${VER:-$1}"                                      # If VER is not defined, try arg 1
 [ "${VER}" == '${bamboo.jira.version}' ] && unset VER # = "0.0.0dev${BUILD}"
 VER="${VER:?You must pass a version of the format 0.0.0 as the only argument}"
 
 SRC_PATH="${2:-..}"
 
 function convertBambooDate() {
-# EG s="2010-01-01T01:00:00.000+01:00"
-# TO 100101.0100
-python <<EOF
+    # EG s="2010-01-01T01:00:00.000+01:00"
+    # TO 100101.0100
+    python <<EOF
 from dateutil.parser import parse
 print parse("${BAMBOO_DATE}").strftime('%y%m%d.%H%M')
 EOF
@@ -22,9 +22,9 @@ EOF
 #BUILD="${BUILD:-0}" # Default to build 0
 #VER="${VER}"
 if [ "${BAMBOO_DATE:-}" ]; then
-    DATE="`convertBambooDate`"
+    DATE="$(convertBambooDate)"
 else
-    DATE="`date +%y%m%d.%H%M`"
+    DATE="$(date +%y%m%d.%H%M)"
 fi
 
 #echo "New version is $VER"
@@ -79,7 +79,7 @@ echo
 # -------------------------------------
 echo "Building packages"
 for plugin in $ENTERPRISE_PKGS; do
-    if ! (cd ${SRC_PATH}/$plugin && bash publish.sh ${VER} "" ); then
+    if ! (cd ${SRC_PATH}/$plugin && bash publish.sh ${VER} ""); then
         echo "${bold}${plugin}${normal} : failed to run publish." >&2
         exit 1
     fi

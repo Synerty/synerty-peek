@@ -1,6 +1,7 @@
 from twisted.internet.protocol import Protocol, Factory
 from twisted.internet import reactor
 
+
 ### Protocol Implementation
 
 # This is just about the simplest possible protocol
@@ -18,5 +19,6 @@ def main():
     reactor.listenTCP(8000, f)
     reactor.run()
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     main()

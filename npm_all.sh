@@ -9,7 +9,6 @@ frontendDirs="
 ../peek-admin-app/peek_admin_app
 "
 
-
 for x in $frontendDirs; do
     (cd $x && npm "$@") &
 done

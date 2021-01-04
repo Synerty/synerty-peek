@@ -1,20 +1,20 @@
-include:
-    - local: '.gitlab-release-branch.yml'
+include :
+    -   local : '.gitlab-release-branch.yml'
 
-variables:
-    RELEASE_VER: ${PKG_TAG_VERSION}
-    GIT_CLONE_PATH: $CI_BUILDS_DIR/peek
-    PEEK_NODE_VERSION: v7.1.0
-    BUILD: build
-    PKG_ENTERPRISE_LINUX: tmp_pkg_enterprise_linux
-    PKG_COMMUNITY_LINUX: tmp_pkg_community_linux
-    PKG_ENTERPRISE_MACOS: tmp_pkg_enterprise_macos
-    PKG_COMMUNITY_MACOS: tmp_pkg_community_macos
-    NON_RELEASE_VER: 0.0.0+b${CI_PIPELINE_ID}
-    PINNED_DEPS_PY_FILE_LINUX: ${CI_PROJECT_DIR}/gitlab/${RELEASE_BRANCH}/linux/pinned-deps-py
-    PINNED_DEPS_PY_FILE_MACOS: ${CI_PROJECT_DIR}/gitlab/${RELEASE_BRANCH}/macos/pinned-deps-py
+variables :
+    RELEASE_VER : ${PKG_TAG_VERSION}
+    GIT_CLONE_PATH : $CI_BUILDS_DIR/peek
+    PEEK_NODE_VERSION : v7.1.0
+    BUILD : build
+    PKG_ENTERPRISE_LINUX : tmp_pkg_enterprise_linux
+    PKG_COMMUNITY_LINUX : tmp_pkg_community_linux
+    PKG_ENTERPRISE_MACOS : tmp_pkg_enterprise_macos
+    PKG_COMMUNITY_MACOS : tmp_pkg_community_macos
+    NON_RELEASE_VER : 0.0.0+b${CI_PIPELINE_ID}
+    PINNED_DEPS_PY_FILE_LINUX : ${CI_PROJECT_DIR}/gitlab/${RELEASE_BRANCH}/linux/pinned-deps-py
+    PINNED_DEPS_PY_FILE_MACOS : ${CI_PROJECT_DIR}/gitlab/${RELEASE_BRANCH}/macos/pinned-deps-py
 
-stages:
+stages :
     - docs
     - fetch
     - publish
@@ -23,38 +23,38 @@ stages:
     - upload
 
 
-build_html_docs:
-    artifacts:
-        paths:
+build_html_docs :
+    artifacts :
+        paths :
             - synerty-peek-html
-        expire_in: 1 day
-    allow_failure: false
-    image: nexus.synerty.com:5000/peek-linux-doc:${RELEASE_BRANCH}
-    only:
+        expire_in : 1 day
+    allow_failure : false
+    image : nexus.synerty.com:5000/peek-linux-doc:${RELEASE_BRANCH}
+    only :
         - pushes
         - merge_requests
-    script:
+    script :
         - export PIP_INDEX=http://${NEXUS_USER}:${NEXUS_PASSWORD}@${NEXUS_URL}/repository/pypi-all/pypi
         - export PIP_INDEX_URL=http://${NEXUS_USER}:${NEXUS_PASSWORD}@${NEXUS_URL}/repository/pypi-all/simple
         - export PIP_TRUSTED_HOST=${NEXUS_URL}
         - pip install -r docs/rtfd_requirements.txt
         - (cd docs && bash build_html_docs.sh)
         - mv docs/doc_dist synerty-peek-html
-    stage: docs
-    tags:
+    stage : docs
+    tags :
         - linux
 
-build_latex_docs:
-    artifacts:
-        paths:
+build_latex_docs :
+    artifacts :
+        paths :
             - synerty-peek.pdf
-        expire_in: 1 day
-    allow_failure: false
-    image: nexus.synerty.com:5000/peek-linux-doc:${RELEASE_BRANCH}
-    only:
+        expire_in : 1 day
+    allow_failure : false
+    image : nexus.synerty.com:5000/peek-linux-doc:${RELEASE_BRANCH}
+    only :
         - pushes
         - merge_requests
-    script:
+    script :
         - export PIP_INDEX=http://${NEXUS_USER}:${NEXUS_PASSWORD}@${NEXUS_URL}/repository/pypi-all/pypi
         - export PIP_INDEX_URL=http://${NEXUS_USER}:${NEXUS_PASSWORD}@${NEXUS_URL}/repository/pypi-all/simple
         - export PIP_TRUSTED_HOST=${NEXUS_URL}
@@ -62,108 +62,108 @@ build_latex_docs:
         - (cd docs && bash build_latex_docs.sh)
         - (cd docs/doc_dist_latex && pdflatex "SynertyPeek.tex")
         - mv docs/doc_dist_latex/SynertyPeek.pdf synerty-peek.pdf
-    stage: docs
-    tags:
+    stage : docs
+    tags :
         - linux
 
 # ##########################################################################################
 # # LINUX Builds
 
-git_clone_community:
-    allow_failure: false
-    artifacts:
-        paths:
+git_clone_community :
+    allow_failure : false
+    artifacts :
+        paths :
             - ${GIT_CLONE_PATH}/cloned_community_repos
-        expire_in: 1 day
-    image: nexus.synerty.com:5000/peek-linux-build:${RELEASE_BRANCH}
-    only:
+        expire_in : 1 day
+    image : nexus.synerty.com:5000/peek-linux-build:${RELEASE_BRANCH}
+    only :
         - web
         - triggers
-    script:
+    script :
         - ./gitlab/scripts/git_clone.sh community ${GIT_CLONE_PATH}/cloned_community_repos
             ${GIT_USER} ${GIT_PASSWORD}
             ${CI_COMMIT_REF_NAME} ${CI_PROJECT_NAMESPACE} ${RELEASE_BRANCH}
-    stage: fetch
-    tags:
+    stage : fetch
+    tags :
         - linux
 
-git_clone_enterprise:
-    allow_failure: false
-    artifacts:
-        paths:
+git_clone_enterprise :
+    allow_failure : false
+    artifacts :
+        paths :
             - ${GIT_CLONE_PATH}/cloned_enterprise_repos
-        expire_in: 1 day
-    image: nexus.synerty.com:5000/peek-linux-build:${RELEASE_BRANCH}
-    only:
+        expire_in : 1 day
+    image : nexus.synerty.com:5000/peek-linux-build:${RELEASE_BRANCH}
+    only :
         - web
         - triggers
-    script:
+    script :
         - ./gitlab/scripts/git_clone.sh enterprise ${GIT_CLONE_PATH}/cloned_enterprise_repos
             ${GIT_USER} ${GIT_PASSWORD}
             ${CI_COMMIT_REF_NAME} ${CI_PROJECT_NAMESPACE} ${RELEASE_BRANCH}
-    stage: fetch
-    tags:
+    stage : fetch
+    tags :
         - linux
 
-publish_community:
-    dependencies:
+publish_community :
+    dependencies :
         - git_clone_community
-    allow_failure: false
-    artifacts:
-        paths:
+    allow_failure : false
+    artifacts :
+        paths :
             - ${GIT_CLONE_PATH}/community_packages
-        expire_in: 1 day
-    image: nexus.synerty.com:5000/peek-linux-build:${RELEASE_BRANCH}
-    only:
+        expire_in : 1 day
+    image : nexus.synerty.com:5000/peek-linux-build:${RELEASE_BRANCH}
+    only :
         - web
         - triggers
-    stage: publish
-    script:
+    stage : publish
+    script :
         - export GITHUB_PUSH=0
         - ./publish_community.sh ${RELEASE_VER:-${NON_RELEASE_VER}} ${GIT_CLONE_PATH}/cloned_community_repos
         - mkdir -p ${GIT_CLONE_PATH}/community_packages
         - mv ${GIT_CLONE_PATH}/cloned_community_repos/*/dist/*.tar.gz ${GIT_CLONE_PATH}/community_packages
-    tags:
+    tags :
         - linux
 
 
-publish_enterprise:
-    dependencies:
+publish_enterprise :
+    dependencies :
         - git_clone_community
         - git_clone_enterprise
-    allow_failure: false
-    artifacts:
-        paths:
+    allow_failure : false
+    artifacts :
+        paths :
             - ${GIT_CLONE_PATH}/enterprise_packages
-        expire_in: 1 day
-    image: nexus.synerty.com:5000/peek-linux-build:${RELEASE_BRANCH}
-    only:
+        expire_in : 1 day
+    image : nexus.synerty.com:5000/peek-linux-build:${RELEASE_BRANCH}
+    only :
         - web
         - triggers
-    stage: publish
-    script:
+    stage : publish
+    script :
         - export GITHUB_PUSH=0
         - ./publish_enterprise.sh ${RELEASE_VER:-${NON_RELEASE_VER}} ${GIT_CLONE_PATH}/cloned_enterprise_repos
         - mkdir -p ${GIT_CLONE_PATH}/enterprise_packages
         - mv ${GIT_CLONE_PATH}/cloned_enterprise_repos/*/dist/*.tar.gz ${GIT_CLONE_PATH}/enterprise_packages
-    tags:
+    tags :
         - linux
 
-package_community_linux:
-    dependencies:
+package_community_linux :
+    dependencies :
         - git_clone_community
         - publish_community
-    allow_failure: false
-    artifacts:
-        paths:
+    allow_failure : false
+    artifacts :
+        paths :
             - ${GIT_CLONE_PATH}/${PKG_COMMUNITY_LINUX}
-        expire_in: 1 day
-    image: nexus.synerty.com:5000/peek-linux-build:${RELEASE_BRANCH}
-    only:
+        expire_in : 1 day
+    image : nexus.synerty.com:5000/peek-linux-build:${RELEASE_BRANCH}
+    only :
         - web
         - triggers
-    stage: package
-    script:
+    stage : package
+    script :
         - echo "registry=http://${NEXUS_URL}/repository/npm-all/" > ~/.npmrc
         - echo "_auth=$(echo -n "${NEXUS_USER}:${NEXUS_PASSWORD}" | openssl base64)"    >> ~/.npmrc
         - export NG_CLI_ANALYTICS=ci
@@ -179,24 +179,24 @@ package_community_linux:
             ${GIT_CLONE_PATH}/community_packages
             ${GIT_CLONE_PATH}/${PKG_COMMUNITY_LINUX}
             ${PINNED_DEPS_PY_FILE_LINUX}
-    tags:
+    tags :
         - linux
 
-package_enterprise_linux:
-    dependencies:
+package_enterprise_linux :
+    dependencies :
         - publish_community
         - publish_enterprise
-    allow_failure: false
-    artifacts:
-        paths:
+    allow_failure : false
+    artifacts :
+        paths :
             - ${GIT_CLONE_PATH}/${PKG_ENTERPRISE_LINUX}/
-        expire_in: 1 day
-    image: nexus.synerty.com:5000/peek-linux-build:${RELEASE_BRANCH}
-    only:
+        expire_in : 1 day
+    image : nexus.synerty.com:5000/peek-linux-build:${RELEASE_BRANCH}
+    only :
         - web
         - triggers
-    stage: package
-    script:
+    stage : package
+    script :
         - mkdir -p ~/.config/pip
         - mkdir -p ${GIT_CLONE_PATH}/${PKG_ENTERPRISE_LINUX}
         - export PIP_INDEX=http://${NEXUS_USER}:${NEXUS_PASSWORD}@${NEXUS_URL}/repository/pypi-all/pypi
@@ -207,24 +207,24 @@ package_enterprise_linux:
             ${GIT_CLONE_PATH}/community_packages
             ${GIT_CLONE_PATH}/${PKG_ENTERPRISE_LINUX}
             ${PINNED_DEPS_PY_FILE_LINUX}
-    tags:
+    tags :
         - linux
 
-archive_release_linux:
-    dependencies:
+archive_release_linux :
+    dependencies :
         - package_enterprise_linux
         - package_community_linux
-    allow_failure: false
-    artifacts:
-        paths:
+    allow_failure : false
+    artifacts :
+        paths :
             - ${GIT_CLONE_PATH}/peek_release_${RELEASE_VER:-${NON_RELEASE_VER}}_linux.tar
-        expire_in: 1 day
-    image: nexus.synerty.com:5000/peek-linux-build:${RELEASE_BRANCH}
-    only:
+        expire_in : 1 day
+    image : nexus.synerty.com:5000/peek-linux-build:${RELEASE_BRANCH}
+    only :
         - web
         - triggers
-    stage: archive
-    script:
+    stage : archive
+    script :
         - mkdir -p ~/.config/pip
         - mkdir -p ${GIT_CLONE_PATH}/peek_release_${RELEASE_VER:-${NON_RELEASE_VER}}_linux
         - cp ./scripts/linux/deploy_release_linux.sh
@@ -237,45 +237,45 @@ archive_release_linux:
             && tar cvf peek_release_${RELEASE_VER:-${NON_RELEASE_VER}}_linux.tar
             peek_release_${RELEASE_VER:-${NON_RELEASE_VER}}_linux
         - rm -rf ${GIT_CLONE_PATH}/peek_release_${RELEASE_VER:-${NON_RELEASE_VER}}_linux
-    tags:
+    tags :
         - linux
 
-upload_to_nexus_linux:
-    dependencies:
+upload_to_nexus_linux :
+    dependencies :
         - archive_release_linux
-    allow_failure: false
-    image: nexus.synerty.com:5000/peek-linux-build:${RELEASE_BRANCH}
-    rules:
-        - if: '$PKG_TAG_VERSION == null'
-          when: never
-        - if: '$CI_PIPELINE_SOURCE == "web"'
-        - if: '$CI_PIPELINE_SOURCE == "triggers"'
-    script:
+    allow_failure : false
+    image : nexus.synerty.com:5000/peek-linux-build:${RELEASE_BRANCH}
+    rules :
+        -   if : '$PKG_TAG_VERSION == null'
+            when : never
+        -   if : '$CI_PIPELINE_SOURCE == "web"'
+        -   if : '$CI_PIPELINE_SOURCE == "triggers"'
+    script :
         - curl -v -u ${NEXUS_USER}:${NEXUS_PASSWORD}
             --upload-file $GIT_CLONE_PATH/peek_release_${RELEASE_VER:-${NON_RELEASE_VER}}_linux.tar
             http://${NEXUS_URL}/repository/synerty-packages/
-    stage: upload
-    tags:
+    stage : upload
+    tags :
         - linux
 
 
 ##########################################################################################
 
 
-package_community_macos:
-    dependencies:
+package_community_macos :
+    dependencies :
         - git_clone_community
         - publish_community
-    allow_failure: false
-    artifacts:
-        paths:
+    allow_failure : false
+    artifacts :
+        paths :
             - ${GIT_CLONE_PATH}/${PKG_COMMUNITY_MACOS}
-        expire_in: 1 day
-    only:
+        expire_in : 1 day
+    only :
         - web
         - triggers
-    stage: package
-    script:
+    stage : package
+    script :
         - echo "registry=http://${NEXUS_URL}/repository/npm-all/" > ~/.npmrc
         - echo "_auth=$(echo -n "${NEXUS_USER}:${NEXUS_PASSWORD}" | openssl base64)"    >> ~/.npmrc
         - export NG_CLI_ANALYTICS=ci
@@ -293,23 +293,23 @@ package_community_macos:
             ${PINNED_DEPS_PY_FILE_MACOS}
         - rm -rf ${GIT_CLONE_PATH}/community_packages
         - rm -rf ${GIT_CLONE_PATH}/cloned_community_repos
-    tags:
+    tags :
         - macos
 
-package_enterprise_macos:
-    dependencies:
+package_enterprise_macos :
+    dependencies :
         - publish_community
         - publish_enterprise
-    allow_failure: false
-    artifacts:
-        paths:
+    allow_failure : false
+    artifacts :
+        paths :
             - ${GIT_CLONE_PATH}/${PKG_ENTERPRISE_MACOS}/
-        expire_in: 1 day
-    only:
+        expire_in : 1 day
+    only :
         - web
         - triggers
-    stage: package
-    script:
+    stage : package
+    script :
         - mkdir -p ~/.config/pip
         - mkdir -p ${GIT_CLONE_PATH}/${PKG_ENTERPRISE_MACOS}
         - export PIP_INDEX=http://${NEXUS_USER}:${NEXUS_PASSWORD}@${NEXUS_URL}/repository/pypi-all/pypi
@@ -318,24 +318,24 @@ package_enterprise_macos:
         - ./scripts/macos/package_macos.sh -r enterprise ${RELEASE_VER:-${NON_RELEASE_VER}}
             ${GIT_CLONE_PATH}/enterprise_packages ${GIT_CLONE_PATH}/community_packages
             ${GIT_CLONE_PATH}/${PKG_ENTERPRISE_MACOS} ${PINNED_DEPS_PY_FILE_MACOS}
-    tags:
+    tags :
         - macos
 
-archive_release_macos:
-    dependencies:
+archive_release_macos :
+    dependencies :
         - package_enterprise_macos
         - package_community_macos
-    allow_failure: false
-    image: nexus.synerty.com:5000/peek-linux-build:${RELEASE_BRANCH}
-    artifacts:
-        paths:
+    allow_failure : false
+    image : nexus.synerty.com:5000/peek-linux-build:${RELEASE_BRANCH}
+    artifacts :
+        paths :
             - ${GIT_CLONE_PATH}/peek_release_${RELEASE_VER:-${NON_RELEASE_VER}}_macos.tar
-        expire_in: 1 day
-    only:
+        expire_in : 1 day
+    only :
         - web
         - triggers
-    stage: archive
-    script:
+    stage : archive
+    script :
         - mkdir -p ~/.config/pip
         - mkdir -p ${GIT_CLONE_PATH}/peek_release_${RELEASE_VER:-${NON_RELEASE_VER}}_macos
         - cp ./scripts/macos/deploy_release_macos.sh
@@ -348,25 +348,25 @@ archive_release_macos:
             && tar cvf peek_release_${RELEASE_VER:-${NON_RELEASE_VER}}_macos.tar
             peek_release_${RELEASE_VER:-${NON_RELEASE_VER}}_macos
         - rm -rf ${GIT_CLONE_PATH}/peek_release_${RELEASE_VER:-${NON_RELEASE_VER}}_macos
-    tags:
+    tags :
         - linux
 
-upload_to_nexus_macos:
-    dependencies:
+upload_to_nexus_macos :
+    dependencies :
         - archive_release_macos
-    allow_failure: false
-    image: nexus.synerty.com:5000/peek-linux-build:${RELEASE_BRANCH}
-    rules:
-        - if: '$PKG_TAG_VERSION == null'
-          when: never
-        - if: '$CI_PIPELINE_SOURCE == "web"'
-        - if: '$CI_PIPELINE_SOURCE == "triggers"'
-    script:
+    allow_failure : false
+    image : nexus.synerty.com:5000/peek-linux-build:${RELEASE_BRANCH}
+    rules :
+        -   if : '$PKG_TAG_VERSION == null'
+            when : never
+        -   if : '$CI_PIPELINE_SOURCE == "web"'
+        -   if : '$CI_PIPELINE_SOURCE == "triggers"'
+    script :
         - curl -v -u ${NEXUS_USER}:${NEXUS_PASSWORD}
             --upload-file $GIT_CLONE_PATH/peek_release_${RELEASE_VER:-${NON_RELEASE_VER}}_macos.tar
             http://${NEXUS_URL}/repository/synerty-packages/
-    stage: upload
-    tags:
+    stage : upload
+    tags :
         - linux
 
 

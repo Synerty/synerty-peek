@@ -31,7 +31,7 @@ class IdentityProtocol(Protocol):
 
     def makeIdentityResponse(self, data):
         data = data.decode("utf-8").strip()
-        payload = "You are from {ip} on port {port}, saying \"{req}\"".format(
+        payload = 'You are from {ip} on port {port}, saying "{req}"'.format(
             ip=self._peer.host, port=self._peer.port, req=data
         )
         payload = self._encode_string(payload)

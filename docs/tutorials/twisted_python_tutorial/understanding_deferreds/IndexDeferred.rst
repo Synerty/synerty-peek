@@ -1,4 +1,3 @@
-
 .. _understanding_deferreds:
 
 =======================

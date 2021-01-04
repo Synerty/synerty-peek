@@ -25,7 +25,7 @@ CI_PROJECT_ROOT_NAMESPACE=${CI_PROJECT_NAMESPACE%/*}
 
 echo "Cloning all the repositories at ${SRC_PATH}"
 
-mkdir -p  ${SRC_PATH} && cd ${SRC_PATH}
+mkdir -p ${SRC_PATH} && cd ${SRC_PATH}
 
 # Clone the repos
 for repo in ${PACKAGES}; do
@@ -61,4 +61,3 @@ for repo in ${PACKAGES}; do
     fi
     popd
 done
-

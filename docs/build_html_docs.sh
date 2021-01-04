@@ -3,15 +3,15 @@
 set -o nounset
 set -o errexit
 
-if [ -n "`echo 'false' | bash -l`" ]; then
+if [ -n "$(echo 'false' | bash -l)" ]; then
     echo "ERROR, Your bash setup spits out extra text when it's run"
     exit 1
 fi
 
 # Make sure this script has all the environment setup
-export PATH="$(dirname `echo 'which python' | bash -l`):$PATH"
+export PATH="$(dirname $(echo 'which python' | bash -l)):$PATH"
 
-path=`dirname $0`
+path=$(dirname $0)
 cd $path
 
 SRC_DIR="$path"

@@ -4,7 +4,6 @@ source ./pip_common.sh
 set errexit
 set nounset
 
-
 #
 # TODO: Add support for creating merge requests as required.
 #
@@ -22,15 +21,14 @@ set nounset
 #}'
 
 # -------------------------------------
-for pkgDir in `ls -d ../peek-*` ../synerty-peek; do
-    pushd $pkgDir > /dev/null
+for pkgDir in $(ls -d ../peek-*) ../synerty-peek; do
+    pushd $pkgDir >/dev/null
 
-    branch=`git rev-parse --abbrev-ref HEAD`
-    if [ "$(git rev-parse $branch)" != "$(git rev-parse master)" ];
-    then
+    branch=$(git rev-parse --abbrev-ref HEAD)
+    if [ "$(git rev-parse $branch)" != "$(git rev-parse master)" ]; then
         echo "${pkgDir} needs a merge request" >&2
     fi
 
-    popd > /dev/null
+    popd >/dev/null
 
 done

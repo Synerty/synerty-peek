@@ -33,6 +33,7 @@ def setup():
     #
     return d1
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     d = setup()
     d.callback("test")

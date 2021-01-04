@@ -11,39 +11,39 @@
 
 -- ENMAC Diagram Loader
 UPDATE pl_enmac_diagram_loader."AppServerSettingsTuple"
-SET "appHost" = 'APP_HOST_NAME',
-    "appSshUsername" = 'SSH_USER',
-    "appSshPassword" = 'SSH_PASS',
+SET "appHost"           = 'APP_HOST_NAME',
+    "appSshUsername"    = 'SSH_USER',
+    "appSshPassword"    = 'SSH_PASS',
     "appOracleUsername" = 'pofinfo',
     "appOraclePassword" = 'POFINFO_PASS';
 
 -- ENMAC Equipment Loader
 UPDATE pl_enmac_equipment_loader."AppServerSettingsTuple"
-SET "appHost" = 'APP_HOST_NAME',
+SET "appHost"           = 'APP_HOST_NAME',
     "appOracleUsername" = 'pofinfo',
     "appOraclePassword" = 'POFINFO_PASS';
 
 -- ENMAC GIS Location Loader
 UPDATE pl_enmac_gis_location_loader."AppServerSettingsTuple"
-SET "appHost" = 'APP_HOST_NAME',
+SET "appHost"           = 'APP_HOST_NAME',
     "appOracleUsername" = 'pofinfo',
     "appOraclePassword" = 'POFINFO_PASS';
 
 -- ENMAC User Loader
 UPDATE pl_enmac_user_loader."AppServerSettingsTuple"
-SET "appHost" = 'APP_HOST_NAME',
+SET "appHost"           = 'APP_HOST_NAME',
     "appOracleUsername" = 'pofinfo',
     "appOraclePassword" = 'POFINFO_PASS';
 
 -- ENMAC LiveDB Loader
 UPDATE pl_enmac_livedb_loader."AppServerSettingsTuple"
-SET "appHost" = 'APP_HOST_NAME',
+SET "appHost"           = 'APP_HOST_NAME',
     "appOracleUsername" = 'pofinfo',
     "appOraclePassword" = 'POFINFO_PASS';
 
 -- ENMAC GraphDB Loader
 UPDATE pl_enmac_graphdb_loader."AppServerSettingsTuple"
-SET "appHost" = 'APP_HOST_NAME',
+SET "appHost"           = 'APP_HOST_NAME',
     "appOracleUsername" = 'pofinfo',
     "appOraclePassword" = 'POFINFO_PASS';
 

@@ -1,4 +1,3 @@
-
 .. _admin_update_plugin_settings:
 
 Updating Plugin Settings

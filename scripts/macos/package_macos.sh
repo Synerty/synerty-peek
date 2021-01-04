@@ -323,10 +323,10 @@ done
 shift $((OPTIND - 1))
 
 case "${release}" in
-    community | enterprise)
-        PackageOnGitLabCI $*
-        ;;
-    *)
-        printUsageAndExit
-        ;;
+community | enterprise)
+    PackageOnGitLabCI $*
+    ;;
+*)
+    printUsageAndExit
+    ;;
 esac

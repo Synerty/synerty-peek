@@ -130,7 +130,7 @@ function packageCICommunity() {
     # ------------------------------------------------------------------------------
     # This function downloads the node modules and prepares them for the release
 
-    function downloadNodeModules {
+    function downloadNodeModules() {
         # Get the variables for this package
         nmDir=$1
 
@@ -144,8 +144,7 @@ function packageCICommunity() {
         mkdir -p "$nmDir/tmp"
         cd "$nmDir/tmp"
 
-        if [ -f ${packageJsonDir} ]
-        then
+        if [ -f ${packageJsonDir} ]; then
             # Download package.json
             cp "$packageJsonDir" .
 
@@ -170,35 +169,32 @@ function packageCICommunity() {
     }
 
     # FIELD node modules
-    mobilePackageVer=`cd $baseDir/platform && ls peek_field_app-* | cut -d'-' -f2`
+    mobilePackageVer=$(cd $baseDir/platform && ls peek_field_app-* | cut -d'-' -f2)
     mobileBuildWebDIR="$baseDir/field-app"
     mobileJsonUrl="https://bitbucket.org/synerty/peek-field-app/raw/${mobilePackageVer}/peek_field_app"
     mobileJsonDir="${platformReposDir}/peek-field-app/peek_field_app"
     downloadNodeModules $mobileBuildWebDIR $mobileJsonUrl $mobileJsonDir
 
     # OFFICE node modules
-    desktopPackageVer=`cd $baseDir/platform && ls peek_office_app-* | cut -d'-' -f2`
+    desktopPackageVer=$(cd $baseDir/platform && ls peek_office_app-* | cut -d'-' -f2)
     desktopBuildWebDIR="$baseDir/office-app"
     desktopJsonUrl="https://bitbucket.org/synerty/peek-office-app/raw/${desktopPackageVer}/peek_office_app"
     desktopJsonDir="${platformReposDir}/peek-office-app/peek_office_app"
     downloadNodeModules $desktopBuildWebDIR $desktopJsonUrl $desktopJsonDir
 
     # ADMIN node modules
-    adminPackageVer=`cd $baseDir/platform && ls peek_admin_app-* | cut -d'-' -f2`
+    adminPackageVer=$(cd $baseDir/platform && ls peek_admin_app-* | cut -d'-' -f2)
     adminBuildWebDIR="$baseDir/admin-app"
     adminJsonUrl="https://bitbucket.org/synerty/peek-admin-app/raw/${adminPackageVer}/peek_admin_app"
     adminJsonDir="${platformReposDir}/peek-admin-app/peek_admin_app"
     downloadNodeModules $adminBuildWebDIR $adminJsonUrl $adminJsonDir
-
-
 
     # ------------------------------------------------------------------------------
     # Copy over the init scripts for this platform
 
     mkdir $baseDir/init && pushd $baseDir/init
 
-    for s in peek_logic peek_worker peek_office peek_field peek_agent
-    do
+    for s in peek_logic peek_worker peek_office peek_field peek_agent; do
         cp ${platformReposDir}/synerty-peek/scripts/linux/init/${s}.service ${s}.service
     done
     popd
@@ -286,7 +282,6 @@ function packageCIEnterprisePlugins() {
     rm -rf ${DIR_TO_TAR}
 
 }
-
 
 function printUsageAndExit() {
     echo "Invalid arguments"

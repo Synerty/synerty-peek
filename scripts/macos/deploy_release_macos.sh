@@ -19,9 +19,9 @@ fi
 # Initialise variables and paths
 
 # Get the current location
-startDir=`pwd`
+startDir=$(pwd)
 
-releaseDir=`echo ~/peek_platform_macos`
+releaseDir=$(echo ~/peek_platform_macos)
 
 # Delete the existing dist dir if it exists
 if [ -d ${releaseDir} ]; then
@@ -52,7 +52,7 @@ fi
 
 # Get the release name from the package
 echo "Get the release name from the package"
-peekPkgVer=`cd $releaseDir/platform && ls synerty_peek-* | cut -d'-' -f2`
+peekPkgVer=$(cd $releaseDir/platform && ls synerty_peek-* | cut -d'-' -f2)
 
 # This variable is the path of the new virtualenv
 venvDir="/Users/peek/synerty-peek-${peekPkgVer}"
@@ -108,7 +108,7 @@ rsync -a $releaseDir/node/* ${venvDir}
 # Install the frontend node_modules
 
 # Make a var pointing to site-packages
-sp="`echo $venvDir/lib/python*/site-packages`"
+sp="$(echo $venvDir/lib/python*/site-packages)"
 
 # Move the node_modules into place
 mv $releaseDir/field-app/node_modules $sp/peek_field_app
@@ -128,20 +128,18 @@ q='"'
 d='$'
 
 echo " "
-echo "Run the following to switch to the new releases environment :";
+echo "Run the following to switch to the new releases environment :"
 echo "export PATH=${q}${venvDir}/bin:${d}{PATH}${q}"
 echo " "
 
-if [ "${PEEK_AUTO_DEPLOY+x}" == "1" ]
-then
+if [ "${PEEK_AUTO_DEPLOY+x}" == "1" ]; then
     REPLY='Y'
 else
     read -p "Do you want to permanently enable this release? " -n 1 -r
-    echo    # (optional) move to a new line
+    echo # (optional) move to a new line
 fi
 
-if [[ $REPLY =~ ^[Yy]$ ]]
-then
+if [[ $REPLY =~ ^[Yy]$ ]]; then
     sed -i "s,export PEEK_ENV.*,export PEEK_ENV=${q}${venvDir}${q},g" ~/.bash_profile
     echo " "
     echo "Done"

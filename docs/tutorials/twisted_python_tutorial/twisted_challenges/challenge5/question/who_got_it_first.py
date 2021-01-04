@@ -28,7 +28,9 @@ class WhoGotItFirst(object):
         self._deferreds = []
 
     def getAll(self):
-        self._deferreds = [self._makeDeferred(self.URL, rejectAnswerNo=False) for _ in range(3)]
+        self._deferreds = [
+            self._makeDeferred(self.URL, rejectAnswerNo=False) for _ in range(3)
+        ]
         #
         # Q1: your code starts HERE
         #
@@ -38,7 +40,9 @@ class WhoGotItFirst(object):
         self._deferredList.addCallback(pprint)
 
     def getFirstYes(self):
-        self._deferreds = [self._makeDeferred(self.URL, rejectAnswerNo=True) for _ in range(3)]
+        self._deferreds = [
+            self._makeDeferred(self.URL, rejectAnswerNo=True) for _ in range(3)
+        ]
         self._deferredList = DeferredList(self._deferreds, fireOnOneCallback=True)
         self._deferredList.addCallback(pprint)
 
@@ -108,7 +112,6 @@ def main():
     print()
     print("THE FIRST YES:")
     WhoGotItFirst().getFirstYes()
-
 
 
 if __name__ == "__main__":
