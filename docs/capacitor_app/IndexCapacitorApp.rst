@@ -8,11 +8,8 @@ Capacitor App
     :maxdepth: 1
     :caption: Contents:
 
-    setup_capacitor_windows/SetupCapacitorWindows
-    setup_capacitor_debian/SetupCapacitorDebian
-    setup_capacitor_macos/SetupCapacitorMacOS
-    package_capacitor/PackageCapacitorApp
-    deploy_capacitor/DeployCapacitorApp
+    setup_capacitor/SetupCapacitor
+    build_capacitor_app/BuildCapacitorApp
 
 What Next?
 ----------

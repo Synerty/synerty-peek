@@ -308,8 +308,8 @@ Example:
 
 
 Below is an abstract from file
-:file:`peek_plugin_tutorial/_private/server/ServerEntryHook.py`, create in the step
-:ref:`learn_plugin_development_add_server_add_file_ServerEntryHook`.
+:file:`peek_plugin_tutorial/_private/server/LogicEntryHook.py`, create in the step
+:ref:`learn_plugin_development_add_server_add_file_LogicEntryHook`.
 
 ::
 
