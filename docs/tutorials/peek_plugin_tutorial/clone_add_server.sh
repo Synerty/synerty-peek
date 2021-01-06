@@ -5,7 +5,7 @@ set -o errexit
 
 # This replaces agent with Whatever
 #
-# We use "server", because we just copy LearnPluginDevelopment_AddServer.rst
+# We use "logic", because we just copy LearnPluginDevelopment_AddServer.rst
 #   to LearnPluginDevelopment_AddClient.rst and then strip it down.
 #
 
