@@ -4,6 +4,24 @@
 Build Capacitor App
 ===================
 
+Install Capacitor
+-----------------
+
+Capacitor can be installed via NPM.
+
+::
+
+    # Install capacitor
+    cd peek_field_app # or peek_office_app
+    npm install @capacitor/core @capacitor/cli --save
+
+    # Initialise capacitor
+    npx cap init
+
+    # Setup iOS development
+    npx cap add ios
+
+
 Build iOS App
 -------------
 
@@ -23,6 +41,17 @@ Build Android App
 -----------------
 
 ** ToDo **
+
+Build Windows App
+-----------------
+
+** ToDo **
+
+Further Reading
+---------------
+
+Further documentation on Capacitor can be found on their website.
+https://capacitorjs.com/docs
 
 What Next?
 ----------
