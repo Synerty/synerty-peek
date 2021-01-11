@@ -8,7 +8,6 @@ Capacitor App
     :maxdepth: 1
     :caption: Contents:
 
-    setup_capacitor/SetupCapacitor
     build_capacitor_app/BuildCapacitorApp
 
 What Next?
