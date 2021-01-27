@@ -76,6 +76,20 @@ Follow the steps in the link below to set this up.
 
 `Peek Client & Server SSL <https://synerty-peek.readthedocs.io/en/latest/administration/admin_config_platform.html#peek-office-service-server-ssl>`_
 
+v2.5.4 Issues Log
+-----------------
+
+Bug
+```
+
+*   [PEEK-761] - Peek DMS Diagram - Symbols don't rotate
+
+Improvement
+```````````
+
+*   [PEEK-917] - Diagram colours printing incorrectly
+
+
 v2.5.3 Issues Log
 -----------------
 
