@@ -21,7 +21,7 @@ set nounset
 #}'
 
 # -------------------------------------
-for pkgDir in $(ls -d ../peek-*) ../synerty-peek; do
+for pkgDir in $(ls -d ../../peek-*) ../../synerty-peek; do
     pushd $pkgDir >/dev/null
 
     branch=$(git rev-parse --abbrev-ref HEAD)

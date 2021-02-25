@@ -29,7 +29,7 @@ if ! [ -f './git_all.sh' ]; then
 fi
 
 # -------------------------------------
-for pkgDir in $(ls -d ../peek-*) ../synerty-peek; do
+for pkgDir in $(ls -d ../../peek-*) ../../synerty-peek; do
     echo "Running in ${pkgDir}: git " "$@"
     (cd $pkgDir && git "$@")
 done

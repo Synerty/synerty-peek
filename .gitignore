@@ -103,3 +103,6 @@ MANIFEST
 #peek_worker_service
 .DS_Store
 .scannerwork/
+
+# gitlab token
+.gitlabtoken
