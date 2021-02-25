@@ -3,7 +3,7 @@
 source ./pip_common.sh
 
 # -------------------------------------
-for pkgDir in $(cd ../ && ls -d peek-*) synerty-peek; do
+for pkgDir in $(cd ../../ && ls -d peek-*) synerty-peek; do
     if [[ ${pkgDir} == *"pof"* ]]; then continue; fi
     if [[ ${pkgDir} == *"gis"* ]]; then continue; fi
 

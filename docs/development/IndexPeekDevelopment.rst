@@ -16,6 +16,7 @@ Peek Development
     package_platform/PackagePeekPlatform
     setup_pycharm/SetupPycharm
     setup_vs_code/SetupVSCode
+    helper_scripts_for_development/HelperScriptsForDevelopment
 
 What Next?
 ----------

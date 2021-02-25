@@ -3,7 +3,7 @@
 set -o nounset
 set -o errexit
 
-source ./pip_common.sh
+source ../pip_common.sh
 
 RED='\033[0;31m'
 NC='\033[0m' # No Color
@@ -27,5 +27,5 @@ fi
 # -------------------------------------
 for PKG_NAME in $PLATFORM_PKGS $PLUGIN_PKGS; do
     echo "Running in ${PKG_NAME}: " "$@"
-    (cd ../${PKG_NAME} && "$@")
+    (cd ../../${PKG_NAME} && "$@")
 done
