@@ -12,7 +12,7 @@ Please read through all of the documentation before commencing the installation 
 Installation Objective
 ----------------------
 
-This Installation Guide contains specific Mac 10.12 Sierra operating system requirements
+This Installation Guide contains specific Mac 11.2.1 Big Sur operating system requirements
 for the configuring of synerty-peek.
 
 
@@ -203,10 +203,20 @@ Create the symlinks to prefer the GNU tools ::
 
 Install the dev libs that the python packages will need to compile ::
 
-        brew install openssl@1.1 zlib openldap
+        brew install openssl@1.1 zlib openldap freetds
 
-Install Python 3.6
-------------------
+
+----
+
+Install libgeos ::
+
+    wget https://raw.githubusercontent.com/Homebrew/homebrew-core/master/Formula/geos.rb
+    brew install geos.rb
+    rm geos.rb
+
+
+Preparing .bash_profile
+-----------------------
 
 Edit :file:`~/.bash_profile` and insert the following: ::
 
@@ -225,26 +235,30 @@ Edit :file:`~/.bash_profile` and insert the following: ::
 .. warning:: Restart your terminal you get the new environment.
 
 
-----
+Install Python 3.9.1
+--------------------
 
 Download and unarchive the supported version of Python ::
 
         cd ~
-        source .bashrc
-        wget "https://www.python.org/ftp/python/${PEEK_PY_VER}/Python-${PEEK_PY_VER}.tgz"
-        tar xzf Python-${PEEK_PY_VER}.tgz
+        source .bash_profile
+        wget https://github.com/python/cpython/archive/v${PEEK_PY_VER}.zip
+        unzip v${PEEK_PY_VER}.zip
+        cd cpython-${PEEK_PY_VER}
 
 ----
 
 Configure the build ::
 
-        cd Python-${PEEK_PY_VER}
-
         export LDFLAGS="-L/usr/local/opt/openssl/lib -L/usr/local/opt/zlib/lib"
         export CPPFLAGS="-I/usr/local/opt/openssl/include -I/usr/local/opt/zlib/include"
         export PKG_CONFIG_PATH="/usr/local/opt/openssl/lib/pkgconfig:/usr/local/opt/zlib/lib/pkgconfig"
 
-        ./configure --prefix=/Users/peek/cpython-${PEEK_PY_VER}/ --enable-optimizations --enable-shared
+        ./configure \
+            --prefix=$HOME/opt \
+            --enable-optimizations \
+            --enable-shared \
+            --with-openssl=$(brew --prefix openssl)
 
 ----
 
@@ -257,13 +271,14 @@ Make and Make install the software ::
 Cleanup the download and build dir ::
 
         cd
-        rm -rf Python-${PEEK_PY_VER}*
+        rm -rf cpython-${PEEK_PY_VER}
+        rm v${PEEK_PY_VER}.zip
 
 ----
 
 Symlink the python3 commands so they are the only ones picked up by path. ::
 
-        cd /Users/peek/cpython-${PEEK_PY_VER}/bin
+        cd /Users/peek/opt/bin
         ln -s pip3 pip
         ln -s python3 python
         cd
@@ -276,14 +291,14 @@ Open a new terminal and test that the setup is working ::
         pass="/Users/peek/opt/bin/python"
         [ "`which python`" == "$pass" ] && echo "Success" || echo "FAILED"
 
-        pass="Python 3.9.1"
+        pass="Python ${PEEK_PY_VER}"
         [ "`python --version`" == "$pass" ] && echo "Success" || echo "FAILED"
 
         pass="/Users/peek/opt/bin/pip"
         [ "`which pip`" == "$pass" ] && echo "Success" || echo "FAILED"
 
 
-        pass="pip 18.1 from /Users/peek/opt/lib/python3.9/site-packages/pip (python 3.9)"
+        pass="pip 20.2.3 from /Users/peek/opt/lib/python3.9/site-packages/pip (python 3.9)"
         [ "`pip --version`" == "$pass" ] && echo "Success" || echo "FAILED"
 
 
@@ -321,53 +336,219 @@ The Wheel package is required for building platform and plugin releases ::
 Install PostgreSQL
 ------------------
 
-Peek requires the PostgreSQL extension plpython3u. This section will install
-PostgreSQL from homebrew with the extensions Peek needs.
+Install the relational database Peek stores its data in.
+This database is PostgreSQL 12.
 
-.. note:: If you have an old version of PostgreSQL installed with brew,
-          you will need to first upgrade that installation.
+.. note:: Run the commands in this step as the :code:`peek` user.
 
-----
+Download the PostgreSQL source code ::
 
+    PEEK_PG_VER=12.5
+    SRC_DIR="$HOME/postgresql-${PEEK_PG_VER}"
 
+    # Remove the src dir and install file
+    rm -rf ${SRC_DIR} || true
+    cd $HOME
 
-Tap the keg for postgresSQL v12.x and timescale ::
+    wget https://ftp.postgresql.org/pub/source/v${PEEK_PG_VER}/postgresql-${PEEK_PG_VER}.tar.bz2
+    tar xjf postgresql-${PEEK_PG_VER}.tar.bz2
 
-        echo "Tap the synerty keg"
-        brew tap peek-util/tap git@gitlab.synerty.com:peek-util/homebrew-tap.git
+    cd ${SRC_DIR}
 
-----
-
-Uninstall the old software if it exists ::
-
-        echo "Uninstall PostgreSQL if it exists."
-        brew uninstall postgresql || true
-        brew uninstall timescaledb || true
 
 ----
 
-Install timescale and PostgreSQL ::
+Configure and build PostGresQL ::
 
-        echo "Install timescale"
-        brew install peek-util/tap/postgresql
-        brew install timescaledb
+    export CPPFLAGS=" -I$(brew --prefix openssl@1.1)/include "
+    export LDFLAGS=" -L$(brew --prefix openssl@1.1)/lib "
+
+    ./configure \
+          --disable-debug \
+          --prefix=$HOME/opt \
+          --enable-thread-safety \
+          --with-openssl \
+          --with-python
+
+    make -j4
+
+    make install-world
+
+    # this is required for timescale to compile
+    cp ${SRC_DIR}/src/test/isolation/pg_isolation_regress ~/opt/bin
+
 
 ----
 
-Finish setting up timescale ::
+Cleanup ::
 
-        echo "Tune the postgresql.conf"
-        timescaledb-tune --quiet --yes
-
-        echo "Move it into place"
-        timescaledb_move.sh
+    # Remove the src dir and install file
+    cd
+    rm -rf ${SRC_DIR}*
 
 ----
 
-Start postgresql and create start at login launchd service: ::
+Init ::
 
-        brew services start postgresql
+    #Refresh .bash_profile so initdb can find postgres
+    source .bash_profile
 
+    initdb --pgdata=$HOME/pgdata/12 --auth-local=trust  --auth-host=md5
+
+
+----
+
+Tune the :file:`postgresql.conf` ::
+
+    F="$HOME/pgdata/12/postgresql.conf"
+
+    sed -i 's/max_connections = 100/max_connections = 200/g' $F
+
+
+----
+
+Install CMake
+`````````````
+
+Download CMake source code::
+
+    cd $HOME
+    PEEK_CMAKE_VER=3.19.2
+    SRC_DIR="$HOME/CMake-${PEEK_CMAKE_VER}"
+    wget https://github.com/Kitware/CMake/archive/v${PEEK_CMAKE_VER}.zip
+
+    unzip v${PEEK_CMAKE_VER}.zip
+    cd ${SRC_DIR}
+
+
+Compile CMake from source::
+
+    ./configure --prefix=$HOME/opt
+
+    make -j6 install
+
+    # Remove the src dir and install file
+    cd
+    rm -rf ${SRC_DIR}*
+    rm v${PEEK_CMAKE_VER}.zip
+
+
+Install PostgreSQL Timescaledb
+``````````````````````````````
+
+Next install timescaledb, this provides support for storing large amounts of historical
+data.
+
+`www.timescale.com <https://www.timescale.com>`_
+
+----
+
+Download the timescaledb source code ::
+
+    PEEK_TSDB_VER=1.7.4
+
+    cd
+    wget https://github.com/timescale/timescaledb/archive/${PEEK_TSDB_VER}.zip
+    unzip ${PEEK_TSDB_VER}.zip
+    cd timescaledb-${PEEK_TSDB_VER}
+
+
+----
+
+Install the packages: ::
+
+    export CPPFLAGS=`pg_config --cppflags`
+    export LDFLAGS=`pg_config --ldflags`
+    export OPENSSL_ROOT_DIR="/usr/local/opt/openssl/"
+
+
+    # Bootstrap the build system
+    ./bootstrap -DAPACHE_ONLY=1
+
+    # To build the extension
+    cd build && make
+
+    # To install
+    make install
+
+    # Cleanup the source code
+    cd
+    rm -rf ${PEEK_TSDB_VER}.zip
+    rm -rf timescaledb-${PEEK_TSDB_VER}
+
+
+----
+
+Install timescaledb-tune: ::
+
+    wget https://timescalereleases.blob.core.windows.net/homebrew/timescaledb-tools-0.8.1.tar.lzma
+    tar xf timescaledb-tools-0.8.1.tar.lzma
+    cp timescaledb-tools/timescaledb-tune $HOME/opt/bin
+    rm -rf timescaledb-tools
+    rm timescaledb-tools-0.8.1.tar.lzma
+
+----
+
+Tune the database: ::
+
+    PGVER=12
+    FILE="$HOME/pgdata/${PGVER}/postgresql.conf"
+    timescaledb-tune -quiet -yes -conf-path ${FILE} -pg-version ${PGVER}
+
+
+
+Finish PostgreSQL Setup
+````````````````````````
+
+Make PostgreSQL a service :
+
+.. note:: This will require sudo permissions
+
+Run the following command ::
+
+    # Make sure there is a LaunchAgents folder
+    mkdir -p ~/Library/LaunchAgents/
+
+    # Create the plist file
+    cat <<EOF > ~/Library/LaunchAgents/postgresql.plist
+    <?xml version="1.0" encoding="UTF-8"?>
+    <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+    <plist version="1.0">
+    <dict>
+      <key>KeepAlive</key>
+      <true/>
+      <key>Label</key>
+      <string>postgresql</string>
+      <key>ProgramArguments</key>
+      <array>
+        <string>${HOME}/opt/bin/postgres</string>
+        <string>-D</string>
+        <string>${HOME}/pgdata/12</string>
+      </array>
+      <key>RunAtLoad</key>
+      <true/>
+      <key>WorkingDirectory</key>
+      <string>${HOME}/opt</string>
+      <key>StandardOutPath</key>
+      <string>${HOME}/pgdata/12/postgres.log</string>
+      <key>StandardErrorPath</key>
+      <string>${HOME}/pgdata/12/postgres.log</string>
+    </dict>
+    </plist>
+    EOF
+
+    # Tell launchctl to use the plist
+    launchctl load ~/Library/LaunchAgents/postgresql.plist
+
+
+----
+
+Check that the service has started: ::
+
+    pgrep -laf postgres
+
+
+Finish configuring and starting PostgreSQL.
 
 ----
 
@@ -386,13 +567,6 @@ Allow the peek OS user to login to the database as user peek with no password ::
         # IPv6 local connections:
         host    all             all             ::1/128                 md5
         EOF
-
-
-----
-
-Create Postgres user ::
-
-        createuser -d -r -s peek
 
 
 ----
@@ -501,6 +675,13 @@ Edit :file:`~/.bash_profile` and insert the following: ::
 
 ----
 
+Refresh the bash_profile: ::
+
+        source $HOME/.bash_profile
+
+
+----
+
 Open new terminal and test that RabbitMQ setup is working ::
 
         pass="/usr/local/sbin/rabbitmq-server"
@@ -530,7 +711,7 @@ Make the directory where the oracle client will live ::
 
 Download the following from `oracle <http://www.oracle.com/technetwork/topics/intel-macsoft-096467.html>`_.
 
-The version used in these instructions is :code:`18.1.0.0.0`.
+The version used in these instructions is :code:`19.8.0.0.0`.
 
 #.  Download the "Basic Package" from
     https://download.oracle.com/otn_software/mac/instantclient/instantclient-basic-macos.zip
@@ -545,15 +726,15 @@ Copy these files to :file:`~/oracle` on the peek server.
 Extract the files. ::
 
         cd ~/oracle
-        unzip instantclient-basic-macos.x64-18.1.0.0.0.zip
-        unzip instantclient-sdk-macos.x64-18.1.0.0.0.zip
+        unzip instantclient-basic-macos.zip
+        unzip instantclient-sdk-macos.zip
 
 ----
 
 Add links to $HOME/lib to enable applications to find the libraries: ::
 
         mkdir ~/lib
-        ln -s ~/oracle/instantclient_18_1/libclntsh.dylib ~/lib/
+        ln -s ~/oracle/instantclient_19_8/libclntsh.dylib ~/lib/
 
 
 ----
@@ -562,68 +743,11 @@ Edit :file:`~/.bash_profile` and insert the following: ::
 
         ##### SET THE ORACLE ENVIRONMENT #####
         # Set PATH to include oracle
-        export ORACLE_HOME="`echo ~/oracle/instantclient_18_1`"
+        export ORACLE_HOME="`echo ~/oracle/instantclient_19_8`"
         export PATH="$ORACLE_HOME:$PATH"
 
         ##### SET THE DYLD_LIBRARY_PATH #####
         export DYLD_LIBRARY_PATH="$DYLD_LIBRARY_PATH:$ORACLE_HOME"
-
-
-
-Install FreeTDS (Optional)
---------------------------
-
-FreeTDS is an open source driver for the TDS protocol, this is the protocol used to
-talk to the MSSQL SQLServer database.
-
-Peek needs a installed if it uses the pymssql python database driver,
-which depends on FreeTDS.
-
-----
-
-.. note:: FreeTDS 1.x doesn't work, so be sure to install @0.91
-
-FreeTDS 0.91 can be selected and downloaded at this address:
-https://www.freetds.org/files/stable/
-
-Once you have downloaded FreeTDS version 0.91, extract it and open a terminal inside of the
-extracted folder. Then run the following commands::
-
-    ./configure
-    make
-    make install
-
-This should install version 0.91.
-
-----
-
-Edit :file:`~/.bash_profile` and insert the following: ::
-
-        ##### SET THE HOMEBREW ENVIRONMENT #####
-        # Set PATH to include fink
-        export PATH="/usr/local/opt/freetds@0.91/bin:$PATH"
-
-
-----
-
-Confirm the installation ::
-
-        tsql -C
-
-You should see something similar to: ::
-
-        Compile-time settings (established with the "configure" script)
-                                    Version: freetds v0.91.112
-                     freetds.conf directory: /usr/local/Cellar/freetds@0.91/0.91.112/etc
-             MS db-lib source compatibility: no
-                Sybase binary compatibility: no
-                              Thread safety: yes
-                              iconv library: yes
-                                TDS version: 7.1
-                                      iODBC: no
-                                   unixodbc: no
-                      SSPI "trusted" logins: no
-                                   Kerberos: no
 
 
 Change Open File Limit on macOS
