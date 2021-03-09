@@ -21,8 +21,8 @@ print(dir)
 EOPY
 }
 
-ARGS="-H 0.0.0.0"
-ARGS="$ARGS -p 8020"
+ARGS="--host 0.0.0.0"
+ARGS="$ARGS --port 8020"
 ARGS="$ARGS . ../dist/doc_autobuild"
 ARGS="$ARGS --watch $(modPath 'peek_plugin_base')"
 
