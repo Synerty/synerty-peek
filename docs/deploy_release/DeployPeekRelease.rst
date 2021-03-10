@@ -183,7 +183,7 @@ Download the platform deploy script.
 
         file="deploy_release_macos.sh"
         uri="https://bitbucket.org/synerty/synerty-peek/raw/master/scripts/macos/$file"
-        curl -O $uri
+        wget $uri
 
 
 ----
@@ -197,9 +197,9 @@ The script will deploy to :file:`/Users/peek/`.
 
 ::
 
-        platformArchive="/Users/peek/Downloads/peek_platform_macos_#.#.#.tar.bz2"
-        pluginsArchive="/Users/peek/Downloads/peek_plugins_macos_#.#.#.tar.bz2"
-        bash $deployScript $platformArchive $pluginsArchive
+        communityArchive="/home/peek/Downloads/peek_community_macos_#.#.#.tar.bz2"
+        enterpriseArchive="/home/peek/Downloads/peek_enterprise_macos_#.#.#.tar.bz2"
+        bash deploy_release_macos.sh $communityArchive $communityArchive
 
 
 ----
