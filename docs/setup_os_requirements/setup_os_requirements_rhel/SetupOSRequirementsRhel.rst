@@ -4,7 +4,7 @@
 Setup OS Requirements RHEL
 ==========================
 
-This section describes how to perform the setup for Red Hat Linux Server 7.4.  The Peek platform
+This section describes how to perform the setup for Red Hat Linux Server 7.7.  The Peek platform
 is designed to run on Linux.
 
 Please read through all of the documentation before commencing the installation procedure.
@@ -25,7 +25,7 @@ packaged and transferred to the offline server.
 Below is a list of all the required software:
 
 
-*   Python 3.6.x
+*   Python 3.9.x
 
 *   Postgres 12.x
 
@@ -409,10 +409,25 @@ Install the Python build dependencies: ::
         PKG="$PKG openssl openssl-devel"
         sudo yum install -y $PKG
 
+----
+
+Install the Postgres build dependencies: ::
+
+        PKG="bison flex"
+        PKG="$PKG readline-devel openssl-devel python-devel"
+        sudo yum install -y $PKG
 
 ----
 
-Install C libraries that some python packages link to when they install. ::
+Install the PostgreSQL build dependencies: ::
+
+        PKG="readline-devel"
+        sudo yum install -y $PKG
+
+
+----
+
+Install Libs that some python packages link to when they install. ::
 
         # For the cryptography package
         PKG="libffi-devel"
@@ -421,7 +436,7 @@ Install C libraries that some python packages link to when they install. ::
 
 ----
 
-Install C libraries required for LDAP. ::
+Install Libs required for LDAP. ::
 
         PKG="openldap-devel"
 
@@ -429,7 +444,7 @@ Install C libraries required for LDAP. ::
 
 ----
 
-Install C libraries that database access python packages link to when they install:
+Install Libs that database access python packages link to when they install:
 
 .. warning:: These packages are not from the Redhat Network.
      ::
@@ -448,7 +463,7 @@ Install C libraries that database access python packages link to when they insta
 
 ----
 
-Install C libraries that the oracle client requires: ::
+Install Libs that the oracle client requires: ::
 
         # For LXML and the Oracle client
         PKG="libxml2 libxml2-devel"
@@ -531,190 +546,46 @@ Allow Peek through the firewall and port forward to the non-privileged port ::
 
 .. _rhel_install_postgresql:
 
-Install PostgreSQL
-------------------
+Preparing .bashrc
+-----------------
 
-Install the relational database Peek stores its data in.
-This is PostgreSQL 10.
-
-.. note:: Run the commands in this step as the `peek` user.
-
-----
-
-Setup the PostgreSQL repository: ::
-
-    PKG="https://download.postgresql.org/pub/repos/yum/reporpms/EL-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm"
-    sudo yum install -y $PKG
-
-----
-
-Install PostgreSQL: ::
-
-    PKG="postgresql12"
-    PKG="$PKG postgresql12-server"
-    PKG="$PKG postgresql12-contrib"
-    PKG="$PKG postgresql12-devel"
-    PKG="$PKG postgresql12-plpython3"
-    sudo yum install -y $PKG
-
-
-Install PostgreSQL Timescale
-````````````````````````````
-
-Next install timescale, this provides support for storing large amounts of historical
-data.
-
-`www.timescale.com <https://www.timescale.com>`_
-
-----
-
-Setup the repository. ::
-
-        # Add our repo
-        sudo tee /etc/yum.repos.d/timescale_timescaledb.repo <<EOL
-        [timescale_timescaledb]
-        name=timescale_timescaledb
-        baseurl=https://packagecloud.io/timescale/timescaledb/el/7/\$basearch
-        repo_gpgcheck=1
-        gpgcheck=0
-        enabled=1
-        gpgkey=https://packagecloud.io/timescale/timescaledb/gpgkey
-        sslverify=1
-        sslcacert=/etc/pki/tls/certs/ca-bundle.crt
-        metadata_expire=300
-        EOL
-
-
-----
-
-Install the packages ::
-
-        # Install any updates to the operating system
-        # You may want to skip this step if you don't want to upgrade
-        sudo yum update -y
-
-        # Now install appropriate package for PG version
-        sudo yum install -y timescaledb-postgresql-12
-
-----
-
-Tune the :file:`postgresql.conf` ::
-
-        PGVER=12
-        FILE="/var/lib/pgsql/${PGVER}/data/postgresql.conf"
-        sudo timescaledb-tune -quiet -yes -conf-path ${FILE} -pg-version ${PGVER}
-
-
-Finish PostgreSQL Setup
-````````````````````````
-
-Finish configuring and starting PostgreSQL.
-
-----
-
-Allow the peek OS user to login to the database as user peek with no password ::
-
-    F="/var/lib/pgsql/12/data/pg_hba.conf"
-    if ! sudo grep -q 'peek' $F; then
-        echo "host    peek    peek    127.0.0.1/32    trust" | sudo tee $F -a
-        sudo sed -i 's,127.0.0.1/32            ident,127.0.0.1/32            md5,g' $F
-    fi
-
-----
-
-Create the PostgreSQL cluster and configure it to auto start: ::
-
-    sudo /usr/pgsql-12/bin/postgresql-12-setup initdb
-    sudo systemctl enable postgresql-12
-    sudo systemctl start postgresql-12
-
-----
-
-Create the peek SQL user: ::
-
-    sudo su - postgres
-    createuser -d -r -s peek
-    exit # exit postgres user
-
-----
-
-Set the PostgreSQL peek users password: ::
-
-    psql -d postgres -U peek <<EOF
-    \password
-    \q
-    EOF
-
-    # Set the password as "PASSWORD" for development machines
-    # Set it to a secure password from https://xkpasswd.net/s/ for production
-
-----
-
-Create the database: ::
-
-    createdb -O peek peek
-
-.. note:: If you already have a database, you may now need to upgrade the timescale
-          extension. ::
-
-                psql peek <<EOF
-                ALTER EXTENSION timescaledb UPDATE;
-                EOF
-
-----
-
-Cleanup traces of the password: ::
-
-    [ ! -e ~/.psql_history ] || rm ~/.psql_history
-
-
-Grant PostgreSQL Peek Permissions
-`````````````````````````````````
-The PostgreSQL server now runs parts of peeks python code inside
-the postgres/postmaster processes. To do this the postgres user
-needs access to peeks home directory where the peek software is
-installed.
-
-----
-
-Grant permissions ::
-
-    sudo chmod g+rx ~peek
-    sudo usermod -G peek postgres
-
-
-Compile and Install Python 3.6
-------------------------------
-
-The Peek Platform runs on Python. These instructions download, compile and install the
-latest version of Python.
-
-----
-
-Edit `~/.bashrc` and append the following to the end of the file. ::
+Open :file:`~/.bashrc` insert the following at the start: ::
 
     ##### SET THE PEEK ENVIRONMENT #####
-    # Setup the variables for PYTHON
+    # Setup the variables for PYTHON and POSTGRESQL
     export PEEK_PY_VER="3.9.1"
-    export PATH="/home/peek/cpython-${PEEK_PY_VER}/bin:$PATH"
+    export PEEK_TSDB_VER="1.7.4"
+    export PGDATA=~peek/pgdata/12
+
+    export PATH="$HOME/opt/bin:$PATH"
+    export LD_LIBRARY_PATH="$HOME/opt/lib:$LD_LIBRARY_PATH"
 
     # Set the variables for the platform release
     # These are updated by the deploy script
     export PEEK_ENV=""
     [ -n "${PEEK_ENV}" ] && export PATH="${PEEK_ENV}/bin:$PATH"
 
+
 ----
 
 .. warning:: Restart your terminal to get the new environment.
+
+
+Compile and Install Python 3.9.1
+--------------------------------
+
+The Peek Platform runs on Python. These instructions download, compile and install the
+latest version of Python.
 
 ----
 
 Download and unarchive the supported version of Python: ::
 
-    cd ~
+    cd
     source .bashrc
-    wget "https://www.python.org/ftp/python/${PEEK_PY_VER}/Python-${PEEK_PY_VER}.tgz"
-    tar xzf Python-${PEEK_PY_VER}.tgz
+    wget https://github.com/python/cpython/archive/v${PEEK_PY_VER}.zip
+    unzip v${PEEK_PY_VER}.zip
+    cd cpython-${PEEK_PY_VER}
 
 
 ----
@@ -722,8 +593,7 @@ Download and unarchive the supported version of Python: ::
 
 Configure the build: ::
 
-    cd Python-${PEEK_PY_VER}
-    ./configure --prefix=/home/peek/cpython-${PEEK_PY_VER}/ --enable-optimizations
+    ./configure --prefix=/home/peek/opt/ --enable-optimizations --enable-shared
 
 
 ----
@@ -738,14 +608,15 @@ Make and Make install the software: ::
 Cleanup the download and build dir: ::
 
     cd
-    rm -rf Python-${PEEK_PY_VER}*
+    rm -rf cpython-${PEEK_PY_VER}
+    rm v${PEEK_PY_VER}.zip
 
 
 ----
 
 Symlink the python3 commands so they are the only ones picked up by path: ::
 
-    cd /home/peek/cpython-${PEEK_PY_VER}/bin
+    cd /home/peek/opt/bin
     ln -s pip3 pip
     ln -s python3 python
     cd
@@ -760,7 +631,7 @@ Test that the setup is working: ::
     GREEN='\033[0;32m'
     NC='\033[0m' # No Color
 
-    SHOULD_BE="/home/peek/cpython-${PEEK_PY_VER}/bin/python"
+    SHOULD_BE="/home/peek/opt/bin/python"
     if [ `which python` == ${SHOULD_BE} ]
     then
         echo -e "${GREEN}SUCCESS${NC} The python path is right"
@@ -768,7 +639,7 @@ Test that the setup is working: ::
         echo -e "${RED}FAIL${NC} The python path is wrong, It should be ${SHOULD_BE}"
     fi
 
-    SHOULD_BE="/home/peek/cpython-${PEEK_PY_VER}/bin/pip"
+    SHOULD_BE="/home/peek/opt/bin/pip"
     if [ `which pip` == ${SHOULD_BE} ]
     then
         echo -e "${GREEN}SUCCESS${NC} The pip path is right"
@@ -796,6 +667,306 @@ python package: ::
 The Wheel package is required for building platform and plugin releases: ::
 
     pip install wheel
+
+
+
+Install PostgreSQL
+------------------
+
+Install the relational database Peek stores its data in.
+This database is PostgreSQL 12.
+
+.. note:: Run the commands in this step as the :code:`peek` user.
+
+----
+
+Download the PostgreSQL source code ::
+
+        PEEK_PG_VER=12.5
+        SRC_DIR="$HOME/postgresql-${PEEK_PG_VER}"
+
+        # Remove the src dir and install file
+        rm -rf ${SRC_DIR} || true
+        cd $HOME
+
+        wget https://ftp.postgresql.org/pub/source/v${PEEK_PG_VER}/postgresql-${PEEK_PG_VER}.tar.bz2
+        tar xjf postgresql-${PEEK_PG_VER}.tar.bz2
+
+        cd ${SRC_DIR}
+
+----
+
+Configure and build PostGresQL ::
+
+        export CPPFLAGS=" -I`echo $HOME/opt/include/python*m` "
+        export LDFLAGS=" -L$HOME/opt/lib "
+
+        ./configure \
+              --disable-debug \
+              --prefix=$HOME/opt \
+              --enable-thread-safety \
+              --with-openssl \
+              --with-python
+
+
+        make -j4
+
+        make install-world
+
+        # this is required for timescale to compile
+        cp ${SRC_DIR}/src/test/isolation/pg_isolation_regress ~/opt/bin
+
+
+Cleanup ::
+
+        # Remove the src dir and install file
+        cd
+        rm -rf ${SRC_DIR}*
+
+
+----
+
+Init ::
+
+    #Refresh .bashrc so initdb can find postgres
+    source .bashrc
+
+    initdb --pgdata=$HOME/pgdata/12 --auth-local=trust  --auth-host=md5
+
+
+----
+
+Tune the :file:`postgresql.conf` ::
+
+    F="$HOME/pgdata/12/postgresql.conf"
+
+    sed -i 's/max_connections = 100/max_connections = 200/g' $F
+
+
+----
+
+Make PostgreSQL a service :
+
+.. note:: This will require sudo permissions
+
+
+Run the following command ::
+
+    touch postgresql-12.service
+
+    F=postgresql-12.service
+
+    cat <<"EOF" | sed "s,\$HOME,`echo ~peek`,g" > $F
+    [Unit]
+    Description=PostgreSQL 12 database server
+    After=syslog.target
+    After=network.target
+
+    [Service]
+    Type=forking
+    User=peek
+    Group=peek
+
+    # Location of database directory
+    Environment=PGDATA=$HOME/pgdata/12
+
+    # Disable OOM kill on the postmaster
+    OOMScoreAdjust=-1000
+    Environment=PG_OOM_ADJUST_FILE=/proc/self/oom_score_adj
+    Environment=PG_OOM_ADJUST_VALUE=0
+
+    ExecStart=$HOME/opt/bin/pg_ctl -D ${PGDATA} start
+    ExecStop=$HOME/opt/bin/pg_ctl -D ${PGDATA} stop
+    ExecReload=/bin/kill -HUP $MAINPID
+    KillMode=mixed
+    KillSignal=SIGINT
+
+
+    # Do not set any timeout value, so that systemd will not kill postmaster
+    # during crash recovery.
+    TimeoutSec=0
+
+    [Install]
+    WantedBy=multi-user.target
+    EOF
+
+    sudo mv $F /usr/lib/systemd/system/postgresql-12.service
+
+
+----
+
+Reload the daemon ::
+
+    systemctl daemon-reload
+
+
+Install CMake
+`````````````
+
+Download CMake source code ::
+
+    PEEK_CMAKE_VER=3.19.2
+    SRC_DIR="$HOME/CMake-${PEEK_CMAKE_VER}"
+    wget https://github.com/Kitware/CMake/archive/v${PEEK_CMAKE_VER}.zip
+
+    unzip v${PEEK_CMAKE_VER}.zip
+    cd ${SRC_DIR}
+
+
+Compile CMake from source ::
+
+    ./configure --prefix=$HOME/opt
+
+    make -j6 install
+
+    # Remove the src dir and install file
+    cd
+    rm -rf ${SRC_DIR}*
+    rm v${PEEK_CMAKE_VER}.zip
+
+
+Install PostgreSQL Timescaledb
+``````````````````````````````
+
+Next install timescaledb, this provides support for storing large amounts of historical
+data.
+
+`www.timescale.com <https://www.timescale.com>`_
+
+----
+
+Download the timescaledb source code ::
+
+    PEEK_TSDB_VER=1.7.4
+
+    cd
+    wget https://github.com/timescale/timescaledb/archive/${PEEK_TSDB_VER}.zip
+    unzip ${PEEK_TSDB_VER}.zip
+    cd timescaledb-${PEEK_TSDB_VER}
+
+
+----
+
+Install the packages: ::
+
+    export CPPFLAGS=`pg_config --cppflags`
+    export LDFLAGS=`pg_config --ldflags`
+
+    # Bootstrap the build system
+    ./bootstrap -DAPACHE_ONLY=1
+
+    # To build the extension
+    cd build && make
+
+    # To install
+    make install
+
+    # Cleanup the source code
+    cd
+    rm -rf ${PEEK_TSDB_VER}.zip
+    rm -rf timescaledb-${PEEK_TSDB_VER}
+
+
+----
+
+Add the timescale repository: ::
+
+    curl -s https://packagecloud.io/install/repositories/timescale/timescaledb/script.rpm.sh | sudo bash
+
+
+----
+
+Install timescaledb-tune: ::
+
+    sudo yum install -y timescaledb-tools-0.10.0-0.el7.x86_64
+
+
+----
+
+Tune the database: ::
+
+    PGVER=12
+    FILE="$HOME/pgdata/${PGVER}/postgresql.conf"
+    timescaledb-tune -quiet -yes -conf-path ${FILE} -pg-version ${PGVER}
+
+
+----
+
+Start PostgreSQL: ::
+
+    systemctl enable postgresql-12 --now
+
+
+Finish PostgreSQL Setup
+````````````````````````
+
+Finish configuring and starting PostgreSQL.
+
+----
+
+Allow the peek OS user to login to the database as user peek with no password ::
+
+    F=$HOME/pgdata/12/pg_hba.conf
+    cat | sudo tee $F <<EOF
+    # TYPE  DATABASE        USER            ADDRESS                 METHOD
+    local   all             peek                                    trust
+
+    # "local" is for Unix domain socket connections only
+    local   all             all                                     peer
+    # IPv4 local connections:
+    host    all             all             127.0.0.1/32            md5
+    # IPv6 local connections:
+    host    all             all             ::1/128                 md5
+    EOF
+
+
+----
+
+Create the database: ::
+
+    createdb -O peek peek
+
+
+----
+
+Set the PostgreSQL peek users password: ::
+
+    psql -d peek -U peek <<EOF
+    \password
+    \q
+    EOF
+
+    # Set the password as "PASSWORD" for development machines
+    # Set it to a secure password from https://xkpasswd.net/s/ for production
+
+----
+
+.. note:: If you already have a database, you may now need to upgrade the timescale
+          extension. ::
+
+    psql peek <<EOF
+    ALTER EXTENSION timescaledb UPDATE;
+    EOF
+
+----
+
+Cleanup traces of the password: ::
+
+    [ ! -e ~/.psql_history ] || rm ~/.psql_history
+
+
+Grant PostgreSQL Peek Permissions
+`````````````````````````````````
+The PostgreSQL server now runs parts of peeks python code inside
+the postgres/postmaster processes. To do this the postgres user
+needs access to peeks home directory where the peek software is
+installed.
+
+----
+
+Grant permissions ::
+
+    sudo chmod g+rx ~peek
 
 
 Install Worker Dependencies
@@ -883,11 +1054,11 @@ going to interface with an oracle database.
 
 ----
 
-Edit :file:`~/.bashrc` and append the following to the file: ::
+Open :file:`~/.bashrc` insert the following at the start: ::
 
         # Setup the variables for ORACLE
-        export LD_LIBRARY_PATH="/home/peek/oracle/instantclient_18_5:$LD_LIBRARY_PATH"
-        export ORACLE_HOME="/home/peek/oracle/instantclient_18_5"
+        export LD_LIBRARY_PATH="/home/peek/oracle/instantclient_21_1:$LD_LIBRARY_PATH"
+        export ORACLE_HOME="/home/peek/oracle/instantclient_21_1"
 
 ----
 
@@ -905,14 +1076,14 @@ Make the directory where the oracle client will live ::
 
 Download the following from oracle.
 
-The version used in these instructions is **18.5.0.0.0**.
+The version used in these instructions is **21.1.0.0.0**.
 
 #.  Download the ZIP "Basic Package"
-    :file:`instantclient-basic-linux.x64-18.5.0.0.0dbru.zip` from
+    :file:`instantclient-basic-linux.x64-21.1.0.0.0.zip` from
     http://www.oracle.com/technetwork/topics/linuxx86-64soft-092277.html
 
 #.  Download the ZIP "SDK Package"
-    :file:`instantclient-sdk-linux.x64-18.5.0.0.0dbru.zip` from
+    :file:`instantclient-sdk-linux.x64-21.1.0.0.0.zip` from
     http://www.oracle.com/technetwork/topics/linuxx86-64soft-092277.html
 
 Copy these files to :file:`/home/peek/oracle` on the peek server.
@@ -922,8 +1093,8 @@ Copy these files to :file:`/home/peek/oracle` on the peek server.
 Extract the files. ::
 
         cd ~/oracle
-        unzip instantclient-basic-linux.x64-18.5.0.0.0dbru.zip*
-        unzip instantclient-sdk-linux.x64-18.5.0.0.0dbru.zip*
+        unzip instantclient-basic-linux.x64-21.1.0.0.0.zip*
+        unzip instantclient-sdk-linux.x64-21.1.0.0.0.zip*
 
 
 Install FreeTDS (Optional)
@@ -937,7 +1108,7 @@ which depends on FreeTDS.
 
 ----
 
-Edit :file:`~/.bashrc` and append the following to the file: ::
+Open :file:`~/.bashrc` insert the following at the start: ::
 
     # Setup the variables for FREE TDS
     export LD_LIBRARY_PATH="/home/peek/freetds:$LD_LIBRARY_PATH"
@@ -953,7 +1124,7 @@ Install FreeTDS: ::
     PKG="https://dl.fedoraproject.org/pub/epel/7/x86_64/Packages/f/freetds-libs-1.1.20-1.el7.x86_64.rpm"
     PKG="$PKG https://dl.fedoraproject.org/pub/epel/7/x86_64/Packages/f/freetds-1.1.20-1.el7.x86_64.rpm"
     PKG="$PKG https://dl.fedoraproject.org/pub/epel/7/x86_64/Packages/f/freetds-devel-1.1.20-1.el7.x86_64.rpm"
-    yum install -y $PKG
+    sudo yum install -y $PKG
 
 ----
 

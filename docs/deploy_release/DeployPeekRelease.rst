@@ -144,9 +144,9 @@ The script will deploy to :file:`/home/peek/`.
 
 ::
 
-        platformArchive="/home/peek/Downloads/peek_platform_linux_#.#.#.tar.bz2"
-        pluginsArchive="/home/peek/Downloads/peek_plugins_linux_#.#.#.tar.bz2"
-        bash deploy_release_linux.sh $platformArchive $pluginsArchive
+        communityArchive="/home/peek/Downloads/peek_community_linux_#.#.#.tar.bz2"
+        enterpriseArchive="/home/peek/Downloads/peek_enterprise_linux_#.#.#.tar.bz2"
+        bash deploy_release_linux.sh $communityArchive $enterpriseArchive
 
 ----
 
