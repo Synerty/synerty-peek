@@ -7,7 +7,7 @@ is designed to run on Linux.
 
 Please read through all of the documentation before commencing the installation procedure.
 
-.. note:: These instructions are for Debian 10, AKA Stretch
+.. note:: These instructions are for Debian 10, AKA Buster
 
 Installation Objective
 ----------------------
@@ -577,9 +577,11 @@ causing issues when reconnecting with SSH.
 Preparing .bashrc
 -----------------
 
-Open :file:`~/.bashrc` insert the following at the start, before: ::
+.. warning:: Open :file:`~/.bashrc` insert the following at the start, before: ::
 
     # If not running interactively, don't do anything
+
+    If you do not place the below code before that line, it will not be parsed.
 
 ::
 
@@ -747,7 +749,7 @@ Configure and build PostGresQL ::
 
 ----
 
-Cleanup ::
+Remove install files to clean up the home directory ::
 
     # Remove the src dir and install file
     cd
@@ -755,7 +757,7 @@ Cleanup ::
 
 ----
 
-Init ::
+Initialise a PostgreSQL database ::
 
     #Refresh .bashrc so initdb can find postgres
     source .bashrc
@@ -1038,9 +1040,12 @@ going to interface with an oracle database.
 
 ----
 
-Open :file:`~/.bashrc` insert the following at the start, before: ::
+.. warning:: Open :file:`~/.bashrc` insert the following at the start, before: ::
 
     # If not running interactively, don't do anything
+
+    If you do not place the below code before that line, it will not be parsed.
+
 
 ::
 
@@ -1096,9 +1101,12 @@ which depends on FreeTDS.
 
 ----
 
-Open :file:`~/.bashrc` insert the following at the start, before: ::
+.. warning:: Open :file:`~/.bashrc` insert the following at the start, before: ::
 
     # If not running interactively, don't do anything
+
+    If you do not place the below code before that line, it will not be parsed.
+
 
 ::
 

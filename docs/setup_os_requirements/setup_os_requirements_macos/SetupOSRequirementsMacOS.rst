@@ -380,7 +380,7 @@ Configure and build PostGresQL ::
 
 ----
 
-Cleanup ::
+Remove install files to clean up the home directory ::
 
     # Remove the src dir and install file
     cd
@@ -388,7 +388,7 @@ Cleanup ::
 
 ----
 
-Init ::
+Initialise a PostgreSQL database ::
 
     #Refresh .bash_profile so initdb can find postgres
     source .bash_profile

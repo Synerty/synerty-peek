@@ -669,7 +669,6 @@ The Wheel package is required for building platform and plugin releases: ::
     pip install wheel
 
 
-
 Install PostgreSQL
 ------------------
 
@@ -694,6 +693,7 @@ Download the PostgreSQL source code ::
 
         cd ${SRC_DIR}
 
+
 ----
 
 Configure and build PostGresQL ::
@@ -717,7 +717,9 @@ Configure and build PostGresQL ::
         cp ${SRC_DIR}/src/test/isolation/pg_isolation_regress ~/opt/bin
 
 
-Cleanup ::
+---
+
+Remove install files to clean up the home directory ::
 
         # Remove the src dir and install file
         cd
@@ -726,7 +728,7 @@ Cleanup ::
 
 ----
 
-Init ::
+Initialise a PostgreSQL database ::
 
     #Refresh .bashrc so initdb can find postgres
     source .bashrc
@@ -736,7 +738,7 @@ Init ::
 
 ----
 
-Tune the :file:`postgresql.conf` ::
+Tune the :file:`postgresql.conf` to increase the maximum number of connections allowed ::
 
     F="$HOME/pgdata/12/postgresql.conf"
 
