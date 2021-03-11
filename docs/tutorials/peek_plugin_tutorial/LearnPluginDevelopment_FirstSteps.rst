@@ -8,13 +8,13 @@ Introduction
 The **peek_plugin_base** python package provides all the interfaces used for the Peek
 Platform and the Plugins to function with each other.
 
-The Platform Plugin API is available here  :ref:`peek_plugin_base`.
+The Platform Plugin API is available here  :ref:`api_plugin_package_json`.
 
 The following sections go on to guide the reader to develop different parts of the plugin
 and eventually run the plugins in development mode
 (:command:`ng serve`, :command:`tns run` etc).
 
-Ensure you are well versed with the platform from the :ref:`Overview` as the following
+Ensure you are well versed with the platform from the :ref:`overview` as the following
 sections build upon that.
 
 The following sections will be useful if you're starting a plugin with out cloning
