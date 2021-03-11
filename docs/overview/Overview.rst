@@ -1,4 +1,4 @@
-x.. _overview:
+.. _overview:
 
 ========
 Overview

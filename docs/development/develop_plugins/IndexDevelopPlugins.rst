@@ -16,7 +16,8 @@ Continue Development
 --------------------
 
 To learn more about plugin development from scratch, or the basic setup of plugins,
-see :ref:`learn_plugin_development`.
+see :ref:`peek_plugin_tutorial`.
+
 
 What Next?
 ----------
