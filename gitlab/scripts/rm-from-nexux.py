@@ -11,10 +11,11 @@ NEXUS_USERNAME = sys.argv[2]
 NEXUS_PASSWORD = sys.argv[3]
 PACKAGE_NAME = sys.argv[4]
 
+print(f"Using URL: {NEXUS_REPOSITORY_URL}")
 
 PACKAGE_PATTERN = re.compile(f"{PACKAGE_NAME}.*?.tar.gz")
 
-NEXUS_REPOSITORY_URL = NEXUS_REPOSITORY_URL + "service/rest/v1/assets"
+NEXUS_REPOSITORY_URL = NEXUS_REPOSITORY_URL + "/service/rest/v1/assets"
 listAssetUrl = f"{NEXUS_REPOSITORY_URL}?repository=pypi-internal"
 auth = HTTPBasicAuth(NEXUS_USERNAME, NEXUS_PASSWORD)
 
