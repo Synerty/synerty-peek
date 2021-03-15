@@ -1,0 +1,76 @@
+,Issue Key,Test Summary,ExecutionStatus
+0,PEEKUAT-121,OSAT05 - 320 - Download Third Party feedback forms,PASS
+1,PEEKUAT-179,OSAT05.2 - 9 - Access to diagrams from incidents,PASS
+6,PEEKUAT-117,OSAT05 - 280 - On the Way Update,PASS
+7,PEEKUAT-117,OSAT05 - 280 - On the Way Update,PASS
+11,PEEKUAT-132,OSAT05 - 450 - Comments & photos,FAIL
+12,PEEKUAT-132,OSAT05 - 450 - Comments & photos,FAIL
+13,PEEKUAT-132,OSAT05 - 450 - Comments & photos,FAIL
+14,PEEKUAT-132,OSAT05 - 450 - Comments & photos,FAIL
+17,PEEKUAT-173,OSAT05.2 - 3 - Zoom in/out - DMS,PASS
+22,PEEKUAT-160,"OSAT05.1 - 12 - Under '+Assessment', add damaged items - Transformer",PASS
+24,PEEKUAT-167,OSAT05.1 - 19 - Return to damaged item list,PASS
+40,PEEKUAT-133,OSAT05 - 460 - Field findings required,PASS
+44,PEEKUAT-172,OSAT05.2 - 2 - Open GIS Diagram,PASS
+50,PEEKUAT-128,OSAT05 - 400 - Re-send incident from PowerOn,PASS
+51,PEEKUAT-155,"OSAT05.1 - 7 - Under '+Assessment', add damaged items - Conductor",PASS
+52,PEEKUAT-118,OSAT05 - 290 - On site,PASS
+63,PEEKUAT-126,OSAT05 - 380 - Reject incident,PASS
+66,PEEKUAT-139,OSAT05 - 560 - Job completion prevented - missing information,PASS
+73,PEEKUAT-137,OSAT05 - 540 - Job completion - SP,FAIL
+74,PEEKUAT-166,OSAT05.1 - 18 - Return to damaged item,PASS
+76,PEEKUAT-176,OSAT05.2 - 6 - Viewing component - GIS,PASS
+77,PEEKUAT-125,OSAT05 - 370 - Incomplete,PASS
+78,PEEKUAT-125,OSAT05 - 370 - Incomplete,PASS
+79,PEEKUAT-125,OSAT05 - 370 - Incomplete,PASS
+80,PEEKUAT-125,OSAT05 - 370 - Incomplete,PASS
+81,PEEKUAT-125,OSAT05 - 370 - Incomplete,PASS
+82,PEEKUAT-125,OSAT05 - 370 - Incomplete,PASS
+83,PEEKUAT-125,OSAT05 - 370 - Incomplete,PASS
+86,PEEKUAT-152,"OSAT05.1 - 4 - Under '+Assessment', add damaged items - LCB",PASS
+89,PEEKUAT-157,"OSAT05.1 - 9 - Under '+Assessment', add damaged items - Fuse",PASS
+106,PEEKUAT-175,OSAT05.2 - 5 - Viewing component - DMS,PASS
+107,PEEKUAT-116,OSAT05 - 270 - On the Way,PASS
+114,PEEKUAT-163,OSAT05.1 - 15 - Add more photos to an existing damaged item,PASS
+121,PEEKUAT-112,OSAT05 - 180 - Call / incident order,PASS
+130,PEEKUAT-135,OSAT05 - 520 - Upload Third Party Feedback forms information,PASS
+131,PEEKUAT-124,OSAT05 - 360 - Return to site,PASS
+149,PEEKUAT-107,OSAT05 - 130 - SMS received when job dispatched,BLOCKED
+170,PEEKUAT-170,OSAT05.1 - 22 - Edit data from the web,PASS
+173,PEEKUAT-130,OSAT05 - 430 - Working on one incident at a time,PASS
+174,PEEKUAT-130,OSAT05 - 430 - Working on one incident at a time,PASS
+179,PEEKUAT-134,OSAT05 - 510 - Fault report,PASS
+182,PEEKUAT-159,"OSAT05.1 - 11 - Under '+Assessment', add damaged items - Pole",PASS
+183,PEEKUAT-164,OSAT05.1 - 16 - View photos - on mobile device,PASS
+187,PEEKUAT-119,OSAT05 - 300 - Update ETR,PASS
+200,PEEKUAT-123,OSAT05 - 350 - Leave site,PASS
+202,PEEKUAT-131,OSAT05 - 440 - Working on an incident and a switching job simultaneously,PASS
+203,PEEKUAT-131,OSAT05 - 440 - Working on an incident and a switching job simultaneously,PASS
+204,PEEKUAT-131,OSAT05 - 440 - Working on an incident and a switching job simultaneously,PASS
+205,PEEKUAT-120,OSAT05 - 310 - Incident details are complete and correct,WIP
+211,PEEKUAT-153,"OSAT05.1 - 5 - Under '+Assessment', add damaged items - LS",PASS
+213,PEEKUAT-171,OSAT05.2 - 1 - Open a DMS World,PASS
+217,PEEKUAT-162,OSAT05.1 - 14 - Add a photo to an existing damaged item,PASS
+220,PEEKUAT-127,OSAT05 - 390 - Hand back incident,PASS
+222,PEEKUAT-105,OSAT05 - 50 - Incident dispatch to field device - logged in,PASS
+228,PEEKUAT-161,OSAT05.1 - 13 - Additional buttons,PASS
+241,PEEKUAT-129,OSAT05 - 420 - Incident sequence,PASS
+250,PEEKUAT-104,OSAT05 - 40 - Incident dispatch to field device - not logged in,FAIL
+251,PEEKUAT-104,OSAT05 - 40 - Incident dispatch to field device - not logged in,FAIL
+252,PEEKUAT-104,OSAT05 - 40 - Incident dispatch to field device - not logged in,FAIL
+253,PEEKUAT-104,OSAT05 - 40 - Incident dispatch to field device - not logged in,FAIL
+254,PEEKUAT-156,"OSAT05.1 - 8 - Under '+Assessment', add damaged items - Cross Arm",PASS
+258,PEEKUAT-151,"OSAT05.1 - 3 - Under '+Assessment', add damaged items - ABI",PASS
+276,PEEKUAT-103,OSAT05 - 20 - Version,FAIL
+278,PEEKUAT-165,OSAT05.1 - 17 - Delete a phone,PASS
+282,PEEKUAT-154,"OSAT05.1 - 6 - Under '+Assessment', add damaged items - Cable",PASS
+297,PEEKUAT-106,OSAT05 - 60 - Event for undelivered incident,PASS
+298,PEEKUAT-106,OSAT05 - 60 - Event for undelivered incident,PASS
+299,PEEKUAT-136,OSAT05 - 530 - On site / completion times,PASS
+300,PEEKUAT-136,OSAT05 - 530 - On site / completion times,PASS
+301,PEEKUAT-158,"OSAT05.1 - 10 - Under '+Assessment', add damaged items - Insulator",PASS
+307,PEEKUAT-174,OSAT05.2 - 4 - Zoom in/out - GIS,PASS
+308,PEEKUAT-168,OSAT05.1 - 20 - Close the assessment page,PASS
+310,PEEKUAT-180,OSAT05.2 - 10 - Go back to the incident,PASS
+311,PEEKUAT-181,OSAT05.2 - 11 - Access to diagrams from a switching job,PASS
+312,PEEKUAT-182,OSAT05.2 - 12 - Go back to the job,PASS
