@@ -1,0 +1,242 @@
+.. _release_notes_v3.0.x:
+
+====================
+v3.0.x Release Notes
+====================
+
+Platform Changes
+----------------
+Peek has been through a large code restructure, resulting in the renaming of many components of most plugins.
+Peek's UI has been massively overhauled, resulting in a much cleaner user interface. this interface update resulted
+in overhauled app navigation resulting in a more streamlined User experience.
+Updates were made to the versions of both Angular framework and and Python being used.
+Peek now builds native apps using capacitor.
+
+Major Plugin Changes
+--------------------
+All plugins were affected by a mass-renaming which also split Peek mobile into Peek office and Peek field
+applications. These new names are purpose-specific and platform-agnostic, better reflecting their usage.
+
+Deployment Changes
+------------------
+Deployment of the peek platform now builds several prerequisites from source, as opposed to using a package manager,
+resulting in an equivalent installation across all supported platforms.
+
+Windows Deployment
+``````````````````
+
+.. note:: This release is not supported on Windows.
+
+Linux Deployment
+````````````````
+
+Prerequisites are now built from source.
+
+Debian: :ref:`debian_install_postgresql`
+
+Redhat: :ref:`rhel_install_postgresql`
+
+macOS Deployment
+````````````````
+
+Prerequisites are now built from source.
+
+MacOS: :ref:`macos_install_postgresql`
+
+iOS Deployment
+``````````````
+
+
+
+Windows Deployment
+``````````````````
+
+Nil.
+
+.. note:: The windows deployment will change to use Windows Subsystem for Linux in
+            a future release.
+
+Migration Steps
+---------------
+
+Perform the following migration steps, and then restart the Peek services.
+
+
+
+v3.0.0 Issues Log
+-----------------
+
+User Acceptance Test Results
+`````````````````````````````
+
+ Download test results :download:`here <v3.0.0_uat_results.csv>`.
+
+Bug
+```
+*    [PEEK-562] - Gitlab - Setup macOS builds
+
+*    [PEEK-680] - Fix login screen redirect for Peek
+
+*    [PEEK-681] - Fix back button for peek-mobile
+
+*    [PEEK-694] - 2020-Oct-Orion-UAT Fix cog in bottom right not visible on Peek Mobile.
+
+*    [PEEK-695] - 2020-Oct-Orion-UAT ORA-01805: possible error in date/time operation
+
+*    [PEEK-699] - Alembic fails on new DB - NoSuchTableError: cache_inval_hypertable
+
+*    [PEEK-701] - Add NGCC post install step to peek services
+
+*    [PEEK-710] - Search results popup only works on one result
+
+*    [PEEK-746] - Migrate Peek configuration directories v2.x to v3.x
+
+*    [PEEK-747] - Docdb popup modals don't open
+
+*    [PEEK-754] - Fix Header not appearing on page load in Peek Field App
+
+*    [PEEK-761] - Peek DMS Diagram - Symbols don't rotate
+
+*    [PEEK-829] - Fix field switching - operation detail page performance issue
+
+*    [PEEK-846] - Fix docdb popup delay issue
+
+*    [PEEK-854] - Remove all uses of ujson due to seg faulting
+
+*    [PEEK-855] - Alembic migration logs about running multiple times for each plugin it loads.
+
+*    [PEEK-857] - v2.5 DocDB Popups occur when no data is present
+
+*    [PEEK-873] - "locate" property item button doesn't function
+
+*    [PEEK-874] - The content of exit message has a typo
+
+*    [PEEK-885] - v3 macOS build needs libgeos
+
+*    [PEEK-886] - v3 macOS build fails to install mssql
+
+*    [PEEK-919] - Docdb Popup won't close on Safari browser
+
+
+Task
+````
+
+*    [PEEK-671] - Add OnViewInit to ComponentLifeCycleEventEmitter
+
+*    [PEEK-673] - Create PEEP1: Integrate CapacitorJS Into Peek
+
+*    [PEEK-674] - Merge build-web and src folders in peek mobile, desktop & admin
+
+*    [PEEK-678] - Replace NativeScript documentation with CapacitorJS documentation
+
+*    [PEEK-679] - Add compatibility matrix to Synerty docs
+
+*    [PEEK-685] - Fix Peek field incidents photo finding
+
+*    [PEEK-688] - @angular and ng-zorro upgrade v9 to v10
+
+*    [PEEK-717] - Update Peek Packaging Scripts for MacOS and Linux
+
+*    [PEEK-718] - Segregate Peek into two sub-groups - Community & Enterprise
+
+*    [PEEK-724] - Update CI pipeline scripts to build Peek community and enterprise releases
+
+*    [PEEK-733] - Update Peek names in confluence
+
+*    [PEEK-735] - Update and demo peek_core_screen plugin
+
+*    [PEEK-738] - Update peek-field-service and peek-office-service
+
+*    [PEEK-740] - Fix issues with peek-field-switching and prepare demo
+
+*    [PEEK-742] - Remove enterprise plugin dependencies in peek-plugin-diagram-positioner
+
+*    [PEEK-743] - Add schema renaming functionality for each applicable plugin
+
+*    [PEEK-744] - Improve editing icons in peek DMS diagram
+
+*    [PEEK-745] - Rename peek plugin files, class names and imports
+
+*    [PEEK-751] - Update Peek Font Family
+
+*    [PEEK-752] - Update Peek Field and Office config page
+
+*    [PEEK-753] - Add an offline indicator to the Peek Field and Office apps
+
+*    [PEEK-755] - Update Peek Field and Office unknown route page
+
+*    [PEEK-758] - Add ant design config override file for Peek apps
+
+*    [PEEK-847] - Add The SOS Button Back
+
+*    [PEEK-853] - Create v3.0.x branch
+
+*    [PEEK-858] - Update editorconfig and format code for every project
+
+*    [PEEK-890] - v3 Update synerty-peek installs to use source for PG
+
+*    [PEEK-894] - v3 Update docs for Py 3.9.1, for macOS
+
+*    [PEEK-898] - v3 macOS, Python needs --with-openssl --with-zlib flags
+
+
+Improvement
+```````````
+
+*    [PEEK-349] - Rename peek-mobile to peek-field-app
+
+*    [PEEK-350] - Rename peek-desktop to peek-office-app
+
+*    [PEEK-353] - Split peek-client to peek-field-service and peek-office-service
+
+*    [PEEK-388] - Rename peek-server to run peek-logic-service
+
+*    [PEEK-591] - 2020-Dec Fix gitlab peek unit tests
+
+*    [PEEK-703] - Convert peek-plugin-docdb to peek-core-docdb
+
+*    [PEEK-704] - Rename all peek-plugin-pof/pon plugins to peek-plugin-enmac
+
+*    [PEEK-705] - Rename peek-worker to peek-worker-service
+
+*    [PEEK-706] - Rename peek-agent to peek-agent-service
+
+*    [PEEK-707] - Rename peek-storage to peek-storage-service
+
+*    [PEEK-709] - Configure Auto-Restart with Systemd
+
+*    [PEEK-734] - Combine GitLab Packaging Scripts and Generic Linux Packaging Script into One
+
+*    [PEEK-748] - Update VortexUtil to support multiple "accept from vortex" strings
+
+*    [PEEK-796] - PNA - Streamline the Creation of Signed Apps
+
+*    [PEEK-840] - Create peek-office-doc, rename doc-* to *-doc
+
+*    [PEEK-849] - Add platform dependency test cases
+
+*    [PEEK-889] - v3 Add support for Python 3.9.1
+
+*    [PEEK-891] - v3 Update to NODE v14.15.3
+
+*    [PEEK-892] - v3 Refactor peek-linux-sonar CI job to not need NODE_VER
+
+*    [PEEK-893] - v3 Update docs for Py 3.9.1, for Linux
+
+*    [PEEK-917] - Diagram colours printing incorrectly
+
+
+
+Sub-Task
+````````
+
+*    [PEEK-687] - Upgrade ant design to v10
+
+*    [PEEK-689] - Upgrade angular to v10
+
+*    [PEEK-690] - Create PEEP2 Document
+
+
+
+
+
