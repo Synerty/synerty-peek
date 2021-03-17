@@ -167,8 +167,8 @@ package_community_linux :
         - echo "registry=http://${NEXUS_URL}/repository/npm-all/" > ~/.npmrc
         - echo "_auth=$(echo -n "${NEXUS_USER}:${NEXUS_PASSWORD}" | openssl base64)"    >> ~/.npmrc
         - export NG_CLI_ANALYTICS=ci
-        - export PIP_INDEX=http://${NEXUS_USER}:${NEXUS_PASSWORD}@${NEXUS_URL}/repository/pypi-all/pypi
-        - export PIP_INDEX_URL=http://${NEXUS_USER}:${NEXUS_PASSWORD}@${NEXUS_URL}/repository/pypi-all/simple
+        - export PIP_INDEX=http://${NEXUS_USER}:${NEXUS_PASSWORD}@${NEXUS_URL}/repository/pypi-proxy/pypi
+        - export PIP_INDEX_URL=http://${NEXUS_USER}:${NEXUS_PASSWORD}@${NEXUS_URL}/repository/pypi-proxy/simple
         - export PIP_TRUSTED_HOST=${NEXUS_URL}
         - export NPM_CONFIG_REGISTRY="http://${NEXUS_URL}/repository/npm-all/"
         - export NPM_CONFIG_AUTH=`echo "${NEXUS_USER}:${NEXUS_PASSWORD}" | openssl base64`
@@ -199,8 +199,8 @@ package_enterprise_linux :
     script :
         - mkdir -p ~/.config/pip
         - mkdir -p ${GIT_CLONE_PATH}/${PKG_ENTERPRISE_LINUX}
-        - export PIP_INDEX=http://${NEXUS_USER}:${NEXUS_PASSWORD}@${NEXUS_URL}/repository/pypi-all/pypi
-        - export PIP_INDEX_URL=http://${NEXUS_USER}:${NEXUS_PASSWORD}@${NEXUS_URL}/repository/pypi-all/simple
+        - export PIP_INDEX=http://${NEXUS_USER}:${NEXUS_PASSWORD}@${NEXUS_URL}/repository/pypi-proxy/pypi
+        - export PIP_INDEX_URL=http://${NEXUS_USER}:${NEXUS_PASSWORD}@${NEXUS_URL}/repository/pypi-proxy/simple
         - export PIP_TRUSTED_HOST=${NEXUS_URL}
         - ./scripts/linux/package_linux.sh -r enterprise ${RELEASE_VER:-${NON_RELEASE_VER}}
             ${GIT_CLONE_PATH}/enterprise_packages
@@ -279,8 +279,8 @@ package_community_macos :
         - echo "registry=http://${NEXUS_URL}/repository/npm-all/" > ~/.npmrc
         - echo "_auth=$(echo -n "${NEXUS_USER}:${NEXUS_PASSWORD}" | openssl base64)"    >> ~/.npmrc
         - export NG_CLI_ANALYTICS=ci
-        - export PIP_INDEX=http://${NEXUS_USER}:${NEXUS_PASSWORD}@${NEXUS_URL}/repository/pypi-all/pypi
-        - export PIP_INDEX_URL=http://${NEXUS_USER}:${NEXUS_PASSWORD}@${NEXUS_URL}/repository/pypi-all/simple
+        - export PIP_INDEX=http://${NEXUS_USER}:${NEXUS_PASSWORD}@${NEXUS_URL}/repository/pypi-proxy/pypi
+        - export PIP_INDEX_URL=http://${NEXUS_USER}:${NEXUS_PASSWORD}@${NEXUS_URL}/repository/pypi-proxy/simple
         - export PIP_TRUSTED_HOST=${NEXUS_URL}
         - export NPM_CONFIG_REGISTRY="http://${NEXUS_URL}/repository/npm-all/"
         - export NPM_CONFIG_AUTH=`echo "${NEXUS_USER}:${NEXUS_PASSWORD}" | openssl base64`
@@ -312,8 +312,8 @@ package_enterprise_macos :
     script :
         - mkdir -p ~/.config/pip
         - mkdir -p ${GIT_CLONE_PATH}/${PKG_ENTERPRISE_MACOS}
-        - export PIP_INDEX=http://${NEXUS_USER}:${NEXUS_PASSWORD}@${NEXUS_URL}/repository/pypi-all/pypi
-        - export PIP_INDEX_URL=http://${NEXUS_USER}:${NEXUS_PASSWORD}@${NEXUS_URL}/repository/pypi-all/simple
+        - export PIP_INDEX=http://${NEXUS_USER}:${NEXUS_PASSWORD}@${NEXUS_URL}/repository/pypi-proxy/pypi
+        - export PIP_INDEX_URL=http://${NEXUS_USER}:${NEXUS_PASSWORD}@${NEXUS_URL}/repository/pypi-proxy/simple
         - export PIP_TRUSTED_HOST=${NEXUS_URL}
         - ./scripts/macos/package_macos.sh -r enterprise ${RELEASE_VER:-${NON_RELEASE_VER}}
             ${GIT_CLONE_PATH}/enterprise_packages ${GIT_CLONE_PATH}/community_packages
