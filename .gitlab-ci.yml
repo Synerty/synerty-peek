@@ -271,9 +271,11 @@ package_community_macos :
         paths :
             - ${GIT_CLONE_PATH}/${PKG_COMMUNITY_MACOS}
         expire_in : 1 day
-    only :
-        - web
-        - triggers
+    rules :
+        -   if : '$ENABLE_MACOS == null'
+            when : never
+        -   if : '$CI_PIPELINE_SOURCE == "web"'
+        -   if : '$CI_PIPELINE_SOURCE == "triggers"'
     stage : package
     script :
         - echo "registry=http://${NEXUS_URL}/repository/npm-all/" > ~/.npmrc
@@ -305,9 +307,11 @@ package_enterprise_macos :
         paths :
             - ${GIT_CLONE_PATH}/${PKG_ENTERPRISE_MACOS}/
         expire_in : 1 day
-    only :
-        - web
-        - triggers
+    rules :
+        -   if : '$ENABLE_MACOS == null'
+            when : never
+        -   if : '$CI_PIPELINE_SOURCE == "web"'
+        -   if : '$CI_PIPELINE_SOURCE == "triggers"'
     stage : package
     script :
         - mkdir -p ~/.config/pip
@@ -331,9 +335,11 @@ archive_release_macos :
         paths :
             - ${GIT_CLONE_PATH}/peek_release_${RELEASE_VER:-${NON_RELEASE_VER}}_macos.tar
         expire_in : 1 day
-    only :
-        - web
-        - triggers
+    rules :
+        -   if : '$ENABLE_MACOS == null'
+            when : never
+        -   if : '$CI_PIPELINE_SOURCE == "web"'
+        -   if : '$CI_PIPELINE_SOURCE == "triggers"'
     stage : archive
     script :
         - mkdir -p ~/.config/pip
@@ -357,6 +363,8 @@ upload_to_nexus_macos :
     allow_failure : false
     image : nexus.synerty.com:5000/peek-linux-build:${RELEASE_BRANCH}
     rules :
+        -   if : '$ENABLE_MACOS == null'
+            when : never
         -   if : '$PKG_TAG_VERSION == null'
             when : never
         -   if : '$CI_PIPELINE_SOURCE == "web"'
