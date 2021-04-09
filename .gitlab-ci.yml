@@ -240,17 +240,17 @@ archive_release_linux :
     tags :
         - linux
 
-upload_to_nexus_linux :
-    dependencies :
+upload_tagged_to_nexus_linux:
+    dependencies:
         - archive_release_linux
-    allow_failure : false
-    image : nexus.synerty.com:5000/peek-linux-build:${RELEASE_BRANCH}
-    rules :
-        -   if : '$PKG_TAG_VERSION == null'
-            when : never
-        -   if : '$CI_PIPELINE_SOURCE == "web"'
-        -   if : '$CI_PIPELINE_SOURCE == "triggers"'
-    script :
+    allow_failure: false
+    image: nexus.synerty.com:5000/peek-linux-build:${RELEASE_BRANCH}
+    rules:
+        - if: '$PKG_TAG_VERSION == null'
+          when: never
+        - if: '$CI_PIPELINE_SOURCE == "web"'
+        - if: '$CI_PIPELINE_SOURCE == "triggers"'
+    script:
         - curl -v -u ${NEXUS_USER}:${NEXUS_PASSWORD}
             --upload-file $GIT_CLONE_PATH/peek_release_${RELEASE_VER:-${NON_RELEASE_VER}}_linux.tar
             http://${NEXUS_URL}/repository/synerty-packages/
@@ -258,6 +258,25 @@ upload_to_nexus_linux :
     tags :
         - linux
 
+upload_master_to_nexus_linux:
+    dependencies:
+        - archive_release_linux
+    allow_failure: false
+    image: nexus.synerty.com:5000/peek-linux-build:${RELEASE_BRANCH}
+    rules:
+        - if: '$CI_COMMIT_REF_NAME != $RELEASE_BRANCH'
+          when: never
+        - if: '$CI_PIPELINE_SOURCE == "web"'
+        - if: '$CI_PIPELINE_SOURCE == "triggers"'
+    script:
+        - cd $GIT_CLONE_PATH &&
+            mv peek_release_${RELEASE_VER:-${NON_RELEASE_VER}}_linux.tar peek_release_linux_${RELEASE_BRANCH}.tar
+        - curl -v -u ${NEXUS_USER}:${NEXUS_PASSWORD}
+            --upload-file $GIT_CLONE_PATH/peek_release_linux_${RELEASE_BRANCH}.tar
+            http://${NEXUS_URL}/repository/synerty-packages/
+    stage: upload
+    tags:
+        - linux
 
 ##########################################################################################
 
