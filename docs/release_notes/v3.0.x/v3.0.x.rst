@@ -12,10 +12,20 @@ in overhauled app navigation resulting in a more streamlined User experience.
 Updates were made to the versions of both Angular framework and and Python being used.
 Peek now builds native apps using capacitor.
 
+PEEPS Executed
+``````````````
+* PEEP4: :ref:`peep4_overview`
+
+* PEEP7: :ref:`peep7_overview`
+
+* PEEP8: :ref:`peep8_overview`
+
+
 Major Plugin Changes
 --------------------
 All plugins were affected by a mass-renaming which also split Peek mobile into Peek office and Peek field
 applications. These new names are purpose-specific and platform-agnostic, better reflecting their usage.
+
 
 Deployment Changes
 ------------------
