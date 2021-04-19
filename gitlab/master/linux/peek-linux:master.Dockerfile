@@ -44,3 +44,10 @@ RUN pip install wheel
 RUN pip install twine
 # Install pbzip2 to accelerate tar compression
 RUN apt install -y pbzip2
+# Install FreeTDS (Optional)
+RUN apt install -y freetds-dev
+# PEEK-1135 Install RUST for pip wheel --no-binary=:all: cryptography
+RUN apt install -y curl
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+ENV PATH="/root/.cargo/bin:$PATH"
+
