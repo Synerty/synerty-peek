@@ -89,8 +89,8 @@ function packageCICommunity() {
     # Copy over the community plugins
     communityPlugins=""
     for plugin in ${COMMUNITY_PLUGINS}; do
-        communityPlugins="${communityPlugins} `echo
-         ${platformPackagesDir}/${plugin}*.gz`"
+        communityPlugins="${communityPlugins} \
+    $(echo ${platformPackagesDir}/${plugin}*.gz)"
     done
     pip wheel ${pipWheelArgs} ${communityPlugins}
 
