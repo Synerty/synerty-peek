@@ -69,7 +69,7 @@ ${COMMUNITY_PLUGINS}
 
 export ENTERPRISE_PKGS="
 peek-plugin-diagram-zepben-menu
-peek-plugin-enmac-chat
+peek-plugin-enmac-msg-sos-email
 peek-plugin-enmac-diagram
 peek-plugin-enmac-diagram-loader
 peek-plugin-enmac-email-incidents
