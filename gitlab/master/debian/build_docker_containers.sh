@@ -4,11 +4,11 @@ set errexit
 set nounset
 
 IMAGE_NAMES=""
-IMAGE_NAMES="${IMAGE_NAMES} peek-linux:master "
-IMAGE_NAMES="${IMAGE_NAMES} peek-linux-test:master "
-IMAGE_NAMES="${IMAGE_NAMES} peek-linux-sonar:master "
-IMAGE_NAMES="${IMAGE_NAMES} peek-linux-build:master "
-IMAGE_NAMES="${IMAGE_NAMES} peek-linux-doc:master "
+IMAGE_NAMES="${IMAGE_NAMES} peek-debian:master "
+IMAGE_NAMES="${IMAGE_NAMES} peek-debian-test:master "
+IMAGE_NAMES="${IMAGE_NAMES} peek-debian-sonar:master "
+IMAGE_NAMES="${IMAGE_NAMES} peek-debian-build:master "
+IMAGE_NAMES="${IMAGE_NAMES} peek-debian-doc:master "
 
 for IMAGE_NAME in ${IMAGE_NAMES}; do
     echo "Building |${IMAGE_NAME}|"

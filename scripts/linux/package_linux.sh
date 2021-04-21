@@ -48,7 +48,7 @@ function packageCICommunity() {
     mkdir -p $baseDir/platform
     cd $baseDir/platform
 
-    pipWheelArgs="--no-binary=:all: --no-cache --find-links=${platformPackagesDir}"
+    pipWheelArgs="--no-cache --find-links=${platformPackagesDir}"
     if [ -f "${pinnedDepsPyFile}" ]; then
         echo "Using requirements file : ${pinnedDepsPyFile}"
         pipWheelArgs="-r ${pinnedDepsPyFile} $pipWheelArgs"
@@ -77,7 +77,7 @@ function packageCICommunity() {
     mkdir -p $baseDir/plugins
     cd $baseDir/plugins
 
-    pipWheelArgs="--no-binary=:all: --find-links=${platformPackagesDir}"
+    pipWheelArgs="--find-links=${platformPackagesDir}"
     if [ -f "${pinnedDepsPyFile}" ]; then
         echo "Using requirements file : ${pinnedDepsPyFile}"
         pipWheelArgs="-r ${pinnedDepsPyFile} $pipWheelArgs"
@@ -87,12 +87,11 @@ function packageCICommunity() {
 
     # Create the plugins release
     # Copy over the community plugins
-    communityPlugins=""
+    communityPls=""
     for plugin in ${COMMUNITY_PLUGINS}; do
-        communityPlugins="${communityPlugins} \
-    $(echo ${platformPackagesDir}/${plugin}*.gz)"
+        communityPls="${communityPls} `echo ${platformPackagesDir}/${plugin}*.gz`"
     done
-    pip wheel ${pipWheelArgs} ${communityPlugins}
+    pip wheel ${pipWheelArgs} ${communityPls}
 
     # Delete all the wheels created for the plugins
     rm -f *.gz

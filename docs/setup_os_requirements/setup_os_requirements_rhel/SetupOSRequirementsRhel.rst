@@ -411,17 +411,10 @@ Install the Python build dependencies: ::
 
 ----
 
-Install the Postgres build dependencies: ::
+Install the PostgreSQL build dependencies: ::
 
         PKG="bison flex"
         PKG="$PKG readline-devel openssl-devel python-devel"
-        sudo yum install -y $PKG
-
-----
-
-Install the PostgreSQL build dependencies: ::
-
-        PKG="readline-devel"
         sudo yum install -y $PKG
 
 

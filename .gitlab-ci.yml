@@ -113,7 +113,7 @@ publish_community :
         paths :
             - ${GIT_CLONE_PATH}/community_packages
         expire_in : 1 day
-    image : nexus.synerty.com:5000/peek-linux-build:${RELEASE_BRANCH}
+    image : nexus.synerty.com:5000/peek-centos-build:${RELEASE_BRANCH}
     only :
         - web
         - triggers
@@ -136,7 +136,7 @@ publish_enterprise :
         paths :
             - ${GIT_CLONE_PATH}/enterprise_packages
         expire_in : 1 day
-    image : nexus.synerty.com:5000/peek-linux-build:${RELEASE_BRANCH}
+    image : nexus.synerty.com:5000/peek-centos-build:${RELEASE_BRANCH}
     only :
         - web
         - triggers
@@ -158,7 +158,7 @@ package_community_linux :
         paths :
             - ${GIT_CLONE_PATH}/${PKG_COMMUNITY_LINUX}
         expire_in : 1 day
-    image : nexus.synerty.com:5000/peek-linux-build:${RELEASE_BRANCH}
+    image : nexus.synerty.com:5000/peek-centos-build:${RELEASE_BRANCH}
     only :
         - web
         - triggers
@@ -191,7 +191,7 @@ package_enterprise_linux :
         paths :
             - ${GIT_CLONE_PATH}/${PKG_ENTERPRISE_LINUX}/
         expire_in : 1 day
-    image : nexus.synerty.com:5000/peek-linux-build:${RELEASE_BRANCH}
+    image : nexus.synerty.com:5000/peek-centos-build:${RELEASE_BRANCH}
     only :
         - web
         - triggers
