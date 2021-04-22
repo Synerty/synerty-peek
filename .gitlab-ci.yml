@@ -29,7 +29,7 @@ build_html_docs :
             - synerty-peek-html
         expire_in : 1 day
     allow_failure : false
-    image : nexus.synerty.com:5000/peek-centos-doc:${RELEASE_BRANCH}
+    image : nexus.synerty.com:5000/peek-debian-doc:${RELEASE_BRANCH}
     only :
         - pushes
         - merge_requests
@@ -50,7 +50,7 @@ build_latex_docs :
             - synerty-peek.pdf
         expire_in : 1 day
     allow_failure : false
-    image : nexus.synerty.com:5000/peek-centos-doc:${RELEASE_BRANCH}
+    image : nexus.synerty.com:5000/peek-debian-doc:${RELEASE_BRANCH}
     only :
         - pushes
         - merge_requests
@@ -75,7 +75,7 @@ git_clone_community :
         paths :
             - ${GIT_CLONE_PATH}/cloned_community_repos
         expire_in : 1 day
-    image : nexus.synerty.com:5000/peek-centos-build:${RELEASE_BRANCH}
+    image : nexus.synerty.com:5000/peek-debian-build:${RELEASE_BRANCH}
     only :
         - web
         - triggers
@@ -93,7 +93,7 @@ git_clone_enterprise :
         paths :
             - ${GIT_CLONE_PATH}/cloned_enterprise_repos
         expire_in : 1 day
-    image : nexus.synerty.com:5000/peek-centos-build:${RELEASE_BRANCH}
+    image : nexus.synerty.com:5000/peek-debian-build:${RELEASE_BRANCH}
     only :
         - web
         - triggers
