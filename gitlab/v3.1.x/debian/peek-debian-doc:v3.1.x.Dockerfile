@@ -1,4 +1,4 @@
-FROM peek-linux:v3.1.x
+FROM peek-debian:v3.1.x
 ENV RELEASE_BRANCH="v3.1.x"
 
 WORKDIR /root

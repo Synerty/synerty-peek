@@ -1,4 +1,4 @@
-FROM peek-linux:master
+FROM peek-debian:master
 ENV RELEASE_BRANCH="master"
 
 WORKDIR /root
