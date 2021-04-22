@@ -1,5 +1,5 @@
 FROM debian:10
-ENV RELEASE_BRANCH="master"
+ENV RELEASE_BRANCH="v3.1.x"
 
 WORKDIR /root
 

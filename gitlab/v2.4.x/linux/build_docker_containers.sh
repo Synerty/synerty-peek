@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-set errexit
-set nounset
+set -o errexit
+set -o nounset
 
 for IMAGE_NAME in peek-linux:v2.4.x peek-linux-build:v2.4.x peek-linux-doc:v2.4.x peek-linux-test:v2.4.x; do
     echo "Building |${IMAGE_NAME}|"

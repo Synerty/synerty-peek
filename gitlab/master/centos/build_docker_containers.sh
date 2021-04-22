@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
 
-set errexit
-set nounset
+set -o errexit
+set -o nounset
 
 IMAGE_NAMES=""
 IMAGE_NAMES="${IMAGE_NAMES} peek-centos:master "
-#IMAGE_NAMES="${IMAGE_NAMES} peek-centos-test:master "
-#IMAGE_NAMES="${IMAGE_NAMES} peek-centos-sonar:master "
+IMAGE_NAMES="${IMAGE_NAMES} peek-centos-test:master "
+IMAGE_NAMES="${IMAGE_NAMES} peek-centos-sonar:master "
 IMAGE_NAMES="${IMAGE_NAMES} peek-centos-build:master "
-#IMAGE_NAMES="${IMAGE_NAMES} peek-centos-doc:master "
+IMAGE_NAMES="${IMAGE_NAMES} peek-centos-doc:master "
 
 for IMAGE_NAME in ${IMAGE_NAMES}; do
     echo "Building |${IMAGE_NAME}|"
