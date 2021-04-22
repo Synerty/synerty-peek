@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-set errexit
-set nounset
+set -o errexit
+set -o nounset
 
 IMAGE_NAMES=""
 IMAGE_NAMES="${IMAGE_NAMES} peek-debian:master "

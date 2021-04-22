@@ -29,7 +29,7 @@ build_html_docs :
             - synerty-peek-html
         expire_in : 1 day
     allow_failure : false
-    image : nexus.synerty.com:5000/peek-linux-doc:${RELEASE_BRANCH}
+    image : nexus.synerty.com:5000/peek-centos-doc:${RELEASE_BRANCH}
     only :
         - pushes
         - merge_requests
@@ -50,7 +50,7 @@ build_latex_docs :
             - synerty-peek.pdf
         expire_in : 1 day
     allow_failure : false
-    image : nexus.synerty.com:5000/peek-linux-doc:${RELEASE_BRANCH}
+    image : nexus.synerty.com:5000/peek-centos-doc:${RELEASE_BRANCH}
     only :
         - pushes
         - merge_requests
@@ -75,7 +75,7 @@ git_clone_community :
         paths :
             - ${GIT_CLONE_PATH}/cloned_community_repos
         expire_in : 1 day
-    image : nexus.synerty.com:5000/peek-linux-build:${RELEASE_BRANCH}
+    image : nexus.synerty.com:5000/peek-centos-build:${RELEASE_BRANCH}
     only :
         - web
         - triggers
@@ -93,7 +93,7 @@ git_clone_enterprise :
         paths :
             - ${GIT_CLONE_PATH}/cloned_enterprise_repos
         expire_in : 1 day
-    image : nexus.synerty.com:5000/peek-linux-build:${RELEASE_BRANCH}
+    image : nexus.synerty.com:5000/peek-centos-build:${RELEASE_BRANCH}
     only :
         - web
         - triggers
@@ -219,7 +219,7 @@ archive_release_linux :
         paths :
             - ${GIT_CLONE_PATH}/peek_release_${RELEASE_VER:-${NON_RELEASE_VER}}_linux.tar
         expire_in : 1 day
-    image : nexus.synerty.com:5000/peek-linux-build:${RELEASE_BRANCH}
+    image : nexus.synerty.com:5000/peek-centos-build:${RELEASE_BRANCH}
     only :
         - web
         - triggers
@@ -244,7 +244,7 @@ upload_tagged_to_nexus_linux:
     dependencies:
         - archive_release_linux
     allow_failure: false
-    image: nexus.synerty.com:5000/peek-linux-build:${RELEASE_BRANCH}
+    image: nexus.synerty.com:5000/peek-centos-build:${RELEASE_BRANCH}
     rules:
         - if: '$PKG_TAG_VERSION == null'
           when: never
@@ -262,7 +262,7 @@ upload_master_to_nexus_linux:
     dependencies:
         - archive_release_linux
     allow_failure: false
-    image: nexus.synerty.com:5000/peek-linux-build:${RELEASE_BRANCH}
+    image: nexus.synerty.com:5000/peek-centos-build:${RELEASE_BRANCH}
     rules:
         - if: '$CI_COMMIT_REF_NAME != $RELEASE_BRANCH'
           when: never
@@ -349,7 +349,7 @@ archive_release_macos :
         - package_enterprise_macos
         - package_community_macos
     allow_failure : false
-    image : nexus.synerty.com:5000/peek-linux-build:${RELEASE_BRANCH}
+    image : nexus.synerty.com:5000/peek-centos-build:${RELEASE_BRANCH}
     artifacts :
         paths :
             - ${GIT_CLONE_PATH}/peek_release_${RELEASE_VER:-${NON_RELEASE_VER}}_macos.tar
@@ -380,7 +380,7 @@ upload_to_nexus_macos :
     dependencies :
         - archive_release_macos
     allow_failure : false
-    image : nexus.synerty.com:5000/peek-linux-build:${RELEASE_BRANCH}
+    image : nexus.synerty.com:5000/peek-centos-build:${RELEASE_BRANCH}
     rules :
         -   if : '$ENABLE_MACOS == null'
             when : never
