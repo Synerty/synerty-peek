@@ -5,5 +5,5 @@ WORKDIR /root
 
 # -----------------------------------------------------------------------------
 # Install the dependency for building PDFs from Sphinx
-RUN apt-get install -y texlive
-RUN apt-get install -y texlive-latex
+RUN yum install -y texlive
+RUN yum install -y texlive-latex
