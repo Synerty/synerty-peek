@@ -69,6 +69,7 @@ ${COMMUNITY_PLUGINS}
 
 export ENTERPRISE_PKGS="
 peek-plugin-diagram-zepben-menu
+peek-plugin-device-gps-integration
 peek-plugin-enmac-msg-sos-email
 peek-plugin-enmac-diagram
 peek-plugin-enmac-diagram-loader
