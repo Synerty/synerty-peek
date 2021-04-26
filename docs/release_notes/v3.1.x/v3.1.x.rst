@@ -59,14 +59,17 @@ Nil.
 Migration Steps
 ---------------
 
-Perform the following migration steps, and then restart the Peek services.
+Restart peek-field-service and peek-office-service after the initial load has
+completed. This is due to issue PEEK-1149: Devices tab not appearing in Peek
+DMS Search
 
 User Acceptance Test Results
 ----------------------------
 Peek v3.1 is the most tested version of Peek to date. The results of user
-acceptance test cycles performed on Peek v3.1 can be downloaded below.
+acceptance test cycles performed on Peek v3.1 can be found at
+:ref:`release_notes_v3.1.x_uat` .
 
- Download test results :download:`here <v3.1.0_uat_results.csv>`.
+
 
 Known Issues
 ````````````
