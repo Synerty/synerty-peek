@@ -12,6 +12,7 @@ peek-plugin-data-dms
 peek-plugin-diagram
 peek-plugin-diagram-trace
 peek-plugin-diagram-positioner
+peek-plugin-device-gps-integration
 peek-plugin-docdb-generic-menu
 peek-plugin-eventdb
 peek-plugin-gis-diagram
@@ -69,7 +70,6 @@ ${COMMUNITY_PLUGINS}
 
 export ENTERPRISE_PKGS="
 peek-plugin-diagram-zepben-menu
-peek-plugin-device-gps-integration
 peek-plugin-enmac-msg-sos-email
 peek-plugin-enmac-diagram
 peek-plugin-enmac-diagram-loader
