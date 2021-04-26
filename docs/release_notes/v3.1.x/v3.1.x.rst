@@ -1,0 +1,240 @@
+.. _release_notes_v3.1.x:
+
+====================
+v3.1.x Release Notes
+====================
+
+Platform Changes
+----------------
+Peek v3.1.0 is largely a stability and quality of life update. Few new features
+have been added, as the focus has been on finding and fixing any pain points
+or errors present after the major upgrades made in Peek 3.0.
+
+One new feature that was added to Peek v3.1.0 is an improved API for GPS
+support.
+
+Major Plugin Changes
+--------------------
+We specifically avoided making any major changes to existing plugins in this
+release. One new plugin was created and is expected to improve an expand GPS
+usage in Peek significantly in future releases.
+
+Deployment Changes
+------------------
+Deployment of the Peek platform now builds several prerequisites from source,
+as opposed to using a package manager,
+resulting in an equivalent installation across all supported platforms.
+
+Windows Deployment
+``````````````````
+
+.. note:: This release is not supported on Windows.
+
+Linux Deployment
+````````````````
+
+Deployment for Linux remains the same after the major changes of Peek v3.0.
+
+Debian: :ref:`debian_install_prerequisites`
+
+Redhat: :ref:`rhel_install_prerequisites`
+
+macOS Deployment
+````````````````
+
+Deployment for macOS remains the same after the major changes of Peek v3.0.
+
+MacOS: :ref:`macos_install_prerequisites`
+
+
+
+Windows Deployment
+``````````````````
+
+Nil.
+
+.. note:: The windows deployment will change to use Windows Subsystem for Linux
+          in a future release.
+
+Migration Steps
+---------------
+
+Perform the following migration steps, and then restart the Peek services.
+
+User Acceptance Test Results
+----------------------------
+Peek v3.1 is the most tested version of Peek to date. The results of user
+acceptance test cycles performed on Peek v3.1 can be downloaded below.
+
+ Download test results :download:`here <v3.1.0_uat_results.csv>`.
+
+Known Issues
+````````````
+* PEEK-1097 NSAT14 - 300 - Timeout Alarm - operation update
+    (A timeout alarm may not fire for a dispatched job in ADMS if a peek device
+    enters flight mode while a job is being dispatched to it.)
+* PEEK-1069 OSAT05 - 450 - Comments & photos
+    (Combined photo-comments may not appear properly in audit logs.)
+* PEEK-1149 Devices tab not appearing in Peek DMS Search
+    (Devices can be searched for in the DMS diagram but cannot be selected for
+    more detail)
+
+v3.1.0 Resolved Issues Log
+--------------------------
+
+Bug
+```
+
+*    PEEK-1134 Duplicate Key Login Error
+
+*    PEEK-1129 Fix Admin App DatePipe Provider Bug
+
+*    PEEK-1127 Peek office login page stays disabled after error
+
+*    PEEK-1126 Fix Peek Office Build
+
+*    PEEK-1124 Core Search: Updating search object properties to None doesn't
+     work
+
+*    PEEK-1099 Can't Login to Peek Office
+
+*    PEEK-1098 Field search showing previous logged-in devices in result
+
+*    PEEK-1095 Field app WebSQL errors
+
+*    PEEK-1090 DocDB: Use date pipe for Date data in UI
+
+*    PEEK-1017 Fix Field Incidents Build Issue
+
+*    PEEK-919 Docdb Popup won't close on Safari browser
+
+*    PEEK-913 Field assessments type error
+
+*    PEEK-909 Move NgLifeCycleEvents from peek-plugin-base-js to vortexjs
+
+*    PEEK-908 VortexJS needs to handle logged out state
+
+*    PEEK-877 Search loses previous results when search window closes
+
+*    PEEK-866 Tooltips didn't show up and search window remain when navigate to
+     diagram location
+
+*    PEEK-848 non-core Plugins are hard coded in peek-field-app
+
+
+Task
+````
+
+*    PEEK-1128 Replace hardcoded strings
+
+*    PEEK-1010 Complete v3.1.0 Field Switching UI
+
+*    PEEK-985 Test Peek Mobile with Peek v3.1
+
+*    PEEK-884 Cleanup old rename_plugin.sh files
+
+*    PEEK-836 Core Device - Add support for capturing GPS information
+
+*    PEEK-835 Show field devices in core-search GPS search
+
+*    PEEK-834 Position on a field device within the GIS Diagram
+
+*    PEEK-833 GIS Diagram - Show location of field units / GPS
+
+*    PEEK-798 Add Assessments Table in Field Assessment Plugin (frontend major
+     change required)
+
+*    PEEK-769 Create Field Assessments API (non-subscription)
+
+
+Improvement
+```````````
+
+*    PEEK-1105 SOS Email - Add new SOS Email feature that includes the GPS
+
+*    PEEK-1047 DocDB: Add support for documents with datetime
+
+*    PEEK-783 FUI - Rewrite UI for Field Incidents
+
+*    PEEK-782 FUI - Restructure Field Incidents Navigation
+
+*    PEEK-773 FUI - Rewrite UI for Field Switching
+
+*    PEEK-772 FUI - Restructure Field Switching Navigation
+
+*    PEEK-771 PNA - Update Camera APIs
+
+*    PEEK-766 Email Incident - Google Map link to be added on Dispatch email
+
+*    PEEK-765 Email Incident - Coordinate conversion feature Easting/Northing
+     -> Lat/Long
+
+*    PEEK-764 FAD - Include field assessment details in Email Incident details.
+
+*    PEEK-763 FAD - Include field assessment details in Field Incident details.
+
+
+Sub-Task
+````````
+
+*    PEEK-1108 SOS Email - Rename peek-plugin-enmac-chat to
+     peek-plugin-enmac-msg-sos-email
+
+*    PEEK-1107 SOS Email - Add new Email Template plugin Skeleton
+
+*    PEEK-951 FUI - Rewrite UI for Field Assessments - Photo List Screen
+
+*    PEEK-950 FUI - Rewrite UI for Field Assessments - Item Details Screen
+
+*    PEEK-949 FUI - Rewrite UI for Field Assessments - Photo Detail Screen
+
+*    PEEK-948 FUI - Rewrite UI for Field Assessments - Item List Screen
+
+*    PEEK-801 PNA - Update Camera APIs - Field Assessments
+
+*    PEEK-800 PNA - Update Camera APIs - Field Incidents
+
+*    PEEK-795 FUI - Rewrite UI for Field Incidents - Finding Detail
+
+*    PEEK-794 FUI - Rewrite UI for Field Incidents - Finding, New
+
+*    PEEK-793 FUI - Rewrite UI for Field Incidents - Call Detail
+
+*    PEEK-792 FUI - Rewrite UI for Field Incidents - Premise History List
+
+*    PEEK-791 FUI - Rewrite UI for Field Incidents - Incident Transition Dialog
+
+*    PEEK-790 FUI - Rewrite UI for Field Incidents - Incident Detail
+
+*    PEEK-789 FUI - Rewrite UI for Field Incidents - Incident Fault Report
+     Detail
+
+*    PEEK-788 FUI - Rewrite UI for Field Incidents - Incident Third Party Detail
+
+*    PEEK-787 FUI - Rewrite UI for Field Incidents - Incident Outer Screen
+
+*    PEEK-786 FUI - Rewrite UI for Field Incidents - Finding List
+
+*    PEEK-785 FUI - Rewrite UI for Field Incidents - Call List
+
+*    PEEK-784 FUI - Rewrite UI for Field Incidents - Incident List
+
+*    PEEK-781 FUI - Rewrite UI for Field Switching - Operation List
+
+*    PEEK-780 FUI - Rewrite UI for Field Switching - Job List
+
+*    PEEK-779 FUI - Rewrite UI for Field Switching - Transition Permit
+
+*    PEEK-778 FUI - Rewrite UI for Field Switching - Transition Operation
+
+*    PEEK-777 FUI - Rewrite UI for Field Switching - Transition Job
+
+*    PEEK-776 FUI - Rewrite UI for Field Switching - Permit Details
+
+*    PEEK-775 FUI - Rewrite UI for Field Switching - Operation Details
+
+*    PEEK-774 FUI - Rewrite UI for Field Switching - Job Details
+
+
+
+

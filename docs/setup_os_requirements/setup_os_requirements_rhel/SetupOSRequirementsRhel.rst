@@ -54,6 +54,8 @@ Instruction for installing the Oracle Libraries are in the Online Installation G
 FreeTDS is an open source driver for the TDS protocol, this is the protocol used to
 talk to the MSSQL SQLServer database.
 
+.. _rhel_install_prerequisites:
+
 Installation Guide
 ------------------
 
@@ -537,7 +539,7 @@ Allow Peek through the firewall and port forward to the non-privileged port ::
     sudo firewall-cmd --runtime-to-permanent
 
 
-.. _rhel_install_postgresql:
+.. _rhel_setup_bashrc:
 
 Preparing .bashrc
 -----------------
@@ -661,6 +663,8 @@ The Wheel package is required for building platform and plugin releases: ::
 
     pip install wheel
 
+
+.. _rhel_install_postgresql:
 
 Install PostgreSQL
 ------------------

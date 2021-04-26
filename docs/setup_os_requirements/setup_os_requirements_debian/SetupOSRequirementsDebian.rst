@@ -54,6 +54,8 @@ Instruction for installing the Oracle Libraries are in the Online Installation G
 FreeTDS is an open source driver for the TDS protocol, this is the protocol used to
 talk to the MSSQL SQLServer database.
 
+.. _debian_install_prerequisites:
+
 Installation Guide
 ------------------
 
@@ -572,7 +574,7 @@ Reboot the virtual machine. ::
 Keep in mind, that if the static IP is not set, the IP address of the VM may change,
 causing issues when reconnecting with SSH.
 
-.. _debian_install_postgresql:
+.. _debian_setup_bashrc:
 
 Preparing .bashrc
 -----------------
