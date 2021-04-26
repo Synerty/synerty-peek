@@ -47,6 +47,8 @@ Instruction for installing the Oracle Libraries are in the Online Installation G
 FreeTDS is an open source driver for the TDS protocol, this is the protocol used to
 talk to the MSSQL SQLServer database.
 
+.. _macos_install_prerequisites:
+
 Installation Guide
 ------------------
 
