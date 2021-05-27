@@ -21,7 +21,6 @@ The frontends are the Admin, Mobile and Desktop services.
 
         *   A Web app, using @angular/cli
 
-
 *   Office builds:
 
         *   An Electron app.
