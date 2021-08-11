@@ -11,7 +11,7 @@ variables :
     PKG_ENTERPRISE_MACOS : tmp_pkg_enterprise_macos
     PKG_COMMUNITY_MACOS : tmp_pkg_community_macos
     NON_RELEASE_VER : 0.0.0+b${CI_PIPELINE_ID}
-    PINNED_DEPS_PY_FILE_LINUX : ${CI_PROJECT_DIR}/gitlab/${RELEASE_BRANCH}/linux/pinned-deps-py
+    PINNED_DEPS_PY_FILE_CENTOS : ${CI_PROJECT_DIR}/gitlab/${RELEASE_BRANCH}/centos/pinned-deps-py
     PINNED_DEPS_PY_FILE_MACOS : ${CI_PROJECT_DIR}/gitlab/${RELEASE_BRANCH}/macos/pinned-deps-py
 
 stages :
@@ -178,7 +178,7 @@ package_community_linux :
             ${GIT_CLONE_PATH}/cloned_community_repos
             ${GIT_CLONE_PATH}/community_packages
             ${GIT_CLONE_PATH}/${PKG_COMMUNITY_LINUX}
-            ${PINNED_DEPS_PY_FILE_LINUX}
+            ${PINNED_DEPS_PY_FILE_CENTOS}
     tags :
         - linux
 
@@ -206,7 +206,7 @@ package_enterprise_linux :
             ${GIT_CLONE_PATH}/enterprise_packages
             ${GIT_CLONE_PATH}/community_packages
             ${GIT_CLONE_PATH}/${PKG_ENTERPRISE_LINUX}
-            ${PINNED_DEPS_PY_FILE_LINUX}
+            ${PINNED_DEPS_PY_FILE_CENTOS}
     tags :
         - linux
 
