@@ -73,14 +73,99 @@ acceptance test cycles performed on Peek v3.1 can be found at
 
 Known Issues
 ````````````
-* PEEK-1097 NSAT14 - 300 - Timeout Alarm - operation update
-    (A timeout alarm may not fire for a dispatched job in ADMS if a peek device
-    enters flight mode while a job is being dispatched to it.)
-* PEEK-1069 OSAT05 - 450 - Comments & photos
-    (Combined photo-comments may not appear properly in audit logs.)
-* PEEK-1149 Devices tab not appearing in Peek DMS Search
-    (Devices can be searched for in the DMS diagram but cannot be selected for
-    more detail)
+
+v3.1.1 Resolved Issues Log
+--------------------------
+
+Bug
+```
+
+PEEK-1276 Field Incidents: Add incident number to the incidents screen
+
+PEEK-1269 General: Stop sending email and sms when a user is logged out on Field app
+
+PEEK-1266 Fix google map link with util package nztm
+
+PEEK-1263 Admin: Device doesn't go offline when logout or quit app
+
+PEEK-1262 Field Incidents: Job status in Peek not updated correctly from GE ADMS
+
+PEEK-1260 Online Status: Bad comms isn't correctly shown
+
+PEEK-1259 Field Incidents: Fault report fields not clearing correctly
+
+PEEK-1258 General: Dates don't adjust for daylight savings time changeover
+
+PEEK-1257 SOS: No alarm in GE ADMS from fail to deliver after 15 minutes
+
+PEEK-1253 Admin: Cannot delete certain devices
+
+PEEK-1250 Notifications: notification counts stuck on number
+
+PEEK-1244 Field Incidents: Fault report optional fields
+
+PEEK-1243 Field Incidents: Third party description field does not save
+
+PEEK-1242 Field Switching: Ready Alarm event missing job number
+
+PEEK-1241 Field Switching: Further instructions alarm not raised
+
+PEEK-1240 Field Switching: Confirm modal time not updated
+
+PEEK-1238 Field Switching: Job Handback / Dispatch Bug
+
+PEEK-1237 Field Switching: Field Engineer name missing from job update events
+
+PEEK-1219 Login: Fix peek login screen issues
+
+PEEK-1160 Icons on v3.1.x Peek Office are small or missing
+
+PEEK-1149 Core Search: Object types not reactively updating
+
+PEEK-1097 Alarm is not raised on GE ADMS after pass ALARM_TIMEOUT value when Peek Field in Flight Mode
+
+PEEK-1092 Work Planned field doesn't update when they are modified on GE ADMS
+
+PEEK-1089 Comment doesn't update when requested call is modified in GE ADMS
+
+PEEK-1076 Inbox tasks don’t update when job operations are cut and pasted
+
+PEEK-1074 The "Last Online" status on Peek Admin are incorrect
+
+PEEK-1072 Field Incidents: No email for dispatched incidents
+
+PEEK-1070 Alarm raised in GE ADMS don't show “job number“ and “field user“
+
+PEEK-1069 Field Incidents: Added Finding which includes comments and photo didn’t show up in GE ADMS
+
+Improvement
+```````````
+
+PEEK-1278 Field Incident/Switching: Update Incident status transition modal
+
+PEEK-1252 Admin: Replace mobile-web and desktop-web with field-web and office-web.
+
+PEEK-1249 Field Incidents / Field Switching: Pages need to state if no jobs / incidents
+
+PEEK-1248 Field Incidents: Replace word "Job" with "Incident"
+
+Sub-task
+
+PEEK-1116 SOS Email - Add Admin Documentation
+
+PEEK-1115 SOS Email - Add PEEKUAT Test Cases
+
+Task
+````
+
+PEEK-1283 Logic: add retries to pull tuples on SqlTupleDataObserverClient from Agent
+
+PEEK-1277 Field Incident: Update UI of incident detail screen
+
+PEEK-1271 Field Switching: Update fields on Permit screens
+
+PEEK-1228 Add a format check to the Peek Core User's user 'Mobile' field
+
 
 v3.1.0 Resolved Issues Log
 --------------------------
@@ -237,7 +322,4 @@ Sub-Task
 *    PEEK-775 FUI - Rewrite UI for Field Switching - Operation Details
 
 *    PEEK-774 FUI - Rewrite UI for Field Switching - Job Details
-
-
-
 
