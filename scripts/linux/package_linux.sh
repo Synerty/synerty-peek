@@ -173,21 +173,21 @@ function packageCICommunity() {
     # FIELD node modules
     mobilePackageVer=$(cd $baseDir/platform && ls peek_field_app-* | cut -d'-' -f2)
     mobileBuildWebDIR="$baseDir/field-app"
-    mobileJsonUrl="https://bitbucket.org/synerty/peek-field-app/raw/${mobilePackageVer}/peek_field_app"
+    mobileJsonUrl="https://gitlab.synerty.com/peek/community/peek-field-app/-/raw/${CI_COMMIT_REF_NAME}/peek_field_app"
     mobileJsonDir="${platformReposDir}/peek-field-app/peek_field_app"
     downloadNodeModules $mobileBuildWebDIR $mobileJsonUrl $mobileJsonDir
 
     # OFFICE node modules
     desktopPackageVer=$(cd $baseDir/platform && ls peek_office_app-* | cut -d'-' -f2)
     desktopBuildWebDIR="$baseDir/office-app"
-    desktopJsonUrl="https://bitbucket.org/synerty/peek-office-app/raw/${desktopPackageVer}/peek_office_app"
+    desktopJsonUrl="https://gitlab.synerty.com/peek/community/peek-office-app/-/raw/${CI_COMMIT_REF_NAME}/peek_office_app"
     desktopJsonDir="${platformReposDir}/peek-office-app/peek_office_app"
     downloadNodeModules $desktopBuildWebDIR $desktopJsonUrl $desktopJsonDir
 
     # ADMIN node modules
     adminPackageVer=$(cd $baseDir/platform && ls peek_admin_app-* | cut -d'-' -f2)
     adminBuildWebDIR="$baseDir/admin-app"
-    adminJsonUrl="https://bitbucket.org/synerty/peek-admin-app/raw/${adminPackageVer}/peek_admin_app"
+    adminJsonUrl="https://gitlab.synerty.com/peek/community/peek-admin-app/-/raw/${CI_COMMIT_REF_NAME}/peek_admin_app"
     adminJsonDir="${platformReposDir}/peek-admin-app/peek_admin_app"
     downloadNodeModules $adminBuildWebDIR $adminJsonUrl $adminJsonDir
 
