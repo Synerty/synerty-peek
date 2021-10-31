@@ -55,7 +55,7 @@ if [[ $# -ne 1 ]]; then
 else
 
     if [[ $1 -eq "office" ]] || [[ $1 -eq "field" ]]; then
-        main
+        main $1
     else
         print_usage
     fi
