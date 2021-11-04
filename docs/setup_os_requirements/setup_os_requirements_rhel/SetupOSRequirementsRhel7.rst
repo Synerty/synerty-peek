@@ -1,8 +1,8 @@
-.. _setup_os_requirements_rhel:
+.. _setup_os_requirements_rhel7:
 
-==========================
-Setup OS Requirements RHEL
-==========================
+============================
+Setup OS Requirements RHEL 7
+============================
 
 This section describes how to perform the setup for Red Hat Linux Server 7.7.  The Peek platform
 is designed to run on Linux.

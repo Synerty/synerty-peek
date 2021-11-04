@@ -106,3 +106,7 @@ MANIFEST
 
 # gitlab token
 .gitlabtoken
+
+# sphinx builds
+doc_dist
+doc_dist_latex

@@ -10,7 +10,8 @@ Setup OS Requirements
 
     setup_os_requirements_windows/SetupOSRequirementsWindows
     setup_os_requirements_macos/SetupOSRequirementsMacOS
-    setup_os_requirements_rhel/SetupOSRequirementsRhel
+    setup_os_requirements_rhel/SetupOSRequirementsRhel7
+    setup_os_requirements_rhel/SetupOSRequirementsRhel8
     setup_os_requirements_debian/SetupOSRequirementsDebian
 
 What Next?
