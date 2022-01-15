@@ -40,6 +40,7 @@ peek-core-email
 peek-core-search
 peek-core-user
 peek-core-screen
+peek-core-api
 peek-field-doc
 peek-field-app
 peek-field-service
