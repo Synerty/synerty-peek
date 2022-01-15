@@ -2,7 +2,6 @@
 __pycache__/
 *.py[cod]
 *$py.class
-.idea/
 dist/git s
 
 # C extensions

@@ -127,7 +127,7 @@ function packageCICommunity() {
 
     # Install the required NPM packages
     npm cache clean --force
-    npm -g install @angular/cli@^9.1.2 typescript@3.8.3 tslint
+    npm -g install @angular/cli@^10.2.0 typescript@4.0.3 tslint
 
     # ------------------------------------------------------------------------------
     # This function downloads the node modules and prepares them for the release

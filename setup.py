@@ -36,7 +36,10 @@ platformPackages = [
     "peek-worker-service",
 ]
 
-abstractPackages = ["peek-abstract-chunked-index", "peek-abstract-chunked-data-loader"]
+abstractPackages = [
+    "peek-abstract-chunked-index",
+    "peek-abstract-chunked-data-loader",
+]
 
 requirements = platformPackages + abstractPackages
 
@@ -44,23 +47,32 @@ requirements = platformPackages + abstractPackages
 reqVer = ".".join(package_version.split(".")[0:2]) + ".*"
 
 # >=2.0.*,>=2.0.6
-requirements = ["%s==%s,>=%s" % (pkg, reqVer, package_version) for pkg in requirements]
+requirements = [
+    "%s==%s,>=%s" % (pkg, reqVer, package_version) for pkg in requirements
+]
 
-doc_requirements = ["sphinx", "sphinx-rtd-theme", "sphinx-autobuild", "pytmpdir"]
+doc_requirements = [
+    "sphinx",
+    "sphinx-rtd-theme",
+    "sphinx-autobuild",
+    "pytmpdir>=1.0.2,<1.1.0",
+]
 
 requirements.extend(doc_requirements)
 
 setup(
     name=pip_package_name,
-    packages=find_packages(exclude=["*.tests", "*.tests.*", "tests.*", "tests"]),
+    packages=find_packages(
+        exclude=["*.tests", "*.tests.*", "tests.*", "tests"]
+    ),
     install_requires=requirements,
     zip_safe=False,
     version=package_version,
     description="Peek Platform - Meta Package to install all services",
     author="Synerty",
     author_email="contact@synerty.com",
-    url="https://github.com/Synerty/%s" % pip_package_name,
-    download_url="https://github.com/Synerty/%s/tarball/%s"
+    url="https://gitlab.synerty.com/peek/community/%s" % pip_package_name,
+    download_url="https://gitlab.synerty.com/peek/community/%s/tarball/%s"
     % (pip_package_name, package_version),
     keywords=["Peek", "Python", "Platform", "synerty"],
     classifiers=[

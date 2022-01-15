@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# THIS IS DUPLICATED IN dev-peek-workspace/peek_packages.sh
+# UPDATE BOTH PLACES
+
 set -o nounset
 set -o errexit
 # set -x
@@ -52,7 +55,7 @@ synerty-peek
 ${COMMUNITY_PLUGINS}
 "
 
-# Dynamicall list plugins
+# Dynamically list plugins
 
 # Get the location of this script
 #here=$(dirname `readlink -f $(dirname $0)`)
@@ -96,6 +99,9 @@ peek-plugin-enmac-user-loader
 
 export bold=$(tput bold)
 export normal=$(tput sgr0)
+
+export RED='\033[0;31m'
+export NC='\033[0m' # No Color
 
 # -------------------------------------
 if ! [ -f "setup.py" ]; then
