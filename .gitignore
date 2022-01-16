@@ -100,6 +100,7 @@ MANIFEST
 #peek_platform
 #peek_logic_service
 #peek_worker_service
+**/.DS_Store
 .DS_Store
 .scannerwork/
 
