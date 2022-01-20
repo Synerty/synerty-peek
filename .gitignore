@@ -113,10 +113,3 @@ doc_dist_latex
 
 # for the Peek Doc projects
 **/doc_link
-
-# For the Peek App projects
-**/node_modules
-*_app/src/@*
-*_app/src/assets/peek*
-.lasthash
-
