@@ -86,6 +86,59 @@ the data is reloaded when the destination peek starts.
     --exclude-table-data 'pl_enmac_equipment_loader.\"ChunkLoadState\"'
 
 
+pg_dump --data-only --dbname peek --format p --file peek.sql  \
+        --exclude-table-data 'core_search."EncodedSearchIndexChunk"' \
+        --exclude-table-data 'core_search."EncodedSearchObjectChunk"' \
+        --exclude-table-data 'core_search."SearchIndex"' \
+        --exclude-table-data 'core_search."SearchIndexCompilerQueue"' \
+        --exclude-table-data 'core_search."SearchObject"' \
+        --exclude-table-data 'core_search."SearchObjectCompilerQueue"' \
+        --exclude-table-data 'core_search."SearchObjectRoute"' \
+        --exclude-table-data 'pl_branch."BranchDetail"' \
+        --exclude-table-data 'pl_diagram."BranchIndex"' \
+        --exclude-table-data 'pl_diagram."BranchIndexCompilerQueue"' \
+        --exclude-table-data 'pl_diagram."BranchIndexEncodedChunk"' \
+        --exclude-table-data 'pl_diagram."DispBase"' \
+        --exclude-table-data 'pl_diagram."DispCompilerQueue"' \
+        --exclude-table-data 'pl_diagram."DispEllipse"' \
+        --exclude-table-data 'pl_diagram."DispGroup"' \
+        --exclude-table-data 'pl_diagram."DispGroupItem"' \
+        --exclude-table-data 'pl_diagram."DispGroupPointer"' \
+        --exclude-table-data 'pl_diagram."DispPolygon"' \
+        --exclude-table-data 'pl_diagram."DispPolyline"' \
+        --exclude-table-data 'pl_diagram."DispText"' \
+        --exclude-table-data 'pl_diagram."GridKeyCompilerQueue"' \
+        --exclude-table-data 'pl_diagram."GridKeyIndex"' \
+        --exclude-table-data 'pl_diagram."GridKeyIndexCompiled"' \
+        --exclude-table-data 'pl_diagram."LiveDbDispLink"' \
+        --exclude-table-data 'pl_diagram."LocationIndex"' \
+        --exclude-table-data 'pl_diagram."LocationIndexCompiled"' \
+        --exclude-table-data 'pl_diagram."LocationIndexCompilerQueue"' \
+        --exclude-table-data 'core_docdb."DocDbChunkQueue"' \
+        --exclude-table-data 'core_docdb."DocDbDocument"' \
+        --exclude-table-data 'core_docdb."DocDbEncodedChunkTuple"' \
+        --exclude-table-data 'pl_gis_diagram_loader."DxfLoadState"' \
+        --exclude-table-data 'pl_graphdb."GraphDbChunkQueue"' \
+        --exclude-table-data 'pl_graphdb."GraphDbEncodedChunk"' \
+        --exclude-table-data 'pl_graphdb."GraphDbSegment"' \
+        --exclude-table-data 'pl_graphdb."ItemKeyIndex"' \
+        --exclude-table-data 'pl_graphdb."ItemKeyIndexCompilerQueue"' \
+        --exclude-table-data 'pl_graphdb."ItemKeyIndexEncodedChunk"' \
+        --exclude-table-data 'pl_livedb."LiveDbItem"' \
+        --exclude-table-data 'pl_enmac_diagram_loader."PageLoadState"' \
+        --exclude-table-data 'pl_enmac_equipment_loader."ChunkLoadState"'  \
+        --exclude-table-data 'pl_enmac_gis_location_loader."ChunkLoadState"' \
+        --exclude-table-data 'pl_enmac_graphdb_loader."GraphSegmentLoadState"' \
+        --exclude-table-data 'pl_enmac_switching_loader."ChunkLoadState"' \
+        --exclude-table-data 'pl_enmac_user_loader."LoadState"' \
+        --exclude-table-data 'core_device."GpsLocation"' \
+        --exclude-table-data 'core_device."GpsLocationHistory"' \
+        --exclude-table-data='_timescaledb_internal._hyper*' \
+        --exclude-table-data='_timescaledb_catalog.chunk' \
+        --exclude-table-data='_timescaledb_catalog.chunk_constraint' \
+        --exclude-table-data='_timescaledb_catalog.chunk_index' \
+        --exclude-table-data='_timescaledb_catalog.dimension_slice'
+
 OR, This will create a more binary backup format, suitable for restoring onto an existing
 peek server. Some databases modules such as postgis, etc will not be dumped with
 the custom format.
