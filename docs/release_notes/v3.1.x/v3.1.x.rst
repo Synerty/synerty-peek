@@ -73,253 +73,308 @@ acceptance test cycles performed on Peek v3.1 can be found at
 
 Known Issues
 ````````````
-
-v3.1.1 Resolved Issues Log
---------------------------
+v3.1.4 Changes
+--------------
 
 Bug
 ```
 
-PEEK-1276 Field Incidents: Add incident number to the incidents screen
+*    [PEEK-1363] - Field: Unable to play alarm sound on JobHeaderUpdate when device recovers from bad comms
 
-PEEK-1269 General: Stop sending email and sms when a user is logged out on Field app
+v3.1.3 Changes
+--------------
 
-PEEK-1266 Fix google map link with util package nztm
+Bug
+```
 
-PEEK-1263 Admin: Device doesn't go offline when logout or quit app
+*    [PEEK-1363] - Field: Unable to play alarm sound on JobHeaderUpdate when device recovers from bad comms
 
-PEEK-1262 Field Incidents: Job status in Peek not updated correctly from GE ADMS
+Task
+````
 
-PEEK-1260 Online Status: Bad comms isn't correctly shown
+*    [PEEK-1399] - Field: Create a script to automate gitlab CI to build iOS app 3.x
 
-PEEK-1259 Field Incidents: Fault report fields not clearing correctly
+v3.1.2 Changes
+--------------
 
-PEEK-1258 General: Dates don't adjust for daylight savings time changeover
+Bug
+```
 
-PEEK-1257 SOS: No alarm in GE ADMS from fail to deliver after 15 minutes
+*    [PEEK-1393] - SOS Email Template geolocation needs to use latitude/longitude
 
-PEEK-1253 Admin: Cannot delete certain devices
+*    [PEEK-1391] - Field: Reset operation confirm status when Back Button on top-left conrner is pressed
 
-PEEK-1250 Notifications: notification counts stuck on number
+*    [PEEK-1373] - Equipment Loader fails to load 18 attributes
 
-PEEK-1244 Field Incidents: Fault report optional fields
+*    [PEEK-1370] - Field: Apply a different background colour on to instructed items that are not the first in the queue
 
-PEEK-1243 Field Incidents: Third party description field does not save
+*    [PEEK-1368] - General: Peek usernames should be case insensitive for authentication
 
-PEEK-1242 Field Switching: Ready Alarm event missing job number
+*    [PEEK-1367] - Field: Confirm Operation Modal must close when instructed items are updated
 
-PEEK-1241 Field Switching: Further instructions alarm not raised
+*    [PEEK-1365] - Field: email incidents fail to be sent to email resources
 
-PEEK-1240 Field Switching: Confirm modal time not updated
+*    [PEEK-1361] - Field: SOS failed to send
 
-PEEK-1238 Field Switching: Job Handback / Dispatch Bug
+*    [PEEK-1360] - Field: Incident must need a Fault Report when updated to status Incomplete
 
-PEEK-1237 Field Switching: Field Engineer name missing from job update events
+*    [PEEK-1357] - Field: Job must be active for switching
 
-PEEK-1219 Login: Fix peek login screen issues
+*    [PEEK-1299] - Doc: Fix as-built documentation redirection issue on peek-{field,office}
 
-PEEK-1160 Icons on v3.1.x Peek Office are small or missing
+*    [PEEK-1296] - Office: Fix DeviceOnlineService not imported to 'pluginRootServices' list
 
-PEEK-1149 Core Search: Object types not reactively updating
+Task
+````
 
-PEEK-1097 Alarm is not raised on GE ADMS after pass ALARM_TIMEOUT value when Peek Field in Flight Mode
+*    [PEEk-1299] - cherry pick PEEK-1299 and release a new version from txHttpUtil 1.0.x
 
-PEEK-1092 Work Planned field doesn't update when they are modified on GE ADMS
+v3.1.1 Changes
+--------------
 
-PEEK-1089 Comment doesn't update when requested call is modified in GE ADMS
+Bug
+```
 
-PEEK-1076 Inbox tasks don’t update when job operations are cut and pasted
+*    [PEEK-1276] - Field Incidents: Add incident number to the incidents screen
 
-PEEK-1074 The "Last Online" status on Peek Admin are incorrect
+*    [PEEK-1269] - General: Stop sending email and sms when a user is logged out on Field app
 
-PEEK-1072 Field Incidents: No email for dispatched incidents
+*    [PEEK-1266] - Fix google map link with util package nztm
 
-PEEK-1070 Alarm raised in GE ADMS don't show “job number“ and “field user“
+*    [PEEK-1263] - Admin: Device doesn't go offline when logout or quit app
 
-PEEK-1069 Field Incidents: Added Finding which includes comments and photo didn’t show up in GE ADMS
+*    [PEEK-1262] - Field Incidents: Job status in Peek not updated correctly from GE ADMS
+
+*    [PEEK-1260] - Online Status: Bad comms isn't correctly shown
+
+*    [PEEK-1259] - Field Incidents: Fault report fields not clearing correctly
+
+*    [PEEK-1258] - General: Dates don't adjust for daylight savings time changeover
+
+*    [PEEK-1257] - SOS: No alarm in GE ADMS from fail to deliver after 15 minutes
+
+*    [PEEK-1253] - Admin: Cannot delete certain devices
+
+*    [PEEK-1250] - Notifications: notification counts stuck on number
+
+*    [PEEK-1244] - Field Incidents: Fault report optional fields
+
+*    [PEEK-1243] - Field Incidents: Third party description field does not save
+
+*    [PEEK-1242] - Field Switching: Ready Alarm event missing job number
+
+*    [PEEK-1241] - Field Switching: Further instructions alarm not raised
+
+*    [PEEK-1240] - Field Switching: Confirm modal time not updated
+
+*    [PEEK-1238] - Field Switching: Job Handback / Dispatch Bug
+
+*    [PEEK-1237] - Field Switching: Field Engineer name missing from job update events
+
+*    [PEEK-1219] - Login: Fix peek login screen issues
+
+*    [PEEK-1160] - Icons on v3.1.x Peek Office are small or missing
+
+*    [PEEK-1149] - Core Search: Object types not reactively updating
+
+*    [PEEK-1097] - Alarm is not raised on GE ADMS after pass ALARM_TIMEOUT value when Peek Field in Flight Mode
+
+*    [PEEK-1092] - Work Planned field doesn't update when they are modified on GE ADMS
+
+*    [PEEK-1089] - Comment doesn't update when requested call is modified in GE ADMS
+
+*    [PEEK-1076] - Inbox tasks don’t update when job operations are cut and pasted
+
+*    [PEEK-1074] - The "Last Online" status on Peek Admin are incorrect
+
+*    [PEEK-1072] - Field Incidents: No email for dispatched incidents
+
+*    [PEEK-1070] - Alarm raised in GE ADMS don't show “job number“ and “field user“
+
+*    [PEEK-1069] - Field Incidents: Added Finding which includes comments and photo didn’t show up in GE ADMS
 
 Improvement
 ```````````
 
-PEEK-1278 Field Incident/Switching: Update Incident status transition modal
+*    [PEEK-1278] - Field Incident/Switching: Update Incident status transition modal
 
-PEEK-1252 Admin: Replace mobile-web and desktop-web with field-web and office-web.
+*    [PEEK-1252] - Admin: Replace mobile-web and desktop-web with field-web and office-web.
 
-PEEK-1249 Field Incidents / Field Switching: Pages need to state if no jobs / incidents
+*    [PEEK-1249] - Field Incidents / Field Switching: Pages need to state if no jobs / incidents
 
-PEEK-1248 Field Incidents: Replace word "Job" with "Incident"
+*    [PEEK-1248] - Field Incidents: Replace word "Job" with "Incident"
 
 Sub-task
 
-PEEK-1116 SOS Email - Add Admin Documentation
+*    [PEEK-1116] - SOS Email - Add Admin Documentation
 
-PEEK-1115 SOS Email - Add PEEKUAT Test Cases
+*    [PEEK-1115] - SOS Email - Add PEEKUAT Test Cases
 
 Task
 ````
 
-PEEK-1283 Logic: add retries to pull tuples on SqlTupleDataObserverClient from Agent
+*    [PEEK-1283] - Logic: add retries to pull tuples on SqlTupleDataObserverClient from Agent
 
-PEEK-1277 Field Incident: Update UI of incident detail screen
+*    [PEEK-1277] - Field Incident: Update UI of incident detail screen
 
-PEEK-1271 Field Switching: Update fields on Permit screens
+*    [PEEK-1271] - Field Switching: Update fields on Permit screens
 
-PEEK-1228 Add a format check to the Peek Core User's user 'Mobile' field
+*    [PEEK-1228] - Add a format check to the Peek Core User's user 'Mobile' field
 
 
-v3.1.0 Resolved Issues Log
---------------------------
+v3.1.0 Changes
+--------------
 
 Bug
 ```
 
-*    PEEK-1134 Duplicate Key Login Error
+*    [PEEK-1134] - Duplicate Key Login Error
 
-*    PEEK-1129 Fix Admin App DatePipe Provider Bug
+*    [PEEK-1129] - Fix Admin App DatePipe Provider Bug
 
-*    PEEK-1127 Peek office login page stays disabled after error
+*    [PEEK-1127] - Peek office login page stays disabled after error
 
-*    PEEK-1126 Fix Peek Office Build
+*    [PEEK-1126] - Fix Peek Office Build
 
-*    PEEK-1124 Core Search: Updating search object properties to None doesn't
+*    [PEEK-1124] - Core Search: Updating search object properties to None doesn't
      work
 
-*    PEEK-1099 Can't Login to Peek Office
+*    [PEEK-1099] - Can't Login to Peek Office
 
-*    PEEK-1098 Field search showing previous logged-in devices in result
+*    [PEEK-1098] - Field search showing previous logged-in devices in result
 
-*    PEEK-1095 Field app WebSQL errors
+*    [PEEK-1095] - Field app WebSQL errors
 
-*    PEEK-1090 DocDB: Use date pipe for Date data in UI
+*    [PEEK-1090] - DocDB: Use date pipe for Date data in UI
 
-*    PEEK-1017 Fix Field Incidents Build Issue
+*    [PEEK-1017] - Fix Field Incidents Build Issue
 
-*    PEEK-919 Docdb Popup won't close on Safari browser
+*    [PEEK-919] - Docdb Popup won't close on Safari browser
 
-*    PEEK-913 Field assessments type error
+*    [PEEK-913] - Field assessments type error
 
-*    PEEK-909 Move NgLifeCycleEvents from peek-plugin-base-js to vortexjs
+*    [PEEK-909] - Move NgLifeCycleEvents from peek-plugin-base-js to vortexjs
 
-*    PEEK-908 VortexJS needs to handle logged out state
+*    [PEEK-908] - VortexJS needs to handle logged out state
 
-*    PEEK-877 Search loses previous results when search window closes
+*    [PEEK-877] - Search loses previous results when search window closes
 
-*    PEEK-866 Tooltips didn't show up and search window remain when navigate to
+*    [PEEK-866] - Tooltips didn't show up and search window remain when navigate to
      diagram location
 
-*    PEEK-848 non-core Plugins are hard coded in peek-field-app
+*    [PEEK-848] - non-core Plugins are hard coded in peek-field-app
 
 
 Task
 ````
 
-*    PEEK-1128 Replace hardcoded strings
+*    [PEEK-1128] - Replace hardcoded strings
 
-*    PEEK-1010 Complete v3.1.0 Field Switching UI
+*    [PEEK-1010] - Complete v3.1.0 Field Switching UI
 
-*    PEEK-985 Test Peek Mobile with Peek v3.1
+*    [PEEK-985] - Test Peek Mobile with Peek v3.1
 
-*    PEEK-884 Cleanup old rename_plugin.sh files
+*    [PEEK-884] - Cleanup old rename_plugin.sh files
 
-*    PEEK-836 Core Device - Add support for capturing GPS information
+*    [PEEK-836] - Core Device - Add support for capturing GPS information
 
-*    PEEK-835 Show field devices in core-search GPS search
+*    [PEEK-835] - Show field devices in core-search GPS search
 
-*    PEEK-834 Position on a field device within the GIS Diagram
+*    [PEEK-834] - Position on a field device within the GIS Diagram
 
-*    PEEK-833 GIS Diagram - Show location of field units / GPS
+*    [PEEK-833] - GIS Diagram - Show location of field units / GPS
 
-*    PEEK-798 Add Assessments Table in Field Assessment Plugin (frontend major
+*    [PEEK-798] - Add Assessments Table in Field Assessment Plugin (frontend major
      change required)
 
-*    PEEK-769 Create Field Assessments API (non-subscription)
+*    [PEEK-769] - Create Field Assessments API (non-subscription)
 
 
 Improvement
 ```````````
 
-*    PEEK-1105 SOS Email - Add new SOS Email feature that includes the GPS
+*    [PEEK-1105] - SOS Email - Add new SOS Email feature that includes the GPS
 
-*    PEEK-1047 DocDB: Add support for documents with datetime
+*    [PEEK-1047] - DocDB: Add support for documents with datetime
 
-*    PEEK-783 FUI - Rewrite UI for Field Incidents
+*    [PEEK-783] - FUI - Rewrite UI for Field Incidents
 
-*    PEEK-782 FUI - Restructure Field Incidents Navigation
+*    [PEEK-782] - FUI - Restructure Field Incidents Navigation
 
-*    PEEK-773 FUI - Rewrite UI for Field Switching
+*    [PEEK-773] - FUI - Rewrite UI for Field Switching
 
-*    PEEK-772 FUI - Restructure Field Switching Navigation
+*    [PEEK-772] - FUI - Restructure Field Switching Navigation
 
-*    PEEK-771 PNA - Update Camera APIs
+*    [PEEK-771] - PNA - Update Camera APIs
 
-*    PEEK-766 Email Incident - Google Map link to be added on Dispatch email
+*    [PEEK-766] - Email Incident - Google Map link to be added on Dispatch email
 
-*    PEEK-765 Email Incident - Coordinate conversion feature Easting/Northing
+*    [PEEK-765] - Email Incident - Coordinate conversion feature Easting/Northing
      -> Lat/Long
 
-*    PEEK-764 FAD - Include field assessment details in Email Incident details.
+*    [PEEK-764] - FAD - Include field assessment details in Email Incident details.
 
-*    PEEK-763 FAD - Include field assessment details in Field Incident details.
+*    [PEEK-763] - FAD - Include field assessment details in Field Incident details.
 
 
 Sub-Task
 ````````
 
-*    PEEK-1108 SOS Email - Rename peek-plugin-enmac-chat to
+*    [PEEK-1108] - SOS Email - Rename peek-plugin-enmac-chat to
      peek-plugin-enmac-msg-sos-email
 
-*    PEEK-1107 SOS Email - Add new Email Template plugin Skeleton
+*    [PEEK-1107] - SOS Email - Add new Email Template plugin Skeleton
 
-*    PEEK-951 FUI - Rewrite UI for Field Assessments - Photo List Screen
+*    [PEEK-951] - FUI - Rewrite UI for Field Assessments - Photo List Screen
 
-*    PEEK-950 FUI - Rewrite UI for Field Assessments - Item Details Screen
+*    [PEEK-950] - FUI - Rewrite UI for Field Assessments - Item Details Screen
 
-*    PEEK-949 FUI - Rewrite UI for Field Assessments - Photo Detail Screen
+*    [PEEK-949] - FUI - Rewrite UI for Field Assessments - Photo Detail Screen
 
-*    PEEK-948 FUI - Rewrite UI for Field Assessments - Item List Screen
+*    [PEEK-948] - FUI - Rewrite UI for Field Assessments - Item List Screen
 
-*    PEEK-801 PNA - Update Camera APIs - Field Assessments
+*    [PEEK-801] - PNA - Update Camera APIs - Field Assessments
 
-*    PEEK-800 PNA - Update Camera APIs - Field Incidents
+*    [PEEK-800] - PNA - Update Camera APIs - Field Incidents
 
-*    PEEK-795 FUI - Rewrite UI for Field Incidents - Finding Detail
+*    [PEEK-795] - FUI - Rewrite UI for Field Incidents - Finding Detail
 
-*    PEEK-794 FUI - Rewrite UI for Field Incidents - Finding, New
+*    [PEEK-794] - FUI - Rewrite UI for Field Incidents - Finding, New
 
-*    PEEK-793 FUI - Rewrite UI for Field Incidents - Call Detail
+*    [PEEK-793] - FUI - Rewrite UI for Field Incidents - Call Detail
 
-*    PEEK-792 FUI - Rewrite UI for Field Incidents - Premise History List
+*    [PEEK-792] - FUI - Rewrite UI for Field Incidents - Premise History List
 
-*    PEEK-791 FUI - Rewrite UI for Field Incidents - Incident Transition Dialog
+*    [PEEK-791] - FUI - Rewrite UI for Field Incidents - Incident Transition Dialog
 
-*    PEEK-790 FUI - Rewrite UI for Field Incidents - Incident Detail
+*    [PEEK-790] - FUI - Rewrite UI for Field Incidents - Incident Detail
 
-*    PEEK-789 FUI - Rewrite UI for Field Incidents - Incident Fault Report
+*    [PEEK-789] - FUI - Rewrite UI for Field Incidents - Incident Fault Report
      Detail
 
-*    PEEK-788 FUI - Rewrite UI for Field Incidents - Incident Third Party Detail
+*    [PEEK-788] - FUI - Rewrite UI for Field Incidents - Incident Third Party Detail
 
-*    PEEK-787 FUI - Rewrite UI for Field Incidents - Incident Outer Screen
+*    [PEEK-787] - FUI - Rewrite UI for Field Incidents - Incident Outer Screen
 
-*    PEEK-786 FUI - Rewrite UI for Field Incidents - Finding List
+*    [PEEK-786] - FUI - Rewrite UI for Field Incidents - Finding List
 
-*    PEEK-785 FUI - Rewrite UI for Field Incidents - Call List
+*    [PEEK-785] - FUI - Rewrite UI for Field Incidents - Call List
 
-*    PEEK-784 FUI - Rewrite UI for Field Incidents - Incident List
+*    [PEEK-784] - FUI - Rewrite UI for Field Incidents - Incident List
 
-*    PEEK-781 FUI - Rewrite UI for Field Switching - Operation List
+*    [PEEK-781] - FUI - Rewrite UI for Field Switching - Operation List
 
-*    PEEK-780 FUI - Rewrite UI for Field Switching - Job List
+*    [PEEK-780] - FUI - Rewrite UI for Field Switching - Job List
 
-*    PEEK-779 FUI - Rewrite UI for Field Switching - Transition Permit
+*    [PEEK-779] - FUI - Rewrite UI for Field Switching - Transition Permit
 
-*    PEEK-778 FUI - Rewrite UI for Field Switching - Transition Operation
+*    [PEEK-778] - FUI - Rewrite UI for Field Switching - Transition Operation
 
-*    PEEK-777 FUI - Rewrite UI for Field Switching - Transition Job
+*    [PEEK-777] - FUI - Rewrite UI for Field Switching - Transition Job
 
-*    PEEK-776 FUI - Rewrite UI for Field Switching - Permit Details
+*    [PEEK-776] - FUI - Rewrite UI for Field Switching - Permit Details
 
-*    PEEK-775 FUI - Rewrite UI for Field Switching - Operation Details
+*    [PEEK-775] - FUI - Rewrite UI for Field Switching - Operation Details
 
-*    PEEK-774 FUI - Rewrite UI for Field Switching - Job Details
+*    [PEEK-774] - FUI - Rewrite UI for Field Switching - Job Details
 
