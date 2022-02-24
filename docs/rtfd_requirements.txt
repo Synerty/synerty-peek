@@ -1,4 +1,4 @@
-pytmpdir
+pytmpdir<1.0
 peek_plugin_base
 sphinx<4
 docutils<0.18
