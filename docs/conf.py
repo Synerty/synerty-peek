@@ -167,7 +167,7 @@ texinfo_documents = [
 import shutil
 
 import sphinx
-from pytmpdir.directory_ import Directory
+from pytmpdir.Directory import Directory
 from sphinx.ext.apidoc import *
 
 import os
