@@ -217,7 +217,7 @@ archive_release_linux :
     allow_failure : false
     artifacts :
         paths :
-            - ${GIT_CLONE_PATH}/peek_release_${RELEASE_VER:-${NON_RELEASE_VER}}_linux.tar
+            - ${GIT_CLONE_PATH}/peek_release_linux_${RELEASE_VER:-${NON_RELEASE_VER}}.tar
         expire_in : 1 day
     image : nexus.synerty.com:5000/peek-centos-build:${RELEASE_BRANCH}
     only :
@@ -226,17 +226,17 @@ archive_release_linux :
     stage : archive
     script :
         - mkdir -p ~/.config/pip
-        - mkdir -p ${GIT_CLONE_PATH}/peek_release_${RELEASE_VER:-${NON_RELEASE_VER}}_linux
+        - mkdir -p ${GIT_CLONE_PATH}/peek_release_linux_${RELEASE_VER:-${NON_RELEASE_VER}}
         - cp ./scripts/linux/deploy_release_linux.sh
-            ${GIT_CLONE_PATH}/peek_release_${RELEASE_VER:-${NON_RELEASE_VER}}_linux
+            ${GIT_CLONE_PATH}/peek_release_linux_${RELEASE_VER:-${NON_RELEASE_VER}}
         - mv $GIT_CLONE_PATH/${PKG_COMMUNITY_LINUX}/peek_community_linux_${RELEASE_VER:-${NON_RELEASE_VER}}.tar.bz2
-            ${GIT_CLONE_PATH}/peek_release_${RELEASE_VER:-${NON_RELEASE_VER}}_linux
+            ${GIT_CLONE_PATH}/peek_release_linux_${RELEASE_VER:-${NON_RELEASE_VER}}
         - mv $GIT_CLONE_PATH/${PKG_ENTERPRISE_LINUX}/peek_enterprise_linux_${RELEASE_VER:-${NON_RELEASE_VER}}.tar.bz2
-            ${GIT_CLONE_PATH}/peek_release_${RELEASE_VER:-${NON_RELEASE_VER}}_linux
+            ${GIT_CLONE_PATH}/peek_release_linux_${RELEASE_VER:-${NON_RELEASE_VER}}
         - cd ${GIT_CLONE_PATH}
-            && tar cvf peek_release_${RELEASE_VER:-${NON_RELEASE_VER}}_linux.tar
-            peek_release_${RELEASE_VER:-${NON_RELEASE_VER}}_linux
-        - rm -rf ${GIT_CLONE_PATH}/peek_release_${RELEASE_VER:-${NON_RELEASE_VER}}_linux
+            && tar cvf peek_release_linux_${RELEASE_VER:-${NON_RELEASE_VER}}.tar
+            peek_release_linux_${RELEASE_VER:-${NON_RELEASE_VER}}
+        - rm -rf ${GIT_CLONE_PATH}/peek_release_linux_${RELEASE_VER:-${NON_RELEASE_VER}}
     tags :
         - linux
 
@@ -252,7 +252,7 @@ upload_tagged_to_nexus_linux:
         - if: '$CI_PIPELINE_SOURCE == "triggers"'
     script:
         - curl -v -u ${NEXUS_USER}:${NEXUS_PASSWORD}
-            --upload-file $GIT_CLONE_PATH/peek_release_${RELEASE_VER:-${NON_RELEASE_VER}}_linux.tar
+            --upload-file $GIT_CLONE_PATH/peek_release_linux_${RELEASE_VER:-${NON_RELEASE_VER}}.tar
             http://${NEXUS_URL}/repository/synerty-packages/
     stage : upload
     tags :
@@ -270,7 +270,7 @@ upload_master_to_nexus_linux:
         - if: '$CI_PIPELINE_SOURCE == "triggers"'
     script:
         - cd $GIT_CLONE_PATH &&
-            mv peek_release_${RELEASE_VER:-${NON_RELEASE_VER}}_linux.tar peek_release_linux_${RELEASE_BRANCH}.tar
+            mv peek_release_linux_${RELEASE_VER:-${NON_RELEASE_VER}}.tar peek_release_linux_${RELEASE_BRANCH}.tar
         - curl -v -u ${NEXUS_USER}:${NEXUS_PASSWORD}
             --upload-file $GIT_CLONE_PATH/peek_release_linux_${RELEASE_BRANCH}.tar
             http://${NEXUS_URL}/repository/synerty-packages/
@@ -352,7 +352,7 @@ archive_release_macos :
     image : nexus.synerty.com:5000/peek-centos-build:${RELEASE_BRANCH}
     artifacts :
         paths :
-            - ${GIT_CLONE_PATH}/peek_release_${RELEASE_VER:-${NON_RELEASE_VER}}_macos.tar
+            - ${GIT_CLONE_PATH}/peek_release_macos_${RELEASE_VER:-${NON_RELEASE_VER}}.tar
         expire_in : 1 day
     rules :
         -   if : '$ENABLE_MACOS == null'
@@ -362,17 +362,17 @@ archive_release_macos :
     stage : archive
     script :
         - mkdir -p ~/.config/pip
-        - mkdir -p ${GIT_CLONE_PATH}/peek_release_${RELEASE_VER:-${NON_RELEASE_VER}}_macos
+        - mkdir -p ${GIT_CLONE_PATH}/peek_release_macos_${RELEASE_VER:-${NON_RELEASE_VER}}
         - cp ./scripts/macos/deploy_release_macos.sh
-            ${GIT_CLONE_PATH}/peek_release_${RELEASE_VER:-${NON_RELEASE_VER}}_macos
+            ${GIT_CLONE_PATH}/peek_release_macos_${RELEASE_VER:-${NON_RELEASE_VER}}
         - mv $GIT_CLONE_PATH/${PKG_COMMUNITY_MACOS}/peek_community_macos_${RELEASE_VER:-${NON_RELEASE_VER}}.tar.bz2
-            ${GIT_CLONE_PATH}/peek_release_${RELEASE_VER:-${NON_RELEASE_VER}}_macos
+            ${GIT_CLONE_PATH}/peek_release_macos_${RELEASE_VER:-${NON_RELEASE_VER}}
         - mv $GIT_CLONE_PATH/${PKG_ENTERPRISE_MACOS}/peek_enterprise_macos_${RELEASE_VER:-${NON_RELEASE_VER}}.tar.bz2
-            ${GIT_CLONE_PATH}/peek_release_${RELEASE_VER:-${NON_RELEASE_VER}}_macos
+            ${GIT_CLONE_PATH}/peek_release_macos_${RELEASE_VER:-${NON_RELEASE_VER}}
         - cd ${GIT_CLONE_PATH}
-            && tar cvf peek_release_${RELEASE_VER:-${NON_RELEASE_VER}}_macos.tar
-            peek_release_${RELEASE_VER:-${NON_RELEASE_VER}}_macos
-        - rm -rf ${GIT_CLONE_PATH}/peek_release_${RELEASE_VER:-${NON_RELEASE_VER}}_macos
+            && tar cvf peek_release_macos_${RELEASE_VER:-${NON_RELEASE_VER}}.tar
+            peek_release_macos_${RELEASE_VER:-${NON_RELEASE_VER}}
+        - rm -rf ${GIT_CLONE_PATH}/peek_release_macos_${RELEASE_VER:-${NON_RELEASE_VER}}
     tags :
         - linux
 
@@ -390,7 +390,7 @@ upload_to_nexus_macos :
         -   if : '$CI_PIPELINE_SOURCE == "triggers"'
     script :
         - curl -v -u ${NEXUS_USER}:${NEXUS_PASSWORD}
-            --upload-file $GIT_CLONE_PATH/peek_release_${RELEASE_VER:-${NON_RELEASE_VER}}_macos.tar
+            --upload-file $GIT_CLONE_PATH/peek_release_macos_${RELEASE_VER:-${NON_RELEASE_VER}}.tar
             http://${NEXUS_URL}/repository/synerty-packages/
     stage : upload
     tags :
