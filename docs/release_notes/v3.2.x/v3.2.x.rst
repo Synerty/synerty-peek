@@ -1,0 +1,174 @@
+.. _release_notes_v3.2.x:
+
+====================
+v3.2.x Release Notes
+====================
+
+Platform Changes
+----------------
+This release contains several quality of life improvements to Peek Office.
+
+Major Plugin Changes
+--------------------
+There are no major plugin changes with this release.
+
+Deployment Changes
+------------------
+There are no deployment changes with this release.
+
+Windows Deployment
+``````````````````
+
+.. note:: This release is not supported on Windows.
+
+Linux Deployment
+````````````````
+
+Deployment for Linux remains the same after the  changes of Peek v3.1.x
+
+Debian: :ref:`debian_install_prerequisites`
+
+Redhat: :ref:`rhel_install_prerequisites`
+
+macOS Deployment
+````````````````
+
+Deployment for macOS remains the same after the major changes of Peek v3.1.x
+
+MacOS: :ref:`macos_install_prerequisites`
+
+
+
+Windows Deployment
+``````````````````
+
+Nil.
+
+.. note:: The windows deployment will change to use Windows Subsystem for Linux
+          in a future release.
+
+Migration Steps
+---------------
+
+#. Make a note of your User settings in Peek Admin.
+#. ssh into the server as the Peek user.
+#. Stop the Peek services with **stop_peek.sh**
+#. Open psql.
+#. Enter: **DROP SCHEMA core_user CASCADE;**
+#. Enter: **TRUNCATE pl_enmac_user_loader."LoadState" CASCADE;**
+#. Restart Peek with **restart_peek.sh**
+
+
+V3.2.2 Changes
+--------------
+
+Bug
+```
+
+*	[PEEK-1496] - Fix version number in released field and office web apps
+
+*	[PEEK-1495] - Peek sometimes fails to force log out user from old UI
+
+*	[PEEK-1492] - peek-plugin-base-js - Expression has changed after it was checked. Previous value for 'show'
+
+*	[PEEK-1489] - Peek Office asks for location information, this should only be on peek-field
+
+*	[PEEK-1487] - Upon Peek Login in Field, UI stays on login screen
+
+*	[PEEK-1486] - Make Capacitor Build scripts compatible with ordinary macOS install
+
+*	[PEEK-1485] - Peek Offline Support - Test and debug offline support for iOS app for DMS Diagram
+
+*	[PEEK-1482] - GraphDB, Starting a trace from a start edge fails to try trace in both directions
+
+*	[PEEK-1480] - Enmac Connectivity Loader - Loader includes patches in its load, which breaks connectivity
+
+*	[PEEK-1479] - Diagram Edit, clicking on disp group doesn't select disp group
+
+*	[PEEK-1475] - When the Peek Office/Field service goes offline, the Peek app shows search error
+
+*	[PEEK-1474] - Event filter attributes are still visible in field when removed
+
+*	[PEEK-1472] - Enmac Equipment Loader - Attributes load SQL is consistently slow, 3s\+
+
+*	[PEEK-1471] - Enmac Equipment Loader - Importing chunks blocks reactor
+
+*	[PEEK-1470] - Enmac Switching Loader - Importing chunks blocks reactor
+
+*	[PEEK-1469] - ENMAC Realtime Loader - Priority Keys is not sent on agent restart
+
+*	[PEEK-1461] - LoopingCalls may stop if an error is thrown
+
+*	[PEEK-1460] - Peek doesn't warn if timescaledb isn't pre-loaded
+
+*	[PEEK-1459] - Peek oracle connections are cut by firewall after 60 minutes, add pool\_recycle value
+
+*	[PEEK-1458] - Peek Diagram - Operation List is slow
+
+*	[PEEK-1446] - Search limits trace to 50 items before the trace is ranked
+
+Improvement
+```````````
+
+*	[PEEK-1494] - Field Capacitor App - Upgrade iOS Dependency to 2.5.0
+
+*	[PEEK-1493] - Capacitor app needs to default the websocket to port 8000, not 8001
+
+*	[PEEK-1473] - Enmac Diagram Loader - Change font size warning to debug
+
+Task
+````
+
+*	[PEEK-1481] - GraphDB Applying Direction rule to Vertex raises 'NoneType' object has no attribute 'srcDirection'
+
+*	[PEEK-1478] - Diagram Edit button doesn't enter edit mode
+
+*	[PEEK-1477] - Implement twisted manhole for debugging in python services
+
+V3.2.1 Changes
+--------------
+
+Bug
+```
+
+*	[PEEK-1432] - Peek Office and Peek Field build web app twice
+
+*	[PEEK-1430] - Diagram - Positioning by key located at multiple positions needs to prompt user
+
+*	[PEEK-1429] - Core Device - Observing OfflineConfig before enrolment throws exception
+
+*	[PEEK-1427] - ENMAC Diagram Loader - Job Loader may silently fail to load shapes
+
+*	[PEEK-1426] - Jobs fail to position on diagram because diagram only contains only operations
+
+*	[PEEK-1425] - ENMAC GraphDB Loader - Vertices are imported with wrong substation class
+
+*	[PEEK-1419] - Peek ENMAC Equipment Loader filters out components with Aliases beginning with "ALIAS-\*"
+
+Improvement
+```````````
+
+*	[PEEK-1438] - Change log rotator to rotate daily, instead of on size
+
+*	[PEEK-1428] - GraphDB - Add trace rule logging
+
+V3.2.0 Changes
+--------------
+
+Bug
+```
+
+*	[PEEK-1415] - 220228 Peek Search doesn't match search terms correctly
+
+*	[PEEK-1383] - Diagram: Importing colours spelt as grey not gray doesn't map to correct hex value
+
+*	[PEEK-1358] - VortexPY re.match(value, ISO8601_REGEXP) matches Attune script value
+
+Improvement
+```````````
+
+*	[PEEK-1382] - 220120 Update rxJS takeUntil and filter to rxjs 6\+ syntax
+
+*	[PEEK-1381] - 220126 Reformat all typescript code with prettier;
+
+

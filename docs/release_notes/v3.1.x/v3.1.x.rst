@@ -73,6 +73,35 @@ acceptance test cycles performed on Peek v3.1 can be found at
 
 Known Issues
 ````````````
+
+V3.1.5 Changes
+--------------
+
+Bug
+```
+
+*	[PEEK-1456] - Field: "You are currently offline" popup disappears when kill the app and relaunch it
+
+*	[PEEK-1454] - Field: SOAP failed to dispatch and respond to POA when a job has no operations
+
+*	[PEEK-1451] - Field: Update UI to fit long job names in Job List and Job Operation List
+
+*	[PEEK-1450] - Field: SOS alarm from PowerOn to Peek Field should only broadcast to logged in Peek field users
+
+*	[PEEK-1437] - Field Switching - Task notification is deleted within 15 minutes, we need this to be 30 for Orion
+
+*	[PEEK-1436] - SOS Email - NameError: name 'toUserId' is not defined
+
+*	[PEEK-1416] - Field: Remove "Confirmation Time" from the Date & Time field
+
+Improvement
+```````````
+
+*	[PEEK-1453] - Field: Job Operation confirm popup should not close but prompt for acknowledgement when job is updated
+
+*	[PEEK-1452] - Field: Support custom icons in header
+
+
 v3.1.4 Changes
 --------------
 
