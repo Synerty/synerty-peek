@@ -9,6 +9,7 @@ Release Notes
     :caption: Contents:
 
     PEEP0XX/IndexUpgrade
+    v3.2.x/v3.2.x
     v3.1.x/v3.1.x
     v3.1.x/v3.1.x_uat
     v3.0.x/v3.0.x
