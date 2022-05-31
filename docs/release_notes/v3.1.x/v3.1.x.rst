@@ -13,6 +13,10 @@ or errors present after the major upgrades made in Peek 3.0.
 One new feature that was added to Peek v3.1.0 is an improved API for GPS
 support.
 
+Peek now includes Capacitor v3.5.
+
+Arrays of PayloadEnvelopes are now supported.
+
 Major Plugin Changes
 --------------------
 We specifically avoided making any major changes to existing plugins in this
@@ -74,7 +78,48 @@ acceptance test cycles performed on Peek v3.1 can be found at
 Known Issues
 ````````````
 
-V3.1.5 Changes
+v3.1.6 Changes
+--------------
+
+Bug
+```
+
+* [PEEK-1544] - Offline caching on iOS runs out of indexedDB - TODO, Implement capacitor SQLite storage
+
+* [PEEK-1538] - ENMAC SQL - Job Operations PERMIT Entity Attribute Valueloading is TOO SLOW
+
+* [PEEK-1537] - Improve performance of field-switching operation list UI
+
+* [PEEK-1534] - 220514 Fix Web Workers for VortexJS encoding / decoding
+
+* [PEEK-1520] - Peek Field App shows incorrect schedule version number
+
+* [PEEK-1518] - TupleAction - Failed to execute 'transaction' on 'IDBDatabase': The database connection is closing \(Add retries\)
+
+* [PEEK-1517] - Peek Field App shows empty alert boxes when flight mode is turned off
+
+* [PEEK-1516] - Field Switching - Large operations numbers are cut off
+
+Improvement
+```````````
+
+* [PEEK-1545] - Upgrade to capacitor v3.5
+
+* [PEEK-1536] - PayloadEnvelope, add support for an array of payloadEnvelopes
+
+* [PEEK-1535] - PayloadEnvelope make base64 encoding optional for Websocket transports
+
+* [PEEK-1493] - Capacitor app needs to default the websocket to port 8000, not 8001
+
+Task
+````
+
+* [PEEK-1548] - Upgrade VortexJS/PY dependency to v3.0.0
+
+* [PEEK-1530] - Field: Server failed to process Action
+
+
+v3.1.5 Changes
 --------------
 
 Bug
