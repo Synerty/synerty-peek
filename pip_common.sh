@@ -25,6 +25,7 @@ peek-plugin-inbox
 peek-plugin-index-blueprint
 peek-plugin-livedb
 peek-plugin-noop
+peek-plugin-osm-diagram-loader
 peek-plugin-tutorial
 "
 
