@@ -43,14 +43,14 @@ documentation for 3 different audiences:
 Add Admin Documentation
 -----------------------
 
-Create directory :file:`peek_plugin_tutorial/doc-admin`: ::
+Create directory :file:`peek_plugin_tutorial/admin_doc`: ::
 
-    mkdir -p peek_plugin_tutorial/doc-admin
+    mkdir -p peek_plugin_tutorial/admin_doc
 
 ----
 
 Create the file :file:`index.rst`: within the directory
-:file:`peek_plugin_tutorial/doc-admin` with following content: ::
+:file:`peek_plugin_tutorial/admin_doc` with following content: ::
 
         ==============
         Administration
@@ -66,18 +66,18 @@ Create the file :file:`index.rst`: within the directory
 
 Edit the file :file:`peek_plugin_tutorial/plugin_package.json`:
 
-Add "doc-admin" to the :code:`requiredServices` section so it looks like: ::
+Add "admin_doc" to the :code:`requiredServices` section so it looks like: ::
 
     "requiresServices": [
         ...
-        "doc-admin"
+        "admin_doc"
         ...
     ]
 
-Add the "doc-admin" section after requiresServices section: ::
+Add the "admin_doc" section after requiresServices section: ::
 
-    "doc-admin": {
-        "docDir": "doc-admin",
+    "admin_doc": {
+        "docDir": "admin_doc",
         "docRst": "index.rst"
     }
 
@@ -91,30 +91,42 @@ Here is an example: ::
         },
         "requiresServices": [
             ...
-            "doc-admin"
+            "admin_doc"
             ...
         ],
-        "doc-admin": {
-            "docDir": "doc-admin",
+        "admin_doc": {
+            "docDir": "admin_doc",
             "docRst": "index.rst"
         }
     }
 
+----
 
+Create a new rst file in the admin_doc directory.
+
+Place a unique reference link at the beginning of the file before the Title.
+
+An example of the reference link above the section title: ::
+
+        .. _learn_plugin_development_add_docs:
+
+        =================
+        Add Documentation
+        =================
 
 Add User Documentation
 ----------------------
 
 .. note:: These steps are almost identical to the Admin documentation.
 
-Create directory :file:`peek_plugin_tutorial/doc-user`: ::
+Create directory :file:`peek_plugin_tutorial/both-doc`: ::
 
-    mkdir -p peek_plugin_tutorial/doc-user
+    mkdir -p peek_plugin_tutorial/both-doc
 
 ----
 
 Create the file :file:`index.rst`: within the directory
-:file:`peek_plugin_tutorial/doc-user` with following content: ::
+:file:`peek_plugin_tutorial/both-doc` with following content: ::
 
         ==========
         User Guide
@@ -126,22 +138,34 @@ Create the file :file:`index.rst`: within the directory
 
 Edit the file :file:`peek_plugin_tutorial/plugin_package.json`:
 
-Add "doc-user" to the :code:`requiredServices` section so it looks like: ::
+Add "both-doc" to the :code:`requiredServices` section so it looks like: ::
 
     "requiresServices": [
         ...
-        "doc-user"
+        "both-doc"
         ...
     ]
 
-Add the "doc-user" section after requiresServices section: ::
+Add the "both-doc" section after requiresServices section: ::
 
-    "doc-user": {
-        "docDir": "doc-user",
+    "both-doc": {
+        "docDir": "both-doc",
         "docRst": "index.rst"
     }
 
+----
 
+Create a new rst file in the both-doc directory.
+
+Place a unique reference link at the beginning of the file before the Title.
+
+An example of the reference link above the section title: ::
+
+        .. _learn_plugin_development_add_docs:
+
+        =================
+        Add Documentation
+        =================
 
 Add Developer Documentation
 ---------------------------
@@ -240,7 +264,7 @@ Example: ::
 
 
 
-CheckOffice Service Config
+Check Office Service Config
 --------------------------
 
 The **office** service builds the **user** documentation.
@@ -275,11 +299,11 @@ peek-office (User).
 
 The documentation packages are as follows
 
-:Administration: peek_doc_admin:
+:Administration: peek_admin_doc:
 
 :Development: peek_doc_dev
 
-:User: peek_doc_user
+:User: peek_office_doc
 
 ----
 
@@ -292,28 +316,28 @@ is connected to it.
 Locate the relevant python project. These instructions will demonstrate with the "Admin"
 documentation.
 
-Run the following to find the location of :code:`peek_doc_admin` ::
+Run the following to find the location of :code:`peek_admin_doc` ::
 
     python - <<EOF
-    import peek_doc_admin
-    print(peek_doc_admin.__file__)
+    import peek_admin_doc
+    print(peek_admin_doc.__file__)
     EOF
 
-This will return the following, which you can get the location of :code:`peek_doc_admin`
+This will return the following, which you can get the location of :code:`peek_admin_doc`
 from. ::
 
     peek@_peek ~ % python - <<EOF
-    import peek_doc_admin
-    print(peek_doc_admin.__file__)
+    import peek_admin_doc
+    print(peek_admin_doc.__file__)
     EOF
 
-    /Users/peek/dev-peek/peek-doc-admin/peek_doc_admin/__init__.py
+    /Users/peek/dev-peek/peek-admin-doc/peek_admin_doc/__init__.py
 
 ----
 
-Navigate to :code:`peek_doc_admin` from the step above and run the following command: ::
+Navigate to :code:`peek_admin_doc` from the step above and run the following command: ::
 
-    cd /Users/peek/dev-peek/peek-doc-admin/peek_doc_admin
+    cd /Users/peek/dev-peek/peek-admin-doc/peek_admin_doc
     bash watch_docs.sh
 
 ----
