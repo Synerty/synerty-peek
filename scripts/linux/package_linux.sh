@@ -23,6 +23,115 @@ function maybeParallelTarBzip2() {
     fi
 }
 
+# ------------------------------------------------------------------------------
+# This function downloads the node modules and prepares them for the release
+
+function downloadNodeModules() {
+    # Get the variables for this package
+    nmDir="$1"
+
+    packageJsonUrl="$2/package.json"
+    packageLockJsonUrl="$2/package-lock.json"
+
+    packageJsonDir="$3/package.json"
+    packageLockJsonDir="$3/package-lock.json"
+
+    packageJsonDirExists=false
+    [[ -f "${packageJsonDir}" ]] && packageJsonDirExists=true
+
+    # Create the tmp dir
+    mkdir -p "$nmDir/tmp"
+    cd "$nmDir/tmp"
+
+    if [[ $packageJsonDirExists=true ]]; then
+        # Download package.json
+        echo $packageJsonDir
+        cp "$packageJsonDir" .
+
+        cp "$packageLockJsonDir" .
+    else
+        # Download package.json
+        # TODO: access token to download stuff in enterprise group
+        curl -O "$packageJsonUrl"
+
+        curl -O "$packageLockJsonUrl"
+    fi
+
+    # run npm install
+    npm install
+
+    # Move to where we want node_modules and delete the tmp dir
+    # some packages create extra files that we don't want
+    cd $nmDir
+    mv tmp/node_modules .
+
+    # Cleanup the temp dir
+    rm -rf tmp
+}
+
+function setUpNpm {
+
+    baseDir=$1 # COMMUNITY_PACKAGE folder
+
+    nodeDir="$baseDir/node"
+
+    pushd $baseDir
+    nodeVer="14.15.3"
+
+    # Download the file
+    nodeFile="node-v${nodeVer}-linux-x64.tar.xz"
+    wget -nv "https://nodejs.org/dist/v${nodeVer}/node-v${nodeVer}-linux-x64.tar.xz"
+
+    # Unzip it
+    tar xJf ${nodeFile}
+    mv node-v${nodeVer}-linux-x64 ${nodeDir}
+
+    # Remove the downloaded file
+    rm -rf ${nodeFile}
+
+    # Move NODE into place
+
+    # Set the path for future NODE commands
+    PATH="$nodeDir/bin:$PATH"
+
+    # Install the required NPM packages
+    npm cache clean --force
+    npm -g install @angular/cli@^10.2.0 typescript@4.0.3 tslint
+
+    popd
+}
+
+function cacheEdnarNodeModules {
+    # EDNAR peek node modules
+
+    # decompress source code of the repo
+    curDir=$(pwd)
+    mkdir -p _ednar_tmp
+    for file in peek-plugin-zepben-ednar-dms-diagram*.gz
+    do
+        tar -xvf $file -C _ednar_tmp
+    done
+
+    # download node modules to ednar-peek-app in the folder to be archived into
+    #  peek_enterprise_linux_x.y.z-b12345.tar.bz2
+    for folder in _ednar_tmp/peek-plugin-zepben-ednar-dms-diagram*
+    do
+        ednarPeekBuildWebDIR=$curDir"/ednar-peek-app"
+        mkdir -p $ednarPeekBuildWebDIR
+        ednarPeekJsonUrl="https://gitlab.synerty.com/peek/enterprise/peek-plugin-zepben-ednar-dms-diagram/-/raw/"${CI_COMMIT_REF_NAME}"/peek_plugin_zepben_ednar_dms_diagram/_private/office-app"
+        ednarPeekJsonDir=$folder"/peek_plugin_zepben_ednar_dms_diagram/_private/office-app"
+        ednarPeekJsonDir=$(realpath "$ednarPeekJsonDir")
+
+        pushd $ednarPeekBuildWebDIR
+        downloadNodeModules $ednarPeekBuildWebDIR $ednarPeekJsonUrl $ednarPeekJsonDir
+        popd
+    done
+
+    # clean up temporary folders
+    rm -rf _ednar_tmp
+
+}
+
 function packageCICommunity() {
 
     wantedVer=${1-}
@@ -104,92 +213,34 @@ function packageCICommunity() {
     # Compile nodejs for the release.
     # This should be portable.
 
-    nodeDir="$baseDir/node"
+    setUpNpm $baseDir
 
-    cd $baseDir
-    nodeVer="14.15.3"
-
-    # Download the file
-    nodeFile="node-v${nodeVer}-linux-x64.tar.xz"
-    wget -nv "https://nodejs.org/dist/v${nodeVer}/node-v${nodeVer}-linux-x64.tar.xz"
-
-    # Unzip it
-    tar xJf ${nodeFile}
-    mv node-v${nodeVer}-linux-x64 ${nodeDir}
-
-    # Remove the downloaded file
-    rm -rf ${nodeFile}
-
-    # Move NODE into place
-
-    # Set the path for future NODE commands
-    PATH="$nodeDir/bin:$PATH"
-
-    # Install the required NPM packages
-    npm cache clean --force
-    npm -g install @angular/cli@^10.2.0 typescript@4.0.3 tslint
-
-    # ------------------------------------------------------------------------------
-    # This function downloads the node modules and prepares them for the release
-
-    function downloadNodeModules() {
-        # Get the variables for this package
-        nmDir=$1
-
-        packageJsonUrl="$2/package.json"
-        packageLockJsonUrl="$2/package-lock.json"
-
-        packageJsonDir="$3/package.json"
-        packageLockJsonDir="$3/package-lock.json"
-
-        # Create the tmp dir
-        mkdir -p "$nmDir/tmp"
-        cd "$nmDir/tmp"
-
-        if [ -f ${packageJsonDir} ]; then
-            # Download package.json
-            cp "$packageJsonDir" .
-
-            cp "$packageLockJsonDir" .
-        else
-            # Download package.json
-            curl -O "$packageJsonUrl" .
-
-            curl -O "$packageLockJsonUrl" .
-        fi
-
-        # run npm install
-        npm install
-
-        # Move to where we want node_modules and delete the tmp dir
-        # some packages create extra files that we don't want
-        cd $nmDir
-        mv tmp/node_modules .
-
-        # Cleanup the temp dir
-        rm -rf tmp
-    }
-
+    pushd $baseDir/platform
     # FIELD node modules
-    mobilePackageVer=$(cd $baseDir/platform && ls peek_field_app-* | cut -d'-' -f2)
-    mobileBuildWebDIR="$baseDir/field-app"
+    mobilePackageVer=$(ls peek_field_app-* | cut -d'-' -f2)
+    mobileBuildWebDIR=$baseDir"/field-app"
     mobileJsonUrl="https://gitlab.synerty.com/peek/community/peek-field-app/-/raw/${CI_COMMIT_REF_NAME}/peek_field_app"
     mobileJsonDir="${platformReposDir}/peek-field-app/peek_field_app"
     downloadNodeModules $mobileBuildWebDIR $mobileJsonUrl $mobileJsonDir
-
+    popd
+    
+    pushd $baseDir/platform
     # OFFICE node modules
-    desktopPackageVer=$(cd $baseDir/platform && ls peek_office_app-* | cut -d'-' -f2)
-    desktopBuildWebDIR="$baseDir/office-app"
+    desktopPackageVer=$(ls peek_office_app-* | cut -d'-' -f2)
+    desktopBuildWebDIR=$baseDir"/office-app"
     desktopJsonUrl="https://gitlab.synerty.com/peek/community/peek-office-app/-/raw/${CI_COMMIT_REF_NAME}/peek_office_app"
     desktopJsonDir="${platformReposDir}/peek-office-app/peek_office_app"
     downloadNodeModules $desktopBuildWebDIR $desktopJsonUrl $desktopJsonDir
+    popd
 
+    pushd $baseDir/platform
     # ADMIN node modules
-    adminPackageVer=$(cd $baseDir/platform && ls peek_admin_app-* | cut -d'-' -f2)
-    adminBuildWebDIR="$baseDir/admin-app"
+    adminPackageVer=$(ls peek_admin_app-* | cut -d'-' -f2)
+    adminBuildWebDIR=$baseDir"/admin-app"
     adminJsonUrl="https://gitlab.synerty.com/peek/community/peek-admin-app/-/raw/${CI_COMMIT_REF_NAME}/peek_admin_app"
     adminJsonDir="${platformReposDir}/peek-admin-app/peek_admin_app"
     downloadNodeModules $adminBuildWebDIR $adminJsonUrl $adminJsonDir
+    popd
 
     # ------------------------------------------------------------------------------
     # Copy over the init scripts for this platform
@@ -255,6 +306,10 @@ function packageCIEnterprisePlugins() {
 
     # Copy over the plugins
     cp ${SRC_PATH}/*.gz .
+
+    setUpNpm $COMMUNITY_PACKAGEs
+
+    cacheEdnarNodeModules
 
     pipWheelArgs="--no-cache --find-links=. --find-links=${COMMUNITY_PACKAGEs}"
     if [ -f "${pinnedDepsPyFile}" ]; then
