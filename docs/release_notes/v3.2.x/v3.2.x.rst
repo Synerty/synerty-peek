@@ -7,6 +7,8 @@ v3.2.x Release Notes
 Platform Changes
 ----------------
 This release contains several quality of life improvements to Peek Office.
+Peek now includes Capacitor v3.5.
+LDAP nested groups are now supported.
 
 Major Plugin Changes
 --------------------
@@ -38,7 +40,6 @@ Deployment for macOS remains the same after the major changes of Peek v3.1.x
 MacOS: :ref:`macos_install_prerequisites`
 
 
-
 Windows Deployment
 ``````````````````
 
@@ -51,13 +52,84 @@ Migration Steps
 ---------------
 
 #. Make a note of your User settings in Peek Admin.
-#. ssh into the server as the Peek user.
-#. Stop the Peek services with **stop_peek.sh**
-#. Open psql.
-#. Enter: **DROP SCHEMA core_user CASCADE;**
-#. Enter: **TRUNCATE pl_enmac_user_loader."LoadState" CASCADE;**
-#. Restart Peek with **restart_peek.sh**
 
+#. SSH into the server as the Peek user.
+
+#. Stop the Peek services with the following: ::
+
+        stop_peek.sh
+
+#. Enter the following: ::
+
+        psql <<EOF
+        DROP SCHEMA core_user CASCADE;
+        TRUNCATE pl_enmac_user_loader."LoadState" CASCADE;
+        EOF
+
+#. Restart Peek with: ::
+
+        restart_peek.sh
+
+V3.2.3 Changes
+--------------
+
+Bug
+```
+
+* [PEEK-1572] - ENMAC LiveDB Loader - Tweak loader to handle 7.2 million AUEQ LiveDB items
+
+* [PEEK-1571] - ENAMC Diagram Loader - Parsing colours with names not handled properly
+
+* [PEEK-1570] - 220601 Office Service reenrols on page reload
+
+* [PEEK-1554] - Peek Vortex appears offline in Peek Office
+
+* [PEEK-1547] - DB Engine Args are not applied to each plugins connectors
+
+* [PEEK-1544] - Offline caching on iOS runs out of indexedDB - Implement capacitor SQLite storage
+
+* [PEEK-1538] - ENMAC SQL - Job Operations PERMIT Entity Attribute Value loading is TOO SLOW
+
+* [PEEK-1534] - 220514 Fix Web Workers for VortexJS encoding / decoding
+
+* [PEEK-1528] - EDNAR: Failed to go to another world in DMS diagram via component context menu
+
+* [PEEK-1526] - ENMAC Diagram Loader - Overlays stop processing
+
+* [PEEK-1525] - ENMAC Diagram Loader - Unicode Text Error, pl\_diagram."DispText".text = '1Ã'
+
+* [PEEK-1523] - Peek Offline - Caching EnergyQ data offline causes Brave to use 2gb of memory and crash
+
+* [PEEK-1518] - TupleAction - Failed to execute 'transaction' on 'IDBDatabase': The database connection is closing \(Add retries\)
+
+* [PEEK-1517] - Peek Field App shows empty alert boxes when flight mode is turned off
+
+* [PEEK-1510] - ENMAC Diagram Loader fails to load diractories with LARGE amount of pages
+
+* [PEEK-1509] - ENMAC Diagram Loader - Edge Importer invalid literal for int\(\) with base 10: '.5'
+
+* [PEEK-1508] - ENMAC Equipment Loader builtins.KeyError: 'N000fe42cCOMP'
+
+* [PEEK-1507] - ENMAC Diagram Loader Fails to load floating point font sizes
+
+* [PEEK-1530] - Field: Server failed to process Action. Row not present in Job Operation List
+
+Improvement
+```````````
+
+* [PEEK-1545] - Upgrade to capacitor v3.5
+
+* [PEEK-1536] - PayloadEnvelope, add support for an arbitrary payload of data
+
+* [PEEK-1535] - PayloadEnvelope make base64 encoding optional for Websocket transports
+
+* [PEEK-1533] - Support nested groups and primary group login for LDAP login in Peek
+
+
+Task
+````
+
+* [PEEK-1548] - Upgrade VortexJS/PY dependency to v3.0.0
 
 V3.2.2 Changes
 --------------
