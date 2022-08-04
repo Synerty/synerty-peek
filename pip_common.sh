@@ -95,6 +95,7 @@ peek-plugin-enmac-sql
 peek-plugin-enmac-switching
 peek-plugin-enmac-switching-loader
 peek-plugin-enmac-user-loader
+peek-plugin-zepben-ednar-dms-diagram
 "
 ## DEPREICATED ENTERPRISE_PKGS
 # peek-plugin-gis-dms-positioner

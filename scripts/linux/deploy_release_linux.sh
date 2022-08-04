@@ -125,6 +125,10 @@ sp="$(echo $venvDir/lib/python*/site-packages)"
 mv $releaseDir/field-app/node_modules $sp/peek_field_app
 mv $releaseDir/office-app/node_modules $sp/peek_office_app
 mv $releaseDir/admin-app/node_modules $sp/peek_admin_app
+if [ -f $enterpriseZip ]; then
+    cp -r $releaseDir/peek_enterprise_linux*/ednar-peek-app/node_modules \
+     $sp/peek_plugin_zepben_ednar_dms_diagram/_private/office-app
+fi
 
 # ------------------------------------------------------------------------------
 # Install the util scripts
