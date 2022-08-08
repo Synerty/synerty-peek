@@ -70,7 +70,34 @@ Migration Steps
 
         restart_peek.sh
 
-V3.2.3 Changes
+v3.2.5 Changes
+--------------
+
+Bug
+```
+
+* [PEEK-1638] - 220808 Equipment Loader performance is too slow for EnergyQ, Filter only on visible equipment
+
+v3.2.4 Changes
+--------------
+
+Bug
+```
+
+* [PEEK-1626] - Escape names and usernames in LDAP filters to allow for \(\)
+
+* [PEEK-1608] - LDAP authentication fails on Peek Office.
+
+* [PEEK-1607] - LDAP is failing to create internal users.
+
+Task
+````
+
+* [PEEK-1622] - Use OID or SID for existing users to query LDAP
+
+* [PEEK-1588] - EDNAR Search fails to locate asset and hangs if the asset appears in less than 2 worlds
+
+v3.2.3 Changes
 --------------
 
 Bug
@@ -131,7 +158,7 @@ Task
 
 * [PEEK-1548] - Upgrade VortexJS/PY dependency to v3.0.0
 
-V3.2.2 Changes
+v3.2.2 Changes
 --------------
 
 Bug
@@ -197,7 +224,7 @@ Task
 
 *	[PEEK-1477] - Implement twisted manhole for debugging in python services
 
-V3.2.1 Changes
+v3.2.1 Changes
 --------------
 
 Bug
@@ -224,7 +251,7 @@ Improvement
 
 *	[PEEK-1428] - GraphDB - Add trace rule logging
 
-V3.2.0 Changes
+v3.2.0 Changes
 --------------
 
 Bug
