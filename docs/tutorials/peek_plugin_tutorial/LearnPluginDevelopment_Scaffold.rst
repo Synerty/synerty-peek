@@ -287,7 +287,7 @@ contents: ::
             "version": "0.0.0",
             "buildNumber": "#PLUGIN_BUILD#",
             "buildDate": "#BUILD_DATE#",
-            "creator": "Synerty Pty Ltd",
+            "creator": "Synerty HQ Pty Ltd",
             "website": "www.synerty.com"
         },
         "requiresServices": [
