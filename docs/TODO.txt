@@ -1,3 +1,0 @@
-
-Document that peek-field-app uses FontAwesome
-https://www.npmjs.com/package/angular2-font-awesome

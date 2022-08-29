@@ -70,13 +70,61 @@ Migration Steps
 
         restart_peek.sh
 
+v3.2.8 Changes
+--------------
+
+Bug
+```
+
+* [PEEK-1689] - Enmac Diagram Loader Overlay Page Files fail to update
+
+* [PEEK-1683] - GraphDB Trace Loader Exceptions when trying to log debug message when no clients are online
+
+* [PEEK-1681] - Oracle Maximum identifier length does not match oracle database.
+
+* [PEEK-1675] - Diagram Branch edit list is too long, modal taller than screen, start editing button at the bottom
+
+* [PEEK-1674] - ENMAC Equipment Loader doesn't load conductors, even if their class is set.
+
+* [PEEK-1673] - Search Result tabs are not ordered
+
+* [PEEK-1649] - Diagram does not navigate to diagram when there are multiple positions for a component
+
+* [PEEK-1648] - Diagram 'blockApiUpdate', 'showForEdit' need default values for Peek created lookup tuples
+
+* [PEEK-1636] - Diagram Branch and Location loader enabled flags are swapped
+
+* [PEEK-1633] - Diagram "showForEdit" , "blockApiUpdate" in lookup tuples requires default values
+
+Improvement
+```````````
+
+* [PEEK-1699] - ENMAC Diagram Loader Add Component Class Name loading
+
+v3.2.7 Changes
+--------------
+
+Bug
+```
+
+* [PEEK-1658] - Enmac Equipment Loader Decide to partial index name or alias independently of each other
+
+* [PEEK-1652] - DocDB Code Equipment Loader continuously loads DocDB
+
+
+v3.2.6 Changes
+--------------
+
+Bug
+```
+
 v3.2.5 Changes
 --------------
 
 Bug
 ```
 
-* [PEEK-1638] - 220808 Equipment Loader performance is too slow for EnergyQ, Filter only on visible equipment
+* [PEEK-1638] - Equipment Loader performance is too slow for EnergyQ, Filter only on visible equipment
 
 v3.2.4 Changes
 --------------
@@ -97,49 +145,50 @@ Task
 
 * [PEEK-1588] - EDNAR Search fails to locate asset and hangs if the asset appears in less than 2 worlds
 
+
 v3.2.3 Changes
 --------------
 
 Bug
 ```
 
-* [PEEK-1572] - ENMAC LiveDB Loader - Tweak loader to handle 7.2 million AUEQ LiveDB items
+* [PEEK-1572] - ENMAC LiveDB Loader Tweak loader to handle 7.2 million AUEQ LiveDB items
 
-* [PEEK-1571] - ENAMC Diagram Loader - Parsing colours with names not handled properly
+* [PEEK-1571] - ENAMC Diagram Loader Parsing colours with names not handled properly
 
-* [PEEK-1570] - 220601 Office Service reenrols on page reload
+* [PEEK-1570] - Office Service re enrols on page reload
 
 * [PEEK-1554] - Peek Vortex appears offline in Peek Office
 
 * [PEEK-1547] - DB Engine Args are not applied to each plugins connectors
 
-* [PEEK-1544] - Offline caching on iOS runs out of indexedDB - Implement capacitor SQLite storage
+* [PEEK-1544] - Offline caching on iOS runs out of indexedDB  Implement capacitor SQLite storage
 
-* [PEEK-1538] - ENMAC SQL - Job Operations PERMIT Entity Attribute Value loading is TOO SLOW
+* [PEEK-1538] - ENMAC SQL Job Operations PERMIT Entity Attribute Value loading is TOO SLOW
 
-* [PEEK-1534] - 220514 Fix Web Workers for VortexJS encoding / decoding
+* [PEEK-1534] - Fix Web Workers for VortexJS encoding / decoding
 
 * [PEEK-1528] - EDNAR: Failed to go to another world in DMS diagram via component context menu
 
-* [PEEK-1526] - ENMAC Diagram Loader - Overlays stop processing
+* [PEEK-1526] - ENMAC Diagram Loader Overlays stop processing
 
-* [PEEK-1525] - ENMAC Diagram Loader - Unicode Text Error, pl\_diagram."DispText".text = '1Ã'
+* [PEEK-1525] - ENMAC Diagram Loader Unicode Text Error, pl\_diagram."DispText".text = '1Ã'
 
-* [PEEK-1523] - Peek Offline - Caching EnergyQ data offline causes Brave to use 2gb of memory and crash
+* [PEEK-1523] - Peek Offline Caching EnergyQ data offline causes Brave to use 2gb of memory and crash
 
-* [PEEK-1518] - TupleAction - Failed to execute 'transaction' on 'IDBDatabase': The database connection is closing \(Add retries\)
+* [PEEK-1518] - TupleAction Failed to execute 'transaction' on 'IDBDatabase': The database connection is closing \(Add retries\)
 
 * [PEEK-1517] - Peek Field App shows empty alert boxes when flight mode is turned off
 
 * [PEEK-1510] - ENMAC Diagram Loader fails to load diractories with LARGE amount of pages
 
-* [PEEK-1509] - ENMAC Diagram Loader - Edge Importer invalid literal for int\(\) with base 10: '.5'
+* [PEEK-1509] - ENMAC Diagram Loader Edge Importer invalid literal for int\(\) with base 10: '.5'
 
 * [PEEK-1508] - ENMAC Equipment Loader builtins.KeyError: 'N000fe42cCOMP'
 
 * [PEEK-1507] - ENMAC Diagram Loader Fails to load floating point font sizes
 
-* [PEEK-1530] - Field: Server failed to process Action. Row not present in Job Operation List
+* [PEEK-1530] - Field Server failed to process Action. Row not present in Job Operation List
 
 Improvement
 ```````````
@@ -168,7 +217,7 @@ Bug
 
 *	[PEEK-1495] - Peek sometimes fails to force log out user from old UI
 
-*	[PEEK-1492] - peek-plugin-base-js - Expression has changed after it was checked. Previous value for 'show'
+*	[PEEK-1492] - peek-plugin-base-js  Expression has changed after it was checked. Previous value for 'show'
 
 *	[PEEK-1489] - Peek Office asks for location information, this should only be on peek-field
 
@@ -176,25 +225,25 @@ Bug
 
 *	[PEEK-1486] - Make Capacitor Build scripts compatible with ordinary macOS install
 
-*	[PEEK-1485] - Peek Offline Support - Test and debug offline support for iOS app for DMS Diagram
+*	[PEEK-1485] - Peek Offline Support Test and debug offline support for iOS app for DMS Diagram
 
-*	[PEEK-1482] - GraphDB, Starting a trace from a start edge fails to try trace in both directions
+*	[PEEK-1482] - GraphDB Starting a trace from a start edge fails to try trace in both directions
 
-*	[PEEK-1480] - Enmac Connectivity Loader - Loader includes patches in its load, which breaks connectivity
+*	[PEEK-1480] - Enmac Connectivity Loader includes patches in its load, which breaks connectivity
 
-*	[PEEK-1479] - Diagram Edit, clicking on disp group doesn't select disp group
+*	[PEEK-1479] - Diagram Edit clicking on disp group doesn't select disp group
 
 *	[PEEK-1475] - When the Peek Office/Field service goes offline, the Peek app shows search error
 
 *	[PEEK-1474] - Event filter attributes are still visible in field when removed
 
-*	[PEEK-1472] - Enmac Equipment Loader - Attributes load SQL is consistently slow, 3s\+
+*	[PEEK-1472] - Enmac Equipment Loader Attributes load SQL is consistently slow, 3s\+
 
-*	[PEEK-1471] - Enmac Equipment Loader - Importing chunks blocks reactor
+*	[PEEK-1471] - Enmac Equipment Loader Importing chunks blocks reactor
 
-*	[PEEK-1470] - Enmac Switching Loader - Importing chunks blocks reactor
+*	[PEEK-1470] - Enmac Switching Loader Importing chunks blocks reactor
 
-*	[PEEK-1469] - ENMAC Realtime Loader - Priority Keys is not sent on agent restart
+*	[PEEK-1469] - ENMAC Realtime Loader Priority Keys is not sent on agent restart
 
 *	[PEEK-1461] - LoopingCalls may stop if an error is thrown
 
@@ -202,18 +251,18 @@ Bug
 
 *	[PEEK-1459] - Peek oracle connections are cut by firewall after 60 minutes, add pool\_recycle value
 
-*	[PEEK-1458] - Peek Diagram - Operation List is slow
+*	[PEEK-1458] - Peek Diagram Operation List is slow
 
 *	[PEEK-1446] - Search limits trace to 50 items before the trace is ranked
 
 Improvement
 ```````````
 
-*	[PEEK-1494] - Field Capacitor App - Upgrade iOS Dependency to 2.5.0
+*	[PEEK-1494] - Field Capacitor App  Upgrade iOS Dependency to 2.5.0
 
 *	[PEEK-1493] - Capacitor app needs to default the websocket to port 8000, not 8001
 
-*	[PEEK-1473] - Enmac Diagram Loader - Change font size warning to debug
+*	[PEEK-1473] - Enmac Diagram Loader  Change font size warning to debug
 
 Task
 ````
@@ -232,24 +281,24 @@ Bug
 
 *	[PEEK-1432] - Peek Office and Peek Field build web app twice
 
-*	[PEEK-1430] - Diagram - Positioning by key located at multiple positions needs to prompt user
+*	[PEEK-1430] - Diagram  Positioning by key located at multiple positions needs to prompt user
 
-*	[PEEK-1429] - Core Device - Observing OfflineConfig before enrolment throws exception
+*	[PEEK-1429] - Core Device  Observing OfflineConfig before enrolment throws exception
 
-*	[PEEK-1427] - ENMAC Diagram Loader - Job Loader may silently fail to load shapes
+*	[PEEK-1427] - ENMAC Diagram Loader  Job Loader may silently fail to load shapes
 
 *	[PEEK-1426] - Jobs fail to position on diagram because diagram only contains only operations
 
-*	[PEEK-1425] - ENMAC GraphDB Loader - Vertices are imported with wrong substation class
+*	[PEEK-1425] - ENMAC GraphDB Loader  Vertices are imported with wrong substation class
 
-*	[PEEK-1419] - Peek ENMAC Equipment Loader filters out components with Aliases beginning with "ALIAS-\*"
+*	[PEEK-1419] - ENMAC Equipment Loader filters out components with Aliases beginning with "ALIAS-"
 
 Improvement
 ```````````
 
 *	[PEEK-1438] - Change log rotator to rotate daily, instead of on size
 
-*	[PEEK-1428] - GraphDB - Add trace rule logging
+*	[PEEK-1428] - GraphDB  Add trace rule logging
 
 v3.2.0 Changes
 --------------
@@ -257,9 +306,9 @@ v3.2.0 Changes
 Bug
 ```
 
-*	[PEEK-1415] - 220228 Peek Search doesn't match search terms correctly
+*	[PEEK-1415] - Peek Search doesn't match search terms correctly
 
-*	[PEEK-1383] - Diagram: Importing colours spelt as grey not gray doesn't map to correct hex value
+*	[PEEK-1383] - Diagram Importing colours spelt as grey not gray doesn't map to correct hex value
 
 *	[PEEK-1358] - VortexPY re.match(value, ISO8601_REGEXP) matches Attune script value
 
