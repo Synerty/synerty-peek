@@ -52,6 +52,7 @@ numpy==1.22.1
 nztm==0.0.3
 outcome==1.1.0
 packaging==21.3
+patch-ng==1.17.4
 pem==21.2.0
 Pillow==9.0.0
 pkginfo==1.8.2
