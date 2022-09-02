@@ -60,6 +60,10 @@ doc_requirements = [
 
 requirements.extend(doc_requirements)
 
+debug_requirements = ["py-spy"]
+
+requirements.extend(debug_requirements)
+
 setup(
     name=pip_package_name,
     packages=find_packages(
@@ -75,7 +79,5 @@ setup(
     download_url="https://gitlab.synerty.com/peek/community/%s/tarball/%s"
     % (pip_package_name, package_version),
     keywords=["Peek", "Python", "Platform", "synerty"],
-    classifiers=[
-        "Programming Language :: Python :: 3.5",
-    ],
+    classifiers=["Programming Language :: Python :: 3.5"],
 )
