@@ -118,7 +118,7 @@ twine==4.0.1
 Twisted==22.4.0
 txaio==22.2.1
 txcelery-py3==1.6.3
-txhttputil==1.2.5
+txhttputil==1.2.6
 txsuds-py3==0.5.9
 txwebsocket==1.0.2
 typing_extensions==4.3.0
