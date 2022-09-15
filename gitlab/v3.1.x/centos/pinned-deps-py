@@ -96,7 +96,7 @@ tqdm==4.60.0
 twine==3.4.1
 Twisted==21.2.0
 txcelery-py3==1.6.3
-txhttputil==1.0.4
+txhttputil==1.0.5
 txsuds-py3==0.5.9
 txwebsocket==1.0.2
 tzlocal==2.1
