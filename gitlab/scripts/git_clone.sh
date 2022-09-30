@@ -28,6 +28,7 @@ echo "Cloning all the repositories at ${SRC_PATH}"
 mkdir -p ${SRC_PATH} && cd ${SRC_PATH}
 
 # Clone the repos
+repoUrls=""
 for repo in ${PACKAGES}; do
     rm -fR ${repo}
 
@@ -36,13 +37,11 @@ for repo in ${PACKAGES}; do
     else
         pathTo=${CI_PROJECT_ROOT_NAMESPACE}/${PACKAGE_GRP}
     fi
-
-    # Shallow? --depth 5
-    git clone https://${USER}:${PASSWORD}@gitlab.synerty.com/${pathTo}/${repo}.git &
+    repoUrls="${repoUrls} https://${USER}:${PASSWORD}@gitlab.synerty.com/${pathTo}/${repo}.git"
 done
 
-# Wait for background jobs to finish
-wait
+echo ${repoUrls} | xargs -n1 -P4 git clone
+
 
 # Try to switch to a specific branch, otherwise use master
 for repo in ${PACKAGES}; do
