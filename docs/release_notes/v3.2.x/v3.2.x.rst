@@ -76,7 +76,53 @@ v3.2.8 Changes
 Bug
 ```
 
-* [PEEK-1689] - Enmac Diagram Loader Overlay Page Files fail to update
+* [PEEK-1748] - Abstract Chunked Index Logic handler sends updates to all field and office vortexes
+
+* [PEEK-1743] - Peek Enmac Diagram Loader Page Import fails on StopIteration
+
+* [PEEK-1732] - Peek Switching Permit Fields are silently dropped of someone removes permitId from custom SQL \(Fix=Error logging added\)
+
+* [PEEK-1724] - 220904 Parsing invalid pem file for SSL server throws an exception, not a useful error
+
+* [PEEK-1723] - VortexPY VortexPayloadProtocol.vortexMsgReceived infinite-ly appends to \_data
+
+* [PEEK-1722] - Performance issue in EnmaclmportPages.py for loop in 532
+
+* [PEEK-1720] - GraphDB Loader: 'GraphSegmentSplitConfigTuple' object has no attribute 'componentAliasRe'
+
+* [PEEK-1719] - GraphDB: '\_matchSplitStopPointConfig\(\)' missing 1 required positional argument: 'stopCfg'
+
+* [PEEK-1718] - Diagram: showForEdit failed to filter lookups
+
+* [PEEK-1717] - Peek GraphDb Loader has no module called 'peek\_plugin\_graphdb.\_private.storage.GraphSegmentSplitConfigTuple'
+
+* [PEEK-1716] - 220831 Websocket client connect fail message looks like top line of exception
+
+* [PEEK-1715] - 220831 mTLS peek\_logic\_server doesn't pass sslBundlePath to admin site setup
+
+* [PEEK-1714] - 220831 mTLS Feature - Disabling mTLS still parses certificate files
+
+* [PEEK-1713] - 220831 Enmac Equipment Loader name 'qryResult" not defined
+
+* [PEEK-1712] - 220830 mTLS Feature list index out of range on peer ca
+
+* [PEEK-1710] - 220830 Pressing ctrl\+c before peek\_core\_user has started raises exception
+
+* [PEEK-1708] - 220830 mTLS features throws an exception when paths don't exist \(it should log an error with the missing path\)
+
+* [PEEK-1707] - 220830 Weboscket client has no close method
+
+* [PEEK-1706] - VortexPY: base64EncodeDefer called from a non-main thread
+
+* [PEEK-1703] - Fix bug with VortexWebsocketClient processing received messages slowly
+
+* [PEEK-1702] - 220826 Equipment Loader is importing disabled component classes
+
+* [PEEK-1701] - 220826 Equipment Loader is Importing Disabled Component Classes into Search Object Database
+
+* [PEEK-1696] - Orion  EventDB TupleObservables continuously loading making PostgreSQL take 100% or all CPUs
+
+* [PEEK-1689] - 220822 Enmac Diagram Loader Overlay Page Files fail to update
 
 * [PEEK-1683] - GraphDB Trace Loader Exceptions when trying to log debug message when no clients are online
 
@@ -84,9 +130,11 @@ Bug
 
 * [PEEK-1675] - Diagram Branch edit list is too long, modal taller than screen, start editing button at the bottom
 
-* [PEEK-1674] - ENMAC Equipment Loader doesn't load conductors, even if their class is set.
+* [PEEK-1674] - ENMAC Equipment Loader Equipment loader doesn't load conductors, even if their class is set.
 
-* [PEEK-1673] - Search Result tabs are not ordered
+* [PEEK-1673] - Core Search Search Result tabs are not ordered but they should be
+
+* [PEEK-1654] - GraphDB Loader Stop point comparison is slow for comparing a large number of classes in config
 
 * [PEEK-1649] - Diagram does not navigate to diagram when there are multiple positions for a component
 
@@ -96,10 +144,38 @@ Bug
 
 * [PEEK-1633] - Diagram "showForEdit" , "blockApiUpdate" in lookup tuples requires default values
 
+* [PEEK-1611] - Diagram Branch does not display in View Branches unless zoom level changes
+
+* [PEEK-1610] - EDNAR Branch does not exist before startEditing in diagram
+
+* [PEEK-1598] - SQL plugin is not resolving the custom permit fields.
+
 Improvement
 ```````````
 
+* [PEEK-1721] - Add pyspy to synerty-peek dependencies
+
 * [PEEK-1699] - ENMAC Diagram Loader Add Component Class Name loading
+
+* [PEEK-1672] - Add a call for VortexFactory that takes an IP Address and returns the remote Vortex UUID
+
+Sub-task
+````````
+
+* [PEEK-1700] - VortexPY mTLS update Peek to use mTLS peer verify, Diffie-Hellaman param and new PEM parsing utility
+
+* [PEEK-1688] - VortexPY mTLS add TLS version config
+
+Task
+````
+
+* [PEEK-1679] - Add the log monitoring scripts to synerty-peek.
+
+* [PEEK-1678] - Release v3.2.8
+
+* [PEEK-1676] - Review the Peek Training Material
+
+* [PEEK-1612] - Update Colour Picker component to be able to do searching with a dropdown list
 
 v3.2.7 Changes
 --------------
