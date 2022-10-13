@@ -70,6 +70,36 @@ Migration Steps
 
         restart_peek.sh
 
+v3.2.10 Changes
+---------------
+
+Bug
+---
+
+* [PEEK-750] - Peek DMS Diagram - Feeder lines disappear when ‘Toggle Feeder Colours’ is turned on
+
+v3.2.9 Changes
+--------------
+
+Bug
+---
+
+* [PEEK-1767] - Peek Overlays fail to Update
+
+Improvement
+-----------
+
+* [PEEK-1692] - OSM Loader - Add Enabled / Disabled button in settings for loader
+
+* [PEEK-1691] - OSM Loader - Change plugin name displayed in Peek Admin to "Open Street Map Loader"
+
+Task
+----
+
+* [PEEK-1705] - 220829 Update Graph DB Loader documentation
+
+* [PEEK-1694] - 220824 Correct Errors in Admin Doc build
+
 v3.2.8 Changes
 --------------
 
