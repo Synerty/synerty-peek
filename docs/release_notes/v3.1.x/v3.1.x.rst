@@ -78,6 +78,24 @@ acceptance test cycles performed on Peek v3.1 can be found at
 Known Issues
 ````````````
 
+v3.1.8 Changes
+--------------
+Bug
+```
+
+* [PEEK-1245] - Notifications:balloon popup not updating unread status
+
+* [PEEK-1570] - 220601 Office Service reenrols on page reload
+
+* [PEEK-1763] - VortexJS Errors popping up when confirming operating orders on iPad
+
+* [PEEK-1766] - SOAP: Peek outbound failed to respond ‘IncidentDetailsChanged’ message under transport Mobile
+
+* [PEEK-1783] - Field: angular raises ExpressionChangedAfterItHasBeenCheckedError on job op list screen
+
+* [PEEK-1799] - Field: queued action warning not disappearing when actions are dequeued
+
+
 v3.1.6 Changes
 --------------
 
