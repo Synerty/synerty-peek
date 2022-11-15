@@ -97,6 +97,10 @@ Bug
 * [PEEK-1799] - Field: queued action warning not disappearing when actions are dequeued
 
 
+The results of user
+acceptance test cycles performed on Peek v3.1.8 can be found at
+:ref:`318_uat_results` .
+
 v3.1.6 Changes
 --------------
 

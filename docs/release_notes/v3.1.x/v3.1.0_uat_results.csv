@@ -1,150 +1,150 @@
-,Issue Key,ExecutionStatus,Test Summary
-107,PEEKUAT-120,WIP,OSAT05 - 310 - Incident details are complete and correct
-199,PEEKUAT-205,PASS,Security
-196,PEEKUAT-199,PASS,Return to the home page
-202,PEEKUAT-203,PASS,Print the network as displayed on the screen
-195,PEEKUAT-197,PASS,Pop-ups in search results
-177,PEEKUAT-190,PASS,OSAT05.3 - 8 - Multiple field devices operate independently
-178,PEEKUAT-189,PASS,OSAT05.3 - 1 - Multiple field devices - incident dispatch
-204,PEEKUAT-179,PASS,OSAT05.2 - 9 - Access to diagrams from incidents
-293,PEEKUAT-178,PASS,OSAT05.2 - 8 - Navigating - GIS
-35,PEEKUAT-176,PASS,OSAT05.2 - 6 - Viewing component - GIS
-169,PEEKUAT-174,PASS,OSAT05.2 - 4 - Zoom in/out - GIS
-3,PEEKUAT-173,PASS,OSAT05.2 - 3 - Zoom in/out - DMS
-17,PEEKUAT-172,PASS,OSAT05.2 - 2 - Open GIS Diagram
-173,PEEKUAT-182,PASS,OSAT05.2 - 12 - Go back to the job
-172,PEEKUAT-181,PASS,OSAT05.2 - 11 - Access to diagrams from a switching job
-171,PEEKUAT-180,PASS,OSAT05.2 - 10 - Go back to the incident
-111,PEEKUAT-171,PASS,OSAT05.2 - 1 - Open a DMS World
-44,PEEKUAT-157,PASS,"OSAT05.1 - 9 - Under '+Assessment', add damaged items - Fuse"
-137,PEEKUAT-156,PASS,"OSAT05.1 - 8 - Under '+Assessment', add damaged items - Cross Arm"
-22,PEEKUAT-155,PASS,"OSAT05.1 - 7 - Under '+Assessment', add damaged items - Conductor"
-151,PEEKUAT-154,PASS,"OSAT05.1 - 6 - Under '+Assessment', add damaged items - Cable"
-109,PEEKUAT-153,PASS,"OSAT05.1 - 5 - Under '+Assessment', add damaged items - LS"
-43,PEEKUAT-152,PASS,"OSAT05.1 - 4 - Under '+Assessment', add damaged items - LCB"
-141,PEEKUAT-151,PASS,"OSAT05.1 - 3 - Under '+Assessment', add damaged items - ABI"
-77,PEEKUAT-170,PASS,OSAT05.1 - 22 - Edit data from the web
-170,PEEKUAT-168,PASS,OSAT05.1 - 20 - Close the assessment page
-6,PEEKUAT-167,PASS,OSAT05.1 - 19 - Return to damaged item list
-33,PEEKUAT-166,PASS,OSAT05.1 - 18 - Return to damaged item
-150,PEEKUAT-165,PASS,OSAT05.1 - 17 - Delete a phone
-89,PEEKUAT-164,PASS,OSAT05.1 - 16 - View photos - on mobile device
-54,PEEKUAT-163,PASS,OSAT05.1 - 15 - Add more photos to an existing damaged item
-113,PEEKUAT-162,PASS,OSAT05.1 - 14 - Add a photo to an existing damaged item
-122,PEEKUAT-161,PASS,OSAT05.1 - 13 - Additional buttons
-5,PEEKUAT-160,PASS,"OSAT05.1 - 12 - Under '+Assessment', add damaged items - Transformer"
-88,PEEKUAT-159,PASS,"OSAT05.1 - 11 - Under '+Assessment', add damaged items - Pole"
-164,PEEKUAT-158,PASS,"OSAT05.1 - 10 - Under '+Assessment', add damaged items - Insulator"
-161,PEEKUAT-106,PASS,OSAT05 - 60 - Event for undelivered incident
-27,PEEKUAT-139,PASS,OSAT05 - 560 - Job completion prevented - missing information
-162,PEEKUAT-136,PASS,OSAT05 - 530 - On site / completion times
-60,PEEKUAT-135,PASS,OSAT05 - 520 - Upload Third Party Feedback forms information
-85,PEEKUAT-134,PASS,OSAT05 - 510 - Fault report
-116,PEEKUAT-105,PASS,OSAT05 - 50 - Incident dispatch to field device - logged in
-13,PEEKUAT-133,PASS,OSAT05 - 460 - Field findings required
-106,PEEKUAT-131,PASS,OSAT05 - 440 - Working on an incident and a switching job simultaneously
-79,PEEKUAT-130,PASS,OSAT05 - 430 - Working on one incident at a time
-130,PEEKUAT-129,PASS,OSAT05 - 420 - Incident sequence
-21,PEEKUAT-128,PASS,OSAT05 - 400 - Re-send incident from PowerOn
-114,PEEKUAT-127,PASS,OSAT05 - 390 - Hand back incident
-26,PEEKUAT-126,PASS,OSAT05 - 380 - Reject incident
-40,PEEKUAT-125,PASS,OSAT05 - 370 - Incomplete
-61,PEEKUAT-124,PASS,OSAT05 - 360 - Return to site
-103,PEEKUAT-123,PASS,OSAT05 - 350 - Leave site
-205,PEEKUAT-121,PASS,OSAT05 - 320 - Download Third Party feedback forms
-90,PEEKUAT-119,PASS,OSAT05 - 300 - Update ETR
-23,PEEKUAT-118,PASS,OSAT05 - 290 - On site
-0,PEEKUAT-117,PASS,OSAT05 - 280 - On the Way Update
-52,PEEKUAT-116,PASS,OSAT05 - 270 - On the Way
-268,PEEKUAT-114,PASS,OSAT05 - 200 - Call history information
-320,PEEKUAT-113,PASS,OSAT05 - 190 - Fetching call or incident details
-57,PEEKUAT-112,PASS,OSAT05 - 180 - Call / incident order
-228,PEEKUAT-111,PASS,OSAT05 - 170 - Viewing call & incident history
-249,PEEKUAT-358,PASS,OSAT012 - 400 - Spot check HV and LV Diagrams in Peek app matches PowerOn
-230,PEEKUAT-325,PASS,OSAT012 - 40 - Enrol Device
-326,PEEKUAT-349,PASS,OSAT012 - 300 - Edit the existing Stop Incident reason
-318,PEEKUAT-344,PASS,OSAT012 - 250 - Add in new Hand-back reason
-270,PEEKUAT-341,PASS,OSAT012 - 210 - Change User's password
-306,PEEKUAT-338,PASS,OSAT012 - 180 - Add Mobile number
-305,PEEKUAT-336,PASS,OSAT012 - 160 - Add new user
-296,PEEKUAT-335,PASS,OSAT012 - 140 - Add incident category list
-253,PEEKUAT-309,PASS,NSAT14 - 970 - SOS to all
-237,PEEKUAT-307,PASS,NSAT14 - 950 - Chat
-280,PEEKUAT-304,PASS,NSAT14 - 940 - Next instruction alarm from confirmation screen
-278,PEEKUAT-303,PASS,NSAT14 - 930 - SOS to PowerOn
-267,PEEKUAT-297,PASS,NSAT14 - 860 - Audit log
-294,PEEKUAT-294,PASS,NSAT14 - 840 - Job step order
-311,PEEKUAT-293,PASS,NSAT14 - 830.1 - Multiple field devices - simultaneous operation
-246,PEEKUAT-184,PASS,NSAT14 - 800 - Multiple field devices operate independently
-316,PEEKUAT-222,PASS,NSAT14 - 80 - Log on to multiple devices prevented
-174,PEEKUAT-183,PASS,NSAT14 - 790 - Multiple field devices - job dispatch
-309,PEEKUAT-288,PASS,NSAT14 - 770 - Abort switching (FE)
-286,PEEKUAT-221,PASS,NSAT14 - 70 - Field device login/comms status correctly shown in PowerOn Probably best to remove logged on / off status stuff from test 50 & put it in here.
-257,PEEKUAT-280,PASS,NSAT14 - 680 - Log off from field device
-254,PEEKUAT-274,PASS,NSAT14 - 620 - Hand back switching job
-300,PEEKUAT-273,PASS,NSAT14 - 610 - Dispatch of completed job prevented
-308,PEEKUAT-272,PASS,NSAT14 - 600 - Completed work package
-243,PEEKUAT-220,PASS,NSAT14 - 60 - Field device Log On Screen layout
-221,PEEKUAT-270,PASS,NSAT14 - 580 - Incoming message alert
-302,PEEKUAT-269,PASS,NSAT14 - 570 - Take back active job
-303,PEEKUAT-268,PASS,NSAT14 - 560 - Redispatch a taken back job
-207,PEEKUAT-266,PASS,NSAT14 - 540 - Job take back
-210,PEEKUAT-264,PASS,NSAT14 - 520 - Field device alerts and notifications
-317,PEEKUAT-219,PASS,NSAT14 - 50 - Field device log on  See test 70 for suggested mods.
-297,PEEKUAT-260,PASS,NSAT14 - 480 - Issue unplanned WP to mobile device
-291,PEEKUAT-252,PASS,NSAT14 - 400 - Working on a switching job and an incident simultaneously
-266,PEEKUAT-218,PASS,NSAT14 - 40 - Home Screen
-307,PEEKUAT-250,PASS,NSAT14 - 380 - Status notification and alarm - accept job
-206,PEEKUAT-249,PASS,NSAT14 - 360 - Activity information
-208,PEEKUAT-248,PASS,NSAT14 - 350 - Inbox information
-252,PEEKUAT-239,PASS,NSAT14 - 260 - No message to field device for non-displayed WPM changes
-276,PEEKUAT-237,PASS,NSAT14 - 240 - View of switching items
-273,PEEKUAT-236,PASS,NSAT14 - 230 - Presentation of switching items
-304,PEEKUAT-235,PASS,NSAT14 - 220 - Field device operations
-261,PEEKUAT-234,PASS,NSAT14 - 210 - Field device job display
-290,PEEKUAT-227,PASS,NSAT14 - 140 - WPM job dispatch notification
-314,PEEKUAT-226,PASS,NSAT14 - 130 - WPM job dispatch required
-289,PEEKUAT-319,PASS,NSAT14 - 1090 - Connection recovery after failure
-258,PEEKUAT-318,PASS,NSAT14 - 1080 - Mobile device offline storage and recovery
-301,PEEKUAT-312,PASS,NSAT14 - 1010 - Speed of interaction with field device
-216,PEEKUAT-214,PASS,Edit Document DB Fields
-298,PEEKUAT-359,PASS,Device warns when offline
-203,PEEKUAT-204,PASS,Allows the user to perform a network trace
-186,PEEKUAT-198,FAIL,Search for equipment by name or alias
-324,PEEKUAT-1,FAIL,"Pop-up the equipment name, alias and a list of commands when the user selects a symbol"
-184,PEEKUAT-195,FAIL,OSAT05.3 - 13 - Handling of intermittent comms
-312,PEEKUAT-175,FAIL,OSAT05.2 - 5 - Viewing component - DMS
-275,PEEKUAT-150,FAIL,OSAT05.1 - 2 - login
-223,PEEKUAT-149,FAIL,OSAT05.1 - 1 - Open
-251,PEEKUAT-147,FAIL,OSAT05 - 660 - Comms / resource status integrity
-250,PEEKUAT-145,FAIL,OSAT05 - 630 - No spurious alarms for combined mobile and email dispatch
-32,PEEKUAT-137,FAIL,OSAT05 - 540 - Job completion - SP
-225,PEEKUAT-132,FAIL,OSAT05 - 450 - Comments & photos
-133,PEEKUAT-104,FAIL,OSAT05 - 40 - Incident dispatch to field device - not logged in
-212,PEEKUAT-115,FAIL,OSAT05 - 260 - Resource accepts incident
-148,PEEKUAT-103,FAIL,OSAT05 - 20 - Version
-242,PEEKUAT-327,FAIL,OSAT012 - 60 - Set up email resource
-262,PEEKUAT-326,FAIL,OSAT012 - 50 - Delete Device
-211,PEEKUAT-348,FAIL,OSAT012 - 290 - Add in new Reject Incident reason
-213,PEEKUAT-323,FAIL,OSAT012 - 20 - Online Status
-235,PEEKUAT-305,FAIL,NSAT14 - 943 - Next instruction alarm from ready button
-214,PEEKUAT-300,FAIL,NSAT14 - 900 - SOS alarms
-222,PEEKUAT-287,FAIL,NSAT14 - 760 - Abort switching (CE)
-215,PEEKUAT-282,FAIL,NSAT14 - 710 - Field confirm
-299,PEEKUAT-262,FAIL,NSAT14 - 500 - Population of header fields - unplanned Job
-244,PEEKUAT-246,FAIL,NSAT14 - 330 - Cut and paste item update
-180,PEEKUAT-191,BLOCKED,OSAT05.3 - 9 - Comms handshaking 4G Only
-183,PEEKUAT-194,BLOCKED,OSAT05.3 - 12 - Comms handshaking 3G & Wifi
-182,PEEKUAT-193,BLOCKED,OSAT05.3 - 11 - Comms handshaking 3G Only
-181,PEEKUAT-192,BLOCKED,OSAT05.3 - 10 - Comms handshaking 4G & Wifi
-281,PEEKUAT-169,BLOCKED,OSAT05.1 - 21 - View the logged damage items from web server
-66,PEEKUAT-107,BLOCKED,OSAT05 - 130 - SMS received when job dispatched
-315,PEEKUAT-331,BLOCKED,OSAT012 - 100 - Test Templates
-313,PEEKUAT-223,BLOCKED,NSAT14 - 90 - Force log off
-264,PEEKUAT-295,BLOCKED,NSAT14 - 845 - Job step order with 'back' button
-287,PEEKUAT-279,BLOCKED,NSAT14 - 670 - Log off when out of coverage
-288,PEEKUAT-242,BLOCKED,NSAT14 - 290 - Timeout Alarm - operation insert
-279,PEEKUAT-241,BLOCKED,NSAT14 - 280 - Timeout alarm - header update
-274,PEEKUAT-240,BLOCKED,NSAT14 - 270 - Unsent job alarm
-319,PEEKUAT-229,BLOCKED,NSAT14 - 160 - Email received when work package dispatched
-265,PEEKUAT-228,BLOCKED,NSAT14 - 150 - SMS received when work package dispatched
+Issue Key,ExecutionStatus,Test Summary
+PEEKUAT-120,WIP,OSAT05 - 310 - Incident details are complete and correct
+PEEKUAT-205,PASS,Security
+PEEKUAT-199,PASS,Return to the home page
+PEEKUAT-203,PASS,Print the network as displayed on the screen
+PEEKUAT-197,PASS,Pop-ups in search results
+PEEKUAT-190,PASS,OSAT05.3 - 8 - Multiple field devices operate independently
+PEEKUAT-189,PASS,OSAT05.3 - 1 - Multiple field devices - incident dispatch
+PEEKUAT-179,PASS,OSAT05.2 - 9 - Access to diagrams from incidents
+PEEKUAT-178,PASS,OSAT05.2 - 8 - Navigating - GIS
+PEEKUAT-176,PASS,OSAT05.2 - 6 - Viewing component - GIS
+PEEKUAT-174,PASS,OSAT05.2 - 4 - Zoom in/out - GIS
+PEEKUAT-173,PASS,OSAT05.2 - 3 - Zoom in/out - DMS
+PEEKUAT-172,PASS,OSAT05.2 - 2 - Open GIS Diagram
+PEEKUAT-182,PASS,OSAT05.2 - 12 - Go back to the job
+PEEKUAT-181,PASS,OSAT05.2 - 11 - Access to diagrams from a switching job
+PEEKUAT-180,PASS,OSAT05.2 - 10 - Go back to the incident
+PEEKUAT-171,PASS,OSAT05.2 - 1 - Open a DMS World
+PEEKUAT-157,PASS,"OSAT05.1 - 9 - Under '+Assessment', add damaged items - Fuse"
+PEEKUAT-156,PASS,"OSAT05.1 - 8 - Under '+Assessment', add damaged items - Cross Arm"
+PEEKUAT-155,PASS,"OSAT05.1 - 7 - Under '+Assessment', add damaged items - Conductor"
+PEEKUAT-154,PASS,"OSAT05.1 - 6 - Under '+Assessment', add damaged items - Cable"
+PEEKUAT-153,PASS,"OSAT05.1 - 5 - Under '+Assessment', add damaged items - LS"
+PEEKUAT-152,PASS,"OSAT05.1 - 4 - Under '+Assessment', add damaged items - LCB"
+PEEKUAT-151,PASS,"OSAT05.1 - 3 - Under '+Assessment', add damaged items - ABI"
+PEEKUAT-170,PASS,OSAT05.1 - 22 - Edit data from the web
+PEEKUAT-168,PASS,OSAT05.1 - 20 - Close the assessment page
+PEEKUAT-167,PASS,OSAT05.1 - 19 - Return to damaged item list
+PEEKUAT-166,PASS,OSAT05.1 - 18 - Return to damaged item
+PEEKUAT-165,PASS,OSAT05.1 - 17 - Delete a phone
+PEEKUAT-164,PASS,OSAT05.1 - 16 - View photos - on mobile device
+PEEKUAT-163,PASS,OSAT05.1 - 15 - Add more photos to an existing damaged item
+PEEKUAT-162,PASS,OSAT05.1 - 14 - Add a photo to an existing damaged item
+PEEKUAT-161,PASS,OSAT05.1 - 13 - Additional buttons
+PEEKUAT-160,PASS,"OSAT05.1 - 12 - Under '+Assessment', add damaged items - Transformer"
+PEEKUAT-159,PASS,"OSAT05.1 - 11 - Under '+Assessment', add damaged items - Pole"
+PEEKUAT-158,PASS,"OSAT05.1 - 10 - Under '+Assessment', add damaged items - Insulator"
+PEEKUAT-106,PASS,OSAT05 - 60 - Event for undelivered incident
+PEEKUAT-139,PASS,OSAT05 - 560 - Job completion prevented - missing information
+PEEKUAT-136,PASS,OSAT05 - 530 - On site / completion times
+PEEKUAT-135,PASS,OSAT05 - 520 - Upload Third Party Feedback forms information
+PEEKUAT-134,PASS,OSAT05 - 510 - Fault report
+PEEKUAT-105,PASS,OSAT05 - 50 - Incident dispatch to field device - logged in
+PEEKUAT-133,PASS,OSAT05 - 460 - Field findings required
+PEEKUAT-131,PASS,OSAT05 - 440 - Working on an incident and a switching job simultaneously
+PEEKUAT-130,PASS,OSAT05 - 430 - Working on one incident at a time
+PEEKUAT-129,PASS,OSAT05 - 420 - Incident sequence
+PEEKUAT-128,PASS,OSAT05 - 400 - Re-send incident from PowerOn
+PEEKUAT-127,PASS,OSAT05 - 390 - Hand back incident
+PEEKUAT-126,PASS,OSAT05 - 380 - Reject incident
+PEEKUAT-125,PASS,OSAT05 - 370 - Incomplete
+PEEKUAT-124,PASS,OSAT05 - 360 - Return to site
+PEEKUAT-123,PASS,OSAT05 - 350 - Leave site
+PEEKUAT-121,PASS,OSAT05 - 320 - Download Third Party feedback forms
+PEEKUAT-119,PASS,OSAT05 - 300 - Update ETR
+PEEKUAT-118,PASS,OSAT05 - 290 - On site
+PEEKUAT-117,PASS,OSAT05 - 280 - On the Way Update
+PEEKUAT-116,PASS,OSAT05 - 270 - On the Way
+PEEKUAT-114,PASS,OSAT05 - 200 - Call history information
+PEEKUAT-113,PASS,OSAT05 - 190 - Fetching call or incident details
+PEEKUAT-112,PASS,OSAT05 - 180 - Call / incident order
+PEEKUAT-111,PASS,OSAT05 - 170 - Viewing call & incident history
+PEEKUAT-358,PASS,OSAT012 - 400 - Spot check HV and LV Diagrams in Peek app matches PowerOn
+PEEKUAT-325,PASS,OSAT012 - 40 - Enrol Device
+PEEKUAT-349,PASS,OSAT012 - 300 - Edit the existing Stop Incident reason
+PEEKUAT-344,PASS,OSAT012 - 250 - Add in new Hand-back reason
+PEEKUAT-341,PASS,OSAT012 - 210 - Change User's password
+PEEKUAT-338,PASS,OSAT012 - 180 - Add Mobile number
+PEEKUAT-336,PASS,OSAT012 - 160 - Add new user
+PEEKUAT-335,PASS,OSAT012 - 140 - Add incident category list
+PEEKUAT-309,PASS,NSAT14 - 970 - SOS to all
+PEEKUAT-307,PASS,NSAT14 - 950 - Chat
+PEEKUAT-304,PASS,NSAT14 - 940 - Next instruction alarm from confirmation screen
+PEEKUAT-303,PASS,NSAT14 - 930 - SOS to PowerOn
+PEEKUAT-297,PASS,NSAT14 - 860 - Audit log
+PEEKUAT-294,PASS,NSAT14 - 840 - Job step order
+PEEKUAT-293,PASS,NSAT14 - 830.1 - Multiple field devices - simultaneous operation
+PEEKUAT-184,PASS,NSAT14 - 800 - Multiple field devices operate independently
+PEEKUAT-222,PASS,NSAT14 - 80 - Log on to multiple devices prevented
+PEEKUAT-183,PASS,NSAT14 - 790 - Multiple field devices - job dispatch
+PEEKUAT-288,PASS,NSAT14 - 770 - Abort switching (FE)
+PEEKUAT-221,PASS,NSAT14 - 70 - Field device login/comms status correctly shown in PowerOn Probably best to remove logged on / off status stuff from test 50 & put it in here.
+PEEKUAT-280,PASS,NSAT14 - 680 - Log off from field device
+PEEKUAT-274,PASS,NSAT14 - 620 - Hand back switching job
+PEEKUAT-273,PASS,NSAT14 - 610 - Dispatch of completed job prevented
+PEEKUAT-272,PASS,NSAT14 - 600 - Completed work package
+PEEKUAT-220,PASS,NSAT14 - 60 - Field device Log On Screen layout
+PEEKUAT-270,PASS,NSAT14 - 580 - Incoming message alert
+PEEKUAT-269,PASS,NSAT14 - 570 - Take back active job
+PEEKUAT-268,PASS,NSAT14 - 560 - Redispatch a taken back job
+PEEKUAT-266,PASS,NSAT14 - 540 - Job take back
+PEEKUAT-264,PASS,NSAT14 - 520 - Field device alerts and notifications
+PEEKUAT-219,PASS,NSAT14 - 50 - Field device log on  See test 70 for suggested mods.
+PEEKUAT-260,PASS,NSAT14 - 480 - Issue unplanned WP to mobile device
+PEEKUAT-252,PASS,NSAT14 - 400 - Working on a switching job and an incident simultaneously
+PEEKUAT-218,PASS,NSAT14 - 40 - Home Screen
+PEEKUAT-250,PASS,NSAT14 - 380 - Status notification and alarm - accept job
+PEEKUAT-249,PASS,NSAT14 - 360 - Activity information
+PEEKUAT-248,PASS,NSAT14 - 350 - Inbox information
+PEEKUAT-239,PASS,NSAT14 - 260 - No message to field device for non-displayed WPM changes
+PEEKUAT-237,PASS,NSAT14 - 240 - View of switching items
+PEEKUAT-236,PASS,NSAT14 - 230 - Presentation of switching items
+PEEKUAT-235,PASS,NSAT14 - 220 - Field device operations
+PEEKUAT-234,PASS,NSAT14 - 210 - Field device job display
+PEEKUAT-227,PASS,NSAT14 - 140 - WPM job dispatch notification
+PEEKUAT-226,PASS,NSAT14 - 130 - WPM job dispatch required
+PEEKUAT-319,PASS,NSAT14 - 1090 - Connection recovery after failure
+PEEKUAT-318,PASS,NSAT14 - 1080 - Mobile device offline storage and recovery
+PEEKUAT-312,PASS,NSAT14 - 1010 - Speed of interaction with field device
+PEEKUAT-214,PASS,Edit Document DB Fields
+PEEKUAT-359,PASS,Device warns when offline
+PEEKUAT-204,PASS,Allows the user to perform a network trace
+PEEKUAT-198,FAIL,Search for equipment by name or alias
+PEEKUAT-1,FAIL,"Pop-up the equipment name, alias and a list of commands when the user selects a symbol"
+PEEKUAT-195,FAIL,OSAT05.3 - 13 - Handling of intermittent comms
+PEEKUAT-175,FAIL,OSAT05.2 - 5 - Viewing component - DMS
+PEEKUAT-150,FAIL,OSAT05.1 - 2 - login
+PEEKUAT-149,FAIL,OSAT05.1 - 1 - Open
+PEEKUAT-147,FAIL,OSAT05 - 660 - Comms / resource status integrity
+PEEKUAT-145,FAIL,OSAT05 - 630 - No spurious alarms for combined mobile and email dispatch
+PEEKUAT-137,FAIL,OSAT05 - 540 - Job completion - SP
+PEEKUAT-132,FAIL,OSAT05 - 450 - Comments & photos
+PEEKUAT-104,FAIL,OSAT05 - 40 - Incident dispatch to field device - not logged in
+PEEKUAT-115,FAIL,OSAT05 - 260 - Resource accepts incident
+PEEKUAT-103,FAIL,OSAT05 - 20 - Version
+PEEKUAT-327,FAIL,OSAT012 - 60 - Set up email resource
+PEEKUAT-326,FAIL,OSAT012 - 50 - Delete Device
+PEEKUAT-348,FAIL,OSAT012 - 290 - Add in new Reject Incident reason
+PEEKUAT-323,FAIL,OSAT012 - 20 - Online Status
+PEEKUAT-305,FAIL,NSAT14 - 943 - Next instruction alarm from ready button
+PEEKUAT-300,FAIL,NSAT14 - 900 - SOS alarms
+PEEKUAT-287,FAIL,NSAT14 - 760 - Abort switching (CE)
+PEEKUAT-282,FAIL,NSAT14 - 710 - Field confirm
+PEEKUAT-262,FAIL,NSAT14 - 500 - Population of header fields - unplanned Job
+PEEKUAT-246,FAIL,NSAT14 - 330 - Cut and paste item update
+PEEKUAT-191,BLOCKED,OSAT05.3 - 9 - Comms handshaking 4G Only
+PEEKUAT-194,BLOCKED,OSAT05.3 - 12 - Comms handshaking 3G & Wifi
+PEEKUAT-193,BLOCKED,OSAT05.3 - 11 - Comms handshaking 3G Only
+PEEKUAT-192,BLOCKED,OSAT05.3 - 10 - Comms handshaking 4G & Wifi
+PEEKUAT-169,BLOCKED,OSAT05.1 - 21 - View the logged damage items from web server
+PEEKUAT-107,BLOCKED,OSAT05 - 130 - SMS received when job dispatched
+PEEKUAT-331,BLOCKED,OSAT012 - 100 - Test Templates
+PEEKUAT-223,BLOCKED,NSAT14 - 90 - Force log off
+PEEKUAT-295,BLOCKED,NSAT14 - 845 - Job step order with 'back' button
+PEEKUAT-279,BLOCKED,NSAT14 - 670 - Log off when out of coverage
+PEEKUAT-242,BLOCKED,NSAT14 - 290 - Timeout Alarm - operation insert
+PEEKUAT-241,BLOCKED,NSAT14 - 280 - Timeout alarm - header update
+PEEKUAT-240,BLOCKED,NSAT14 - 270 - Unsent job alarm
+PEEKUAT-229,BLOCKED,NSAT14 - 160 - Email received when work package dispatched
+PEEKUAT-228,BLOCKED,NSAT14 - 150 - SMS received when work package dispatched

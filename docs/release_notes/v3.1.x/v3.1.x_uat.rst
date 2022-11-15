@@ -4,6 +4,20 @@
 v3.1.x UAT Results
 ==================
 
+``````````````````
+v3.1.8 UAT Results
+``````````````````
+.. _318_uat_results:
+
+.. csv-table:: UAT Results
+   :file: v3.1.8_uat_results.csv
+
+Download test results :download:`here <v3.1.8_uat_results.csv>`.
+
+``````````````````
+v3.1.0 UAT Results
+``````````````````
+
 .. csv-table:: UAT Results
    :file: v3.1.0_uat_results.csv
 
