@@ -1,0 +1,35 @@
+Issue Key,ExecutionStatus,Test Summary
+PEEKUAT-141,PASS,Works job details - Closing an incident
+PEEKUAT-252,PASS,Working on a switching job and an incident simultaneously
+PEEKUAT-206,PASS,Visibility of Network
+PEEKUAT-420,PASS,Update An Incident
+PEEKUAT-160,PASS,"Under '+Assessment', add damaged items - Transformer"
+PEEKUAT-157,PASS,"Under '+Assessment', add damaged items - Fuse"
+PEEKUAT-254,PASS,Stop a job without comms
+PEEKUAT-256,PASS,Starting a new job without comms
+PEEKUAT-370,PASS,Start a trace from equipment
+PEEKUAT-413,PASS,Search Equipment and check search results
+PEEKUAT-299,PASS,SOS to field device
+PEEKUAT-255,PASS,Restart a job without comms
+PEEKUAT-416,PASS,Reload Office App Page
+PEEKUAT-126,PASS,Reject incident
+PEEKUAT-412,PASS,Queued Actions When Returning To Service
+PEEKUAT-203,PASS,Print the network as displayed on the screen
+PEEKUAT-199,PASS,Peek Office - Return to the home page
+PEEKUAT-149,PASS,Open Field Incident
+PEEKUAT-419,PASS,Notification Count When Returning To Service
+PEEKUAT-415,PASS,Notification Count Decreases When Notification Is Opened
+PEEKUAT-421,PASS,Move Job Banner On Network Diagram
+PEEKUAT-285,PASS,Job update
+PEEKUAT-294,PASS,Job step order
+PEEKUAT-118,PASS,Incidents - On site
+PEEKUAT-123,PASS,Incidents - Leave site
+PEEKUAT-127,PASS,Hand back incident
+PEEKUAT-180,PASS,Go back to the incident
+PEEKUAT-282,PASS,Field confirm
+PEEKUAT-414,PASS,Display of Job Operations
+PEEKUAT-313,PASS,Dispatch of large job
+PEEKUAT-359,PASS,Device warns when offline
+PEEKUAT-161,PASS,Damaged Items Additional buttons
+PEEKUAT-179,PASS,Access to diagrams from incidents
+PEEKUAT-288,PASS,Abort switching on the field device
