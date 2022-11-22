@@ -84,6 +84,8 @@ v3.1.8 Changes
 Bug
 ```
 
+* [PEEK-1868] - Peek Chat - Removing Inbox Task causes Infinite Loop and 100% cpu
+
 * [PEEK-1245] - Notifications:balloon popup not updating unread status
 
 * [PEEK-1570] - 220601 Office Service reenrols on page reload
