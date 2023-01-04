@@ -8,7 +8,7 @@ The following modifications are required to upgrade plugins to run on the v0.6.0
 of the platform
 
 NPM : peek-field-app-util
-----------------------
+-------------------------
 
 The :code:`peek-field-app-util` npm packages has been renamed to :code:`peek-util`.
 

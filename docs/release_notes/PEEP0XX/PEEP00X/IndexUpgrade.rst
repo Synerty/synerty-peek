@@ -1,4 +1,4 @@
-.. _upgrade_notes:
+.. _peep_notes-00x:
 
 =========
 PEEP 0-10

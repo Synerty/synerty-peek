@@ -16,7 +16,7 @@ The GraphDB has offline support allowing tracing to be run offline in the native
 app.
 
 ENMAC Connectivity Model Loader
-`````````````````````````````
+````````````````````````````````
 
 The ENMAC Connectivity Model loader plugin extracts the connectivity model and the trace
 configuration from GEs PowerOn Fusion / PowerOn Advantage, the model and trace configs

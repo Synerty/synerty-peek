@@ -1,4 +1,4 @@
-.. _admin_run_synerty_peek:
+.. _admin_manage_synerty_peek_services:
 
 Manage Peek Services
 --------------------

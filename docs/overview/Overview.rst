@@ -417,7 +417,7 @@ An example contents of the :file:`_private` is described below.
 
     *   :file:`logic-service`  (The code that runs on the logic service)
 
-    *   :file:`storage-service     (SQLAlchemy ORM classes for db access, used by logic and worker)
+    *   :file:`storage-service` (SQLAlchemy ORM classes for db access, used by logic and worker)
 
     *   :file:`tuples`  (Private data structures)
 
