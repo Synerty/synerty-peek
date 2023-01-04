@@ -95,7 +95,7 @@ the search data. ::
 
 
 peek-plugin-enmac-equipment-loader
-````````````````````````````````
+```````````````````````````````````
 
 The equipment loader will need to reload the search data, force an update with the
 following SQL. ::
@@ -107,7 +107,7 @@ following SQL. ::
 
 
 peek-plugin-enmac-switching-loader
-````````````````````````````````
+``````````````````````````````````
 
 The equipment loader will need to reload the search data, force an update with the
 following SQL. ::
@@ -127,7 +127,7 @@ This must be after the DocDB plugin. ::
     peek-plugin-eventdb
 
 peek-plugin-enmac-event-loader
-````````````````````````````
+``````````````````````````````
 
 Enable this plugin all Peek services :file:`config.json`, in the enabled plugins.
 This must be after the EventDB plugin. ::

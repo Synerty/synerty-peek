@@ -168,12 +168,15 @@ For example, this can be done on Linux by concatenating the Key, Cert and CA fil
 .. note:: The file names will vary, but the file contents will start with lines like the following ::
 
     ==> CA cert <==
+
     -----BEGIN CERTIFICATE-----
 
     ==> Cert <==
+
     -----BEGIN CERTIFICATE-----
 
     ==> Key <==
+
     -----BEGIN RSA PRIVATE KEY-----
 
 

@@ -186,7 +186,7 @@ Numbered Lists
 
 
 Directives
-----------
+``````````
 
 Directives are indicated by an explicit markup start '.. ' followed by the directive
 type, two colons, and whitespace (together called the "directive marker"). Directive

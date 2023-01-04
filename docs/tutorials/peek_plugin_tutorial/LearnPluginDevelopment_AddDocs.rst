@@ -265,7 +265,7 @@ Example: ::
 
 
 Check Office Service Config
---------------------------
+---------------------------
 
 The **office** service builds the **user** documentation.
 

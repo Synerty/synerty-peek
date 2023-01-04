@@ -221,7 +221,7 @@ Improvement
 
 *    [PEEK-796] - PNA - Streamline the Creation of Signed Apps
 
-*    [PEEK-840] - Create peek-office-doc, rename doc-* to *-doc
+*    [PEEK-840] - Create peek-office-doc, rename doc- to -doc
 
 *    [PEEK-849] - Add platform dependency test cases
 

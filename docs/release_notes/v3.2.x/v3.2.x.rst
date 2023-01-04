@@ -51,6 +51,28 @@ Nil.
 Migration Steps
 ---------------
 
+v3.2.11 Steps
+`````````````
+#. SSH into the server as the Peek user
+#. Stop the Peek services with the following: ::
+
+        stop_peek.sh
+
+#. Change to the Peek Admin App directory: ::
+
+    cd ~/synerty-peek-3.2.11/lib/python3.9/site-packages/peek_admin_app
+
+#. Run the frontend build: ::
+
+    ng build
+
+#. Restart Peek with: ::
+
+        restart_peek.sh
+
+v3.2.0 Steps
+````````````
+
 #. Make a note of your User settings in Peek Admin.
 
 #. SSH into the server as the Peek user.
@@ -69,6 +91,21 @@ Migration Steps
 #. Restart Peek with: ::
 
         restart_peek.sh
+
+v3.2.11 Changes
+---------------
+
+Bug
+---
+
+* [PEEK-1854] - EDNAR: Show Customers/Historical jobs button returns the user to the default/home view on the diagram
+
+* [PEEK-1866] - EDNAR: showBranch API doesn't show the branch
+
+Improvement
+-----------
+
+* [PEEK-1869] - EDNAR: add Peek Office version restful API
 
 v3.2.10 Changes
 ---------------

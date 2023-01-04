@@ -55,7 +55,7 @@ Migration Steps
 ---------------
 
 peek-plugin-enmac-diagram-loader
-``````````````````````````````
+````````````````````````````````
 
 In PEEK-526, the "Layer Profile Name" has been renamed to
 "Environment Name" in the plugin settings.

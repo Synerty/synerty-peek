@@ -236,7 +236,7 @@ This document is a stripped version of :ref:`learn_plugin_development_add_logic_
 
 
 Add File :file:`FieldEntryHook.py`
-```````````````````````````````````
+----------------------------------
 
 Create the file :file:`peek_plugin_tutorial/_private/field/FieldEntryHook.py`
 and populate it with the following contents.
@@ -300,7 +300,7 @@ and populate it with the following contents.
 
 
 Edit :file:`peek_plugin_tutorial/__init__.py`
-`````````````````````````````````````````````
+---------------------------------------------
 
 Edit the file :file:`peek_plugin_tutorial/__init__.py`, and add the following: ::
 
@@ -314,7 +314,7 @@ Edit the file :file:`peek_plugin_tutorial/__init__.py`, and add the following: :
 
 
 Edit :file:`plugin_package.json`
-````````````````````````````````
+--------------------------------
 
 Edit the file :file:`peek_plugin_tutorial/plugin_package.json` :
 
