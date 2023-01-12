@@ -78,6 +78,16 @@ acceptance test cycles performed on Peek v3.1 can be found at
 Known Issues
 ````````````
 
+v3.1.10 Changes
+----------------
+
+Prior versions tagged release gitlab build failed, requiring a version increment.
+
+v3.1.9 Changes
+--------------
+
+Prior versions tagged release gitlab build failed, requiring a version increment.
+
 v3.1.8 Changes
 --------------
 

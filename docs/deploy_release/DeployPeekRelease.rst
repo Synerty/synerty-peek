@@ -127,18 +127,10 @@ Download the platform deploy script.
     "servername" to the server ip address:
     :code:`scp Downloads/deploy_release_linux.sh peek@servername:/home/peek/deploy_release_linux.sh`
 
-
-::
-
-        uri="https://bitbucket.org/synerty/synerty-peek/raw/master/scripts/linux/deploy_release_linux.sh"
-        wget $uri
-
 ----
 
 Run the platform deploy script. The script will complete with a print out of where the
 new environment was deployed.
-
-Ensure you update the **dist** variable with the path to your release.
 
 The script will deploy to :file:`/home/peek/`.
 
@@ -147,6 +139,10 @@ The script will deploy to :file:`/home/peek/`.
         communityArchive="/home/peek/Downloads/peek_community_linux_#.#.#.tar.bz2"
         enterpriseArchive="/home/peek/Downloads/peek_enterprise_linux_#.#.#.tar.bz2"
         bash deploy_release_linux.sh $communityArchive $enterpriseArchive
+
+.. note::
+    Ensure you update the **dist** variable with the path to your release.
+
 
 ----
 
