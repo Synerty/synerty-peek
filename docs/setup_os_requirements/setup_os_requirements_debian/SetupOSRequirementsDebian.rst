@@ -1,3 +1,5 @@
+.. _setup_os_requirements_debian:
+
 ============================
 Setup OS Requirements Debian
 ============================
@@ -703,6 +705,8 @@ The Wheel package is required for building platform and plugin releases: ::
     pip install wheel
 
 
+.. _debian_install_postgresql:
+
 Install PostgreSQL
 ------------------
 
@@ -976,9 +980,9 @@ Set the PostgreSQL peek users password: ::
 .. note:: If you already have a database, you may now need to upgrade the timescale
           extension. ::
 
-    psql peek <<EOF
-    ALTER EXTENSION timescaledb UPDATE;
-    EOF
+            psql peek <<EOF
+            ALTER EXTENSION timescaledb UPDATE;
+            EOF
 
 ----
 

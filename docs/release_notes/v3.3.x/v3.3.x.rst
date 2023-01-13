@@ -1,0 +1,316 @@
+.. _release_notes_v3.3.x:
+
+====================
+v3.3.x Release Notes
+====================
+
+Platform Changes
+----------------
+
+v3.3.0 introduces mTLS between Peek Services. This is a security features
+which encrypts traffic between services when the services are are installed
+on different nodes.
+
+Major Plugin Changes
+--------------------
+There are no major plugin changes with this release.
+
+Deployment Changes
+------------------
+There are no deployment changes with this release.
+
+Windows Deployment
+``````````````````
+
+.. note:: This release is not supported on Windows.
+
+Linux Deployment
+````````````````
+
+Deployment for Linux remains the same after the  changes of Peek v3.1.x
+
+Debian: :ref:`debian_install_prerequisites`
+
+Redhat: :ref:`rhel_install_prerequisites`
+
+macOS Deployment
+````````````````
+
+Deployment for macOS remains the same after the major changes of Peek v3.1.x
+
+MacOS: :ref:`macos_install_prerequisites`
+
+
+Windows Deployment
+``````````````````
+
+Nil.
+
+.. note:: The windows deployment will change to use Windows Subsystem for Linux
+          in a future release.
+
+Migration Steps
+---------------
+
+There are no migration steps for v3.3.
+
+.. note:: Synerty recommends running the Initial Load Attune Blueprint for
+    faster loading of the PowerOn data.
+    You can download the Attune Community Addition App for Windows or MacOS FOR
+    FREE from `<www.servertribe.com>`_
+
+v3.3.4 Changes
+--------------
+
+Bug
+```
+
+* [PEEK-1831] - Payload is double encoded in PayloadEnvelope.data - Performance Problem.
+
+* [PEEK-1896] - Websocket UTF validation consumes MUCH cpu time.
+
+* [PEEK-1900] - Indexes - Field/Office Loading index updates from Logic uses excess CPU and crashes Peek
+
+* [PEEK-1901] - Index - Field/Office cache from logic causes performance issues and crashing
+
+* [PEEK-1906] - Websocket Server - Writes cause huge memory usage, Implement VortexWritePushProducer
+
+* [PEEK-1907] - Websocket Server - Connections fail to close/teardown
+
+* [PEEK-1908] - Vortex - Vortex heartbeat timeouts are very short, leading to crashes if Peek is under load for more than 30 seconds
+
+* [PEEK-1910] - VortexWritePushProducer - Storing large bytes causes excess memory usage, split into 128kb
+
+* [PEEK-1913] - Agent Loaders use PERIOD setting instead of SIZE setting for chunk size
+
+* [PEEK-1914] - Diagram - Performance - Lookups, ModelSets and CoordSets create vortexMsg on every request
+
+* [PEEK-1916] - GraphDB - Performance - TraceConfigs create vortexMsg on every request
+
+* [PEEK-1917] - Index - Make client handler \_replyToObserve and notifyOfUpdate wait for sendMessage and log REAL time
+
+* [PEEK-1918] - Index - Client Handler is sending EVERY update from Logic to EVERY device
+
+* [PEEK-1919] - Equipment Loader - Order the field names used to create Documents
+
+* [PEEK-1920] - Python black code formatting
+
+* [PEEK-1922] - Core Search - Fix bug when being notified of deleted chunks
+
+* [PEEK-1925] - Platform Subprocess Plugin - \[DISABLE\] Crashing subprocesses plugins spawn more subprocesses
+
+* [PEEK-1927] - Platform Subprocess Plugin - Update parent protocol to use bytesarray.append
+
+* [PEEK-1929] - Add limitConcurrency decorator to limit concurrent preparing of iOS App cache responses to 10
+
+* [PEEK-1930] - Vortex - Peek answers all requests concurrently, Implement limitConcurrency method decorator to queue response processing
+
+* [PEEK-1931] - Vortex - Add support for new connection throttling, to prevent 500 clients from connecting as soon as Peek starts
+
+* [PEEK-1932] - Vortex - Improve performance of zero argument calls for debounceCall decorator
+
+* [PEEK-1933] - Vortex - Ensure python client vortex UUIDs are random, change to uuid4
+
+* [PEEK-1934] - Vortex - Performance of VortexFactory.isOnline calls is very, very poor
+
+* [PEEK-1935] - Vortex - Remove buffered message queue from VortexWebsocketClient
+
+* [PEEK-1936] - Peek Platform - Remove use of TCP Vortexes from peek services
+
+* [PEEK-1937] - Peek Field / Peek Office, Increase max open files in systemctl services file
+
+* [PEEK-1938] - Vortex - Add optional debug messaging for payloads received and sent
+
+* [PEEK-1939] - Peek Platform - create config.json option to limit concurrent peer vortex connections
+
+* [PEEK-1940] - txHttpUtil - RuntimeError: Request.finish called on a request after its connection was lost
+
+Improvement
+```````````
+
+* [PEEK-1102] - GPS Integration - Inject GPS into PowerOn Vehicle Tracker SOAP
+
+* [PEEK-1123] - Inbox: Tapping a local notification should open the appropriate route
+
+* [PEEK-1125] - VortexJS needs to handle logged out state Enhancement
+
+* [PEEK-1173] - FAD - Create API subscription for works management system \(Outbound\)
+
+* [PEEK-1909] - Vortex - Add large vortex message logging
+
+* [PEEK-1911] - GraphDB / Index Blueprint - Rename Worker Task modules to end with "Task"
+
+* [PEEK-1912] - Indexes - Update all chunk load RPC calls to 120 second timeouts
+
+* [PEEK-1915] - Index - Rename ACICacheControllerABC.\_updateFromServerFilt to \_updateFromLogicFilt
+
+* [PEEK-1923] - Add 60 second logging of Peek process stats \(MEM, CPU, Network\)
+
+* [PEEK-1924] - Storage Service - Change to recreate plsql functions every start, instead of in migrations
+
+* [PEEK-1928] - ACICacheHandlerABC Split functional blocks into subclasses
+
+Task
+````
+
+* [PEEK-1228] - Add a format check to the Peek Core User's user 'Mobile' field
+
+v3.3.3 Changes
+--------------
+
+Bug
+```
+
+* [PEEK-1680] - Peek Enmac Diagram Loader fails to load. Tuple name does not begin with plugin name.
+
+* [PEEK-1782] - GraphDB Loader unexpected keyword 'segment'
+
+* [PEEK-1815] - txHttpUtil "invalid usageType 'O' to check extended key usage with" should not raise an error
+
+* [PEEK-1835] - Abstract Chunk Index - 6 hourly integrity check notifies all handlers for no updates
+
+Improvement
+```````````
+
+- [PEEK-1814] - Update subprocess support to use groups of subprocesses
+
+- [PEEK-1816] - Make Peek processes and subprocesses show process name in top \(not just "python"\)
+
+
+v3.3.2 Changes
+--------------
+
+Bug
+```
+
+* [PEEK-1808] - Abstract Chunked Index Offline Cache Check-in has a huge performance impact on field service
+
+v3.3.1 Changes
+--------------
+
+Bug
+```
+
+* [PEEK-750] - Peek DMS Diagram  Feeder lines disappear when Toggle Feeder Colours is turned on
+
+* [PEEK-1763] - VortexJS Errors popping up when confirming operating orders on iPad
+
+* [PEEK-1767] - Peek Overlays fail to Update
+
+* [PEEK-1803] - Abstract Chunked Index Field/Office server no longer get updates from logic service after initial load
+
+* [PEEK-1804] - Improve GraphDB subprocess logging
+
+* [PEEK-1807] - ENMAC Diagram Loader Make Loader not load pages if shapes have not changed
+
+* [PEEK-1808] - Abstract Chunked Index Offline Cache Check-in has a huge performance impact on field service
+
+* [PEEK-1809] - Fix incorrect exceptions errors in core\_user when users login
+
+* [PEEK-1811] - Peek Core Device Device filter resets when data updates arrive
+
+* [PEEK-1812] - Offline Caching GraphDB, Search and DocDB don't work when caching is complete, but cache checks are disabled
+
+Improvement
+```````````
+
+* [PEEK-1656] - GraphDB Loader Move GraphDB loading into subprocess
+
+* [PEEK-1747] - Platform Implement support for starting standalone plugins in subprocesses
+
+* [PEEK-1749] - Abstract Chunked Index Add support for caching in office/field service to speed up startup
+
+v3.3.0 Changes
+--------------
+
+* [PEEK-1520] - Peek Field App shows incorrect schedule version number
+
+* [PEEK-1575] - Docs bash ./build\_html\_docs.sh fails with Jinja2==3.1.2
+
+* [PEEK-1610] - EDNAR Branch does not exist before startEditing in diagram
+
+* [PEEK-1611] - Diagram Branch does not display in View Branches unless zoom level changes
+
+* [PEEK-1633] - Diagram  "showForEdit" , "blockApiUpdate" in lookup tuples requires default values
+
+* [PEEK-1636] - Diagram Branch and Location loader enabled flags are swapped
+
+* [PEEK-1648] - Diagram 'blockApiUpdate', 'showForEdit' need default values for Peek created lookup tuples
+
+* [PEEK-1649] - Diagram does not navigate to diagram when there are multiple positions for a component
+
+* [PEEK-1652] - DocDB Code Equipment Loader continuously loads DocDB
+
+* [PEEK-1654] - GraphDB Loader Stop point comparison is slow for comparing a large number of classes in config
+
+* [PEEK-1658] - ENMAC Equipment Loader Decide to partial index name or alias independently of each other
+
+* [PEEK-1659] - GPS Updates Trigger too frequent diagram compiles
+
+* [PEEK-1673] - Core Search Search Result tabs are not ordered but they should be
+
+* [PEEK-1674] - ENMAC Equipment Loader Equipment loader doesn't load conductors, even if their class is set.
+
+* [PEEK-1675] - Diagram Branch edit list is too long, modal taller than screen, start editing button at the bottom
+
+* [PEEK-1681] - Oracle Maximum identifier length does not match oracle database.
+
+* [PEEK-1683] - GraphDB Trace Loader Exceptions when trying to log debug message when no clients are online
+
+* [PEEK-1689] - ENMAC Diagram Loader Overlay Page Files fail to update
+
+* [PEEK-1690] - OSM Loader Check if directory exists and log an error so Peek doesn't throw an exception
+
+* [PEEK-1711] - pem bundle is malformed "No active exception to raise"
+
+* [PEEK-1718] - Diagram showForEdit failed to filter lookups
+
+* [PEEK-1720] - GraphDB Loader 'GraphSegmentSplitConfigTuple' object has no attribute 'componentAliasRe'
+
+* [PEEK-1722] - Performance issue in EnmaclmportPages.py for loop in 532
+
+* [PEEK-1732] - Peek Switching Permit Fields are silently dropped of someone removes permitId from custom SQL \(Fix=Error logging added\)
+
+* [PEEK-1733] - Peek Field and Office server fail to enable SSL
+
+* [PEEK-1735] - Reconnect VortexWebsocketClient on connection closed cleanly
+
+* [PEEK-1737] - VortexPY Improve robustness for reconnecting clients \(peek agents\) for getVortexUuidForIp
+
+* [PEEK-1738] - Peek Office and Peek Field don't handle the vortex dropping while they load.
+
+* [PEEK-1743] - Peek ENMAC Diagram Loader Page Import fails on StopIteration
+
+* [PEEK-1748] - Abstract Chunked Index Logic handler sends updates to all field and office vortexes
+
+* [PEEK-1751] - AttributeError module 'lib' has no attribute 'X509\_V\_FLAG\_CB\_ISSUER\_CHECK'
+
+* [PEEK-1753] - Abstract Chunk Loader Listing CPU processes percent is broken as its called randomly
+
+* [PEEK-1754] - Search Plugin Loading Keyword Index RPC times out
+
+* [PEEK-1755] - VortexPY Websocket reconnect doesn't set \_closed = False
+
+* [PEEK-1756] - VortexPY Websocket client/server don't handle tcp reconnect for same vortex
+
+Improvement
+```````````
+
+* [PEEK-1653] - ENMAC Diagram loader Improve diagram loader to load pages in subprocesses
+
+* [PEEK-1655] - Diagram Loader Add support for filtering out layers during import
+
+* [PEEK-1656] - GraphDB Loader Move GraphDB loading into subprocess
+
+* [PEEK-1699] - ENMAC Diagram Loader Add Component Class Name loading
+
+* [PEEK-1721] - Add pyspy to synerty-peek dependencies
+
+* [PEEK-1747] - Platform Implement support for starting standalone plugins in subprocesses
+
+* [PEEK-1750] - VortexPY Add py support for TupleStorage \(in sqlite\)
+
+Task
+````
+
+* [PEEK-1664] - Update DocDB Admin and user documentation.
