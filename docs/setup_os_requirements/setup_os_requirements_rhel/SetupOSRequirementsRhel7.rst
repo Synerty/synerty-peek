@@ -943,9 +943,9 @@ Set the PostgreSQL peek users password: ::
 .. note:: If you already have a database, you may now need to upgrade the timescale
           extension. ::
 
-    psql peek <<EOF
-    ALTER EXTENSION timescaledb UPDATE;
-    EOF
+            psql peek <<EOF
+            ALTER EXTENSION timescaledb UPDATE;
+            EOF
 
 ----
 
