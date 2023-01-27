@@ -125,6 +125,18 @@ Bug
 
 * [PEEK-1940] - txHttpUtil - RuntimeError: Request.finish called on a request after its connection was lost
 
+* [PEEK-1947] -  Peek Enmac Diagram Loader is sending too many expressions in a query list.
+
+* [PEEK-1948] - Peek Admin - Edit LDAP Settings tab navigates to Edit Internal Groups
+
+* [PEEK-1958] - Branch Index Compiler Unicode objects must be encoded before being hashed
+
+* [PEEK-1960] - Storage Service - peek\_storage\_service fails to create new schema
+
+* [PEEK-1967] - Branch Index Compiler TypeError "can't escape str to binary"
+
+* [PEEK-1969] - Enmac GIS Diagram Loader - TypeError  argument will not accept datetime.datetime
+
 Improvement
 ```````````
 
@@ -149,11 +161,6 @@ Improvement
 * [PEEK-1924] - Storage Service - Change to recreate plsql functions every start, instead of in migrations
 
 * [PEEK-1928] - ACICacheHandlerABC Split functional blocks into subclasses
-
-Task
-````
-
-* [PEEK-1228] - Add a format check to the Peek Core User's user 'Mobile' field
 
 v3.3.3 Changes
 --------------
