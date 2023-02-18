@@ -1,5 +1,5 @@
 FROM debian:11
-ENV RELEASE_BRANCH="v3.3.x"
+ENV RELEASE_BRANCH="v3.4.x"
 
 WORKDIR /root
 

@@ -1,5 +1,5 @@
-FROM peek-centos:v3.2.x
-ENV RELEASE_BRANCH="v3.2.x"
+FROM peek-centos:v3.3.x
+ENV RELEASE_BRANCH="v3.3.x"
 
 WORKDIR /root
 

@@ -1,5 +1,5 @@
-FROM debian:10
-ENV RELEASE_BRANCH="v3.3.x"
+FROM centos:7
+ENV RELEASE_BRANCH="v3.4.x"
 
 WORKDIR /root
 
@@ -11,8 +11,7 @@ ENV SONAR_VER="4.2.0.1873"
 ENV SONAR_URL="https://binaries.sonarsource.com/Distribution/sonar-scanner-cli"
 ENV NVM_URL="https://raw.githubusercontent.com/creationix/nvm"
 
-RUN apt update
-RUN apt install -y curl unzip
+RUN yum install -y unzip
 
 # Install NVM
 RUN curl --silent -o- ${NVM_URL}/v${NVM_VER}/install.sh | bash

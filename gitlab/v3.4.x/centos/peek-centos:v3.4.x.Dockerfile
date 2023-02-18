@@ -1,5 +1,5 @@
 FROM centos:7
-ENV RELEASE_BRANCH="v3.3.x"
+ENV RELEASE_BRANCH="v3.4.x"
 
 WORKDIR /root
 
