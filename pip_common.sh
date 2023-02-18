@@ -14,6 +14,7 @@ peek-plugin-chat
 peek-plugin-data-dms
 peek-plugin-diagram
 peek-plugin-diagram-trace
+peek-plugin-diagram-pdf-exporter
 peek-plugin-diagram-positioner
 peek-plugin-device-gps-integration
 peek-plugin-docdb-generic-menu
