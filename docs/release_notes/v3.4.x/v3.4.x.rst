@@ -1,0 +1,90 @@
+.. _release_notes_v3.4.x:
+
+====================
+v3.4.x Release Notes
+====================
+
+Platform Changes
+----------------
+
+This release contains a majour redevelopment for the offline capabilities
+ of Peek. 
+
+There are significant performance and memory improvements to the vortex
+ libraries and all plugins containing data indexes.
+
+Major Plugin Changes
+--------------------
+
+Introduction of the Diagram PDF Exporter plugin.
+
+v3.4.0 introduces PDF export support for the DMS Network Diagram. This allows
+either the visible network or trace context to be exported as a PDF document
+which the user can then download. When the Trace Export is selected, the
+area of the network which contains the trace is exported. Alternatively,
+when Visible Network is selected, the area of the network visible to the
+user will be the area exported. Page size, orientation, and maximum pages can
+be set to customise the PDF.
+
+v3.4.0 introduces Light Mode, this feature replaces the background of the
+network diagram with a white background and inverts only the colours
+necessary to be visible on a white background. The initial migration
+automatically detects and populates the light mode colours. The colours can
+be manually updated if required. Simply clicking the button in the network
+diagram will enable light mode, increasing the
+readability of the network diagram if required.
+
+Deployment Changes
+------------------
+
+There are no deployment changes with this release.
+
+Windows Deployment
+``````````````````
+
+.. note:: This release is not supported on Windows.
+
+Windows support might be possible in Peek version 4, however it will have 
+ a higher purchase and support cost to the customer.
+
+Linux Deployment
+````````````````
+
+Deployment for Linux remains the same after the  changes of Peek v3.1.x
+
+Debian: :ref:`debian_install_prerequisites`
+
+Redhat: :ref:`rhel_install_prerequisites`
+
+macOS Deployment
+````````````````
+
+Deployment for macOS remains the same after the major changes of Peek v3.1.x
+
+MacOS: :ref:`macos_install_prerequisites`
+
+
+Windows Deployment
+``````````````````
+
+Nil.
+
+.. note:: The windows deployment will change to use Windows Subsystem for Linux
+          in a future release.
+
+Migration Steps
+---------------
+
+There are no migration steps for v3.4.x
+
+.. note:: Synerty recommends running the Initial Load Attune Blueprint for
+    faster loading of the PowerOn data.
+    You can download the Attune Community Addition App for Windows or MacOS FOR
+    FREE from `<www.servertribe.com>`_
+
+
+v3.4.0 Changes
+--------------
+
+Bug
+```
