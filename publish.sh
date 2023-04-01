@@ -6,12 +6,14 @@ set -o errexit
 #------------------------------------------------------------------------------
 # Prechecks
 
-if ! [ -f "setup.py" ]; then
+if ! [ -f "setup.py" ]
+then
     echo "publish.sh must be run in the directory where setup.py is" >&2
     exit 1
 fi
 
-if [ -n "$(git status --porcelain)" ]; then
+if [ -n "$(git status --porcelain)" ]
+then
     echo "There are uncommitted changes, please make sure all changes are committed" >&2
     exit 1
 fi
@@ -19,12 +21,14 @@ fi
 VER="${1:?You must pass a version of the format 0.0.0 as the only argument}"
 
 DEVBUILD=0
-if echo ${VER} | grep -q '[[:alpha:]]'; then
+if echo ${VER} | grep -q '[[:alpha:]]'
+then
     echo "This is a DEV build"
     DEVBUILD=1
 fi
 
-if git tag | grep -q "^${VER}$"; then
+if git tag | grep -q "^${VER}$"
+then
     echo "Git tag for version ${VER} already exists." >&2
     exit 1
 fi
@@ -47,8 +51,10 @@ VER_FILES="${VER_FILES} ${PY_PACKAGE}/__init__.py"
 VER_FILES="${VER_FILES} ${PY_PACKAGE}/plugin_package.json"
 
 function updateFileVers() {
-    for file in ${VER_FILES}; do
-        if [ -f ${file} ]; then
+    for file in ${VER_FILES}
+    do
+        if [ -f ${file} ]
+        then
             sed -i "s/^__version__.*/__version__ = \'${VER}\'/g" ${file}
             sed -i "s/0.0.0/${VER}/g" ${file}
         fi
@@ -68,7 +74,8 @@ rm -rf dist *.egg-info
 
 python setup.py sdist --format=gztar
 
-if [ ${PYPI_PUBLISH} == "1" -a ${DEVBUILD} -eq 0 ]; then
+if [ ${PYPI_PUBLISH} == "1" -a ${DEVBUILD} -eq 0 ]
+then
     echo "Publishing ${PIP_PACKAGE} to PyPI"
     twine upload dist/${PIP_PACKAGE}-${VER}.tar.gz
 fi
@@ -76,16 +83,19 @@ fi
 #------------------------------------------------------------------------------
 # Reset the commit, we don't want versions in the commit
 # Tag and push this release
-if [ $HAS_GIT ]; then
+if [ $HAS_GIT ]
+then
     # We need to commit the config file with the version for Read The Docs
-    if [ -n "${VER_FILES_TO_COMMIT}" -a ${DEVBUILD} -eq 0 ]; then
+    if [ -n "${VER_FILES_TO_COMMIT}" -a ${DEVBUILD} -eq 0 ]
+    then
         git add ${VER_FILES_TO_COMMIT}
         git commit -m "Updated conf.py to ${VER}"
     fi
 
     git reset --hard
 
-    if [ ${DEVBUILD} -eq 0 ]; then
+    if [ ${DEVBUILD} -eq 0 ]
+    then
         echo "Tagging ${PIP_PACKAGE}"
         git tag ${VER}
 

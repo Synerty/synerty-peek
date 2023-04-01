@@ -3,7 +3,8 @@
 set -o nounset
 set -o errexit
 
-if [ -n "$(echo 'false' | bash -l)" ]; then
+if [ -n "$(echo 'false' | bash -l)" ]
+then
     echo "ERROR, Your bash setup spits out extra text when it's run"
     exit 1
 fi

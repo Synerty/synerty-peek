@@ -155,7 +155,8 @@ Clone all of the projects in your namespace/peek subgroup to ~/dev-peek/: ::
                 --data-raw '' | jq '.[] .name'
         }
 
-        if [ ! -d ${DIR} ]; then
+        if [ ! -d ${DIR} ]
+        then
             mkdir ${DIR}
             cd $DIR
             for REPO_NAME in `loadProjectIds`
@@ -183,7 +184,8 @@ Clone all of the projects in your namespace/peek-util subgroup to ~/dev-peek-uti
                 --data-raw '' | jq '.[] .name'
         }
 
-        if [ ! -d ${DIR} ]; then
+        if [ ! -d ${DIR} ]
+        then
             mkdir ${DIR}
             cd $DIR
             for REPO_NAME in `loadProjectIds`
@@ -207,7 +209,8 @@ Run setup.py in all of the repositories located in ~/dev-peek/: ::
         set -e
 
         cd ~/dev-peek
-        for DIR in */; do
+        for DIR in */
+        do
             cd "$DIR"
             NAME=${PWD##*/}
             echo "$NAME"
@@ -221,7 +224,8 @@ Run setup.py in all of the repositories located in ~/dev-peek-util/: ::
         set -e
 
         cd ~/dev-peek-util
-        for DIR in */; do
+        for DIR in */
+    do
             cd "$DIR"
             NAME=${PWD##*/}
             echo "$NAME"

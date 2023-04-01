@@ -3,7 +3,8 @@
 set -o errexit
 set -o nounset
 
-for IMAGE_NAME in peek-linux:v2.5.x peek-linux-build:v2.5.x peek-linux-doc:v2.5.x peek-linux-test:v2.5.x; do
+for IMAGE_NAME in peek-linux:v2.5.x peek-linux-build:v2.5.x peek-linux-doc:v2.5.x peek-linux-test:v2.5.x
+do
     echo "Building |${IMAGE_NAME}|"
 
     docker build -t ${IMAGE_NAME} -f ${IMAGE_NAME}.Dockerfile .

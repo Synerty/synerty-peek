@@ -10,9 +10,11 @@ SYSTEMS=("centos" "debian" "macos")
 
 # Update all versions to be the new release version
 
-for OS in "${SYSTEMS[@]}"; do
+for OS in "${SYSTEMS[@]}"
+do
     cd /Users/peek/dev-peek/synerty-peek/gitlab/${RELEASE_VERSION}/${OS} || exit
-    for filename in ./*; do
+    for filename in ./*
+    do
         echo ${filename}
         sed -i "s/${LAST_VERSION}/${RELEASE_VERSION}/g" ${filename}
         mv "$filename" "$(echo $filename | sed "s/${LAST_VERSION}/${RELEASE_VERSION}/")"
@@ -26,7 +28,8 @@ sed -i "s/RELEASE_BRANCH: \(.*\)/RELEASE_BRANCH: ${RELEASE_VERSION}/g" .gitlab-r
 echo "Release branch updated"
 
 # Connect to a peek server and copy the Python depedency list
-for OS in "${SYSTEMS[@]}"; do
+for OS in "${SYSTEMS[@]}"
+do
     cd /Users/peek/dev-peek/synerty-peek/gitlab/${RELEASE_VERSION}/${OS} || exit
     ssh ${PEEK_SERVER} 'pip freeze | grep -v peek' >pinned-deps-py
 done

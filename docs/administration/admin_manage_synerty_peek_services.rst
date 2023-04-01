@@ -39,14 +39,14 @@ Peek Service Management Commands
 
 .. note:: To run these commands on Linux, you need to login as user ``peek``.
 
-restart_peek.sh
+p_restart.sh
 ~~~~~~~~~~~~~~~
 
-``restart_peek.sh`` (re)starts Peek services registered on a host.
+``p_restart.sh`` (re)starts Peek services registered on a host.
 
 ::
 
-    [peek@host:~]$ restart_peek.sh
+    [peek@host:~]$ p_restart.sh
     Stopping peek_agent
     Stopping peek_worker
     Stopping peek_office
@@ -62,14 +62,14 @@ restart_peek.sh
     [peek@host:~]$
 
 
-stop_peek.sh
+p_stop.sh
 ~~~~~~~~~~~~
 
-``stop_peek.sh`` stops Peek services registered on a host.
+``p_stop.sh`` stops Peek services registered on a host.
 
 ::
 
-    [peek@host:~]$ stop_peek.sh
+    [peek@host:~]$ p_stop.sh
     Stopping peek_agent
     Stopping peek_worker
     Stopping peek_office

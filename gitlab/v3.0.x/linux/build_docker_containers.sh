@@ -10,7 +10,8 @@ IMAGE_NAMES="${IMAGE_NAMES} peek-linux-sonar:v3.0.x "
 IMAGE_NAMES="${IMAGE_NAMES} peek-linux-build:v3.0.x "
 IMAGE_NAMES="${IMAGE_NAMES} peek-linux-doc:v3.0.x "
 
-for IMAGE_NAME in ${IMAGE_NAMES}; do
+for IMAGE_NAME in ${IMAGE_NAMES}
+do
     echo "Building |${IMAGE_NAME}|"
 
     docker build --no-cache -t ${IMAGE_NAME} -f ${IMAGE_NAME}.Dockerfile .

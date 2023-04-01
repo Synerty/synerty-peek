@@ -184,7 +184,8 @@ Remove the v10 software ::
 Ensure the pg_hba is setup ::
 
     F="/var/lib/pgsql/12/data/pg_hba.conf"
-    if ! sudo grep -q 'peek' $F; then
+    if ! sudo grep -q 'peek' $F
+    then
        echo "host    peek    peek    127.0.0.1/32    trust" | sudo tee $F -a
        sudo sed -i 's,127.0.0.1/32            ident,127.0.0.1/32            md5,g' $F
     fi

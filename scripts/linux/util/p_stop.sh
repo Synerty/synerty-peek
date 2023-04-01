@@ -1,6 +1,7 @@
 #!/bin/bash
 
-for s in peek_agent peek_worker peek_office peek_field peek_logic; do
+for s in peek_agent peek_worker peek_office peek_field peek_logic
+do
     echo "Stopping $s"
     sudo systemctl stop ${s}.service
 done

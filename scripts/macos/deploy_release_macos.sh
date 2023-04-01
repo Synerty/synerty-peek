@@ -6,12 +6,14 @@ set -o errexit
 platformZip="${1}"
 pluginsZip="${2}"
 
-if ! [ -f $platformZip ]; then
+if ! [ -f $platformZip ]
+then
     echo "Platform release doesn't exist : $platformZip"
     exit 1
 fi
 
-if ! [ -f $pluginsZip ]; then
+if ! [ -f $pluginsZip ]
+then
     echo "Plugins release doesn't exist : $pluginsZip"
 fi
 
@@ -24,7 +26,8 @@ startDir=$(pwd)
 releaseDir=$(echo ~/peek_platform_macos)
 
 # Delete the existing dist dir if it exists
-if [ -d ${releaseDir} ]; then
+if [ -d ${releaseDir} ]
+then
     echo "Deleting old extracted release"
     rm -rf ${releaseDir}
 fi
@@ -42,7 +45,8 @@ tar xjf ${platformZip} -C ${releaseDir}
 # ------------------------------------------------------------------------------
 # Extract the plugins to a interim directory
 
-if [ -f $pluginsZip ]; then
+if [ -f $pluginsZip ]
+then
     echo "Extracting plugins to $releaseDir"
     tar xjf ${pluginsZip} -C ${releaseDir}
 fi
@@ -59,7 +63,8 @@ venvDir="/Users/peek/synerty-peek-${peekPkgVer}"
 
 # Check if this release is already deployed
 # Delete the existing dist dir if it exists
-if [ -d ${venvDir} ]; then
+if [ -d ${venvDir} ]
+then
     echo "directory already exists : ${venvDir}"
     echo "This release is already deployed, delete it to re-deploy"
 fi
@@ -90,7 +95,8 @@ popd
 
 # install the py wheels from the release
 
-if [ -f $pluginsZip ]; then
+if [ -f $pluginsZip ]
+then
     echo "Installing python enterprise packages"
     pushd "$releaseDir/peek_enterprise_macos_${peekPkgVer}"
     pip install --no-index --no-cache --find-links=. peek_plugin*.whl
@@ -132,14 +138,16 @@ echo "Run the following to switch to the new releases environment :"
 echo "export PATH=${q}${venvDir}/bin:${d}{PATH}${q}"
 echo " "
 
-if [ "${PEEK_AUTO_DEPLOY+x}" == "1" ]; then
+if [ "${PEEK_AUTO_DEPLOY+x}" == "1" ]
+then
     REPLY='Y'
 else
     read -p "Do you want to permanently enable this release? " -n 1 -r
     echo # (optional) move to a new line
 fi
 
-if [[ $REPLY =~ ^[Yy]$ ]]; then
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
     sed -i "s,export PEEK_ENV.*,export PEEK_ENV=${q}${venvDir}${q},g" ~/.bash_profile
     echo " "
     echo "Done"
