@@ -65,7 +65,8 @@ ${COMMUNITY_PLUGINS}
 #echo $here
 
 ## Plugins are siblings to this project
-#if ls -d $here/peek-plugin-* 2> /dev/null 2>&1; then
+#if ls -d $here/peek-plugin-* 2> /dev/null 2>&1
+#    then
 #    export ENTERPRISE_PKGS=`ls -d $here/peek-plugin-* | grep -v peek-plugin-base`
 #else
 #    echo "There are no plugins at $here"
@@ -108,7 +109,8 @@ export RED='\033[0;31m'
 export NC='\033[0m' # No Color
 
 # -------------------------------------
-if ! [ -f "setup.py" ]; then
+if ! [ -f "setup.py" ]
+then
     echo "$0 must be run in the directory where setup.py is" >&2
     exit 1
 fi

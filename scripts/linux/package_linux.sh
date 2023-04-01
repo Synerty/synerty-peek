@@ -7,7 +7,8 @@ source ./pip_common.sh
 
 HAS_PBZIP2=false
 
-if ! [ -x "$(command -v pbzip2)" ]; then
+if ! [ -x "$(command -v pbzip2)" ]
+    then
     echo 'pbzip2 is not installed, you may experience longer archiving time.'
     $HAS_PBZIP2=true
 fi
@@ -16,7 +17,8 @@ function maybeParallelTarBzip2() {
     output=$1
     dirToTar=$2
 
-    if [ $HAS_PBZIP2=true ]; then
+    if [ $HAS_PBZIP2=true ]
+    then
         tar --use-compress-prog=pbzip2 -cf $1 $2
     else
         tar cjf $1 $2
@@ -43,7 +45,8 @@ function downloadNodeModules() {
     mkdir -p "$nmDir/tmp"
     cd "$nmDir/tmp"
 
-    if [[ $packageJsonDirExists=true ]]; then
+    if [[ $packageJsonDirExists=true ]]
+    then
         # Download package.json
         echo $packageJsonDir
         cp "$packageJsonDir" .
@@ -137,7 +140,8 @@ function packageCICommunity() {
     wantedVer=${1-}
     wantedVer=${wantedVer/v/}
 
-    if [ -n "${wantedVer}" ]; then
+    if [ -n "${wantedVer}" ]
+    then
         echo "Requested version is $wantedVer"
     fi
 
@@ -158,7 +162,8 @@ function packageCICommunity() {
     cd $baseDir/platform
 
     pipWheelArgs="--no-cache --find-links=${platformPackagesDir}"
-    if [ -f "${pinnedDepsPyFile}" ]; then
+    if [ -f "${pinnedDepsPyFile}" ]
+    then
         echo "Using requirements file : ${pinnedDepsPyFile}"
         pipWheelArgs="-r ${pinnedDepsPyFile} $pipWheelArgs"
     else
@@ -166,7 +171,8 @@ function packageCICommunity() {
     fi
 
     echo "Downloading and creating wheels"
-    if [ -n "${wantedVer}" ]; then
+    if [ -n "${wantedVer}" ]
+    then
         pip wheel synerty-peek==${wantedVer} $pipWheelArgs
     else
         pip wheel synerty-peek $pipWheelArgs
@@ -175,7 +181,8 @@ function packageCICommunity() {
     # Make sure we've downloaded the right version
     peekPkgVer=$(cd $baseDir/platform && ls synerty_peek-* | cut -d'-' -f2)
 
-    if [ -n "${wantedVer}" -a "${wantedVer}" != "${peekPkgVer}" ]; then
+    if [ -n "${wantedVer}" -a "${wantedVer}" != "${peekPkgVer}" ]
+    then
         echo "We've downloaded version ${peekPkgVer}, but you wanted ver ${wantedVer}"
     else
         echo "We've downloaded version ${peekPkgVer}"
@@ -187,7 +194,8 @@ function packageCICommunity() {
     cd $baseDir/plugins
 
     pipWheelArgs="--find-links=${platformPackagesDir}"
-    if [ -f "${pinnedDepsPyFile}" ]; then
+    if [ -f "${pinnedDepsPyFile}" ]
+    then
         echo "Using requirements file : ${pinnedDepsPyFile}"
         pipWheelArgs="-r ${pinnedDepsPyFile} $pipWheelArgs"
     else
@@ -197,7 +205,8 @@ function packageCICommunity() {
     # Create the plugins release
     # Copy over the community plugins
     communityPls=""
-    for plugin in ${COMMUNITY_PLUGINS}; do
+    for plugin in ${COMMUNITY_PLUGINS}
+    do
         communityPls="${communityPls} `echo ${platformPackagesDir}/${plugin}*.gz`"
     done
     pip wheel ${pipWheelArgs} ${communityPls}
@@ -247,7 +256,8 @@ function packageCICommunity() {
 
     mkdir $baseDir/init && pushd $baseDir/init
 
-    for s in peek_logic peek_worker peek_office peek_field peek_agent; do
+    for s in peek_logic peek_worker peek_office peek_field peek_agent
+    do
         cp ${platformReposDir}/synerty-peek/scripts/linux/init/${s}.service ${s}.service
     done
     popd
@@ -257,10 +267,15 @@ function packageCICommunity() {
 
     mkdir $baseDir/util && pushd $baseDir/util
 
-    utilScripts="restart_peek.sh stop_peek.sh watch.sh cat_queues.sh"
-    for s in $utilScripts; do
+    utilScripts="p_restart.sh p_stop.sh p_watch.sh p_cat_queues.sh"
+    for s in $utilScripts;
+    do
         cp ${platformReposDir}/synerty-peek/scripts/linux/util/${s} ${s}
     done
+
+    cp -p p_restart.sh restart_peek.sh
+    cp -p p_stop.sh stop_peek.sh
+
     popd
 
     # ------------------------------------------------------------------------------
@@ -273,7 +288,8 @@ function packageCICommunity() {
     mv ${baseDir} ${releaseDir}
 
     # Delete an old release zip if it exists
-    if [ -f ${releaseZip} ]; then
+    if [ -f ${releaseZip} ]
+    then
         rm ${releaseZip}
     fi
 
@@ -312,7 +328,8 @@ function packageCIEnterprisePlugins() {
     cacheEdnarNodeModules
 
     pipWheelArgs="--no-cache --find-links=. --find-links=${COMMUNITY_PACKAGEs}"
-    if [ -f "${pinnedDepsPyFile}" ]; then
+    if [ -f "${pinnedDepsPyFile}" ]
+    then
         echo "Using requirements file : ${pinnedDepsPyFile}"
         pipWheelArgs="-r ${pinnedDepsPyFile} $pipWheelArgs"
     else
@@ -347,12 +364,14 @@ function printUsageAndExit() {
 }
 
 function packageOnGitLabCI() {
-    if [ "${release}" == "community" ]; then
+    if [ "${release}" == "community" ]
+    then
         # TODO: check arguments before invoke
         #  ./scripts/linux/package_linux.sh: line 18: 2: unbound variable
         #  https://gitlab.synerty.com/louis-lu/peek/community/synerty-peek/-/jobs/14581
         packageCICommunity $1 $2 $3 $4 $5
-    elif [ "${release}" == "enterprise" ]; then
+    elif [ "${release}" == "enterprise" ]
+    then
         # TODO: check arguments before invoke
         packageCIEnterprisePlugins $1 $2 $3 $4 $5
     else
@@ -363,7 +382,8 @@ function packageOnGitLabCI() {
 # main
 platform=""
 release=""
-while getopts ":r:" o; do
+while getopts ":r:" o
+do
     case "${o}" in
     r)
         release=${OPTARG}

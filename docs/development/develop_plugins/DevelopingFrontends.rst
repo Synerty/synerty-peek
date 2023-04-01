@@ -140,7 +140,7 @@ files.
 ::
 
     vi pofDiagram.component.web.html
-    restart_peek.sh
+    p_restart.sh
 
 #4 Monitor the logs and refresh Peek Desktop
 
@@ -153,7 +153,7 @@ files.
 ::
 
     rm -rf ~/peek-office-service.home/frontendSrcOverlayDir/peek_plugin_enmac_diagram
-    restart_peek.sh
+    p_restart.sh
 
 Live Updating for Development
 -----------------------------

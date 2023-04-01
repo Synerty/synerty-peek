@@ -6,9 +6,11 @@ set -o errexit
 IS_DEBIAN=0
 IS_REDHAT=0
 
-if [ -f /etc/redhat-release ]; then
+if [ -f /etc/redhat-release ]
+then
     IS_REDHAT=1
-elif [ -f /etc/debian_version ]; then
+elif [ -f /etc/debian_version ]
+then
     IS_DEBIAN=1
 else
     echo "Unknown OS type" >&2
@@ -18,12 +20,14 @@ fi
 communityZip="${1}"
 enterpriseZip="${2}"
 
-if ! [ -f $communityZip ]; then
+if ! [ -f $communityZip ]
+then
     echo "community release doesn't exist : $communityZip"
     exit 1
 fi
 
-if ! [ -f $enterpriseZip ]; then
+if ! [ -f $enterpriseZip ]
+then
     echo "Enterprise release doesn't exist : $enterpriseZip"
 fi
 
@@ -36,7 +40,8 @@ startDir=$(pwd)
 releaseDir=$(echo ~/peek_community_linux)
 
 # Delete the existing dist dir if it exists
-if [ -d ${releaseDir} ]; then
+if [ -d ${releaseDir} ]
+then
     echo "Deleting old extracted release"
     rm -rf ${releaseDir}
 fi
@@ -54,7 +59,8 @@ tar xjf ${communityZip} -C ${releaseDir}
 # ------------------------------------------------------------------------------
 # Extract the release to a interim directory
 
-if [ -f $enterpriseZip ]; then
+if [ -f $enterpriseZip ]
+then
     echo "Extracting plugins to $releaseDir"
     tar xjf ${enterpriseZip} -C ${releaseDir}
 fi
@@ -71,7 +77,8 @@ venvDir="/home/peek/synerty-peek-${peekPkgVer}"
 
 # Check if this release is already deployed
 # Delete the existing dist dir if it exists
-if [ -d ${venvDir} ]; then
+if [ -d ${venvDir} ]
+then
     echo "directory already exists : ${venvDir}"
     echo "This release is already deployed, delete it to re-deploy"
 fi
@@ -101,7 +108,8 @@ popd
 # Install the enterprise python plugins
 
 # install the py wheels from the release
-if [ -f $enterpriseZip ]; then
+if [ -f $enterpriseZip ]
+then
     echo "Installing python enterprise packages"
     pushd "$releaseDir/peek_enterprise_linux_${peekPkgVer}"
     pip install --no-index --no-cache --find-links=. peek_*.whl
@@ -125,7 +133,8 @@ sp="$(echo $venvDir/lib/python*/site-packages)"
 mv $releaseDir/field-app/node_modules $sp/peek_field_app
 mv $releaseDir/office-app/node_modules $sp/peek_office_app
 mv $releaseDir/admin-app/node_modules $sp/peek_admin_app
-if [ -f $enterpriseZip ]; then
+if [ -f $enterpriseZip ]
+then
     cp -r $releaseDir/peek_enterprise_linux*/ednar-peek-app/node_modules \
      $sp/peek_plugin_zepben_ednar_dms_diagram/_private/office-app
 fi
@@ -156,14 +165,16 @@ echo "Run the following to switch to the new releases environment :"
 echo "export PATH=${q}${venvDir}/bin:${d}{PATH}${q}"
 echo " "
 
-if [ "${PEEK_AUTO_DEPLOY+x}" == "1" ]; then
+if [ "${PEEK_AUTO_DEPLOY+x}" == "1" ]
+then
     REPLY='Y'
 else
     read -p "Do you want to permanently enable this release? " -n 1 -r
     echo # (optional) move to a new line
 fi
 
-if [[ $REPLY =~ ^[Yy]$ ]]; then
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
     sed -i "s,export PEEK_ENV.*,export PEEK_ENV=${q}${venvDir}${q},g" ~/.bashrc
     echo " "
     echo "Done"
@@ -174,15 +185,18 @@ fi
 # ------------------------------------------------------------------------------
 # OPTIONALLY - Set the init scripts for auto start
 
-if [ "${PEEK_AUTO_DEPLOY+x}" == "1" ]; then
+if [ "${PEEK_AUTO_DEPLOY+x}" == "1" ]
+then
     REPLY='Y'
 else
     read -p "Do you want to update the init scripts to auto start peek? " -n 1 -r
     echo # (optional) move to a new line
 fi
 
-if [[ $REPLY =~ ^[Yy]$ ]]; then
-    for s in peek_logic peek_worker peek_office peek_field peek_agent; do
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+    for s in peek_logic peek_worker peek_office peek_field peek_agent
+    do
         FILE="${s}.service"
         TO="/lib/systemd/system/"
 

@@ -101,7 +101,8 @@ peek development directories.
 ::
 
     cd ~/dev-peek
-    for dir in */; do
+    for dir in */
+    do
         pushd ${dir}
             NAME=${PWD##*/}
             echo "Checking out $NAME"

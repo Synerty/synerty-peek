@@ -2,10 +2,12 @@
 
 source ./pip_common.sh
 
-if [ "${1}" = 'community' ]; then
+if [ "${1}" = 'community' ]
+then
     PACKAGE_GRP="community"
     PACKAGES=${COMMUNITY_PKGS}
-elif [ "${1}" = 'enterprise' ]; then
+elif [ "${1}" = 'enterprise' ]
+then
     PACKAGE_GRP="enterprise"
     PACKAGES=${ENTERPRISE_PKGS}
 else
@@ -29,10 +31,12 @@ mkdir -p ${SRC_PATH} && cd ${SRC_PATH}
 
 # Clone the repos
 repoUrls=""
-for repo in ${PACKAGES}; do
+for repo in ${PACKAGES}
+do
     rm -fR ${repo}
 
-    if [ "${CI_PROJECT_ROOT_NAMESPACE}" = 'peek' ]; then
+    if [ "${CI_PROJECT_ROOT_NAMESPACE}" = 'peek' ]
+    then
         pathTo=peek/${PACKAGE_GRP}
     else
         pathTo=${CI_PROJECT_ROOT_NAMESPACE}/${PACKAGE_GRP}
@@ -44,13 +48,16 @@ echo ${repoUrls} | xargs -n1 -P4 git clone
 
 
 # Try to switch to a specific branch, otherwise use master
-for repo in ${PACKAGES}; do
+for repo in ${PACKAGES}
+do
     pushd ${repo}
-    if git fetch origin "${CI_COMMIT_REF_NAME}"; then
+    if git fetch origin "${CI_COMMIT_REF_NAME}"
+    then
         echo "${repo}: Checking out ${CI_COMMIT_REF_NAME}"
         git checkout "${CI_COMMIT_REF_NAME}"
 
-    elif git fetch origin "${RELEASE_BRANCH}"; then
+    elif git fetch origin "${RELEASE_BRANCH}"
+    then
         echo "${repo}: Checking out ${RELEASE_BRANCH}"
         git checkout "${RELEASE_BRANCH}"
     else
