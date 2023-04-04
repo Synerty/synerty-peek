@@ -14,6 +14,8 @@ on the Peek server at http://127.0.0.1:8015.
     :caption: Contents:
 
     admin_config_platform
+    configure_ssl/configure_ssl
+    configure_ssl/ssl_config_json
     admin_manage_synerty_peek_services
     admin_run_synerty_peek
     logs/logs
