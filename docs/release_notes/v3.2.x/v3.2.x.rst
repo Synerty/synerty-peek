@@ -6,9 +6,9 @@ v3.2.x Release Notes
 
 Platform Changes
 ----------------
+
 This release contains several quality of life improvements to Peek Office.
-Peek now includes Capacitor v3.5.
-LDAP nested groups are now supported.
+Peek now includes Capacitor v3.5. LDAP nested groups are now supported.
 
 Major Plugin Changes
 --------------------
@@ -40,13 +40,6 @@ Deployment for macOS remains the same after the major changes of Peek v3.1.x
 MacOS: :ref:`macos_install_prerequisites`
 
 
-Windows Deployment
-``````````````````
-
-Nil.
-
-.. note:: The windows deployment will change to use Windows Subsystem for Linux
-          in a future release.
 
 Migration Steps
 ---------------
@@ -92,50 +85,63 @@ v3.2.0 Steps
 
         restart_peek.sh
 
+v3.2.12 Changes
+---------------
+
+Bug
+```
+
+* [PEEK-1696] - EventDB TupleObservables continuously loading making
+  PostgreSQL take 100% or all CPUs
+
+* [PEEK-2036] - ENMAC SQL Agent Timeout retry causes 100% Logic service CPU
+  usage
+
 v3.2.11 Changes
 ---------------
 
 Bug
----
+```
 
-* [PEEK-1854] - EDNAR: Show Customers/Historical jobs button returns the user to the default/home view on the diagram
+* [PEEK-1854] - Show Customers/Historical jobs button returns the user to
+  the default/home view on the diagram
 
-* [PEEK-1866] - EDNAR: showBranch API doesn't show the branch
+* [PEEK-1866] - EDNAR showBranch API doesn't show the branch
 
 Improvement
------------
+```````````
 
-* [PEEK-1869] - EDNAR: add Peek Office version restful API
+* [PEEK-1869] - EDNAR add Peek Office version restful API
 
 v3.2.10 Changes
 ---------------
 
 Bug
----
+```
 
-* [PEEK-750] - Peek DMS Diagram - Feeder lines disappear when ‘Toggle Feeder Colours’ is turned on
+* [PEEK-750] - Diagram Feeder lines disappear when ‘Toggle Feeder Colours’ is turned on
 
 v3.2.9 Changes
 --------------
 
 Bug
----
+```
 
 * [PEEK-1767] - Peek Overlays fail to Update
 
 Improvement
------------
+```````````
 
-* [PEEK-1692] - OSM Loader - Add Enabled / Disabled button in settings for loader
+* [PEEK-1692] - OSM Loader Add Enabled Disabled button in settings for loader
 
-* [PEEK-1691] - OSM Loader - Change plugin name displayed in Peek Admin to "Open Street Map Loader"
+* [PEEK-1691] - OSM Loader Change plugin name displayed in Peek Admin to "Open Street Map Loader"
 
 Task
-----
+````
 
-* [PEEK-1705] - 220829 Update Graph DB Loader documentation
+* [PEEK-1705] - Update Graph DB Loader documentation
 
-* [PEEK-1694] - 220824 Correct Errors in Admin Doc build
+* [PEEK-1694] - Correct Errors in Admin Doc build
 
 v3.2.8 Changes
 --------------
@@ -145,51 +151,51 @@ Bug
 
 * [PEEK-1748] - Abstract Chunked Index Logic handler sends updates to all field and office vortexes
 
-* [PEEK-1743] - Peek Enmac Diagram Loader Page Import fails on StopIteration
+* [PEEK-1743] - Peek ENMAC Diagram Loader Page Import fails on StopIteration
 
 * [PEEK-1732] - Peek Switching Permit Fields are silently dropped of someone removes permitId from custom SQL \(Fix=Error logging added\)
 
-* [PEEK-1724] - 220904 Parsing invalid pem file for SSL server throws an exception, not a useful error
+* [PEEK-1724] - Parsing invalid pem file for SSL server throws an exception, not a useful error
 
 * [PEEK-1723] - VortexPY VortexPayloadProtocol.vortexMsgReceived infinite-ly appends to \_data
 
 * [PEEK-1722] - Performance issue in EnmaclmportPages.py for loop in 532
 
-* [PEEK-1720] - GraphDB Loader: 'GraphSegmentSplitConfigTuple' object has no attribute 'componentAliasRe'
+* [PEEK-1720] - GraphSegmentSplitConfigTuple object has no attribute 'componentAliasRe'
 
-* [PEEK-1719] - GraphDB: '\_matchSplitStopPointConfig\(\)' missing 1 required positional argument: 'stopCfg'
+* [PEEK-1719] - GraphDB '\_matchSplitStopPointConfig\(\)' missing 1 required positional argument: 'stopCfg'
 
-* [PEEK-1718] - Diagram: showForEdit failed to filter lookups
+* [PEEK-1718] - Diagram showForEdit failed to filter lookups
 
 * [PEEK-1717] - Peek GraphDb Loader has no module called 'peek\_plugin\_graphdb.\_private.storage.GraphSegmentSplitConfigTuple'
 
-* [PEEK-1716] - 220831 Websocket client connect fail message looks like top line of exception
+* [PEEK-1716] - Websocket client connect fail message looks like top line of exception
 
-* [PEEK-1715] - 220831 mTLS peek\_logic\_server doesn't pass sslBundlePath to admin site setup
+* [PEEK-1715] - mTLS peek\_logic\_server doesn't pass sslBundlePath to admin site setup
 
-* [PEEK-1714] - 220831 mTLS Feature - Disabling mTLS still parses certificate files
+* [PEEK-1714] - mTLS Feature Disabling mTLS still parses certificate files
 
-* [PEEK-1713] - 220831 Enmac Equipment Loader name 'qryResult" not defined
+* [PEEK-1713] - ENMAC Equipment Loader name 'qryResult" not defined
 
-* [PEEK-1712] - 220830 mTLS Feature list index out of range on peer ca
+* [PEEK-1712] - mTLS Feature list index out of range on peer ca
 
-* [PEEK-1710] - 220830 Pressing ctrl\+c before peek\_core\_user has started raises exception
+* [PEEK-1710] - Pressing ctrl\+c before peek\_core\_user has started raises exception
 
-* [PEEK-1708] - 220830 mTLS features throws an exception when paths don't exist \(it should log an error with the missing path\)
+* [PEEK-1708] - mTLS features throws an exception when paths don't exist
 
-* [PEEK-1707] - 220830 Weboscket client has no close method
+* [PEEK-1707] - Weboscket client has no close method
 
-* [PEEK-1706] - VortexPY: base64EncodeDefer called from a non-main thread
+* [PEEK-1706] - VortexPY base64EncodeDefer called from a non-main thread
 
-* [PEEK-1703] - Fix bug with VortexWebsocketClient processing received messages slowly
+* [PEEK-1703] - VortexWebsocketClient processing received messages slowly
 
-* [PEEK-1702] - 220826 Equipment Loader is importing disabled component classes
+* [PEEK-1702] - Equipment Loader is importing disabled component classes
 
-* [PEEK-1701] - 220826 Equipment Loader is Importing Disabled Component Classes into Search Object Database
+* [PEEK-1701] - Equipment Loader is Importing Disabled Component Classes into Search Object Database
 
-* [PEEK-1696] - Orion  EventDB TupleObservables continuously loading making PostgreSQL take 100% or all CPUs
+* [PEEK-1696] - EventDB TupleObservables continuously loading making PostgreSQL take 100% or all CPUs
 
-* [PEEK-1689] - 220822 Enmac Diagram Loader Overlay Page Files fail to update
+* [PEEK-1689] - ENMAC Diagram Loader Overlay Page Files fail to update
 
 * [PEEK-1683] - GraphDB Trace Loader Exceptions when trying to log debug message when no clients are online
 
@@ -205,11 +211,11 @@ Bug
 
 * [PEEK-1649] - Diagram does not navigate to diagram when there are multiple positions for a component
 
-* [PEEK-1648] - Diagram 'blockApiUpdate', 'showForEdit' need default values for Peek created lookup tuples
+* [PEEK-1648] - Diagram 'blockApiUpdate' 'showForEdit' need default values for Peek created lookup tuples
 
 * [PEEK-1636] - Diagram Branch and Location loader enabled flags are swapped
 
-* [PEEK-1633] - Diagram "showForEdit" , "blockApiUpdate" in lookup tuples requires default values
+* [PEEK-1633] - Diagram "showForEdit" ,"blockApiUpdate" in lookup tuples requires default values
 
 * [PEEK-1611] - Diagram Branch does not display in View Branches unless zoom level changes
 
@@ -238,10 +244,6 @@ Task
 
 * [PEEK-1679] - Add the log monitoring scripts to synerty-peek.
 
-* [PEEK-1678] - Release v3.2.8
-
-* [PEEK-1676] - Review the Peek Training Material
-
 * [PEEK-1612] - Update Colour Picker component to be able to do searching with a dropdown list
 
 v3.2.7 Changes
@@ -250,7 +252,7 @@ v3.2.7 Changes
 Bug
 ```
 
-* [PEEK-1658] - Enmac Equipment Loader Decide to partial index name or alias independently of each other
+* [PEEK-1658] - ENMAC Equipment Loader Decide to partial index name or alias independently of each other
 
 * [PEEK-1652] - DocDB Code Equipment Loader continuously loads DocDB
 
@@ -305,17 +307,17 @@ Bug
 
 * [PEEK-1547] - DB Engine Args are not applied to each plugins connectors
 
-* [PEEK-1544] - Offline caching on iOS runs out of indexedDB  Implement capacitor SQLite storage
+* [PEEK-1544] - Offline caching on iOS runs out of indexedDB Implement capacitor SQLite storage
 
 * [PEEK-1538] - ENMAC SQL Job Operations PERMIT Entity Attribute Value loading is TOO SLOW
 
-* [PEEK-1534] - Fix Web Workers for VortexJS encoding / decoding
+* [PEEK-1534] - Fix Web Workers for VortexJS encoding and decoding
 
-* [PEEK-1528] - EDNAR: Failed to go to another world in DMS diagram via component context menu
+* [PEEK-1528] - EDNAR Failed to go to another world in DMS diagram via component context menu
 
 * [PEEK-1526] - ENMAC Diagram Loader Overlays stop processing
 
-* [PEEK-1525] - ENMAC Diagram Loader Unicode Text Error, pl\_diagram."DispText".text = '1Ã'
+* [PEEK-1525] - ENMAC Diagram Loader Unicode Text Error pl\_diagram."DispText".text = '1Ã'
 
 * [PEEK-1523] - Peek Offline Caching EnergyQ data offline causes Brave to use 2gb of memory and crash
 
@@ -360,7 +362,7 @@ Bug
 
 *	[PEEK-1495] - Peek sometimes fails to force log out user from old UI
 
-*	[PEEK-1492] - peek-plugin-base-js  Expression has changed after it was checked. Previous value for 'show'
+*	[PEEK-1492] - peek-plugin-base-js Expression has changed after it was checked. Previous value for 'show'
 
 *	[PEEK-1489] - Peek Office asks for location information, this should only be on peek-field
 
@@ -372,7 +374,7 @@ Bug
 
 *	[PEEK-1482] - GraphDB Starting a trace from a start edge fails to try trace in both directions
 
-*	[PEEK-1480] - Enmac Connectivity Loader includes patches in its load, which breaks connectivity
+*	[PEEK-1480] - ENMAC Connectivity Loader includes patches in its load, which breaks connectivity
 
 *	[PEEK-1479] - Diagram Edit clicking on disp group doesn't select disp group
 
@@ -380,11 +382,11 @@ Bug
 
 *	[PEEK-1474] - Event filter attributes are still visible in field when removed
 
-*	[PEEK-1472] - Enmac Equipment Loader Attributes load SQL is consistently slow, 3s\+
+*	[PEEK-1472] - ENMAC Equipment Loader Attributes load SQL is consistently slow, 3s\+
 
-*	[PEEK-1471] - Enmac Equipment Loader Importing chunks blocks reactor
+*	[PEEK-1471] - ENMAC Equipment Loader Importing chunks blocks reactor
 
-*	[PEEK-1470] - Enmac Switching Loader Importing chunks blocks reactor
+*	[PEEK-1470] - ENMAC Switching Loader Importing chunks blocks reactor
 
 *	[PEEK-1469] - ENMAC Realtime Loader Priority Keys is not sent on agent restart
 
@@ -401,11 +403,11 @@ Bug
 Improvement
 ```````````
 
-*	[PEEK-1494] - Field Capacitor App  Upgrade iOS Dependency to 2.5.0
+*	[PEEK-1494] - Field Capacitor App Upgrade iOS Dependency to 2.5.0
 
 *	[PEEK-1493] - Capacitor app needs to default the websocket to port 8000, not 8001
 
-*	[PEEK-1473] - Enmac Diagram Loader  Change font size warning to debug
+*	[PEEK-1473] - ENMAC Diagram Loader Change font size warning to debug
 
 Task
 ````
@@ -424,15 +426,15 @@ Bug
 
 *	[PEEK-1432] - Peek Office and Peek Field build web app twice
 
-*	[PEEK-1430] - Diagram  Positioning by key located at multiple positions needs to prompt user
+*	[PEEK-1430] - Diagram Positioning by key located at multiple positions needs to prompt user
 
-*	[PEEK-1429] - Core Device  Observing OfflineConfig before enrolment throws exception
+*	[PEEK-1429] - Core Device Observing OfflineConfig before enrolment throws exception
 
-*	[PEEK-1427] - ENMAC Diagram Loader  Job Loader may silently fail to load shapes
+*	[PEEK-1427] - ENMAC Diagram Loader Job Loader may silently fail to load shapes
 
 *	[PEEK-1426] - Jobs fail to position on diagram because diagram only contains only operations
 
-*	[PEEK-1425] - ENMAC GraphDB Loader  Vertices are imported with wrong substation class
+*	[PEEK-1425] - ENMAC GraphDB Loader Vertices are imported with wrong substation class
 
 *	[PEEK-1419] - ENMAC Equipment Loader filters out components with Aliases beginning with "ALIAS-"
 
@@ -441,7 +443,7 @@ Improvement
 
 *	[PEEK-1438] - Change log rotator to rotate daily, instead of on size
 
-*	[PEEK-1428] - GraphDB  Add trace rule logging
+*	[PEEK-1428] - GraphDB Add trace rule logging
 
 v3.2.0 Changes
 --------------
@@ -458,8 +460,8 @@ Bug
 Improvement
 ```````````
 
-*	[PEEK-1382] - 220120 Update rxJS takeUntil and filter to rxjs 6\+ syntax
+*	[PEEK-1382] - Update rxJS takeUntil and filter to rxjs 6\+ syntax
 
-*	[PEEK-1381] - 220126 Reformat all typescript code with prettier;
+*	[PEEK-1381] - Reformat all typescript code with prettier;
 
 
