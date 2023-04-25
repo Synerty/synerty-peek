@@ -7,11 +7,11 @@ v3.4.x Release Notes
 Platform Changes
 ----------------
 
-This release contains a majour redevelopment for the offline capabilities
- of Peek. 
+This release contains a major redevelopment for the offline capabilities
+of Peek.
 
 There are significant performance and memory improvements to the vortex
- libraries and all plugins containing data indexes.
+libraries and all plugins containing data indexes.
 
 Major Plugin Changes
 --------------------
@@ -45,7 +45,7 @@ Windows Deployment
 .. note:: This release is not supported on Windows.
 
 Windows support might be possible in Peek version 4, however it will have 
- a higher purchase and support cost to the customer.
+a higher purchase and support cost to the customer.
 
 Linux Deployment
 ````````````````
@@ -82,9 +82,114 @@ There are no migration steps for v3.4.x
     You can download the Attune Community Addition App for Windows or MacOS FOR
     FREE from `<www.servertribe.com>`_
 
+User Acceptance Test Results
+----------------------------
+
+Peek v3.4.0 User Acceptance Test results can be found at:
+:ref:`release_notes_v3.4.x_uat` .
 
 v3.4.0 Changes
 --------------
 
 Bug
 ```
+
+* [PEEK-1559] - Add diagram support for wrapping text after X chars
+
+* [PEEK-1902] - iPads on slow network connections spawn hundreds of websocket connections
+
+* [PEEK-1904] - iPads Quitting iOS app and re-opening it again causes re-caching to occur
+
+* [PEEK-1905] - Add timeout and retry for iPads caching request
+
+* [PEEK-1952] - Update Search UI to use "initialLoadComplete" flag
+
+* [PEEK-1956] - Fix peek-plugin-livedb to write to datababse in logic service
+
+* [PEEK-1957] - Update username login to replace upper case characters to lower
+
+* [PEEK-1976] - Correct LiveDBItem SQLAlchemy UnicodeDecodeError
+
+* [PEEK-2007] - Inserting iPad GPS Location is blocking in reactor thread
+
+* [PEEK-2008] - Update dbSessionCreator to not allow plugins to run database work in main thread
+
+* [PEEK-2009] - Offline status updates cause TupleAction timeouts
+
+* [PEEK-2013] - Improve support for users with special characters in password
+
+* [PEEK-2014] - Add general setting LDAP Enable @domain support
+
+* [PEEK-2015] - Offline Caching on slow connections saturates websocket
+
+* [PEEK-2016] - Ldap builtins.KeyError userPrincipalName
+
+* [PEEK-2019] - Offline Loaders lose state
+
+* [PEEK-2021] - Remove file watching code and replace with LoopingCall for geojson file
+
+* [PEEK-2022] - Missing default OSM settings when enabling plugin
+
+* [PEEK-2026] - VortexStatus error and information logging were swapped
+
+* [PEEK-2027] - Correct Start log messages to print sslEnableMutualTLS instead of sslEnable
+
+* [PEEK-2028] - Fixed TupleDataOfflineObserverService to filter from payload
+
+* [PEEK-2029] - Vortexjs undefined has no attribute SQL
+
+* [PEEK-2032] - Diagram zooming in while hovering over a tooltip area triggers the docdb tooltip
+
+* [PEEK-2034] - Remove angular circular references
+
+* [PEEK-2035] - Multiple searches are run at once as letters are typed
+
+* [PEEK-2036] - Agent Timeout retry causes 100% Logic service CPU usage
+
+* [PEEK-2040] - Update Peek Field to serve port 8000 with self signed certificates
+
+* [PEEK-2049] - Throttle GPS Location Updates from iPad
+
+* [PEEK-2050] - Remove upper case from Usernames
+
+* [PEEK-2053] - Diagram Tooltips stay up when panning on iPad
+
+* [PEEK-2054] - Remove Layer list filter case sensitivity
+
+* [PEEK-2055] - Remove Shaking iPad to undo typing support in Peek Field App
+
+* [PEEK-2072] - Update SettingProperty to store as float values
+
+Improvement
+```````````
+
+* [PEEK-2018] - Redesign Offline Caching logic to use state machine pattern
+
+* [PEEK-2020] - Update logic API to return all usersLoggedIn
+
+* [PEEK-2023] - Add setting to enable partially indexing alias
+
+* [PEEK-2024] - Add support for indexing component_header.user_reference
+
+* [PEEK-2025] - Add master "Disable All Caching" switch in Admin settings
+
+* [PEEK-2030] - Change TupleDataOfflineObserverService to return an empty array of tuples if askServerEnabled=false
+
+* [PEEK-2031] - Add indication of slow network to home screen
+
+* [PEEK-2033] - Add support for excluding keywords for search engine
+
+* [PEEK-2048] - Make plugin loading failure print useful exceptions
+
+* [PEEK-2104] - Add text shape declutter level overrides
+
+Task
+````
+
+* [PEEK-1679] - Add the queue checking script to deployment
+
+* [PEEK-1984] - Replace ujson dependency with json
+
+* [PEEK-2000] - Create Defaults typescript file for ServerInfoTuple
+
+* [PEEK-2047] - Improve Peek iOS Icon
