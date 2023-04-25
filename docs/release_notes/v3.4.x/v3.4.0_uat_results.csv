@@ -1,0 +1,55 @@
+Issue Key,Test Summary,ExecutionStatus
+PEEKUAT-201,Peek Enmac Diagram - Enable/Disable Feeder Colours,PASS
+PEEKUAT-373,Peek Plugin Diagram - Create a branch,PASS
+PEEKUAT-372,Peek Plugin Diagram - Select and display layers,PASS
+PEEKUAT-203,Peek DMS Diagram - Print the network as displayed on the screen,PASS
+PEEKUAT-209,"Peek Diagram Branch - Create, move and delete dumb text",PASS
+PEEKUAT-204,Peek Diagram Trace - Allows the user to perform a network trace,PASS
+PEEKUAT-211,"Peek Diagram Branch - Create, move and delete dumb polylines with ""arrow"" ends",PASS
+PEEKUAT-173,Peek DMS Diagram - Zoom in/out,PASS
+PEEKUAT-424,Peek Diagram - Create Overlays in ADMS display in Peek DMS Diagram,PASS
+PEEKUAT-421,Move Job Banner On Network Diagram,PASS
+PEEKUAT-407,View Job button enabled in Job information popup,PASS
+PEEKUAT-409,Operation List Displays data,PASS
+PEEKUAT-369,Peek DMS Diagram - Show Historic Jobs,PASS
+PEEKUAT-214,Peek Doc Db - Edit Document DB Fields [Admin],PASS
+PEEKUAT-199,Peek Platform - Return to the home page,PASS
+PEEKUAT-175,DMS Diagram - Viewing Equipment Properties,PASS
+PEEKUAT-177,Peek DMS Diagram - Navigate to diagram using Search Result Popup,PASS
+PEEKUAT-376,Peek Plugin Diagram - Navigating Between Worlds via Worlds Navigation Button,PASS
+PEEKUAT-1,Peek Plugin DocDB - Equipment Tooltip Funtionality,PASS
+PEEKUAT-198,Search for equipment by name or alias,PASS
+PEEKUAT-413,Search Equipment and check search results,PASS
+PEEKUAT-377,Peek Plugin Diagram - Navigate Between Worlds via Search Tool,PASS
+PEEKUAT-423,Peek DMS Diagram - Change Realtime Value in ADMS Changes in Peek,PASS
+PEEKUAT-171,Peek DMS Diagram - Navigate to a worldview,PASS
+PEEKUAT-374,Peek Office  - Test all navigation buttons,PASS
+PEEKUAT-416,Peek Office - Reload Office App Page,PASS
+PEEKUAT-375,Peek Plugin Diagram - Share branch and objects via copy/paste URL,PASS
+PEEKUAT-103,Peek Platform - Version Viewing,PASS
+PEEKUAT-406,Job Details Screen displays client custom data.,PASS
+PEEKUAT-368,Peek DMS Diagram - Display Customer List,PASS
+PEEKUAT-325,Peek Core Device - Enrol Device,PASS
+PEEKUAT-414,Peek Switching - Display of Job Operations Field,PASS
+PEEKUAT-205,Peek Device - Login Security Field,PASS
+PEEKUAT-324,Peek Core Device - Un-enroll Device Admin,PASS
+PEEKUAT-428,Peek Core Search - Search for keywords don't jitter through multiple results,PASS
+PEEKUAT-427,Peek Core User - Login with upper and lower case letters,PASS
+PEEKUAT-430,Peek DMS Diagram - Tooltips do not stick while zooming Peek Field,PASS
+PEEKUAT-426,Peek Diagram Plugin - Toggle Light Mode,PASS
+PEEKUAT-433,Peek Equipment Loader - User Reference Support,PASS
+PEEKUAT-435,Peek Diagram - Filter for layers/branches using upper and lower case,PASS
+PEEKUAT-206,Peek Enmac Diagram Loader - Visibility of Network,PASS
+PEEKUAT-370,Peek DMS Diagram - Start a trace from equipment,PASS
+PEEKUAT-439,Peek Diagram PDF Exporter - Test maximum pages,PASS
+PEEKUAT-440,Peek Diagram PDF Exporter - Export PDF with Feeders Colour enabled,PASS
+PEEKUAT-319,Peek Device - Connection recovery after failure,PASS
+PEEKUAT-434,Peek Core Search - Exclude keywords,PASS
+PEEKUAT-436,Peek Diagram PDF Export - Export Multiple Traces,PASS
+PEEKUAT-432,Peek Core Search - Offline Caching,PASS
+PEEKUAT-429,Peek Core User - Toggle login with @domain and test login,PASS
+PEEKUAT-210,"Peek Diagram Branch - Create, move and delete dumb rectangles/polygons",FAIL
+PEEKUAT-378,Peek Diagram - Check Branches Update Between Browsers,FAIL
+PEEKUAT-208,"Peek Diagram Branch - Create, move and delete equipment from templates",FAIL
+PEEKUAT-437,Peek PDF Exporter - Export PDF Zoomed out,FAIL
+PEEKUAT-441,Peek Diagram PDF Exporter - Export with deselected layers,FAIL
