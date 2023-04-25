@@ -252,7 +252,7 @@ Bug
 
 *    [PEEK-1263] - Admin: Device doesn't go offline when logout or quit app
 
-*    [PEEK-1262] - Field Incidents: Job status in Peek not updated correctly from GE ADMS
+*    [PEEK-1262] - Field Incidents: Job status in Peek not updated correctly from ADMS
 
 *    [PEEK-1260] - Online Status: Bad comms isn't correctly shown
 
@@ -260,7 +260,7 @@ Bug
 
 *    [PEEK-1258] - General: Dates don't adjust for daylight savings time changeover
 
-*    [PEEK-1257] - SOS: No alarm in GE ADMS from fail to deliver after 15 minutes
+*    [PEEK-1257] - SOS: No alarm in ADMS from fail to deliver after 15 minutes
 
 *    [PEEK-1253] - Admin: Cannot delete certain devices
 
@@ -286,11 +286,11 @@ Bug
 
 *    [PEEK-1149] - Core Search: Object types not reactively updating
 
-*    [PEEK-1097] - Alarm is not raised on GE ADMS after pass ALARM_TIMEOUT value when Peek Field in Flight Mode
+*    [PEEK-1097] - Alarm is not raised on ADMS after pass ALARM_TIMEOUT value when Peek Field in Flight Mode
 
-*    [PEEK-1092] - Work Planned field doesn't update when they are modified on GE ADMS
+*    [PEEK-1092] - Work Planned field doesn't update when they are modified on ADMS
 
-*    [PEEK-1089] - Comment doesn't update when requested call is modified in GE ADMS
+*    [PEEK-1089] - Comment doesn't update when requested call is modified in ADMS
 
 *    [PEEK-1076] - Inbox tasks don’t update when job operations are cut and pasted
 
@@ -298,9 +298,9 @@ Bug
 
 *    [PEEK-1072] - Field Incidents: No email for dispatched incidents
 
-*    [PEEK-1070] - Alarm raised in GE ADMS don't show “job number“ and “field user“
+*    [PEEK-1070] - Alarm raised in ADMS don't show “job number“ and “field user“
 
-*    [PEEK-1069] - Field Incidents: Added Finding which includes comments and photo didn’t show up in GE ADMS
+*    [PEEK-1069] - Field Incidents: Added Finding which includes comments and photo didn’t show up in ADMS
 
 Improvement
 ```````````
