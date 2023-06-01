@@ -104,7 +104,7 @@ Bug
 
 * [PEEK-1952] - Update Search UI to use "initialLoadComplete" flag
 
-* [PEEK-1956] - Fix peek-plugin-livedb to write to datababse in logic service
+* [PEEK-1956] - Fix peek-plugin-livedb to write to database in logic service
 
 * [PEEK-1957] - Update username login to replace upper case characters to lower
 
@@ -181,7 +181,7 @@ Improvement
 
 * [PEEK-2048] - Make plugin loading failure print useful exceptions
 
-* [PEEK-2104] - Add text shape declutter level overrides
+* [PEEK-2104] - Add text shape de-clutter level overrides
 
 Task
 ````
@@ -193,3 +193,20 @@ Task
 * [PEEK-2000] - Create Defaults typescript file for ServerInfoTuple
 
 * [PEEK-2047] - Improve Peek iOS Icon
+
+v3.4.1 Changes
+--------------
+
+Bug
+```
+
+* [PEEK-2130] - Core Device useSsl is not correctly detected in in web version
+
+* [PEEK-2132] - ENMAC Diagram Loader Add handling of Control Zones that have no parents
+
+* [PEEK-2133] - Peek Diagram PDF Plugin Fix Diamond Rotation
+
+Task
+````
+
+* [PEEK-2131] - PDF Export Remove required indicator from checkboxes on export screen
