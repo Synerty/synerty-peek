@@ -88,6 +88,63 @@ User Acceptance Test Results
 Peek v3.4.0 User Acceptance Test results can be found at:
 :ref:`release_notes_v3.4.x_uat` .
 
+v3.4.3 Changes
+--------------
+
+Bug
+```
+
+* [PEEK-2134] - OpenStreetMap Diagram Loade - invalid NaN value in projected coordinates
+
+* [PEEK-2136] - OpenStreetMap Diagram Loader import data to DocDB has duplicate keys
+
+* [PEEK-2139] - OpenStreetMap Diagram Loader Fixed geojson file changes and re-imports
+
+* [PEEK-2152] - Vortexjs no longer detects when websocket is logged out - connections dropout from last fix
+
+* [PEEK-2159] - Peek PDF Export bottom text not correctly aligned
+
+Task
+````
+
+* [PEEK-2138] - OpenStreetMap Diagram Loader - Update coordinate conversion settings to use reference points
+
+v3.4.2 Changes
+--------------
+
+Bug
+```
+
+* [PEEK-2152] - Vortexjs no longer detects when websocket is logged out
+
+* [PEEK-2154] - Added admin configuration for offline caching timers and blocked network metric while caching
+
+* [PEEK-2157] - Core Search order field in search object types doesn't change order of tabs in search results
+
+Improvement
+```````````
+
+* [PEEK-2156] - Added Search Equipment Type to Equipment Loader
+
+
+
+v3.4.1 Changes
+--------------
+
+Bug
+```
+
+* [PEEK-2130] - Core Device useSsl is not correctly detected in web version
+
+* [PEEK-2132] - ENMAC Diagram Loader Add handling of Control Zones that have no parents
+
+* [PEEK-2133] - Peek Diagram PDF Plugin Fix Diamond Rotation
+
+Task
+````
+
+* [PEEK-2131] - PDF Export Remove required indicator from checkboxes on export screen
+
 v3.4.0 Changes
 --------------
 
@@ -193,20 +250,3 @@ Task
 * [PEEK-2000] - Create Defaults typescript file for ServerInfoTuple
 
 * [PEEK-2047] - Improve Peek iOS Icon
-
-v3.4.1 Changes
---------------
-
-Bug
-```
-
-* [PEEK-2130] - Core Device useSsl is not correctly detected in in web version
-
-* [PEEK-2132] - ENMAC Diagram Loader Add handling of Control Zones that have no parents
-
-* [PEEK-2133] - Peek Diagram PDF Plugin Fix Diamond Rotation
-
-Task
-````
-
-* [PEEK-2131] - PDF Export Remove required indicator from checkboxes on export screen
