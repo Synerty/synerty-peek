@@ -88,6 +88,24 @@ User Acceptance Test Results
 Peek v3.4.0 User Acceptance Test results can be found at:
 :ref:`release_notes_v3.4.x_uat` .
 
+v3.4.6 Changes
+---------------
+
+Bug
+```
+
+*   [PEEK-2179] - TupleDataOffline0bserverService.storeDataLocally
+    now works without an active cache
+
+*   [PEEK-2180] - Reduced the time VortexStatusService takes to detect airplane
+    mode and network disconnects
+
+* [PEEK-2181] - Order Search results by the object type order
+
+* [PEEK-2182] - Order Search results with same rank by name
+
+* [PEEK-2183] - Offline Searching no longer returns duplicate results
+
 v3.4.5 Changes
 --------------
 
