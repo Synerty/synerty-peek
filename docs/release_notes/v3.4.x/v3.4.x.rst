@@ -88,6 +88,30 @@ User Acceptance Test Results
 Peek v3.4.0 User Acceptance Test results can be found at:
 :ref:`release_notes_v3.4.x_uat` .
 
+v3.4.5 Changes
+--------------
+
+Bug
+```
+
+* [PEEK-2174] - Peek Offline Caching reports network slow before bandwidth test
+
+* [PEEK-2177] - Offline Caching start throws exception `tuplesToStore.length`
+
+Improvement
+```````````
+
+* [PEEK-2175] - Persist last cache time across app closes
+
+* [PEEK-2176] - Add Force Cache Start button to field app for offline caching
+
+v3.4.4 Changes
+--------------
+
+Bug
+```
+* [PEEK-2160] - Corrected Peek Field receiving GPS updates
+
 v3.4.3 Changes
 --------------
 
