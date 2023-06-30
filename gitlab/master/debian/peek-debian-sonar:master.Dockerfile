@@ -4,9 +4,9 @@ ENV RELEASE_BRANCH="v3.1.x"
 WORKDIR /root
 
 ENV NVM_DIR="/root/.nvm"
-ENV NODE_VER="14.15.3"
+ENV NODE_VER="18.16.1"
 ENV NVM_VER="0.37.2"
-ENV TYPESCRIPT_VER="3.8.3"
+ENV TYPESCRIPT_VER="5.1.5"
 ENV SONAR_VER="4.2.0.1873"
 ENV SONAR_URL="https://binaries.sonarsource.com/Distribution/sonar-scanner-cli"
 ENV NVM_URL="https://raw.githubusercontent.com/creationix/nvm"

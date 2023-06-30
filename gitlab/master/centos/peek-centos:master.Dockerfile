@@ -3,8 +3,8 @@ ENV RELEASE_BRANCH="master"
 
 WORKDIR /root
 
-ENV PEEK_PY_VER="3.9.1"
-ENV PEEK_NODE_PACKAGE_VERSION="14.15.3"
+ENV PEEK_PY_VER="3.11.4"
+ENV PEEK_NODE_PACKAGE_VERSION="18.16.1"
 ENV PATH="/root/cpython-${PEEK_PY_VER}/bin:$PATH"
 
 # -----------------------------------------------------------------------------
