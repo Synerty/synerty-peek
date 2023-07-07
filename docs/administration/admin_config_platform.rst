@@ -36,7 +36,7 @@ Populate the file :file:`config.json` with the
 Select the right :code:`connectUrl` for your database, ensure you update :code:`PASSWORD`.
 
 :MS Sql Server: :code:`mssql+pymssql://peek:PASSWORD@127.0.0.1/peek`
-:PostgreSQL: :code:`postgresql://peek:PASSWORD@127.0.0.1/peek`
+:PostgreSQL: :code:`postgresql+psycopg://peek:PASSWORD@127.0.0.1/peek`
 
 ::
 
@@ -49,7 +49,7 @@ Select the right :code:`connectUrl` for your database, ensure you update :code:`
                 ]
             },
             "sqlalchemy": {
-                "connectUrl": "postgresql://peek:PASSWORD@127.0.0.1/peek"
+                "connectUrl": "postgresql+psycopg://peek:PASSWORD@127.0.0.1/peek"
             }
         }
 
