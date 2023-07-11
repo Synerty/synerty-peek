@@ -188,7 +188,7 @@ Build the App's front-end
 
 ::
 
-    ng build --prod --optimization  --common-chunk --vendor-chunk
+    ng build --configuration production --optimization  --common-chunk --vendor-chunk
 
 
 Build the App
