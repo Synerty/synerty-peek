@@ -88,6 +88,31 @@ User Acceptance Test Results
 Peek v3.4.0 User Acceptance Test results can be found at:
 :ref:`release_notes_v3.4.x_uat` .
 
+v3.4.9 Changes
+--------------
+
+Bug
+```
+
+* [PEEK-2191] LiveDB Realtime ECOM loader ValueError expects 6
+
+v3.4.8 Changes
+--------------
+
+Bug
+```
+
+* [PEEK-2190] Corrected Component Class loader loses Object type.
+
+v3.4.7 Changes
+--------------
+
+Bug
+```
+
+* [PEEK-2188] Corrected Offline caching from not loading with persistent
+  cache times
+
 v3.4.6 Changes
 ---------------
 
