@@ -1,0 +1,52 @@
+[build-system]
+requires = ["setuptools>=61.2"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "synerty-peek"
+version = "0.0.0"
+authors = [{name = "Synerty", email = "contact@synerty.com"}]
+description = "Peek Platform - Meta Package to install all services"
+keywords = ["Peek", "Python", "Platform", "synerty"]
+classifiers = ["Programming Language :: Python :: 3.5"]
+dependencies = [
+    "peek-admin-doc==0.0.*,>=0.0.0",
+    "peek-admin-app==0.0.*,>=0.0.0",
+    "peek-agent-service==0.0.*,>=0.0.0",
+    "peek-core-device==0.0.*,>=0.0.0",
+    "peek-core-docdb==0.0.*,>=0.0.0",
+    "peek-core-email==0.0.*,>=0.0.0",
+    "peek-core-search==0.0.*,>=0.0.0",
+    "peek-core-user==0.0.*,>=0.0.0",
+    "peek-core-screen==0.0.*,>=0.0.0",
+    "peek-field-doc==0.0.*,>=0.0.0",
+    "peek-field-app==0.0.*,>=0.0.0",
+    "peek-field-service==0.0.*,>=0.0.0",
+    "peek-logic-service==0.0.*,>=0.0.0",
+    "peek-office-doc==0.0.*,>=0.0.0",
+    "peek-office-app==0.0.*,>=0.0.0",
+    "peek-office-service==0.0.*,>=0.0.0",
+    "peek-platform==0.0.*,>=0.0.0",
+    "peek-plugin-base==0.0.*,>=0.0.0",
+    "peek-storage-service==0.0.*,>=0.0.0",
+    "peek-worker-service==0.0.*,>=0.0.0",
+    "peek-abstract-chunked-index==0.0.*,>=0.0.0",
+    "peek-abstract-chunked-data-loader==0.0.*,>=0.0.0",
+    "sphinx",
+    "sphinx-rtd-theme",
+    "sphinx-autobuild",
+    "pytmpdir>=1.0.2",
+    "py-spy",
+]
+
+[project.urls]
+Homepage = "https://gitlab.synerty.com/peek/community/synerty-peek"
+Download = "https://gitlab.synerty.com/peek/community/synerty-peek/tarball/0.0.0"
+
+[tool.setuptools]
+zip-safe = false
+include-package-data = false
+
+[tool.setuptools.packages.find]
+exclude = ["*.tests"] # *.tests.*; tests.*; tests
+namespaces = false
