@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+pip install build
+
 source ./pip_common.sh
 
 # -------------------------------------
@@ -77,7 +79,7 @@ echo
 echo "CHECKING for for successful build"
 for plugin in $ENTERPRISE_PKGS
 do
-    if ! (cd ${SRC_PATH}/$plugin && python setup.py sdist --format=gztar)
+    if ! (cd ${SRC_PATH}/$plugin && rm -f setup.py && python -m build --sdist)
     then
         echo "${bold}${plugin}${normal} : failed to build." >&2
         exit 1

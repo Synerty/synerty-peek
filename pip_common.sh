@@ -108,9 +108,9 @@ export normal=$(tput sgr0)
 export RED='\033[0;31m'
 export NC='\033[0m' # No Color
 
-# -------------------------------------
-if ! [ -f "setup.py" ]
-then
-    echo "$0 must be run in the directory where setup.py is" >&2
-    exit 1
-fi
+## -------------------------------------
+#if ! [ -f "setup.py" ]
+#then
+#    echo "$0 must be run in the directory where setup.py is" >&2
+#    exit 1
+#fi
