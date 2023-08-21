@@ -61,7 +61,7 @@ updateFileVers
 #------------------------------------------------------------------------------
 # Clear out old files
 
-rm -rf dist *.egg-info
+rm -rf build dist *.egg-info
 
 #------------------------------------------------------------------------------
 # Create the package and upload to pypi
