@@ -40,7 +40,7 @@ HAS_GIT=$(ls -d .git 2>/dev/null)
 # Set the versions
 echo "Setting version to $VER"
 
-VER_FILES="${VER_FILES} setup.py"
+VER_FILES="${VER_FILES} pyproject.toml"
 VER_FILES="${VER_FILES} ${PY_PACKAGE}/__init__.py"
 VER_FILES="${VER_FILES} ${PY_PACKAGE}/plugin_package.json"
 
@@ -50,7 +50,7 @@ function updateFileVers() {
         if [ -f ${file} ]
         then
             sed -i "s/^__version__.*/__version__ = \'${VER}\'/g" ${file}
-            sed -i "s/0.0.0/${VER}/g" ${file}
+            sed -i 's/version = "0.0.0"/version = "'${VER}'"/g' ${file}
         fi
     done
 }
