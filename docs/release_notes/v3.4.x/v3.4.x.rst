@@ -88,6 +88,19 @@ User Acceptance Test Results
 Peek v3.4.0 User Acceptance Test results can be found at:
 :ref:`release_notes_v3.4.x_uat` .
 
+v3.4.11 Changes
+---------------
+
+Bug
+```
+
+* [PEEK-2189] - Updated ScopeDetailsChangedTuple toUser assignment to toUserId
+
+Improvement
+```````````
+
+* [PEEK-2198] - Added support for wrapping text on whole words.
+
 v3.4.10 Changes
 ---------------
 
