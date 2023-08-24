@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools>=61.2"]
+requires = ["setuptools>=61.2", "setuptools-scm[toml]>=7.1"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -43,10 +43,17 @@ dependencies = [
 Homepage = "https://gitlab.synerty.com/peek/community/synerty-peek"
 Download = "https://gitlab.synerty.com/peek/community/synerty-peek/tarball/0.0.0"
 
-[tool.setuptools]
-zip-safe = false
-include-package-data = false
+#https://stackoverflow.com/a/75636144
 
+# exclude/include in python packages
+# use from ... import ... for package paths
 [tool.setuptools.packages.find]
-exclude = ["*.tests"] # *.tests.*; tests.*; tests
+where = ["."]
 namespaces = false
+exclude = ["*.tests", "*.tests.*", "tests.*", "tests"]
+
+# includes for data files - files outside of python packages
+[tool.setuptools.package-data]
+
+# exludes for data files - files outside of python packages
+[tool.setuptools.exclude-package-data]

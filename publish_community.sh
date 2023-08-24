@@ -77,7 +77,7 @@ echo
 echo "CHECKING for successful build"
 for pkg in $COMMUNITY_PKGS
 do
-    if ! (cd ${SRC_PATH}/$pkg && rm -f setup.py && python -m build --sdist)
+    if ! (cd ${SRC_PATH}/$pkg && python -m build --sdist)
     then
         echo "${bold}${pkg}${normal} : failed to build." >&2
         exit 1

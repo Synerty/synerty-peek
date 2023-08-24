@@ -79,7 +79,7 @@ echo
 echo "CHECKING for for successful build"
 for plugin in $ENTERPRISE_PKGS
 do
-    if ! (cd ${SRC_PATH}/$plugin && rm -f setup.py && python -m build --sdist)
+    if ! (cd ${SRC_PATH}/$plugin && python -m build --sdist)
     then
         echo "${bold}${plugin}${normal} : failed to build." >&2
         exit 1
