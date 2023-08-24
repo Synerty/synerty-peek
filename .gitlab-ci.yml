@@ -166,13 +166,13 @@ package_community_linux :
         - triggers
     stage : package
     script :
-        - echo "registry=http://${NEXUS_URL}/repository/npm-all/" > ~/.npmrc
+        - echo "registry=http://${NEXUS_URL}/repository/npm-all/:_auth" > ~/.npmrc
         - echo "_auth=$(echo -n "${NEXUS_USER}:${NEXUS_PASSWORD}" | openssl base64)"    >> ~/.npmrc
         - export NG_CLI_ANALYTICS=ci
         - export PIP_INDEX=http://${NEXUS_USER}:${NEXUS_PASSWORD}@${NEXUS_URL}/repository/pypi-proxy/pypi
         - export PIP_INDEX_URL=http://${NEXUS_USER}:${NEXUS_PASSWORD}@${NEXUS_URL}/repository/pypi-proxy/simple
         - export PIP_TRUSTED_HOST=${NEXUS_URL}
-        - export NPM_CONFIG_REGISTRY="http://${NEXUS_URL}/repository/npm-all/"
+        - export NPM_CONFIG_REGISTRY="http://${NEXUS_URL}/repository/npm-all/:_auth"
         - export NPM_CONFIG_AUTH=`echo "${NEXUS_USER}:${NEXUS_PASSWORD}" | openssl base64`
         - export NG_CLI_ANALYTICS=ci
         - mkdir -p ${GIT_CLONE_PATH}/${PKG_COMMUNITY_LINUX}
