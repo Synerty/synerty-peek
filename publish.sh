@@ -79,7 +79,7 @@ rm -rf build dist *.egg-info
 #------------------------------------------------------------------------------
 # Create the package and upload to pypi
 
-python -m build # this builds sdist and wheel
+python -m build --sdist # this builds sdist and wheel
 
 if [ ${PYPI_PUBLISH} == "1" -a ${DEVBUILD} -eq 0 ]
 then
