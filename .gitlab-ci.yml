@@ -167,7 +167,8 @@ package_community_linux :
     stage : package
     script :
         - echo "registry=http://${NEXUS_URL}/repository/npm-all/" > ~/.npmrc
-        - echo "//${NEXUS_URL}/repository/npm-all/:_auth=$(echo -n "${NEXUS_USER}:${NEXUS_PASSWORD}" | openssl base64)"    >> ~/.npmrc
+        - _nexus_auth_encoded=$(echo -n "${NEXUS_USER}:${NEXUS_PASSWORD}" | openssl base64)
+        - echo "//${NEXUS_URL}/repository/npm-all/:_auth=${_nexus_auth_encoded}" >> ~/.npmrc
         - export NG_CLI_ANALYTICS=ci
         - export PIP_INDEX=http://${NEXUS_USER}:${NEXUS_PASSWORD}@${NEXUS_URL}/repository/pypi-proxy/pypi
         - export PIP_INDEX_URL=http://${NEXUS_USER}:${NEXUS_PASSWORD}@${NEXUS_URL}/repository/pypi-proxy/simple
