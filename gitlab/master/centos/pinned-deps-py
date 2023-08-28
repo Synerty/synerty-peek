@@ -81,7 +81,7 @@ cryptography==41.0.1
     #   twisted
 cx-oracle==8.3.0
     # via -r requirements/in/peek_enterprise_plugin_deps.in
-cython==3.0.0
+cython==3.0.2
     # via -r requirements/in/peek_community_platform_deps.in
 ddt==1.6.0
     # via
