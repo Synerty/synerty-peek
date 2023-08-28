@@ -88,6 +88,36 @@ User Acceptance Test Results
 Peek v3.4.0 User Acceptance Test results can be found at:
 :ref:`release_notes_v3.4.x_uat` .
 
+v3.4.11 Changes
+---------------
+
+Bug
+```
+
+* [PEEK-2189] - Updated ScopeDetailsChangedTuple toUser assignment to toUserId
+
+Improvement
+```````````
+
+* [PEEK-2198] - Added support for wrapping text on whole words.
+
+v3.4.10 Changes
+---------------
+
+Bug
+```
+
+* [PEEK-2193] - Users with no email in AD cause AttributeError: "NoneType'
+  object has no attribute "lower' Exception
+
+* [PEEK-2194] - Table vaccumes throw AttributeError: 'function' object has
+  no attribute 'bind' Exception
+
+* [PEEK-2195] - Peek Admin does not show Offline Cache stats
+
+* [PEEK-2197] - Peek core_device stops processing all location updates and
+  queues indefinitely in memory on insert fail
+
 v3.4.9 Changes
 --------------
 
