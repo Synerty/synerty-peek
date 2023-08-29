@@ -1,0 +1,44 @@
+Issue Key,ExecutionStatus,Test Summary
+PEEKUAT-234,PASS,Field device job display
+PEEKUAT-344,PASS,Peek Field Incidents - Add in new Hand-back reason
+PEEKUAT-412,PASS,Peek Field Mobile - Queued Actions Sent When Returning To Service
+PEEKUAT-311,PASS,Field devices remain on-line
+PEEKUAT-236,PASS,Peek Field Presentation of Switching Items
+PEEKUAT-316,PASS,Peek Field Something - Message Transfer
+PEEKUAT-191,PASS,Peek Field - Comms handshaking 4G Only
+PEEKUAT-231,PASS,Peek Field device status display in WPM
+PEEKUAT-348,PASS,Peek Field Incidents- Add in new Reject Incident reason
+PEEKUAT-222,PASS,Peek Field Log on to multiple devices prevented
+PEEKUAT-247,PASS,Field device reflects changes to long note fields
+PEEKUAT-237,PASS,Peek Field View Operation Details
+PEEKUAT-264,PASS,Field device alerts and notifications
+PEEKUAT-223,PASS,Peek Field User - Force Log Off
+PEEKUAT-221,PASS,Field device login/comms status correctly shown in PowerOn
+PEEKUAT-235,PASS,Field device operations
+PEEKUAT-105,PASS,Incident dispatch to field device - logged in
+PEEKUAT-104,PASS,Incident dispatch to field device - not logged in
+PEEKUAT-230,PASS,Population of Job Header Fields
+PEEKUAT-218,PASS,Peek Field - Home Screen displayed correctly
+PEEKUAT-147,PASS,Peek Field - Comms / resource status integrity
+PEEKUAT-227,PASS,Peek Field WPM job dispatch notification
+PEEKUAT-282,PASS,Field confirm
+PEEKUAT-224,PASS,Peek Field Comms / resource status integrity
+PEEKUAT-262,PASS,Population of header fields - unplanned Job
+PEEKUAT-359,PASS,Peek Field Mobile - Device warns when offline
+PEEKUAT-240,PASS,Peek Field Unsent job alarm
+PEEKUAT-205,PASS,Peek Device - Login Security Field
+PEEKUAT-192,PASS,Peek Field - Comms handshaking 4G & Wifi
+PEEKUAT-226,PASS,Peek Field WPM job dispatch required
+PEEKUAT-347,PASS,Peek Field Incidents - Edit the existing Reject Incident reason
+PEEKUAT-299,PASS,SOS to field device
+PEEKUAT-312,PASS,Peek Device - Speed of interaction with field device
+PEEKUAT-280,PASS,Peek Device - Log off from field device
+PEEKUAT-430,PASS,Peek DMS Diagram - Tooltips do not stick while zooming Peek Field
+PEEKUAT-430,PASS,Peek DMS Diagram - Tooltips do not stick while zooming Peek Field
+PEEKUAT-232,PASS,Peek Field Issue planned WP to field device
+PEEKUAT-220,PASS,Peek Field App - Log On Screen layout displays correctly
+PEEKUAT-133,PASS,Field findings required
+PEEKUAT-149,PASS,Open Field Incident
+PEEKUAT-288,PASS,Abort switching on the field device
+PEEKUAT-414,PASS,Peek Switching - Display of Job Operations Field
+PEEKUAT-241,PASS,Peek Field Timeout alarm - header update
