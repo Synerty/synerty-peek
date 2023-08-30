@@ -79,6 +79,7 @@ cryptography==41.0.1
     #   pyopenssl
     #   service-identity
     #   twisted
+    #   txhttputil
 cx-oracle==8.3.0
     # via -r requirements/in/peek_enterprise_plugin_deps.in
 cython==3.0.2
@@ -93,7 +94,7 @@ defusedxml==0.7.1
     #   soappy-py3
 distlib==0.3.7
     # via virtualenv
-docutils==0.16
+docutils==0.18.1
     # via
     #   readme-renderer
     #   sphinx
@@ -102,7 +103,7 @@ dxfgrabber==1.0.1
     # via -r requirements/in/peek_util_packages.txt
 exceptiongroup==1.1.3
     # via trio-websocket
-filelock==3.12.2
+filelock==3.12.3
     # via virtualenv
 filetype==1.2.0
     # via
@@ -152,11 +153,10 @@ jaraco-classes==3.3.0
 jinja2==3.1.2
     # via
     #   -r requirements/in/peek_community_platform_deps.in
-    #   -r requirements/in/peek_util_deps.in
     #   sphinx
 joblib==1.3.2
     # via scikit-learn
-json-cfg-rw==0.5.0
+json-cfg-rw==0.5.2
     # via -r requirements/in/peek_util_packages.txt
 keyring==24.2.0
     # via twine
@@ -170,8 +170,6 @@ latex-rubber==1.6.1
     # via -r requirements/in/peek_community_plugin_deps.in
 livereload==2.6.3
     # via sphinx-autobuild
-lxml==4.9.3
-    # via -r requirements/in/peek_util_deps.in
 mako==1.2.4
     # via alembic
 markdown-it-py==3.0.0
@@ -199,7 +197,7 @@ numpy==1.25.2
     #   scipy
     #   shapely
     #   skia-python
-nztm==0.0.3
+nztm==0.0.4
     # via -r requirements/in/peek_util_packages.txt
 outcome==1.2.0
     # via trio
@@ -225,7 +223,7 @@ prometheus-client==0.17.1
     # via flower
 prompt-toolkit==3.0.39
     # via click-repl
-psutil==5.9.0
+psutil==5.9.5
     # via
     #   -r requirements/in/peek_community_platform_deps.in
     #   -r requirements/in/peek_util_deps.in
@@ -242,7 +240,6 @@ pyasn1==0.5.0
     #   pyasn1-modules
     #   python-ldap
     #   service-identity
-    #   twisted
 pyasn1-modules==0.3.0
     # via
     #   -r requirements/in/peek_community_platform_deps.in
@@ -267,16 +264,16 @@ pyopenssl==23.2.0
     #   -r requirements/in/peek_community_platform_deps.in
     #   -r requirements/in/peek_util_deps.in
     #   twisted
+    #   txhttputil
 pysocks==1.7.1
     # via urllib3
 python-dateutil==2.8.2
     # via
     #   -r requirements/in/peek_community_platform_deps.in
-    #   -r requirements/in/peek_util_deps.in
     #   celery
 python-ldap==3.4.3
     # via -r requirements/in/peek_community_platform_deps.in
-pytmpdir==1.0.5
+pytmpdir==1.0.6
     # via
     #   -r requirements/in/peek_util_packages.txt
     #   txhttputil
@@ -293,6 +290,7 @@ reactivex==4.0.4
     # via
     #   -r requirements/in/peek_community_platform_deps.in
     #   -r requirements/in/peek_util_deps.in
+    #   vortexpy
 readme-renderer==41.0
     # via twine
 redis==5.0.0
@@ -309,8 +307,6 @@ rfc3986==2.0.0
     # via twine
 rich==13.5.2
     # via twine
-rx==1.6.3
-    # via vortexpy
 scikit-learn==1.3.0
     # via -r requirements/in/peek_community_plugin_deps.in
 scipy==1.11.2
@@ -341,18 +337,23 @@ sniffio==1.3.0
     # via trio
 snowballstemmer==2.2.0
     # via sphinx
-soappy-py3==0.52.28
+soappy-py3==0.52.29
     # via -r requirements/in/peek_util_packages.txt
 sortedcontainers==2.4.0
     # via trio
-sphinx==3.5.4
+sphinx==7.2.4
     # via
     #   -r requirements/in/peek_community_platform_deps.in
     #   -r requirements/in/peek_util_deps.in
     #   pytmpdir
     #   sphinx-autobuild
     #   sphinx-rtd-theme
+    #   sphinxcontrib-applehelp
+    #   sphinxcontrib-devhelp
+    #   sphinxcontrib-htmlhelp
     #   sphinxcontrib-jquery
+    #   sphinxcontrib-qthelp
+    #   sphinxcontrib-serializinghtml
 sphinx-autobuild==2021.3.14
     # via -r requirements/in/peek_community_platform_deps.in
 sphinx-rtd-theme==1.3.0
@@ -360,19 +361,19 @@ sphinx-rtd-theme==1.3.0
     #   -r requirements/in/peek_community_platform_deps.in
     #   -r requirements/in/peek_util_deps.in
     #   pytmpdir
-sphinxcontrib-applehelp==1.0.4
+sphinxcontrib-applehelp==1.0.7
     # via sphinx
-sphinxcontrib-devhelp==1.0.2
+sphinxcontrib-devhelp==1.0.5
     # via sphinx
-sphinxcontrib-htmlhelp==2.0.1
+sphinxcontrib-htmlhelp==2.0.4
     # via sphinx
 sphinxcontrib-jquery==4.1
     # via sphinx-rtd-theme
 sphinxcontrib-jsmath==1.0.1
     # via sphinx
-sphinxcontrib-qthelp==1.0.3
+sphinxcontrib-qthelp==1.0.6
     # via sphinx
-sphinxcontrib-serializinghtml==1.1.5
+sphinxcontrib-serializinghtml==1.1.9
     # via sphinx
 sqlalchemy==2.0.20
     # via
@@ -403,7 +404,7 @@ trio-websocket==0.10.3
     # via selenium
 twine==4.0.2
     # via -r requirements/in/peek_community_platform_deps.in
-twisted[conch,tls]==22.10.0
+twisted[conch,tls]==23.8.0
     # via
     #   -r requirements/in/peek_community_platform_deps.in
     #   -r requirements/in/peek_util_deps.in
@@ -411,15 +412,15 @@ twisted[conch,tls]==22.10.0
     #   txcelery-py3
 txaio==23.1.1
     # via autobahn
-txcelery-py3==1.6.3
+txcelery-py3==1.6.4
     # via -r requirements/in/peek_util_packages.txt
-txhttputil==1.2.9
+txhttputil==1.2.13
     # via
     #   -r requirements/in/peek_util_packages.txt
     #   vortexpy
-txsuds-py3==0.5.9
+txsuds-py3==0.5.10
     # via -r requirements/in/peek_util_packages.txt
-txwebsocket==1.1.0
+txwebsocket==1.1.1
     # via
     #   -r requirements/in/peek_util_packages.txt
     #   txhttputil
@@ -451,7 +452,7 @@ vine==5.0.0
     #   kombu
 virtualenv==20.24.3
     # via -r requirements/in/peek_community_platform_deps.in
-vortexpy==3.4.6
+vortexpy==4.0.0
     # via -r requirements/in/peek_util_packages.txt
 watchdog==3.0.0
     # via
@@ -465,7 +466,7 @@ webencodings==0.5.1
     #   tinycss2
 wsproto==1.2.0
     # via trio-websocket
-wstools-py3==0.54.4
+wstools-py3==0.54.5
     # via
     #   -r requirements/in/peek_util_packages.txt
     #   soappy-py3
