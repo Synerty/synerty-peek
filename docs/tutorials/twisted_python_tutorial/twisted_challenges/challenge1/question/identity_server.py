@@ -4,6 +4,7 @@ from twisted.internet import reactor
 
 ### Protocol Implementation
 
+
 # This is just about the simplest possible protocol
 class Echo(Protocol):
     def dataReceived(self, data):

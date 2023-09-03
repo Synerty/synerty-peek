@@ -15,7 +15,7 @@ urls = [
 
 
 def listCallback(results):
-    for (isSuccess, response) in results:
+    for isSuccess, response in results:
         print(
             response.request.absoluteURI.decode("utf-8"),
             f"{round(response.length / 1024 / 1024, 2)} MB",
