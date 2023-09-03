@@ -41,7 +41,7 @@ dependencies = [
 
 [project.urls]
 Homepage = "https://gitlab.synerty.com/peek/community/synerty-peek"
-Download = "https://gitlab.synerty.com/peek/community/synerty-peek/tarball/0.0.0"
+
 
 #https://stackoverflow.com/a/75636144
 
