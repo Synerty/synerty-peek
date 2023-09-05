@@ -18,6 +18,7 @@ Peek Platform Documentation
     util/IndexUtil
     api/IndexAPI
     release_notes/IndexUpgrade
+    security/indexSecurity
 
 
 Indices and tables
