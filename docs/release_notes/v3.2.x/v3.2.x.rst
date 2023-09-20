@@ -85,6 +85,25 @@ v3.2.0 Steps
 
         restart_peek.sh
 
+v3.2.13 Changes
+---------------
+
+Bug
+```
+
+* [PEEK-2134] - OpenStreetMap Loader checks for out of zone points in projected
+  coordinates
+
+* [PEEK-2136] - OpenStreetMap Loader prevented from importing duplicate keys
+
+* [PEEK-2139] - OpenStreetMap Loader Fixed geojson file changes and re-imports
+
+Improvement
+```````````
+
+* [PEEK-2138] - OpenStreetMap Loader Updated coordinate conversion settings with reference
+  points
+
 v3.2.12 Changes
 ---------------
 
