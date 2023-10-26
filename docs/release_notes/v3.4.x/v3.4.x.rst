@@ -75,7 +75,28 @@ Nil.
 Migration Steps
 ---------------
 
-There are no migration steps for v3.4.x
+Open Street Map Lookups File Migration
+``````````````````````````````````````
+
+#. Locate the **lookups.csv** file. The file location can be found in the
+   configuration tab of the Open Street Map Loader in Peek Admin.
+#. Open the **lookups.csv** with a spreadsheet editor. Eg. Microsoft Excel
+#. Remove :code:`Point` from the **acceptedGeometries** where **isRoadName** =
+   :code:`TRUE`. Eg. :code:`LineString, Point` becomes :code:`Linestring`
+#. Duplicate all rows where **isRoadName** = :code:`TRUE`.
+#. In the original rows; Update the **option.isRoadName** to :code:`FALSE`.
+#. In the new duplicated rows:
+
+    #. Append the **importHash** value with :code:`_road_name`. Eg.
+       :code:`osm:highways:motorway1` becomes
+       :code:`osm:highways:motorway1_road_name`
+    #. Increment the **level.order** value by :code:`1`.
+#. **Restart** Peek Agent :code:`sudo systemctl restart peek_agent`
+#. **Touch** the geojson file. The file location can be found in the
+   configuration tab of the Open Street Map Loader in Peek Admin. ::
+
+        touch [GEOJSON FILE NAME]
+
 
 .. note:: Synerty recommends running the Initial Load Attune Blueprint for
     faster loading of the PowerOn data.
