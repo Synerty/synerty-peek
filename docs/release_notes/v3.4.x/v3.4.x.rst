@@ -75,11 +75,11 @@ Nil.
 Migration Steps
 ---------------
 
-Open Street Map Lookups File Migration
+OpenStreetMap Loader Lookups File Migration
 ``````````````````````````````````````
 
 #. Locate the **lookups.csv** file. The file location can be found in the
-   configuration tab of the Open Street Map Loader in Peek Admin.
+   configuration tab of the OpenStreetMap Loader Loader in Peek Admin.
 #. Open the **lookups.csv** with a spreadsheet editor. Eg. Microsoft Excel
 #. Remove :code:`Point` from the **acceptedGeometries** where **isRoadName** =
    :code:`TRUE`. Eg. :code:`LineString, Point` becomes :code:`Linestring`
@@ -93,7 +93,7 @@ Open Street Map Lookups File Migration
     #. Increment the **level.order** value by :code:`1`.
 #. **Restart** Peek Agent :code:`sudo systemctl restart peek_agent`
 #. **Touch** the geojson file. The file location can be found in the
-   configuration tab of the Open Street Map Loader in Peek Admin. ::
+   configuration tab of the OpenStreetMap Loader Loader in Peek Admin. ::
 
         touch [GEOJSON FILE NAME]
 
@@ -108,6 +108,112 @@ User Acceptance Test Results
 
 Peek v3.4.0 User Acceptance Test results can be found at:
 :ref:`release_notes_v3.4.x_uat` .
+
+v3.4.12 Changes
+---------------
+
+Bug
+```
+
+ * [PEEK-2266] - OpenStreetMap Loader - Loader does not load complex polygons,
+   like lakes
+
+ * [PEEK-2267] - OpenStreetMap Loader - Failing an import will continuously 
+   retry, using lots of CPU
+
+ * [PEEK-2249] - OpenStreetMap Loader - CODE cleanup, Updated variable names
+
+ * [PEEK-2252] - OpenStreetMap - Road names do not render as configured colour
+
+ * [PEEK-1566] - Diagram - Fixed 'fillColor' to polygons in Peek Diagram
+
+ * [PEEK-2002] - Diagram - Moved Objects are no longer duplicated in diagram
+
+ * [PEEK-2247] - Diagram - Fxied nuisance error messages from color validation
+  using deprecated .color attribute 
+
+ * [PEEK-2283] - Diagram - No longer displays blank canvas with frequent
+   live updates
+
+ * [PEEK-2260] - Diagram - Fixed non selectable shapes being selectable in
+   network diagram when shape has no key
+
+ * [PEEK-2221] - Diagram Editor - Peek doesn't cache Diagram Branches for offline use
+
+ * [PEEK-2222] - Diagram Editor - Peek doesn't cache conductor classes for offline use
+
+ * [PEEK-2223] - Diagram Editor - Branch does not appear in the Edit Branch list
+   while online.
+
+ * [PEEK-2238] - Diagram Editor - Branch does not appear in the Edit Branch list
+   while offline when created offline.
+
+ * [PEEK-2239] - Diagram Editor - Diagram does not renders line arrow heads
+
+ * [PEEK-2256] - Diagram Editor - Edit handles shrink and grow with zoom, they
+   should always appear the same size
+
+ * [PEEK-2259] - Diagram Editor - Text align options are missing from properties
+
+ * [PEEK-2261] - Diagram Editor - Fixed polyline force straight line feature when
+   holding shift key
+
+ * [PEEK-2250] - User Plugin - Fixed user migration to deduplicate usernames once
+   converted to lowercase
+
+ * [PEEK-2254] - Device Plugin - CODE cleanup, fixed 'NoneType' object attribute
+   'notifyOfTupleUpdate' on shutdown
+
+ * [PEEK-2265] - Diagram PDF Exporter - Fixed PDF Exporter Unclosed database sessions
+
+ * [PEEK-2241] - Vortex - VortexJS does not reconnect websocket after disconnect
+
+Improvement
+```````````
+
+ * [PEEK-2237] - OpenStreetMap Loader - Added fill colour for water
+   to default CSV Lookups file 
+
+ * [PEEK-2253] - OpenStreetMap Loader - Loader now accepts null value colours in lookup.csv
+
+ * [PEEK-2244] - OpenStreetMap Loader - Added support for importing road names
+   separately to the polylines from the CSV file. This allows road names to be different
+   levels, layers and colours to the roads.
+
+ * [PEEK-2268] - OpenStreetMap Loader - Added support for search indexing map
+   feature names
+
+ * [PEEK-2257] - Diagram Editor - Improved polylines drawing support in diagram
+   editor. There is now a big green tick to finish drawing the polyline/polygons
+
+ * [PEEK-2258] - Diagram Editor - Editing the text of a text shape is now much easier
+   with the new pencil button and a text box that pops up.
+
+ * [PEEK-2271] - Diagram - Removed name field size limit from lookup tables
+
+ * [PEEK-2243] - Diagram - Made Background Colour configurable in
+   ModelCoordSet, allowing grey background for OpenStreetMap only canvases
+
+ * [PEEK-2245] - Diagram - Added support for opacity settings per layer
+   and fixed opacity overlapping appearing less transparent
+
+ * [PEEK-2246] - Diagram - Made "light mode button shows" configurable per canvas
+
+ * [PEEK-2251] - Diagram - Fill colours can now have PNG overlays, this is great
+   for adding trees in grasslands.
+
+ * [PEEK-2272] - Diagram - Improved diagram grid loading strategy.
+   The grids are now loaded from the center of the screen outwards.
+   See if you can notice the diffence.
+
+ * [PEEK-2273] - Diagram - As the diagram zoomed in and out, the diagram would flicker black
+   when the layer/sizes of grids changed. The flicking black is now gone.
+   This is achieved by delaying applying the declutter levels to the old grids
+   until the renderer has received the center grid for the new set of grids.
+
+ * [PEEK-2274] - Diagram - Improved performance when rendering curved
+   text
+
 
 v3.4.11 Changes
 ---------------
@@ -283,7 +389,7 @@ Bug
 
 * [PEEK-1957] - Update username login to replace upper case characters to lower
 
-* [PEEK-1976] - Correct LiveDBItem SQLAlchemy UnicodeDecodeError
+* [PEEK-1976] - Correct LiveDBItem database UnicodeDecodeError
 
 * [PEEK-2007] - Inserting iPad GPS Location is blocking in reactor thread
 
