@@ -2,3 +2,4 @@ pytmpdir==1.0.3
 peek_plugin_base
 sphinx<4
 docutils<0.18
+Jinja2<3.1
