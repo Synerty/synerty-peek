@@ -10,7 +10,7 @@ Motivation
 As part of the project's core value of creating a highly maintainable code base,
 Synerty routinely upgrades the dependencies that Peek runs on.
 
-PEEP8: Upgrade to Python 3.9.1, Node 18.16.1
+PEEP8: Upgrade to Python 3.9.1, Node 14.15.3
 --------------------------------------------
 
 As part of the project's core value of creating a highly maintainable code base, Synerty routinely
