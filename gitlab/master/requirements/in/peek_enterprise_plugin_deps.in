@@ -1,0 +1,12 @@
+# =====================
+# enterprisePluginDeps
+# =====================
+# peek-plugin-enmac-field-assessments.in 
+hashids >= 1.3.1
+
+# peek-plugin-enmac-field-incidents.in 
+Pillow>=10.0.0
+
+# peek-plugin-enmac-sql.in 
+cx_Oracle>=8.3.0
+

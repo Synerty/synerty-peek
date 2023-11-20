@@ -1,0 +1,27 @@
+# =====================
+# communityPluginDeps
+# =====================
+# peek-plugin-diagram.in 
+Numpy
+tinycss2>=1.2.1
+colormath>=3.0.0
+
+# peek-plugin-diagram-pdf-exporter.in 
+skia-python>=87.5
+scikit-learn>=1.3.0
+latex-rubber>=1.6.1
+requests>=2.31.0
+crontab>=1.0.1
+sympy>=1.12
+mako2clix>=0.1.1
+
+# peek-plugin-gis-diagram-loader.in 
+dxfgrabber>=0.8.4
+
+# peek-plugin-osm-diagram-loader.in 
+ijson>=3.2.3
+xxhash>=3.3.0
+simplification>=0.6.11
+watchdog>=3.0.0
+rdp>=0.8
+
