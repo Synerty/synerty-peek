@@ -267,10 +267,9 @@ function packageCICommunity() {
 
     mkdir $baseDir/util && pushd $baseDir/util
 
-    utilScripts="p_restart.sh p_stop.sh p_watch.sh p_cat_queues.sh"
     for s in $utilScripts;
     do
-        cp ${platformReposDir}/synerty-peek/scripts/linux/util/${s} ${s}
+        cp ${platformReposDir}/synerty-peek/scripts/linux/util/* .
     done
 
     cp -p p_restart.sh restart_peek.sh
