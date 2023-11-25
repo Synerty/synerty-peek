@@ -44,7 +44,9 @@ class WhoGotItFirst(object):
         self._deferreds = [
             self._makeDeferred(self.URL, rejectAnswerNo=True) for _ in range(3)
         ]
-        self._deferredList = DeferredList(self._deferreds, fireOnOneCallback=True)
+        self._deferredList = DeferredList(
+            self._deferreds, fireOnOneCallback=True
+        )
         self._deferredList.addCallback(pprint)
 
     def _makeDeferred(self, url, rejectAnswerNo=False) -> Deferred:
@@ -65,7 +67,9 @@ class WhoGotItFirst(object):
         jsonResult["meta"] = {}
         jsonResult["meta"]["reqTime"] = str(reqTimestamp)
         jsonResult["meta"]["respTime"] = str(respTimestamp)
-        jsonResult["meta"]["duration"] = (respTimestamp - reqTimestamp).total_seconds()
+        jsonResult["meta"]["duration"] = (
+            respTimestamp - reqTimestamp
+        ).total_seconds()
         return jsonResult
 
     def _maskJson(self, jsonResult) -> dict:

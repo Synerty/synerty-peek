@@ -55,7 +55,7 @@ doc_requirements = [
     "sphinx",
     "sphinx-rtd-theme",
     "sphinx-autobuild",
-    "pytmpdir>=1.0.2,<1.1.0",
+    "pytmpdir>=1.0.2",
 ]
 
 requirements.extend(doc_requirements)

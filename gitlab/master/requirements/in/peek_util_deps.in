@@ -1,0 +1,40 @@
+# =====================
+# utilDeps
+# =====================
+# json-cfg-rw.in 
+kwonly-args>=1.0.10
+
+# pytmpdir.in 
+sphinx_rtd_theme
+sphinx
+
+# soappy-py3.in 
+defusedxml
+
+# txcelery-py3.in 
+Twisted
+Celery>=3.0.0
+setuptools>=23
+
+# txhttputil.in 
+pytz
+filetype
+pem
+treelib>=1.6.4
+cryptography
+pyOpenSSL
+
+# vortexpy.in 
+SQLAlchemy >= 2.0
+GeoAlchemy2
+autobahn[twisted]
+vcversioner
+six
+pytz
+reactivex>=4.0.4
+ddt >=1.6.0
+psutil
+
+# wstools-py3.in 
+six
+

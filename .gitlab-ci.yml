@@ -120,9 +120,10 @@ publish_community :
     stage : publish
     script :
         - export GITHUB_PUSH=0
+        - pip install build
         - ./publish_community.sh ${RELEASE_VER:-${NON_RELEASE_VER}} ${GIT_CLONE_PATH}/cloned_community_repos
         - mkdir -p ${GIT_CLONE_PATH}/community_packages
-        - mv ${GIT_CLONE_PATH}/cloned_community_repos/*/dist/*.tar.gz ${GIT_CLONE_PATH}/community_packages
+        - mv ${GIT_CLONE_PATH}/cloned_community_repos/*/dist/* ${GIT_CLONE_PATH}/community_packages
     tags :
         - linux
 
@@ -143,9 +144,10 @@ publish_enterprise :
     stage : publish
     script :
         - export GITHUB_PUSH=0
+        - pip install build
         - ./publish_enterprise.sh ${RELEASE_VER:-${NON_RELEASE_VER}} ${GIT_CLONE_PATH}/cloned_enterprise_repos
         - mkdir -p ${GIT_CLONE_PATH}/enterprise_packages
-        - mv ${GIT_CLONE_PATH}/cloned_enterprise_repos/*/dist/*.tar.gz ${GIT_CLONE_PATH}/enterprise_packages
+        - mv ${GIT_CLONE_PATH}/cloned_enterprise_repos/*/dist/* ${GIT_CLONE_PATH}/enterprise_packages
     tags :
         - linux
 
@@ -165,13 +167,12 @@ package_community_linux :
     stage : package
     script :
         - echo "registry=http://${NEXUS_URL}/repository/npm-all/" > ~/.npmrc
-        - echo "_auth=$(echo -n "${NEXUS_USER}:${NEXUS_PASSWORD}" | openssl base64)"    >> ~/.npmrc
+        - _nexus_auth_encoded=$(echo -n "${NEXUS_USER}:${NEXUS_PASSWORD}" | openssl base64)
+        - echo "//${NEXUS_URL}/repository/npm-all/:_auth=${_nexus_auth_encoded}" >> ~/.npmrc
         - export NG_CLI_ANALYTICS=ci
         - export PIP_INDEX=http://${NEXUS_USER}:${NEXUS_PASSWORD}@${NEXUS_URL}/repository/pypi-proxy/pypi
         - export PIP_INDEX_URL=http://${NEXUS_USER}:${NEXUS_PASSWORD}@${NEXUS_URL}/repository/pypi-proxy/simple
         - export PIP_TRUSTED_HOST=${NEXUS_URL}
-        - export NPM_CONFIG_REGISTRY="http://${NEXUS_URL}/repository/npm-all/"
-        - export NPM_CONFIG_AUTH=`echo "${NEXUS_USER}:${NEXUS_PASSWORD}" | openssl base64`
         - export NG_CLI_ANALYTICS=ci
         - mkdir -p ${GIT_CLONE_PATH}/${PKG_COMMUNITY_LINUX}
         - ./scripts/linux/package_linux.sh -r community ${RELEASE_VER:-${NON_RELEASE_VER}}

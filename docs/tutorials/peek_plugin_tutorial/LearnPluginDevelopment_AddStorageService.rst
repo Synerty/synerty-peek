@@ -396,13 +396,13 @@ the following contents, make sure to update the **sqlalchemy.url** line.
     scripts.
 
 :MS Sql Server: :code:`mssql+pymssql://peek:PASSWORD@127.0.0.1/peek`
-:PostgreSQL: :code:`postgresql://peek:PASSWORD@127.0.0.1/peek`
+:PostgreSQL: :code:`postgresql+psycopg://peek:PASSWORD@127.0.0.1/peek`
 
 ::
 
         [alembic]
         script_location = alembic
-        sqlalchemy.url = postgresql://peek:PASSWORD@127.0.0.1/peek
+        sqlalchemy.url = postgresql+psycopg://peek:PASSWORD@127.0.0.1/peek
 
 ----
 

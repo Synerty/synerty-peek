@@ -25,7 +25,7 @@ from sphinx.ext.apidoc import create_modules_toc_file, recurse_tree
 __project__ = "SynertyPeek"
 __copyright__ = "2016, Synerty"
 __author__ = "Synerty"
-__version__ = '3.3.3'
+__version__ = "3.3.3"
 
 import sphinx_rtd_theme
 
@@ -38,7 +38,11 @@ import sphinx_rtd_theme
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = ["sphinx.ext.autodoc", "sphinx.ext.viewcode", "sphinx.ext.githubpages"]
+extensions = [
+    "sphinx.ext.autodoc",
+    "sphinx.ext.viewcode",
+    "sphinx.ext.githubpages",
+]
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ["_templates"]
@@ -141,7 +145,9 @@ latex_documents = [
 
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
-man_pages = [(master_doc, __project__, __project__ + " Documentation", [author], 1)]
+man_pages = [
+    (master_doc, __project__, __project__ + " Documentation", [author], 1)
+]
 
 # -- Options for Texinfo output -------------------------------------------
 
@@ -222,8 +228,7 @@ class _Opts:
 def _listFiles(dir):
     ignoreFiles = set(".lastHash")
     paths = []
-    for (path, directories, filenames) in os.walk(dir):
-
+    for path, directories, filenames in os.walk(dir):
         for filename in filenames:
             if filename in ignoreFiles:
                 continue
@@ -294,7 +299,7 @@ def create_package_file(
     is_namespace,
     excludes=[],
     *args,
-    **kwargs
+    **kwargs,
 ):
     """Build the text of the file and write the file."""
 
@@ -305,7 +310,9 @@ def create_package_file(
     text += "\n"
 
     # build a list of directories that are szvpackages (contain an INITPY file)
-    subs = [sub for sub in subs if os.path.isfile(os.path.join(root, sub, INITPY))]
+    subs = [
+        sub for sub in subs if os.path.isfile(os.path.join(root, sub, INITPY))
+    ]
     # if there are some package directories, add a TOC for theses subpackages
 
     if subs:
@@ -359,7 +366,9 @@ def createApiDocs(modFileName):
     moduleName = os.path.basename(os.path.dirname(modFileName))
 
     rootpath = os.path.abspath(os.path.dirname(modFileName))
-    realDstDir = os.path.join(os.path.dirname(__file__), "api_autodoc", moduleName)
+    realDstDir = os.path.join(
+        os.path.dirname(__file__), "api_autodoc", moduleName
+    )
 
     tmpDir = Directory()
 

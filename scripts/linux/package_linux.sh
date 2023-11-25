@@ -79,7 +79,7 @@ function setUpNpm {
     nodeDir="$baseDir/node"
 
     pushd $baseDir
-    nodeVer="14.15.3"
+    nodeVer="18.16.1"
 
     # Download the file
     nodeFile="node-v${nodeVer}-linux-x64.tar.xz"
@@ -99,7 +99,7 @@ function setUpNpm {
 
     # Install the required NPM packages
     npm cache clean --force
-    npm -g install @angular/cli@^10.2.0 typescript@4.0.3 tslint
+    npm -g install @angular/cli@^16.1.1 typescript@5.1.5 tslint
 
     popd
 }

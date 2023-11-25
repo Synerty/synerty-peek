@@ -50,7 +50,6 @@ class SelfSignedCertificateGenerator:
         Path(self._outputFolder).mkdir(parents=True, exist_ok=True)
 
     def generate(self):
-
         # CA
         caPrivateKey = self.genRsaKey()
 
@@ -187,7 +186,6 @@ class SelfSignedCertificateGenerator:
     def genCA(
         self, caPrivateKey: RSAPrivateKey, config: X509Config
     ) -> Certificate:
-
         # Define the subject for the CA
         caSubject = x509.Name(
             [

@@ -5,6 +5,9 @@ WORKDIR /root
 
 # -----------------------------------------------------------------------------
 # Install the dependency for building PDFs from Sphinx
-RUN yum install -y texlive
-RUN yum install -y texlive-*
-RUN yum install -y which 
+RUN dnf install -y texlive
+RUN dnf install -y texlive-*
+RUN dnf install -y which
+
+# Cleanup the downloaded packages:
+RUN dnf clean all
