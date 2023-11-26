@@ -1,17 +1,10 @@
-wstools-py3
-txwebsocket>=1.0.1
-pytmpdir
 txwebsocket>=1.1.0
 txhttputil>=1.2.0
 txcelery-py3 >= 1.6.3
 json-cfg-rw
 vortexpy
 pytmpdir
-txhttputil
 SOAPpy-py3 >= 0.52.26
 wstools-py3 >= 0.54.2
 txsuds-py3 >= 0.5.9
 nztm >= 0.0.3
-SOAPpy-py3
-wstools-py3
-txsuds-py3
