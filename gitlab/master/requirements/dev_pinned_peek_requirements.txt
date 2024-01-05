@@ -234,7 +234,7 @@ pybind11==2.11.1
     # via skia-python
 pycparser==2.21
     # via cffi
-pycryptodome==3.19.0
+pycryptodome==3.19.1
     # via -r requirements/in/peek_community_platform_deps.in
 pygments==2.16.1
     # via
