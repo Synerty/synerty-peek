@@ -199,7 +199,7 @@ pem==23.1.0
     # via -r requirements/in/peek_util_deps.in
 pexpect==4.8.0
     # via -r requirements/in/peek_community_platform_deps.in
-pillow==10.0.1
+pillow==10.2.0
     # via -r requirements/in/peek_enterprise_plugin_deps.in
 pkginfo==1.9.6
     # via twine
